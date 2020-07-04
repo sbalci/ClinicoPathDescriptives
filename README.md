@@ -1,2 +1,6 @@
 # ClinicoPathDescriptives
- ClinicoPath jamovi module Descriptives
+
+ClinicoPath jamovi module Descriptives
+
+See https://sbalci.github.io/ClinicoPathJamoviModule/
+

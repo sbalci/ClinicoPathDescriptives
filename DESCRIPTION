@@ -39,8 +39,11 @@ Imports:
     tibble,
     tidyr,
     gtsummary,
-    arsenal,
-    kableExtra
+    kableExtra,
+    finalfit
+Remotes:
+    spgarbet/tangram,
+    mayoverse/arsenal
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

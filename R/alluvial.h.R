@@ -18,7 +18,7 @@ alluvialOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             mytitle = "Alluvial Plot", ...) {
 
             super$initialize(
-                package='ClinicoPathDescriptives',
+                package='ClinicoPath',
                 name='alluvial',
                 requiresData=TRUE,
                 ...)
@@ -166,7 +166,7 @@ alluvialBase <- if (requireNamespace('jmvcore')) R6::R6Class(
     public = list(
         initialize = function(options, data=NULL, datasetId="", analysisId="", revision=0) {
             super$initialize(
-                package = 'ClinicoPathDescriptives',
+                package = 'ClinicoPath',
                 name = 'alluvial',
                 version = c(1,0,0),
                 options = options,

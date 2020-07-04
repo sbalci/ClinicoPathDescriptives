@@ -42,47 +42,22 @@ analyses:
     menuGroup: Exploration
     menuSubgroup: ClinicoPath Descriptives
     menuTitle: Alluvial Diagrams
+  - title: Cross Tables
+    name: crosstable
+    ns: ClinicoPathDescriptives
+    menuGroup: Exploration
+    menuSubgroup: ClinicoPath Comparisons
+    menuTitle: Cross Tables
+    description: Function for making Cross Tables.
 datasets:
   - name: histopathology including analysis
-    path: histopathologyanalysis.omv
-    description: >-
-      Fake histopathology research data for ClinicoPath module, includes
-      analysis
+    path: histopathologyDescriptives.omv
+    description: Example analysis for descriptive functions.
     tags:
       - Table One
       - Data Summary
-      - Survival
-      - Natural Language
-  - name: histopathology data only
-    path: histopathology.omv
-    description: Fake histopathology research data for ClinicoPath module
-    tags:
-      - Table One
-      - Data Summary
-      - Survival
-  - name: melanoma
-    path: melanoma.omv
-    description: 'melanoma dataset obtained from {boot}.'
-    tags:
-      - Data Summary
-      - Survival
-      - Competing risks regression
-  - name: colon
-    path: colon.omv
-    description: 'colon cancer dataset, obtained from {survival}.'
-    tags:
-      - Data Summary
-      - Survival
-  - name: BreastCancer
-    path: BreastCancer.omv
-    description: 'Wisconsin Breast Cancer Database dataset, obtained from {mlbench}.'
-    tags:
-      - Classification
-  - name: rocdata
-    path: rocdata.omv
-    description: Example data for ROC analysis.
-    tags:
-      - ROC
+      - Cross Tables
+      - Alluvial Diagrams
 usesNative: true
 minApp: 1.2.19
 
