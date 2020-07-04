@@ -1,5 +1,5 @@
 ---
-Title: Descriptives Functions for Clinicopathological Research
+title: Descriptives Functions for Clinicopathological Research
 name: ClinicoPathDescriptives
 version: 0.0.2.0019
 jms: '1.0'
@@ -84,6 +84,6 @@ datasets:
     tags:
       - ROC
 usesNative: true
-minApp: 1.2.22
+minApp: 1.2.19
 
 ...

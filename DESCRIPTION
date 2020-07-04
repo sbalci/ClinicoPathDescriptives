@@ -39,7 +39,8 @@ Imports:
     tibble,
     tidyr,
     gtsummary,
-    arsenal
+    arsenal,
+    kableExtra
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
