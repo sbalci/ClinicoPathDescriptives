@@ -1,0 +1,107 @@
+---
+name:  alluvial
+title: Alluvial Diagrams
+menuGroup: Exploration
+menuSubgroup: ClinicoPath Descriptives
+version: '1.0.0'
+jas: '1.2'
+options:
+    - name: data
+      type: Data
+      description:
+          R: >
+            The data as a data frame.
+
+    - name: vars
+      title: Variables
+      type: Variables
+      description:
+          R: >
+            a string naming the variables from `data` that contains the
+            values used for the Alluvial Diagram.
+
+    - name: condensationvar
+      title: Condensation Variable
+      type: Variable
+      description:
+          R: >
+            The primary variable to be used for condensation.
+
+    - name: excl
+      title: Exclude Missing (NA)
+      type: Bool
+      default: true
+
+    - name: marg
+      title: Marginal Plots
+      type: Bool
+      default: false
+
+
+    - name: verb
+      title: Print Plot Summary
+      type: Bool
+      default: false
+
+
+    - name: fill
+      title: Fill by
+      type: List
+      options:
+        - title: First Variable
+          name: first_variable
+        - title: Last Variable
+          name: last_variable
+        - title: All Flows
+          name: all_flows
+        - title: Values
+          name: values
+      default: first_variable
+      description:
+          R: >
+            A list for the argument fill for selecting the variable to be
+            represented by color. Default is 'first_variable'.
+
+    - name: bin
+      title: Bin Labels
+      type: List
+      options:
+        - title: Default
+          name: default
+        - title: Mean
+          name: mean
+        - title: Median
+          name: median
+        - title: Min-Max
+          name: min_max
+        - title: Cuts
+          name: cuts
+      default: default
+      description:
+          R: >
+            labels for the bins from low to high
+
+
+    - name: flip
+      title: Flip Plot
+      type: Bool
+      default: false
+
+    - name: usetitle
+      title: Use Title
+      type: Bool
+      default: false
+
+    - name: mytitle
+      title: >
+          Title of the Plot
+      type: String
+      default: 'Alluvial Plot'
+
+
+# - name: inter
+#   title: Interactive
+#   type: Bool
+#   default: false
+
+...

@@ -1,0 +1,86 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+.Rhistory
+.RData
+.Ruserdata
+ClinicoPath.Rproj
+build
+.Rbuildignore
+.gitignore
+data
+jamovi
+^.*\.jmo
+
+### R user files
+.RProfile
+
+### R Studio files
+\.Rproj$
+^.*\.Rproj$
+^\.Rproj\.user$
+
+### Configuration
+^_pkgdown\.yml$
+^\.github/
+^docs$
+^pkgdown$
+^img$
+^renv$
+^renv\.lock$
+
+### pkgdown websites
+^public/
+^docs/
+
+### Obsolete and temporary files/directories
+^delete/
+^temp/
+
+### Uncompiled documentation files
+^README\.Rmd$
+^.*Class.Rd$
+^.*\.gif$
+^.*\.png$
+^.*\.mp4$
+
+
+### License
+^LICENSE\.md$
+
+### Jamovi
+^jamovi/
+.jmo$
+^build/R/
+^build/js/
+^tododata/
+/tododata/
+tododata
+^vignettes/
+^docs/
+^temp/
+^build/
+^.*\.jmo$
+^.*\.omv$
+
+### Other R codes
+^tests$
+^data-raw$
+R/utils-pipe.R
+
+### CI
+^\.travis\.yml$
+^codecov\.yml$
+^\.gitlab-ci\.yml$
+^\.github/
+^docs$
+^tic\.R$
+^\.circleci/
+^appveyor\.yml$
+^codemeta\.json$
+.gitpod.Dockerfile
+.gitpod.yml
+.binder
+^\.ccache$
+^\.github$
+^clang-.*
+^gfortran.*
