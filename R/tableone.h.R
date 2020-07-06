@@ -11,7 +11,7 @@ tableoneOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             excl = TRUE, ...) {
 
             super$initialize(
-                package='ClinicoPath',
+                package='ClinicoPathDescriptives',
                 name='tableone',
                 requiresData=TRUE,
                 ...)
@@ -109,7 +109,7 @@ tableoneBase <- if (requireNamespace('jmvcore')) R6::R6Class(
     public = list(
         initialize = function(options, data=NULL, datasetId="", analysisId="", revision=0) {
             super$initialize(
-                package = 'ClinicoPath',
+                package = 'ClinicoPathDescriptives',
                 name = 'tableone',
                 version = c(0,0,1),
                 options = options,
