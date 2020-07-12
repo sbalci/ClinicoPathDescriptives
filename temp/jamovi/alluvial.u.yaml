@@ -1,0 +1,77 @@
+title: Alluvial Diagrams
+name: alluvial
+jus: '3.0'
+stage: 0
+compilerMode: tame
+children:
+  - type: VariableSupplier
+    persistentItems: true
+    stretchFactor: 1
+    children:
+      - type: TargetLayoutBox
+        label: Variables
+        children:
+          - type: VariablesListBox
+            name: vars
+            isTarget: true
+
+      - type: TargetLayoutBox
+        label: Condensation Variable
+        children:
+          - type: VariablesListBox
+            name: condensationvar
+            maxItemCount: 1
+            isTarget: true
+
+
+  - type: CollapseBox
+    label: Options
+    stretchFactor: 1
+    collapsed: true
+    children:
+      - type: LayoutBox
+        margin: large
+        stretchFactor: 1
+        children:
+          - type: LayoutBox
+            cell:
+              column: 0
+              row: 0
+            stretchFactor: 1
+            children:
+              - type: Label
+                label: Options1
+                fitToGrid: true
+                children:
+                    - type: CheckBox
+                      name: excl
+                    - type: CheckBox
+                      name: marg
+                    - type: CheckBox
+                      name: verb
+                    - type: CheckBox
+                      name: flip
+          - type: LayoutBox
+            cell:
+              column: 1
+              row: 0
+            stretchFactor: 1
+            children:
+              - type: Label
+                label: Options2
+                fitToGrid: true
+                cell:
+                  column: 1
+                  row: 0
+                children:
+                    - type: ComboBox
+                      name: fill
+                    - type: ComboBox
+                      name: bin
+                    - type: CheckBox
+                      name: usetitle
+                    - type: TextBox
+                      name: mytitle
+                      format: string
+                      width: large
+                      enable: (usetitle)

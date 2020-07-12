@@ -1,0 +1,64 @@
+---
+title: Descriptives Functions for Clinicopathological Research
+name: ClinicoPathDescriptives
+version: 0.0.2.0019
+jms: '1.0'
+authors:
+  - Serdar Balci
+maintainer: Serdar Balci <drserdarbalci@gmail.com>
+date: '2020-07-04'
+type: R
+description: >-
+  Descriptives Functions for Clinicopathological Research Descriptive functions
+  from ClinicoPath jamovi module. ClinicoPath help researchers to generate
+  natural language summaries of their dataset, generate cross tables with
+  statistical tests, and survival analysis with survival tables, survival plots,
+  and natural language summaries.
+analyses:
+  - title: Table One
+    name: tableone
+    ns: ClinicoPathDescriptives
+    menuGroup: Exploration
+    menuSubgroup: ClinicoPath Descriptives
+    menuTitle: Table One
+    description: Function for making Table One.
+  - title: Summary of Continuous Variables
+    name: summarydata
+    ns: ClinicoPathDescriptives
+    menuGroup: Exploration
+    menuSubgroup: ClinicoPath Descriptives
+    menuTitle: Summary of Continuous Variables
+    description: Function for Generating Summaries for Continuous Variables.
+  - title: Summary of Categorical Variables
+    name: reportcat
+    ns: ClinicoPathDescriptives
+    menuGroup: Exploration
+    menuSubgroup: ClinicoPath Descriptives
+    menuTitle: Summary of Categorical Variables
+    description: Function for Generating Summaries for Categorical Variables.
+  - title: Alluvial Diagrams
+    name: alluvial
+    ns: ClinicoPathDescriptives
+    menuGroup: Exploration
+    menuSubgroup: ClinicoPath Descriptives
+    menuTitle: Alluvial Diagrams
+  - title: Cross Tables
+    name: crosstable
+    ns: ClinicoPathDescriptives
+    menuGroup: Exploration
+    menuSubgroup: ClinicoPath Comparisons
+    menuTitle: Cross Tables
+    description: Function for making Cross Tables.
+datasets:
+  - name: histopathology including analysis
+    path: histopathologyDescriptives.omv
+    description: Example analysis for descriptive functions.
+    tags:
+      - Table One
+      - Data Summary
+      - Cross Tables
+      - Alluvial Diagrams
+usesNative: true
+minApp: 1.2.19
+
+...
