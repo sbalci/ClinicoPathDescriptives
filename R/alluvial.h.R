@@ -154,7 +154,8 @@ alluvialResults <- if (requireNamespace('jmvcore')) R6::R6Class(
                     "bin",
                     "flip",
                     "usetitle",
-                    "mytitle")))
+                    "mytitle",
+                    "originaltheme")))
             self$add(jmvcore::Image$new(
                 options=options,
                 title="`Condensation Plot ${condensationvar}`",
@@ -165,7 +166,8 @@ alluvialResults <- if (requireNamespace('jmvcore')) R6::R6Class(
                 requiresData=TRUE,
                 clearWith=list(
                     "vars",
-                    "condensationvar"),
+                    "condensationvar",
+                    "originaltheme"),
                 visible="(condensationvar)"))}))
 
 alluvialBase <- if (requireNamespace('jmvcore')) R6::R6Class(
