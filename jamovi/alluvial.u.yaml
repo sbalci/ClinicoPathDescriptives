@@ -70,6 +70,7 @@ children:
                     #   name: originaltheme
                     - type: ComboBox
                       name: fill
+                      enable: (!themex:jamovi)
                     - type: ComboBox
                       name: bin
                     - type: CheckBox
