@@ -16,7 +16,7 @@ alluvialOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             flip = FALSE,
             usetitle = FALSE,
             mytitle = "Alluvial Plot",
-            originaltheme = FALSE, ...) {
+            themex = "jamovi", ...) {
 
             super$initialize(
                 package='ClinicoPathDescriptives',
@@ -73,10 +73,23 @@ alluvialOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
                 "mytitle",
                 mytitle,
                 default="Alluvial Plot")
-            private$..originaltheme <- jmvcore::OptionBool$new(
-                "originaltheme",
-                originaltheme,
-                default=FALSE)
+            private$..themex <- jmvcore::OptionList$new(
+                "themex",
+                themex,
+                options=list(
+                    "jamovi",
+                    "original",
+                    "grey",
+                    "gray",
+                    "bw",
+                    "linedraw",
+                    "light",
+                    "dark",
+                    "minimal",
+                    "classic",
+                    "void",
+                    "test"),
+                default="jamovi")
 
             self$.addOption(private$..vars)
             self$.addOption(private$..condensationvar)
@@ -88,7 +101,7 @@ alluvialOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             self$.addOption(private$..flip)
             self$.addOption(private$..usetitle)
             self$.addOption(private$..mytitle)
-            self$.addOption(private$..originaltheme)
+            self$.addOption(private$..themex)
         }),
     active = list(
         vars = function() private$..vars$value,
@@ -101,7 +114,7 @@ alluvialOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
         flip = function() private$..flip$value,
         usetitle = function() private$..usetitle$value,
         mytitle = function() private$..mytitle$value,
-        originaltheme = function() private$..originaltheme$value),
+        themex = function() private$..themex$value),
     private = list(
         ..vars = NA,
         ..condensationvar = NA,
@@ -113,7 +126,7 @@ alluvialOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
         ..flip = NA,
         ..usetitle = NA,
         ..mytitle = NA,
-        ..originaltheme = NA)
+        ..themex = NA)
 )
 
 alluvialResults <- if (requireNamespace('jmvcore')) R6::R6Class(
@@ -155,7 +168,7 @@ alluvialResults <- if (requireNamespace('jmvcore')) R6::R6Class(
                     "flip",
                     "usetitle",
                     "mytitle",
-                    "originaltheme")))
+                    "themex")))
             self$add(jmvcore::Image$new(
                 options=options,
                 title="`Condensation Plot ${condensationvar}`",
@@ -167,7 +180,7 @@ alluvialResults <- if (requireNamespace('jmvcore')) R6::R6Class(
                 clearWith=list(
                     "vars",
                     "condensationvar",
-                    "originaltheme"),
+                    "themex"),
                 visible="(condensationvar)"))}))
 
 alluvialBase <- if (requireNamespace('jmvcore')) R6::R6Class(
@@ -206,7 +219,7 @@ alluvialBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #' @param flip .
 #' @param usetitle .
 #' @param mytitle .
-#' @param originaltheme .
+#' @param themex .
 #' @return A results object containing:
 #' \tabular{llllll}{
 #'   \code{results$todo} \tab \tab \tab \tab \tab a html \cr
@@ -227,7 +240,7 @@ alluvial <- function(
     flip = FALSE,
     usetitle = FALSE,
     mytitle = "Alluvial Plot",
-    originaltheme = FALSE) {
+    themex = "jamovi") {
 
     if ( ! requireNamespace('jmvcore'))
         stop('alluvial requires jmvcore to be installed (restart may be required)')
@@ -252,7 +265,7 @@ alluvial <- function(
         flip = flip,
         usetitle = usetitle,
         mytitle = mytitle,
-        originaltheme = originaltheme)
+        themex = themex)
 
     analysis <- alluvialClass$new(
         options = options,

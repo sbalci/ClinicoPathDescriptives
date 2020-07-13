@@ -16,7 +16,7 @@ alluvial(
   flip = FALSE,
   usetitle = FALSE,
   mytitle = "Alluvial Plot",
-  originaltheme = FALSE
+  themex = "jamovi"
 )
 }
 \arguments{
@@ -44,7 +44,7 @@ represented by color. Default is 'first_variable'.}
 
 \item{mytitle}{.}
 
-\item{originaltheme}{.}
+\item{themex}{.}
 }
 \value{
 A results object containing:
