@@ -111,8 +111,8 @@ options:
       options:
         - title: jamovi
           name: jamovi
-        - title: original
-          name: original
+        - title: easyalluvial
+          name: easyalluvial
         # - title: ipsum
         #   name: ipsum
         - title: grey
@@ -135,7 +135,7 @@ options:
           name: void
         - title: test
           name: test
-      default: jamovi
+      default: easyalluvial
 
 # - name: inter
 #   title: Interactive

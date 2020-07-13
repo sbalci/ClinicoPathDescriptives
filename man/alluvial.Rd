@@ -16,7 +16,7 @@ alluvial(
   flip = FALSE,
   usetitle = FALSE,
   mytitle = "Alluvial Plot",
-  themex = "jamovi"
+  themex = "easyalluvial"
 )
 }
 \arguments{

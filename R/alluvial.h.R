@@ -16,7 +16,7 @@ alluvialOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             flip = FALSE,
             usetitle = FALSE,
             mytitle = "Alluvial Plot",
-            themex = "jamovi", ...) {
+            themex = "easyalluvial", ...) {
 
             super$initialize(
                 package='ClinicoPathDescriptives',
@@ -78,7 +78,7 @@ alluvialOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
                 themex,
                 options=list(
                     "jamovi",
-                    "original",
+                    "easyalluvial",
                     "grey",
                     "gray",
                     "bw",
@@ -89,7 +89,7 @@ alluvialOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
                     "classic",
                     "void",
                     "test"),
-                default="jamovi")
+                default="easyalluvial")
 
             self$.addOption(private$..vars)
             self$.addOption(private$..condensationvar)
@@ -240,7 +240,7 @@ alluvial <- function(
     flip = FALSE,
     usetitle = FALSE,
     mytitle = "Alluvial Plot",
-    themex = "jamovi") {
+    themex = "easyalluvial") {
 
     if ( ! requireNamespace('jmvcore'))
         stop('alluvial requires jmvcore to be installed (restart may be required)')
