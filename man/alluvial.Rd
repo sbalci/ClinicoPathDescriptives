@@ -15,7 +15,8 @@ alluvial(
   bin = "default",
   flip = FALSE,
   usetitle = FALSE,
-  mytitle = "Alluvial Plot"
+  mytitle = "Alluvial Plot",
+  originaltheme = FALSE
 )
 }
 \arguments{
@@ -42,6 +43,8 @@ represented by color. Default is 'first_variable'.}
 \item{usetitle}{.}
 
 \item{mytitle}{.}
+
+\item{originaltheme}{.}
 }
 \value{
 A results object containing:

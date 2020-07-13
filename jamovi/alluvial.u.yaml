@@ -64,6 +64,8 @@ children:
                   column: 1
                   row: 0
                 children:
+                    - type: CheckBox
+                      name: originaltheme
                     - type: ComboBox
                       name: fill
                     - type: ComboBox

@@ -136,8 +136,11 @@ alluvialClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             }
 
 
+            originaltheme <- self$options$originaltheme
 
-            plot <- plot + ggtheme
+            if (!originaltheme) {
+                plot <- plot + ggtheme
+            }
 
             # Print Plot ----
             print(plot)
