@@ -74,8 +74,8 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             self$results$text$setContent(
                 list(
-                    head(mydata),
-                    head(plotData)
+                    head(mydata, n = 20),
+                    head(plotData, n = 20)
                     )
             )
 
@@ -103,7 +103,7 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                            mapping = ggplot2::aes(
                                x = Pop,
                                y = ifelse(
-                                   test = Gender == self$options$female,
+                                   test = Gender == "Female",
                                    yes = -n,
                                    no = n
                                ),
