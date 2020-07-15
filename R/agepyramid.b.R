@@ -83,47 +83,47 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
         }
 
-        # ,
-        # .plot = function(image, ggtheme, theme, ...) {
-        #
-        #
-        #     # Error Message ----
-        #     if ( (is.null(self$options$age) && is.null(self$options$gender)) )
-        #         return()
-        #
-        #     if (nrow(self$data) == 0) stop("Data contains no (complete) rows")
-        #
-        #
-        #     # read data ----
-        #
-        #     plotData <- image$state
-        #
-        #     plot <- ggplot2::ggplot(data = plotData,
-        #                    mapping = ggplot2::aes(
-        #                        x = Pop,
-        #                        y = ifelse(
-        #                            test = Gender == "Female",
-        #                            yes = -n,
-        #                            no = n
-        #                        ),
-        #                        fill = Gender
-        #                    )) +
-        #         ggplot2::geom_col() +
-        #         ggplot2::coord_flip() +
-        #         ggplot2::scale_y_continuous(labels = abs,
-        #                                     limits = max(plotData$n) * c(-1, 1)
-        #                                     ) +
-        #         ggplot2::labs(x = "Age",
-        #                       y = "Population"
-        #                       )
-        #
-        #
-        #  plot <- plot + ggtheme
-        #
-        #  print(plot)
-        #  TRUE
-        #
-        # }
+        ,
+        .plot = function(image, ggtheme, theme, ...) {
+
+
+            # Error Message ----
+            if ( (is.null(self$options$age) || is.null(self$options$gender)) )
+                return()
+
+            if (nrow(self$data) == 0) stop("Data contains no (complete) rows")
+
+
+            # read data ----
+
+            plotData <- image$state
+
+            plot <- ggplot2::ggplot(data = plotData,
+                           mapping = ggplot2::aes(
+                               x = Pop,
+                               y = ifelse(
+                                   test = Gender == "Female",
+                                   yes = -n,
+                                   no = n
+                               ),
+                               fill = Gender
+                           )) +
+                ggplot2::geom_col() +
+                ggplot2::coord_flip() +
+                ggplot2::scale_y_continuous(labels = abs,
+                                            limits = max(plotData$n) * c(-1, 1)
+                                            ) +
+                ggplot2::labs(x = "Age",
+                              y = "Population"
+                              )
+
+
+         plot <- plot + ggtheme
+
+         print(plot)
+         TRUE
+
+        }
 
 
         )
