@@ -23,6 +23,7 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             if ( (is.null(self$options$age) && is.null(self$options$gender)) )
                 return()
 
+            # Read data ----
 
             mydata <- self$data
 
@@ -37,6 +38,13 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             mydata[["Age"]] <- jmvcore::toNumeric(mydata[[age]])
 
             mydata[["Gender"]] <- as.factor(mydata[[gender]])
+
+            mydata <- mydata %>%
+                dplyr::mutate(
+                    Gender = dplyr::case_when(
+                        .data[[gender]] == self$options$female ~ "Female",
+                        TRUE ~ "Male"
+                        ))
 
 
             mydata[["Pop"]] <- cut(mydata[["Age"]],
@@ -74,6 +82,15 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
         ,
         .plot = function(image, ggtheme, theme, ...) {
+
+
+            # Error Message ----
+
+            if (nrow(self$data) == 0) stop("Data contains no (complete) rows")
+
+            if ( (is.null(self$options$age) && is.null(self$options$gender)) )
+                return()
+
 
             # read data ----
 
