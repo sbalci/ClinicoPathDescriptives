@@ -5,13 +5,13 @@ jrs:   '1.1'
 
 items:
 
-    - name:  text
+    - name:  Html
       title: Age Pyramid
       type:  Preformatted
 
 
     - name: plot
-      title: ''
+      title: 'Age Pyramid'
       type: Image
       width:  600
       height: 450

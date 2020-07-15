@@ -72,11 +72,14 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             image$setState(plotData)
 
 
-            self$results$text$setContent(
-                list(
-                    head(mydata, n = 20),
-                    head(plotData, n = 20)
-                    )
+
+            plotData2 <- plotData %>% kableExtra::kable()
+
+            self$results$text$setContent(plotData2
+                # list(
+                #     head(mydata, n = 20),
+                #     head(plotData, n = 20)
+                #     )
             )
 
 

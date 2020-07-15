@@ -53,7 +53,7 @@ agepyramidOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
 agepyramidResults <- if (requireNamespace('jmvcore')) R6::R6Class(
     inherit = jmvcore::Group,
     active = list(
-        text = function() private$.items[["text"]],
+        Html = function() private$.items[["Html"]],
         plot = function() private$.items[["plot"]]),
     private = list(),
     public=list(
@@ -64,12 +64,12 @@ agepyramidResults <- if (requireNamespace('jmvcore')) R6::R6Class(
                 title="Age Pyramid")
             self$add(jmvcore::Preformatted$new(
                 options=options,
-                name="text",
+                name="Html",
                 title="Age Pyramid"))
             self$add(jmvcore::Image$new(
                 options=options,
                 name="plot",
-                title="",
+                title="Age Pyramid",
                 width=600,
                 height=450,
                 renderFun=".plot",
@@ -108,7 +108,7 @@ agepyramidBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #' @param female .
 #' @return A results object containing:
 #' \tabular{llllll}{
-#'   \code{results$text} \tab \tab \tab \tab \tab a preformatted \cr
+#'   \code{results$Html} \tab \tab \tab \tab \tab a preformatted \cr
 #'   \code{results$plot} \tab \tab \tab \tab \tab an image \cr
 #' }
 #'
