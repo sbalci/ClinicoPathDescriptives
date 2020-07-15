@@ -49,6 +49,12 @@ analyses:
     menuSubgroup: ClinicoPath Comparisons
     menuTitle: Cross Tables
     description: Function for making Cross Tables.
+  - title: Age Pyramid
+    name: agepyramid
+    ns: ClinicoPathDescriptives
+    menuGroup: Exploration
+    menuSubgroup: ClinicoPath Descriptives
+    menuTitle: Age Pyramid
 datasets:
   - name: histopathology including analysis
     path: histopathologyDescriptives.omv

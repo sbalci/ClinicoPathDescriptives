@@ -1,0 +1,111 @@
+#' @title Age Pyramid
+#'
+#'
+#'
+#'
+#' @importFrom R6 R6Class
+#' @import jmvcore
+#'
+
+# https://stackoverflow.com/questions/14680075/simpler-population-pyramid-in-ggplot2
+
+agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
+    "agepyramidClass",
+    inherit = agepyramidBase,
+    private = list(
+        .run = function() {
+
+
+            # Error Message ----
+
+            if (nrow(self$data) == 0) stop("Data contains no (complete) rows")
+
+            if ( (is.null(self$options$age) && is.null(self$options$gender)) )
+                return()
+
+
+            mydata <- self$data
+
+            age <- self$options$age
+
+            gender <- self$options$gender
+
+            mydata <- jmvcore::select(mydata, c(age, gender))
+
+            mydata <- jmvcore::naOmit(mydata)
+
+            mydata[["Age"]] <- jmvcore::toNumeric(mydata[[age]])
+
+            mydata[["Gender"]] <- as.factor(mydata[[gender]])
+
+
+            mydata[["Pop"]] <- cut(mydata[["Age"]],
+                                 include.lowest = TRUE,
+                                 right = TRUE,
+                                 breaks = c(
+                                     seq(from = 0,
+                                         to = max(mydata[["Age"]], na.rm = TRUE),
+                                         by = 5
+                                     ),
+                                     max(mydata[["Age"]], na.rm = TRUE)
+                                 ),
+                                 ordered_result = TRUE
+            )
+
+
+            plotData <- mydata %>%
+                dplyr::group_by(Gender, Pop) %>%
+                dplyr::count()
+
+            image <- self$results$plot
+            image$setState(plotData)
+
+
+            # self$results$text$setContent(
+            #     list(
+            #         head(mydata),
+            #         head(plotData)
+            #         )
+            # )
+
+
+
+        }
+
+        ,
+        .plot = function(image, ggtheme, theme, ...) {
+
+            # read data ----
+
+            plotData <- image$state
+
+            plot <- ggplot2::ggplot(data = plotData,
+                           mapping = ggplot2::aes(
+                               x = Pop,
+                               y = ifelse(
+                                   test = Gender == self$options$female,
+                                   yes = -n,
+                                   no = n
+                               ),
+                               fill = Gender
+                           )) +
+                ggplot2::geom_col() +
+                ggplot2::coord_flip() +
+                ggplot2::scale_y_continuous(labels = abs,
+                                            limits = max(plotData$n) * c(-1, 1)
+                                            ) +
+                ggplot2::labs(x = "Age",
+                              y = "Population"
+                              )
+
+
+         plot <- plot + ggtheme
+
+         print(plot)
+         TRUE
+
+        }
+
+
+        )
+)
