@@ -5,9 +5,9 @@ jrs:   '1.1'
 
 items:
 
-    # - name:  text
-    #   title: Age Pyramid
-    #   type:  Preformatted
+    - name:  text
+      title: Age Pyramid
+      type:  Preformatted
 
 
     - name: plot
