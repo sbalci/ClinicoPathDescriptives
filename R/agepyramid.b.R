@@ -41,8 +41,8 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             mydata <- mydata %>%
                 dplyr::mutate(
-                    Gender = dplyr::case_when(
-                        .data[[gender]] == self$options$female ~ "Female",
+                    Gender2 = dplyr::case_when(
+                        Gender == self$options$female ~ "Female",
                         TRUE ~ "Male"
                         ))
 
@@ -62,7 +62,7 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
 
             plotData <- mydata %>%
-                dplyr::group_by(Gender, Pop) %>%
+                dplyr::group_by(Gender2, Pop) %>%
                 dplyr::count()
 
             image <- self$results$plot
@@ -100,7 +100,7 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                            mapping = ggplot2::aes(
                                x = Pop,
                                y = ifelse(
-                                   test = Gender == self$options$female,
+                                   test = Gender2 == self$options$female,
                                    yes = -n,
                                    no = n
                                ),
