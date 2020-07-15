@@ -104,7 +104,7 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                                    yes = -n,
                                    no = n
                                ),
-                               fill = Gender
+                               fill = Gender2
                            )) +
                 ggplot2::geom_col() +
                 ggplot2::coord_flip() +
