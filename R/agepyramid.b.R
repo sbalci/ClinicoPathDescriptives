@@ -74,7 +74,9 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
 
             plotData2 <- plotData %>%
-                tidyr::pivot_longer(data = ., cols = Gender) %>%
+                tidyr::pivot_wider(data = .,
+                                   names_from = Gender,
+                                   values_from = n) %>%
                 kableExtra::kable()
 
             self$results$text$setContent(plotData2
