@@ -77,6 +77,7 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 tidyr::pivot_wider(data = .,
                                    names_from = Gender,
                                    values_from = n) %>%
+                dplyr::arrange(dplyr::desc(Pop)) %>%
                 kableExtra::kable()
 
             self$results$text$setContent(plotData2
