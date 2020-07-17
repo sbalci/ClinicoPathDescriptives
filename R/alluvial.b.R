@@ -68,7 +68,7 @@ alluvialClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             # verbose ----
             # verbose <- FALSE
-            verb <- self$options$verb
+            # verb <- self$options$verb
             # if (isTRUE(verb)) verbose <- TRUE
 
             # fill_by ----
@@ -106,7 +106,7 @@ alluvialClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             marg <- self$options$marg
 
             if (marg) {
-                plot <- plot %>%
+                plot <- plot +
                     easyalluvial::add_marginal_histograms(mydata)
                     }
 

@@ -14,7 +14,6 @@ children:
           - type: VariablesListBox
             name: vars
             isTarget: true
-
       - type: TargetLayoutBox
         label: Condensation Variable
         children:
@@ -22,8 +21,6 @@ children:
             name: condensationvar
             maxItemCount: 1
             isTarget: true
-
-
   - type: CollapseBox
     label: Options
     stretchFactor: 1
@@ -43,14 +40,12 @@ children:
                 label: Output
                 fitToGrid: true
                 children:
-                    - type: CheckBox
-                      name: excl
-                    - type: CheckBox
-                      name: marg
-                    - type: CheckBox
-                      name: verb
-                    - type: CheckBox
-                      name: flip
+                  - type: CheckBox
+                    name: excl
+                  - type: CheckBox
+                    name: marg
+                  - type: CheckBox
+                    name: flip
           - type: LayoutBox
             cell:
               column: 1
@@ -64,20 +59,17 @@ children:
                   column: 1
                   row: 0
                 children:
-                    - type: ComboBox
-                      name: themex
-                    # - type: CheckBox
-                    #   name: originaltheme
-                    - type: ComboBox
-                      name: fill
-                      # enable: (!themex:jamovi)
-                    - type: ComboBox
-                      name: bin
-                    - type: CheckBox
-                      name: usetitle
-                      children:
-                        - type: TextBox
-                          name: mytitle
-                          format: string
-                          width: large
-                          enable: (usetitle)
+                  - type: ComboBox
+                    name: themex
+                  - type: ComboBox
+                    name: fill
+                  - type: ComboBox
+                    name: bin
+                  - type: CheckBox
+                    name: usetitle
+                    children:
+                      - type: TextBox
+                        name: mytitle
+                        format: string
+                        width: large
+                        enable: (usetitle)

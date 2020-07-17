@@ -38,10 +38,10 @@ options:
       default: false
 
 
-    - name: verb
-      title: Print plot summary
-      type: Bool
-      default: false
+    # - name: verb
+    #   title: Print plot summary
+    #   type: Bool
+    #   default: false
 
 
     - name: fill
