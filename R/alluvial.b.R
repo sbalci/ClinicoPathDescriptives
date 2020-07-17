@@ -65,6 +65,11 @@ alluvialClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             fill <- jmvcore::composeTerm(self$options$fill)
 
 
+            # Exclude NA ----
+
+            excl <- self$options$excl
+
+            if (excl) {mydata <- jmvcore::naOmit(mydata)}
 
             # verbose ----
             # verbose <- FALSE
@@ -82,11 +87,6 @@ alluvialClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             if (bin == "default") bin <- c("LL", "ML", "M", "MH", "HH")
 
-            # Exclude NA ----
-
-            excl <- self$options$excl
-
-            if (excl) {mydata <- jmvcore::naOmit(mydata)}
 
 
             # easyalluvial ----
@@ -107,8 +107,11 @@ alluvialClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             marg <- self$options$marg
 
             if (marg) {
-                plot <- plot %>%
-                    easyalluvial::add_marginal_histograms(mydata)
+                plot <- easyalluvial::add_marginal_histograms(p = plot,
+                                                              data_input = mydata,
+                                                              keep_labels = TRUE,
+                                                              top = TRUE,
+                                                              plot = TRUE)
                     }
 
 
