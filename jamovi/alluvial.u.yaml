@@ -65,7 +65,7 @@ children:
                     name: themex
                   - type: ComboBox
                     name: fill
-                    enable: '(!themex:jamovi)'
+                    enable: '(marg || !themex:jamovi)'
                   - type: ComboBox
                     name: bin
                   - type: CheckBox
