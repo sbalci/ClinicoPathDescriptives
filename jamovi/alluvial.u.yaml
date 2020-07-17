@@ -67,6 +67,7 @@ children:
                     name: bin
                   - type: CheckBox
                     name: usetitle
+                    enable: (!marg)
                     children:
                       - type: TextBox
                         name: mytitle
