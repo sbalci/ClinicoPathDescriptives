@@ -40,7 +40,7 @@ children:
             stretchFactor: 1
             children:
               - type: Label
-                label: Options1
+                label: Output
                 fitToGrid: true
                 children:
                     - type: CheckBox
@@ -58,7 +58,7 @@ children:
             stretchFactor: 1
             children:
               - type: Label
-                label: Options2
+                label: Plots
                 fitToGrid: true
                 cell:
                   column: 1
@@ -70,7 +70,7 @@ children:
                     #   name: originaltheme
                     - type: ComboBox
                       name: fill
-                      enable: (!themex:jamovi)
+                      # enable: (!themex:jamovi)
                     - type: ComboBox
                       name: bin
                     - type: CheckBox

@@ -117,26 +117,12 @@ alluvialClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             if (flip) {
                 plot <- plot +
-                    ggplot2::coord_flip() +
-                    ggplot2::theme_minimal()
+                    ggplot2::coord_flip()
+                    # ggplot2::theme_minimal()
             }
 
 
-            # add title ----
 
-            mytitle <- self$options$mytitle
-
-            # mytitle <- jmvcore::composeTerm(components = mytitle)
-
-
-            # use title ----
-
-            usetitle <- self$options$usetitle
-
-            if (usetitle) {
-                plot <- plot +
-                    ggplot2::ggtitle(mytitle)
-            }
 
             # select theme ----
 
@@ -171,14 +157,30 @@ alluvialClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 plot <- plot + ggplot2::theme_test()
             }
 
-
-
-
             # originaltheme <- self$options$originaltheme
             #
             # if (!originaltheme) {
             #     plot <- plot + ggtheme
             # }
+
+
+            # add title ----
+
+            mytitle <- self$options$mytitle
+
+            # mytitle <- jmvcore::composeTerm(components = mytitle)
+
+
+            # use title ----
+
+            usetitle <- self$options$usetitle
+
+            if (usetitle) {
+                plot <- plot +
+                    ggplot2::ggtitle(mytitle)
+            }
+
+
 
             # Print Plot ----
             print(plot)
