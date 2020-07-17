@@ -107,7 +107,7 @@ alluvialClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             marg <- self$options$marg
 
             if (marg) {
-                plot <- plot +
+                plot <- plot %>%
                     easyalluvial::add_marginal_histograms(mydata)
                     }
 
