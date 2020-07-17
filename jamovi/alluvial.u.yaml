@@ -46,6 +46,7 @@ children:
                     name: marg
                   - type: CheckBox
                     name: flip
+                    enable: (!marg)
           - type: LayoutBox
             cell:
               column: 1
