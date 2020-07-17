@@ -20,7 +20,7 @@ alluvialClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 todo <- "
                 <br>Welcome to ClinicoPath
                 <br><br>
-                This tool will help you form Alluvial Plots.
+                This tool will help you form Alluvial Diagrams (Alluvial Plots).
                 <hr><br>
                 "
 
@@ -96,7 +96,8 @@ alluvialClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 easyalluvial::alluvial_wide( data = mydata,
                                              max_variables = 8,
                                              fill_by = fill,
-                                             verbose = verb,
+                                             verbose = TRUE,
+                                             # verbose = verb,
                                              bin_labels = bin
                 )
 
