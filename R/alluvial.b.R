@@ -134,7 +134,7 @@ alluvialClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
 
             if (themex == "jamovi") {
-                plot <- plot + ggtheme
+                plot <- plot + ggtheme + ggplot2::theme(legend = FALSE)
             } else if (themex == "easyalluvial") {
                 plot <- plot
             # } else if (themex == "ipsum") {
