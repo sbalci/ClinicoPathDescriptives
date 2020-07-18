@@ -193,7 +193,7 @@ alluvialClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             usetitle <- self$options$usetitle
 
-            if (usetitle) {
+            if (!marg && usetitle) {
                 plot <- plot +
                     ggplot2::ggtitle(mytitle)
             }
