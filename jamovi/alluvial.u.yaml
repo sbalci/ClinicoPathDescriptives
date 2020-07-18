@@ -42,6 +42,9 @@ children:
                 children:
                   - type: CheckBox
                     name: excl
+                  - type: ComboBox
+                    name: orient
+                    enable: (!marg)
                   - type: CheckBox
                     name: marg
           - type: LayoutBox
@@ -70,8 +73,4 @@ children:
                         format: string
                         width: large
                         enable: (usetitle)
-  - type: LayoutBox
-    margin: large
-    children:
-      - type: ComboBox
-        name: orient
+
