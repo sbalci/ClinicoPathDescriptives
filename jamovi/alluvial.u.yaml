@@ -44,10 +44,6 @@ children:
                     name: excl
                   - type: CheckBox
                     name: marg
-                    enable: '(!themex:jamovi)'
-                  - type: CheckBox
-                    name: flip
-                    enable: (!marg)
           - type: LayoutBox
             cell:
               column: 1
@@ -62,11 +58,7 @@ children:
                   row: 0
                 children:
                   - type: ComboBox
-                    name: themex
-                    enable: (!marg)
-                  - type: ComboBox
                     name: fill
-                    enable: '(marg || !themex:jamovi)'
                   - type: ComboBox
                     name: bin
                   - type: CheckBox
@@ -78,3 +70,8 @@ children:
                         format: string
                         width: large
                         enable: (usetitle)
+  - type: LayoutBox
+    margin: large
+    children:
+      - type: ComboBox
+        name: orient
