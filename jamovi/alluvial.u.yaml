@@ -44,7 +44,7 @@ children:
                     name: excl
                   - type: CheckBox
                     name: marg
-                    enable: (orient:horr)
+                    enable: (orient:horr && !usetitle)
                   - type: ComboBox
                     name: orient
                     enable: (!marg)
