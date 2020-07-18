@@ -120,10 +120,10 @@ alluvialClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             orient <- self$options$orient
 
             if (orient == "vert") {
+                plot <- plot
+            } else {
                 plot <- plot +
                     ggplot2::coord_flip()
-            } else {
-                plot <- plot
             }
 
 
