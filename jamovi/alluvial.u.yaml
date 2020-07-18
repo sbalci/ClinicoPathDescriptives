@@ -42,11 +42,11 @@ children:
                 children:
                   - type: CheckBox
                     name: excl
+                  - type: CheckBox
+                    name: marg
                   - type: ComboBox
                     name: orient
                     enable: (!marg)
-                  - type: CheckBox
-                    name: marg
           - type: LayoutBox
             cell:
               column: 1
