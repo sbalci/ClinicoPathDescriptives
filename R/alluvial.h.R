@@ -139,7 +139,7 @@ alluvialResults <- if (requireNamespace('jmvcore')) R6::R6Class(
                     "verb",
                     "fill",
                     "bin",
-                    "flip",
+                    "orient",
                     "usetitle",
                     "mytitle")))
             self$add(jmvcore::Image$new(

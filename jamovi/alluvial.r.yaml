@@ -34,7 +34,7 @@ items:
           - verb
           - fill
           - bin
-          - flip
+          - orient
           - usetitle
           - mytitle
           # - themex
