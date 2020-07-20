@@ -82,7 +82,11 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
 
             plotData2 <- as.data.frame(plotData2) %>%
-                tibble::rownames_to_column(.data = .)
+                tibble::rownames_to_column(.data = .) %>%
+                dplyr::filter(!is.na(Pop)) %>%
+                dplyr::mutate(
+                    Pop = as.character(Pop)
+                )
 
 
 

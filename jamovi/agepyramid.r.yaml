@@ -20,7 +20,10 @@ items:
         - name: Male
           title: "Male"
           type: number
-
+      clearWith:
+          - age
+          - gender
+          - female
 
 
 

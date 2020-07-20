@@ -79,7 +79,11 @@ agepyramidResults <- if (requireNamespace('jmvcore')) R6::R6Class(
                     list(
                         `name`="Male", 
                         `title`="Male", 
-                        `type`="number"))))
+                        `type`="number")),
+                clearWith=list(
+                    "age",
+                    "gender",
+                    "female")))
             self$add(jmvcore::Image$new(
                 options=options,
                 name="plot",
