@@ -81,6 +81,11 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
 
 
+            plotData2 <- as.data.frame(plotData2) %>%
+                tibble::rownames_to_column(.data = .)
+
+
+
             pyramidTable <- self$results$pyramidTable
 
             data_frame <- pyramidTable
