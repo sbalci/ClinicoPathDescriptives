@@ -88,7 +88,7 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             pyramidTable <- self$results$pyramidTable
 
-            data_frame <- pyramidTable
+            data_frame <- plotData2
             for(i in seq_along(data_frame[,1,drop=T])) {
                 epirTable$addRow(rowKey = i, values = c(data_frame[i,])) # This code produces a named vector/list, which is what the values argument expects
             }
