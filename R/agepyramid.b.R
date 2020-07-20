@@ -77,8 +77,18 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 tidyr::pivot_wider(data = .,
                                    names_from = Gender,
                                    values_from = n) %>%
-                dplyr::arrange(dplyr::desc(Pop)) %>%
-                kableExtra::kable()
+                dplyr::arrange(dplyr::desc(Pop))
+
+
+
+            pyramidTable <- self$results$pyramidTable
+
+            data_frame <- pyramidTable
+            for(i in seq_along(data_frame[,1,drop=T])) {
+                epirTable$addRow(rowKey = i, values = c(data_frame[i,])) # This code produces a named vector/list, which is what the values argument expects
+            }
+
+
 
             self$results$text$setContent(plotData2
                 # list(
