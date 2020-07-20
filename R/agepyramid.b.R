@@ -95,15 +95,6 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
 
 
-            self$results$text$setContent(plotData2
-                # list(
-                #     head(mydata, n = 20),
-                #     head(plotData, n = 20)
-                #     )
-            )
-
-
-
         }
 
         ,

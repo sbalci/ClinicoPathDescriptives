@@ -5,10 +5,6 @@ jrs:   '1.1'
 
 items:
 
-    # - name:  text
-    #   title: Age Pyramid
-    #   type:  Html
-
 
     - name:  pyramidTable
       title: 'Population Data'
