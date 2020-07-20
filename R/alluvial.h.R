@@ -12,7 +12,7 @@ alluvialOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             marg = FALSE,
             fill = "first_variable",
             bin = "default",
-            orient = "horr",
+            orient = "vert",
             usetitle = FALSE,
             mytitle = "Alluvial Plot", ...) {
 
@@ -61,7 +61,7 @@ alluvialOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
                 options=list(
                     "horr",
                     "vert"),
-                default="horr")
+                default="vert")
             private$..usetitle <- jmvcore::OptionBool$new(
                 "usetitle",
                 usetitle,
@@ -206,7 +206,7 @@ alluvial <- function(
     marg = FALSE,
     fill = "first_variable",
     bin = "default",
-    orient = "horr",
+    orient = "vert",
     usetitle = FALSE,
     mytitle = "Alluvial Plot") {
 

@@ -12,7 +12,7 @@ alluvial(
   marg = FALSE,
   fill = "first_variable",
   bin = "default",
-  orient = "horr",
+  orient = "vert",
   usetitle = FALSE,
   mytitle = "Alluvial Plot"
 )

@@ -90,7 +90,7 @@ options:
           name: horr
         - title: Vertical
           name: vert
-      default: horr
+      default: vert
 
 
 
