@@ -10,7 +10,8 @@ items:
       title: 'Population Data'
       type: Table
       rows: 0
-      columns: &idcols
+      columns:
+      # columns: &idcols
         - name: Pop
           title: "Population"
           type: text
