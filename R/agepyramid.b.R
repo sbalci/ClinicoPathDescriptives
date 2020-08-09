@@ -60,6 +60,8 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                                  ordered_result = TRUE
             )
 
+            image2 <- self$results$plot2
+            image2$setState(mydata)
 
             plotData <- mydata %>%
                 dplyr::select(Gender = Gender2,
@@ -71,8 +73,6 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             image <- self$results$plot
             image$setState(plotData)
 
-            image2 <- self$results$plot2
-            image2$setState(plotData)
 
 
             plotData2 <- plotData %>%
@@ -164,9 +164,9 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             plot2 <- ggcharts::pyramid_chart(
                 data = plotData,
-                x = n,
+                x = Age,
                 y = Pop,
-                group = Gender)
+                group = Gender2)
 
 
             print(plot2)
