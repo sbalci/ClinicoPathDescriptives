@@ -40,8 +40,7 @@ Imports:
     tidyr,
     gtsummary,
     kableExtra,
-    finalfit,
-    ggcharts
+    finalfit
 Remotes:
     spgarbet/tangram,
     mayoverse/arsenal

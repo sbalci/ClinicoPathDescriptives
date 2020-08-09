@@ -54,8 +54,7 @@ agepyramidResults <- if (requireNamespace('jmvcore')) R6::R6Class(
     inherit = jmvcore::Group,
     active = list(
         pyramidTable = function() private$.items[["pyramidTable"]],
-        plot = function() private$.items[["plot"]],
-        plot2 = function() private$.items[["plot2"]]),
+        plot = function() private$.items[["plot"]]),
     private = list(),
     public=list(
         initialize=function(options) {
@@ -96,18 +95,6 @@ agepyramidResults <- if (requireNamespace('jmvcore')) R6::R6Class(
                 clearWith=list(
                     "age",
                     "gender",
-                    "female")))
-            self$add(jmvcore::Image$new(
-                options=options,
-                name="plot2",
-                title="Age Pyramid",
-                width=600,
-                height=450,
-                renderFun=".plot2",
-                requiresData=TRUE,
-                clearWith=list(
-                    "age",
-                    "gender",
                     "female")))}))
 
 agepyramidBase <- if (requireNamespace('jmvcore')) R6::R6Class(
@@ -141,7 +128,6 @@ agepyramidBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #' \tabular{llllll}{
 #'   \code{results$pyramidTable} \tab \tab \tab \tab \tab a table \cr
 #'   \code{results$plot} \tab \tab \tab \tab \tab an image \cr
-#'   \code{results$plot2} \tab \tab \tab \tab \tab an image \cr
 #' }
 #'
 #' Tables can be converted to data frames with \code{asDF} or \code{\link{as.data.frame}}. For example:
