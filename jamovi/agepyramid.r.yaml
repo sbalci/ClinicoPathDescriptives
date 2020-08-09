@@ -41,4 +41,18 @@ items:
           - female
 
 
+    - name: plot2
+      title: 'Age Pyramid'
+      type: Image
+      width:  600
+      height: 450
+      renderFun: .plot2
+      requiresData: true
+      clearWith:
+          - age
+          - gender
+          - female
+
+
+
 ...

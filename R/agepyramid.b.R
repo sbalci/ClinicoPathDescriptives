@@ -71,6 +71,8 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             image <- self$results$plot
             image$setState(plotData)
 
+            image2 <- self$results$plot2
+            image2$setState(plotData)
 
 
             plotData2 <- plotData %>%
@@ -140,6 +142,35 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
          print(plot)
          TRUE
+
+        }
+
+
+
+        ,
+        .plot2 = function(image2, ggtheme, theme, ...) {
+
+
+            # Error Message ----
+            if ( (is.null(self$options$age) || is.null(self$options$gender)) )
+                return()
+
+            if (nrow(self$data) == 0) stop("Data contains no (complete) rows")
+
+
+            # read data ----
+
+            plotData <- image2$state
+
+            plot2 <- ggcharts::pyramid_chart(
+                data = plotData,
+                x = n,
+                y = Pop,
+                group = Gender)
+
+
+            print(plot2)
+            TRUE
 
         }
 
