@@ -3,6 +3,7 @@
 export(agepyramid)
 export(alluvial)
 export(crosstable)
+export(lollipop)
 export(reportcat)
 export(tableone)
 import(ggplot2)
