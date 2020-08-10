@@ -2,7 +2,7 @@ title: Lollipop Chart
 name: lollipop
 jus: '3.0'
 stage: 0
-compilerMode: aggressive
+compilerMode: tame
 children:
   - type: VariableSupplier
     persistentItems: false
@@ -22,8 +22,6 @@ children:
             name: group
             maxItemCount: 1
             isTarget: true
-  - type: LayoutBox
-    margin: large
-    children:
-      - type: LevelSelector
-        name: highlight
+          - type: LevelSelector
+            name: highlight
+            enable: (group)
