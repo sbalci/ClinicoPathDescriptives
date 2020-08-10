@@ -48,11 +48,8 @@ lollipopClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             dep <- self$options$dep
 
             plot <-
-            plotData %>%
-            ggcharts::lollipop_chart(x = group
-                                     , y = dep
-                                     # , threshold = 30
-                                     )
+            plotData
+
 
 
             # plot <- plot + ggtheme

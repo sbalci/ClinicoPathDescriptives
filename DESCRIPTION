@@ -1,8 +1,8 @@
 Type: Package
 Package: ClinicoPathDescriptives
 Title: Descriptives Functions for Clinicopathological Research
-Version: 0.0.2.0025
-Date: 2020-07-22
+Version: 0.0.2.0033
+Date: 2020-08-10
 Authors@R: 
     person(given = "Serdar",
            family = "Balci",
@@ -40,8 +40,7 @@ Imports:
     tidyr,
     gtsummary,
     kableExtra,
-    finalfit,
-    ggcharts
+    finalfit
 Remotes:
     spgarbet/tangram,
     mayoverse/arsenal
