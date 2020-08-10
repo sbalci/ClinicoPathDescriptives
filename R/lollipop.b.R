@@ -31,7 +31,7 @@ lollipopClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
 
             # Error Message ----
-            if ( (is.null(self$options$age) || is.null(self$options$gender)) )
+            if ( (is.null(self$options$dep) || is.null(self$options$group)) )
                 return()
 
             if (nrow(self$data) == 0) stop("Data contains no (complete) rows")
