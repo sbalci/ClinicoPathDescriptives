@@ -55,12 +55,6 @@ analyses:
     menuGroup: Exploration
     menuSubgroup: ClinicoPath Descriptive Plots
     menuTitle: Age Pyramid
-  - title: Lollipop Chart
-    name: lollipop
-    ns: ClinicoPathDescriptives
-    menuGroup: Exploration
-    menuSubgroup: ClinicoPath Descriptive Plots
-    menuTitle: Lollipop Chart
 datasets:
   - name: histopathology including analysis
     path: histopathologyDescriptives.omv
