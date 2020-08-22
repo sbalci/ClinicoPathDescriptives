@@ -37,7 +37,9 @@ vartreeResults <- if (requireNamespace('jmvcore')) R6::R6Class(
             super$initialize(
                 options=options,
                 name="",
-                title="Variable Tree")
+                title="Variable Tree",
+                refs=list(
+                    "vtree"))
             self$add(jmvcore::Html$new(
                 options=options,
                 name="todo",
