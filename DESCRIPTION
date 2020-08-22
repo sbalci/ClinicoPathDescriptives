@@ -40,7 +40,8 @@ Imports:
     tidyr,
     gtsummary,
     kableExtra,
-    finalfit
+    finalfit,
+    vtree
 Remotes:
     spgarbet/tangram,
     mayoverse/arsenal

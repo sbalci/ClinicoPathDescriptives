@@ -1,0 +1,28 @@
+---
+name:  vartree
+title: Variable Tree
+menuGroup: Exploration
+menuSubgroup: ClinicoPath Descriptive Plots
+version: '1.0.0'
+jas: '1.2'
+
+description:
+    main: Function for Generating Tree Summaries of Variables.
+    R:
+        dontrun: true
+        usage: |
+            # example will be added
+
+options:
+    - name: data
+      type: Data
+      description:
+          R: >
+            The data as a data frame.
+
+
+    - name: vars
+      title: Variables
+      type: Variables
+
+...
