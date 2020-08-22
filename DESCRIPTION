@@ -41,7 +41,8 @@ Imports:
     gtsummary,
     kableExtra,
     finalfit,
-    vtree
+    vtree,
+    DiagrammeRsvg
 Remotes:
     spgarbet/tangram,
     mayoverse/arsenal
