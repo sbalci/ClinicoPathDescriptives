@@ -13,12 +13,13 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             if ( is.null(self$options$vars) ) {
                 # ToDo Message ----
                 todo <- "
-                <br>Welcome to ClinicoPath DEscriptives Module
+                <br>Welcome to ClinicoPath Descriptives Module
                           <br><br>
                           This tool will help you form a Variable Tree.
                           "
                 html <- self$results$todo
                 html$setContent(todo)
+                return()
 
             } else {
                 todo <- ""
