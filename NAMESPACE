@@ -2,6 +2,7 @@
 
 export(agepyramid)
 export(alluvial)
+export(benford)
 export(crosstable)
 export(reportcat)
 export(tableone)

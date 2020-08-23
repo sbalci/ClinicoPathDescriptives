@@ -1,8 +1,8 @@
 Type: Package
 Package: ClinicoPathDescriptives
 Title: Descriptives Functions for Clinicopathological Research
-Version: 0.0.2.0037
-Date: 2020-08-22
+Version: 0.0.2.0038
+Date: 2020-08-23
 Authors@R: 
     person(given = "Serdar",
            family = "Balci",
@@ -45,7 +45,8 @@ Imports:
     DiagrammeRsvg
 Remotes:
     spgarbet/tangram,
-    mayoverse/arsenal
+    mayoverse/arsenal,
+    carloscinelli/benford.analysis
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
