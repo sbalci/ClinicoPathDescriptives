@@ -4,12 +4,14 @@
 \alias{vartree}
 \title{Variable Tree}
 \usage{
-vartree(data, vars)
+vartree(data, vars, horizontal = TRUE)
 }
 \arguments{
 \item{data}{The data as a data frame.}
 
 \item{vars}{.}
+
+\item{horizontal}{.}
 }
 \value{
 A results object containing:

@@ -25,4 +25,12 @@ options:
       title: Variables
       type: Variables
 
+
+    - name: horizontal
+      title: Horizontal Layout
+      type: Bool
+      default: true
+
+
+
 ...

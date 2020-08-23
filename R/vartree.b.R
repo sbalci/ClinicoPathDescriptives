@@ -36,7 +36,20 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             mydata <- self$data
 
+
+            # Read Arguments ----
+
+
+            horizontal <- self$options$horizontal
+
+
+
+            # Prepare Data ----
+
             mydata <- jmvcore::naOmit(mydata)
+
+
+            # Prepare Formula ----
 
             formula <- jmvcore::constructFormula(terms = self$options$vars)
 
@@ -49,7 +62,15 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             myvars <- paste0(myvars, collapse = " ")
 
-            results <- vtree::vtree(mydata, myvars)
+
+            # run vtree ----
+
+            results <- vtree::vtree(z = mydata,
+                                    vars = myvars,
+
+                                    horiz = horizontal)
+
+            # export as svg ----
 
             results <- DiagrammeRsvg::export_svg(gv = results)
 

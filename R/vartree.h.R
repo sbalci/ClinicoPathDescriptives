@@ -6,7 +6,8 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
     inherit = jmvcore::Options,
     public = list(
         initialize = function(
-            vars = NULL, ...) {
+            vars = NULL,
+            horizontal = TRUE, ...) {
 
             super$initialize(
                 package='ClinicoPathDescriptives',
@@ -17,13 +18,20 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             private$..vars <- jmvcore::OptionVariables$new(
                 "vars",
                 vars)
+            private$..horizontal <- jmvcore::OptionBool$new(
+                "horizontal",
+                horizontal,
+                default=TRUE)
 
             self$.addOption(private$..vars)
+            self$.addOption(private$..horizontal)
         }),
     active = list(
-        vars = function() private$..vars$value),
+        vars = function() private$..vars$value,
+        horizontal = function() private$..horizontal$value),
     private = list(
-        ..vars = NA)
+        ..vars = NA,
+        ..horizontal = NA)
 )
 
 vartreeResults <- if (requireNamespace('jmvcore')) R6::R6Class(
@@ -79,6 +87,7 @@ vartreeBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #'}
 #' @param data The data as a data frame.
 #' @param vars .
+#' @param horizontal .
 #' @return A results object containing:
 #' \tabular{llllll}{
 #'   \code{results$todo} \tab \tab \tab \tab \tab a html \cr
@@ -88,7 +97,8 @@ vartreeBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #' @export
 vartree <- function(
     data,
-    vars) {
+    vars,
+    horizontal = TRUE) {
 
     if ( ! requireNamespace('jmvcore'))
         stop('vartree requires jmvcore to be installed (restart may be required)')
@@ -101,7 +111,8 @@ vartree <- function(
 
 
     options <- vartreeOptions$new(
-        vars = vars)
+        vars = vars,
+        horizontal = horizontal)
 
     analysis <- vartreeClass$new(
         options = options,
