@@ -36,17 +36,19 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             mydata <- self$data
 
-
             # Read Arguments ----
 
-
             horizontal <- self$options$horizontal
-
+            sline <- self$options$sline
 
 
             # Prepare Data ----
 
-            mydata <- jmvcore::naOmit(mydata)
+            # Exclude NA ----
+
+            excl <- self$options$excl
+
+            if (excl) {mydata <- jmvcore::naOmit(mydata)}
 
 
             # Prepare Formula ----
@@ -67,7 +69,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             results <- vtree::vtree(z = mydata,
                                     vars = myvars,
-
+                                    sameline = sline,
                                     horiz = horizontal)
 
             # export as svg ----

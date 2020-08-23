@@ -18,4 +18,8 @@ children:
     margin: large
     children:
       - type: CheckBox
+        name: excl
+      - type: CheckBox
         name: horizontal
+      - type: CheckBox
+        name: sline

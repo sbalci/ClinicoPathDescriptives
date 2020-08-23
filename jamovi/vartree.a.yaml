@@ -26,11 +26,22 @@ options:
       type: Variables
 
 
-    - name: horizontal
-      title: Horizontal Layout
+    - name: excl
+      title: Exclude Missing (NA)
       type: Bool
       default: true
 
+
+    - name: horizontal
+      title: Horizontal Layout
+      type: Bool
+      default: false
+
+
+    - name: sline
+      title: Sameline
+      type: Bool
+      default: true
 
 
 ...

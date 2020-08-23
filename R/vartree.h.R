@@ -7,7 +7,9 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
     public = list(
         initialize = function(
             vars = NULL,
-            horizontal = TRUE, ...) {
+            excl = TRUE,
+            horizontal = FALSE,
+            sline = TRUE, ...) {
 
             super$initialize(
                 package='ClinicoPathDescriptives',
@@ -18,20 +20,34 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             private$..vars <- jmvcore::OptionVariables$new(
                 "vars",
                 vars)
+            private$..excl <- jmvcore::OptionBool$new(
+                "excl",
+                excl,
+                default=TRUE)
             private$..horizontal <- jmvcore::OptionBool$new(
                 "horizontal",
                 horizontal,
+                default=FALSE)
+            private$..sline <- jmvcore::OptionBool$new(
+                "sline",
+                sline,
                 default=TRUE)
 
             self$.addOption(private$..vars)
+            self$.addOption(private$..excl)
             self$.addOption(private$..horizontal)
+            self$.addOption(private$..sline)
         }),
     active = list(
         vars = function() private$..vars$value,
-        horizontal = function() private$..horizontal$value),
+        excl = function() private$..excl$value,
+        horizontal = function() private$..horizontal$value,
+        sline = function() private$..sline$value),
     private = list(
         ..vars = NA,
-        ..horizontal = NA)
+        ..excl = NA,
+        ..horizontal = NA,
+        ..sline = NA)
 )
 
 vartreeResults <- if (requireNamespace('jmvcore')) R6::R6Class(
@@ -87,7 +103,9 @@ vartreeBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #'}
 #' @param data The data as a data frame.
 #' @param vars .
+#' @param excl .
 #' @param horizontal .
+#' @param sline .
 #' @return A results object containing:
 #' \tabular{llllll}{
 #'   \code{results$todo} \tab \tab \tab \tab \tab a html \cr
@@ -98,7 +116,9 @@ vartreeBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 vartree <- function(
     data,
     vars,
-    horizontal = TRUE) {
+    excl = TRUE,
+    horizontal = FALSE,
+    sline = TRUE) {
 
     if ( ! requireNamespace('jmvcore'))
         stop('vartree requires jmvcore to be installed (restart may be required)')
@@ -112,7 +132,9 @@ vartree <- function(
 
     options <- vartreeOptions$new(
         vars = vars,
-        horizontal = horizontal)
+        excl = excl,
+        horizontal = horizontal,
+        sline = sline)
 
     analysis <- vartreeClass$new(
         options = options,
