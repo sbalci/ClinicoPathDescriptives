@@ -40,6 +40,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             horizontal <- self$options$horizontal
             sline <- self$options$sline
+            mytitle <- self$options$mytitle
 
 
             # Prepare Data ----
@@ -70,7 +71,11 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             results <- vtree::vtree(z = mydata,
                                     vars = myvars,
                                     sameline = sline,
-                                    horiz = horizontal)
+                                    title = mytitle,
+                                    horiz = horizontal
+
+
+                                    )
 
             # export as svg ----
 

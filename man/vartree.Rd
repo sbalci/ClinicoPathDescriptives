@@ -4,7 +4,14 @@
 \alias{vartree}
 \title{Variable Tree}
 \usage{
-vartree(data, vars, excl = TRUE, horizontal = FALSE, sline = TRUE)
+vartree(
+  data,
+  vars,
+  excl = TRUE,
+  horizontal = FALSE,
+  sline = TRUE,
+  mytitle = "Variable Tree"
+)
 }
 \arguments{
 \item{data}{The data as a data frame.}
@@ -16,6 +23,8 @@ vartree(data, vars, excl = TRUE, horizontal = FALSE, sline = TRUE)
 \item{horizontal}{.}
 
 \item{sline}{.}
+
+\item{mytitle}{.}
 }
 \value{
 A results object containing:

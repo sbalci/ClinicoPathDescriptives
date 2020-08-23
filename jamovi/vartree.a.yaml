@@ -44,4 +44,10 @@ options:
       default: true
 
 
+    - name: mytitle
+      title: Title
+      type: String
+      default: 'Variable Tree'
+
+
 ...

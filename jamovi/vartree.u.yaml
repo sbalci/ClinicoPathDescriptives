@@ -23,3 +23,9 @@ children:
         name: horizontal
       - type: CheckBox
         name: sline
+  - type: LayoutBox
+    margin: large
+    children:
+      - type: TextBox
+        name: mytitle
+        format: string

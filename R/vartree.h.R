@@ -9,7 +9,8 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             vars = NULL,
             excl = TRUE,
             horizontal = FALSE,
-            sline = TRUE, ...) {
+            sline = TRUE,
+            mytitle = "Variable Tree", ...) {
 
             super$initialize(
                 package='ClinicoPathDescriptives',
@@ -32,22 +33,29 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
                 "sline",
                 sline,
                 default=TRUE)
+            private$..mytitle <- jmvcore::OptionString$new(
+                "mytitle",
+                mytitle,
+                default="Variable Tree")
 
             self$.addOption(private$..vars)
             self$.addOption(private$..excl)
             self$.addOption(private$..horizontal)
             self$.addOption(private$..sline)
+            self$.addOption(private$..mytitle)
         }),
     active = list(
         vars = function() private$..vars$value,
         excl = function() private$..excl$value,
         horizontal = function() private$..horizontal$value,
-        sline = function() private$..sline$value),
+        sline = function() private$..sline$value,
+        mytitle = function() private$..mytitle$value),
     private = list(
         ..vars = NA,
         ..excl = NA,
         ..horizontal = NA,
-        ..sline = NA)
+        ..sline = NA,
+        ..mytitle = NA)
 )
 
 vartreeResults <- if (requireNamespace('jmvcore')) R6::R6Class(
@@ -106,6 +114,7 @@ vartreeBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #' @param excl .
 #' @param horizontal .
 #' @param sline .
+#' @param mytitle .
 #' @return A results object containing:
 #' \tabular{llllll}{
 #'   \code{results$todo} \tab \tab \tab \tab \tab a html \cr
@@ -118,7 +127,8 @@ vartree <- function(
     vars,
     excl = TRUE,
     horizontal = FALSE,
-    sline = TRUE) {
+    sline = TRUE,
+    mytitle = "Variable Tree") {
 
     if ( ! requireNamespace('jmvcore'))
         stop('vartree requires jmvcore to be installed (restart may be required)')
@@ -134,7 +144,8 @@ vartree <- function(
         vars = vars,
         excl = excl,
         horizontal = horizontal,
-        sline = sline)
+        sline = sline,
+        mytitle = mytitle)
 
     analysis <- vartreeClass$new(
         options = options,
