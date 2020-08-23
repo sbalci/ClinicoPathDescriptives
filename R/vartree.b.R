@@ -78,8 +78,8 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                                     # shownodelabels = ,
                                     showvarnames = self$options$varnames,
                                     showpct = self$options$pct,
-                                    height = self$options$hght,
-                                    width = self$options$wdth
+                                    pxheight = self$options$hght,
+                                    pxwidth = self$options$wdth
                                     )
 
             # export as svg ----
