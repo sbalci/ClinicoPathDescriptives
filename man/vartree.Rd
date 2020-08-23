@@ -13,7 +13,8 @@ vartree(
   varnames = FALSE,
   pct = FALSE,
   mytitle = "Variable Tree",
-  imagewidth = 10
+  wdth = 900,
+  hght = 200
 )
 }
 \arguments{
@@ -33,7 +34,9 @@ vartree(
 
 \item{mytitle}{.}
 
-\item{imagewidth}{.}
+\item{wdth}{.}
+
+\item{hght}{.}
 }
 \value{
 A results object containing:

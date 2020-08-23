@@ -2,7 +2,7 @@ title: Variable Tree
 name: vartree
 jus: '3.0'
 stage: 0
-compilerMode: aggressive
+compilerMode: tame
 children:
   - type: VariableSupplier
     persistentItems: false
@@ -33,9 +33,16 @@ children:
       - type: TextBox
         name: mytitle
         format: string
+        width: large
   - type: LayoutBox
     margin: large
     children:
       - type: TextBox
-        name: imagewidth
+        name: wdth
+        format: number
+  - type: LayoutBox
+    margin: large
+    children:
+      - type: TextBox
+        name: hght
         format: number

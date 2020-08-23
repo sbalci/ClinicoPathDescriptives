@@ -13,7 +13,8 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             varnames = FALSE,
             pct = FALSE,
             mytitle = "Variable Tree",
-            imagewidth = 10, ...) {
+            wdth = 900,
+            hght = 200, ...) {
 
             super$initialize(
                 package='ClinicoPathDescriptives',
@@ -48,10 +49,14 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
                 "mytitle",
                 mytitle,
                 default="Variable Tree")
-            private$..imagewidth <- jmvcore::OptionInteger$new(
-                "imagewidth",
-                imagewidth,
-                default=10)
+            private$..wdth <- jmvcore::OptionInteger$new(
+                "wdth",
+                wdth,
+                default=900)
+            private$..hght <- jmvcore::OptionInteger$new(
+                "hght",
+                hght,
+                default=200)
 
             self$.addOption(private$..vars)
             self$.addOption(private$..excl)
@@ -60,7 +65,8 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             self$.addOption(private$..varnames)
             self$.addOption(private$..pct)
             self$.addOption(private$..mytitle)
-            self$.addOption(private$..imagewidth)
+            self$.addOption(private$..wdth)
+            self$.addOption(private$..hght)
         }),
     active = list(
         vars = function() private$..vars$value,
@@ -70,7 +76,8 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
         varnames = function() private$..varnames$value,
         pct = function() private$..pct$value,
         mytitle = function() private$..mytitle$value,
-        imagewidth = function() private$..imagewidth$value),
+        wdth = function() private$..wdth$value,
+        hght = function() private$..hght$value),
     private = list(
         ..vars = NA,
         ..excl = NA,
@@ -79,7 +86,8 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
         ..varnames = NA,
         ..pct = NA,
         ..mytitle = NA,
-        ..imagewidth = NA)
+        ..wdth = NA,
+        ..hght = NA)
 )
 
 vartreeResults <- if (requireNamespace('jmvcore')) R6::R6Class(
@@ -141,7 +149,8 @@ vartreeBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #' @param varnames .
 #' @param pct .
 #' @param mytitle .
-#' @param imagewidth .
+#' @param wdth .
+#' @param hght .
 #' @return A results object containing:
 #' \tabular{llllll}{
 #'   \code{results$todo} \tab \tab \tab \tab \tab a html \cr
@@ -158,7 +167,8 @@ vartree <- function(
     varnames = FALSE,
     pct = FALSE,
     mytitle = "Variable Tree",
-    imagewidth = 10) {
+    wdth = 900,
+    hght = 200) {
 
     if ( ! requireNamespace('jmvcore'))
         stop('vartree requires jmvcore to be installed (restart may be required)')
@@ -178,7 +188,8 @@ vartree <- function(
         varnames = varnames,
         pct = pct,
         mytitle = mytitle,
-        imagewidth = imagewidth)
+        wdth = wdth,
+        hght = hght)
 
     analysis <- vartreeClass$new(
         options = options,

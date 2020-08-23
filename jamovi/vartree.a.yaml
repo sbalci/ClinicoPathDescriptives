@@ -48,24 +48,24 @@ options:
       type: Bool
       default: false
 
-
     - name: pct
       title: Percentages
       type: Bool
       default: false
-
 
     - name: mytitle
       title: Title
       type: String
       default: 'Variable Tree'
 
-
-
-    - name: imagewidth
+    - name: wdth
       title: Image Width
       type: Integer
-      default: 10
+      default: 900
 
+    - name: hght
+      title: Image Width
+      type: Integer
+      default: 200
 
 ...
