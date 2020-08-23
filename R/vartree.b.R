@@ -72,7 +72,13 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                                     vars = myvars,
                                     sameline = sline,
                                     title = mytitle,
-                                    horiz = horizontal
+                                    horiz = horizontal,
+                                    # fillcolor = "white",
+                                    # showvarinnode = ,
+                                    # shownodelabels = ,
+                                    showvarnames = self$options$varnames,
+                                    showpct = self$options$pct,
+                                    imagewidth = paste0(self$options$imagewidth,"in")
 
 
                                     )

@@ -43,11 +43,29 @@ options:
       type: Bool
       default: true
 
+    - name: varnames
+      title: Variable Names
+      type: Bool
+      default: false
+
+
+    - name: pct
+      title: Percentages
+      type: Bool
+      default: false
+
 
     - name: mytitle
       title: Title
       type: String
       default: 'Variable Tree'
+
+
+
+    - name: imagewidth
+      title: Image Width
+      type: Integer
+      default: 10
 
 
 ...

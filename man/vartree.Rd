@@ -10,7 +10,10 @@ vartree(
   excl = TRUE,
   horizontal = FALSE,
   sline = TRUE,
-  mytitle = "Variable Tree"
+  varnames = FALSE,
+  pct = FALSE,
+  mytitle = "Variable Tree",
+  imagewidth = 10
 )
 }
 \arguments{
@@ -24,7 +27,13 @@ vartree(
 
 \item{sline}{.}
 
+\item{varnames}{.}
+
+\item{pct}{.}
+
 \item{mytitle}{.}
+
+\item{imagewidth}{.}
 }
 \value{
 A results object containing:

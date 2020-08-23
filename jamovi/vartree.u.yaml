@@ -23,9 +23,19 @@ children:
         name: horizontal
       - type: CheckBox
         name: sline
+      - type: CheckBox
+        name: varnames
+      - type: CheckBox
+        name: pct
   - type: LayoutBox
     margin: large
     children:
       - type: TextBox
         name: mytitle
         format: string
+  - type: LayoutBox
+    margin: large
+    children:
+      - type: TextBox
+        name: imagewidth
+        format: number
