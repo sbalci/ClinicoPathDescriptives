@@ -67,21 +67,6 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             myvars <- paste0(myvars, collapse = " ")
 
-            percvar <- self$options$percvar
-
-            if ( !is.null(self$options$percvar) ) {
-
-                xsummary <- paste0(percvar,"=Yes \n%pct%")
-
-                results <- vtree::vtree(z = mydata,
-                                        vars = myvars,
-                                        summary = xsummary,
-
-                      showlegend=TRUE)
-
-
-            }
-
             # run vtree ----
             results <- vtree::vtree(z = mydata,
                                     vars = myvars,
@@ -97,6 +82,25 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                                     pxheight = self$options$hght,
                                     pxwidth = self$options$wdth
                                     )
+
+
+            percvar <- self$options$percvar
+
+            if ( !is.null(self$options$percvar) ) {
+
+                xsummary <- paste0(percvar,"=Yes \n%pct%")
+
+                results <- vtree::vtree(z = mydata,
+                                        vars = myvars,
+                                        summary = xsummary,
+
+                                        showlegend = TRUE)
+
+
+            }
+
+
+
 
             # export as svg ----
 
