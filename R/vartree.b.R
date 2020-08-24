@@ -83,7 +83,6 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             xshowvarinnode <- FALSE
             xshownodelabels <- TRUE
             xshowvarnames <- TRUE
-            xshowlevels <- TRUE
             xshowpct <- TRUE
             xshowlpct <- TRUE
             xshowcount <- TRUE
@@ -103,8 +102,6 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             xsummary <- ""
             xrunsummary <- NULL
             xretain <- NULL
-            xwidth <- NULL
-            xheight <- NULL
             xgraphattr <- ""
             xnodeattr <- ""
             xedgeattr <- ""
@@ -118,10 +115,6 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             xnodeargs <- NULL
             xchoicechecklist <- TRUE
             xarrowhead <- "normal"
-            xpxwidth <- NULL
-            xpxheight <- NULL
-            ximagewidth <- NULL
-            ximageheight <- NULL
             xfolder <- NULL
             xpngknit <- TRUE
             xas.if.knit <- FALSE
@@ -176,8 +169,6 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 showvarnames = self$options$varnames,
                 showlegend = self$options$legend,
                 showpct = self$options$pct,
-                # pxheight = self$options$hght,
-                # pxwidth = self$options$wdth,
                 splitspaces = xsplitspaces,
                 # prune = list(),
                 # prunebelow = list(),
@@ -215,7 +206,6 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 # showvarinnode = FALSE,
                 # shownodelabels = TRUE,
                 # showvarnames = TRUE,
-                # showlevels = TRUE,
                 # showpct = TRUE,
                 # showlpct = TRUE,
                 # showcount = TRUE,
@@ -232,11 +222,11 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 # margin = 0.2,
                 # vp = TRUE,
                 # horiz = TRUE,
-                summary = xsummary
+                summary = xsummary,
                 # runsummary = NULL,
                 # retain = NULL,
-                # width = NULL,
-                # height = NULL,
+                width = self$options$hght,
+                height = self$options$hght,
                 # graphattr = "",
                 # nodeattr = "",
                 # edgeattr = "",
@@ -250,10 +240,6 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 # nodeargs = NULL,
                 # choicechecklist = TRUE,
                 # arrowhead = "normal",
-                # pxwidth,
-                # pxheight,
-                # imagewidth,
-                # imageheight,
                 # folder,
                 # pngknit = TRUE,
                 # as.if.knit = FALSE,
