@@ -88,8 +88,10 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             if ( !is.null(self$options$percvar) ) {
 
+                vars <- self$options$vars
+
                 mydata2 <- mydata %>%
-                    dplyr::select(myvars, percvar)
+                    dplyr::select(vars, percvar)
 
                 xsummary <- paste0(percvar,"=Yes \n%pct%")
 
