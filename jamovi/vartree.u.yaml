@@ -34,7 +34,7 @@ children:
   - type: CollapseBox
     label: Options
     stretchFactor: 1
-    collapsed: true
+    collapsed: false
     children:
       - type: LayoutBox
         margin: large
