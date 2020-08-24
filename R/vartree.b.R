@@ -110,7 +110,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
                 results <- vtree::vtree(z = mydata2,
                                         vars = myvars2,
-                                        # summary = xsummary,
+                                        summary = xsummary,
 
                                         showlegend = TRUE)
 
