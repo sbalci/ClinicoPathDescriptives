@@ -156,6 +156,18 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             }
 
 
+            # Continuous Variable for Summaries ----
+
+            if ( !is.null(self$options$summaryvar) ) {
+                summaryvar <- self$options$summaryvar
+                xsummary <- paste0(summaryvar,"\n", summaryvar, "\n\n", summaryvar, "\n", "mean=%mean%", "\n", "SD=%SD%", "\n", "mv=%mv%", "%leafonly%")
+            }
+
+
+
+
+
+
 
             # run vtree function ----
 

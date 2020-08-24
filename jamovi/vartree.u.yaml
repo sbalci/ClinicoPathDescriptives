@@ -23,6 +23,14 @@ children:
             isTarget: true
           - type: LevelSelector
             name: percvarLevel
+      - type: TargetLayoutBox
+        label: Continuous Variable for Summaries
+        children:
+          - type: VariablesListBox
+            name: summaryvar
+            maxItemCount: 1
+            isTarget: true
+
   - type: CollapseBox
     label: Options
     stretchFactor: 1
@@ -81,14 +89,4 @@ children:
                   - type: TextBox
                     name: height
                     format: number
-  - type: VariableSupplier
-    persistentItems: false
-    stretchFactor: 1
-    children:
-      - type: TargetLayoutBox
-        label: Continuous Variable for Summaries
-        children:
-          - type: VariablesListBox
-            name: summaryvar
-            maxItemCount: 1
-            isTarget: true
+
