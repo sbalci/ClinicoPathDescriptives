@@ -62,13 +62,13 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
 
 
-            mydata <- mydata %>%
+            mydata1 <- mydata %>%
                 dplyr::select(myvars)
 
             myvars <- paste0(myvars, collapse = " ")
 
             # run vtree ----
-            results <- vtree::vtree(z = mydata,
+            results <- vtree::vtree(z = mydata1,
                                     vars = myvars,
                                     sameline = sline,
                                     title = mytitle,
@@ -88,9 +88,12 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             if ( !is.null(self$options$percvar) ) {
 
+                mydata2 <- mydata %>%
+                    dplyr::select(myvars, percvar)
+
                 xsummary <- paste0(percvar,"=Yes \n%pct%")
 
-                results <- vtree::vtree(z = mydata,
+                results <- vtree::vtree(z = mydata2,
                                         vars = myvars,
                                         summary = xsummary,
 
