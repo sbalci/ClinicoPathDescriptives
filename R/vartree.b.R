@@ -51,8 +51,6 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             xprunebelow <- list()
             xkeep <- list()
             xfollow <- list()
-            xprunelone <- NULL
-            xpruneNA <- FALSE
             xprunesmaller <- NULL
             xlabelnode <- list()
             xtlabelnode <- NULL
@@ -169,7 +167,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             # run vtree function ----
 
-            results <- vtree(
+            results <- vtree::vtree(
                 z = mydata,
                 vars = myvars1,
                 sameline = sline,
@@ -180,13 +178,11 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 showpct = self$options$pct,
                 # pxheight = self$options$hght,
                 # pxwidth = self$options$wdth,
-                # splitspaces = TRUE,
+                splitspaces = xsplitspaces,
                 # prune = list(),
                 # prunebelow = list(),
                 # keep = list(),
                 # follow = list(),
-                # prunelone = NULL,
-                # pruneNA = FALSE,
                 # prunesmaller = NULL,
                 # labelnode = list(),
                 # tlabelnode = NULL,
