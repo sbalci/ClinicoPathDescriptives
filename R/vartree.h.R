@@ -7,11 +7,13 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
     public = list(
         initialize = function(
             vars = NULL,
+            percvar = NULL,
             excl = TRUE,
             horizontal = FALSE,
             sline = TRUE,
             varnames = FALSE,
             pct = FALSE,
+            legend = FALSE,
             mytitle = "Variable Tree",
             wdth = 900,
             hght = 200, ...) {
@@ -25,6 +27,9 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             private$..vars <- jmvcore::OptionVariables$new(
                 "vars",
                 vars)
+            private$..percvar <- jmvcore::OptionVariable$new(
+                "percvar",
+                percvar)
             private$..excl <- jmvcore::OptionBool$new(
                 "excl",
                 excl,
@@ -45,6 +50,10 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
                 "pct",
                 pct,
                 default=FALSE)
+            private$..legend <- jmvcore::OptionBool$new(
+                "legend",
+                legend,
+                default=FALSE)
             private$..mytitle <- jmvcore::OptionString$new(
                 "mytitle",
                 mytitle,
@@ -59,32 +68,38 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
                 default=200)
 
             self$.addOption(private$..vars)
+            self$.addOption(private$..percvar)
             self$.addOption(private$..excl)
             self$.addOption(private$..horizontal)
             self$.addOption(private$..sline)
             self$.addOption(private$..varnames)
             self$.addOption(private$..pct)
+            self$.addOption(private$..legend)
             self$.addOption(private$..mytitle)
             self$.addOption(private$..wdth)
             self$.addOption(private$..hght)
         }),
     active = list(
         vars = function() private$..vars$value,
+        percvar = function() private$..percvar$value,
         excl = function() private$..excl$value,
         horizontal = function() private$..horizontal$value,
         sline = function() private$..sline$value,
         varnames = function() private$..varnames$value,
         pct = function() private$..pct$value,
+        legend = function() private$..legend$value,
         mytitle = function() private$..mytitle$value,
         wdth = function() private$..wdth$value,
         hght = function() private$..hght$value),
     private = list(
         ..vars = NA,
+        ..percvar = NA,
         ..excl = NA,
         ..horizontal = NA,
         ..sline = NA,
         ..varnames = NA,
         ..pct = NA,
+        ..legend = NA,
         ..mytitle = NA,
         ..wdth = NA,
         ..hght = NA)
@@ -143,11 +158,13 @@ vartreeBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #'}
 #' @param data The data as a data frame.
 #' @param vars .
+#' @param percvar .
 #' @param excl .
 #' @param horizontal .
 #' @param sline .
 #' @param varnames .
 #' @param pct .
+#' @param legend .
 #' @param mytitle .
 #' @param wdth .
 #' @param hght .
@@ -161,11 +178,13 @@ vartreeBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 vartree <- function(
     data,
     vars,
+    percvar,
     excl = TRUE,
     horizontal = FALSE,
     sline = TRUE,
     varnames = FALSE,
     pct = FALSE,
+    legend = FALSE,
     mytitle = "Variable Tree",
     wdth = 900,
     hght = 200) {
@@ -174,19 +193,23 @@ vartree <- function(
         stop('vartree requires jmvcore to be installed (restart may be required)')
 
     if ( ! missing(vars)) vars <- jmvcore::resolveQuo(jmvcore::enquo(vars))
+    if ( ! missing(percvar)) percvar <- jmvcore::resolveQuo(jmvcore::enquo(percvar))
     if (missing(data))
         data <- jmvcore::marshalData(
             parent.frame(),
-            `if`( ! missing(vars), vars, NULL))
+            `if`( ! missing(vars), vars, NULL),
+            `if`( ! missing(percvar), percvar, NULL))
 
 
     options <- vartreeOptions$new(
         vars = vars,
+        percvar = percvar,
         excl = excl,
         horizontal = horizontal,
         sline = sline,
         varnames = varnames,
         pct = pct,
+        legend = legend,
         mytitle = mytitle,
         wdth = wdth,
         hght = hght)

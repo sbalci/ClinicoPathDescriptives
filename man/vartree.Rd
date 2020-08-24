@@ -7,11 +7,13 @@
 vartree(
   data,
   vars,
+  percvar,
   excl = TRUE,
   horizontal = FALSE,
   sline = TRUE,
   varnames = FALSE,
   pct = FALSE,
+  legend = FALSE,
   mytitle = "Variable Tree",
   wdth = 900,
   hght = 200
@@ -22,6 +24,8 @@ vartree(
 
 \item{vars}{.}
 
+\item{percvar}{.}
+
 \item{excl}{.}
 
 \item{horizontal}{.}
@@ -31,6 +35,8 @@ vartree(
 \item{varnames}{.}
 
 \item{pct}{.}
+
+\item{legend}{.}
 
 \item{mytitle}{.}
 

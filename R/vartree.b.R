@@ -60,14 +60,29 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             myvars <- unlist(myvars)
 
+
+
             mydata <- mydata %>%
                 dplyr::select(myvars)
 
             myvars <- paste0(myvars, collapse = " ")
 
+            percvar <- self$options$percvar
+
+            if (percvar) {
+
+                xsummary <- paste0(percvar,"=Yes \n%pct%")
+
+                results <- vtree::vtree(z = mydata,
+                                        vars = myvars,
+                                        summary = xsummary,
+
+                      showlegend=TRUE)
+
+
+            }
 
             # run vtree ----
-
             results <- vtree::vtree(z = mydata,
                                     vars = myvars,
                                     sameline = sline,
@@ -77,6 +92,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                                     # showvarinnode = ,
                                     # shownodelabels = ,
                                     showvarnames = self$options$varnames,
+                                    showlegend = self$options$legend,
                                     showpct = self$options$pct,
                                     pxheight = self$options$hght,
                                     pxwidth = self$options$wdth

@@ -26,6 +26,11 @@ options:
       type: Variables
 
 
+    - name: percvar
+      title: Variable for Percentage
+      type: Variable
+
+
     - name: excl
       title: Exclude Missing (NA)
       type: Bool
@@ -53,6 +58,11 @@ options:
       type: Bool
       default: false
 
+    - name: legend
+      title: Legends
+      type: Bool
+      default: false
+
     - name: mytitle
       title: Title
       type: String
@@ -64,7 +74,7 @@ options:
       default: 900
 
     - name: hght
-      title: Image Width
+      title: Image Height
       type: Integer
       default: 200
 
