@@ -91,9 +91,11 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
                 # Prepare Formula ----
 
-                formula2 <- jmvcore::constructFormula(terms = self$options$vars)
+                # formula2 <- jmvcore::constructFormula(terms = self$options$vars)
 
-                myvars2 <- jmvcore::decomposeFormula(formula = formula2)
+                # myvars2 <- jmvcore::decomposeFormula(formula = formula2)
+
+                myvars2 <- self$options$vars
 
                 mydata2 <- jmvcore::select(df = mydata, columnNames = c(myvars2, percvar))
 
@@ -106,7 +108,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
                 results <- vtree::vtree(z = mydata2,
                                         vars = myvars2,
-                                        summary = xsummary,
+                                        # summary = xsummary,
 
                                         showlegend = TRUE)
 
