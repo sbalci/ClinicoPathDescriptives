@@ -84,19 +84,32 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                                     )
 
 
-            percvar <- self$options$percvar
 
             if ( !is.null(self$options$percvar) ) {
 
-                vars <- self$options$vars
+            percvar <- self$options$percvar
+
+                # Prepare Formula ----
+
+                formula2 <- jmvcore::constructFormula(terms = self$options$vars)
+
+                myvars2 <- jmvcore::decomposeFormula(formula = formula2)
+
+                myvars2 <- unlist(myvars2)
+
 
                 mydata2 <- mydata %>%
-                    dplyr::select(vars, percvar)
+                    dplyr::select(myvars2)
+
+                myvars2 <- paste0(myvars2, collapse = " ")
+
+                mydata2 <- mydata %>%
+                    dplyr::select(myvars2, percvar)
 
                 xsummary <- paste0(percvar,"=Yes \n%pct%")
 
                 results <- vtree::vtree(z = mydata2,
-                                        vars = myvars,
+                                        vars = myvars2,
                                         summary = xsummary,
 
                                         showlegend = TRUE)
