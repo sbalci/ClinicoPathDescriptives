@@ -21,42 +21,70 @@ children:
             name: percvar
             maxItemCount: 1
             isTarget: true
-  - type: LayoutBox
-    margin: large
+          - type: LevelSelector
+            name: percvarLevel
+
+
+  - type: CollapseBox
+    label: Options
+    stretchFactor: 1
+    collapsed: true
     children:
-      - type: CheckBox
-        name: excl
-      - type: CheckBox
-        name: horizontal
-      - type: CheckBox
-        name: sline
-      - type: CheckBox
-        name: varnames
-      - type: CheckBox
-        name: pct
-      - type: CheckBox
-        name: legend
-  - type: LayoutBox
-    margin: large
-    children:
-      - type: LevelSelector
-        name: percvarLevel
-  - type: LayoutBox
-    margin: large
-    children:
-      - type: TextBox
-        name: mytitle
-        format: string
-        width: large
-  - type: LayoutBox
-    margin: large
-    children:
-      - type: TextBox
-        name: wdth
-        format: number
-  - type: LayoutBox
-    margin: large
-    children:
-      - type: TextBox
-        name: hght
-        format: number
+      - type: LayoutBox
+        margin: large
+        stretchFactor: 1
+        children:
+          - type: LayoutBox
+            cell:
+              column: 0
+              row: 0
+            stretchFactor: 1
+            children:
+              - type: Label
+                label: Output
+                fitToGrid: true
+                children:
+                  - type: CheckBox
+                    name: excl
+                  - type: CheckBox
+                    name: varnames
+                  - type: CheckBox
+                    name: pct
+                  - type: TextBox
+                    name: wdth
+                    format: number
+                  - type: TextBox
+                    name: hght
+                    format: number
+
+
+          - type: LayoutBox
+            cell:
+              column: 1
+              row: 0
+            stretchFactor: 1
+            children:
+              - type: Label
+                label: Plots
+                fitToGrid: true
+                cell:
+                  column: 1
+                  row: 0
+                children:
+                  - type: CheckBox
+                    name: horizontal
+                  - type: CheckBox
+                    name: sline
+                  - type: CheckBox
+                    name: legend
+                  - type: TextBox
+                    name: mytitle
+                    format: string
+                    width: large
+
+
+
+
+
+
+
