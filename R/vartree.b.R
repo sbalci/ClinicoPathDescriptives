@@ -41,11 +41,96 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             horizontal <- self$options$horizontal
             sline <- self$options$sline
             mytitle <- self$options$mytitle
+            myvars <-  self$options$vars
+            percvar <- self$options$percvar
 
 
             # Default Arguments ----
+            xsplitspaces  <-  TRUE
+            xprune <- list()
+            xprunebelow <- list()
+            xkeep <- list()
+            xfollow <- list()
+            xprunelone <- NULL
+            xpruneNA <- FALSE
+            xprunesmaller <- NULL
+            xlabelnode <- list()
+            xtlabelnode <- NULL
+            xlabelvar <- NULL
+            xvarminwidth <- NULL
+            xvarminheight <- NULL
+            xvarlabelloc <- NULL
+            xfillcolor <- "white"
+            xfillcolor <- NULL
+            xfillnodes <- TRUE
+            xNAfillcolor <- "white"
+            xrootfillcolor <- "#EFF3FF"
+            xpalette <- NULL
+            xgradient <- TRUE
+            xrevgradient <- FALSE
+            xsinglecolor <- 2
+            xcolorvarlabels <- TRUE
+            xtitle <- ""
+            xsameline <- FALSE
+            xVenn <- FALSE
+            xcheck.is.na <- FALSE
+            xseq <- FALSE
+            xpattern <- FALSE
+            xptable <- FALSE
+            xshowroot <- TRUE
+            xtext <- list()
+            xttext <- list()
+            xplain <- FALSE
+            xsqueeze <- 1
+            xshowvarinnode <- FALSE
+            xshownodelabels <- TRUE
+            xshowvarnames <- TRUE
+            xshowlevels <- TRUE
+            xshowpct <- TRUE
+            xshowlpct <- TRUE
+            xshowcount <- TRUE
+            xshowlegend <- FALSE
+            xvarnamepointsize <- 18
+            xHTMLtext <- FALSE
+            xdigits <- 0
+            xcdigits <- 1
+            xsplitwidth <- 20
+            xlsplitwidth <- 15
+            xgetscript <- FALSE
+            xnodesep <- 0.5
+            xranksep <- 0.5
+            xmargin <- 0.2
+            xvp <- TRUE
+            xhoriz <- TRUE
             xsummary <- ""
-
+            xrunsummary <- NULL
+            xretain <- NULL
+            xwidth <- NULL
+            xheight <- NULL
+            xgraphattr <- ""
+            xnodeattr <- ""
+            xedgeattr <- ""
+            xcolor <- c("blue", "forestgreen", "red", "orange", "pink")
+            xcolornodes <- FALSE
+            xmincount <- 1
+            xmaxcount <- NULL
+            xshowempty <- FALSE
+            xrounded <- TRUE
+            xnodefunc <- NULL
+            xnodeargs <- NULL
+            xchoicechecklist <- TRUE
+            xarrowhead <- "normal"
+            xpxwidth <- NULL
+            xpxheight <- NULL
+            ximagewidth <- NULL
+            ximageheight <- NULL
+            xfolder <- NULL
+            xpngknit <- TRUE
+            xas.if.knit <- FALSE
+            xmaxNodes <- 1000
+            xparent <- 1
+            xlast <- 1
+            xroot <- TRUE
 
 
             # Exclude NA ----
@@ -62,11 +147,11 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             formula <- jmvcore::constructFormula(terms = self$options$vars)
 
-            myvars <- jmvcore::decomposeFormula(formula = formula)
+            myvars1 <- jmvcore::decomposeFormula(formula = formula)
 
-            myvars <- unlist(myvars)
+            myvars1 <- unlist(myvars1)
 
-            myvars <- paste0(myvars, collapse = " ")
+            myvars1 <- paste0(myvars1, collapse = " ")
 
 
                 # myvars2 <- self$options$vars
@@ -86,7 +171,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             results <- vtree(
                 z = mydata,
-                vars =myvars,
+                vars = myvars1,
                 sameline = sline,
                 title = mytitle,
                 horiz = horizontal,
@@ -151,7 +236,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 # margin = 0.2,
                 # vp = TRUE,
                 # horiz = TRUE,
-                summary = xsummary,
+                summary = xsummary
                 # runsummary = NULL,
                 # retain = NULL,
                 # width = NULL,
@@ -179,7 +264,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 # maxNodes = 1000,
                 # parent = 1,
                 # last = 1,
-                root = TRUE
+                # root = TRUE
             )
 
 
