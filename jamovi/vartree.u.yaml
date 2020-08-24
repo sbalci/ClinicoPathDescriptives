@@ -39,6 +39,11 @@ children:
   - type: LayoutBox
     margin: large
     children:
+      - type: LevelSelector
+        name: percvarLevel
+  - type: LayoutBox
+    margin: large
+    children:
       - type: TextBox
         name: mytitle
         format: string

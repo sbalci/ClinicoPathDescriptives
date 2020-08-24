@@ -29,7 +29,10 @@ options:
     - name: percvar
       title: Variable for Percentage
       type: Variable
-
+    - name: percvarLevel
+      title: Level
+      type: Level
+      variable: (percvar)
 
     - name: excl
       title: Exclude Missing (NA)

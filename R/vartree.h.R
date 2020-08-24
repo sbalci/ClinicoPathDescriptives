@@ -8,6 +8,7 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
         initialize = function(
             vars = NULL,
             percvar = NULL,
+            percvarLevel = NULL,
             excl = TRUE,
             horizontal = FALSE,
             sline = TRUE,
@@ -30,6 +31,10 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             private$..percvar <- jmvcore::OptionVariable$new(
                 "percvar",
                 percvar)
+            private$..percvarLevel <- jmvcore::OptionLevel$new(
+                "percvarLevel",
+                percvarLevel,
+                variable="(percvar)")
             private$..excl <- jmvcore::OptionBool$new(
                 "excl",
                 excl,
@@ -69,6 +74,7 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             self$.addOption(private$..vars)
             self$.addOption(private$..percvar)
+            self$.addOption(private$..percvarLevel)
             self$.addOption(private$..excl)
             self$.addOption(private$..horizontal)
             self$.addOption(private$..sline)
@@ -82,6 +88,7 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
     active = list(
         vars = function() private$..vars$value,
         percvar = function() private$..percvar$value,
+        percvarLevel = function() private$..percvarLevel$value,
         excl = function() private$..excl$value,
         horizontal = function() private$..horizontal$value,
         sline = function() private$..sline$value,
@@ -94,6 +101,7 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
     private = list(
         ..vars = NA,
         ..percvar = NA,
+        ..percvarLevel = NA,
         ..excl = NA,
         ..horizontal = NA,
         ..sline = NA,
@@ -159,6 +167,7 @@ vartreeBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #' @param data The data as a data frame.
 #' @param vars .
 #' @param percvar .
+#' @param percvarLevel .
 #' @param excl .
 #' @param horizontal .
 #' @param sline .
@@ -179,6 +188,7 @@ vartree <- function(
     data,
     vars,
     percvar,
+    percvarLevel,
     excl = TRUE,
     horizontal = FALSE,
     sline = TRUE,
@@ -204,6 +214,7 @@ vartree <- function(
     options <- vartreeOptions$new(
         vars = vars,
         percvar = percvar,
+        percvarLevel = percvarLevel,
         excl = excl,
         horizontal = horizontal,
         sline = sline,
