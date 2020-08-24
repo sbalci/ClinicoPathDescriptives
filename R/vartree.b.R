@@ -97,7 +97,6 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             xnodesep <- 0.5
             xranksep <- 0.5
             xmargin <- 0.2
-            xvp <- TRUE
             xhoriz <- TRUE
             xsummary <- ""
             xrunsummary <- NULL
@@ -220,13 +219,13 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 # nodesep = 0.5,
                 # ranksep = 0.5,
                 # margin = 0.2,
-                # vp = TRUE,
+                vp = self$options$vp,
                 # horiz = TRUE,
                 summary = xsummary,
                 # runsummary = NULL,
                 # retain = NULL,
-                width = paste0(self$options$hght, "pt"),
-                height = self$options$hght,
+                width = self$options$width,
+                height = self$options$height,
                 # graphattr = "",
                 # nodeattr = "",
                 # edgeattr = "",
@@ -246,7 +245,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 # maxNodes = 1000,
                 # parent = 1,
                 # last = 1,
-                # root = TRUE
+                root = xroot
             )
 
 

@@ -10,14 +10,15 @@ vartree(
   percvar,
   percvarLevel,
   excl = TRUE,
+  vp = TRUE,
   horizontal = FALSE,
   sline = TRUE,
   varnames = FALSE,
   pct = FALSE,
   legend = FALSE,
   mytitle = "Variable Tree",
-  wdth = 900,
-  hght = 200
+  width = 1000,
+  height = 1000
 )
 }
 \arguments{
@@ -31,6 +32,8 @@ vartree(
 
 \item{excl}{.}
 
+\item{vp}{.}
+
 \item{horizontal}{.}
 
 \item{sline}{.}
@@ -43,9 +46,9 @@ vartree(
 
 \item{mytitle}{.}
 
-\item{wdth}{.}
+\item{width}{.}
 
-\item{hght}{.}
+\item{height}{.}
 }
 \value{
 A results object containing:

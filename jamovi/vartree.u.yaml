@@ -23,8 +23,6 @@ children:
             isTarget: true
           - type: LevelSelector
             name: percvarLevel
-
-
   - type: CollapseBox
     label: Options
     stretchFactor: 1
@@ -50,14 +48,11 @@ children:
                     name: varnames
                   - type: CheckBox
                     name: pct
-                  - type: TextBox
-                    name: wdth
-                    format: number
-                  - type: TextBox
-                    name: hght
-                    format: number
-
-
+              - type: LayoutBox
+                margin: large
+                children:
+                  - type: CheckBox
+                    name: vp
           - type: LayoutBox
             cell:
               column: 1
@@ -77,14 +72,20 @@ children:
                     name: sline
                   - type: CheckBox
                     name: legend
+                    enable: (varnames)
                   - type: TextBox
                     name: mytitle
                     format: string
                     width: large
-
-
-
-
-
-
-
+  - type: LayoutBox
+    margin: large
+    children:
+      - type: TextBox
+        name: width
+        format: number
+  - type: LayoutBox
+    margin: large
+    children:
+      - type: TextBox
+        name: height
+        format: number

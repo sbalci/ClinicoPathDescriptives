@@ -39,6 +39,10 @@ options:
       type: Bool
       default: true
 
+    - name: vp
+      title: Valid Percentages
+      type: Bool
+      default: true
 
     - name: horizontal
       title: Horizontal Layout
@@ -71,14 +75,14 @@ options:
       type: String
       default: 'Variable Tree'
 
-    - name: wdth
+    - name: width
       title: Image Width
       type: Integer
-      default: 900
+      default: 1000
 
-    - name: hght
+    - name: height
       title: Image Height
       type: Integer
-      default: 200
+      default: 1000
 
 ...

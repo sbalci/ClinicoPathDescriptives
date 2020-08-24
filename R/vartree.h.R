@@ -10,14 +10,15 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             percvar = NULL,
             percvarLevel = NULL,
             excl = TRUE,
+            vp = TRUE,
             horizontal = FALSE,
             sline = TRUE,
             varnames = FALSE,
             pct = FALSE,
             legend = FALSE,
             mytitle = "Variable Tree",
-            wdth = 900,
-            hght = 200, ...) {
+            width = 1000,
+            height = 1000, ...) {
 
             super$initialize(
                 package='ClinicoPathDescriptives',
@@ -38,6 +39,10 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             private$..excl <- jmvcore::OptionBool$new(
                 "excl",
                 excl,
+                default=TRUE)
+            private$..vp <- jmvcore::OptionBool$new(
+                "vp",
+                vp,
                 default=TRUE)
             private$..horizontal <- jmvcore::OptionBool$new(
                 "horizontal",
@@ -63,54 +68,57 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
                 "mytitle",
                 mytitle,
                 default="Variable Tree")
-            private$..wdth <- jmvcore::OptionInteger$new(
-                "wdth",
-                wdth,
-                default=900)
-            private$..hght <- jmvcore::OptionInteger$new(
-                "hght",
-                hght,
-                default=200)
+            private$..width <- jmvcore::OptionInteger$new(
+                "width",
+                width,
+                default=1000)
+            private$..height <- jmvcore::OptionInteger$new(
+                "height",
+                height,
+                default=1000)
 
             self$.addOption(private$..vars)
             self$.addOption(private$..percvar)
             self$.addOption(private$..percvarLevel)
             self$.addOption(private$..excl)
+            self$.addOption(private$..vp)
             self$.addOption(private$..horizontal)
             self$.addOption(private$..sline)
             self$.addOption(private$..varnames)
             self$.addOption(private$..pct)
             self$.addOption(private$..legend)
             self$.addOption(private$..mytitle)
-            self$.addOption(private$..wdth)
-            self$.addOption(private$..hght)
+            self$.addOption(private$..width)
+            self$.addOption(private$..height)
         }),
     active = list(
         vars = function() private$..vars$value,
         percvar = function() private$..percvar$value,
         percvarLevel = function() private$..percvarLevel$value,
         excl = function() private$..excl$value,
+        vp = function() private$..vp$value,
         horizontal = function() private$..horizontal$value,
         sline = function() private$..sline$value,
         varnames = function() private$..varnames$value,
         pct = function() private$..pct$value,
         legend = function() private$..legend$value,
         mytitle = function() private$..mytitle$value,
-        wdth = function() private$..wdth$value,
-        hght = function() private$..hght$value),
+        width = function() private$..width$value,
+        height = function() private$..height$value),
     private = list(
         ..vars = NA,
         ..percvar = NA,
         ..percvarLevel = NA,
         ..excl = NA,
+        ..vp = NA,
         ..horizontal = NA,
         ..sline = NA,
         ..varnames = NA,
         ..pct = NA,
         ..legend = NA,
         ..mytitle = NA,
-        ..wdth = NA,
-        ..hght = NA)
+        ..width = NA,
+        ..height = NA)
 )
 
 vartreeResults <- if (requireNamespace('jmvcore')) R6::R6Class(
@@ -169,14 +177,15 @@ vartreeBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #' @param percvar .
 #' @param percvarLevel .
 #' @param excl .
+#' @param vp .
 #' @param horizontal .
 #' @param sline .
 #' @param varnames .
 #' @param pct .
 #' @param legend .
 #' @param mytitle .
-#' @param wdth .
-#' @param hght .
+#' @param width .
+#' @param height .
 #' @return A results object containing:
 #' \tabular{llllll}{
 #'   \code{results$todo} \tab \tab \tab \tab \tab a html \cr
@@ -190,14 +199,15 @@ vartree <- function(
     percvar,
     percvarLevel,
     excl = TRUE,
+    vp = TRUE,
     horizontal = FALSE,
     sline = TRUE,
     varnames = FALSE,
     pct = FALSE,
     legend = FALSE,
     mytitle = "Variable Tree",
-    wdth = 900,
-    hght = 200) {
+    width = 1000,
+    height = 1000) {
 
     if ( ! requireNamespace('jmvcore'))
         stop('vartree requires jmvcore to be installed (restart may be required)')
@@ -216,14 +226,15 @@ vartree <- function(
         percvar = percvar,
         percvarLevel = percvarLevel,
         excl = excl,
+        vp = vp,
         horizontal = horizontal,
         sline = sline,
         varnames = varnames,
         pct = pct,
         legend = legend,
         mytitle = mytitle,
-        wdth = wdth,
-        hght = hght)
+        width = width,
+        height = height)
 
     analysis <- vartreeClass$new(
         options = options,
