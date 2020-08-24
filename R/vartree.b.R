@@ -69,7 +69,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             percvar <- self$options$percvar
 
-            if (percvar) {
+            if ( !is.null(self$options$percvar) ) {
 
                 xsummary <- paste0(percvar,"=Yes \n%pct%")
 
