@@ -43,7 +43,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             mytitle <- self$options$mytitle
             myvars <-  self$options$vars
             percvar <- self$options$percvar
-
+            summaryvar <- self$options$summaryvar
 
             # Default Arguments ----
             xsplitspaces  <-  TRUE
@@ -131,7 +131,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             # Prepare Data ----
 
-            mydata <- jmvcore::select(df = mydata, columnNames = c(myvars, percvar))
+            mydata <- jmvcore::select(df = mydata, columnNames = c(myvars, percvar, summaryvar))
 
             # Prepare Formula ----
 
