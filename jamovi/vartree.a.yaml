@@ -72,6 +72,11 @@ options:
       type: Bool
       default: false
 
+    - name: nodelabel
+      title: Node Label
+      type: Bool
+      default: true
+
     - name: pct
       title: Percentages
       type: Bool

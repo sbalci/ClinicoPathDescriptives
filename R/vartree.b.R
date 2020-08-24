@@ -81,7 +81,6 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             xplain <- FALSE
             xsqueeze <- 1
             xshowvarinnode <- FALSE
-            xshownodelabels <- TRUE
             xshowvarnames <- TRUE
             xshowpct <- TRUE
             xshowlpct <- TRUE
@@ -152,7 +151,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             # Percentage Variable ----
             if ( !is.null(self$options$percvar) ) {
                 percvar <- self$options$percvar
-                xsummary <- paste0("",percvar,"=", self$options$percvarLevel ,"\n%pct%")
+                xsummary <- paste0(percvar,"=", self$options$percvarLevel ,"\n%pct%")
 
             }
 
@@ -222,7 +221,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 # plain = FALSE,
                 # squeeze = 1,
                 # showvarinnode = FALSE,
-                # shownodelabels = TRUE,
+                shownodelabels = self$options$nodelabel,
                 # showvarnames = TRUE,
                 # showpct = TRUE,
                 # showlpct = TRUE,

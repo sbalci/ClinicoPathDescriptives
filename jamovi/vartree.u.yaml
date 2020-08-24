@@ -54,6 +54,8 @@ children:
                   - type: CheckBox
                     name: varnames
                   - type: CheckBox
+                    name: showcount
+                  - type: CheckBox
                     name: pct
                   - type: CheckBox
                     name: vp
@@ -62,7 +64,7 @@ children:
                 margin: large
                 children:
                   - type: CheckBox
-                    name: showcount
+                    name: nodelabel
           - type: LayoutBox
             cell:
               column: 1

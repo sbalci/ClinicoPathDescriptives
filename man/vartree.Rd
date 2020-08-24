@@ -15,6 +15,7 @@ vartree(
   horizontal = FALSE,
   sline = TRUE,
   varnames = FALSE,
+  nodelabel = TRUE,
   pct = FALSE,
   showcount = TRUE,
   legend = FALSE,
@@ -43,6 +44,8 @@ vartree(
 \item{sline}{.}
 
 \item{varnames}{.}
+
+\item{nodelabel}{.}
 
 \item{pct}{.}
 

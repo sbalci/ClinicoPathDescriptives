@@ -15,6 +15,7 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             horizontal = FALSE,
             sline = TRUE,
             varnames = FALSE,
+            nodelabel = TRUE,
             pct = FALSE,
             showcount = TRUE,
             legend = FALSE,
@@ -75,6 +76,10 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
                 "varnames",
                 varnames,
                 default=FALSE)
+            private$..nodelabel <- jmvcore::OptionBool$new(
+                "nodelabel",
+                nodelabel,
+                default=TRUE)
             private$..pct <- jmvcore::OptionBool$new(
                 "pct",
                 pct,
@@ -109,6 +114,7 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             self$.addOption(private$..horizontal)
             self$.addOption(private$..sline)
             self$.addOption(private$..varnames)
+            self$.addOption(private$..nodelabel)
             self$.addOption(private$..pct)
             self$.addOption(private$..showcount)
             self$.addOption(private$..legend)
@@ -126,6 +132,7 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
         horizontal = function() private$..horizontal$value,
         sline = function() private$..sline$value,
         varnames = function() private$..varnames$value,
+        nodelabel = function() private$..nodelabel$value,
         pct = function() private$..pct$value,
         showcount = function() private$..showcount$value,
         legend = function() private$..legend$value,
@@ -142,6 +149,7 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
         ..horizontal = NA,
         ..sline = NA,
         ..varnames = NA,
+        ..nodelabel = NA,
         ..pct = NA,
         ..showcount = NA,
         ..legend = NA,
@@ -211,6 +219,7 @@ vartreeBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #' @param horizontal .
 #' @param sline .
 #' @param varnames .
+#' @param nodelabel .
 #' @param pct .
 #' @param showcount .
 #' @param legend .
@@ -235,6 +244,7 @@ vartree <- function(
     horizontal = FALSE,
     sline = TRUE,
     varnames = FALSE,
+    nodelabel = TRUE,
     pct = FALSE,
     showcount = TRUE,
     legend = FALSE,
@@ -268,6 +278,7 @@ vartree <- function(
         horizontal = horizontal,
         sline = sline,
         varnames = varnames,
+        nodelabel = nodelabel,
         pct = pct,
         showcount = showcount,
         legend = legend,
