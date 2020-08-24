@@ -152,7 +152,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             # Percentage Variable ----
             if ( !is.null(self$options$percvar) ) {
                 percvar <- self$options$percvar
-                xsummary <- paste0(percvar, " \n",percvar,"=", self$options$percvarLevel ,"\n%pct%")
+                xsummary <- paste0(percvar, " \n",percvar,"=", self$options$percvarLevel ,"%pct%")
 
             }
 
@@ -226,7 +226,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 # showvarnames = TRUE,
                 # showpct = TRUE,
                 # showlpct = TRUE,
-                # showcount = TRUE,
+                showcount = self$options$showcount,
                 # showlegend = FALSE,
                 # varnamepointsize = 18,
                 # HTMLtext = FALSE,

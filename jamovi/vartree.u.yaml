@@ -30,7 +30,6 @@ children:
             name: summaryvar
             maxItemCount: 1
             isTarget: true
-
   - type: CollapseBox
     label: Options
     stretchFactor: 1
@@ -59,6 +58,11 @@ children:
                   - type: CheckBox
                     name: vp
                     enable: (!excl && pct)
+              - type: LayoutBox
+                margin: large
+                children:
+                  - type: CheckBox
+                    name: showcount
           - type: LayoutBox
             cell:
               column: 1
@@ -89,4 +93,3 @@ children:
                   - type: TextBox
                     name: height
                     format: number
-

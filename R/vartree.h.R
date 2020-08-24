@@ -16,6 +16,7 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             sline = TRUE,
             varnames = FALSE,
             pct = FALSE,
+            showcount = TRUE,
             legend = FALSE,
             mytitle = "Variable Tree",
             width = 1000,
@@ -78,6 +79,10 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
                 "pct",
                 pct,
                 default=FALSE)
+            private$..showcount <- jmvcore::OptionBool$new(
+                "showcount",
+                showcount,
+                default=TRUE)
             private$..legend <- jmvcore::OptionBool$new(
                 "legend",
                 legend,
@@ -105,6 +110,7 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             self$.addOption(private$..sline)
             self$.addOption(private$..varnames)
             self$.addOption(private$..pct)
+            self$.addOption(private$..showcount)
             self$.addOption(private$..legend)
             self$.addOption(private$..mytitle)
             self$.addOption(private$..width)
@@ -121,6 +127,7 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
         sline = function() private$..sline$value,
         varnames = function() private$..varnames$value,
         pct = function() private$..pct$value,
+        showcount = function() private$..showcount$value,
         legend = function() private$..legend$value,
         mytitle = function() private$..mytitle$value,
         width = function() private$..width$value,
@@ -136,6 +143,7 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
         ..sline = NA,
         ..varnames = NA,
         ..pct = NA,
+        ..showcount = NA,
         ..legend = NA,
         ..mytitle = NA,
         ..width = NA,
@@ -204,6 +212,7 @@ vartreeBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #' @param sline .
 #' @param varnames .
 #' @param pct .
+#' @param showcount .
 #' @param legend .
 #' @param mytitle .
 #' @param width .
@@ -227,6 +236,7 @@ vartree <- function(
     sline = TRUE,
     varnames = FALSE,
     pct = FALSE,
+    showcount = TRUE,
     legend = FALSE,
     mytitle = "Variable Tree",
     width = 1000,
@@ -259,6 +269,7 @@ vartree <- function(
         sline = sline,
         varnames = varnames,
         pct = pct,
+        showcount = showcount,
         legend = legend,
         mytitle = mytitle,
         width = width,

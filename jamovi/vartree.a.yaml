@@ -77,6 +77,11 @@ options:
       type: Bool
       default: false
 
+    - name: showcount
+      title: Counts
+      type: Bool
+      default: true
+
     - name: legend
       title: Legends
       type: Bool

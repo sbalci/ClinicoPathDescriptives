@@ -16,6 +16,7 @@ vartree(
   sline = TRUE,
   varnames = FALSE,
   pct = FALSE,
+  showcount = TRUE,
   legend = FALSE,
   mytitle = "Variable Tree",
   width = 1000,
@@ -44,6 +45,8 @@ vartree(
 \item{varnames}{.}
 
 \item{pct}{.}
+
+\item{showcount}{.}
 
 \item{legend}{.}
 
