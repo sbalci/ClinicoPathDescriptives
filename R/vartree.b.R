@@ -43,7 +43,10 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             mytitle <- self$options$mytitle
 
 
-            # Prepare Data ----
+            # Default Arguments ----
+            xsummary <- ""
+
+
 
             # Exclude NA ----
 
@@ -51,6 +54,9 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             if (excl) {mydata <- jmvcore::naOmit(mydata)}
 
+            # Prepare Data ----
+
+            mydata <- jmvcore::select(df = mydata, columnNames = c(myvars, percvar))
 
             # Prepare Formula ----
 
@@ -60,63 +66,121 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             myvars <- unlist(myvars)
 
-
-
-            mydata1 <- mydata %>%
-                dplyr::select(myvars)
-
             myvars <- paste0(myvars, collapse = " ")
 
-            # run vtree ----
-            results <- vtree::vtree(z = mydata1,
-                                    vars = myvars,
-                                    sameline = sline,
-                                    title = mytitle,
-                                    horiz = horizontal,
-                                    # fillcolor = "white",
-                                    # showvarinnode = ,
-                                    # shownodelabels = ,
-                                    showvarnames = self$options$varnames,
-                                    showlegend = self$options$legend,
-                                    showpct = self$options$pct,
-                                    pxheight = self$options$hght,
-                                    pxwidth = self$options$wdth
-                                    )
 
+                # myvars2 <- self$options$vars
+                # myvars2 <- unlist(myvars2)
+                #
+                # myvars2 <- paste0(myvars2, collapse = " ")
 
-
+            # Percentage Variable ----
             if ( !is.null(self$options$percvar) ) {
-
                 percvar <- self$options$percvar
-
-                # Prepare Formula ----
-
-                # formula2 <- jmvcore::constructFormula(terms = self$options$vars)
-
-                # myvars2 <- jmvcore::decomposeFormula(formula = formula2)
-
-                myvars2 <- self$options$vars
-
-                mydata2 <- jmvcore::select(df = mydata, columnNames = c(myvars2, percvar))
-
-                myvars2 <- unlist(myvars2)
-
-                myvars2 <- paste0(myvars2, collapse = " ")
-
-
                 xsummary <- paste0(percvar,"=", self$options$percvarLevel ,"\n%pct%")
-
-
-
-                results <- vtree::vtree(z = mydata2,
-                                        vars = myvars2,
-                                        summary = xsummary,
-
-                                        showlegend = TRUE)
-
-
             }
 
+
+
+            # run vtree function ----
+
+            results <- vtree(
+                z = mydata,
+                vars =myvars,
+                sameline = sline,
+                title = mytitle,
+                horiz = horizontal,
+                showvarnames = self$options$varnames,
+                showlegend = self$options$legend,
+                showpct = self$options$pct,
+                # pxheight = self$options$hght,
+                # pxwidth = self$options$wdth,
+                # splitspaces = TRUE,
+                # prune = list(),
+                # prunebelow = list(),
+                # keep = list(),
+                # follow = list(),
+                # prunelone = NULL,
+                # pruneNA = FALSE,
+                # prunesmaller = NULL,
+                # labelnode = list(),
+                # tlabelnode = NULL,
+                # labelvar = NULL,
+                # varminwidth = NULL,
+                # varminheight = NULL,
+                # varlabelloc = NULL,
+                # fillcolor = "white",
+                # fillcolor = NULL,
+                # fillnodes = TRUE,
+                # NAfillcolor = "white",
+                # rootfillcolor = "#EFF3FF",
+                # palette = NULL,
+                # gradient = TRUE,
+                # revgradient = FALSE,
+                # singlecolor = 2,
+                # colorvarlabels = TRUE,
+                # title = "",
+                # sameline = FALSE,
+                # Venn = FALSE,
+                # check.is.na = FALSE,
+                # seq = FALSE,
+                # pattern = FALSE,
+                # ptable = FALSE,
+                # showroot = TRUE,
+                # text = list(),
+                # ttext = list(),
+                # plain = FALSE,
+                # squeeze = 1,
+                # showvarinnode = FALSE,
+                # shownodelabels = TRUE,
+                # showvarnames = TRUE,
+                # showlevels = TRUE,
+                # showpct = TRUE,
+                # showlpct = TRUE,
+                # showcount = TRUE,
+                # showlegend = FALSE,
+                # varnamepointsize = 18,
+                # HTMLtext = FALSE,
+                # digits = 0,
+                # cdigits = 1,
+                # splitwidth = 20,
+                # lsplitwidth = 15,
+                # getscript = FALSE,
+                # nodesep = 0.5,
+                # ranksep = 0.5,
+                # margin = 0.2,
+                # vp = TRUE,
+                # horiz = TRUE,
+                summary = xsummary,
+                # runsummary = NULL,
+                # retain = NULL,
+                # width = NULL,
+                # height = NULL,
+                # graphattr = "",
+                # nodeattr = "",
+                # edgeattr = "",
+                # color = c("blue", "forestgreen", "red", "orange", "pink"),
+                # colornodes = FALSE,
+                # mincount = 1,
+                # maxcount,
+                # showempty = FALSE,
+                # rounded = TRUE,
+                # nodefunc = NULL,
+                # nodeargs = NULL,
+                # choicechecklist = TRUE,
+                # arrowhead = "normal",
+                # pxwidth,
+                # pxheight,
+                # imagewidth,
+                # imageheight,
+                # folder,
+                # pngknit = TRUE,
+                # as.if.knit = FALSE,
+                # maxNodes = 1000,
+                # parent = 1,
+                # last = 1,
+                root = TRUE
+            )
 
 
 
