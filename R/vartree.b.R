@@ -95,8 +95,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
                 myvars2 <- jmvcore::decomposeFormula(formula = formula2)
 
-                mydata2 <- mydata %>%
-                    dplyr::select(myvars2, percvar)
+                mydata2 <- jmvcore::select(df = mydata, columnNames = c(myvars2, percvar))
 
                 myvars2 <- unlist(myvars2)
 
