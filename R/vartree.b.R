@@ -87,7 +87,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             if ( !is.null(self$options$percvar) ) {
 
-            percvar <- self$options$percvar
+                percvar <- self$options$percvar
 
                 # Prepare Formula ----
 
@@ -96,10 +96,6 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 myvars2 <- jmvcore::decomposeFormula(formula = formula2)
 
                 myvars2 <- unlist(myvars2)
-
-
-                mydata2 <- mydata %>%
-                    dplyr::select(myvars2)
 
                 myvars2 <- paste0(myvars2, collapse = " ")
 
