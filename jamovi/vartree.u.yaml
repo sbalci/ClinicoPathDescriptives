@@ -14,6 +14,13 @@ children:
           - type: VariablesListBox
             name: vars
             isTarget: true
+      - type: TargetLayoutBox
+        label: Variable for Percentage
+        children:
+          - type: VariablesListBox
+            name: percvar
+            maxItemCount: 1
+            isTarget: true
   - type: LayoutBox
     margin: large
     children:
@@ -29,17 +36,6 @@ children:
         name: pct
       - type: CheckBox
         name: legend
-  - type: VariableSupplier
-    persistentItems: false
-    stretchFactor: 1
-    children:
-      - type: TargetLayoutBox
-        label: Variable for Percentage
-        children:
-          - type: VariablesListBox
-            name: percvar
-            maxItemCount: 1
-            isTarget: true
   - type: LayoutBox
     margin: large
     children:
