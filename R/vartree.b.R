@@ -104,7 +104,9 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 myvars2 <- paste0(myvars2, collapse = " ")
 
 
-                xsummary <- paste0(percvar,"=Yes \n%pct%")
+                xsummary <- paste0("'", percvar,"=Yes \n%pct%", "'")
+
+
 
                 results <- vtree::vtree(z = mydata2,
                                         vars = myvars2,
