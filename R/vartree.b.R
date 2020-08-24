@@ -225,7 +225,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 summary = xsummary,
                 # runsummary = NULL,
                 # retain = NULL,
-                width = self$options$hght,
+                width = paste0(self$options$hght, "pt"),
                 height = self$options$hght,
                 # graphattr = "",
                 # nodeattr = "",
