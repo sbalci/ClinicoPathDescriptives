@@ -95,12 +95,13 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
                 myvars2 <- jmvcore::decomposeFormula(formula = formula2)
 
+                mydata2 <- mydata %>%
+                    dplyr::select(myvars2, percvar)
+
                 myvars2 <- unlist(myvars2)
 
                 myvars2 <- paste0(myvars2, collapse = " ")
 
-                mydata2 <- mydata %>%
-                    dplyr::select(myvars2, percvar)
 
                 xsummary <- paste0(percvar,"=Yes \n%pct%")
 
