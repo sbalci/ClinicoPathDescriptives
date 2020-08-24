@@ -48,11 +48,10 @@ children:
                     name: varnames
                   - type: CheckBox
                     name: pct
-              - type: LayoutBox
-                margin: large
-                children:
+                    enable: (!excl)
                   - type: CheckBox
                     name: vp
+                    enable: (!excl && pct)
           - type: LayoutBox
             cell:
               column: 1
@@ -77,15 +76,9 @@ children:
                     name: mytitle
                     format: string
                     width: large
-  - type: LayoutBox
-    margin: large
-    children:
-      - type: TextBox
-        name: width
-        format: number
-  - type: LayoutBox
-    margin: large
-    children:
-      - type: TextBox
-        name: height
-        format: number
+                  - type: TextBox
+                    name: width
+                    format: number
+                  - type: TextBox
+                    name: height
+                    format: number
