@@ -160,7 +160,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             if ( !is.null(self$options$summaryvar) ) {
                 summaryvar <- self$options$summaryvar
-                xsummary <- paste0(summaryvar,"\n", summaryvar, "\n\n", summaryvar, "\n", "mean=%mean%", "\n", "SD=%SD%", "\n", "mv=%mv%", "%leafonly%")
+                xsummary <- paste0("\n", summaryvar,"\n", summaryvar, "\n\n", "mean=%mean%", "\n", "SD=%SD%", "\n", "mv=%mv%", "%leafonly%")
             }
 
 
