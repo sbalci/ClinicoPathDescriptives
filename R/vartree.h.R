@@ -9,6 +9,7 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             vars = NULL,
             percvar = NULL,
             percvarLevel = NULL,
+            summaryvar = NULL,
             excl = TRUE,
             vp = TRUE,
             horizontal = FALSE,
@@ -28,14 +29,31 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             private$..vars <- jmvcore::OptionVariables$new(
                 "vars",
-                vars)
+                vars,
+                suggested=list(
+                    "ordinal",
+                    "nominal"),
+                permitted=list(
+                    "factor"))
             private$..percvar <- jmvcore::OptionVariable$new(
                 "percvar",
-                percvar)
+                percvar,
+                suggested=list(
+                    "ordinal",
+                    "nominal"),
+                permitted=list(
+                    "factor"))
             private$..percvarLevel <- jmvcore::OptionLevel$new(
                 "percvarLevel",
                 percvarLevel,
                 variable="(percvar)")
+            private$..summaryvar <- jmvcore::OptionVariable$new(
+                "summaryvar",
+                summaryvar,
+                suggested=list(
+                    "continuous"),
+                permitted=list(
+                    "numeric"))
             private$..excl <- jmvcore::OptionBool$new(
                 "excl",
                 excl,
@@ -80,6 +98,7 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             self$.addOption(private$..vars)
             self$.addOption(private$..percvar)
             self$.addOption(private$..percvarLevel)
+            self$.addOption(private$..summaryvar)
             self$.addOption(private$..excl)
             self$.addOption(private$..vp)
             self$.addOption(private$..horizontal)
@@ -95,6 +114,7 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
         vars = function() private$..vars$value,
         percvar = function() private$..percvar$value,
         percvarLevel = function() private$..percvarLevel$value,
+        summaryvar = function() private$..summaryvar$value,
         excl = function() private$..excl$value,
         vp = function() private$..vp$value,
         horizontal = function() private$..horizontal$value,
@@ -109,6 +129,7 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
         ..vars = NA,
         ..percvar = NA,
         ..percvarLevel = NA,
+        ..summaryvar = NA,
         ..excl = NA,
         ..vp = NA,
         ..horizontal = NA,
@@ -176,6 +197,7 @@ vartreeBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #' @param vars .
 #' @param percvar .
 #' @param percvarLevel .
+#' @param summaryvar .
 #' @param excl .
 #' @param vp .
 #' @param horizontal .
@@ -198,6 +220,7 @@ vartree <- function(
     vars,
     percvar,
     percvarLevel,
+    summaryvar,
     excl = TRUE,
     vp = TRUE,
     horizontal = FALSE,
@@ -214,17 +237,22 @@ vartree <- function(
 
     if ( ! missing(vars)) vars <- jmvcore::resolveQuo(jmvcore::enquo(vars))
     if ( ! missing(percvar)) percvar <- jmvcore::resolveQuo(jmvcore::enquo(percvar))
+    if ( ! missing(summaryvar)) summaryvar <- jmvcore::resolveQuo(jmvcore::enquo(summaryvar))
     if (missing(data))
         data <- jmvcore::marshalData(
             parent.frame(),
             `if`( ! missing(vars), vars, NULL),
-            `if`( ! missing(percvar), percvar, NULL))
+            `if`( ! missing(percvar), percvar, NULL),
+            `if`( ! missing(summaryvar), summaryvar, NULL))
 
+    for (v in vars) if (v %in% names(data)) data[[v]] <- as.factor(data[[v]])
+    for (v in percvar) if (v %in% names(data)) data[[v]] <- as.factor(data[[v]])
 
     options <- vartreeOptions$new(
         vars = vars,
         percvar = percvar,
         percvarLevel = percvarLevel,
+        summaryvar = summaryvar,
         excl = excl,
         vp = vp,
         horizontal = horizontal,

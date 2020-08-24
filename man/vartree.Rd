@@ -9,6 +9,7 @@ vartree(
   vars,
   percvar,
   percvarLevel,
+  summaryvar,
   excl = TRUE,
   vp = TRUE,
   horizontal = FALSE,
@@ -29,6 +30,8 @@ vartree(
 \item{percvar}{.}
 
 \item{percvarLevel}{.}
+
+\item{summaryvar}{.}
 
 \item{excl}{.}
 

@@ -24,15 +24,27 @@ options:
     - name: vars
       title: Variables
       type: Variables
-
+      suggested: [ ordinal, nominal ]
+      permitted: [ factor ]
 
     - name: percvar
       title: Variable for Percentage
       type: Variable
+      suggested: [ ordinal, nominal ]
+      permitted: [ factor ]
+
     - name: percvarLevel
       title: Level
       type: Level
       variable: (percvar)
+
+
+    - name: summaryvar
+      title: Continuous Variable for Summaries
+      type: Variable
+      suggested: [ continuous ]
+      permitted: [ numeric ]
+
 
     - name: excl
       title: Exclude Missing (NA)
