@@ -152,8 +152,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             # Percentage Variable ----
             if ( !is.null(self$options$percvar) ) {
                 percvar <- self$options$percvar
-                # xsummary <- paste0(percvar,"=", self$options$percvarLevel ,"\n%pct%")
-                xsummary <- glue::glue(percvar,"=", self$options$percvarLevel ,"\n%pct%")
+                xsummary <- paste0(percvar, " \n",percvar,"=", self$options$percvarLevel ,"\n%pct%")
 
             }
 
