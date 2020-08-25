@@ -172,14 +172,14 @@ options:
       default: leafonly
 
 
-    - name: width
-      title: Image Width
-      type: Integer
-      default: 1000
+    # - name: width
+    #   title: Image Width
+    #   type: Integer
+    #   default: 100
 
-    - name: height
-      title: Image Height
-      type: Integer
-      default: 1000
+    # - name: height
+    #   title: Image Height
+    #   type: Integer
+    #   default: 100
 
 ...
