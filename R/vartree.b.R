@@ -71,7 +71,6 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             xsameline <- FALSE
             xVenn <- FALSE
             xcheck.is.na <- FALSE
-            xseq <- FALSE
 
             xptable <- FALSE
             xshowroot <- TRUE
@@ -238,7 +237,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 # sameline = FALSE,
                 # Venn = FALSE,
                 # check.is.na = FALSE,
-                # seq = FALSE,
+                seq = self$options$sequence,
                 pattern = self$options$pattern,
                 # ptable = FALSE,
                 # showroot = TRUE,
