@@ -127,3 +127,6 @@ children:
                   - type: CheckBox
                     name: sequence
                     enable: (!pattern)
+                  - type: CheckBox
+                    name: ptable
+

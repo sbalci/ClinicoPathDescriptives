@@ -27,6 +27,7 @@ vartree(
   legend = FALSE,
   pattern = FALSE,
   sequence = FALSE,
+  ptable = FALSE,
   mytitle = "Variable Tree",
   useprunesmaller = FALSE,
   prunesmaller = 5,
@@ -78,6 +79,8 @@ vartree(
 \item{pattern}{.}
 
 \item{sequence}{.}
+
+\item{ptable}{.}
 
 \item{mytitle}{.}
 

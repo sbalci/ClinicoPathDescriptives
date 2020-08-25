@@ -134,6 +134,11 @@ options:
       type: Bool
       default: false
 
+    - name: ptable
+      title: Pattern Table
+      type: Bool
+      default: false
+
     - name: mytitle
       title: Title
       type: String

@@ -239,7 +239,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 # check.is.na = FALSE,
                 seq = self$options$sequence,
                 pattern = self$options$pattern,
-                # ptable = FALSE,
+                ptable = self$options$ptable,
                 # showroot = TRUE,
                 # text = list(),
                 # ttext = list(),
