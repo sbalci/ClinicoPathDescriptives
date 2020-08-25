@@ -47,8 +47,9 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             # Default Arguments ----
 
+            # prunesmaller ----
             xprunesmaller <- NULL
-
+            useprunesmaller <- self$options$useprunesmaller
             if (useprunesmaller) {
                 xprunesmaller <- self$options$prunesmaller
             }
