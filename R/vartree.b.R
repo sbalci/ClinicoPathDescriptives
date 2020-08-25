@@ -171,14 +171,12 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                     summarylocation1 <- "%allnodes%"
                 }
 
-
-
                 xsummary <- paste0(
                     summaryvar," \n\n",
                     summaryvar, "\n",
                     "mean=%mean%", "\n",
                     "SD=%SD%", "\n",
-                    "Range=%range%", "\n",
+                    # "Range=%range%", "\n",
                     # "mv=%mv%",
                     summarylocation1
                     )
@@ -203,8 +201,9 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 pruneLevel1 <- jmvcore::constructFormula(terms = pruneLevel1)
                 pruneLevel2 <- jmvcore::constructFormula(terms = pruneLevel2)
 
+                pruneLevelvector <- c(pruneLevel1, pruneLevel2)
 
-                xprunebelow <- list(prunebelow = c(pruneLevel1, pruneLevel2))
+                xprunebelow <- paste0('list(', prunebelow, '=', pruneLevelvector, ')')
             }
 
 
