@@ -28,7 +28,6 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             pattern = FALSE,
             sequence = FALSE,
             ptable = FALSE,
-            venntable = FALSE,
             mytitle = "",
             useprunesmaller = FALSE,
             prunesmaller = 5,
@@ -151,10 +150,6 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
                 "ptable",
                 ptable,
                 default=FALSE)
-            private$..venntable <- jmvcore::OptionBool$new(
-                "venntable",
-                venntable,
-                default=FALSE)
             private$..mytitle <- jmvcore::OptionString$new(
                 "mytitle",
                 mytitle,
@@ -197,7 +192,6 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             self$.addOption(private$..pattern)
             self$.addOption(private$..sequence)
             self$.addOption(private$..ptable)
-            self$.addOption(private$..venntable)
             self$.addOption(private$..mytitle)
             self$.addOption(private$..useprunesmaller)
             self$.addOption(private$..prunesmaller)
@@ -226,7 +220,6 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
         pattern = function() private$..pattern$value,
         sequence = function() private$..sequence$value,
         ptable = function() private$..ptable$value,
-        venntable = function() private$..venntable$value,
         mytitle = function() private$..mytitle$value,
         useprunesmaller = function() private$..useprunesmaller$value,
         prunesmaller = function() private$..prunesmaller$value,
@@ -254,7 +247,6 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
         ..pattern = NA,
         ..sequence = NA,
         ..ptable = NA,
-        ..venntable = NA,
         ..mytitle = NA,
         ..useprunesmaller = NA,
         ..prunesmaller = NA,
@@ -266,8 +258,7 @@ vartreeResults <- if (requireNamespace('jmvcore')) R6::R6Class(
     active = list(
         todo = function() private$.items[["todo"]],
         text1 = function() private$.items[["text1"]],
-        text2 = function() private$.items[["text2"]],
-        text3 = function() private$.items[["text3"]]),
+        text2 = function() private$.items[["text2"]]),
     private = list(),
     public=list(
         initialize=function(options) {
@@ -289,12 +280,7 @@ vartreeResults <- if (requireNamespace('jmvcore')) R6::R6Class(
                 options=options,
                 name="text2",
                 title="Pattern Table",
-                visible="(ptable)"))
-            self$add(jmvcore::Preformatted$new(
-                options=options,
-                name="text3",
-                title="Venn Table",
-                visible="(venntable)"))}))
+                visible="(ptable)"))}))
 
 vartreeBase <- if (requireNamespace('jmvcore')) R6::R6Class(
     "vartreeBase",
@@ -347,7 +333,6 @@ vartreeBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #' @param pattern .
 #' @param sequence .
 #' @param ptable .
-#' @param venntable .
 #' @param mytitle .
 #' @param useprunesmaller .
 #' @param prunesmaller .
@@ -357,7 +342,6 @@ vartreeBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #'   \code{results$todo} \tab \tab \tab \tab \tab a html \cr
 #'   \code{results$text1} \tab \tab \tab \tab \tab a html \cr
 #'   \code{results$text2} \tab \tab \tab \tab \tab a preformatted \cr
-#'   \code{results$text3} \tab \tab \tab \tab \tab a preformatted \cr
 #' }
 #'
 #' @export
@@ -385,7 +369,6 @@ vartree <- function(
     pattern = FALSE,
     sequence = FALSE,
     ptable = FALSE,
-    venntable = FALSE,
     mytitle = "",
     useprunesmaller = FALSE,
     prunesmaller = 5,
@@ -436,7 +419,6 @@ vartree <- function(
         pattern = pattern,
         sequence = sequence,
         ptable = ptable,
-        venntable = venntable,
         mytitle = mytitle,
         useprunesmaller = useprunesmaller,
         prunesmaller = prunesmaller,

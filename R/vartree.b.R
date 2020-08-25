@@ -334,11 +334,11 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             }
 
 
-            # venntable ----
-            if (self$options$ptable && self$options$venntable) {
-                results2 <- print(vtree::VennTable(results), quote = FALSE)
-                self$results$text3$setContent(results2)
-            }
+            # # venntable ----
+            # if (self$options$ptable && self$options$venntable) {
+            #     results2 <- print(vtree::VennTable(results), quote = FALSE)
+            #     self$results$text3$setContent(results2)
+            # }
 
 
         }

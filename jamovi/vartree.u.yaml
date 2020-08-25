@@ -123,7 +123,5 @@ children:
                     enable: (!pattern)
                   - type: CheckBox
                     name: ptable
-                  - type: CheckBox
-                    name: venntable
                   - type: ComboBox
                     name: summarylocation
