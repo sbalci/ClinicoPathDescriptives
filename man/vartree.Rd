@@ -28,12 +28,10 @@ vartree(
   pattern = FALSE,
   sequence = FALSE,
   ptable = FALSE,
-  venntable = FALSE,
-  mytitle = "Variable Tree",
+  mytitle = "",
   useprunesmaller = FALSE,
   prunesmaller = 5,
-  width = 1000,
-  height = 1000
+  summarylocation = "leafonly"
 )
 }
 \arguments{
@@ -83,17 +81,13 @@ vartree(
 
 \item{ptable}{.}
 
-\item{venntable}{.}
-
 \item{mytitle}{.}
 
 \item{useprunesmaller}{.}
 
 \item{prunesmaller}{.}
 
-\item{width}{.}
-
-\item{height}{.}
+\item{summarylocation}{.}
 }
 \value{
 A results object containing:
@@ -101,7 +95,6 @@ A results object containing:
 \code{results$todo} \tab \tab \tab \tab \tab a html \cr
 \code{results$text1} \tab \tab \tab \tab \tab a html \cr
 \code{results$text2} \tab \tab \tab \tab \tab a preformatted \cr
-\code{results$text3} \tab \tab \tab \tab \tab a preformatted \cr
 }
 }
 \description{

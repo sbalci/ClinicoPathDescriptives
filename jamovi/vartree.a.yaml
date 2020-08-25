@@ -139,39 +139,45 @@ options:
       type: Bool
       default: false
 
-    - name: venntable
-      title: Venn Table
-      type: Bool
-      default: false
+    # - name: venntable
+    #   title: Venn Table
+    #   type: Bool
+    #   default: false
 
     - name: mytitle
-      title: Title
+      title: Root Title
       type: String
-      default: 'Variable Tree'
+      default: ''
 
     - name: useprunesmaller
-      title: ''
+      title: Prune
       type: Bool
       default: false
 
     - name: prunesmaller
-      title: Prune Counts
+      title: 'counts <'
       type: Integer
       default: 5
 
-# %noroot%	all nodes except the root
-# %leafonly%	leaf nodes
+    - name: summarylocation
+      title: 'Summary Location'
+      type: List
+      options:
+        - title: 'All Nodes'
+          name: allnodes
+        - title: 'Leaf Nodes'
+          name: leafonly
+      default: leafonly
 
 
+    # - name: width
+    #   title: Image Width
+    #   type: Integer
+    #   default: 1000
 
-    - name: width
-      title: Image Width
-      type: Integer
-      default: 1000
-
-    - name: height
-      title: Image Height
-      type: Integer
-      default: 1000
+    # - name: height
+    #   title: Image Height
+    #   type: Integer
+    #   default: 1000
 
 ...

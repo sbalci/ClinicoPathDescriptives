@@ -28,12 +28,10 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             pattern = FALSE,
             sequence = FALSE,
             ptable = FALSE,
-            venntable = FALSE,
-            mytitle = "Variable Tree",
+            mytitle = "",
             useprunesmaller = FALSE,
             prunesmaller = 5,
-            width = 1000,
-            height = 1000, ...) {
+            summarylocation = "leafonly", ...) {
 
             super$initialize(
                 package='ClinicoPathDescriptives',
@@ -148,14 +146,10 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
                 "ptable",
                 ptable,
                 default=FALSE)
-            private$..venntable <- jmvcore::OptionBool$new(
-                "venntable",
-                venntable,
-                default=FALSE)
             private$..mytitle <- jmvcore::OptionString$new(
                 "mytitle",
                 mytitle,
-                default="Variable Tree")
+                default="")
             private$..useprunesmaller <- jmvcore::OptionBool$new(
                 "useprunesmaller",
                 useprunesmaller,
@@ -164,14 +158,13 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
                 "prunesmaller",
                 prunesmaller,
                 default=5)
-            private$..width <- jmvcore::OptionInteger$new(
-                "width",
-                width,
-                default=1000)
-            private$..height <- jmvcore::OptionInteger$new(
-                "height",
-                height,
-                default=1000)
+            private$..summarylocation <- jmvcore::OptionList$new(
+                "summarylocation",
+                summarylocation,
+                options=list(
+                    "allnodes",
+                    "leafonly"),
+                default="leafonly")
 
             self$.addOption(private$..vars)
             self$.addOption(private$..percvar)
@@ -195,12 +188,10 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             self$.addOption(private$..pattern)
             self$.addOption(private$..sequence)
             self$.addOption(private$..ptable)
-            self$.addOption(private$..venntable)
             self$.addOption(private$..mytitle)
             self$.addOption(private$..useprunesmaller)
             self$.addOption(private$..prunesmaller)
-            self$.addOption(private$..width)
-            self$.addOption(private$..height)
+            self$.addOption(private$..summarylocation)
         }),
     active = list(
         vars = function() private$..vars$value,
@@ -225,12 +216,10 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
         pattern = function() private$..pattern$value,
         sequence = function() private$..sequence$value,
         ptable = function() private$..ptable$value,
-        venntable = function() private$..venntable$value,
         mytitle = function() private$..mytitle$value,
         useprunesmaller = function() private$..useprunesmaller$value,
         prunesmaller = function() private$..prunesmaller$value,
-        width = function() private$..width$value,
-        height = function() private$..height$value),
+        summarylocation = function() private$..summarylocation$value),
     private = list(
         ..vars = NA,
         ..percvar = NA,
@@ -254,12 +243,10 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
         ..pattern = NA,
         ..sequence = NA,
         ..ptable = NA,
-        ..venntable = NA,
         ..mytitle = NA,
         ..useprunesmaller = NA,
         ..prunesmaller = NA,
-        ..width = NA,
-        ..height = NA)
+        ..summarylocation = NA)
 )
 
 vartreeResults <- if (requireNamespace('jmvcore')) R6::R6Class(
@@ -267,8 +254,7 @@ vartreeResults <- if (requireNamespace('jmvcore')) R6::R6Class(
     active = list(
         todo = function() private$.items[["todo"]],
         text1 = function() private$.items[["text1"]],
-        text2 = function() private$.items[["text2"]],
-        text3 = function() private$.items[["text3"]]),
+        text2 = function() private$.items[["text2"]]),
     private = list(),
     public=list(
         initialize=function(options) {
@@ -290,12 +276,7 @@ vartreeResults <- if (requireNamespace('jmvcore')) R6::R6Class(
                 options=options,
                 name="text2",
                 title="Pattern Table",
-                visible="(ptable)"))
-            self$add(jmvcore::Preformatted$new(
-                options=options,
-                name="text3",
-                title="Venn Table",
-                visible="(venntable)"))}))
+                visible="(ptable)"))}))
 
 vartreeBase <- if (requireNamespace('jmvcore')) R6::R6Class(
     "vartreeBase",
@@ -348,18 +329,15 @@ vartreeBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #' @param pattern .
 #' @param sequence .
 #' @param ptable .
-#' @param venntable .
 #' @param mytitle .
 #' @param useprunesmaller .
 #' @param prunesmaller .
-#' @param width .
-#' @param height .
+#' @param summarylocation .
 #' @return A results object containing:
 #' \tabular{llllll}{
 #'   \code{results$todo} \tab \tab \tab \tab \tab a html \cr
 #'   \code{results$text1} \tab \tab \tab \tab \tab a html \cr
 #'   \code{results$text2} \tab \tab \tab \tab \tab a preformatted \cr
-#'   \code{results$text3} \tab \tab \tab \tab \tab a preformatted \cr
 #' }
 #'
 #' @export
@@ -387,12 +365,10 @@ vartree <- function(
     pattern = FALSE,
     sequence = FALSE,
     ptable = FALSE,
-    venntable = FALSE,
-    mytitle = "Variable Tree",
+    mytitle = "",
     useprunesmaller = FALSE,
     prunesmaller = 5,
-    width = 1000,
-    height = 1000) {
+    summarylocation = "leafonly") {
 
     if ( ! requireNamespace('jmvcore'))
         stop('vartree requires jmvcore to be installed (restart may be required)')
@@ -439,12 +415,10 @@ vartree <- function(
         pattern = pattern,
         sequence = sequence,
         ptable = ptable,
-        venntable = venntable,
         mytitle = mytitle,
         useprunesmaller = useprunesmaller,
         prunesmaller = prunesmaller,
-        width = width,
-        height = height)
+        summarylocation = summarylocation)
 
     analysis <- vartreeClass$new(
         options = options,

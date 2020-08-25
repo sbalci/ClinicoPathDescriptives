@@ -84,6 +84,13 @@ children:
                     enable: (!excl && pct)
                   - type: CheckBox
                     name: nodelabel
+                  - type: CheckBox
+                    name: legend
+                    enable: (varnames)
+                  - type: TextBox
+                    name: mytitle
+                    format: string
+                    width: large
           - type: LayoutBox
             cell:
               column: 1
@@ -102,19 +109,6 @@ children:
                   - type: CheckBox
                     name: sline
                   - type: CheckBox
-                    name: legend
-                    enable: (varnames)
-                  - type: TextBox
-                    name: mytitle
-                    format: string
-                    width: large
-                  - type: TextBox
-                    name: width
-                    format: number
-                  - type: TextBox
-                    name: height
-                    format: number
-                  - type: CheckBox
                     name: useprunesmaller
                     children:
                       - type: TextBox
@@ -129,6 +123,8 @@ children:
                     enable: (!pattern)
                   - type: CheckBox
                     name: ptable
-                  - type: CheckBox
-                    name: venntable
-                    enable: (!ptable && pattern)
+  - type: LayoutBox
+    margin: large
+    children:
+      - type: ComboBox
+        name: summarylocation

@@ -162,6 +162,17 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             if ( !is.null(self$options$summaryvar) ) {
                 summaryvar <- self$options$summaryvar
+
+                summarylocation <- self$options$summarylocation
+
+                if (summarylocation == "leafonly") {
+                    summarylocation1 <- "%leafonly%"
+                } else if (summarylocation == "allnodes") {
+                    summarylocation1 <- "%allnodes%"
+                }
+
+
+
                 xsummary <- paste0(
                     summaryvar," \n\n",
                     summaryvar, "\n",
@@ -169,8 +180,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                     "SD=%SD%", "\n",
                     "Range=%range%", "\n",
                     # "mv=%mv%",
-                    "%leafonly%"
-                    # "%noroot%"
+                    summarylocation1
                     )
             }
 
@@ -234,7 +244,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 # colorvarlabels = TRUE,
                 # title = "",
                 # sameline = FALSE,
-                Venn = self$options$venntable,
+                # Venn = self$options$venntable,
                 # check.is.na = FALSE,
                 seq = self$options$sequence,
                 pattern = self$options$pattern,
@@ -306,13 +316,10 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             }
 
 
-            if (self$options$ptable && self$options$venntable) {
-
-                results2 <- print(vtree::VennTable(results), quote = FALSE)
-
-                self$results$text3$setContent(results2)
-
-            }
+            # if (self$options$ptable && self$options$venntable) {
+            #     results2 <- print(vtree::VennTable(results), quote = FALSE)
+            #     self$results$text3$setContent(results2)
+            # }
 
 
 
