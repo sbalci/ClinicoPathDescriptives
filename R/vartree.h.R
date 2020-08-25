@@ -26,6 +26,7 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             showcount = TRUE,
             legend = FALSE,
             pattern = FALSE,
+            sequence = FALSE,
             mytitle = "Variable Tree",
             useprunesmaller = FALSE,
             prunesmaller = 5,
@@ -137,6 +138,10 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
                 "pattern",
                 pattern,
                 default=FALSE)
+            private$..sequence <- jmvcore::OptionBool$new(
+                "sequence",
+                sequence,
+                default=FALSE)
             private$..mytitle <- jmvcore::OptionString$new(
                 "mytitle",
                 mytitle,
@@ -178,6 +183,7 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             self$.addOption(private$..showcount)
             self$.addOption(private$..legend)
             self$.addOption(private$..pattern)
+            self$.addOption(private$..sequence)
             self$.addOption(private$..mytitle)
             self$.addOption(private$..useprunesmaller)
             self$.addOption(private$..prunesmaller)
@@ -205,6 +211,7 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
         showcount = function() private$..showcount$value,
         legend = function() private$..legend$value,
         pattern = function() private$..pattern$value,
+        sequence = function() private$..sequence$value,
         mytitle = function() private$..mytitle$value,
         useprunesmaller = function() private$..useprunesmaller$value,
         prunesmaller = function() private$..prunesmaller$value,
@@ -231,6 +238,7 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
         ..showcount = NA,
         ..legend = NA,
         ..pattern = NA,
+        ..sequence = NA,
         ..mytitle = NA,
         ..useprunesmaller = NA,
         ..prunesmaller = NA,
@@ -310,6 +318,7 @@ vartreeBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #' @param showcount .
 #' @param legend .
 #' @param pattern .
+#' @param sequence .
 #' @param mytitle .
 #' @param useprunesmaller .
 #' @param prunesmaller .
@@ -344,6 +353,7 @@ vartree <- function(
     showcount = TRUE,
     legend = FALSE,
     pattern = FALSE,
+    sequence = FALSE,
     mytitle = "Variable Tree",
     useprunesmaller = FALSE,
     prunesmaller = 5,
@@ -393,6 +403,7 @@ vartree <- function(
         showcount = showcount,
         legend = legend,
         pattern = pattern,
+        sequence = sequence,
         mytitle = mytitle,
         useprunesmaller = useprunesmaller,
         prunesmaller = prunesmaller,

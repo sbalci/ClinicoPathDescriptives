@@ -123,3 +123,7 @@ children:
                         enable: (useprunesmaller)
                   - type: CheckBox
                     name: pattern
+                    enable: (!sequence)
+                  - type: CheckBox
+                    name: sequence
+                    enable: (!pattern)

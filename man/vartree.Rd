@@ -26,6 +26,7 @@ vartree(
   showcount = TRUE,
   legend = FALSE,
   pattern = FALSE,
+  sequence = FALSE,
   mytitle = "Variable Tree",
   useprunesmaller = FALSE,
   prunesmaller = 5,
@@ -75,6 +76,8 @@ vartree(
 \item{legend}{.}
 
 \item{pattern}{.}
+
+\item{sequence}{.}
 
 \item{mytitle}{.}
 

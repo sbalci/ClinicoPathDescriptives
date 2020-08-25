@@ -129,6 +129,10 @@ options:
       type: Bool
       default: false
 
+    - name: sequence
+      title: Sequence Tree
+      type: Bool
+      default: false
 
     - name: mytitle
       title: Title
