@@ -213,6 +213,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 pruneLevelvector <- c(pruneLevel1, pruneLevel2)
 
                 xprunebelow <- paste0('list(', prunebelow, '=', pruneLevelvector, ')')
+                xprunebelow <- as.formula(xprunebelow)
             }
 
 
