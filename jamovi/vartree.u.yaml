@@ -131,4 +131,4 @@ children:
                     name: ptable
                   - type: CheckBox
                     name: venntable
-                    enable: (ptable)
+                    enable: (!ptable && pattern)
