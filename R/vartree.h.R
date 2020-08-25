@@ -277,7 +277,7 @@ vartreeResults <- if (requireNamespace('jmvcore')) R6::R6Class(
                 options=options,
                 name="text1",
                 title="Variable Tree Html"))
-            self$add(jmvcore::Preformatted$new(
+            self$add(jmvcore::Html$new(
                 options=options,
                 name="text2",
                 title="",
@@ -343,7 +343,7 @@ vartreeBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #' \tabular{llllll}{
 #'   \code{results$todo} \tab \tab \tab \tab \tab a html \cr
 #'   \code{results$text1} \tab \tab \tab \tab \tab a html \cr
-#'   \code{results$text2} \tab \tab \tab \tab \tab a preformatted \cr
+#'   \code{results$text2} \tab \tab \tab \tab \tab a html \cr
 #' }
 #'
 #' @export
