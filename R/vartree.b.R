@@ -302,7 +302,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             if (self$options$ptable) {
 
-                self$results$text2$setContent(print(results))
+                self$results$text2$setContent(results)
 
             }
 
