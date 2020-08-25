@@ -77,11 +77,13 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             private$..pruneLevel1 <- jmvcore::OptionLevel$new(
                 "pruneLevel1",
                 pruneLevel1,
-                variable="(prunebelow)")
+                variable="(prunebelow)",
+                allowNone=TRUE)
             private$..pruneLevel2 <- jmvcore::OptionLevel$new(
                 "pruneLevel2",
                 pruneLevel2,
-                variable="(prunebelow)")
+                variable="(prunebelow)",
+                allowNone=TRUE)
             private$..follow <- jmvcore::OptionVariable$new(
                 "follow",
                 follow,
@@ -93,11 +95,13 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             private$..followLevel1 <- jmvcore::OptionLevel$new(
                 "followLevel1",
                 followLevel1,
-                variable="(follow)")
+                variable="(follow)",
+                allowNone=TRUE)
             private$..followLevel2 <- jmvcore::OptionLevel$new(
                 "followLevel2",
                 followLevel2,
-                variable="(follow)")
+                variable="(follow)",
+                allowNone=TRUE)
             private$..excl <- jmvcore::OptionBool$new(
                 "excl",
                 excl,

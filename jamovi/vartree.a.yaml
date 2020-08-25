@@ -54,11 +54,13 @@ options:
       title: 'Level 1'
       type: Level
       variable: (prunebelow)
+      allowNone: true
 
     - name: pruneLevel2
       title: 'Level 2'
       type: Level
       variable: (prunebelow)
+      allowNone: true
 
     - name: follow
       title: Follow Below
@@ -70,13 +72,13 @@ options:
       title: 'Level 1'
       type: Level
       variable: (follow)
+      allowNone: true
 
     - name: followLevel2
       title: 'Level 2'
       type: Level
       variable: (follow)
-
-
+      allowNone: true
 
     - name: excl
       title: Exclude Missing (NA)
