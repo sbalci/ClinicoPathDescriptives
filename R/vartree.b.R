@@ -69,7 +69,6 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             xcolorvarlabels <- TRUE
             xtitle <- ""
             xsameline <- FALSE
-            xVenn <- FALSE
             xcheck.is.na <- FALSE
 
             xptable <- FALSE
@@ -235,7 +234,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 # colorvarlabels = TRUE,
                 # title = "",
                 # sameline = FALSE,
-                # Venn = FALSE,
+                Venn = self$options$venntable,
                 # check.is.na = FALSE,
                 seq = self$options$sequence,
                 pattern = self$options$pattern,
@@ -305,6 +304,18 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 self$results$text2$setContent(results)
 
             }
+
+
+            if (self$options$ptable && self$options$venntable) {
+
+                results2 <- print(VennTable(results, ptable = TRUE), quote = FALSE)
+
+
+                self$results$text2$setContent(results2)
+
+            }
+
+
 
 
 

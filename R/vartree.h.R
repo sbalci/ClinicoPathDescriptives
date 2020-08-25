@@ -28,6 +28,7 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             pattern = FALSE,
             sequence = FALSE,
             ptable = FALSE,
+            venntable = FALSE,
             mytitle = "Variable Tree",
             useprunesmaller = FALSE,
             prunesmaller = 5,
@@ -147,6 +148,10 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
                 "ptable",
                 ptable,
                 default=FALSE)
+            private$..venntable <- jmvcore::OptionBool$new(
+                "venntable",
+                venntable,
+                default=FALSE)
             private$..mytitle <- jmvcore::OptionString$new(
                 "mytitle",
                 mytitle,
@@ -190,6 +195,7 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             self$.addOption(private$..pattern)
             self$.addOption(private$..sequence)
             self$.addOption(private$..ptable)
+            self$.addOption(private$..venntable)
             self$.addOption(private$..mytitle)
             self$.addOption(private$..useprunesmaller)
             self$.addOption(private$..prunesmaller)
@@ -219,6 +225,7 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
         pattern = function() private$..pattern$value,
         sequence = function() private$..sequence$value,
         ptable = function() private$..ptable$value,
+        venntable = function() private$..venntable$value,
         mytitle = function() private$..mytitle$value,
         useprunesmaller = function() private$..useprunesmaller$value,
         prunesmaller = function() private$..prunesmaller$value,
@@ -247,6 +254,7 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
         ..pattern = NA,
         ..sequence = NA,
         ..ptable = NA,
+        ..venntable = NA,
         ..mytitle = NA,
         ..useprunesmaller = NA,
         ..prunesmaller = NA,
@@ -280,7 +288,7 @@ vartreeResults <- if (requireNamespace('jmvcore')) R6::R6Class(
             self$add(jmvcore::Preformatted$new(
                 options=options,
                 name="text2",
-                title="ptable",
+                title="Pattern Table",
                 visible="(ptable)"))}))
 
 vartreeBase <- if (requireNamespace('jmvcore')) R6::R6Class(
@@ -334,6 +342,7 @@ vartreeBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #' @param pattern .
 #' @param sequence .
 #' @param ptable .
+#' @param venntable .
 #' @param mytitle .
 #' @param useprunesmaller .
 #' @param prunesmaller .
@@ -371,6 +380,7 @@ vartree <- function(
     pattern = FALSE,
     sequence = FALSE,
     ptable = FALSE,
+    venntable = FALSE,
     mytitle = "Variable Tree",
     useprunesmaller = FALSE,
     prunesmaller = 5,
@@ -422,6 +432,7 @@ vartree <- function(
         pattern = pattern,
         sequence = sequence,
         ptable = ptable,
+        venntable = venntable,
         mytitle = mytitle,
         useprunesmaller = useprunesmaller,
         prunesmaller = prunesmaller,

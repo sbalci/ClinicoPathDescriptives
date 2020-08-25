@@ -14,7 +14,7 @@ items:
       type:  Html
 
     - name:  text2
-      title: 'ptable'
+      title: Pattern Table
       type:  Preformatted
       visible: (ptable)
 

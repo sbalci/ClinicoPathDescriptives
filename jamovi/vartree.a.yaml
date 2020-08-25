@@ -139,6 +139,11 @@ options:
       type: Bool
       default: false
 
+    - name: venntable
+      title: Venn Table
+      type: Bool
+      default: false
+
     - name: mytitle
       title: Title
       type: String
