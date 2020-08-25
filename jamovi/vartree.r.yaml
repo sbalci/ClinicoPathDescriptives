@@ -18,10 +18,10 @@ items:
       type:  Preformatted
       visible: (ptable)
 
-    # - name:  text3
-    #   title: Venn Table
-    #   type:  Preformatted
-    #   visible: (venntable)
+    - name:  text3
+      title: Venn Table
+      type:  Preformatted
+      visible: (venntable)
 
 
 refs:
