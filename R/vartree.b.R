@@ -72,7 +72,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             xVenn <- FALSE
             xcheck.is.na <- FALSE
             xseq <- FALSE
-            xpattern <- FALSE
+
             xptable <- FALSE
             xshowroot <- TRUE
             xtext <- list()
@@ -153,6 +153,10 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 percvar <- self$options$percvar
                 xsummary <- paste0(percvar,"=", self$options$percvarLevel ,"\n%pct%")
 
+                # summary=c("Score \nScore: mean (SD) %meanx% (%SD%)","Pre \nPre: range %range%"))
+
+
+
             }
 
 
@@ -162,11 +166,14 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 summaryvar <- self$options$summaryvar
                 xsummary <- paste0(
                     summaryvar," \n\n",
-                                   summaryvar, "\n",
-                                   "mean=%mean%", "\n",
-                                   "SD=%SD%", "\n",
-                                   # "mv=%mv%",
-                                   "%leafonly%")
+                    summaryvar, "\n",
+                    "mean=%mean%", "\n",
+                    "SD=%SD%", "\n",
+                    "Range=%range%", "\n",
+                    # "mv=%mv%",
+                    "%leafonly%"
+                    # "%noroot%"
+                    )
             }
 
 
@@ -232,7 +239,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 # Venn = FALSE,
                 # check.is.na = FALSE,
                 # seq = FALSE,
-                # pattern = FALSE,
+                pattern = self$options$pattern,
                 # ptable = FALSE,
                 # showroot = TRUE,
                 # text = list(),

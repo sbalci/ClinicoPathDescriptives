@@ -123,10 +123,22 @@ options:
       type: Bool
       default: false
 
+
+    - name: pattern
+      title: Pattern Tree
+      type: Bool
+      default: false
+
+
     - name: mytitle
       title: Title
       type: String
       default: 'Variable Tree'
+
+    - name: useprunesmaller
+      title: ''
+      type: Bool
+      default: false
 
     - name: prunesmaller
       title: Prune Counts

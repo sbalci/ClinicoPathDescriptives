@@ -25,7 +25,9 @@ vartree(
   pct = FALSE,
   showcount = TRUE,
   legend = FALSE,
+  pattern = FALSE,
   mytitle = "Variable Tree",
+  useprunesmaller = FALSE,
   prunesmaller = 5,
   width = 1000,
   height = 1000
@@ -72,7 +74,11 @@ vartree(
 
 \item{legend}{.}
 
+\item{pattern}{.}
+
 \item{mytitle}{.}
+
+\item{useprunesmaller}{.}
 
 \item{prunesmaller}{.}
 

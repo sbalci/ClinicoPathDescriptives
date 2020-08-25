@@ -25,7 +25,9 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             pct = FALSE,
             showcount = TRUE,
             legend = FALSE,
+            pattern = FALSE,
             mytitle = "Variable Tree",
+            useprunesmaller = FALSE,
             prunesmaller = 5,
             width = 1000,
             height = 1000, ...) {
@@ -131,10 +133,18 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
                 "legend",
                 legend,
                 default=FALSE)
+            private$..pattern <- jmvcore::OptionBool$new(
+                "pattern",
+                pattern,
+                default=FALSE)
             private$..mytitle <- jmvcore::OptionString$new(
                 "mytitle",
                 mytitle,
                 default="Variable Tree")
+            private$..useprunesmaller <- jmvcore::OptionBool$new(
+                "useprunesmaller",
+                useprunesmaller,
+                default=FALSE)
             private$..prunesmaller <- jmvcore::OptionInteger$new(
                 "prunesmaller",
                 prunesmaller,
@@ -167,7 +177,9 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             self$.addOption(private$..pct)
             self$.addOption(private$..showcount)
             self$.addOption(private$..legend)
+            self$.addOption(private$..pattern)
             self$.addOption(private$..mytitle)
+            self$.addOption(private$..useprunesmaller)
             self$.addOption(private$..prunesmaller)
             self$.addOption(private$..width)
             self$.addOption(private$..height)
@@ -192,7 +204,9 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
         pct = function() private$..pct$value,
         showcount = function() private$..showcount$value,
         legend = function() private$..legend$value,
+        pattern = function() private$..pattern$value,
         mytitle = function() private$..mytitle$value,
+        useprunesmaller = function() private$..useprunesmaller$value,
         prunesmaller = function() private$..prunesmaller$value,
         width = function() private$..width$value,
         height = function() private$..height$value),
@@ -216,7 +230,9 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
         ..pct = NA,
         ..showcount = NA,
         ..legend = NA,
+        ..pattern = NA,
         ..mytitle = NA,
+        ..useprunesmaller = NA,
         ..prunesmaller = NA,
         ..width = NA,
         ..height = NA)
@@ -293,7 +309,9 @@ vartreeBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #' @param pct .
 #' @param showcount .
 #' @param legend .
+#' @param pattern .
 #' @param mytitle .
+#' @param useprunesmaller .
 #' @param prunesmaller .
 #' @param width .
 #' @param height .
@@ -325,7 +343,9 @@ vartree <- function(
     pct = FALSE,
     showcount = TRUE,
     legend = FALSE,
+    pattern = FALSE,
     mytitle = "Variable Tree",
+    useprunesmaller = FALSE,
     prunesmaller = 5,
     width = 1000,
     height = 1000) {
@@ -372,7 +392,9 @@ vartree <- function(
         pct = pct,
         showcount = showcount,
         legend = legend,
+        pattern = pattern,
         mytitle = mytitle,
+        useprunesmaller = useprunesmaller,
         prunesmaller = prunesmaller,
         width = width,
         height = height)
