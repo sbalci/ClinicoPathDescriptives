@@ -210,6 +210,25 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
                 }
 
+
+            # Follow Below ----
+
+            if ( !is.null(self$options$follow) ) {
+
+                follow <- self$options$follow
+                follow <- jmvcore::composeTerm(follow)
+
+                followLevel1 <- self$options$followLevel1
+                followLevel1 <- jmvcore::composeTerm(followLevel1)
+
+                followLevel2 <- self$options$followLevel2
+                followLevel2 <- jmvcore::composeTerm(followLevel2)
+
+                xfollow <-  paste0("list(", follow,"=c('", followLevel1, "','", followLevel2,"'))")
+
+            }
+
+
             # run vtree function ----
 
             results <- vtree::vtree(
@@ -225,7 +244,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 # prune = list(),
                 prunebelow = eval(parse(text = xprunebelow)),
                 # keep = list(),
-                # follow = list(),
+                follow = eval(parse(text = xfollow)),
                 prunesmaller = xprunesmaller,
                 # labelnode = list(),
                 # tlabelnode = NULL,
