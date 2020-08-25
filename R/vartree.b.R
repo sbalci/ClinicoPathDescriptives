@@ -211,7 +211,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 pruneLevel2 <- jmvcore::composeTerm(components = pruneLevel2)
 
                 # xprunebelow <- list(prunebelow = c(pruneLevel1, pruneLevel2))
-                xprunebelow <- paste0("list(", prunebelow, "=c(", self$options$pruneLevel1, ",", pruneLevel2, "))")
+                xprunebelow <- paste0("list(", prunebelow, "=c(", evalq(pruneLevel1), ",", evalq(pruneLevel2), "))")
                 xprunebelow <- as.formula(xprunebelow)
                 }
 
