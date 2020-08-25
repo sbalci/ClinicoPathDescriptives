@@ -141,10 +141,10 @@ options:
       type: Bool
       default: false
 
-    # - name: venntable
-    #   title: Venn Table
-    #   type: Bool
-    #   default: false
+    - name: venntable
+      title: Venn Table
+      type: Bool
+      default: false
 
     - name: mytitle
       title: Root Title
@@ -172,14 +172,14 @@ options:
       default: leafonly
 
 
-    # - name: width
-    #   title: Image Width
-    #   type: Integer
-    #   default: 1000
+    - name: width
+      title: Image Width
+      type: Integer
+      default: 1000
 
-    # - name: height
-    #   title: Image Height
-    #   type: Integer
-    #   default: 1000
+    - name: height
+      title: Image Height
+      type: Integer
+      default: 1000
 
 ...
