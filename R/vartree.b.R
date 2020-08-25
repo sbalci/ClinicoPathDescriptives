@@ -198,34 +198,17 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             if ( !is.null(self$options$prunebelow) ) {
 
                 prunebelow <- self$options$prunebelow
-
-                pruneLevel1 <- NULL
-                pruneLevel2 <- NULL
+                prunebelow <- jmvcore::composeTerm(prunebelow)
 
                 pruneLevel1 <- self$options$pruneLevel1
+                pruneLevel1 <- jmvcore::composeTerm(pruneLevel1)
+
                 pruneLevel2 <- self$options$pruneLevel2
+                pruneLevel2 <- jmvcore::composeTerm(pruneLevel2)
 
-                # prunebelow <- jmvcore::composeTerm(components = prunebelow)
-                #
-                # pruneLevel1 <- jmvcore::composeTerm(components = pruneLevel1)
-                # pruneLevel2 <- jmvcore::composeTerm(components = pruneLevel2)
-
-
-
-                # x <- "Race"
-                # y <- c("Asian", "Black")
-                # form <- paste0("x=y")
-                # vtree::vtree(deneme,
-                #              "Race LVI",
-                #              prunebelow = list( eval(form) )
-                # )
-
-                xprunebelow <- paste0('prunebelow = c(pruneLevel1,pruneLevel2)')
-
+                xprunebelow <-  paste0("list(", x,"=c('", y1, "','", y2,"'))")
 
                 }
-
-
 
             # run vtree function ----
 
@@ -240,7 +223,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 showpct = self$options$pct,
                 splitspaces = xsplitspaces,
                 # prune = list(),
-                prunebelow = list( eval(xprunebelow) ),
+                prunebelow = eval(parse(text = xprunebelow)),
                 # keep = list(),
                 # follow = list(),
                 prunesmaller = xprunesmaller,
