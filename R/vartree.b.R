@@ -205,10 +205,10 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 pruneLevel1 <- self$options$pruneLevel1
                 pruneLevel2 <- self$options$pruneLevel2
 
-                prunebelow <- jmvcore::composeTerm(components = prunebelow)
-
-                pruneLevel1 <- jmvcore::composeTerm(components = pruneLevel1)
-                pruneLevel2 <- jmvcore::composeTerm(components = pruneLevel2)
+                # prunebelow <- jmvcore::composeTerm(components = prunebelow)
+                #
+                # pruneLevel1 <- jmvcore::composeTerm(components = pruneLevel1)
+                # pruneLevel2 <- jmvcore::composeTerm(components = pruneLevel2)
 
 
 
