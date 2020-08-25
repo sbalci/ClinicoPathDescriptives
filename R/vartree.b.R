@@ -295,9 +295,9 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             # export as svg ----
 
-            results <- DiagrammeRsvg::export_svg(gv = results)
+            results1 <- DiagrammeRsvg::export_svg(gv = results)
 
-            self$results$text1$setContent(print(results))
+            self$results$text1$setContent(print(results1))
 
 
             if (self$options$ptable) {
