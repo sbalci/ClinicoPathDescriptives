@@ -158,8 +158,8 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             # Percentage Variable ----
             if ( !is.null(self$options$percvar) ) {
                 percvar <- self$options$percvar
-                xsummary <- paste0(percvar,"=", self$options$percvarLevel,
-                                   # "\n%pct%"
+                xsummary <- paste0(percvar,"=", self$options$percvarLevel
+                                   #, "\n%pct%"
                                    )
 
                 # summary=c("Score \nScore: mean (SD) %meanx% (%SD%)","Pre \nPre: range %range%"))
