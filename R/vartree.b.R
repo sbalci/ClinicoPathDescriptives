@@ -299,6 +299,15 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             self$results$text1$setContent(print(results))
 
+
+            if (self$options$ptable) {
+
+                self$results$text2$setContent(print(results))
+
+            }
+
+
+
         }
 
         )

@@ -258,7 +258,8 @@ vartreeResults <- if (requireNamespace('jmvcore')) R6::R6Class(
     inherit = jmvcore::Group,
     active = list(
         todo = function() private$.items[["todo"]],
-        text1 = function() private$.items[["text1"]]),
+        text1 = function() private$.items[["text1"]],
+        text2 = function() private$.items[["text2"]]),
     private = list(),
     public=list(
         initialize=function(options) {
@@ -275,7 +276,12 @@ vartreeResults <- if (requireNamespace('jmvcore')) R6::R6Class(
             self$add(jmvcore::Html$new(
                 options=options,
                 name="text1",
-                title="Variable Tree Html"))}))
+                title="Variable Tree Html"))
+            self$add(jmvcore::Preformatted$new(
+                options=options,
+                name="text2",
+                title="",
+                visible="(ptable)"))}))
 
 vartreeBase <- if (requireNamespace('jmvcore')) R6::R6Class(
     "vartreeBase",
@@ -337,6 +343,7 @@ vartreeBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #' \tabular{llllll}{
 #'   \code{results$todo} \tab \tab \tab \tab \tab a html \cr
 #'   \code{results$text1} \tab \tab \tab \tab \tab a html \cr
+#'   \code{results$text2} \tab \tab \tab \tab \tab a preformatted \cr
 #' }
 #'
 #' @export

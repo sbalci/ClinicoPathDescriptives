@@ -13,6 +13,12 @@ items:
       title: Variable Tree Html
       type:  Html
 
+    - name:  text2
+      title: ''
+      type:  Preformatted
+      visible: (ptable)
+
+
 refs:
     - vtree
 
