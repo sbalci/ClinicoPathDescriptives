@@ -283,7 +283,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 # showlpct = TRUE,
                 showcount = self$options$showcount,
                 # showlegend = FALSE,
-                varnamepointsize = 8,
+                varnamepointsize = 18,
                 # HTMLtext = FALSE,
                 # digits = 0,
                 # cdigits = 1,
@@ -323,28 +323,22 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             )
 
 
-
             # export as svg ----
-
             results1 <- DiagrammeRsvg::export_svg(gv = results)
-
             self$results$text1$setContent(print(results1))
 
 
+            # ptable ----
             if (self$options$ptable) {
-
                 self$results$text2$setContent(results)
-
             }
 
 
-            # if (self$options$ptable && self$options$venntable) {
-            #     results2 <- print(vtree::VennTable(results), quote = FALSE)
-            #     self$results$text3$setContent(results2)
-            # }
-
-
-
+            # venntable ----
+            if (self$options$ptable && self$options$venntable) {
+                results2 <- print(vtree::VennTable(results), quote = FALSE)
+                self$results$text3$setContent(results2)
+            }
 
 
         }
