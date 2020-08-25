@@ -311,7 +311,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 results2 <- print(vtree::VennTable(results), quote = FALSE)
 
 
-                self$results$text2$setContent(results2)
+                self$results$text3$setContent(results2)
 
             }
 
