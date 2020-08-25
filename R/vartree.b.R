@@ -308,7 +308,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             if (self$options$ptable && self$options$venntable) {
 
-                results2 <- print(VennTable(results, ptable = TRUE), quote = FALSE)
+                results2 <- print(vtree::VennTable(results, ptable = TRUE), quote = FALSE)
 
 
                 self$results$text2$setContent(results2)
