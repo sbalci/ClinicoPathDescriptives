@@ -128,6 +128,11 @@ options:
       type: String
       default: 'Variable Tree'
 
+    - name: prunesmaller
+      title: Prune Counts
+      type: Integer
+      default: 5
+
     - name: width
       title: Image Width
       type: Integer

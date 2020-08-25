@@ -109,6 +109,12 @@ children:
   - type: LayoutBox
     margin: large
     children:
+      - type: TextBox
+        name: prunesmaller
+        format: number
+  - type: LayoutBox
+    margin: large
+    children:
       - type: LevelSelector
         name: pruneLevel1
   - type: LayoutBox

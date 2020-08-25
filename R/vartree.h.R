@@ -26,6 +26,7 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             showcount = TRUE,
             legend = FALSE,
             mytitle = "Variable Tree",
+            prunesmaller = 5,
             width = 1000,
             height = 1000, ...) {
 
@@ -134,6 +135,10 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
                 "mytitle",
                 mytitle,
                 default="Variable Tree")
+            private$..prunesmaller <- jmvcore::OptionInteger$new(
+                "prunesmaller",
+                prunesmaller,
+                default=5)
             private$..width <- jmvcore::OptionInteger$new(
                 "width",
                 width,
@@ -163,6 +168,7 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             self$.addOption(private$..showcount)
             self$.addOption(private$..legend)
             self$.addOption(private$..mytitle)
+            self$.addOption(private$..prunesmaller)
             self$.addOption(private$..width)
             self$.addOption(private$..height)
         }),
@@ -187,6 +193,7 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
         showcount = function() private$..showcount$value,
         legend = function() private$..legend$value,
         mytitle = function() private$..mytitle$value,
+        prunesmaller = function() private$..prunesmaller$value,
         width = function() private$..width$value,
         height = function() private$..height$value),
     private = list(
@@ -210,6 +217,7 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
         ..showcount = NA,
         ..legend = NA,
         ..mytitle = NA,
+        ..prunesmaller = NA,
         ..width = NA,
         ..height = NA)
 )
@@ -286,6 +294,7 @@ vartreeBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #' @param showcount .
 #' @param legend .
 #' @param mytitle .
+#' @param prunesmaller .
 #' @param width .
 #' @param height .
 #' @return A results object containing:
@@ -317,6 +326,7 @@ vartree <- function(
     showcount = TRUE,
     legend = FALSE,
     mytitle = "Variable Tree",
+    prunesmaller = 5,
     width = 1000,
     height = 1000) {
 
@@ -363,6 +373,7 @@ vartree <- function(
         showcount = showcount,
         legend = legend,
         mytitle = mytitle,
+        prunesmaller = prunesmaller,
         width = width,
         height = height)
 
