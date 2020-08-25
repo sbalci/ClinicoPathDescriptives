@@ -281,7 +281,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 # showlpct = TRUE,
                 showcount = self$options$showcount,
                 # showlegend = FALSE,
-                # varnamepointsize = 18,
+                varnamepointsize = 10,
                 # HTMLtext = FALSE,
                 # digits = 0,
                 # cdigits = 1,
