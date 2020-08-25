@@ -133,6 +133,11 @@ options:
       type: Integer
       default: 5
 
+# %noroot%	all nodes except the root
+# %leafonly%	leaf nodes
+
+
+
     - name: width
       title: Image Width
       type: Integer

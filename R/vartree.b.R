@@ -183,10 +183,10 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 pruneLevel1 <- self$options$pruneLevel1
                 pruneLevel2 <- self$options$pruneLevel2
 
-                prunebelow <- jmvcore::constructFormula(prunebelow)
+                prunebelow <- jmvcore::constructFormula(terms = prunebelow)
 
-                pruneLevel1 <- jmvcore::constructFormula(pruneLevel1)
-                pruneLevel2 <- jmvcore::constructFormula(pruneLevel2)
+                pruneLevel1 <- jmvcore::constructFormula(terms = pruneLevel1)
+                pruneLevel2 <- jmvcore::constructFormula(terms = pruneLevel2)
 
 
                 xprunebelow <- list(prunebelow = c(pruneLevel1, pruneLevel2))
