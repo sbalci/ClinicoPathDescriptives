@@ -123,8 +123,5 @@ children:
                     enable: (!pattern)
                   - type: CheckBox
                     name: ptable
-  - type: LayoutBox
-    margin: large
-    children:
-      - type: ComboBox
-        name: summarylocation
+                  - type: ComboBox
+                    name: summarylocation
