@@ -38,12 +38,44 @@ options:
       type: Level
       variable: (percvar)
 
-
     - name: summaryvar
       title: Continuous Variable for Summaries
       type: Variable
       suggested: [ continuous ]
       permitted: [ numeric ]
+
+    - name: prunebelow
+      title: Prune Below
+      type: Variable
+      suggested: [ ordinal, nominal ]
+      permitted: [ factor ]
+
+    - name: pruneLevel1
+      title: 'Level 1'
+      type: Level
+      variable: (prunebelow)
+
+    - name: pruneLevel2
+      title: 'Level 2'
+      type: Level
+      variable: (prunebelow)
+
+    - name: follow
+      title: Follow Below
+      type: Variable
+      suggested: [ ordinal, nominal ]
+      permitted: [ factor ]
+
+    - name: followLevel1
+      title: 'Level 1'
+      type: Level
+      variable: (follow)
+
+    - name: followLevel2
+      title: 'Level 2'
+      type: Level
+      variable: (follow)
+
 
 
     - name: excl
@@ -60,7 +92,6 @@ options:
       title: Horizontal Layout
       type: Bool
       default: false
-
 
     - name: sline
       title: Sameline

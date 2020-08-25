@@ -10,6 +10,12 @@ vartree(
   percvar,
   percvarLevel,
   summaryvar,
+  prunebelow,
+  pruneLevel1,
+  pruneLevel2,
+  follow,
+  followLevel1,
+  followLevel2,
   excl = TRUE,
   vp = TRUE,
   horizontal = FALSE,
@@ -34,6 +40,18 @@ vartree(
 \item{percvarLevel}{.}
 
 \item{summaryvar}{.}
+
+\item{prunebelow}{.}
+
+\item{pruneLevel1}{.}
+
+\item{pruneLevel2}{.}
+
+\item{follow}{.}
+
+\item{followLevel1}{.}
+
+\item{followLevel2}{.}
 
 \item{excl}{.}
 

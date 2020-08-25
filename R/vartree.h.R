@@ -10,6 +10,12 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             percvar = NULL,
             percvarLevel = NULL,
             summaryvar = NULL,
+            prunebelow = NULL,
+            pruneLevel1 = NULL,
+            pruneLevel2 = NULL,
+            follow = NULL,
+            followLevel1 = NULL,
+            followLevel2 = NULL,
             excl = TRUE,
             vp = TRUE,
             horizontal = FALSE,
@@ -56,6 +62,38 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
                     "continuous"),
                 permitted=list(
                     "numeric"))
+            private$..prunebelow <- jmvcore::OptionVariable$new(
+                "prunebelow",
+                prunebelow,
+                suggested=list(
+                    "ordinal",
+                    "nominal"),
+                permitted=list(
+                    "factor"))
+            private$..pruneLevel1 <- jmvcore::OptionLevel$new(
+                "pruneLevel1",
+                pruneLevel1,
+                variable="(prunebelow)")
+            private$..pruneLevel2 <- jmvcore::OptionLevel$new(
+                "pruneLevel2",
+                pruneLevel2,
+                variable="(prunebelow)")
+            private$..follow <- jmvcore::OptionVariable$new(
+                "follow",
+                follow,
+                suggested=list(
+                    "ordinal",
+                    "nominal"),
+                permitted=list(
+                    "factor"))
+            private$..followLevel1 <- jmvcore::OptionLevel$new(
+                "followLevel1",
+                followLevel1,
+                variable="(follow)")
+            private$..followLevel2 <- jmvcore::OptionLevel$new(
+                "followLevel2",
+                followLevel2,
+                variable="(follow)")
             private$..excl <- jmvcore::OptionBool$new(
                 "excl",
                 excl,
@@ -109,6 +147,12 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
             self$.addOption(private$..percvar)
             self$.addOption(private$..percvarLevel)
             self$.addOption(private$..summaryvar)
+            self$.addOption(private$..prunebelow)
+            self$.addOption(private$..pruneLevel1)
+            self$.addOption(private$..pruneLevel2)
+            self$.addOption(private$..follow)
+            self$.addOption(private$..followLevel1)
+            self$.addOption(private$..followLevel2)
             self$.addOption(private$..excl)
             self$.addOption(private$..vp)
             self$.addOption(private$..horizontal)
@@ -127,6 +171,12 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
         percvar = function() private$..percvar$value,
         percvarLevel = function() private$..percvarLevel$value,
         summaryvar = function() private$..summaryvar$value,
+        prunebelow = function() private$..prunebelow$value,
+        pruneLevel1 = function() private$..pruneLevel1$value,
+        pruneLevel2 = function() private$..pruneLevel2$value,
+        follow = function() private$..follow$value,
+        followLevel1 = function() private$..followLevel1$value,
+        followLevel2 = function() private$..followLevel2$value,
         excl = function() private$..excl$value,
         vp = function() private$..vp$value,
         horizontal = function() private$..horizontal$value,
@@ -144,6 +194,12 @@ vartreeOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
         ..percvar = NA,
         ..percvarLevel = NA,
         ..summaryvar = NA,
+        ..prunebelow = NA,
+        ..pruneLevel1 = NA,
+        ..pruneLevel2 = NA,
+        ..follow = NA,
+        ..followLevel1 = NA,
+        ..followLevel2 = NA,
         ..excl = NA,
         ..vp = NA,
         ..horizontal = NA,
@@ -214,6 +270,12 @@ vartreeBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #' @param percvar .
 #' @param percvarLevel .
 #' @param summaryvar .
+#' @param prunebelow .
+#' @param pruneLevel1 .
+#' @param pruneLevel2 .
+#' @param follow .
+#' @param followLevel1 .
+#' @param followLevel2 .
 #' @param excl .
 #' @param vp .
 #' @param horizontal .
@@ -239,6 +301,12 @@ vartree <- function(
     percvar,
     percvarLevel,
     summaryvar,
+    prunebelow,
+    pruneLevel1,
+    pruneLevel2,
+    follow,
+    followLevel1,
+    followLevel2,
     excl = TRUE,
     vp = TRUE,
     horizontal = FALSE,
@@ -258,21 +326,33 @@ vartree <- function(
     if ( ! missing(vars)) vars <- jmvcore::resolveQuo(jmvcore::enquo(vars))
     if ( ! missing(percvar)) percvar <- jmvcore::resolveQuo(jmvcore::enquo(percvar))
     if ( ! missing(summaryvar)) summaryvar <- jmvcore::resolveQuo(jmvcore::enquo(summaryvar))
+    if ( ! missing(prunebelow)) prunebelow <- jmvcore::resolveQuo(jmvcore::enquo(prunebelow))
+    if ( ! missing(follow)) follow <- jmvcore::resolveQuo(jmvcore::enquo(follow))
     if (missing(data))
         data <- jmvcore::marshalData(
             parent.frame(),
             `if`( ! missing(vars), vars, NULL),
             `if`( ! missing(percvar), percvar, NULL),
-            `if`( ! missing(summaryvar), summaryvar, NULL))
+            `if`( ! missing(summaryvar), summaryvar, NULL),
+            `if`( ! missing(prunebelow), prunebelow, NULL),
+            `if`( ! missing(follow), follow, NULL))
 
     for (v in vars) if (v %in% names(data)) data[[v]] <- as.factor(data[[v]])
     for (v in percvar) if (v %in% names(data)) data[[v]] <- as.factor(data[[v]])
+    for (v in prunebelow) if (v %in% names(data)) data[[v]] <- as.factor(data[[v]])
+    for (v in follow) if (v %in% names(data)) data[[v]] <- as.factor(data[[v]])
 
     options <- vartreeOptions$new(
         vars = vars,
         percvar = percvar,
         percvarLevel = percvarLevel,
         summaryvar = summaryvar,
+        prunebelow = prunebelow,
+        pruneLevel1 = pruneLevel1,
+        pruneLevel2 = pruneLevel2,
+        follow = follow,
+        followLevel1 = followLevel1,
+        followLevel2 = followLevel2,
         excl = excl,
         vp = vp,
         horizontal = horizontal,

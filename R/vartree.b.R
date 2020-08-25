@@ -92,6 +92,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             xcdigits <- 1
             xsplitwidth <- 20
             xlsplitwidth <- 15
+            # vsplitwidth in 5.0.0
             xgetscript <- FALSE
             xnodesep <- 0.5
             xranksep <- 0.5
@@ -171,7 +172,20 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
 
 
+            # Prune Below ----
 
+            if ( !is.null(self$options$prunebelow) ) {
+
+                prunebelow <- self$options$prunebelow
+
+                pruneLevel1 <- NULL
+                pruneLevel2 <- NULL
+
+                pruneLevel1 <- self$options$pruneLevel1
+                pruneLevel2 <- self$options$pruneLevel2
+
+                xprunebelow <- list(prunebelow = c(pruneLevel1, pruneLevel2))
+            }
 
 
 
@@ -188,7 +202,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 showpct = self$options$pct,
                 splitspaces = xsplitspaces,
                 # prune = list(),
-                # prunebelow = list(),
+                prunebelow = xprunebelow,
                 # keep = list(),
                 # follow = list(),
                 # prunesmaller = NULL,
