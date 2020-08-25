@@ -82,9 +82,6 @@ children:
                   - type: CheckBox
                     name: vp
                     enable: (!excl && pct)
-              - type: LayoutBox
-                margin: large
-                children:
                   - type: CheckBox
                     name: nodelabel
           - type: LayoutBox
@@ -119,12 +116,10 @@ children:
                     format: number
                   - type: CheckBox
                     name: useprunesmaller
-                  - type: TextBox
-                    name: prunesmaller
-                    format: number
-                    enable: (useprunesmaller)
-              - type: LayoutBox
-                margin: large
-                children:
+                    children:
+                      - type: TextBox
+                        name: prunesmaller
+                        format: number
+                        enable: (useprunesmaller)
                   - type: CheckBox
                     name: pattern
