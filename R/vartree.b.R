@@ -46,6 +46,14 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             summaryvar <- self$options$summaryvar
 
             # Default Arguments ----
+
+            xprunesmaller <- NULL
+
+            if (useprunesmaller) {
+                xprunesmaller <- self$options$prunesmaller
+            }
+
+
             xsplitspaces  <-  TRUE
             xprune <- list()
             xprunebelow <- list()
@@ -224,7 +232,7 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 prunebelow = xprunebelow,
                 # keep = list(),
                 # follow = list(),
-                prunesmaller = self$options$prunesmaller,
+                prunesmaller = xprunesmaller,
                 # labelnode = list(),
                 # tlabelnode = NULL,
                 # labelvar = NULL,
