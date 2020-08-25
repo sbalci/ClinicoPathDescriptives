@@ -41,12 +41,12 @@ Imports:
     gtsummary,
     kableExtra,
     finalfit,
-    vtree,
     DiagrammeRsvg
 Remotes:
     spgarbet/tangram,
     mayoverse/arsenal,
-    carloscinelli/benford.analysis
+    carloscinelli/benford.analysis,
+    nbarrowman/vtree
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
