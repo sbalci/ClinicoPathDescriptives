@@ -1,8 +1,8 @@
 Type: Package
 Package: ClinicoPathDescriptives
 Title: Descriptives Functions for Clinicopathological Research
-Version: 0.0.2.0038
-Date: 2020-08-23
+Version: 0.0.2.0039
+Date: 2020-08-28
 Authors@R: 
     person(given = "Serdar",
            family = "Balci",
