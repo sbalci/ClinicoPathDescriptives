@@ -1,12 +1,12 @@
 ---
 title: Descriptives Functions for Clinicopathological Research
 name: ClinicoPathDescriptives
-version: 0.0.2.0041
+version: 0.0.2.0060
 jms: '1.0'
 authors:
   - Serdar Balci
 maintainer: Serdar Balci <drserdarbalci@gmail.com>
-date: '2020-08-31'
+date: '2021-02-07'
 type: R
 description: >-
   Descriptives Functions for Clinicopathological Research Descriptive functions
@@ -68,6 +68,12 @@ analyses:
     menuGroup: Exploration
     menuSubgroup: ClinicoPath Descriptives
     menuTitle: Benford Analysis
+  - title: Venn Diagram
+    name: venn
+    ns: ClinicoPathDescriptives
+    menuGroup: Exploration
+    menuSubgroup: ClinicoPath Descriptive Plots
+    menuTitle: Venn Diagram
 datasets:
   - name: histopathology including analysis
     path: histopathologyDescriptives.omv
@@ -77,6 +83,7 @@ datasets:
       - Data Summary
       - Cross Tables
       - Alluvial Diagrams
+      - Venn Diagrams
 usesNative: true
 minApp: 1.2.19
 
