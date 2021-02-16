@@ -19,9 +19,9 @@ items:
       title: To Do
       type:  Html
 
-    - name: output1
-      title: To Do
-      type:  Preformatted
+    # - name: output1
+    #   title: To Do
+    #   type:  Preformatted
 
     - title: Venn Diagram
       name: plot

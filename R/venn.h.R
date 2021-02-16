@@ -103,7 +103,6 @@ vennResults <- if (requireNamespace('jmvcore')) R6::R6Class(
     inherit = jmvcore::Group,
     active = list(
         todo = function() private$.items[["todo"]],
-        output1 = function() private$.items[["output1"]],
         plot = function() private$.items[["plot"]]),
     private = list(),
     public=list(
@@ -126,10 +125,6 @@ vennResults <- if (requireNamespace('jmvcore')) R6::R6Class(
             self$add(jmvcore::Html$new(
                 options=options,
                 name="todo",
-                title="To Do"))
-            self$add(jmvcore::Preformatted$new(
-                options=options,
-                name="output1",
                 title="To Do"))
             self$add(jmvcore::Image$new(
                 options=options,
@@ -175,7 +170,6 @@ vennBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #' @return A results object containing:
 #' \tabular{llllll}{
 #'   \code{results$todo} \tab \tab \tab \tab \tab a html \cr
-#'   \code{results$output1} \tab \tab \tab \tab \tab a preformatted \cr
 #'   \code{results$plot} \tab \tab \tab \tab \tab an image \cr
 #' }
 #'

@@ -17,7 +17,7 @@ vennClass <- if (requireNamespace('jmvcore'))
                 # Error Message ----
 
 
-                if (is.null(self$options$var1)) {
+                if (is.null(self$options$var1) || is.null(self$options$var2)) {
                     # ToDo Message ----
                     todo <- "
                 <br>Welcome to ClinicoPath
@@ -82,13 +82,13 @@ vennClass <- if (requireNamespace('jmvcore'))
                             ifelse(test = mydata[[var4]] == var4true, TRUE, FALSE)
                     }
 
-                    myoutput1 <- list(
-                        "mydata" = head(mydata),
-                        "names" = names(mydata)
-                    )
+                    # myoutput1 <- list(
+                    #     "mydata" = head(mydata),
+                    #     "names" = names(mydata)
+                    # )
 
 
-                    self$results$output1$setContent(myoutput1)
+                    # self$results$output1$setContent(myoutput1)
 
 
                     plotData <- list("mydata" = mydata,
@@ -111,7 +111,7 @@ vennClass <- if (requireNamespace('jmvcore'))
 
                 #Errors ----
 
-                if (is.null(self$options$var1))
+                if (is.null(self$options$var1) || is.null(self$options$var2))
                     return()
 
                 if (nrow(self$data) == 0)
@@ -133,6 +133,19 @@ vennClass <- if (requireNamespace('jmvcore'))
                     ggvenn::ggvenn(data = mydata2,
                                    columns = namescolumn2)
 
+
+                plot <-
+                    plot +
+                    ggtheme +
+                    ggplot2::theme(axis.line.x = ggplot2::element_blank(),
+                                   axis.text.x = ggplot2::element_blank(),
+                                   axis.ticks.x = ggplot2::element_blank(),
+                                   axis.title.x = ggplot2::element_blank(),
+                                   axis.line.y = ggplot2::element_blank(),
+                                   axis.text.y = ggplot2::element_blank(),
+                                   axis.ticks.y = ggplot2::element_blank(),
+                                   axis.title.y = ggplot2::element_blank()
+                                   )
 
                 # Print Plot ----
                 print(plot)

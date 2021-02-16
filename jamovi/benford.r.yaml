@@ -27,5 +27,6 @@ items:
       renderFun: .plot
       requiresData: true
 
+refs: benford.analysis
 
 ...

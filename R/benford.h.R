@@ -43,7 +43,8 @@ benfordResults <- if (requireNamespace('jmvcore')) R6::R6Class(
             super$initialize(
                 options=options,
                 name="",
-                title="Benford Analysis")
+                title="Benford Analysis",
+                refs="benford.analysis")
             self$add(jmvcore::Html$new(
                 options=options,
                 name="todo",
