@@ -1,12 +1,12 @@
 ---
 title: Descriptives Functions for Clinicopathological Research
 name: ClinicoPathDescriptives
-version: 0.0.2.0064
+version: 0.0.2.0084
 jms: '1.0'
 authors:
   - Serdar Balci
 maintainer: Serdar Balci <drserdarbalci@gmail.com>
-date: '2021-03-26'
+date: '2021-04-14'
 type: R
 description: >-
   Descriptives Functions for Clinicopathological Research Descriptive functions
@@ -85,6 +85,6 @@ datasets:
       - Alluvial Diagrams
       - Venn Diagrams
 usesNative: true
-minApp: 1.2.19
+minApp: 1.8.0
 
 ...
