@@ -7,8 +7,6 @@ ClinicoPath.Rproj
 build
 .Rbuildignore
 .gitignore
-^data/
-data.R
 jamovi
 ^.*\.jmo
 
