@@ -85,6 +85,6 @@ datasets:
       - Alluvial Diagrams
       - Venn Diagrams
 usesNative: true
-minApp: 1.8.0
+minApp: 1.6.0
 
 ...
