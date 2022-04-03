@@ -436,4 +436,12 @@
         `year`=2020, 
         `title`=" Venn Diagram by ggplot2, with really easy-to-use API", 
         `publisher`="[R package]. Retrieved from https://github.com/yanlinlin82/ggvenn", 
-        `url`="https://github.com/yanlinlin82/ggvenn"))
+        `url`="https://github.com/yanlinlin82/ggvenn"), 
+    `ClinicoPathJamoviModule`=list(
+        `type`="software", 
+        `author`="Serdar Balci", 
+        `year`=2022, 
+        `title`="ClinicoPath jamovi Module doi:10.5281/zenodo.3997188", 
+        `publisher`="[R package]. Retrieved from https://github.com/sbalci/ClinicoPathJamoviModule", 
+        `doi`="10.17605/OSF.IO/9SZUD", 
+        `url`="https://www.serdarbalci.com/ClinicoPathJamoviModule/"))
