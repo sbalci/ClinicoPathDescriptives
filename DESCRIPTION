@@ -1,8 +1,8 @@
 Type: Package
 Package: ClinicoPathDescriptives
 Title: Descriptives Functions for Clinicopathological Research
-Version: 0.0.2.03
-Date: 2022-03-24
+Version: 0.0.2.05
+Date: 2022-04-10
 Authors@R: 
     person(given = "Serdar",
            family = "Balci",
@@ -44,7 +44,13 @@ Imports:
     tangram,
     arsenal,
     ggvenn,
-    benford.analysis
+    benford.analysis,
+    DiagrammeR,
+    DiagrammeRsvg,
+    rsvg,
+    shiny
+Remotes:
+    nbarrowman/vtree@ffa53d4ea5050fa9b26918f4bb30595e91a0f489
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
