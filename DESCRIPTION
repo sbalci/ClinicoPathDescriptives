@@ -49,7 +49,7 @@ Imports:
     rsvg,
     shiny
 Remotes:
-    nbarrowman/vtree@ffa53d4ea5050fa9b26918f4bb30595e91a0f489
+    nbarrowman/vtree@ffa53d4ea5050fa9b26918f4bb30595e91a0f489,
     ddsjoberg/gtsummary@f43332fde6264ff95d092da644284dac739c4e17
 Encoding: UTF-8
 LazyData: true
