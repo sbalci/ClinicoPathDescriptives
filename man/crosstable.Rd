@@ -9,7 +9,7 @@ crosstable(
   vars,
   group,
   sty = "nejm",
-  excl = TRUE,
+  excl = FALSE,
   cont = "mean",
   pcat = "chisq"
 )

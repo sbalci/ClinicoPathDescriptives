@@ -8,7 +8,7 @@ alluvialOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
         initialize = function(
             vars = NULL,
             condensationvar = NULL,
-            excl = TRUE,
+            excl = FALSE,
             marg = FALSE,
             fill = "first_variable",
             bin = "default",
@@ -31,7 +31,7 @@ alluvialOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             private$..excl <- jmvcore::OptionBool$new(
                 "excl",
                 excl,
-                default=TRUE)
+                default=FALSE)
             private$..marg <- jmvcore::OptionBool$new(
                 "marg",
                 marg,
@@ -205,7 +205,7 @@ alluvial <- function(
     data,
     vars,
     condensationvar,
-    excl = TRUE,
+    excl = FALSE,
     marg = FALSE,
     fill = "first_variable",
     bin = "default",

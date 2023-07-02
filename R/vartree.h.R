@@ -16,7 +16,7 @@ vartreeOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             follow = NULL,
             followLevel1 = NULL,
             followLevel2 = NULL,
-            excl = TRUE,
+            excl = FALSE,
             vp = TRUE,
             horizontal = FALSE,
             sline = TRUE,
@@ -105,7 +105,7 @@ vartreeOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             private$..excl <- jmvcore::OptionBool$new(
                 "excl",
                 excl,
-                default=TRUE)
+                default=FALSE)
             private$..vp <- jmvcore::OptionBool$new(
                 "vp",
                 vp,
@@ -360,7 +360,7 @@ vartree <- function(
     follow,
     followLevel1,
     followLevel2,
-    excl = TRUE,
+    excl = FALSE,
     vp = TRUE,
     horizontal = FALSE,
     sline = TRUE,
