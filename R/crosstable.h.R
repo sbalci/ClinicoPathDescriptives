@@ -108,10 +108,7 @@ crosstableResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 title="To Do",
                 clearWith=list(
                     "vars",
-                    "group",
-                    "cont",
-                    "pcat",
-                    "sty")))
+                    "group")))
             self$add(jmvcore::Html$new(
                 options=options,
                 name="todo2",
@@ -119,8 +116,6 @@ crosstableResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 clearWith=list(
                     "vars",
                     "group",
-                    "cont",
-                    "pcat",
                     "sty")))
             self$add(jmvcore::Html$new(
                 options=options,
