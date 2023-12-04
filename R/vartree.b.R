@@ -322,10 +322,39 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 root = xroot
             )
 
-
             # export as svg ----
             results1 <- DiagrammeRsvg::export_svg(gv = results)
-            self$results$text1$setContent(print(results1))
+            
+            results1 <- base::sub('width=\"[[:digit:]pt\"]+',
+                                  ifelse(horizontal==TRUE, 'width=400pt ', 'width=1000pt '),
+                                  results1)
+            # results1 <- base::sub('scale[([:digit:] [:digit:])]+',
+            #                       'scale(1, 1)',
+            #                       results1)
+            
+            results1 <- paste0('<html><head><style>
+                               #myDIV {width: 610px; height: 850px; overflow: auto;}
+                               </style></head><body><div id="myDIV">',
+                               results1,
+                               '</div></script></body></html>')
+
+            #### ----------------------
+            # a <- WebPage$new("index")
+            # 
+            # a$add_style("body", list("font-family" = "Helvetica", "color" = "#24292e"))
+            # a$add_style("h2", list("font-size" = "3 em", "color" = "#911414",
+            #                        "text-align" = "center"))
+            # a$add_style("h3", list("font-size" = "1.5 em", "color" = "#2E2E8F",
+            #                        "text-align" = "center"))
+            # 
+            # 
+            # a$add_tag("h2", "Hey there!")
+            # a$add_tag("h3", "You've reached the rtask teams!")
+            # a$add_tag("p", "We are glad to have you here.")
+            # a$add_tag("p", "Enjoying R6 already?")
+            #### ----------------------
+ 
+            self$results$text1$setContent(results1)
 
 
             # ptable ----
@@ -343,5 +372,46 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
         }
 
-        )
+    )
+)
+
+
+
+WebPage <- R6Class("WebPage", 
+                   public = list(
+                       name = character(0),
+                       head = c("<!DOCTYPE html>","<html>","<head>"),
+                       body = "<body>",
+                       style = '<style type="text/css">',
+                       add_style = function(identifier, content){
+                           content <- purrr::imap_chr(content, ~ glue::glue("{.y} : {.x};")) %>%
+                               unname() %>% 
+                               paste(collapse = " ") 
+                           glued <- glue::glue("%identifier% { %content% }", 
+                                         .open = "%", .close = "%")
+                           self$style <- c(self$style, glued)
+                       },
+                       initialize = function(name){
+                           self$name <- name
+                       },
+                       add_tag = function(tag, content){
+                           glued <- glue::glue("<{tag}>{content}</{tag}>")
+                           self$body <- c(self$body, glued)
+                       },
+                       save = function(path){
+                           write(private$concat(self$head, self$style, self$body), 
+                                 glue::glue("{file.path(path, self$name)}.html"))
+                       },
+                       view = function(){
+                           htmltools::html_print(private$concat(self$head, self$style, self$body))
+                       },
+                       print = function(){
+                           cat(private$concat(self$head, self$style, self$body), sep = "\n")
+                       }
+                   ), 
+                   private = list(
+                       concat = function(head, style, body){
+                           c(head, style, "</style>", body,"</body>","</html>")
+                       }
+                   )
 )
