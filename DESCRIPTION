@@ -1,8 +1,8 @@
 Type: Package
 Package: ClinicoPathDescriptives
 Title: Descriptives Functions for Clinicopathological Research
-Version: 0.0.2.07
-Date: 2023-07-02
+Version: 0.0.2.08
+Date: 2023-12-06
 Authors@R: 
     person(given = "Serdar",
            family = "Balci",
@@ -23,7 +23,7 @@ BugReports:
     https://github.com/sbalci/ClinicoPathJamoviModule/issues/
 License: GPL-3
 Depends:
-    R (>= 4.0.0)
+    R (>= 4.1.0)
 Imports: 
     dplyr,
     magrittr,
@@ -48,7 +48,8 @@ Imports:
     DiagrammeRsvg,
     rsvg,
     shiny,
-    gtsummary
+    gtsummary,
+    gtExtras
 Remotes:
     nbarrowman/vtree@ffa53d4ea5050fa9b26918f4bb30595e91a0f489
 Encoding: UTF-8
