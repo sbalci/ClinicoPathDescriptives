@@ -521,9 +521,18 @@ refs:
         type: 'software'
         author: Linlin Yan
         year: 2020
-        title: " Venn Diagram by ggplot2, with really easy-to-use API"
+        title: "Venn Diagram by ggplot2, with really easy-to-use API"
         publisher: '[R package]. Retrieved from https://github.com/yanlinlin82/ggvenn'
         url: https://github.com/yanlinlin82/ggvenn
+
+    upset:
+        type: 'software'
+        author: Jake R Conway, Alexander Lex, Nils Gehlenborg
+        year: 2017
+        title: "UpSetR: An R Package for the Visualization of Intersecting Sets and their Properties"
+        doi: 10.1093/bioinformatics/btx364
+        publisher: '[R package]. Retrieved from https://CRAN.R-project.org/package=UpSetR'
+        url: https://CRAN.R-project.org/package=UpSetR
 
 
     ClinicoPathJamoviModule:
