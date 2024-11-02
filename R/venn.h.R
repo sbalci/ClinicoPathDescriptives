@@ -104,7 +104,8 @@ vennResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
     inherit = jmvcore::Group,
     active = list(
         todo = function() private$.items[["todo"]],
-        plot = function() private$.items[["plot"]]),
+        plot = function() private$.items[["plot"]],
+        plot2 = function() private$.items[["plot2"]]),
     private = list(),
     public=list(
         initialize=function(options) {
@@ -113,7 +114,6 @@ vennResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 name="",
                 title="Venn Diagram",
                 refs=list(
-                    "venn",
                     "ClinicoPathJamoviModule"),
                 clearWith=list(
                     "var1",
@@ -132,10 +132,22 @@ vennResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 options=options,
                 title="Venn Diagram",
                 name="plot",
-                width=600,
+                width=700,
                 height=450,
                 renderFun=".plot",
-                requiresData=TRUE))}))
+                requiresData=TRUE,
+                refs=list(
+                    "venn")))
+            self$add(jmvcore::Image$new(
+                options=options,
+                title="Upset Diagram",
+                name="plot2",
+                width=700,
+                height=450,
+                renderFun=".plot2",
+                requiresData=TRUE,
+                refs=list(
+                    "upset")))}))
 
 vennBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
     "vennBase",
@@ -174,6 +186,7 @@ vennBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 #' \tabular{llllll}{
 #'   \code{results$todo} \tab \tab \tab \tab \tab a html \cr
 #'   \code{results$plot} \tab \tab \tab \tab \tab an image \cr
+#'   \code{results$plot2} \tab \tab \tab \tab \tab an image \cr
 #' }
 #'
 #' @export

@@ -259,7 +259,6 @@ vartreeResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
     active = list(
         todo = function() private$.items[["todo"]],
         text1 = function() private$.items[["text1"]],
-        r_cleaneddata = function() private$.items[["r_cleaneddata"]],
         text2 = function() private$.items[["text2"]]),
     private = list(),
     public=list(
@@ -281,10 +280,6 @@ vartreeResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 title="Variable Tree",
                 clearWith=list(
                     "maxwidth")))
-            self$add(jmvcore::Preformatted$new(
-                options=options,
-                name="r_cleaneddata",
-                title="Cleaned Data"))
             self$add(jmvcore::Preformatted$new(
                 options=options,
                 name="text2",
@@ -317,7 +312,7 @@ vartreeBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 #' Function for Generating Tree Summaries of Variables.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # example will be added
 #'}
 #' @param data The data as a data frame.
@@ -351,7 +346,6 @@ vartreeBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 #' \tabular{llllll}{
 #'   \code{results$todo} \tab \tab \tab \tab \tab a html \cr
 #'   \code{results$text1} \tab \tab \tab \tab \tab a html \cr
-#'   \code{results$r_cleaneddata} \tab \tab \tab \tab \tab a preformatted \cr
 #'   \code{results$text2} \tab \tab \tab \tab \tab a preformatted \cr
 #' }
 #'

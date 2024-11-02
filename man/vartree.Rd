@@ -94,7 +94,6 @@ A results object containing:
 \tabular{llllll}{
 \code{results$todo} \tab \tab \tab \tab \tab a html \cr
 \code{results$text1} \tab \tab \tab \tab \tab a html \cr
-\code{results$r_cleaneddata} \tab \tab \tab \tab \tab a preformatted \cr
 \code{results$text2} \tab \tab \tab \tab \tab a preformatted \cr
 }
 }
@@ -102,7 +101,7 @@ A results object containing:
 Function for Generating Tree Summaries of Variables.
 }
 \examples{
-\dontrun{
+\donttest{
 # example will be added
 }
 }
