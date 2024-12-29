@@ -445,6 +445,16 @@
         `doi`="10.1093/bioinformatics/btx364", 
         `publisher`="[R package]. Retrieved from https://CRAN.R-project.org/package=UpSetR", 
         `url`="https://CRAN.R-project.org/package=UpSetR"), 
+    `whoisinthisstudy`=list(
+        `type`="article", 
+        `author`="Hayes-Larson E, Kezios KL, Mooney SJ, Lovasi G.", 
+        `year`=2019, 
+        `title`="Who is in this study, anyway? Guidelines for a useful Table 1.", 
+        `publisher`="J Clin Epidemiol.", 
+        `volume`=114, 
+        `pages`="125-132", 
+        `doi`="10.1016/j.jclinepi.2019.06.011", 
+        `url`="https://pubmed.ncbi.nlm.nih.gov/31229583/"), 
     `ClinicoPathJamoviModule`=list(
         `type`="software", 
         `author`="Serdar Balci", 
