@@ -3,7 +3,7 @@
 <url><loc>/LICENSE.html</loc></url>
 <url><loc>/authors.html</loc></url>
 <url><loc>/index.html</loc></url>
-<url><loc>/reference/ClinicoPath-package.html</loc></url>
+<url><loc>/reference/ClinicoPathDescriptives-package.html</loc></url>
 <url><loc>/reference/agepyramid.html</loc></url>
 <url><loc>/reference/agepyramidClass.html</loc></url>
 <url><loc>/reference/alluvial.html</loc></url>
@@ -27,5 +27,7 @@
 <url><loc>/reference/vartreeClass.html</loc></url>
 <url><loc>/reference/venn.html</loc></url>
 <url><loc>/reference/vennClass.html</loc></url>
+<url><loc>/reference/waterfall.html</loc></url>
+<url><loc>/reference/waterfallClass.html</loc></url>
 </urlset>
 
