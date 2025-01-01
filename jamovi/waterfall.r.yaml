@@ -1,0 +1,80 @@
+---
+name:  waterfall
+title: Treatment Response Waterfall Plot
+jrs:   '1.1'
+
+items:
+    - name: todo
+      title: To Do
+      type: Html
+
+
+    - name: summary
+      title: Response Summary
+      type: Table
+      rows: 0
+      columns:
+        - name: category
+          title: "Response Category"
+          type: text
+        - name: n
+          title: "n"
+          type: integer
+        - name: percent
+          title: "%"
+          type: number
+          format: percent
+
+
+    - name: mydataview
+      title: mydataview
+      type: Preformatted
+
+
+
+    - name: clinicalMetrics
+      title: Clinical Response Metrics
+      type: Table
+      rows: 0
+      columns:
+        - name: metric
+          title: "Metric"
+          type: text
+        - name: value
+          title: "Value" 
+          type: text
+
+    - name: plot
+      title: 'Waterfall Plot'
+      type: Image
+      width: 800
+      height: 500
+      renderFun: .plot
+      requiresData: true
+      clearWith:
+        - patientID
+        - response
+        - sortBy
+        - showThresholds
+        - labelOutliers
+        - colorScheme
+        - showMedian
+        - showCI
+
+
+    - name: responseCategory
+      title: "Response Category"  
+      type: Output
+      varTitle: '`Calculated Response Category`'
+      varDescription: Calculated response category based on RECIST criteria.
+      clearWith:
+        - patientID
+        - response
+
+
+
+refs:
+    - recist
+    - ClinicoPathJamoviModule
+
+...

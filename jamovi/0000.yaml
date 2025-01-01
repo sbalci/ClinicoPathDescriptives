@@ -1,12 +1,12 @@
 ---
 title: Descriptives Functions for Clinicopathological Research
 name: ClinicoPathDescriptives
-version: 0.0.2.39
+version: 0.0.2.41
 jms: '1.0'
 authors:
   - Serdar Balci
 maintainer: Serdar Balci <drserdarbalci@gmail.com>
-date: '2024-12-22'
+date: '2024-12-29'
 type: R
 description: >-
   Descriptives Functions for Clinicopathological Research Descriptive functions
@@ -74,6 +74,15 @@ analyses:
     menuSubgroup: ClinicoPath Descriptive Plots
     menuTitle: Variable Tree
     description: Function for Generating Tree Summaries of Variables.
+  - title: Treatment Response Waterfall Plot
+    name: waterfall
+    ns: ClinicoPathDescriptives
+    menuGroup: Exploration
+    menuTitle: Treatment Response Waterfall Plot
+    menuSubgroup: ClinicoPath Descriptive Plots
+    description: >-
+      Creates a waterfall plot to visualize tumor response data following RECIST
+      criteria.
 datasets:
   - name: histopathology including analysis
     path: histopathologyDescriptives.omv
@@ -84,6 +93,13 @@ datasets:
       - Cross Tables
       - Alluvial Diagrams
       - Venn Diagrams
+  - name: treatmentResponse
+    path: treatmentResponse.omv
+    description: Example analysis for treatment response.
+    tags:
+      - Oncology
+      - Water Fall
+      - Treatment Response
 usesNative: true
 minApp: 1.6.0
 

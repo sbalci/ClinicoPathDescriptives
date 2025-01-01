@@ -1,0 +1,78 @@
+title: Treatment Response Waterfall Plot
+name: waterfall
+jus: '3.0'
+stage: 0
+compilerMode: tame
+children:
+  - type: VariableSupplier
+    persistentItems: false
+    stretchFactor: 1
+    children:
+      - type: TargetLayoutBox
+        label: Patient ID
+        children:
+          - type: VariablesListBox
+            name: patientID
+            maxItemCount: 1
+            isTarget: true
+      - type: TargetLayoutBox
+        label: Response Value (%)
+        children:
+          - type: VariablesListBox
+            name: response
+            maxItemCount: 1
+            isTarget: true
+  - type: CollapseBox
+    label: Plot Options
+    collapsed: false
+    children:
+      - type: LayoutBox
+        margin: large
+        children:
+          - type: Label
+            label: Visualization
+            children:
+              - type: ComboBox
+                name: sortBy
+              - type: ComboBox
+                name: colorScheme
+          - type: Label
+            label: Annotations
+            children:
+              - type: CheckBox
+                name: showThresholds
+              - type: CheckBox
+                name: labelOutliers
+              - type: CheckBox
+                name: showMedian
+              - type: CheckBox
+                name: showCI
+          - type: LayoutBox
+            margin: large
+            children:
+              - type: Label
+                label: Update Data
+                children:
+                  - type: CheckBox
+                    name: addResponseCategory
+  - type: LayoutBox
+    margin: large
+    children:
+      - type: TextBox
+        name: minResponseForLabel
+        format: number
+        enable: ()
+  - type: LayoutBox
+    margin: large
+    children:
+      - type: TextBox
+        name: barAlpha
+        format: number
+        enable: ()
+  - type: LayoutBox
+    margin: large
+    children:
+      - type: TextBox
+        name: barWidth
+        format: number
+        enable: ()
