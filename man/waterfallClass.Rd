@@ -7,7 +7,15 @@
 A list containing plot object and summary statistics
 }
 \description{
-Creates a waterfall plot to visualize tumor response data following RECIST criteria
+Creates waterfall and spider plots to visualize tumor response data following RECIST criteria
+}
+\examples{
+data <- data.frame(
+  PatientID = paste0("PT", 1:10),
+  Response = c(-100, -45, -30, -20, -10, 0, 10, 20, 30, 40),
+  Time = c(1,2,3,4,5,6,7,8,9,10)
+)
+waterfall(data, "PatientID", "Response", "Time")
 }
 \section{Super classes}{
 \code{\link[jmvcore:Analysis]{jmvcore::Analysis}} -> \code{ClinicoPathDescriptives::waterfallBase} -> \code{waterfallClass}

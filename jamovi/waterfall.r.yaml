@@ -4,10 +4,13 @@ title: Treatment Response Waterfall Plot
 jrs:   '1.1'
 
 items:
+    - name: todo2
+      title: To Do 2
+      type: Html
+
     - name: todo
       title: To Do
       type: Html
-
 
     - name: summary
       title: Response Summary
@@ -26,12 +29,6 @@ items:
           format: percent
 
 
-    - name: mydataview
-      title: mydataview
-      type: Preformatted
-
-
-
     - name: clinicalMetrics
       title: Clinical Response Metrics
       type: Table
@@ -41,16 +38,17 @@ items:
           title: "Metric"
           type: text
         - name: value
-          title: "Value" 
+          title: "Value"
           type: text
 
-    - name: plot
+    - name: waterfallplot
       title: 'Waterfall Plot'
       type: Image
       width: 800
       height: 500
-      renderFun: .plot
+      renderFun: .waterfallplot
       requiresData: true
+      visible: (showWaterfallPlot)
       clearWith:
         - patientID
         - response
@@ -61,9 +59,23 @@ items:
         - showMedian
         - showCI
 
+    - name: spiderplot
+      title: 'Response Over Time'
+      type: Image
+      width: 800
+      height: 500
+      renderFun: .spiderplot
+      requiresData: true
+      visible: (showSpiderPlot)
+      clearWith:
+        - patientID
+        - response
+        - timeVar
+        - inputType
+        - sortBy
 
     - name: responseCategory
-      title: "Response Category"  
+      title: "Response Category"
       type: Output
       varTitle: '`Calculated Response Category`'
       varDescription: Calculated response category based on RECIST criteria.
@@ -71,6 +83,10 @@ items:
         - patientID
         - response
 
+
+    - name: mydataview
+      title: mydataview
+      type: Preformatted
 
 
 refs:

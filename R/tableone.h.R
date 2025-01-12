@@ -145,8 +145,9 @@ tableoneBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 #' @param data The data as a data frame.
 #' @param vars a string naming the variables from \code{data} that contains
 #'   the values used for the Table One.
-#' @param sty .
-#' @param excl .
+#' @param sty a string naming the style of the table.
+#' @param excl a boolean argument whether to exclude missing values. Default
+#'   is false.
 #' @return A results object containing:
 #' \tabular{llllll}{
 #'   \code{results$todo} \tab \tab \tab \tab \tab a html \cr

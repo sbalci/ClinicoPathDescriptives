@@ -16,16 +16,33 @@ children:
             maxItemCount: 1
             isTarget: true
       - type: TargetLayoutBox
-        label: Response Value (%)
+        label: Response Value (Raw or Percentage Measurement)
         children:
           - type: VariablesListBox
-            name: response
+            name: responseVar
+            maxItemCount: 1
+            isTarget: true
+          - type: LayoutBox
+            margin: large
+            children:
+              - type: ComboBox
+                name: inputType
+      - type: TargetLayoutBox
+        label: Time Variable
+        children:
+          - type: VariablesListBox
+            name: timeVar
             maxItemCount: 1
             isTarget: true
   - type: CollapseBox
-    label: Plot Options
+    label: Waterfall Plot Options
     collapsed: false
     children:
+      - type: LayoutBox
+        margin: large
+        children:
+          - type: CheckBox
+            name: showWaterfallPlot
       - type: LayoutBox
         margin: large
         children:
@@ -47,6 +64,21 @@ children:
                 name: showMedian
               - type: CheckBox
                 name: showCI
+          - type: Label
+            label: Plot Customization
+            children:
+              - type: TextBox
+                name: minResponseForLabel
+                format: number
+                enable: ()
+              - type: TextBox
+                name: barAlpha
+                format: number
+                enable: ()
+              - type: TextBox
+                name: barWidth
+                format: number
+                enable: ()
           - type: LayoutBox
             margin: large
             children:
@@ -55,24 +87,15 @@ children:
                 children:
                   - type: CheckBox
                     name: addResponseCategory
-  - type: LayoutBox
-    margin: large
+
+  - type: CollapseBox
+    label: Waterfall Plot Options
+    collapsed: false
     children:
-      - type: TextBox
-        name: minResponseForLabel
-        format: number
-        enable: ()
-  - type: LayoutBox
-    margin: large
-    children:
-      - type: TextBox
-        name: barAlpha
-        format: number
-        enable: ()
-  - type: LayoutBox
-    margin: large
-    children:
-      - type: TextBox
-        name: barWidth
-        format: number
-        enable: ()
+      - type: LayoutBox
+        margin: large
+        children:
+          - type: CheckBox
+            name: showSpiderPlot
+
+

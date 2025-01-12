@@ -7,7 +7,9 @@
 waterfall(
   data,
   patientID,
-  response,
+  responseVar,
+  timeVar,
+  inputType = "percentage",
   sortBy = "response",
   showThresholds = FALSE,
   labelOutliers = FALSE,
@@ -17,6 +19,8 @@ waterfall(
   colorScheme = "jamovi",
   barAlpha = 1,
   barWidth = 0.7,
+  showWaterfallPlot = FALSE,
+  showSpiderPlot = FALSE,
   addResponseCategory = FALSE
 )
 }
@@ -25,37 +29,52 @@ waterfall(
 
 \item{patientID}{Variable containing patient identifiers.}
 
-\item{response}{Percentage change in tumor size.}
+\item{responseVar}{Percentage change in tumor size.}
 
-\item{sortBy}{.}
+\item{timeVar}{Time point of measurement for spider plot (e.g., months from
+baseline)}
+
+\item{inputType}{Specify data format: 'raw' for actual measurements (will
+calculate percent change)  or 'percentage' for pre-calculated percentage
+changes}
+
+\item{sortBy}{Sort the waterfall plot by best response or patient ID.}
 
 \item{showThresholds}{Show +20 percent and -30 percent RECIST thresholds.}
 
 \item{labelOutliers}{Label responses exceeding ±50 percent.}
 
-\item{showMedian}{.}
+\item{showMedian}{Show median response as a horizontal line.}
 
-\item{showCI}{.}
+\item{showCI}{Show confidence interval around median response.}
 
-\item{minResponseForLabel}{.}
+\item{minResponseForLabel}{Minimum response value for labels to be
+displayed.}
 
-\item{colorScheme}{.}
+\item{colorScheme}{Color scheme for waterfall plot.}
 
-\item{barAlpha}{.}
+\item{barAlpha}{Transparency of bars in waterfall plot.}
 
-\item{barWidth}{.}
+\item{barWidth}{Width of bars in waterfall plot.}
 
-\item{addResponseCategory}{.}
+\item{showWaterfallPlot}{.}
+
+\item{showSpiderPlot}{Create an additional spider plot showing response
+over time if longitudinal data available}
+
+\item{addResponseCategory}{Add a new variable to the data frame indicating
+response category.}
 }
 \value{
 A results object containing:
 \tabular{llllll}{
 \code{results$todo} \tab \tab \tab \tab \tab a html \cr
 \code{results$summary} \tab \tab \tab \tab \tab a table \cr
-\code{results$mydataview} \tab \tab \tab \tab \tab a preformatted \cr
 \code{results$clinicalMetrics} \tab \tab \tab \tab \tab a table \cr
-\code{results$plot} \tab \tab \tab \tab \tab an image \cr
+\code{results$waterfallplot} \tab \tab \tab \tab \tab an image \cr
+\code{results$spiderplot} \tab \tab \tab \tab \tab an image \cr
 \code{results$responseCategory} \tab \tab \tab \tab \tab an output \cr
+\code{results$mydataview} \tab \tab \tab \tab \tab a preformatted \cr
 }
 
 Tables can be converted to data frames with \code{asDF} or \code{\link{as.data.frame}}. For example:

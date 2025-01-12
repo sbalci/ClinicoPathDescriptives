@@ -7,7 +7,9 @@ waterfallOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
     public = list(
         initialize = function(
             patientID = NULL,
-            response = NULL,
+            responseVar = NULL,
+            timeVar = NULL,
+            inputType = "percentage",
             sortBy = "response",
             showThresholds = FALSE,
             labelOutliers = FALSE,
@@ -17,6 +19,8 @@ waterfallOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             colorScheme = "jamovi",
             barAlpha = 1,
             barWidth = 0.7,
+            showWaterfallPlot = FALSE,
+            showSpiderPlot = FALSE,
             addResponseCategory = FALSE, ...) {
 
             super$initialize(
@@ -34,13 +38,27 @@ waterfallOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                     "numeric",
                     "factor",
                     "id"))
-            private$..response <- jmvcore::OptionVariable$new(
-                "response",
-                response,
+            private$..responseVar <- jmvcore::OptionVariable$new(
+                "responseVar",
+                responseVar,
                 suggested=list(
                     "continuous"),
                 permitted=list(
                     "numeric"))
+            private$..timeVar <- jmvcore::OptionVariable$new(
+                "timeVar",
+                timeVar,
+                suggested=list(
+                    "continuous"),
+                permitted=list(
+                    "numeric"))
+            private$..inputType <- jmvcore::OptionList$new(
+                "inputType",
+                inputType,
+                options=list(
+                    "raw",
+                    "percentage"),
+                default="percentage")
             private$..sortBy <- jmvcore::OptionList$new(
                 "sortBy",
                 sortBy,
@@ -90,13 +108,23 @@ waterfallOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 default=0.7,
                 min=0.1,
                 max=1)
+            private$..showWaterfallPlot <- jmvcore::OptionBool$new(
+                "showWaterfallPlot",
+                showWaterfallPlot,
+                default=FALSE)
+            private$..showSpiderPlot <- jmvcore::OptionBool$new(
+                "showSpiderPlot",
+                showSpiderPlot,
+                default=FALSE)
             private$..addResponseCategory <- jmvcore::OptionBool$new(
                 "addResponseCategory",
                 addResponseCategory,
                 default=FALSE)
 
             self$.addOption(private$..patientID)
-            self$.addOption(private$..response)
+            self$.addOption(private$..responseVar)
+            self$.addOption(private$..timeVar)
+            self$.addOption(private$..inputType)
             self$.addOption(private$..sortBy)
             self$.addOption(private$..showThresholds)
             self$.addOption(private$..labelOutliers)
@@ -106,11 +134,15 @@ waterfallOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             self$.addOption(private$..colorScheme)
             self$.addOption(private$..barAlpha)
             self$.addOption(private$..barWidth)
+            self$.addOption(private$..showWaterfallPlot)
+            self$.addOption(private$..showSpiderPlot)
             self$.addOption(private$..addResponseCategory)
         }),
     active = list(
         patientID = function() private$..patientID$value,
-        response = function() private$..response$value,
+        responseVar = function() private$..responseVar$value,
+        timeVar = function() private$..timeVar$value,
+        inputType = function() private$..inputType$value,
         sortBy = function() private$..sortBy$value,
         showThresholds = function() private$..showThresholds$value,
         labelOutliers = function() private$..labelOutliers$value,
@@ -120,10 +152,14 @@ waterfallOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
         colorScheme = function() private$..colorScheme$value,
         barAlpha = function() private$..barAlpha$value,
         barWidth = function() private$..barWidth$value,
+        showWaterfallPlot = function() private$..showWaterfallPlot$value,
+        showSpiderPlot = function() private$..showSpiderPlot$value,
         addResponseCategory = function() private$..addResponseCategory$value),
     private = list(
         ..patientID = NA,
-        ..response = NA,
+        ..responseVar = NA,
+        ..timeVar = NA,
+        ..inputType = NA,
         ..sortBy = NA,
         ..showThresholds = NA,
         ..labelOutliers = NA,
@@ -133,6 +169,8 @@ waterfallOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
         ..colorScheme = NA,
         ..barAlpha = NA,
         ..barWidth = NA,
+        ..showWaterfallPlot = NA,
+        ..showSpiderPlot = NA,
         ..addResponseCategory = NA)
 )
 
@@ -140,12 +178,14 @@ waterfallResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
     "waterfallResults",
     inherit = jmvcore::Group,
     active = list(
+        todo2 = function() private$.items[["todo2"]],
         todo = function() private$.items[["todo"]],
         summary = function() private$.items[["summary"]],
-        mydataview = function() private$.items[["mydataview"]],
         clinicalMetrics = function() private$.items[["clinicalMetrics"]],
-        plot = function() private$.items[["plot"]],
-        responseCategory = function() private$.items[["responseCategory"]]),
+        waterfallplot = function() private$.items[["waterfallplot"]],
+        spiderplot = function() private$.items[["spiderplot"]],
+        responseCategory = function() private$.items[["responseCategory"]],
+        mydataview = function() private$.items[["mydataview"]]),
     private = list(),
     public=list(
         initialize=function(options) {
@@ -156,6 +196,10 @@ waterfallResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 refs=list(
                     "recist",
                     "ClinicoPathJamoviModule"))
+            self$add(jmvcore::Html$new(
+                options=options,
+                name="todo2",
+                title="To Do 2"))
             self$add(jmvcore::Html$new(
                 options=options,
                 name="todo",
@@ -179,10 +223,6 @@ waterfallResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                         `title`="%", 
                         `type`="number", 
                         `format`="percent"))))
-            self$add(jmvcore::Preformatted$new(
-                options=options,
-                name="mydataview",
-                title="mydataview"))
             self$add(jmvcore::Table$new(
                 options=options,
                 name="clinicalMetrics",
@@ -199,12 +239,13 @@ waterfallResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                         `type`="text"))))
             self$add(jmvcore::Image$new(
                 options=options,
-                name="plot",
+                name="waterfallplot",
                 title="Waterfall Plot",
                 width=800,
                 height=500,
-                renderFun=".plot",
+                renderFun=".waterfallplot",
                 requiresData=TRUE,
+                visible="(showWaterfallPlot)",
                 clearWith=list(
                     "patientID",
                     "response",
@@ -214,6 +255,21 @@ waterfallResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                     "colorScheme",
                     "showMedian",
                     "showCI")))
+            self$add(jmvcore::Image$new(
+                options=options,
+                name="spiderplot",
+                title="Response Over Time",
+                width=800,
+                height=500,
+                renderFun=".spiderplot",
+                requiresData=TRUE,
+                visible="(showSpiderPlot)",
+                clearWith=list(
+                    "patientID",
+                    "response",
+                    "timeVar",
+                    "inputType",
+                    "sortBy")))
             self$add(jmvcore::Output$new(
                 options=options,
                 name="responseCategory",
@@ -222,7 +278,11 @@ waterfallResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 varDescription="Calculated response category based on RECIST criteria.",
                 clearWith=list(
                     "patientID",
-                    "response")))}))
+                    "response")))
+            self$add(jmvcore::Preformatted$new(
+                options=options,
+                name="mydataview",
+                title="mydataview"))}))
 
 waterfallBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
     "waterfallBase",
@@ -264,25 +324,37 @@ waterfallBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 #'}
 #' @param data The data as a data frame.
 #' @param patientID Variable containing patient identifiers.
-#' @param response Percentage change in tumor size.
-#' @param sortBy .
+#' @param responseVar Percentage change in tumor size.
+#' @param timeVar Time point of measurement for spider plot (e.g., months from
+#'   baseline)
+#' @param inputType Specify data format: 'raw' for actual measurements (will
+#'   calculate percent change)  or 'percentage' for pre-calculated percentage
+#'   changes
+#' @param sortBy Sort the waterfall plot by best response or patient ID.
 #' @param showThresholds Show +20 percent and -30 percent RECIST thresholds.
 #' @param labelOutliers Label responses exceeding ±50 percent.
-#' @param showMedian .
-#' @param showCI .
-#' @param minResponseForLabel .
-#' @param colorScheme .
-#' @param barAlpha .
-#' @param barWidth .
-#' @param addResponseCategory .
+#' @param showMedian Show median response as a horizontal line.
+#' @param showCI Show confidence interval around median response.
+#' @param minResponseForLabel Minimum response value for labels to be
+#'   displayed.
+#' @param colorScheme Color scheme for waterfall plot.
+#' @param barAlpha Transparency of bars in waterfall plot.
+#' @param barWidth Width of bars in waterfall plot.
+#' @param showWaterfallPlot .
+#' @param showSpiderPlot Create an additional spider plot showing response
+#'   over time if longitudinal data available
+#' @param addResponseCategory Add a new variable to the data frame indicating
+#'   response category.
 #' @return A results object containing:
 #' \tabular{llllll}{
+#'   \code{results$todo2} \tab \tab \tab \tab \tab a html \cr
 #'   \code{results$todo} \tab \tab \tab \tab \tab a html \cr
 #'   \code{results$summary} \tab \tab \tab \tab \tab a table \cr
-#'   \code{results$mydataview} \tab \tab \tab \tab \tab a preformatted \cr
 #'   \code{results$clinicalMetrics} \tab \tab \tab \tab \tab a table \cr
-#'   \code{results$plot} \tab \tab \tab \tab \tab an image \cr
+#'   \code{results$waterfallplot} \tab \tab \tab \tab \tab an image \cr
+#'   \code{results$spiderplot} \tab \tab \tab \tab \tab an image \cr
 #'   \code{results$responseCategory} \tab \tab \tab \tab \tab an output \cr
+#'   \code{results$mydataview} \tab \tab \tab \tab \tab a preformatted \cr
 #' }
 #'
 #' Tables can be converted to data frames with \code{asDF} or \code{\link{as.data.frame}}. For example:
@@ -295,7 +367,9 @@ waterfallBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 waterfall <- function(
     data,
     patientID,
-    response,
+    responseVar,
+    timeVar,
+    inputType = "percentage",
     sortBy = "response",
     showThresholds = FALSE,
     labelOutliers = FALSE,
@@ -305,23 +379,29 @@ waterfall <- function(
     colorScheme = "jamovi",
     barAlpha = 1,
     barWidth = 0.7,
+    showWaterfallPlot = FALSE,
+    showSpiderPlot = FALSE,
     addResponseCategory = FALSE) {
 
     if ( ! requireNamespace("jmvcore", quietly=TRUE))
         stop("waterfall requires jmvcore to be installed (restart may be required)")
 
     if ( ! missing(patientID)) patientID <- jmvcore::resolveQuo(jmvcore::enquo(patientID))
-    if ( ! missing(response)) response <- jmvcore::resolveQuo(jmvcore::enquo(response))
+    if ( ! missing(responseVar)) responseVar <- jmvcore::resolveQuo(jmvcore::enquo(responseVar))
+    if ( ! missing(timeVar)) timeVar <- jmvcore::resolveQuo(jmvcore::enquo(timeVar))
     if (missing(data))
         data <- jmvcore::marshalData(
             parent.frame(),
             `if`( ! missing(patientID), patientID, NULL),
-            `if`( ! missing(response), response, NULL))
+            `if`( ! missing(responseVar), responseVar, NULL),
+            `if`( ! missing(timeVar), timeVar, NULL))
 
 
     options <- waterfallOptions$new(
         patientID = patientID,
-        response = response,
+        responseVar = responseVar,
+        timeVar = timeVar,
+        inputType = inputType,
         sortBy = sortBy,
         showThresholds = showThresholds,
         labelOutliers = labelOutliers,
@@ -331,6 +411,8 @@ waterfall <- function(
         colorScheme = colorScheme,
         barAlpha = barAlpha,
         barWidth = barWidth,
+        showWaterfallPlot = showWaterfallPlot,
+        showSpiderPlot = showSpiderPlot,
         addResponseCategory = addResponseCategory)
 
     analysis <- waterfallClass$new(
