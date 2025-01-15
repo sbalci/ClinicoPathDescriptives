@@ -125,6 +125,27 @@ waterfallClass <- if (requireNamespace('jmvcore')) R6::R6Class(
         attr(df, "validation_messages") <- validation_messages
         attr(df, "data_valid") <- data_valid
 
+
+
+
+        # # Add checks for unrealistic values
+        # if (any(df$response > 1000 | df$response < -100, na.rm=TRUE)) {
+        #   validation_messages <- c(validation_messages,
+        #                            "Warning: Response values outside expected range detected")
+        # }
+        #
+        # # Add check for duplicate measurements
+        # duplicates <- df %>%
+        #   dplyr::group_by(!!rlang::sym(patientID), !!rlang::sym(timeVar)) %>%
+        #   dplyr::filter(n() > 1)
+        # if (nrow(duplicates) > 0) {
+        #   validation_messages <- c(validation_messages,
+        #                            "Warning: Duplicate measurements found for some time points")
+        # }
+
+
+
+
         # Return modified dataframe with validation attributes
         return(df)
       }
@@ -224,6 +245,41 @@ waterfallClass <- if (requireNamespace('jmvcore')) R6::R6Class(
       }
 
 
+      ,
+      # Add duration of response calculation
+      .calculateDurationOfResponse = function(df) {
+        df %>%
+          dplyr::group_by(patientID) %>%
+          dplyr::summarise(
+            duration = max(time[response <= -30], na.rm=TRUE) -
+              min(time[response <= -30], na.rm=TRUE),
+            best_response = min(response, na.rm=TRUE)
+          )
+      }
+
+      ,
+      # Add time to response metric
+      .calculateTimeToResponse = function(df) {
+        df %>%
+          dplyr::group_by(patientID) %>%
+          dplyr::filter(response <= -30) %>%
+          dplyr::summarise(
+            time_to_response = min(time, na.rm=TRUE)
+          )
+      }
+
+      ,
+      # Add subgroup analysis capability
+      .createSubgroupAnalysis = function(df, subgroupVar) {
+        df %>%
+          dplyr::group_by(!!rlang::sym(subgroupVar)) %>%
+          dplyr::summarise(
+            ORR = mean(response <= -30, na.rm=TRUE),
+            DCR = mean(response <= 20, na.rm=TRUE),
+            median_response = median(response, na.rm=TRUE)
+          )
+      }
+
 
 
       ,
@@ -311,6 +367,9 @@ waterfallClass <- if (requireNamespace('jmvcore')) R6::R6Class(
           return()
         }
 
+        self$results$todo2$setVisible(FALSE)
+        self$results$todo2$setContent("")
+
 
 
 
@@ -335,6 +394,8 @@ waterfallClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             "<br><br>Please address these items to ensure accurate analysis.",
             sep = ""
           )
+
+          self$results$todo2$setVisible(TRUE)
           self$results$todo2$setContent(validation_messages)
           self$results$todo$setVisible(FALSE)
 
@@ -345,6 +406,8 @@ waterfallClass <- if (requireNamespace('jmvcore')) R6::R6Class(
         if (attr(validated_data, "data_valid")) {
 
           self$results$todo$setVisible(FALSE)
+          self$results$todo2$setVisible(FALSE)
+          self$results$todo2$setContent("")
 
           # Process data and create visualizations
 
@@ -387,26 +450,26 @@ waterfallClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
         # mydataview ----
 
-        self$results$mydataview$setContent(
-          list(
-            "data" = processed_data,
-            options = list(
-              "patientID" = self$options$patientID,
-              "response" = self$options$responseVar,
-              "timeVar" = self$options$timeVar,
-              "sortBy" = self$options$sortBy,
-              "showThresholds" = self$options$showThresholds,
-              "labelOutliers" = self$options$labelOutliers,
-              "colorScheme" = self$options$colorScheme,
-              "barWidth" = self$options$barWidth,
-              "barAlpha" = self$options$barAlpha,
-              "showMedian" = self$options$showMedian,
-              "showCI" = self$options$showCI,
-              "minResponseForLabel" = self$options$minResponseForLabel
-            ),
-            "metrics" = metrics
-          )
-        )
+        # self$results$mydataview$setContent(
+        #   list(
+        #     "data" = processed_data,
+        #     options = list(
+        #       "patientID" = self$options$patientID,
+        #       "response" = self$options$responseVar,
+        #       "timeVar" = self$options$timeVar,
+        #       "sortBy" = self$options$sortBy,
+        #       "showThresholds" = self$options$showThresholds,
+        #       "labelOutliers" = self$options$labelOutliers,
+        #       "colorScheme" = self$options$colorScheme,
+        #       "barWidth" = self$options$barWidth,
+        #       "barAlpha" = self$options$barAlpha,
+        #       "showMedian" = self$options$showMedian,
+        #       "showCI" = self$options$showCI,
+        #       "minResponseForLabel" = self$options$minResponseForLabel
+        #     ),
+        #     "metrics" = metrics
+        #   )
+        # )
 
 
         ## Prepare plot data ----
@@ -604,6 +667,16 @@ waterfallClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             panel.grid.minor.x = ggplot2::element_blank(),
             legend.position = "right"
           )
+
+
+
+
+        # Add waterfall plot faceting by subgroup
+        # if (!is.null(plotData$options$subgroupVar)) {
+        #   p <- p + ggplot2::facet_wrap(~subgroup)
+        # }
+
+
 
         print(p)
         TRUE
