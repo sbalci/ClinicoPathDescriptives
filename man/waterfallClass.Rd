@@ -2,7 +2,7 @@
 % Please edit documentation in R/waterfall.b.R
 \name{waterfallClass}
 \alias{waterfallClass}
-\title{Treatment Response Waterfall Plot}
+\title{Treatment Response Analysis}
 \value{
 A list containing plot object and summary statistics
 }

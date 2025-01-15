@@ -178,8 +178,8 @@ waterfallResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
     "waterfallResults",
     inherit = jmvcore::Group,
     active = list(
-        todo2 = function() private$.items[["todo2"]],
         todo = function() private$.items[["todo"]],
+        todo2 = function() private$.items[["todo2"]],
         summary = function() private$.items[["summary"]],
         clinicalMetrics = function() private$.items[["clinicalMetrics"]],
         waterfallplot = function() private$.items[["waterfallplot"]],
@@ -192,18 +192,28 @@ waterfallResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             super$initialize(
                 options=options,
                 name="",
-                title="Treatment Response Waterfall Plot",
+                title="Treatment Response Analysis",
                 refs=list(
                     "recist",
                     "ClinicoPathJamoviModule"))
             self$add(jmvcore::Html$new(
                 options=options,
-                name="todo2",
-                title="To Do 2"))
+                name="todo",
+                title="To Do",
+                clearWith=list(
+                    "patientID",
+                    "responseVar",
+                    "timeVar",
+                    "inputType")))
             self$add(jmvcore::Html$new(
                 options=options,
-                name="todo",
-                title="To Do"))
+                name="todo2",
+                title="To Do",
+                clearWith=list(
+                    "patientID",
+                    "responseVar",
+                    "timeVar",
+                    "inputType")))
             self$add(jmvcore::Table$new(
                 options=options,
                 name="summary",
@@ -305,7 +315,7 @@ waterfallBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 weightsSupport = 'auto')
         }))
 
-#' Treatment Response Waterfall Plot
+#' Treatment Response Analysis
 #'
 #' Creates a waterfall plot to visualize tumor response data following RECIST 
 #' criteria.
@@ -347,8 +357,8 @@ waterfallBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 #'   response category.
 #' @return A results object containing:
 #' \tabular{llllll}{
-#'   \code{results$todo2} \tab \tab \tab \tab \tab a html \cr
 #'   \code{results$todo} \tab \tab \tab \tab \tab a html \cr
+#'   \code{results$todo2} \tab \tab \tab \tab \tab a html \cr
 #'   \code{results$summary} \tab \tab \tab \tab \tab a table \cr
 #'   \code{results$clinicalMetrics} \tab \tab \tab \tab \tab a table \cr
 #'   \code{results$waterfallplot} \tab \tab \tab \tab \tab an image \cr

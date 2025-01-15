@@ -1,6 +1,6 @@
 ---
 name: waterfall
-title: Treatment Response Waterfall Plot
+title: Treatment Response Analysis
 menuGroup: Exploration
 menuSubgroup: ClinicoPath Descriptive Plots
 version: '1.0.0'

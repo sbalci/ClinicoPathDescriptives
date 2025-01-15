@@ -1,12 +1,12 @@
 ---
 title: Descriptives Functions for Clinicopathological Research
 name: ClinicoPathDescriptives
-version: 0.0.2.45
+version: 0.0.2.48
 jms: '1.0'
 authors:
   - Serdar Balci
 maintainer: Serdar Balci <drserdarbalci@gmail.com>
-date: '2025-01-10'
+date: '2025-01-15'
 type: R
 description: >-
   Descriptives Functions for Clinicopathological Research Descriptive functions
@@ -74,11 +74,11 @@ analyses:
     menuSubgroup: ClinicoPath Descriptive Plots
     menuTitle: Variable Tree
     description: Function for Generating Tree Summaries of Variables.
-  - title: Treatment Response Waterfall Plot
+  - title: Treatment Response Analysis
     name: waterfall
     ns: ClinicoPathDescriptives
     menuGroup: Exploration
-    menuTitle: Treatment Response Waterfall Plot
+    menuTitle: Treatment Response Analysis
     menuSubgroup: ClinicoPath Descriptive Plots
     description: >-
       Creates a waterfall plot to visualize tumor response data following RECIST

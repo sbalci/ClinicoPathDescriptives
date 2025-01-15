@@ -1,16 +1,28 @@
 ---
 name:  waterfall
-title: Treatment Response Waterfall Plot
+title: Treatment Response Analysis
 jrs:   '1.1'
 
 items:
-    - name: todo2
-      title: To Do 2
-      type: Html
 
     - name: todo
       title: To Do
       type: Html
+      clearWith:
+         - patientID
+         - responseVar
+         - timeVar
+         - inputType
+
+
+    - name: todo2
+      title: To Do
+      type: Html
+      clearWith:
+         - patientID
+         - responseVar
+         - timeVar
+         - inputType
 
     - name: summary
       title: Response Summary

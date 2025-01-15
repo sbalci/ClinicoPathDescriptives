@@ -2,7 +2,7 @@
 % Please edit documentation in R/waterfall.h.R
 \name{waterfall}
 \alias{waterfall}
-\title{Treatment Response Waterfall Plot}
+\title{Treatment Response Analysis}
 \usage{
 waterfall(
   data,
