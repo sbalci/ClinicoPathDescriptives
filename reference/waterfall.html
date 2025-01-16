@@ -18,7 +18,7 @@ criteria."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/m
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ClinicoPathDescriptives</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.2.48</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.2.49</span>
       </span>
     </div>
 
@@ -68,8 +68,7 @@ criteria.</p>
 <span>  barAlpha <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  barWidth <span class="op">=</span> <span class="fl">0.7</span>,</span>
 <span>  showWaterfallPlot <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  showSpiderPlot <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  addResponseCategory <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  showSpiderPlot <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -145,17 +144,12 @@ displayed.</p></dd>
 <dd><p>Create an additional spider plot showing response
 over time if longitudinal data available</p></dd>
 
-
-<dt id="arg-addresponsecategory">addResponseCategory<a class="anchor" aria-label="anchor" href="#arg-addresponsecategory"></a></dt>
-<dd><p>Add a new variable to the data frame indicating
-response category.</p></dd>
-
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A results object containing:</p><table class="table table"><tr><td><code>results$todo</code></td><td></td><td></td><td></td><td></td><td>a html</td></tr><tr><td><code>results$summary</code></td><td></td><td></td><td></td><td></td><td>a table</td></tr><tr><td><code>results$clinicalMetrics</code></td><td></td><td></td><td></td><td></td><td>a table</td></tr><tr><td><code>results$waterfallplot</code></td><td></td><td></td><td></td><td></td><td>an image</td></tr><tr><td><code>results$spiderplot</code></td><td></td><td></td><td></td><td></td><td>an image</td></tr><tr><td><code>results$responseCategory</code></td><td></td><td></td><td></td><td></td><td>an output</td></tr><tr><td><code>results$mydataview</code></td><td></td><td></td><td></td><td></td><td>a preformatted</td></tr></table><p>Tables can be converted to data frames with <code>asDF</code> or <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></code>. For example:</p>
-<p><code>results$summary$asDF</code></p>
-<p><code>as.data.frame(results$summary)</code></p>
+    <p>A results object containing:</p><table class="table table"><tr><td><code>results$todo</code></td><td></td><td></td><td></td><td></td><td>a html</td></tr><tr><td><code>results$todo2</code></td><td></td><td></td><td></td><td></td><td>a html</td></tr><tr><td><code>results$summaryTable</code></td><td></td><td></td><td></td><td></td><td>a table</td></tr><tr><td><code>results$clinicalMetrics</code></td><td></td><td></td><td></td><td></td><td>a table</td></tr><tr><td><code>results$waterfallplot</code></td><td></td><td></td><td></td><td></td><td>an image</td></tr><tr><td><code>results$spiderplot</code></td><td></td><td></td><td></td><td></td><td>an image</td></tr><tr><td><code>results$addResponseCategory</code></td><td></td><td></td><td></td><td></td><td>an output</td></tr><tr><td><code>results$mydataview</code></td><td></td><td></td><td></td><td></td><td>a preformatted</td></tr></table><p>Tables can be converted to data frames with <code>asDF</code> or <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></code>. For example:</p>
+<p><code>results$summaryTable$asDF</code></p>
+<p><code>as.data.frame(results$summaryTable)</code></p>
     </div>
 
     <div id="ref-examples">
