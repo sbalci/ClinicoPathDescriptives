@@ -85,9 +85,8 @@ children:
               - type: Label
                 label: Update Data
                 children:
-                  - type: CheckBox
+                  - type: Output
                     name: addResponseCategory
-
   - type: CollapseBox
     label: Waterfall Plot Options
     collapsed: false
@@ -97,5 +96,4 @@ children:
         children:
           - type: CheckBox
             name: showSpiderPlot
-
 

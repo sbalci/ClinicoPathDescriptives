@@ -44,7 +44,7 @@ options:
             Variable containing patient identifiers.
 
     - name: responseVar
-      title: Response Value (Raw or Percent)
+      title: Response Value
       type: Variable
       suggested: [continuous]
       permitted: [numeric]
@@ -214,13 +214,12 @@ options:
 
     - name: addResponseCategory
       title: Add Response Category to Data  
-      type: Bool
-      default: false
-      description:
-          R: >
-            Add a new variable to the data frame indicating response category.
-          jamovi: >
-            Add a new variable to the data frame indicating response category.
+      type: Output
+      # description:
+      #     R: >
+      #       Add a new variable to the data frame indicating response category.
+      #     jamovi: >
+      #       Add a new variable to the data frame indicating response category.
 
 
 

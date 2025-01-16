@@ -20,8 +20,7 @@ waterfallOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             barAlpha = 1,
             barWidth = 0.7,
             showWaterfallPlot = FALSE,
-            showSpiderPlot = FALSE,
-            addResponseCategory = FALSE, ...) {
+            showSpiderPlot = FALSE, ...) {
 
             super$initialize(
                 package="ClinicoPathDescriptives",
@@ -116,10 +115,8 @@ waterfallOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 "showSpiderPlot",
                 showSpiderPlot,
                 default=FALSE)
-            private$..addResponseCategory <- jmvcore::OptionBool$new(
-                "addResponseCategory",
-                addResponseCategory,
-                default=FALSE)
+            private$..addResponseCategory <- jmvcore::OptionOutput$new(
+                "addResponseCategory")
 
             self$.addOption(private$..patientID)
             self$.addOption(private$..responseVar)
@@ -180,11 +177,12 @@ waterfallResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
     active = list(
         todo = function() private$.items[["todo"]],
         todo2 = function() private$.items[["todo2"]],
-        summary = function() private$.items[["summary"]],
+        summaryTable = function() private$.items[["summaryTable"]],
         clinicalMetrics = function() private$.items[["clinicalMetrics"]],
         waterfallplot = function() private$.items[["waterfallplot"]],
         spiderplot = function() private$.items[["spiderplot"]],
-        responseCategory = function() private$.items[["responseCategory"]]),
+        addResponseCategory = function() private$.items[["addResponseCategory"]],
+        mydataview = function() private$.items[["mydataview"]]),
     private = list(),
     public=list(
         initialize=function(options) {
@@ -215,23 +213,28 @@ waterfallResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                     "inputType")))
             self$add(jmvcore::Table$new(
                 options=options,
-                name="summary",
-                title="Response Summary",
+                name="summaryTable",
+                title="Response Categories Based on RECIST v1.1 Criteria",
                 rows=0,
                 columns=list(
                     list(
                         `name`="category", 
-                        `title`="Response Category", 
+                        `title`="Category", 
                         `type`="text"),
                     list(
                         `name`="n", 
-                        `title`="n", 
+                        `title`="Number of Patients", 
                         `type`="integer"),
                     list(
                         `name`="percent", 
-                        `title`="%", 
+                        `title`="Percentage", 
                         `type`="number", 
-                        `format`="percent"))))
+                        `format`="percent")),
+                clearWith=list(
+                    "patientID",
+                    "responseVar",
+                    "timeVar",
+                    "inputType")))
             self$add(jmvcore::Table$new(
                 options=options,
                 name="clinicalMetrics",
@@ -245,7 +248,12 @@ waterfallResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                     list(
                         `name`="value", 
                         `title`="Value", 
-                        `type`="text"))))
+                        `type`="text")),
+                clearWith=list(
+                    "patientID",
+                    "responseVar",
+                    "timeVar",
+                    "inputType")))
             self$add(jmvcore::Image$new(
                 options=options,
                 name="waterfallplot",
@@ -267,7 +275,7 @@ waterfallResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             self$add(jmvcore::Image$new(
                 options=options,
                 name="spiderplot",
-                title="Response Over Time",
+                title="Spider Plot - Response Over Time",
                 width=800,
                 height=500,
                 renderFun=".spiderplot",
@@ -281,13 +289,19 @@ waterfallResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                     "sortBy")))
             self$add(jmvcore::Output$new(
                 options=options,
-                name="responseCategory",
-                title="Response Category",
-                varTitle="`Calculated Response Category`",
+                name="addResponseCategory",
+                title="Add Response Category to Data",
+                varTitle="RECIST",
                 varDescription="Calculated response category based on RECIST criteria.",
                 clearWith=list(
                     "patientID",
-                    "response")))}))
+                    "responseVar",
+                    "timeVar",
+                    "inputType")))
+            self$add(jmvcore::Preformatted$new(
+                options=options,
+                name="mydataview",
+                title="mydataview"))}))
 
 waterfallBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
     "waterfallBase",
@@ -307,7 +321,7 @@ waterfallBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 pause = NULL,
                 completeWhenFilled = FALSE,
                 requiresMissings = FALSE,
-                weightsSupport = 'auto')
+                weightsSupport = 'none')
         }))
 
 #' Treatment Response Analysis
@@ -348,24 +362,23 @@ waterfallBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 #' @param showWaterfallPlot .
 #' @param showSpiderPlot Create an additional spider plot showing response
 #'   over time if longitudinal data available
-#' @param addResponseCategory Add a new variable to the data frame indicating
-#'   response category.
 #' @return A results object containing:
 #' \tabular{llllll}{
 #'   \code{results$todo} \tab \tab \tab \tab \tab a html \cr
 #'   \code{results$todo2} \tab \tab \tab \tab \tab a html \cr
-#'   \code{results$summary} \tab \tab \tab \tab \tab a table \cr
+#'   \code{results$summaryTable} \tab \tab \tab \tab \tab a table \cr
 #'   \code{results$clinicalMetrics} \tab \tab \tab \tab \tab a table \cr
 #'   \code{results$waterfallplot} \tab \tab \tab \tab \tab an image \cr
 #'   \code{results$spiderplot} \tab \tab \tab \tab \tab an image \cr
-#'   \code{results$responseCategory} \tab \tab \tab \tab \tab an output \cr
+#'   \code{results$addResponseCategory} \tab \tab \tab \tab \tab an output \cr
+#'   \code{results$mydataview} \tab \tab \tab \tab \tab a preformatted \cr
 #' }
 #'
 #' Tables can be converted to data frames with \code{asDF} or \code{\link{as.data.frame}}. For example:
 #'
-#' \code{results$summary$asDF}
+#' \code{results$summaryTable$asDF}
 #'
-#' \code{as.data.frame(results$summary)}
+#' \code{as.data.frame(results$summaryTable)}
 #'
 #' @export
 waterfall <- function(
@@ -384,8 +397,7 @@ waterfall <- function(
     barAlpha = 1,
     barWidth = 0.7,
     showWaterfallPlot = FALSE,
-    showSpiderPlot = FALSE,
-    addResponseCategory = FALSE) {
+    showSpiderPlot = FALSE) {
 
     if ( ! requireNamespace("jmvcore", quietly=TRUE))
         stop("waterfall requires jmvcore to be installed (restart may be required)")
@@ -416,8 +428,7 @@ waterfall <- function(
         barAlpha = barAlpha,
         barWidth = barWidth,
         showWaterfallPlot = showWaterfallPlot,
-        showSpiderPlot = showSpiderPlot,
-        addResponseCategory = addResponseCategory)
+        showSpiderPlot = showSpiderPlot)
 
     analysis <- waterfallClass$new(
         options = options,

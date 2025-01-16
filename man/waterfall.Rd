@@ -20,8 +20,7 @@ waterfall(
   barAlpha = 1,
   barWidth = 0.7,
   showWaterfallPlot = FALSE,
-  showSpiderPlot = FALSE,
-  addResponseCategory = FALSE
+  showSpiderPlot = FALSE
 )
 }
 \arguments{
@@ -61,27 +60,25 @@ displayed.}
 
 \item{showSpiderPlot}{Create an additional spider plot showing response
 over time if longitudinal data available}
-
-\item{addResponseCategory}{Add a new variable to the data frame indicating
-response category.}
 }
 \value{
 A results object containing:
 \tabular{llllll}{
 \code{results$todo} \tab \tab \tab \tab \tab a html \cr
-\code{results$summary} \tab \tab \tab \tab \tab a table \cr
+\code{results$todo2} \tab \tab \tab \tab \tab a html \cr
+\code{results$summaryTable} \tab \tab \tab \tab \tab a table \cr
 \code{results$clinicalMetrics} \tab \tab \tab \tab \tab a table \cr
 \code{results$waterfallplot} \tab \tab \tab \tab \tab an image \cr
 \code{results$spiderplot} \tab \tab \tab \tab \tab an image \cr
-\code{results$responseCategory} \tab \tab \tab \tab \tab an output \cr
+\code{results$addResponseCategory} \tab \tab \tab \tab \tab an output \cr
 \code{results$mydataview} \tab \tab \tab \tab \tab a preformatted \cr
 }
 
 Tables can be converted to data frames with \code{asDF} or \code{\link{as.data.frame}}. For example:
 
-\code{results$summary$asDF}
+\code{results$summaryTable$asDF}
 
-\code{as.data.frame(results$summary)}
+\code{as.data.frame(results$summaryTable)}
 }
 \description{
 Creates a waterfall plot to visualize tumor response data following RECIST

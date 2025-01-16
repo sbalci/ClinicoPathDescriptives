@@ -24,21 +24,37 @@ items:
          - timeVar
          - inputType
 
-    - name: summary
-      title: Response Summary
+    - name: summaryTable
+      title: Response Categories Based on RECIST v1.1 Criteria
       type: Table
       rows: 0
       columns:
         - name: category
-          title: "Response Category"
+          title: "Category"
           type: text
         - name: n
-          title: "n"
+          title: "Number of Patients"
           type: integer
         - name: percent
-          title: "%"
+          title: "Percentage"
           type: number
           format: percent
+      clearWith:
+         - patientID
+         - responseVar
+         - timeVar
+         - inputType
+
+
+    # - name: summaryTable_explanation
+    #   title: summaryTable
+    #   type: Html
+    #   clearWith:
+    #      - patientID
+    #      - responseVar
+    #      - timeVar
+    #      - inputType
+
 
 
     - name: clinicalMetrics
@@ -52,6 +68,11 @@ items:
         - name: value
           title: "Value"
           type: text
+      clearWith:
+         - patientID
+         - responseVar
+         - timeVar
+         - inputType
 
     - name: waterfallplot
       title: 'Waterfall Plot'
@@ -72,7 +93,7 @@ items:
         - showCI
 
     - name: spiderplot
-      title: 'Response Over Time'
+      title: 'Spider Plot - Response Over Time'
       type: Image
       width: 800
       height: 500
@@ -86,19 +107,21 @@ items:
         - inputType
         - sortBy
 
-    - name: responseCategory
-      title: "Response Category"
+    - name: addResponseCategory
+      title: Add Response Category to Data
       type: Output
-      varTitle: '`Calculated Response Category`'
+      varTitle: RECIST
       varDescription: Calculated response category based on RECIST criteria.
       clearWith:
-        - patientID
-        - response
+         - patientID
+         - responseVar
+         - timeVar
+         - inputType
 
 
-    # - name: mydataview
-    #   title: mydataview
-    #   type: Preformatted
+    - name: mydataview
+      title: mydataview
+      type: Preformatted
 
 
 refs:

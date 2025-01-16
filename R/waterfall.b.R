@@ -223,6 +223,7 @@ waterfallClass <- if (requireNamespace('jmvcore')) R6::R6Class(
       .calculateMetrics = function(df) {
         ## Calculate response rates ----
         cats <- c("CR", "PR", "SD", "PD")
+
         summary_table <- data.frame(
           category = cats,
           n = sapply(cats, function(x) sum(df$category == x, na.rm = TRUE)),
@@ -427,19 +428,46 @@ waterfallClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
         ## Update results tables ----
         for(i in seq_len(nrow(metrics$summary))) {
-          self$results$summary$addRow(rowKey=i, values=list(
+          self$results$summaryTable$addRow(rowKey=i, values=list(
             category = metrics$summary$category[i],
             n = metrics$summary$n[i],
-            percent = metrics$summary$percent[i]/100
+            percent = paste0(metrics$summary$percent[i], "%")
           ))
         }
 
-        self$results$clinicalMetrics$addRow(rowKey=1, values=list(
+
+
+            self$results$summaryTable$addFootnote(
+              rowNo = 1,
+              col = "category",
+              "Complete Response (CR): Complete disappearance of all target lesions."
+            )
+
+            self$results$summaryTable$addFootnote(
+              rowNo = 2,
+              col = "category",
+              "Partial Response (PR): At least 30% decrease in sum of target lesions."
+            )
+
+            self$results$summaryTable$addFootnote(
+              rowNo = 3,
+              col = "category",
+              "Stable Disease (SD): Neither PR nor PD criteria met."
+            )
+
+            self$results$summaryTable$addFootnote(
+              rowNo = 4,
+              col = "category",
+              "Progressive Disease (PD): At least 20% increase in sum of target lesions."
+            )
+
+
+        self$results$clinicalMetrics$addRow(rowKey = 1, values = list(
           metric = "Objective Response Rate (CR+PR)",
           value = paste0(metrics$ORR, "%")
         ))
 
-        self$results$clinicalMetrics$addRow(rowKey=2, values=list(
+        self$results$clinicalMetrics$addRow(rowKey = 2, values = list(
           metric = "Disease Control Rate (CR+PR+SD)",
           value = paste0(metrics$DCR, "%")
         ))
@@ -450,26 +478,53 @@ waterfallClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
         # mydataview ----
 
-        # self$results$mydataview$setContent(
-        #   list(
-        #     "data" = processed_data,
-        #     options = list(
-        #       "patientID" = self$options$patientID,
-        #       "response" = self$options$responseVar,
-        #       "timeVar" = self$options$timeVar,
-        #       "sortBy" = self$options$sortBy,
-        #       "showThresholds" = self$options$showThresholds,
-        #       "labelOutliers" = self$options$labelOutliers,
-        #       "colorScheme" = self$options$colorScheme,
-        #       "barWidth" = self$options$barWidth,
-        #       "barAlpha" = self$options$barAlpha,
-        #       "showMedian" = self$options$showMedian,
-        #       "showCI" = self$options$showCI,
-        #       "minResponseForLabel" = self$options$minResponseForLabel
-        #     ),
-        #     "metrics" = metrics
-        #   )
-        # )
+        self$results$mydataview$setContent(
+          list(
+            "data" = processed_data,
+            "data_waterfall" = processed_data$waterfall,
+            "data_spider" = processed_data$spider,
+            options = list(
+              "patientID" = self$options$patientID,
+              "response" = self$options$responseVar,
+              "timeVar" = self$options$timeVar,
+              "sortBy" = self$options$sortBy,
+              "showThresholds" = self$options$showThresholds,
+              "labelOutliers" = self$options$labelOutliers,
+              "colorScheme" = self$options$colorScheme,
+              "barWidth" = self$options$barWidth,
+              "barAlpha" = self$options$barAlpha,
+              "showMedian" = self$options$showMedian,
+              "showCI" = self$options$showCI,
+              "minResponseForLabel" = self$options$minResponseForLabel
+            ),
+            "metrics" = metrics
+          )
+        )
+
+
+        ## Add response category to data ----
+
+        if (is.null(self$options$timeVar) && self$options$addResponseCategory && self$results$addResponseCategory$isNotFilled()) {
+          df <- processed_data$waterfall
+          self$results$addResponseCategory$setRowNums(rownames(df))
+          self$results$addResponseCategory$setValues(df$category)
+          }
+
+        if (!is.null(self$options$timeVar) && self$options$addResponseCategory && self$results$addResponseCategory$isNotFilled()) {
+          # Get waterfall data and extract unique patient categories
+          df <- processed_data$waterfall %>%
+            dplyr::select(!!rlang::sym(self$options$patientID), category) %>%
+            dplyr::distinct()
+
+          # Join with original data
+          df2 <- self$data %>%
+            dplyr::left_join(df, by = self$options$patientID)
+
+          # Update response category output
+          self$results$addResponseCategory$setRowNums(rownames(df2))
+          self$results$addResponseCategory$setValues(df2$category)
+        }
+
 
 
         ## Prepare plot data ----
@@ -695,46 +750,46 @@ waterfallClass <- if (requireNamespace('jmvcore')) R6::R6Class(
           # Create an informative message with improved formatting for readability
           text_warning <- paste0(
             "Spider Plot Requirements and Guidelines",
-            "<br><br>",
+            "\n\n",
             "This visualization requires two key elements:",
-            "<br>",
+            "\n",
             "1. A time variable to show response trajectories",
-            "<br>",
+            "\n",
             "2. The 'Show Spider Plot' option to be enabled",
-            "<br><br>",
+            "\n\n",
             "Understanding Spider Plots:",
-            "<br>",
-            "A spider plot helps visualize how each patient's response changes over time. ",
-            "Each line represents one patient's treatment journey, making it easy to see ",
+            "\n",
+            "A spider plot helps visualize how each patient's response changes over time. \n",
+            "Each line represents one patient's treatment journey, making it easy to see \n",
             "patterns in response and identify different types of outcomes.",
-            "<br><br>",
+            "\n\n",
             "To Generate the Plot:",
-            "<br>",
+            "\n",
             "• Add a time variable (such as months from baseline)",
-            "<br>",
+            "\n",
             "• Enable 'Show Spider Plot' in the options panel",
-            "<br><br>",
-            "The resulting visualization will help you track response patterns ",
-            "and compare outcomes across different patients over time.",
+            "\n\n",
+            "The resulting visualization will help you track response patterns \n",
+            "and compare outcomes across different patients over time.\n\n",
             sep = ""
           )
 
           text_warning <- paste0(text_warning,
                                 "Time Variable Requirement:",
-                                "<br><br>A time variable is required to create visualizations when using raw measurements.",
-                                "<br><br>Why is this important?",
-                                "<br>• Baseline identification: Marks the starting point (time = 0)",
-                                "<br>• Response calculation: Computes changes from baseline",
-                                "<br>• Progression tracking: Shows how response changes over time",
-                                "<br><br>How to proceed:",
-                                "<br>1. Add a time variable to your data",
-                                "<br>2. Time should start at 0 (baseline)",
-                                "<br>3. Use consistent time units (e.g., months or weeks)",
-                                "<br><br>Example time variable format:",
-                                "<br>PatientID.     Time      Measurement",
-                                "<br>PT1            0         50              (baseline)",
-                                "<br>PT1            2         25              (2 months)",
-                                "<br>PT1            4         10              (4 months)",
+                                "\n\nA time variable is required to create visualizations when using raw measurements.",
+                                "\n\nWhy is this important?",
+                                "\n• Baseline identification: Marks the starting point (time = 0)",
+                                "\n• Response calculation: Computes changes from baseline",
+                                "\n• Progression tracking: Shows how response changes over time",
+                                "\n\nHow to proceed:",
+                                "\n1. Add a time variable to your data",
+                                "\n2. Time should start at 0 (baseline)",
+                                "\n3. Use consistent time units (e.g., months or weeks)",
+                                "\n\nExample time variable format:",
+                                "\nPatientID.         Time          Measurement",
+                                "\nPT1                0             50              (baseline)",
+                                "\nPT1                2             25              (2 months)",
+                                "\nPT1                4             10              (4 months)",
                                 sep = ""
           )
 
