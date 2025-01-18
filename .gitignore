@@ -33,3 +33,4 @@ build
 *.jmo
 .Rprofile
 .DS_Store
+docs

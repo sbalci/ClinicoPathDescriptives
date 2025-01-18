@@ -293,6 +293,7 @@ waterfallResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 title="Add Response Category to Data",
                 varTitle="RECIST",
                 varDescription="Calculated response category based on RECIST criteria.",
+                measureType="nominal",
                 clearWith=list(
                     "patientID",
                     "responseVar",

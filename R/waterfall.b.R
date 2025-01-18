@@ -428,10 +428,10 @@ waterfallClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
         ## Update results tables ----
         for(i in seq_len(nrow(metrics$summary))) {
-          self$results$summaryTable$addRow(rowKey=i, values=list(
+          self$results$summaryTable$addRow(rowKey = i, values = list(
             category = metrics$summary$category[i],
             n = metrics$summary$n[i],
-            percent = paste0(metrics$summary$percent[i], "%")
+            percent = paste0(round(metrics$summary$percent[i], digits = 1), "%")
           ))
         }
 
@@ -515,6 +515,15 @@ waterfallClass <- if (requireNamespace('jmvcore')) R6::R6Class(
           df <- processed_data$waterfall %>%
             dplyr::select(!!rlang::sym(self$options$patientID), category) %>%
             dplyr::distinct()
+
+          # keys<-1:length(newVariables)
+          # measureTypes<-sapply(newVariables,function(x) { if (is.character(x)) "Nominal" else "Continuous"})
+          #
+          # self$results$sendSample$set(keys=keys,titles=names(newVariables),
+          #                             descriptions=rep("simulated",length(newVariables)),
+          #                             measureTypes=measureTypes
+          # )
+          # self$results$sendSample$setValues(newVariables)
 
           # Join with original data
           df2 <- self$data %>%

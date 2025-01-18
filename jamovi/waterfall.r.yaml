@@ -112,6 +112,7 @@ items:
       type: Output
       varTitle: RECIST
       varDescription: Calculated response category based on RECIST criteria.
+      measureType: nominal
       clearWith:
          - patientID
          - responseVar

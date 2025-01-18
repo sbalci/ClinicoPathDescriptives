@@ -1,8 +1,8 @@
 Type: Package
 Package: ClinicoPathDescriptives
 Title: Descriptive Analysis Tools for Clinicopathological Research
-Version: 0.0.2.49
-Date: 2025-01-16
+Version: 0.0.2.51
+Date: 2025-01-17
 Authors@R: 
     person(given = "Serdar",
            family = "Balci",
@@ -17,9 +17,7 @@ Description: A comprehensive toolkit for descriptive analysis in clinicopatholog
     visualizing categorical data relationships through alluvial diagrams and Venn diagrams,
     and conducting data quality assessments using Benford's law. The package emphasizes
     reproducible research workflows and automated reporting capabilities for medical research.
-URL: https://github.com/sbalci/ClinicoPathJamoviModule/,
-    https://github.com/sbalci/ClinicoPathDescriptives/,
-    https://sbalci.github.io/ClinicoPathJamoviModule/
+URL: https://github.com/sbalci/ClinicoPathJamoviModule/, https://github.com/sbalci/ClinicoPathDescriptives/, https://sbalci.github.io/ClinicoPathJamoviModule/, https://www.serdarbalci.com/ClinicoPathDescriptives/
 BugReports: 
     https://github.com/sbalci/ClinicoPathJamoviModule/issues/
 License: GPL (>= 2)
@@ -54,7 +52,9 @@ Imports:
     gtExtras,
     labelled,
     stats,
-    utils
+    utils,
+    ggdendro,
+    pheatmap
 Remotes:
     nbarrowman/vtree@ffa53d4ea5050fa9b26918f4bb30595e91a0f489
 Encoding: UTF-8
