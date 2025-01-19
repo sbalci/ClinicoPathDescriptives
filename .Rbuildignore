@@ -84,4 +84,4 @@ R/utils-pipe.R
 ^clang-.*
 ^gfortran.*
 
-*workspace
+*\.code\-workspace$
