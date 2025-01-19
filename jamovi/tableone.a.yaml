@@ -11,13 +11,13 @@ description:
     R:
         dontrun: true
         usage: |
-            data('histopathology')
-            dat <- as.data.frame(histopathology)
-            ClinicoPath::tableone(
-            data = dat,
-            vars = vars(Sex, PreinvasiveComponent, LVI, PNI, Grade, Age),
-            sty = "t3",
-            excl = TRUE)
+            # data('histopathology')
+            # dat <- as.data.frame(histopathology)
+            # ClinicoPath::tableone(
+            # data = dat,
+            # vars = vars(Sex, PreinvasiveComponent, LVI, PNI, Grade, Age),
+            # sty = "t3",
+            # excl = TRUE)
 
 
 options:
@@ -56,7 +56,7 @@ options:
       default: t1
       description:
           R: >
-            a string naming the style of the table. 
+            a string naming the style of the table.
           jamovi: >
             a string naming the style of the table.
 

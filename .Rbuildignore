@@ -83,3 +83,5 @@ R/utils-pipe.R
 ^\.github$
 ^clang-.*
 ^gfortran.*
+
+*.code-workspace
