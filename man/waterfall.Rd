@@ -34,7 +34,7 @@ waterfall(
 baseline)}
 
 \item{inputType}{Specify data format: 'raw' for actual measurements (will
-calculate percent change)  or 'percentage' for pre-calculated percentage
+calculate percent change) or 'percentage' for pre-calculated percentage
 changes}
 
 \item{sortBy}{Sort the waterfall plot by best response or patient ID.}
@@ -86,14 +86,14 @@ criteria.
 }
 \examples{
 \donttest{
-data <- data.frame(
-    PatientID = paste0("PT", 1:10),
-    Response = c(-100, -45, -30, -20, -10, 0, 10, 20, 30, 40)
-)
-waterfall(
-    data = data,
-    patientID = "PatientID",
-    response = "Response"
-)
+# data <- data.frame(
+#     PatientID = paste0("PT", 1:10),
+#     Response = c(-100, -45, -30, -20, -10, 0, 10, 20, 30, 40)
+# )
+# ClinicoPathDescriptives::waterfall(
+#     data = data,
+#     patientID = "PatientID",
+#     responseVar = "Response"
+# )
 }
 }

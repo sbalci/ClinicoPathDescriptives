@@ -134,13 +134,13 @@ tableoneBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 #'
 #' @examples
 #' \donttest{
-#' data('histopathology')
-#' dat <- as.data.frame(histopathology)
-#' ClinicoPath::tableone(
-#' data = dat,
-#' vars = vars(Sex, PreinvasiveComponent, LVI, PNI, Grade, Age),
-#' sty = "t3",
-#' excl = TRUE)
+#' # data('histopathology')
+#' # dat <- as.data.frame(histopathology)
+#' # ClinicoPathDescriptives::tableone(
+#' # data = dat,
+#' # vars = vars(Sex, PreinvasiveComponent, LVI, PNI, Grade, Age),
+#' # sty = "t3",
+#' # excl = TRUE)
 #'}
 #' @param data The data as a data frame.
 #' @param vars a string naming the variables from \code{data} that contains

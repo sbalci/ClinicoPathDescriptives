@@ -13,7 +13,7 @@ description:
         usage: |
             # data('histopathology')
             # dat <- as.data.frame(histopathology)
-            # ClinicoPath::tableone(
+            # ClinicoPathDescriptives::tableone(
             # data = dat,
             # vars = vars(Sex, PreinvasiveComponent, LVI, PNI, Grade, Age),
             # sty = "t3",

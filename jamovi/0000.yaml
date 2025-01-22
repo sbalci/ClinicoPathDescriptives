@@ -89,6 +89,12 @@ analyses:
     menuGroup: Pathology
     menuTitle: IHC Expression Analysis
     menuSubgroup: IHC Analysis
+  - title: Study Flowchart
+    name: flowchart
+    ns: ClinicoPathDescriptives
+    menuGroup: Exploration
+    menuSubgroup: ClinicoPath Descriptive Plots
+    menuTitle: Study Flowchart
 datasets:
   - name: histopathology including analysis
     path: histopathologyDescriptives.omv

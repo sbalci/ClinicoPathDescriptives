@@ -12,15 +12,15 @@ description:
     R:
         dontrun: true
         usage: |
-            data <- data.frame(
-                PatientID = paste0("PT", 1:10),
-                Response = c(-100, -45, -30, -20, -10, 0, 10, 20, 30, 40)
-            )
-            waterfall(
-                data = data,
-                patientID = "PatientID",
-                response = "Response"
-            )
+            # data <- data.frame(
+            #     PatientID = paste0("PT", 1:10),
+            #     Response = c(-100, -45, -30, -20, -10, 0, 10, 20, 30, 40)
+            # )
+            # ClinicoPathDescriptives::waterfall(
+            #     data = data,
+            #     patientID = "PatientID",
+            #     responseVar = "Response"
+            # )
 
 
 options:
@@ -31,7 +31,7 @@ options:
             The data as a data frame.
           jamovi: >
             The data as a data frame.
-            
+
     - name: patientID
       title: Patient ID
       type: Variable
@@ -56,7 +56,7 @@ options:
 
 
     - name: timeVar
-      title: Time Variable 
+      title: Time Variable
       type: Variable
       suggested: [continuous]
       permitted: [numeric]
@@ -78,7 +78,7 @@ options:
       default: percentage
       description:
           R: >
-            Specify data format: 'raw' for actual measurements (will calculate percent change) 
+            Specify data format: 'raw' for actual measurements (will calculate percent change)
             or 'percentage' for pre-calculated percentage changes
           jamovi: >
             Select 'Raw Measurements' if providing actual tumor measurements,
@@ -159,7 +159,7 @@ options:
       title: Color Scheme
       type: List
       options:
-        - title: jamovi 
+        - title: jamovi
           name: jamovi
         - title: RECIST (Red/Blue/Green)
           name: recist
@@ -184,7 +184,7 @@ options:
             Transparency of bars in waterfall plot.
           jamovi: >
             Transparency of bars in waterfall plot.
-      
+
     - name: barWidth
       title: Bar Width
       type: Number
@@ -213,7 +213,7 @@ options:
             Create an additional spider plot showing response over time if longitudinal data available
 
     - name: addResponseCategory
-      title: Add Response Category to Data  
+      title: Add Response Category to Data
       type: Output
       # description:
       #     R: >

@@ -32,12 +32,12 @@ Function for making Table One.
 }
 \examples{
 \donttest{
-data('histopathology')
-dat <- as.data.frame(histopathology)
-ClinicoPath::tableone(
-data = dat,
-vars = vars(Sex, PreinvasiveComponent, LVI, PNI, Grade, Age),
-sty = "t3",
-excl = TRUE)
+# data('histopathology')
+# dat <- as.data.frame(histopathology)
+# ClinicoPathDescriptives::tableone(
+# data = dat,
+# vars = vars(Sex, PreinvasiveComponent, LVI, PNI, Grade, Age),
+# sty = "t3",
+# excl = TRUE)
 }
 }
