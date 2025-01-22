@@ -84,7 +84,7 @@ baseline)</p></dd>
 
 <dt id="arg-inputtype">inputType<a class="anchor" aria-label="anchor" href="#arg-inputtype"></a></dt>
 <dd><p>Specify data format: 'raw' for actual measurements (will
-calculate percent change)  or 'percentage' for pre-calculated percentage
+calculate percent change) or 'percentage' for pre-calculated percentage
 changes</p></dd>
 
 
@@ -144,16 +144,15 @@ over time if longitudinal data available</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>    PatientID <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"PT"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>    Response <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">100</span>, <span class="op">-</span><span class="fl">45</span>, <span class="op">-</span><span class="fl">30</span>, <span class="op">-</span><span class="fl">20</span>, <span class="op">-</span><span class="fl">10</span>, <span class="fl">0</span>, <span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">30</span>, <span class="fl">40</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">waterfall</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    data <span class="op">=</span> <span class="va">data</span>,</span></span>
-<span class="r-in"><span>    patientID <span class="op">=</span> <span class="st">"PatientID"</span>,</span></span>
-<span class="r-in"><span>    response <span class="op">=</span> <span class="st">"Response"</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in waterfall(data = data, patientID = "PatientID", response = "Response"):</span> argument "timeVar" is missing, with no default</span>
+<span class="r-in"><span><span class="co"># data &lt;- data.frame(</span></span></span>
+<span class="r-in"><span><span class="co">#     PatientID = paste0("PT", 1:10),</span></span></span>
+<span class="r-in"><span><span class="co">#     Response = c(-100, -45, -30, -20, -10, 0, 10, 20, 30, 40)</span></span></span>
+<span class="r-in"><span><span class="co"># )</span></span></span>
+<span class="r-in"><span><span class="co"># ClinicoPathDescriptives::waterfall(</span></span></span>
+<span class="r-in"><span><span class="co">#     data = data,</span></span></span>
+<span class="r-in"><span><span class="co">#     patientID = "PatientID",</span></span></span>
+<span class="r-in"><span><span class="co">#     responseVar = "Response"</span></span></span>
+<span class="r-in"><span><span class="co"># )</span></span></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
