@@ -1,12 +1,12 @@
 ---
 title: Descriptives Functions for Clinicopathological Research
 name: ClinicoPathDescriptives
-version: 0.0.2.54
+version: 0.0.2.59
 jms: '1.0'
 authors:
   - Serdar Balci
 maintainer: Serdar Balci <drserdarbalci@gmail.com>
-date: '2025-01-24'
+date: '2025-02-12'
 type: R
 description: >-
   Descriptives Functions for Clinicopathological Research Descriptive functions
@@ -83,18 +83,6 @@ analyses:
     description: >-
       Creates a waterfall plot to visualize tumor response data following RECIST
       criteria.
-  - title: IHC Expression Analysis
-    name: ihcstats
-    ns: ClinicoPathDescriptives
-    menuGroup: Pathology
-    menuTitle: IHC Expression Analysis
-    menuSubgroup: IHC Analysis
-  - title: Study Flowchart
-    name: flowchart
-    ns: ClinicoPathDescriptives
-    menuGroup: Exploration
-    menuSubgroup: ClinicoPath Descriptive Plots
-    menuTitle: Study Flowchart
 datasets:
   - name: histopathology including analysis
     path: histopathologyDescriptives.omv

@@ -1,8 +1,8 @@
 Type: Package
 Package: ClinicoPathDescriptives
 Title: Descriptive Analysis Tools for Clinicopathological Research
-Version: 0.0.2.54
-Date: 2025-01-24
+Version: 0.0.2.59
+Date: 2025-02-12
 Authors@R: 
     person(given = "Serdar",
            family = "Balci",
@@ -54,7 +54,8 @@ Imports:
     stats,
     utils,
     ggdendro,
-    pheatmap
+    pheatmap,
+    UpSetR
 Remotes:
     nbarrowman/vtree@ffa53d4ea5050fa9b26918f4bb30595e91a0f489
 Encoding: UTF-8
