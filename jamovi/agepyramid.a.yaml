@@ -3,7 +3,7 @@ name:  agepyramid
 title: Age Pyramid
 menuGroup: Exploration
 menuSubgroup: ClinicoPath Descriptive Plots
-version: '1.0.0'
+version: '0.0.2'
 jas: '1.2'
 
 options:
@@ -52,5 +52,28 @@ options:
           jamovi: >
             a string naming the level from `gender` that contains the
             level female
+
+
+    - name: bin_width
+      title: Bin Width (Years)
+      type: Number
+      default: 5
+      description:
+          R: >
+            The width of the age bins in years. Adjust this to change the granularity of the age groups.
+          jamovi: >
+            The width of the age bins in years.
+
+    - name: plot_title
+      title: Plot Title
+      type: String
+      default: "Age Pyramid"
+      description:
+          R: >
+            The title displayed on the age pyramid plot.
+          jamovi: >
+            The title displayed on the age pyramid plot.
+
+
 
 ...

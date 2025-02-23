@@ -25,3 +25,16 @@ children:
           - type: LevelSelector
             name: female
             enable: (gender)
+  - type: LayoutBox
+    margin: large
+    children:
+      - type: TextBox
+        name: bin_width
+        format: number
+  - type: LayoutBox
+    margin: large
+    children:
+      - type: TextBox
+        name: plot_title
+        format: string
+        width: large

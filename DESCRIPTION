@@ -1,8 +1,8 @@
 Type: Package
 Package: ClinicoPathDescriptives
 Title: Descriptive Analysis Tools for Clinicopathological Research
-Version: 0.0.2.69
-Date: 2024-02-22
+Version: 0.0.2.71
+Date: 2024-02-23
 Authors@R: 
     person(given = "Serdar",
            family = "Balci",
@@ -54,10 +54,10 @@ Imports:
     stats,
     utils,
     ggdendro,
-    pheatmap,
-    UpSetR
+    pheatmap
 Remotes:
-    nbarrowman/vtree@ffa53d4ea5050fa9b26918f4bb30595e91a0f489
+    nbarrowman/vtree@ffa53d4ea5050fa9b26918f4bb30595e91a0f489,
+    hms-dbmi/UpSetR
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
