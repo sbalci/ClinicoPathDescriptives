@@ -1,8 +1,8 @@
 Type: Package
 Package: ClinicoPathDescriptives
 Title: Descriptive Analysis Tools for Clinicopathological Research
-Version: 0.0.2.72
-Date: 2024-02-23
+Version: 0.0.2.75
+Date: 2024-02-24
 Authors@R: 
     person(given = "Serdar",
            family = "Balci",
@@ -24,7 +24,6 @@ License: GPL (>= 2)
 Depends:
     R (>= 4.1.0)
 Imports: 
-    chisq.posthoc.test,
     dplyr,
     magrittr,
     ggplot2,
@@ -53,8 +52,8 @@ Imports:
     labelled,
     stats,
     utils,
-    ggdendro,
-    pheatmap
+    gt,
+    htmltools
 Remotes:
     nbarrowman/vtree@ffa53d4ea5050fa9b26918f4bb30595e91a0f489,
     hms-dbmi/UpSetR
