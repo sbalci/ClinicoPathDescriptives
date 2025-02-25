@@ -116,9 +116,9 @@ options:
       default: false
       description:
           R: >
-            Label responses exceeding \u00B1 50 percent.
+            Label responses exceeding \U00B1 50 percent.
           jamovi: >
-            Label responses exceeding \u00B1 50 percent.
+            Label responses exceeding \U00B1 50 percent.
 
 
 
