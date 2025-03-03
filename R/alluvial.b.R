@@ -4,6 +4,10 @@
 #' @import jmvcore
 #' @import ggplot2
 #' @importFrom magrittr %>%
+#' @import easyalluvial
+#'
+#' @description This tool will help you form Alluvial Diagrams (Alluvial Plots).
+#'
 #'
 
 alluvialClass <- if (requireNamespace('jmvcore')) R6::R6Class(

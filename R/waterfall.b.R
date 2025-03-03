@@ -1,6 +1,10 @@
 #' @title Treatment Response Analysis
 #' @importFrom R6 R6Class
 #' @import jmvcore
+#' @import dplyr
+#' @importFrom magrittr %>%
+#' @import ggplot2
+#' @import scales
 #' @description Creates waterfall and spider plots to visualize tumor response data following RECIST criteria
 #' @param data Data frame containing response data
 #' @param patientID Column name for patient identifiers
@@ -325,9 +329,9 @@ waterfallClass <- if (requireNamespace('jmvcore')) R6::R6Class(
         <br><br>
         <b>RECIST Response Categories:</b>
         <br>- Complete Response (CR): -100% (complete disappearance)
-        <br>- Partial Response (PR): ≥30% decrease
+        <br>- Partial Response (PR): \\eqn{\\ge}30% decrease
         <br>- Stable Disease (SD): Between -30% and +20% change
-        <br>- Progressive Disease (PD): ≥20% increase
+        <br>- Progressive Disease (PD): \\eqn{\\ge}20% increase
         <br><br>
         <b>Data Format Examples:</b>
         <pre>

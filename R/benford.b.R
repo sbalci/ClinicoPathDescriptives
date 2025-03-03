@@ -1,3 +1,21 @@
+#' @title Benford's Law Analysis
+#' @description This function performs a Benford's Law analysis on a numeric variable.
+#' It returns the Benford's Law distribution and a list of potential suspects.
+#' @details The Benford's Law analysis is a test to determine if the distribution of the first digits of a numeric variable follows Benford's Law.
+#' The Benford's Law distribution is compared to the observed distribution of the first digits of the variable.
+#' The analysis returns a list of potential suspects that deviate significantly from Benford's Law.
+#' @param var The numeric variable to analyze.
+#' @return A list with the Benford's Law distribution and a list of potential suspects.
+#' @importFrom benford.analysis benford getSuspects
+#' @importFrom glue glue
+#' @importFrom jmvcore composeTerm constructFormula toNumeric
+#'
+#'
+#' @returns A list with the Benford's Law distribution and a list of potential suspects.
+#' @export benfordClass
+#'
+
+
 benfordClass <- if (requireNamespace('jmvcore')) R6::R6Class(
     "benfordClass",
     inherit = benfordBase,
