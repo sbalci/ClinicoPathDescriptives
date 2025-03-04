@@ -1,0 +1,144 @@
+title: Swimmer Plot
+name: swimmerplot
+jus: '3.0'
+stage: 0
+compilerMode: tame
+children:
+  - type: VariableSupplier
+    persistentItems: true
+    stretchFactor: 1
+    children:
+      - type: TargetLayoutBox
+        label: Patient ID
+        children:
+          - type: VariablesListBox
+            name: patientID
+            maxItemCount: 1
+            isTarget: true
+      - type: TargetLayoutBox
+        label: Start Time/Date
+        children:
+          - type: VariablesListBox
+            name: start
+            maxItemCount: 1
+            isTarget: true
+      - type: TargetLayoutBox
+        label: End Time/Date
+        children:
+          - type: VariablesListBox
+            name: end
+            maxItemCount: 1
+            isTarget: true
+      - type: TargetLayoutBox
+        label: Event Type (optional)
+        children:
+          - type: VariablesListBox
+            name: event
+            maxItemCount: 1
+            isTarget: true
+      - type: TargetLayoutBox
+        label: Sort By (optional)
+        children:
+          - type: VariablesListBox
+            name: sortVariable
+            maxItemCount: 1
+            isTarget: true
+
+  - type: CollapseBox
+    label: Time Settings
+    collapsed: false
+    children:
+      - type: LayoutBox
+        margin: large
+        children:
+          - type: ComboBox
+            name: timetype
+          - type: ComboBox
+            name: timetypedata
+            enable: (timetype:datetime)
+          - type: ComboBox
+            name: timetypeoutput
+          - type: ComboBox
+            name: startType
+            label: Start Time Display
+      - type: LayoutBox
+        margin: large
+        children:
+          - type: Label
+            label: Display Options
+            children:
+              - type: TextBox
+                name: barHeight
+                format: number
+              - type: ComboBox
+                name: referenceLines
+              - type: TextBox
+                name: customReferenceTime
+                format: number
+                enable: (referenceLines:custom)
+
+  # - type: CollapseBox
+  #   label: Clinical Milestones
+  #   collapsed: true
+  #   children:
+
+  #     - type: VariableSupplier
+  #       persistentItems: true
+  #       stretchFactor: 1
+  #       children:
+  #         - type: TargetLayoutBox
+  #           label: MileStone 1 Date
+  #           children:
+  #             - type: VariablesListBox
+  #               name: milestone1Date
+  #               maxItemCount: 1
+  #               isTarget: true
+  #         - type: TargetLayoutBox
+  #           label: MileStone 2 Date
+  #           children:
+  #             - type: VariablesListBox
+  #               name: milestone2Date
+  #               maxItemCount: 1
+  #               isTarget: true                  
+  #         - type: TargetLayoutBox
+  #           label: MileStone 3 Date
+  #           children:
+  #             - type: VariablesListBox
+  #               name: milestone3Date
+  #               maxItemCount: 1
+  #               isTarget: true
+  #         - type: TargetLayoutBox
+  #           label: MileStone 4 Date
+  #           children:
+  #             - type: VariablesListBox
+  #               name: milestone4Date
+  #               maxItemCount: 1
+  #               isTarget: true
+  #         - type: TargetLayoutBox
+  #           label: MileStone 5 Date
+  #           children:
+  #             - type: VariablesListBox
+  #               name: milestone5Date
+  #               maxItemCount: 1
+  #               isTarget: true
+
+  #     - type: TextBox
+  #       name: milestone1Name
+  #       format: string
+  #       width: largest
+  #     - type: TextBox
+  #       name: milestone2Name
+  #       format: string
+  #       width: largest
+  #     - type: TextBox
+  #       name: milestone3Name
+  #       format: string
+  #       width: largest
+  #     - type: TextBox
+  #       name: milestone4Name
+  #       format: string
+  #       width: largest
+  #     - type: TextBox
+  #       name: milestone5Name
+  #       format: string
+  #       width: largest

@@ -78,7 +78,7 @@ summarydataClass <- if (requireNamespace("jmvcore")) R6::R6Class("summarydataCla
 
                     # Interpret normality based on the Shapiro-Wilk p-value.
                     norm_status <- if (!is.na(p_val)) {
-                        if (p_val > 0.05) "appears to be normally distributed" else "does not appear to be normally distributed"
+                        if (p_val > 0.05) "appears to be normally distributed" else "does not appear to be normally distributed. Please use relevant visualisation and tests to verify the characteristics of distribution."
                     } else {
                         "Normality test not applicable due to sample size"
                     }

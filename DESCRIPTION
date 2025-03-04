@@ -1,8 +1,8 @@
 Type: Package
 Package: ClinicoPathDescriptives
 Title: Descriptive Analysis Tools for Clinicopathological Research
-Version: 0.0.2.78
-Date: 2024-03-03
+Version: 0.0.2.79
+Date: 2024-03-04
 Authors@R: 
     person(given = "Serdar",
            family = "Balci",
@@ -53,7 +53,9 @@ Imports:
     stats,
     utils,
     gt,
-    htmltools
+    htmltools,
+    moments,
+    rlang
 Remotes:
     nbarrowman/vtree@ffa53d4ea5050fa9b26918f4bb30595e91a0f489,
     hms-dbmi/UpSetR
