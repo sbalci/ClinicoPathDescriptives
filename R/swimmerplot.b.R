@@ -3,6 +3,7 @@
 #' @import jmvcore
 #' @import ggplot2
 #' @import lubridate
+#' @importFrom ggswim geom_swim_lane geom_swim_marker geom_swim_arrow scale_marker_discrete theme_ggswim
 #' @description Creates swimmer plots for visualizing patient timelines, treatments, and clinical events
 #'
 swimmerplotClass <- if(requireNamespace("jmvcore")) R6::R6Class(
@@ -197,7 +198,12 @@ swimmerplotClass <- if(requireNamespace("jmvcore")) R6::R6Class(
         <b>Optional variables:</b>
         <br>- Event Type: Clinical outcome or status (e.g., CR, PR, SD, PD)
         <br>- Sort Variable: Variable to order patients (e.g., survival time, response)
-        <br>- Milestones: Important clinical events (surgery, treatment, progression, etc.)
+        <br><br>
+        <b>Using ggswim package:</b>
+        <br>The plot is created using ggswim which provides specialized visualizations for:
+        <br>- Lanes: Horizontal bars showing patient timelines
+        <br>- Markers: Symbols for events along the timeline
+        <br>- Styling: Clinical-oriented themes and colors
         <hr>
         <br>Clinical application: Swimmer plots are valuable for visualizing individual patient journeys through treatment and follow-up, allowing clinicians to identify patterns in treatment response, progression, and outcomes.
         "
@@ -248,6 +254,34 @@ swimmerplotClass <- if(requireNamespace("jmvcore")) R6::R6Class(
 
             # Calculate summary statistics for durations.
             stats <- private$.calculateStats(df)
+
+            # Prepare markers data for ggswim if event type is provided
+            markers_data <- NULL
+            if (!is.null(self$options$event)) {
+                # Create a markers dataframe for geom_swim_marker
+                markers_data <- data.frame(
+                    Patient = df$Patient,
+                    x = df$End,
+                    label = df$Event,
+                    stringsAsFactors = TRUE
+                )
+
+                # Define glyphs for different event types (using ggswim defaults or suitable symbols)
+                event_levels <- levels(df$Event)
+
+                # Use clinical glyphs appropriate for common response types
+                glyphs <- rep("⬤", length(event_levels))  # Default glyph is a circle
+
+                # Define colors for response types
+                colors <- RColorBrewer::brewer.pal(
+                    min(length(event_levels), 9),
+                    "Set1"
+                )
+            }
+
+
+
+
 
             # Collect milestone data
             # milestones <- list()
@@ -350,6 +384,7 @@ swimmerplotClass <- if(requireNamespace("jmvcore")) R6::R6Class(
             # Prepare state for plotting.
             plotData <- list(
                 data = df,
+                markers_data = markers_data,
                 # milestone_data = milestone_data,
                 options = list(
                     timeUnit = self$options$timetypeoutput,
@@ -370,9 +405,44 @@ swimmerplotClass <- if(requireNamespace("jmvcore")) R6::R6Class(
             if (is.null(plotData)) return()
 
             df <- plotData$data
-            milestone_data <- plotData$milestone_data
+            markers_data <- plotData$markers_data
+            # milestone_data <- plotData$milestone_data
             opts <- plotData$options
             stats <- plotData$stats
+
+
+            if (self$options$useggswim) {
+
+            # Create the base plot with ggswim's geom_swim_lane
+            p <- ggplot2::ggplot(df)
+
+            # Add lanes using ggswim's geom_swim_lane
+            if (!is.null(self$options$event)) {
+                # If event data exists, color lanes by event
+                p <- p + ggswim::geom_swim_lane(
+                    mapping = ggplot2::aes(
+                        x = Start,
+                        xend = End,
+                        y = Patient,
+                        colour = Event
+                    ),
+                    linewidth = opts$barHeight
+                )
+            } else {
+                # Otherwise, use default styling
+                p <- p + ggswim::geom_swim_lane(
+                    mapping = ggplot2::aes(
+                        x = Start,
+                        xend = End,
+                        y = Patient
+                    ),
+                    linewidth = opts$barHeight,
+                    colour = "steelblue"
+                )
+            }
+
+            } else {
+
 
             # Base plot: draw horizontal segments for each patient.
             p <- ggplot2::ggplot(df, ggplot2::aes(
@@ -382,6 +452,10 @@ swimmerplotClass <- if(requireNamespace("jmvcore")) R6::R6Class(
                 yend = Patient
             )) +
                 ggplot2::geom_segment(size = opts$barHeight, color = "steelblue")
+
+            }
+
+
 
             # Configure x-axis scale and formatting based on timetype.
             if (opts$timeType == "datetime" && opts$startType == "absolute") {
@@ -393,6 +467,66 @@ swimmerplotClass <- if(requireNamespace("jmvcore")) R6::R6Class(
             } else {
                 p <- p + ggplot2::scale_x_continuous(breaks = scales::pretty_breaks(n = 6))
             }
+
+
+
+
+
+            if (self$options$useggswim) {
+                    # Add event markers if Event variable exists using ggswim's geom_swim_marker
+                    if (!is.null(self$options$event) && !is.null(markers_data)) {
+                        # Define clinically relevant colors for common response types
+                        clinical_colors <- c(
+                            "CR" = "#008000",  # Complete Response - Green
+                            "PR" = "#4169E1",  # Partial Response - Royal Blue
+                            "SD" = "#FFA500",  # Stable Disease - Orange
+                            "PD" = "#FF0000",  # Progressive Disease - Red
+                            "NE" = "#808080"   # Not Evaluable - Gray
+                        )
+
+                        # Create a markers dataframe for geom_swim_marker
+                        event_levels <- levels(df$Event)
+
+                        # Define glyphs and colors based on event types
+                        if (all(event_levels %in% names(clinical_colors))) {
+                            # Use clinical colors for known response types
+                            colors <- clinical_colors[event_levels]
+                            # Use specific glyphs for clinical responses
+                            glyphs <- c("✓", "◔", "■", "✗", "?")[1:length(event_levels)]
+                        } else {
+                            # For other event types, use a color palette
+                            colors <- RColorBrewer::brewer.pal(
+                                min(length(event_levels), 9),
+                                "Set1"
+                            )
+                            # Default glyph is a circle
+                            glyphs <- rep("⬤", length(event_levels))
+                        }
+                        names(glyphs) <- event_levels
+                        names(colors) <- event_levels
+
+                        # Add markers using ggswim's geom_swim_marker
+                        p <- p + ggswim::geom_swim_marker(
+                            data = markers_data,
+                            mapping = ggplot2::aes(
+                                x = x,
+                                y = Patient,
+                                marker = label
+                            ),
+                            size = self$options$markerSize
+                        )
+
+                        # Configure marker appearance using scale_marker_discrete
+                        p <- p + ggswim::scale_marker_discrete(
+                            name = "Response",
+                            glyphs = glyphs,
+                            colours = colors,
+                            limits = event_levels
+                        )
+                    }
+            } else {
+
+
 
             # Add event markers if an Event variable exists.
             if ("Event" %in% names(df)) {
@@ -428,6 +562,10 @@ swimmerplotClass <- if(requireNamespace("jmvcore")) R6::R6Class(
                         values = event_colors
                     )
             }
+
+            }
+
+
 
             # Add milestone markers if we have any valid data
             # if (!is.null(milestone_data) && nrow(milestone_data) > 0) {
@@ -550,7 +688,17 @@ swimmerplotClass <- if(requireNamespace("jmvcore")) R6::R6Class(
                 subtitle = plot_subtitle
             )
 
-            # Apply additional theme settings.
+
+
+
+            if (self$options$useggswim) {
+
+            # Apply the ggswim theme
+            p <- p + ggswim::theme_ggswim()
+
+            } else {
+
+                # Apply additional theme settings.
             p <- p + ggtheme +
                 ggplot2::theme(
                     panel.grid.major.y = ggplot2::element_blank(),
@@ -560,6 +708,8 @@ swimmerplotClass <- if(requireNamespace("jmvcore")) R6::R6Class(
                     legend.title = ggplot2::element_text(face = "bold"),
                     plot.subtitle = ggplot2::element_text(size = 9)
                 )
+
+                }
 
             print(p)
             TRUE

@@ -43,7 +43,6 @@ children:
             name: sortVariable
             maxItemCount: 1
             isTarget: true
-
   - type: CollapseBox
     label: Time Settings
     collapsed: false
@@ -76,69 +75,18 @@ children:
                 name: customReferenceTime
                 format: number
                 enable: (referenceLines:custom)
-
-  # - type: CollapseBox
-  #   label: Clinical Milestones
-  #   collapsed: true
-  #   children:
-
-  #     - type: VariableSupplier
-  #       persistentItems: true
-  #       stretchFactor: 1
-  #       children:
-  #         - type: TargetLayoutBox
-  #           label: MileStone 1 Date
-  #           children:
-  #             - type: VariablesListBox
-  #               name: milestone1Date
-  #               maxItemCount: 1
-  #               isTarget: true
-  #         - type: TargetLayoutBox
-  #           label: MileStone 2 Date
-  #           children:
-  #             - type: VariablesListBox
-  #               name: milestone2Date
-  #               maxItemCount: 1
-  #               isTarget: true                  
-  #         - type: TargetLayoutBox
-  #           label: MileStone 3 Date
-  #           children:
-  #             - type: VariablesListBox
-  #               name: milestone3Date
-  #               maxItemCount: 1
-  #               isTarget: true
-  #         - type: TargetLayoutBox
-  #           label: MileStone 4 Date
-  #           children:
-  #             - type: VariablesListBox
-  #               name: milestone4Date
-  #               maxItemCount: 1
-  #               isTarget: true
-  #         - type: TargetLayoutBox
-  #           label: MileStone 5 Date
-  #           children:
-  #             - type: VariablesListBox
-  #               name: milestone5Date
-  #               maxItemCount: 1
-  #               isTarget: true
-
-  #     - type: TextBox
-  #       name: milestone1Name
-  #       format: string
-  #       width: largest
-  #     - type: TextBox
-  #       name: milestone2Name
-  #       format: string
-  #       width: largest
-  #     - type: TextBox
-  #       name: milestone3Name
-  #       format: string
-  #       width: largest
-  #     - type: TextBox
-  #       name: milestone4Name
-  #       format: string
-  #       width: largest
-  #     - type: TextBox
-  #       name: milestone5Name
-  #       format: string
-  #       width: largest
+      - type: LayoutBox
+        margin: large
+        children:
+          - type: Label
+            label: ggswim Integration
+            children:
+              - type: CheckBox
+                name: useggswim
+                label: Use ggswim Package
+  - type: LayoutBox
+    margin: large
+    children:
+      - type: TextBox
+        name: markerSize
+        format: number

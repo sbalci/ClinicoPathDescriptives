@@ -178,6 +178,22 @@ options:
           R: >
             Custom time point to mark with a reference line
 
+    - name: useggswim
+      title: Use ggswim package
+      type: Bool
+      default: false
+
+    - name: markerSize
+      title: Marker Size
+      type: Number
+      min: 1
+      max: 10
+      default: 5
+      description:
+          R: >
+            Size of event markers on the plot
+
+
     # - name: milestone1Name
     #   title: Milestone 1 Name
     #   type: String

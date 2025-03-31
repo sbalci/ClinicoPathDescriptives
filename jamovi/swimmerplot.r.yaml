@@ -26,6 +26,9 @@ clearWith:
     - milestone5Date
     - referenceLines
     - customReferenceTime
+    - useggswim
+    - markerSize
+
 
 items:
     - name: todo
@@ -55,4 +58,6 @@ items:
 
 refs:
     - ClinicoPathJamoviModule
+    - ggswim
+
 ...
