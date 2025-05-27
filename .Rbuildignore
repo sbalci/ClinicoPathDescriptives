@@ -85,3 +85,5 @@ R/utils-pipe.R
 ^gfortran.*
 
 ^.*\.code\-workspace$
+
+^vignettes$
