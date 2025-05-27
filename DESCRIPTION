@@ -1,8 +1,8 @@
 Type: Package
 Package: ClinicoPathDescriptives
 Title: Descriptive Analysis Tools for Clinicopathological Research
-Version: 0.0.3.04
-Date: 2024-05-18
+Version: 0.0.3.12
+Date: 2024-05-26
 Authors@R: 
     person(given = "Serdar",
            family = "Balci",
