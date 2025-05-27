@@ -7,9 +7,7 @@
 Alluvial Plot
 }
 \description{
-Alluvial Plot
-
-Alluvial Plot
+This tool will help you form Alluvial Diagrams (Alluvial Plots).
 }
 \section{Super classes}{
 \code{\link[jmvcore:Analysis]{jmvcore::Analysis}} -> \code{ClinicoPathDescriptives::alluvialBase} -> \code{alluvialClass}

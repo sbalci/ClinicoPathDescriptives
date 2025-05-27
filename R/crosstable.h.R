@@ -87,6 +87,7 @@ crosstableResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
     "crosstableResults",
     inherit = jmvcore::Group,
     active = list(
+        subtitle = function() private$.items[["subtitle"]],
         todo = function() private$.items[["todo"]],
         todo2 = function() private$.items[["todo2"]],
         tablestyle1 = function() private$.items[["tablestyle1"]],
@@ -99,16 +100,21 @@ crosstableResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             super$initialize(
                 options=options,
                 name="",
-                title="`Cross Table - ${group}`",
+                title="Cross Table",
                 refs=list(
                     "ClinicoPathJamoviModule"))
+            self$add(jmvcore::Preformatted$new(
+                options=options,
+                name="subtitle",
+                title="`Cross Table - ${group}`"))
             self$add(jmvcore::Html$new(
                 options=options,
                 name="todo",
                 title="To Do",
                 clearWith=list(
                     "vars",
-                    "group")))
+                    "group",
+                    "sty")))
             self$add(jmvcore::Html$new(
                 options=options,
                 name="todo2",
@@ -168,7 +174,7 @@ crosstableBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             super$initialize(
                 package = "ClinicoPathDescriptives",
                 name = "crosstable",
-                version = c(1,0,0),
+                version = c(0,0,3),
                 options = options,
                 results = crosstableResults$new(options=options),
                 data = data,
@@ -187,17 +193,30 @@ crosstableBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 #'
 #' @examples
 #' \donttest{
-#' # example will be added
+#' # Example usage:
+#' # dat <- as.data.frame(your_data)
+#' # ClinicoPathDescriptives::crosstable(
+#' #   data = dat,
+#' #   vars = vars(YourRowVariable),
+#' #   group = "YourGroupingVariable",
+#' #   sty = "finalfit",
+#' #   excl = TRUE,
+#' #   cont = "mean",
+#' #   pcat = "chisq",
+#' #   exportCSV = TRUE
+#' # )
 #'}
 #' @param data The data as a data frame.
-#' @param vars variable in the rows
-#' @param group variable in the column
+#' @param vars The variable(s) that will appear as rows in the cross table.
+#' @param group The variable that will appear as columns (groups) in the
+#'   table.
 #' @param sty .
-#' @param excl .
+#' @param excl Exclude rows with missing values.
 #' @param cont .
 #' @param pcat .
 #' @return A results object containing:
 #' \tabular{llllll}{
+#'   \code{results$subtitle} \tab \tab \tab \tab \tab a preformatted \cr
 #'   \code{results$todo} \tab \tab \tab \tab \tab a html \cr
 #'   \code{results$todo2} \tab \tab \tab \tab \tab a html \cr
 #'   \code{results$tablestyle1} \tab \tab \tab \tab \tab a html \cr

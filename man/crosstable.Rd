@@ -17,13 +17,14 @@ crosstable(
 \arguments{
 \item{data}{The data as a data frame.}
 
-\item{vars}{variable in the rows}
+\item{vars}{The variable(s) that will appear as rows in the cross table.}
 
-\item{group}{variable in the column}
+\item{group}{The variable that will appear as columns (groups) in the
+table.}
 
 \item{sty}{.}
 
-\item{excl}{.}
+\item{excl}{Exclude rows with missing values.}
 
 \item{cont}{.}
 
@@ -32,6 +33,7 @@ crosstable(
 \value{
 A results object containing:
 \tabular{llllll}{
+\code{results$subtitle} \tab \tab \tab \tab \tab a preformatted \cr
 \code{results$todo} \tab \tab \tab \tab \tab a html \cr
 \code{results$todo2} \tab \tab \tab \tab \tab a html \cr
 \code{results$tablestyle1} \tab \tab \tab \tab \tab a html \cr
@@ -45,6 +47,17 @@ Function for making Cross Tables.
 }
 \examples{
 \donttest{
-# example will be added
+# Example usage:
+# dat <- as.data.frame(your_data)
+# ClinicoPathDescriptives::crosstable(
+#   data = dat,
+#   vars = vars(YourRowVariable),
+#   group = "YourGroupingVariable",
+#   sty = "finalfit",
+#   excl = TRUE,
+#   cont = "mean",
+#   pcat = "chisq",
+#   exportCSV = TRUE
+# )
 }
 }
