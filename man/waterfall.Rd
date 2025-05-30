@@ -41,7 +41,7 @@ changes}
 
 \item{showThresholds}{Show +20 percent and -30 percent RECIST thresholds.}
 
-\item{labelOutliers}{Label responses exceeding ±50 percent.}
+\item{labelOutliers}{Label responses exceeding the specified threshold.}
 
 \item{showMedian}{Show median response as a horizontal line.}
 
@@ -56,10 +56,11 @@ displayed.}
 
 \item{barWidth}{Width of bars in waterfall plot.}
 
-\item{showWaterfallPlot}{.}
+\item{showWaterfallPlot}{Display the waterfall plot showing best response
+for each patient.}
 
-\item{showSpiderPlot}{Create an additional spider plot showing response
-over time if longitudinal data available}
+\item{showSpiderPlot}{Display spider plot showing response trajectories
+over time (requires time variable).}
 }
 \value{
 A results object containing:
@@ -67,11 +68,11 @@ A results object containing:
 \code{results$todo} \tab \tab \tab \tab \tab a html \cr
 \code{results$todo2} \tab \tab \tab \tab \tab a html \cr
 \code{results$summaryTable} \tab \tab \tab \tab \tab a table \cr
+\code{results$personTimeTable} \tab \tab \tab \tab \tab a table \cr
 \code{results$clinicalMetrics} \tab \tab \tab \tab \tab a table \cr
 \code{results$waterfallplot} \tab \tab \tab \tab \tab an image \cr
 \code{results$spiderplot} \tab \tab \tab \tab \tab an image \cr
 \code{results$addResponseCategory} \tab \tab \tab \tab \tab an output \cr
-\code{results$mydataview} \tab \tab \tab \tab \tab a preformatted \cr
 }
 
 Tables can be converted to data frames with \code{asDF} or \code{\link{as.data.frame}}. For example:
@@ -81,19 +82,21 @@ Tables can be converted to data frames with \code{asDF} or \code{\link{as.data.f
 \code{as.data.frame(results$summaryTable)}
 }
 \description{
-Creates a waterfall plot to visualize tumor response data following RECIST
+Creates a waterfall plot and analyzes tumor response data following RECIST
 criteria.
 }
 \examples{
 \donttest{
-# data <- data.frame(
-#     PatientID = paste0("PT", 1:10),
-#     Response = c(-100, -45, -30, -20, -10, 0, 10, 20, 30, 40)
-# )
-# ClinicoPathDescriptives::waterfall(
-#     data = data,
-#     patientID = "PatientID",
-#     responseVar = "Response"
-# )
+data <- data.frame(
+    PatientID = paste0("PT", 1:10),
+    Response = c(-100, -45, -30, -20, -10, 0, 10, 20, 30, 40),
+    Time = c(0, 2, 4, 6, 8, 10, 12, 14, 16, 18)
+)
+waterfall(
+    data = data,
+    patientID = "PatientID",
+    responseVar = "Response",
+    timeVar = "Time"
+)
 }
 }

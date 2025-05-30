@@ -56,7 +56,7 @@ Imports:
     htmltools,
     moments,
     rlang,
-    ggswim
+    lubridate
 Remotes:
     nbarrowman/vtree@ffa53d4ea5050fa9b26918f4bb30595e91a0f489,
     hms-dbmi/UpSetR,
