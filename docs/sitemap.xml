@@ -1,66 +1,37 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ClinicoPath-package.html</loc>
-  </url>
-  <url>
-    <loc>/reference/agepyramid.html</loc>
-  </url>
-  <url>
-    <loc>/reference/agepyramidClass.html</loc>
-  </url>
-  <url>
-    <loc>/reference/alluvial.html</loc>
-  </url>
-  <url>
-    <loc>/reference/alluvialClass.html</loc>
-  </url>
-  <url>
-    <loc>/reference/benford.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crosstable.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crosstableClass.html</loc>
-  </url>
-  <url>
-    <loc>/reference/histopathology.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/reportcat.html</loc>
-  </url>
-  <url>
-    <loc>/reference/reportcatClass.html</loc>
-  </url>
-  <url>
-    <loc>/reference/summarydata.html</loc>
-  </url>
-  <url>
-    <loc>/reference/summarydataClass.html</loc>
-  </url>
-  <url>
-    <loc>/reference/tableone.html</loc>
-  </url>
-  <url>
-    <loc>/reference/tableoneClass.html</loc>
-  </url>
-  <url>
-    <loc>/reference/venn.html</loc>
-  </url>
-  <url>
-    <loc>/reference/vennClass.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/404.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/authors.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/index.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/agepyramid.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/agepyramidClass.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/alluvial.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/alluvialClass.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/benford.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/ClinicoPath-package.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/crosstable.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/crosstableClass.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/histopathology.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/index.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/reportcat.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/reportcatClass.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/summarydata.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/summarydataClass.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/tableone.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/tableoneClass.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/venn.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/vennClass.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/benfordClass.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/ClinicoPathDescriptives-package.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/swimmerplot.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/swimmerplotClass.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/vartree.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/vartreeClass.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/waterfall.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/waterfallClass.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/LICENSE.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/index.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/clinicoPathDescriptives-introduction.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/data-summary.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/visualization.html</loc></url>
 </urlset>
+
