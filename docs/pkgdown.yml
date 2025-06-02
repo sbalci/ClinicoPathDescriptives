@@ -1,6 +1,11 @@
-pandoc: 2.17.1.1
-pkgdown: 2.0.2
+pandoc: '3.4'
+pkgdown: 2.1.1
 pkgdown_sha: ~
-articles: {}
-last_built: 2022-04-03T18:40Z
-
+articles:
+  clinicoPathDescriptives-introduction: clinicoPathDescriptives-introduction.html
+  data-summary: data-summary.html
+  visualization: visualization.html
+last_built: 2025-05-31T11:15Z
+urls:
+  reference: https://www.serdarbalci.com/ClinicoPathDescriptives/reference
+  article: https://www.serdarbalci.com/ClinicoPathDescriptives/articles
