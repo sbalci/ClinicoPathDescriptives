@@ -1,11 +1,8 @@
 pandoc: '3.4'
-pkgdown: 2.1.1
+pkgdown: 2.1.3
 pkgdown_sha: ~
-articles:
-  clinicoPathDescriptives-introduction: clinicoPathDescriptives-introduction.html
-  data-summary: data-summary.html
-  visualization: visualization.html
-last_built: 2025-05-31T11:15Z
+articles: {}
+last_built: 2025-06-30T19:32Z
 urls:
   reference: https://www.serdarbalci.com/ClinicoPathDescriptives/reference
   article: https://www.serdarbalci.com/ClinicoPathDescriptives/articles
