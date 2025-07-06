@@ -6,7 +6,8 @@ summarydataOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class
     inherit = jmvcore::Options,
     public = list(
         initialize = function(
-            vars = NULL, ...) {
+            vars = NULL,
+            distr = FALSE, ...) {
 
             super$initialize(
                 package="ClinicoPathDescriptives",
@@ -21,13 +22,20 @@ summarydataOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class
                     "continuous"),
                 permitted=list(
                     "numeric"))
+            private$..distr <- jmvcore::OptionBool$new(
+                "distr",
+                distr,
+                default=FALSE)
 
             self$.addOption(private$..vars)
+            self$.addOption(private$..distr)
         }),
     active = list(
-        vars = function() private$..vars$value),
+        vars = function() private$..vars$value,
+        distr = function() private$..distr$value),
     private = list(
-        ..vars = NA)
+        ..vars = NA,
+        ..distr = NA)
 )
 
 summarydataResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
@@ -51,7 +59,7 @@ summarydataResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class
                 options=options,
                 name="todo",
                 title="To Do"))
-            self$add(jmvcore::Preformatted$new(
+            self$add(jmvcore::Html$new(
                 options=options,
                 name="text",
                 title=""))
@@ -68,7 +76,7 @@ summarydataBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             super$initialize(
                 package = "ClinicoPathDescriptives",
                 name = "summarydata",
-                version = c(1,0,0),
+                version = c(0,0,2),
                 options = options,
                 results = summarydataResults$new(options=options),
                 data = data,
@@ -83,26 +91,37 @@ summarydataBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 
 #' Summary of Continuous Variables
 #'
-#' Function for Generating Summaries for Continuous Variables.
+#' This module generates descriptive statistics for continuous variables.
+#' It provides both a textual summary and a visually appealing summary table.
+#' Optionally, you can enable distribution diagnostics to examine normality, 
+#' skewness, and kurtosis.
+#' 
 #'
 #' @examples
 #' \donttest{
-#' # example will be added
+#' # Example:
+#' # 1. Load your data frame.
+#' # 2. Select one or more continuous variables.
+#' # 3. (Optional) Enable Distribution Diagnostics to view additional tests.
+#' # 4. Run the summarydata module to see descriptive statistics and distribution characteristics.
 #'}
 #' @param data The data as a data frame.
 #' @param vars a string naming the variables from \code{data} that contains
 #'   the continuous values used for the report
+#' @param distr If TRUE, additional distribution diagnostics (Shapiro-Wilk
+#'   test, skewness, and kurtosis) will be computed and explained.
 #' @return A results object containing:
 #' \tabular{llllll}{
 #'   \code{results$todo} \tab \tab \tab \tab \tab a html \cr
-#'   \code{results$text} \tab \tab \tab \tab \tab a preformatted \cr
+#'   \code{results$text} \tab \tab \tab \tab \tab a html \cr
 #'   \code{results$text1} \tab \tab \tab \tab \tab a html \cr
 #' }
 #'
 #' @export
 summarydata <- function(
     data,
-    vars) {
+    vars,
+    distr = FALSE) {
 
     if ( ! requireNamespace("jmvcore", quietly=TRUE))
         stop("summarydata requires jmvcore to be installed (restart may be required)")
@@ -115,7 +134,8 @@ summarydata <- function(
 
 
     options <- summarydataOptions$new(
-        vars = vars)
+        vars = vars,
+        distr = distr)
 
     analysis <- summarydataClass$new(
         options = options,

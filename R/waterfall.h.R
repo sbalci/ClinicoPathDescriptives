@@ -181,8 +181,7 @@ waterfallResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
         clinicalMetrics = function() private$.items[["clinicalMetrics"]],
         waterfallplot = function() private$.items[["waterfallplot"]],
         spiderplot = function() private$.items[["spiderplot"]],
-        addResponseCategory = function() private$.items[["addResponseCategory"]],
-        mydataview = function() private$.items[["mydataview"]]),
+        addResponseCategory = function() private$.items[["addResponseCategory"]]),
     private = list(),
     public=list(
         initialize=function(options) {
@@ -298,11 +297,7 @@ waterfallResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                     "patientID",
                     "responseVar",
                     "timeVar",
-                    "inputType")))
-            self$add(jmvcore::Preformatted$new(
-                options=options,
-                name="mydataview",
-                title="mydataview"))}))
+                    "inputType")))}))
 
 waterfallBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
     "waterfallBase",
@@ -312,7 +307,7 @@ waterfallBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             super$initialize(
                 package = "ClinicoPathDescriptives",
                 name = "waterfall",
-                version = c(1,0,0),
+                version = c(0,0,2),
                 options = options,
                 results = waterfallResults$new(options=options),
                 data = data,
@@ -327,21 +322,7 @@ waterfallBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 
 #' Treatment Response Analysis
 #'
-#' Creates a waterfall plot to visualize tumor response data following RECIST 
-#' criteria.
-#'
-#' @examples
-#' \donttest{
-#' # data <- data.frame(
-#' #     PatientID = paste0("PT", 1:10),
-#' #     Response = c(-100, -45, -30, -20, -10, 0, 10, 20, 30, 40)
-#' # )
-#' # ClinicoPathDescriptives::waterfall(
-#' #     data = data,
-#' #     patientID = "PatientID",
-#' #     responseVar = "Response"
-#' # )
-#'}
+#' 
 #' @param data The data as a data frame.
 #' @param patientID Variable containing patient identifiers.
 #' @param responseVar Percentage change in tumor size.
@@ -351,8 +332,8 @@ waterfallBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 #'   calculate percent change) or 'percentage' for pre-calculated percentage
 #'   changes
 #' @param sortBy Sort the waterfall plot by best response or patient ID.
-#' @param showThresholds Show +20 percent and -30 percent RECIST thresholds.
-#' @param labelOutliers Label responses exceeding ±50 percent.
+#' @param showThresholds .
+#' @param labelOutliers .
 #' @param showMedian Show median response as a horizontal line.
 #' @param showCI Show confidence interval around median response.
 #' @param minResponseForLabel Minimum response value for labels to be
@@ -372,7 +353,6 @@ waterfallBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 #'   \code{results$waterfallplot} \tab \tab \tab \tab \tab an image \cr
 #'   \code{results$spiderplot} \tab \tab \tab \tab \tab an image \cr
 #'   \code{results$addResponseCategory} \tab \tab \tab \tab \tab an output \cr
-#'   \code{results$mydataview} \tab \tab \tab \tab \tab a preformatted \cr
 #' }
 #'
 #' Tables can be converted to data frames with \code{asDF} or \code{\link{as.data.frame}}. For example:

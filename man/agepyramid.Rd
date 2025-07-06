@@ -4,7 +4,14 @@
 \alias{agepyramid}
 \title{Age Pyramid}
 \usage{
-agepyramid(data, age, gender, female)
+agepyramid(
+  data,
+  age,
+  gender,
+  female,
+  bin_width = 5,
+  plot_title = "Age Pyramid"
+)
 }
 \arguments{
 \item{data}{The data as a data frame.}
@@ -17,6 +24,11 @@ the categorical values used for the report}
 
 \item{female}{a string naming the level from \code{gender} that contains
 the level female}
+
+\item{bin_width}{The width of the age bins in years. Adjust this to change
+the granularity of the age groups.}
+
+\item{plot_title}{The title displayed on the age pyramid plot.}
 }
 \value{
 A results object containing:
