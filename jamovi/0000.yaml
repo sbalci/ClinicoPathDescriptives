@@ -140,6 +140,7 @@ analyses:
       This function generates a "Table One", a descriptive summary table
       frequently used in  clinicopathological research manuscripts. It supports
       multiple output styles for flexible formatting.
+    ribbon: analyses
 datasets:
   - name: histopathology including analysis
     path: histopathologyDescriptives.omv
