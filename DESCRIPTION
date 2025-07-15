@@ -1,29 +1,29 @@
 Type: Package
 Package: ClinicoPathDescriptives
 Title: Descriptive Analysis Tools for Clinicopathological Research
-Version: 0.0.3.55
-Date: 2025-07-13
-Authors@R: 
+Version: 0.0.3.59
+Date: 2025-07-15
+Authors@R:
     person(given = "Serdar",
            family = "Balci",
            role = c("aut", "cre"),
-           email = "drserdarbalci@gmail.com",
+           email = "<drserdarbalci@gmail.com>",
            comment = c(ORCID = "0000-0002-7852-3851"))
 Maintainer: Serdar Balci <drserdarbalci@gmail.com>
 Description: A comprehensive toolkit for descriptive analysis in clinicopathological research.
     Provides interactive graphical user interface functions through the 'jamovi' statistical platform.
-    Features include generating descriptive summaries in natural language, creating cross tables 
+    Features include generating descriptive summaries in natural language, creating cross tables
     with appropriate statistical tests, performing survival analyses with tables and plots,
     visualizing categorical data relationships through alluvial diagrams and Venn diagrams,
     and conducting data quality assessments using Benford's law. The package emphasizes
     reproducible research workflows and automated reporting capabilities for medical research.
-URL: https://github.com/sbalci/ClinicoPathJamoviModule/, https://github.com/sbalci/ClinicoPathDescriptives/, https://sbalci.github.io/ClinicoPathJamoviModule/, https://www.serdarbalci.com/ClinicoPathDescriptives/
-BugReports: 
-    https://github.com/sbalci/ClinicoPathJamoviModule/issues/
+URL: <https://github.com/sbalci/ClinicoPathJamoviModule/>, <https://github.com/sbalci/ClinicoPathDescriptives/>, <https://sbalci.github.io/ClinicoPathJamoviModule/>, <https://www.serdarbalci.com/ClinicoPathDescriptives/>
+BugReports:
+    <https://github.com/sbalci/ClinicoPathJamoviModule/issues/>
 License: GPL (>= 2)
 Depends:
     R (>= 4.1.0)
-Imports: 
+Imports:
     dplyr,
     magrittr,
     ggplot2,
@@ -55,10 +55,10 @@ Imports:
     gt,
     htmltools,
     moments,
-    rlang
-Remotes:
-    nbarrowman/vtree@ffa53d4ea5050fa9b26918f4bb30595e91a0f489,
-    hms-dbmi/UpSetR
+    rlang,
+    UpSetR,
+    ComplexUpset,
+    vtree
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
