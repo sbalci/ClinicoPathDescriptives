@@ -85,3 +85,4 @@ R/utils-pipe.R
 ^gfortran.*
 
 ^.*\.code\-workspace$
+CITATION.cff
