@@ -1,8 +1,8 @@
 Type: Package
 Package: ClinicoPathDescriptives
 Title: Descriptive Analysis Tools for Clinicopathological Research
-Version: 0.0.3.69
-Date: 2025-07-23
+Version: 0.0.3.70
+Date: 2025-07-26
 Authors@R:
     person(given = "Serdar",
            family = "Balci",
@@ -62,6 +62,8 @@ Imports:
     ggswim,
     lubridate,
     pivottabler
+Remotes:
+    CHOP-CGTInformatics/ggswim
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
