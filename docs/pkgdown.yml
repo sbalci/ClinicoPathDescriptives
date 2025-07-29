@@ -1,6 +1,59 @@
-pandoc: 2.17.1.1
-pkgdown: 2.0.2
+pandoc: 3.7.0.2
+pkgdown: 2.1.3
 pkgdown_sha: ~
-articles: {}
-last_built: 2022-04-03T18:40Z
-
+articles:
+  01-biomarkerresponse-comprehensive: 01-biomarkerresponse-comprehensive.html
+  01-comprehensive-data-quality: 01-comprehensive-data-quality.html
+  01-getting-started: 01-getting-started.html
+  01-introduction: 01-introduction.html
+  02-data-quality: 02-data-quality.html
+  02-tableone: 02-tableone.html
+  03-data-summary: 03-data-summary.html
+  03-getting-started-alt: 03-getting-started-alt.html
+  03-reportcat: 03-reportcat.html
+  03-summarydata: 03-summarydata.html
+  04-benford-comprehensive: 04-benford-comprehensive.html
+  04-benford: 04-benford.html
+  04-data-quality-exploration: 04-data-quality-exploration.html
+  05-alluvial: 05-alluvial.html
+  05-dataquality-comprehensive: 05-dataquality-comprehensive.html
+  05-digital-pathology: 05-digital-pathology.html
+  06-agepyramid: 06-agepyramid.html
+  06-molecular-workflow: 06-molecular-workflow.html
+  07-ihcstats-comprehensive-guide: 07-ihcstats-comprehensive-guide.html
+  08-autoeda: 08-autoeda.html
+  08-function-agepyramid: 08-function-agepyramid.html
+  09-crosstable: 09-crosstable.html
+  09-function-alluvial: 09-function-alluvial.html
+  10-function-benford: 10-function-benford.html
+  10-visualization-gallery: 10-visualization-gallery.html
+  11-function-crosstable: 11-function-crosstable.html
+  12-function-reportcat: 12-function-reportcat.html
+  13-cisingle: 13-cisingle.html
+  13-enhancedcrosstable: 13-enhancedcrosstable.html
+  13-function-summarydata: 13-function-summarydata.html
+  14-enhancedtables: 14-enhancedtables.html
+  14-function-tableone: 14-function-tableone.html
+  15-clinical-hemodynamic-monitoring: 15-clinical-hemodynamic-monitoring.html
+  15-eurostatmap: 15-eurostatmap.html
+  15-function-venn: 15-function-venn.html
+  15-groupsummary-comprehensive: 15-groupsummary-comprehensive.html
+  16-coefficient-plots: 16-coefficient-plots.html
+  16-use-clinicopath-in-r: 16-use-clinicopath-in-r.html
+  17-desctools: 17-desctools.html
+  18-consort-flowcharts: 18-consort-flowcharts.html
+  19-contingency-tables: 19-contingency-tables.html
+  19-flowchart-comprehensive: 19-flowchart-comprehensive.html
+  20-ggflowchart-comprehensive: 20-ggflowchart-comprehensive.html
+  20-paired-contingency-tables: 20-paired-contingency-tables.html
+  21-correlation-analysis: 21-correlation-analysis.html
+  21-ggprism-comprehensive: 21-ggprism-comprehensive.html
+  22-gtsummary-comprehensive: 22-gtsummary-comprehensive.html
+  23-hullplot-comprehensive: 23-hullplot-comprehensive.html
+  37-missingdata-comprehensive: 37-missingdata-comprehensive.html
+  swimmer-unified-datasets: swimmer-unified-datasets.html
+  swimmerplot-unified-comprehensive: swimmerplot-unified-comprehensive.html
+last_built: 2025-07-29T12:20Z
+urls:
+  reference: https://www.serdarbalci.com/ClinicoPathDescriptives/reference
+  article: https://www.serdarbalci.com/ClinicoPathDescriptives/articles

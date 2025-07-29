@@ -1,66 +1,110 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ClinicoPath-package.html</loc>
-  </url>
-  <url>
-    <loc>/reference/agepyramid.html</loc>
-  </url>
-  <url>
-    <loc>/reference/agepyramidClass.html</loc>
-  </url>
-  <url>
-    <loc>/reference/alluvial.html</loc>
-  </url>
-  <url>
-    <loc>/reference/alluvialClass.html</loc>
-  </url>
-  <url>
-    <loc>/reference/benford.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crosstable.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crosstableClass.html</loc>
-  </url>
-  <url>
-    <loc>/reference/histopathology.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/reportcat.html</loc>
-  </url>
-  <url>
-    <loc>/reference/reportcatClass.html</loc>
-  </url>
-  <url>
-    <loc>/reference/summarydata.html</loc>
-  </url>
-  <url>
-    <loc>/reference/summarydataClass.html</loc>
-  </url>
-  <url>
-    <loc>/reference/tableone.html</loc>
-  </url>
-  <url>
-    <loc>/reference/tableoneClass.html</loc>
-  </url>
-  <url>
-    <loc>/reference/venn.html</loc>
-  </url>
-  <url>
-    <loc>/reference/vennClass.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/404.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/CLAUDE.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/LICENSE.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/README_widgets.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/01-biomarkerresponse-comprehensive.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/01-comprehensive-data-quality.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/01-getting-started.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/01-introduction.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/02-data-quality.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/02-tableone.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/03-data-summary.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/03-getting-started-alt.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/03-reportcat.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/03-summarydata.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/04-benford-comprehensive.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/04-benford.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/04-data-quality-exploration.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/05-alluvial.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/05-dataquality-comprehensive.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/05-digital-pathology.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/06-agepyramid.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/06-molecular-workflow.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/07-ihcstats-comprehensive-guide.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/08-autoeda.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/08-function-agepyramid.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/09-crosstable.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/09-function-alluvial.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/10-function-benford.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/10-visualization-gallery.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/11-function-crosstable.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/12-function-reportcat.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/13-cisingle.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/13-enhancedcrosstable.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/13-function-summarydata.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/14-enhancedtables.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/14-function-tableone.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/15-clinical-hemodynamic-monitoring.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/15-eurostatmap.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/15-function-venn.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/15-groupsummary-comprehensive.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/16-coefficient-plots.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/16-use-clinicopath-in-r.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/17-desctools.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/18-consort-flowcharts.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/19-contingency-tables.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/19-flowchart-comprehensive.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/20-ggflowchart-comprehensive.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/20-paired-contingency-tables.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/21-correlation-analysis.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/21-ggprism-comprehensive.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/22-gtsummary-comprehensive.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/23-hullplot-comprehensive.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/37-missingdata-comprehensive.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/index.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/swimmer-unified-datasets.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/articles/swimmerplot-unified-comprehensive.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/authors.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/index.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/ClinicoPath-package.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/ClinicoPathDescriptives-package.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/agepyramid.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/agepyramidClass.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/alluvial.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/alluvialClass.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/benford.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/benfordClass.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/bootstrapIDI.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/calculate_auc.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/calculate_nlr.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/calculate_npv.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/calculate_plr.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/calculate_ppv.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/calculate_sensitivity.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/calculate_specificity.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/clinicopath_startup_message.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/crosstable.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/crosstableClass.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/histopathology.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/index.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/is_in_range.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/load_required_package.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/na-coalescing.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/not-in-alt.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/not-in.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/null-coalescing.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/pipe.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/print.sensSpecTable.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/prop_to_percent.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/raw_to_prob.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/reportcat.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/reportcatClass.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/safe_divide.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/summarydata.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/summarydataClass.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/swimmerplot.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/swimmerplotClass.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/tableone.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/tableone2.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/tableone2Class.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/tableoneClass.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/validateROCInputs.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/vartree.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/vartreeClass.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/venn.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/vennClass.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/waterfall.html</loc></url>
+<url><loc>https://www.serdarbalci.com/ClinicoPathDescriptives/reference/waterfallClass.html</loc></url>
 </urlset>
+
