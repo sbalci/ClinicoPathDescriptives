@@ -1,7 +1,7 @@
 ---
 title: Descriptives Functions for Clinicopathological Research
 name: ClinicoPathDescriptives
-version: 0.0.3.89
+version: 0.0.3.90
 jms: '1.0'
 authors:
   - Serdar Balci
@@ -84,7 +84,7 @@ analyses:
     name: benford
     ns: ClinicoPathDescriptives
     menuGroup: Exploration
-    menuSubgroup: ClinicoPath Descriptives
+    menuSubgroup: ClinicoPath Data Quality
     menuTitle: Benford Analysis
     ribbon: analyses
     category: analyses
@@ -136,7 +136,7 @@ analyses:
       clinical events.
     category: analyses
 datasets:
-  - name: histopathology including analysis
+  - name: Histopathology Data Including Analysis
     path: histopathologyDescriptives.omv
     description: Example analysis for descriptive functions.
     tags:
@@ -145,6 +145,31 @@ datasets:
       - Cross Tables
       - Alluvial Diagrams
       - Venn Diagrams
+  - name: Swimmer Plot Analysis
+    path: swimmerplot_sample.omv
+    description: Example analysis for swimmer plot.
+    tags:
+      - Swimmer Plot
+      - Oncology
+      - Pathology
+      - Follow-up
+  - name: Waterfall Plot
+    path: waterfall_percentage_basic.omv
+    description: Example analysis for Waterfall Plot.
+    tags:
+      - Waterfall Plot
+      - Oncology
+      - Pathology
+      - Follow-up
+  - name: Waterfall and Spider Plot
+    path: waterfall_raw_longitudinal.omv
+    description: Example analysis for Waterfall Plot.
+    tags:
+      - Waterfall Plot
+      - Spider Plot
+      - Oncology
+      - Pathology
+      - Follow-up
 usesNative: true
 minApp: 1.6.0
 

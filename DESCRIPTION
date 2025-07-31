@@ -1,7 +1,7 @@
 Type: Package
 Package: ClinicoPathDescriptives
 Title: Descriptive Analysis Tools for Clinicopathological Research
-Version: 0.0.3.89
+Version: 0.0.3.90
 Date: 2025-07-31
 Authors@R:
     person(given = "Serdar",
@@ -61,7 +61,8 @@ Imports:
     vtree,
     ggswim,
     lubridate,
-    pivottabler
+    pivottabler,
+    cardx
 Remotes:
     CHOP-CGTInformatics/ggswim
 Encoding: UTF-8
