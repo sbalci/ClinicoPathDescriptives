@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ClinicoPathDescriptives</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.3.89</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.3.90</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -197,7 +197,9 @@ structures with detailed annotations</li>
 <span><span class="co">## when loading 'ClinicoPathDescriptives'</span></span></code></pre>
 <pre><code><span><span class="co">## Warning: replacing previous import 'dplyr::select' by 'jmvcore::select' when</span></span>
 <span><span class="co">## loading 'ClinicoPathDescriptives'</span></span></code></pre>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<pre><code><span><span class="co">## Warning: replacing previous import 'magrittr::extract' by 'tidyr::extract' when</span></span>
+<span><span class="co">## loading 'ClinicoPathDescriptives'</span></span></code></pre>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## Attaching package: 'dplyr'</span></span></code></pre>
@@ -207,47 +209,47 @@ structures with detailed annotations</li>
 <pre><code><span><span class="co">## The following objects are masked from 'package:base':</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">##     intersect, setdiff, setequal, union</span></span></code></pre>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/" class="external-link">knitr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Load comprehensive ggflowchart test datasets</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"simple_process_flow"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning in data("simple_process_flow"): data set 'simple_process_flow' not</span></span>
 <span><span class="co">## found</span></span></code></pre>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"clinical_decision_flow"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning in data("clinical_decision_flow"): data set 'clinical_decision_flow'</span></span>
 <span><span class="co">## not found</span></span></code></pre>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"research_pipeline_flow"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning in data("research_pipeline_flow"): data set 'research_pipeline_flow'</span></span>
 <span><span class="co">## not found</span></span></code></pre>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"lab_workflow_flow"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning in data("lab_workflow_flow"): data set 'lab_workflow_flow' not found</span></span></code></pre>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"data_analysis_pipeline"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning in data("data_analysis_pipeline"): data set 'data_analysis_pipeline'</span></span>
 <span><span class="co">## not found</span></span></code></pre>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"patient_care_pathway"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning in data("patient_care_pathway"): data set 'patient_care_pathway' not</span></span>
 <span><span class="co">## found</span></span></code></pre>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"software_dev_flow"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning in data("software_dev_flow"): data set 'software_dev_flow' not found</span></span></code></pre>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"minimal_ggflow"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning in data("minimal_ggflow"): data set 'minimal_ggflow' not found</span></span></code></pre>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"complex_decision_tree"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning in data("complex_decision_tree"): data set 'complex_decision_tree' not</span></span>
 <span><span class="co">## found</span></span></code></pre>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"manufacturing_process"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning in data("manufacturing_process"): data set 'manufacturing_process' not</span></span>
 <span><span class="co">## found</span></span></code></pre>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"multi_group_workflow"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"ggflowchart_comprehensive_data"</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -258,7 +260,7 @@ structures with detailed annotations</li>
 <h3 id="simple-process-flow">Simple Process Flow<a class="anchor" aria-label="anchor" href="#simple-process-flow"></a>
 </h3>
 <p>Let’s start with a basic process flowchart:</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Display the simple process flow data structure</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">simple_process_flow</span>, </span>
 <span>             caption <span class="op">=</span> <span class="st">"Simple Process Flow Data Structure"</span><span class="op">)</span></span>
@@ -282,7 +284,7 @@ with branching - <strong>Process C</strong>: Final processing step -
 <div class="section level3">
 <h3 id="clinical-decision-flow">Clinical Decision Flow<a class="anchor" aria-label="anchor" href="#clinical-decision-flow"></a>
 </h3>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Display clinical decision data</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">clinical_decision_flow</span>,</span>
 <span>             caption <span class="op">=</span> <span class="st">"Clinical Decision Flow Data Structure"</span><span class="op">)</span></span>
@@ -310,7 +312,7 @@ Decisions</strong>: Inclusion/exclusion criteria -
 <div class="section level3">
 <h3 id="research-pipeline-workflow">Research Pipeline Workflow<a class="anchor" aria-label="anchor" href="#research-pipeline-workflow"></a>
 </h3>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Display research pipeline data</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">research_pipeline_flow</span>,</span>
 <span>             caption <span class="op">=</span> <span class="st">"Research Pipeline Flow Structure"</span><span class="op">)</span></span>
@@ -336,7 +338,7 @@ preparation and publication</p>
 <div class="section level3">
 <h3 id="laboratory-workflow">Laboratory Workflow<a class="anchor" aria-label="anchor" href="#laboratory-workflow"></a>
 </h3>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Display lab workflow data</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">lab_workflow_flow</span>,</span>
 <span>             caption <span class="op">=</span> <span class="st">"Laboratory Processing Workflow"</span><span class="op">)</span></span>
@@ -359,7 +361,7 @@ preparation and publication</p>
 <div class="section level3">
 <h3 id="available-color-schemes">Available Color Schemes<a class="anchor" aria-label="anchor" href="#available-color-schemes"></a>
 </h3>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Test all available color palettes</span></span>
 <span><span class="va">palettes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"clinical_blue"</span>, <span class="st">"modern_gray"</span>, <span class="st">"viridis"</span>, <span class="st">"set1"</span>, <span class="st">"pastel"</span><span class="op">)</span></span>
 <span></span>
@@ -405,7 +407,7 @@ visualization</li>
 <div class="section level3">
 <h3 id="data-analysis-pipeline">Data Analysis Pipeline<a class="anchor" aria-label="anchor" href="#data-analysis-pipeline"></a>
 </h3>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Display data analysis pipeline</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">data_analysis_pipeline</span>,</span>
 <span>             caption <span class="op">=</span> <span class="st">"Data Science Workflow"</span><span class="op">)</span></span>
@@ -424,7 +426,7 @@ visualization</li>
 <div class="section level3">
 <h3 id="patient-care-pathway">Patient Care Pathway<a class="anchor" aria-label="anchor" href="#patient-care-pathway"></a>
 </h3>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Display patient care pathway</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">patient_care_pathway</span>,</span>
 <span>             caption <span class="op">=</span> <span class="st">"Healthcare Process Flow"</span><span class="op">)</span></span>
@@ -448,7 +450,7 @@ Process</strong>: Patient admission and initial assessment -
 <div class="section level3">
 <h3 id="software-development-lifecycle">Software Development Lifecycle<a class="anchor" aria-label="anchor" href="#software-development-lifecycle"></a>
 </h3>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Display software development flow</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">software_dev_flow</span>,</span>
 <span>             caption <span class="op">=</span> <span class="st">"Software Development Lifecycle"</span><span class="op">)</span></span>
@@ -471,7 +473,7 @@ Process</strong>: Patient admission and initial assessment -
 <div class="section level3">
 <h3 id="manufacturing-process-flow">Manufacturing Process Flow<a class="anchor" aria-label="anchor" href="#manufacturing-process-flow"></a>
 </h3>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Display manufacturing process</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">manufacturing_process</span>,</span>
 <span>             caption <span class="op">=</span> <span class="st">"Industrial Manufacturing Workflow"</span><span class="op">)</span></span>
@@ -490,7 +492,7 @@ Process</strong>: Patient admission and initial assessment -
 <div class="section level3">
 <h3 id="complex-decision-tree">Complex Decision Tree<a class="anchor" aria-label="anchor" href="#complex-decision-tree"></a>
 </h3>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Display complex decision structure</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">complex_decision_tree</span>,</span>
 <span>             caption <span class="op">=</span> <span class="st">"Multi-Level Decision Tree"</span><span class="op">)</span></span>
@@ -513,7 +515,7 @@ Process</strong>: Patient admission and initial assessment -
 <div class="section level3">
 <h3 id="group-based-visualization">Group-Based Visualization<a class="anchor" aria-label="anchor" href="#group-based-visualization"></a>
 </h3>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Display multi-group workflow</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">multi_group_workflow</span>,</span>
 <span>             caption <span class="op">=</span> <span class="st">"Multi-Group Workflow Structure"</span><span class="op">)</span></span>
@@ -550,7 +552,7 @@ Concurrent operation flow</p>
 <strong>Optional Grouping Variable</strong>: Categories for color
 coding</li>
 </ol>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Example of minimal data structure</span></span>
 <span><span class="va">minimal_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  source <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Start"</span>, <span class="st">"Process"</span><span class="op">)</span>,</span>
@@ -574,7 +576,7 @@ coding</li>
 <div class="section level3">
 <h3 id="data-preparation-guidelines">Data Preparation Guidelines<a class="anchor" aria-label="anchor" href="#data-preparation-guidelines"></a>
 </h3>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Function to validate ggflowchart data</span></span>
 <span><span class="va">validate_ggflowchart_data</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">from_var</span>, <span class="va">to_var</span>, <span class="va">group_var</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -643,7 +645,7 @@ coding</li>
 <div class="section level3">
 <h3 id="multi-type-workflow-comparison">Multi-Type Workflow Comparison<a class="anchor" aria-label="anchor" href="#multi-type-workflow-comparison"></a>
 </h3>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Display comprehensive dataset structure</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">ggflowchart_comprehensive_data</span>,</span>
 <span>             caption <span class="op">=</span> <span class="st">"Comprehensive Multi-Workflow Dataset"</span><span class="op">)</span></span>
@@ -715,7 +717,7 @@ ggFlowchart</li>
 <div class="section level3">
 <h3 id="data-preparation-for-jamovi">Data Preparation for jamovi<a class="anchor" aria-label="anchor" href="#data-preparation-for-jamovi"></a>
 </h3>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Example of preparing data for jamovi ggflowchart</span></span>
 <span><span class="va">jamovi_workflow_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  process_from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Data Import"</span>, <span class="st">"Data Cleaning"</span>, <span class="st">"Analysis"</span>, <span class="st">"Reporting"</span><span class="op">)</span>,</span>
@@ -734,7 +736,7 @@ ggFlowchart</li>
 <div class="section level3">
 <h3 id="ggflowchart-vs--diagrammer-flowchart">ggFlowchart vs. DiagrammeR Flowchart<a class="anchor" aria-label="anchor" href="#ggflowchart-vs--diagrammer-flowchart"></a>
 </h3>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">comparison_features</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  Feature <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Aesthetic Style"</span>, <span class="st">"Data Structure"</span>, <span class="st">"Complexity Support"</span>, </span>
 <span>              <span class="st">"Color Options"</span>, <span class="st">"Statistics"</span>, <span class="st">"Use Case"</span>, <span class="st">"Learning Curve"</span><span class="op">)</span>,</span>
@@ -799,7 +801,7 @@ for nodes</li>
 <div class="section level3">
 <h3 id="common-patterns">Common Patterns<a class="anchor" aria-label="anchor" href="#common-patterns"></a>
 </h3>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Linear workflow pattern</span></span>
 <span><span class="va">linear_pattern</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Step 1"</span>, <span class="st">"Step 2"</span>, <span class="st">"Step 3"</span><span class="op">)</span>,</span>
@@ -833,7 +835,7 @@ for nodes</li>
 <div class="section level3">
 <h3 id="edge-case-handling">Edge Case Handling<a class="anchor" aria-label="anchor" href="#edge-case-handling"></a>
 </h3>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Test various edge cases</span></span>
 <span><span class="va">edge_case_tests</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>  <span class="co"># Case 1: Self-loops</span></span>
@@ -879,7 +881,7 @@ for nodes</li>
 <div class="section level3">
 <h3 id="data-quality-checks">Data Quality Checks<a class="anchor" aria-label="anchor" href="#data-quality-checks"></a>
 </h3>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Function to assess flowchart data quality</span></span>
 <span><span class="va">assess_flowchart_quality</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">from_var</span>, <span class="va">to_var</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">quality_report</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>

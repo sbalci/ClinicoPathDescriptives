@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ClinicoPathDescriptives</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.3.89</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.3.90</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -197,7 +197,9 @@ clinical research, professional presentations</li>
 <span><span class="co">## when loading 'ClinicoPathDescriptives'</span></span></code></pre>
 <pre><code><span><span class="co">## Warning: replacing previous import 'dplyr::select' by 'jmvcore::select' when</span></span>
 <span><span class="co">## loading 'ClinicoPathDescriptives'</span></span></code></pre>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<pre><code><span><span class="co">## Warning: replacing previous import 'magrittr::extract' by 'tidyr::extract' when</span></span>
+<span><span class="co">## loading 'ClinicoPathDescriptives'</span></span></code></pre>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## Attaching package: 'dplyr'</span></span></code></pre>
@@ -207,49 +209,49 @@ clinical research, professional presentations</li>
 <pre><code><span><span class="co">## The following objects are masked from 'package:base':</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">##     intersect, setdiff, setequal, union</span></span></code></pre>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/" class="external-link">knitr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Load comprehensive ggprism test datasets</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"clinical_prism_data"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning in data("clinical_prism_data"): data set 'clinical_prism_data' not</span></span>
 <span><span class="co">## found</span></span></code></pre>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"dose_response_prism_data"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning in data("dose_response_prism_data"): data set</span></span>
 <span><span class="co">## 'dose_response_prism_data' not found</span></span></code></pre>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"time_course_prism_data"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning in data("time_course_prism_data"): data set 'time_course_prism_data'</span></span>
 <span><span class="co">## not found</span></span></code></pre>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"statistical_comparison_data"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning in data("statistical_comparison_data"): data set</span></span>
 <span><span class="co">## 'statistical_comparison_data' not found</span></span></code></pre>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"biomarker_expression_data"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning in data("biomarker_expression_data"): data set</span></span>
 <span><span class="co">## 'biomarker_expression_data' not found</span></span></code></pre>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"pharmacokinetics_data"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning in data("pharmacokinetics_data"): data set 'pharmacokinetics_data' not</span></span>
 <span><span class="co">## found</span></span></code></pre>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"colorblind_safe_data"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning in data("colorblind_safe_data"): data set 'colorblind_safe_data' not</span></span>
 <span><span class="co">## found</span></span></code></pre>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"minimal_prism_data"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning in data("minimal_prism_data"): data set 'minimal_prism_data' not found</span></span></code></pre>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"large_prism_dataset"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning in data("large_prism_dataset"): data set 'large_prism_dataset' not</span></span>
 <span><span class="co">## found</span></span></code></pre>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"publication_prism_data"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning in data("publication_prism_data"): data set 'publication_prism_data'</span></span>
 <span><span class="co">## not found</span></span></code></pre>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"comprehensive_prism_data"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning in data("comprehensive_prism_data"): data set</span></span>
 <span><span class="co">## 'comprehensive_prism_data' not found</span></span></code></pre>
@@ -261,7 +263,7 @@ clinical research, professional presentations</li>
 <h3 id="clinical-trial-violin-plot">Clinical Trial Violin Plot<a class="anchor" aria-label="anchor" href="#clinical-trial-violin-plot"></a>
 </h3>
 <p>Let’s start with a basic clinical trial analysis:</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Display the clinical data structure</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">clinical_prism_data</span><span class="op">)</span>, </span>
 <span>             caption <span class="op">=</span> <span class="st">"Clinical Trial Data Structure"</span><span class="op">)</span></span>
@@ -292,7 +294,7 @@ statistics table</p>
 <div class="section level3">
 <h3 id="box-plot-with-error-bars">Box Plot with Error Bars<a class="anchor" aria-label="anchor" href="#box-plot-with-error-bars"></a>
 </h3>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create a Prism-style box plot</span></span>
 <span><span class="va">clinical_box</span> <span class="op">&lt;-</span> <span class="fu">ggprism</span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">clinical_prism_data</span>,</span>
@@ -316,7 +318,7 @@ statistics table</p>
 <div class="section level3">
 <h3 id="dose-response-analysis">Dose-Response Analysis<a class="anchor" aria-label="anchor" href="#dose-response-analysis"></a>
 </h3>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Display dose-response data</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">dose_response_prism_data</span><span class="op">)</span>,</span>
 <span>             caption <span class="op">=</span> <span class="st">"Dose-Response Data Structure"</span><span class="op">)</span></span>
@@ -341,7 +343,7 @@ statistics table</p>
 <div class="section level3">
 <h3 id="time-course-analysis">Time Course Analysis<a class="anchor" aria-label="anchor" href="#time-course-analysis"></a>
 </h3>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Display time course data</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">time_course_prism_data</span><span class="op">)</span>,</span>
 <span>             caption <span class="op">=</span> <span class="st">"Time Course Data Structure"</span><span class="op">)</span></span>
@@ -365,7 +367,7 @@ statistics table</p>
 <div class="section level3">
 <h3 id="column-plot-with-error-bars">Column Plot with Error Bars<a class="anchor" aria-label="anchor" href="#column-plot-with-error-bars"></a>
 </h3>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create column plot for summary data</span></span>
 <span><span class="va">column_plot</span> <span class="op">&lt;-</span> <span class="fu">ggprism</span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">statistical_comparison_data</span>,</span>
@@ -390,7 +392,7 @@ statistics table</p>
 <div class="section level3">
 <h3 id="available-prism-palettes">Available Prism Palettes<a class="anchor" aria-label="anchor" href="#available-prism-palettes"></a>
 </h3>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Test all major color palettes</span></span>
 <span><span class="va">palette_examples</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"floral"</span>, <span class="st">"candy_bright"</span>, <span class="st">"office"</span>, <span class="st">"pastels"</span>, </span>
 <span>                     <span class="st">"colorblind_safe"</span>, <span class="st">"blueprint"</span>, <span class="st">"viridis"</span>, <span class="st">"ocean"</span><span class="op">)</span></span>
@@ -463,7 +465,7 @@ differences</li>
 <div class="section level3">
 <h3 id="palette-preview-mode">Palette Preview Mode<a class="anchor" aria-label="anchor" href="#palette-preview-mode"></a>
 </h3>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Enable palette preview to see all colors</span></span>
 <span><span class="va">preview_demo</span> <span class="op">&lt;-</span> <span class="fu">ggprism</span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">biomarker_expression_data</span>,</span>
@@ -482,7 +484,7 @@ differences</li>
 <div class="section level3">
 <h3 id="automatic-statistical-testing">Automatic Statistical Testing<a class="anchor" aria-label="anchor" href="#automatic-statistical-testing"></a>
 </h3>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Display statistical comparison data</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">statistical_comparison_data</span><span class="op">)</span>,</span>
 <span>             caption <span class="op">=</span> <span class="st">"Multi-Group Statistical Data"</span><span class="op">)</span></span>
@@ -506,7 +508,7 @@ differences</li>
 <div class="section level3">
 <h3 id="manual-statistical-method-selection">Manual Statistical Method Selection<a class="anchor" aria-label="anchor" href="#manual-statistical-method-selection"></a>
 </h3>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Test specific statistical methods</span></span>
 <span><span class="va">statistical_methods</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ttest"</span>, <span class="st">"wilcoxon"</span>, <span class="st">"anova"</span>, <span class="st">"kruskal"</span><span class="op">)</span></span>
 <span></span>
@@ -528,7 +530,7 @@ differences</li>
 <div class="section level3">
 <h3 id="p-value-formatting-options">P-value Formatting Options<a class="anchor" aria-label="anchor" href="#p-value-formatting-options"></a>
 </h3>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Different p-value display formats</span></span>
 <span><span class="va">pvalue_formats</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"exact"</span>, <span class="st">"scientific"</span>, <span class="st">"stars"</span>, <span class="st">"symbols"</span><span class="op">)</span></span>
 <span></span>
@@ -552,7 +554,7 @@ differences</li>
 <div class="section level3">
 <h3 id="publication-mode">Publication Mode<a class="anchor" aria-label="anchor" href="#publication-mode"></a>
 </h3>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Display publication data</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">publication_prism_data</span><span class="op">)</span>,</span>
 <span>             caption <span class="op">=</span> <span class="st">"Publication Example Data"</span><span class="op">)</span></span>
@@ -579,7 +581,7 @@ differences</li>
 <div class="section level3">
 <h3 id="faceted-analysis">Faceted Analysis<a class="anchor" aria-label="anchor" href="#faceted-analysis"></a>
 </h3>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create faceted plot</span></span>
 <span><span class="va">faceted_plot</span> <span class="op">&lt;-</span> <span class="fu">ggprism</span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">publication_prism_data</span>,</span>
@@ -602,7 +604,7 @@ differences</li>
 <div class="section level3">
 <h3 id="pharmacokinetics-analysis">Pharmacokinetics Analysis<a class="anchor" aria-label="anchor" href="#pharmacokinetics-analysis"></a>
 </h3>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Display PK data</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">pharmacokinetics_data</span><span class="op">)</span>,</span>
 <span>             caption <span class="op">=</span> <span class="st">"Pharmacokinetics Data Structure"</span><span class="op">)</span></span>
@@ -628,7 +630,7 @@ differences</li>
 <div class="section level3">
 <h3 id="biomarker-expression-analysis">Biomarker Expression Analysis<a class="anchor" aria-label="anchor" href="#biomarker-expression-analysis"></a>
 </h3>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create biomarker expression plot</span></span>
 <span><span class="va">biomarker_plot</span> <span class="op">&lt;-</span> <span class="fu">ggprism</span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">biomarker_expression_data</span>,</span>
@@ -655,7 +657,7 @@ differences</li>
 <div class="section level3">
 <h3 id="colorblind-safe-visualization">Colorblind-Safe Visualization<a class="anchor" aria-label="anchor" href="#colorblind-safe-visualization"></a>
 </h3>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Display accessibility data</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">colorblind_safe_data</span><span class="op">)</span>,</span>
 <span>             caption <span class="op">=</span> <span class="st">"Accessibility Test Data"</span><span class="op">)</span></span>
@@ -677,7 +679,7 @@ differences</li>
 <div class="section level3">
 <h3 id="shape-palette-options">Shape Palette Options<a class="anchor" aria-label="anchor" href="#shape-palette-options"></a>
 </h3>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Test different shape palettes for scatter plots</span></span>
 <span><span class="va">shape_palettes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"default"</span>, <span class="st">"prism"</span>, <span class="st">"filled"</span>, <span class="st">"open"</span><span class="op">)</span></span>
 <span></span>
@@ -702,7 +704,7 @@ differences</li>
 <div class="section level3">
 <h3 id="theme-variations">Theme Variations<a class="anchor" aria-label="anchor" href="#theme-variations"></a>
 </h3>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Test all Prism theme variants</span></span>
 <span><span class="va">prism_themes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"default"</span>, <span class="st">"white"</span>, <span class="st">"minimal"</span>, <span class="st">"publication"</span><span class="op">)</span></span>
 <span></span>
@@ -722,7 +724,7 @@ differences</li>
 <div class="section level3">
 <h3 id="error-bar-types">Error Bar Types<a class="anchor" aria-label="anchor" href="#error-bar-types"></a>
 </h3>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Test different error bar types</span></span>
 <span><span class="va">error_types</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"none"</span>, <span class="st">"se"</span>, <span class="st">"sd"</span>, <span class="st">"ci"</span><span class="op">)</span></span>
 <span></span>
@@ -741,7 +743,7 @@ differences</li>
 <div class="section level3">
 <h3 id="advanced-prism-guides">Advanced Prism Guides<a class="anchor" aria-label="anchor" href="#advanced-prism-guides"></a>
 </h3>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Test advanced Prism axis guides</span></span>
 <span><span class="va">guide_types</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"standard"</span>, <span class="st">"minor"</span>, <span class="st">"offset"</span>, <span class="st">"offset_minor"</span>, <span class="st">"bracket"</span><span class="op">)</span></span>
 <span></span>
@@ -779,7 +781,7 @@ coding and statistics</li>
 <strong>Optional Faceting Variable</strong>: Categories for panel
 creation</li>
 </ol>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Example of minimal data structure</span></span>
 <span><span class="va">minimal_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  treatment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Control"</span>, <span class="st">"Treatment"</span><span class="op">)</span>,</span>
@@ -803,7 +805,7 @@ creation</li>
 <div class="section level3">
 <h3 id="data-validation-function">Data Validation Function<a class="anchor" aria-label="anchor" href="#data-validation-function"></a>
 </h3>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Function to validate ggprism data</span></span>
 <span><span class="va">validate_ggprism_data</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">x_var</span>, <span class="va">y_var</span>, <span class="va">group_var</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">issues</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -869,7 +871,7 @@ creation</li>
 <div class="section level3">
 <h3 id="performance-testing">Performance Testing<a class="anchor" aria-label="anchor" href="#performance-testing"></a>
 </h3>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Display large dataset structure</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Large dataset dimensions:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">large_prism_dataset</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">large_prism_dataset</span><span class="op">)</span>,</span>
@@ -929,7 +931,7 @@ Plots → GraphPad Prism Style Plots</li>
 <div class="section level3">
 <h3 id="data-preparation-for-jamovi">Data Preparation for jamovi<a class="anchor" aria-label="anchor" href="#data-preparation-for-jamovi"></a>
 </h3>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Example of preparing data for jamovi ggprism</span></span>
 <span><span class="va">jamovi_ready_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  dose_level <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"0 μM"</span>, <span class="st">"1 μM"</span>, <span class="st">"10 μM"</span>, <span class="st">"100 μM"</span><span class="op">)</span>,</span>
@@ -948,7 +950,7 @@ Plots → GraphPad Prism Style Plots</li>
 <div class="section level3">
 <h3 id="ggprism-vs--base-ggplot2">ggprism vs. Base ggplot2<a class="anchor" aria-label="anchor" href="#ggprism-vs--base-ggplot2"></a>
 </h3>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">comparison_features</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  Feature <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Styling"</span>, <span class="st">"Color Palettes"</span>, <span class="st">"Statistical Tests"</span>, </span>
 <span>              <span class="st">"Scientific Themes"</span>, <span class="st">"Learning Curve"</span>, <span class="st">"Customization"</span>, <span class="st">"Use Case"</span><span class="op">)</span>,</span>
@@ -1016,7 +1018,7 @@ labels</li>
 <div class="section level3">
 <h3 id="common-usage-patterns">Common Usage Patterns<a class="anchor" aria-label="anchor" href="#common-usage-patterns"></a>
 </h3>
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Pattern 1: Clinical trial analysis</span></span>
 <span><span class="va">clinical_pattern</span> <span class="op">&lt;-</span> <span class="fu">ggprism</span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">clinical_prism_data</span>,</span>
@@ -1056,7 +1058,7 @@ labels</li>
 <div class="section level3">
 <h3 id="data-issues">Data Issues<a class="anchor" aria-label="anchor" href="#data-issues"></a>
 </h3>
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Issue 1: Missing values</span></span>
 <span><span class="va">missing_test_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="cn">NA</span><span class="op">)</span>,</span>
@@ -1091,7 +1093,7 @@ labels</li>
 <div class="section level3">
 <h3 id="package-dependencies">Package Dependencies<a class="anchor" aria-label="anchor" href="#package-dependencies"></a>
 </h3>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Check if ggprism package is available</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"ggprism"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"✓ ggprism package is available\n"</span><span class="op">)</span></span>

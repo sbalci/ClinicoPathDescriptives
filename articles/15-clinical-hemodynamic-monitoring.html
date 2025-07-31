@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ClinicoPathDescriptives</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.3.89</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.3.90</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -215,7 +215,9 @@ and MCAv)</li>
 <span><span class="co">## when loading 'ClinicoPathDescriptives'</span></span></code></pre>
 <pre><code><span><span class="co">## Warning: replacing previous import 'dplyr::select' by 'jmvcore::select' when</span></span>
 <span><span class="co">## loading 'ClinicoPathDescriptives'</span></span></code></pre>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<pre><code><span><span class="co">## Warning: replacing previous import 'magrittr::extract' by 'tidyr::extract' when</span></span>
+<span><span class="co">## loading 'ClinicoPathDescriptives'</span></span></code></pre>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## Attaching package: 'dplyr'</span></span></code></pre>
@@ -225,7 +227,7 @@ and MCAv)</li>
 <pre><code><span><span class="co">## The following objects are masked from 'package:base':</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">##     intersect, setdiff, setequal, union</span></span></code></pre>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/" class="external-link">knitr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Note: This function requires the clintools package</span></span>
@@ -240,7 +242,7 @@ and MCAv)</li>
 </h2>
 <p>Since hemodynamic monitoring data is specialized, let’s create
 realistic synthetic data:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create 1 hour of synthetic monitoring data at 1 Hz</span></span>
 <span><span class="va">duration_seconds</span> <span class="op">&lt;-</span> <span class="fl">3600</span>  <span class="co"># 1 hour</span></span>
 <span><span class="va">sampling_freq</span> <span class="op">&lt;-</span> <span class="fl">1</span>  <span class="co"># 1 Hz</span></span>
@@ -277,7 +279,7 @@ realistic synthetic data:</p>
 <span><span class="co"># Display data structure</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Monitoring data structure:\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Monitoring data structure:\n</span></span></code></pre>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">monitoring_data</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 'data.frame':    3600 obs. of  6 variables:</span></span>
 <span><span class="co">##  $ time_seconds: num  0 1 2 3 4 5 6 7 8 9 ...</span></span>
@@ -286,10 +288,10 @@ realistic synthetic data:</p>
 <span><span class="co">##  $ mcav_cms    : num  61.5 62.7 61.4 62.5 64.2 ...</span></span>
 <span><span class="co">##  $ hr_bpm      : num  70.1 75.7 71 72.4 73.8 ...</span></span>
 <span><span class="co">##  $ cpp_mmhg    : num  80.9 79.7 84.4 87.5 88.9 ...</span></span></code></pre>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"\\nFirst few rows:\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## \nFirst few rows:\n</span></span></code></pre>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">monitoring_data</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##   time_seconds  abp_mmhg icp_mmhg mcav_cms   hr_bpm cpp_mmhg</span></span>
 <span><span class="co">## 1            0  92.74192 11.81565 61.49918 70.14099 80.92627</span></span>
@@ -306,7 +308,7 @@ realistic synthetic data:</p>
 <h3 id="example-1-pressure-reactivity-analysis">Example 1: Pressure Reactivity Analysis<a class="anchor" aria-label="anchor" href="#example-1-pressure-reactivity-analysis"></a>
 </h3>
 <p>Calculate PRx (pressure reactivity index) from ABP and ICP:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Note: Function available in jamovi interface</span></span>
 <span><span class="co"># Requires clintools package to be installed</span></span>
 <span></span>
@@ -340,7 +342,7 @@ autoregulate.</p>
 </h3>
 <p>Analyze autoregulation using ABP and middle cerebral artery
 velocity:</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Cerebrovascular autoregulation analysis</span></span>
 <span><span class="fu">clinmon</span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">monitoring_data</span>,</span>
@@ -374,7 +376,7 @@ components of autoregulation.</p>
 <h3 id="high-frequency-analysis">High-Frequency Analysis<a class="anchor" aria-label="anchor" href="#high-frequency-analysis"></a>
 </h3>
 <p>For high-resolution monitoring systems:</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create high-frequency data (100 Hz)</span></span>
 <span><span class="va">hf_duration</span> <span class="op">&lt;-</span> <span class="fl">600</span>  <span class="co"># 10 minutes</span></span>
 <span><span class="va">hf_freq</span> <span class="op">&lt;-</span> <span class="fl">100</span>      <span class="co"># 100 Hz</span></span>
@@ -404,7 +406,7 @@ components of autoregulation.</p>
 <h3 id="optimal-cpp-analysis">Optimal CPP Analysis<a class="anchor" aria-label="anchor" href="#optimal-cpp-analysis"></a>
 </h3>
 <p>Determine optimal cerebral perfusion pressure:</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># CPPopt analysis requires special output mode</span></span>
 <span><span class="fu">clinmon</span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">monitoring_data</span>,</span>
@@ -436,7 +438,7 @@ components of autoregulation.</p>
 <h3 id="comprehensive-monitoring-analysis">Comprehensive Monitoring Analysis<a class="anchor" aria-label="anchor" href="#comprehensive-monitoring-analysis"></a>
 </h3>
 <p>Analyze all available variables simultaneously:</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Complete hemodynamic profile</span></span>
 <span><span class="fu">clinmon</span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">monitoring_data</span>,</span>
@@ -459,7 +461,7 @@ components of autoregulation.</p>
 <h3 id="using-cpp-instead-of-separate-abpicp">Using CPP Instead of Separate ABP/ICP<a class="anchor" aria-label="anchor" href="#using-cpp-instead-of-separate-abpicp"></a>
 </h3>
 <p>When CPP is directly measured or pre-calculated:</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Analysis using cerebral perfusion pressure</span></span>
 <span><span class="fu">clinmon</span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">monitoring_data</span>,</span>
@@ -480,7 +482,7 @@ components of autoregulation.</p>
 <div class="section level3">
 <h3 id="block-and-epoch-size-selection">Block and Epoch Size Selection<a class="anchor" aria-label="anchor" href="#block-and-epoch-size-selection"></a>
 </h3>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Compare different temporal resolutions</span></span>
 <span><span class="va">parameter_combinations</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>  <span class="st">"High Resolution"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>blocksize <span class="op">=</span> <span class="fl">3</span>, epochsize <span class="op">=</span> <span class="fl">40</span><span class="op">)</span>,</span>
@@ -522,7 +524,7 @@ response</p>
 <div class="section level3">
 <h3 id="data-quality-thresholds">Data Quality Thresholds<a class="anchor" aria-label="anchor" href="#data-quality-thresholds"></a>
 </h3>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Strict quality requirements</span></span>
 <span><span class="fu">clinmon</span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">monitoring_data</span>,</span>
@@ -561,7 +563,7 @@ response</p>
 <h3 id="case-study-1-traumatic-brain-injury-monitoring">Case Study 1: Traumatic Brain Injury Monitoring<a class="anchor" aria-label="anchor" href="#case-study-1-traumatic-brain-injury-monitoring"></a>
 </h3>
 <p>Continuous monitoring in TBI patient:</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Simulate TBI patient data with raised ICP</span></span>
 <span><span class="va">tbi_data</span> <span class="op">&lt;-</span> <span class="va">monitoring_data</span></span>
 <span><span class="co"># Simulate gradually increasing ICP over time</span></span>
@@ -597,7 +599,7 @@ concerning trends</p>
 <h3 id="case-study-2-intraoperative-monitoring">Case Study 2: Intraoperative Monitoring<a class="anchor" aria-label="anchor" href="#case-study-2-intraoperative-monitoring"></a>
 </h3>
 <p>High-frequency monitoring during neurosurgery:</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Simulate intraoperative data with events</span></span>
 <span><span class="va">surgery_duration</span> <span class="op">&lt;-</span> <span class="fl">7200</span>  <span class="co"># 2 hours</span></span>
 <span><span class="va">surgery_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">surgery_duration</span> <span class="op">-</span> <span class="fl">1</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
@@ -627,7 +629,7 @@ concerning trends</p>
 <h3 id="case-study-3-research-applications">Case Study 3: Research Applications<a class="anchor" aria-label="anchor" href="#case-study-3-research-applications"></a>
 </h3>
 <p>Large dataset analysis for research:</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Simulate multi-day monitoring dataset</span></span>
 <span><span class="va">research_duration</span> <span class="op">&lt;-</span> <span class="fl">86400</span>  <span class="co"># 24 hours</span></span>
 <span><span class="va">research_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">research_duration</span> <span class="op">-</span> <span class="fl">1</span>, by <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>  <span class="co"># 0.1 Hz sampling</span></span>
@@ -662,10 +664,10 @@ concerning trends</p>
 <div class="section level3">
 <h3 id="understanding-hemodynamic-indices">Understanding Hemodynamic Indices<a class="anchor" aria-label="anchor" href="#understanding-hemodynamic-indices"></a>
 </h3>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Hemodynamic Index Interpretation Guide:\\n\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Hemodynamic Index Interpretation Guide:\n\n</span></span></code></pre>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">interpretation_guide</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  Index <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"PRx"</span>, <span class="st">"Mx"</span>, <span class="st">"Sx"</span>, <span class="st">"Dx"</span>, <span class="st">"PI"</span>, <span class="st">"RI"</span>, <span class="st">"CVRi"</span>, <span class="st">"COest"</span><span class="op">)</span>,</span>
 <span>  Normal_Range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"&lt; 0.2"</span>, <span class="st">"&lt; 0.3"</span>, <span class="st">"&lt; 0.3"</span>, <span class="st">"&lt; 0.3"</span>, <span class="st">"0.6-1.2"</span>, <span class="st">"0.5-0.7"</span>, <span class="st">"Variable"</span>, <span class="st">"4-8 L/min"</span><span class="op">)</span>,</span>
@@ -746,52 +748,52 @@ concerning trends</p>
 <div class="section level3">
 <h3 id="trending-and-alarming">Trending and Alarming<a class="anchor" aria-label="anchor" href="#trending-and-alarming"></a>
 </h3>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Clinical Trending Guidelines:\\n\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Clinical Trending Guidelines:\n\n</span></span></code></pre>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"🔴 CRITICAL TRENDS:\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 🔴 CRITICAL TRENDS:\n</span></span></code></pre>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   • PRx increasing above 0.35\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    • PRx increasing above 0.35\n</span></span></code></pre>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   • Mx consistently above 0.4\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    • Mx consistently above 0.4\n</span></span></code></pre>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   • Sudden changes in autoregulation indices\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    • Sudden changes in autoregulation indices\n</span></span></code></pre>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   • Loss of normal physiological variability\\n\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    • Loss of normal physiological variability\n\n</span></span></code></pre>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"🟡 MONITORING TRENDS:\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 🟡 MONITORING TRENDS:\n</span></span></code></pre>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   • PRx values 0.2-0.35\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    • PRx values 0.2-0.35\n</span></span></code></pre>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   • Gradual changes in baseline values\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    • Gradual changes in baseline values\n</span></span></code></pre>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   • Increased index variability\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    • Increased index variability\n</span></span></code></pre>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   • Asymmetric changes between indices\\n\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    • Asymmetric changes between indices\n\n</span></span></code></pre>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"🟢 FAVORABLE TRENDS:\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 🟢 FAVORABLE TRENDS:\n</span></span></code></pre>
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   • PRx consistently below 0.2\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    • PRx consistently below 0.2\n</span></span></code></pre>
-<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   • Stable autoregulation indices\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    • Stable autoregulation indices\n</span></span></code></pre>
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   • Preserved physiological variability\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    • Preserved physiological variability\n</span></span></code></pre>
-<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   • Appropriate responses to interventions\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    • Appropriate responses to interventions\n</span></span></code></pre>
 </div>
@@ -802,7 +804,7 @@ concerning trends</p>
 <div class="section level3">
 <h3 id="handling-missing-data">Handling Missing Data<a class="anchor" aria-label="anchor" href="#handling-missing-data"></a>
 </h3>
-<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create data with missing values (common in clinical monitoring)</span></span>
 <span><span class="va">artifact_data</span> <span class="op">&lt;-</span> <span class="va">monitoring_data</span></span>
 <span><span class="co"># Simulate sensor disconnections and artifacts</span></span>
@@ -827,52 +829,52 @@ concerning trends</p>
 <div class="section level3">
 <h3 id="quality-assessment-recommendations">Quality Assessment Recommendations<a class="anchor" aria-label="anchor" href="#quality-assessment-recommendations"></a>
 </h3>
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Data Quality Assessment Framework:\\n\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Data Quality Assessment Framework:\n\n</span></span></code></pre>
-<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"1. SIGNAL QUALITY CHECKS:\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 1. SIGNAL QUALITY CHECKS:\n</span></span></code></pre>
-<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   ✓ Physiological range validation\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    ✓ Physiological range validation\n</span></span></code></pre>
-<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   ✓ Sampling frequency verification\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    ✓ Sampling frequency verification\n</span></span></code></pre>
-<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   ✓ Missing data pattern analysis\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    ✓ Missing data pattern analysis\n</span></span></code></pre>
-<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   ✓ Artifact detection and removal\\n\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    ✓ Artifact detection and removal\n\n</span></span></code></pre>
-<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"2. ANALYSIS PARAMETER OPTIMIZATION:\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 2. ANALYSIS PARAMETER OPTIMIZATION:\n</span></span></code></pre>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   ✓ Block size appropriate for signal characteristics\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    ✓ Block size appropriate for signal characteristics\n</span></span></code></pre>
-<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   ✓ Epoch size balancing resolution vs. stability\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    ✓ Epoch size balancing resolution vs. stability\n</span></span></code></pre>
-<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   ✓ Quality thresholds based on data characteristics\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    ✓ Quality thresholds based on data characteristics\n</span></span></code></pre>
-<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   ✓ Overlap settings for trend analysis\\n\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    ✓ Overlap settings for trend analysis\n\n</span></span></code></pre>
-<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"3. CLINICAL VALIDATION:\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 3. CLINICAL VALIDATION:\n</span></span></code></pre>
-<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   ✓ Index values within expected ranges\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    ✓ Index values within expected ranges\n</span></span></code></pre>
-<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   ✓ Temporal trends consistent with clinical course\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    ✓ Temporal trends consistent with clinical course\n</span></span></code></pre>
-<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   ✓ Response to interventions as expected\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    ✓ Response to interventions as expected\n</span></span></code></pre>
-<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   ✓ Correlation between related indices\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    ✓ Correlation between related indices\n</span></span></code></pre>
 </div>
@@ -883,7 +885,7 @@ concerning trends</p>
 <div class="section level3">
 <h3 id="fast-processing-for-large-datasets">Fast Processing for Large Datasets<a class="anchor" aria-label="anchor" href="#fast-processing-for-large-datasets"></a>
 </h3>
-<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># For very large datasets (days to weeks of data)</span></span>
 <span><span class="va">large_dataset_analysis</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu">clinmon</span><span class="op">(</span></span>
@@ -907,7 +909,7 @@ concerning trends</p>
 <div class="section level3">
 <h3 id="overlapping-analysis-for-smooth-trends">Overlapping Analysis for Smooth Trends<a class="anchor" aria-label="anchor" href="#overlapping-analysis-for-smooth-trends"></a>
 </h3>
-<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Smooth trend analysis with overlapping windows</span></span>
 <span><span class="fu">clinmon</span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">monitoring_data</span>,</span>
@@ -930,104 +932,104 @@ concerning trends</p>
 <div class="section level3">
 <h3 id="real-time-monitoring-implementation">Real-time Monitoring Implementation<a class="anchor" aria-label="anchor" href="#real-time-monitoring-implementation"></a>
 </h3>
-<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Real-time Monitoring Integration:\\n\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Real-time Monitoring Integration:\n\n</span></span></code></pre>
-<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"🔄 STREAMING DATA PROCESSING:\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 🔄 STREAMING DATA PROCESSING:\n</span></span></code></pre>
-<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   • Buffer management for continuous analysis\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    • Buffer management for continuous analysis\n</span></span></code></pre>
-<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   • Incremental calculation updates\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    • Incremental calculation updates\n</span></span></code></pre>
-<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   • Real-time quality assessment\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    • Real-time quality assessment\n</span></span></code></pre>
-<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   • Automated alert generation\\n\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    • Automated alert generation\n\n</span></span></code></pre>
-<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"📊 CLINICAL DASHBOARD INTEGRATION:\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 📊 CLINICAL DASHBOARD INTEGRATION:\n</span></span></code></pre>
-<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   • Live trend displays\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    • Live trend displays\n</span></span></code></pre>
-<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   • Threshold-based alarming\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    • Threshold-based alarming\n</span></span></code></pre>
-<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   • Historical trend comparison\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    • Historical trend comparison\n</span></span></code></pre>
-<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   • Export capabilities for reporting\\n\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    • Export capabilities for reporting\n\n</span></span></code></pre>
-<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"🏥 ELECTRONIC HEALTH RECORD INTEGRATION:\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 🏥 ELECTRONIC HEALTH RECORD INTEGRATION:\n</span></span></code></pre>
-<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   • Automated data import\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    • Automated data import\n</span></span></code></pre>
-<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   • Structured result storage\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    • Structured result storage\n</span></span></code></pre>
-<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   • Clinical decision support\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    • Clinical decision support\n</span></span></code></pre>
-<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   • Research data extraction\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    • Research data extraction\n</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="research-applications">Research Applications<a class="anchor" aria-label="anchor" href="#research-applications"></a>
 </h3>
-<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Research Applications Framework:\\n\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Research Applications Framework:\n\n</span></span></code></pre>
-<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"📈 LONGITUDINAL STUDIES:\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 📈 LONGITUDINAL STUDIES:\n</span></span></code></pre>
-<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   • Multi-patient cohort analysis\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    • Multi-patient cohort analysis\n</span></span></code></pre>
-<div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   • Outcome correlation studies\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    • Outcome correlation studies\n</span></span></code></pre>
-<div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   • Intervention effect assessment\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    • Intervention effect assessment\n</span></span></code></pre>
-<div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   • Biomarker discovery\\n\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    • Biomarker discovery\n\n</span></span></code></pre>
-<div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"🔬 METHODOLOGY VALIDATION:\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 🔬 METHODOLOGY VALIDATION:\n</span></span></code></pre>
-<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   • Index comparison studies\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    • Index comparison studies\n</span></span></code></pre>
-<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   • Algorithm optimization\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    • Algorithm optimization\n</span></span></code></pre>
-<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   • Clinical correlation validation\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    • Clinical correlation validation\n</span></span></code></pre>
-<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   • Inter-rater reliability assessment\\n\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    • Inter-rater reliability assessment\n\n</span></span></code></pre>
-<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"🎯 CLINICAL TRIALS:\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 🎯 CLINICAL TRIALS:\n</span></span></code></pre>
-<div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   • Objective endpoint measurement\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    • Objective endpoint measurement\n</span></span></code></pre>
-<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   • Treatment response quantification\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    • Treatment response quantification\n</span></span></code></pre>
-<div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   • Safety monitoring\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    • Safety monitoring\n</span></span></code></pre>
-<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   • Dose-response relationships\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    • Dose-response relationships\n</span></span></code></pre>
 </div>
@@ -1038,67 +1040,67 @@ concerning trends</p>
 <div class="section level3">
 <h3 id="analysis-protocol-development">Analysis Protocol Development<a class="anchor" aria-label="anchor" href="#analysis-protocol-development"></a>
 </h3>
-<div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Hemodynamic Analysis Protocol Guidelines:\\n\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Hemodynamic Analysis Protocol Guidelines:\n\n</span></span></code></pre>
-<div class="sourceCode" id="cb164"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"1. PRE-ANALYSIS SETUP:\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 1. PRE-ANALYSIS SETUP:\n</span></span></code></pre>
-<div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   ✓ Verify data quality and completeness\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    ✓ Verify data quality and completeness\n</span></span></code></pre>
-<div class="sourceCode" id="cb168"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   ✓ Confirm physiological signal ranges\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    ✓ Confirm physiological signal ranges\n</span></span></code></pre>
-<div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   ✓ Document analysis parameters\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    ✓ Document analysis parameters\n</span></span></code></pre>
-<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   ✓ Define quality acceptance criteria\\n\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    ✓ Define quality acceptance criteria\n\n</span></span></code></pre>
-<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"2. PARAMETER SELECTION:\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 2. PARAMETER SELECTION:\n</span></span></code></pre>
-<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   ✓ Match block size to signal characteristics\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    ✓ Match block size to signal characteristics\n</span></span></code></pre>
-<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   ✓ Choose epoch size based on clinical question\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    ✓ Choose epoch size based on clinical question\n</span></span></code></pre>
-<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   ✓ Set quality thresholds appropriately\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    ✓ Set quality thresholds appropriately\n</span></span></code></pre>
-<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   ✓ Consider overlapping for trend analysis\\n\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    ✓ Consider overlapping for trend analysis\n\n</span></span></code></pre>
-<div class="sourceCode" id="cb184"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"3. RESULT INTERPRETATION:\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 3. RESULT INTERPRETATION:\n</span></span></code></pre>
-<div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   ✓ Consider clinical context\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    ✓ Consider clinical context\n</span></span></code></pre>
-<div class="sourceCode" id="cb188"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   ✓ Validate against known physiological ranges\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    ✓ Validate against known physiological ranges\n</span></span></code></pre>
-<div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb191"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   ✓ Assess temporal consistency\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    ✓ Assess temporal consistency\n</span></span></code></pre>
-<div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   ✓ Correlate with clinical interventions\\n\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    ✓ Correlate with clinical interventions\n\n</span></span></code></pre>
-<div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb195"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"4. QUALITY ASSURANCE:\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 4. QUALITY ASSURANCE:\n</span></span></code></pre>
-<div class="sourceCode" id="cb196"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb197"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   ✓ Regular algorithm validation\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    ✓ Regular algorithm validation\n</span></span></code></pre>
-<div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   ✓ Clinical correlation checks\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    ✓ Clinical correlation checks\n</span></span></code></pre>
-<div class="sourceCode" id="cb200"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb201"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   ✓ Inter-observer agreement studies\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    ✓ Inter-observer agreement studies\n</span></span></code></pre>
-<div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb203"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   ✓ Continuous quality monitoring\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    ✓ Continuous quality monitoring\n</span></span></code></pre>
 </div>
@@ -1108,31 +1110,31 @@ concerning trends</p>
 <div class="section level4">
 <h4 id="essential-elements-to-report">Essential Elements to Report<a class="anchor" aria-label="anchor" href="#essential-elements-to-report"></a>
 </h4>
-<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb205"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Hemodynamic Analysis Reporting Checklist:\\n\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Hemodynamic Analysis Reporting Checklist:\n\n</span></span></code></pre>
-<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb207"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"✓ Patient demographics and clinical context\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## ✓ Patient demographics and clinical context\n</span></span></code></pre>
-<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb209"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"✓ Monitoring equipment and setup details\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## ✓ Monitoring equipment and setup details\n</span></span></code></pre>
-<div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb211"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"✓ Sampling frequency and duration\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## ✓ Sampling frequency and duration\n</span></span></code></pre>
-<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb213"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"✓ Analysis parameters (block/epoch sizes)\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## ✓ Analysis parameters (block/epoch sizes)\n</span></span></code></pre>
-<div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb215"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"✓ Quality thresholds and data completeness\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## ✓ Quality thresholds and data completeness\n</span></span></code></pre>
-<div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb217"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"✓ Index values with confidence intervals\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## ✓ Index values with confidence intervals\n</span></span></code></pre>
-<div class="sourceCode" id="cb218"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb219"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"✓ Clinical interpretation and significance\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## ✓ Clinical interpretation and significance\n</span></span></code></pre>
-<div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb221"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"✓ Limitations and assumptions\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## ✓ Limitations and assumptions\n</span></span></code></pre>
 </div>
@@ -1140,37 +1142,37 @@ concerning trends</p>
 <div class="section level3">
 <h3 id="common-pitfalls-and-solutions">Common Pitfalls and Solutions<a class="anchor" aria-label="anchor" href="#common-pitfalls-and-solutions"></a>
 </h3>
-<div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb223"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Common Hemodynamic Analysis Pitfalls:\\n\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Common Hemodynamic Analysis Pitfalls:\n\n</span></span></code></pre>
-<div class="sourceCode" id="cb224"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb225"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"1. WRONG: Using inappropriate time windows\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 1. WRONG: Using inappropriate time windows\n</span></span></code></pre>
-<div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb227"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   RIGHT: Match analysis windows to signal characteristics\\n\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    RIGHT: Match analysis windows to signal characteristics\n\n</span></span></code></pre>
-<div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb229"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"2. WRONG: Ignoring data quality issues\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 2. WRONG: Ignoring data quality issues\n</span></span></code></pre>
-<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb231"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   RIGHT: Implement rigorous quality control\\n\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    RIGHT: Implement rigorous quality control\n\n</span></span></code></pre>
-<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb233"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"3. WRONG: Over-interpreting short-term changes\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 3. WRONG: Over-interpreting short-term changes\n</span></span></code></pre>
-<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb235"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   RIGHT: Focus on sustained trends and patterns\\n\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    RIGHT: Focus on sustained trends and patterns\n\n</span></span></code></pre>
-<div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb237"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"4. WRONG: Using single indices in isolation\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 4. WRONG: Using single indices in isolation\n</span></span></code></pre>
-<div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb239"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   RIGHT: Integrate multiple indices for comprehensive assessment\\n\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    RIGHT: Integrate multiple indices for comprehensive assessment\n\n</span></span></code></pre>
-<div class="sourceCode" id="cb240"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"5. WRONG: Ignoring clinical context\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 5. WRONG: Ignoring clinical context\n</span></span></code></pre>
-<div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb243"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"   RIGHT: Always interpret results with clinical knowledge\\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    RIGHT: Always interpret results with clinical knowledge\n</span></span></code></pre>
 </div>
