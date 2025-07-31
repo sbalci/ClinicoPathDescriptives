@@ -1,12 +1,12 @@
 ---
 title: Descriptives Functions for Clinicopathological Research
 name: ClinicoPathDescriptives
-version: 0.0.3.82
+version: 0.0.3.89
 jms: '1.0'
 authors:
   - Serdar Balci
 maintainer: Serdar Balci <drserdarbalci@gmail.com>
-date: '2025-07-28'
+date: '2025-07-31'
 type: R
 description: >-
   Descriptives Functions for Clinicopathological Research Descriptive functions
@@ -135,18 +135,6 @@ analyses:
       Creates a swimmer plot to visualize individual patient timelines and
       clinical events.
     category: analyses
-  - title: Table One Draft 2
-    name: tableone2
-    ns: ClinicoPathDescriptives
-    category: analyses
-    menuGroup: Exploration
-    menuSubgroup: ClinicoPath Descriptives
-    menuTitle: Table One Draft 2
-    description: >
-      This function generates a "Table One", a descriptive summary table
-      frequently used in  clinicopathological research manuscripts. It supports
-      multiple output styles for flexible formatting.
-    ribbon: analyses
 datasets:
   - name: histopathology including analysis
     path: histopathologyDescriptives.omv
