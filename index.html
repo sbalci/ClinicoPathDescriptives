@@ -103,9 +103,184 @@
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="clinicopathdescriptives">ClinicoPathDescriptives<a class="anchor" aria-label="anchor" href="#clinicopathdescriptives"></a>
 </h1></div>
-<p>ClinicoPath jamovi module Descriptives</p>
-<p>See <a href="https://sbalci.github.io/ClinicoPathJamoviModule/" class="external-link uri">https://sbalci.github.io/ClinicoPathJamoviModule/</a></p>
-<p><a href="https://github.com/sbalci/ClinicoPathDescriptives/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/sbalci/ClinicoPathDescriptives/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></p>
+<p><a href="https://github.com/sbalci/ClinicoPathDescriptives/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/sbalci/ClinicoPathDescriptives/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a> <a href="https://CRAN.R-project.org/package=ClinicoPathDescriptives" class="external-link"><img src="https://www.r-pkg.org/badges/version/ClinicoPathDescriptives" alt="CRAN status"></a> <a href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html" class="external-link"><img src="https://img.shields.io/badge/License-GPL%20v2-blue.svg" alt="License: GPL v2"></a></p>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
+<p><strong>ClinicoPathDescriptives</strong> is a comprehensive R package designed specifically for descriptive analysis in clinicopathological research. This toolkit bridges the gap between statistical analysis and medical research workflows by providing both programmatic R functions and an intuitive graphical interface through the jamovi statistical platform.</p>
+<p>The package emphasizes reproducible research workflows, automated reporting capabilities, and natural language interpretation of statistical results, making advanced statistical analysis accessible to medical researchers regardless of their programming background. With over 50 comprehensive vignettes and extensive documentation, ClinicoPathDescriptives serves as both a powerful analytical tool and an educational resource for clinicopathological research.</p>
+</div>
+<div class="section level2">
+<h2 id="key-features">Key Features<a class="anchor" aria-label="anchor" href="#key-features"></a>
+</h2>
+<div class="section level3">
+<h3 id="id_-descriptive-analysis-suite">📊 Descriptive Analysis Suite<a class="anchor" aria-label="anchor" href="#id_-descriptive-analysis-suite"></a>
+</h3>
+<ul>
+<li>
+<strong>Table One Generation</strong> (<code>tableone</code>): Create publication-ready baseline characteristics tables with automatic variable type detection and appropriate statistical tests</li>
+<li>
+<strong>Cross-tabulation Analysis</strong> (<code>crosstable</code>): Generate comprehensive contingency tables with chi-square, Fisher’s exact, and other appropriate statistical tests, including q-value corrections for multiple comparisons</li>
+<li>
+<strong>Summary Statistics</strong> (<code>summarydata</code>): Automated descriptive statistics with natural language interpretation and multiple output formats</li>
+<li>
+<strong>Categorical Data Reporting</strong> (<code>reportcat</code>): Specialized reporting tools for categorical variables with clinical context</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="id_-advanced-visualizations">📈 Advanced Visualizations<a class="anchor" aria-label="anchor" href="#id_-advanced-visualizations"></a>
+</h3>
+<ul>
+<li>
+<strong>Age Pyramid Plots</strong> (<code>agepyramid</code>): Population structure visualizations for demographic analysis</li>
+<li>
+<strong>Alluvial Diagrams</strong> (<code>alluvial</code>): Flow visualizations for tracking categorical variable relationships and patient pathways</li>
+<li>
+<strong>Venn Diagrams</strong> (<code>venn</code>): Set relationship visualizations with statistical overlap analysis</li>
+<li>
+<strong>Swimmer Plots</strong> (<code>swimmerplot</code>): Timeline visualizations for longitudinal clinical studies and treatment responses</li>
+<li>
+<strong>Waterfall Plots</strong> (<code>waterfall</code>): Treatment response and biomarker change visualizations</li>
+<li>
+<strong>Variable Trees</strong> (<code>vartree</code>): Hierarchical data structure visualizations for complex datasets</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="id_-data-quality--validation">🔍 Data Quality &amp; Validation<a class="anchor" aria-label="anchor" href="#id_-data-quality--validation"></a>
+</h3>
+<ul>
+<li>
+<strong>Benford’s Law Analysis</strong> (<code>benford</code>): Statistical data quality assessment and fraud detection using first-digit distribution analysis</li>
+<li>
+<strong>Comprehensive Data Profiling</strong>: Automated data quality reports with missing value analysis, distribution assessments, and outlier detection</li>
+<li>
+<strong>Variable Validation</strong>: Built-in checks for data consistency and clinical plausibility</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="id_-clinical-research-focus">🎯 Clinical Research Focus<a class="anchor" aria-label="anchor" href="#id_-clinical-research-focus"></a>
+</h3>
+<ul>
+<li>
+<strong>Medical Terminology Integration</strong>: Functions and outputs designed with clinical research workflows in mind</li>
+<li>
+<strong>Journal-Ready Tables</strong>: Multiple formatting options compatible with major medical journals (NEJM, Lancet, JAMA styles)</li>
+<li>
+<strong>Statistical Best Practices</strong>: Appropriate test selection based on data characteristics and clinical research standards</li>
+<li>
+<strong>Natural Language Summaries</strong>: Automated interpretation of statistical results in clinically meaningful language</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="id_️-dual-interface-design">🖥️ Dual Interface Design<a class="anchor" aria-label="anchor" href="#id_%EF%B8%8F-dual-interface-design"></a>
+</h3>
+<ul>
+<li>
+<strong>R Programming Interface</strong>: Full programmatic control with pipe-friendly syntax and tidy data principles</li>
+<li>
+<strong>jamovi GUI Modules</strong>: Point-and-click interface for researchers without programming experience</li>
+<li>
+<strong>Reproducible Workflows</strong>: All analyses generate reproducible code regardless of interface used</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="id_-comprehensive-documentation">📚 Comprehensive Documentation<a class="anchor" aria-label="anchor" href="#id_-comprehensive-documentation"></a>
+</h3>
+<ul>
+<li>
+<strong>50+ Detailed Vignettes</strong>: Step-by-step tutorials covering all package functions with clinical examples</li>
+<li>
+<strong>22 Clinical Datasets</strong>: Real-world medical research scenarios for testing and learning</li>
+<li>
+<strong>Interactive Examples</strong>: Hands-on tutorials with interpretation guidance</li>
+<li>
+<strong>pkgdown Website</strong>: Professional documentation at <a href="https://www.serdarbalci.com/ClinicoPathDescriptives/">serdarbalci.com/ClinicoPathDescriptives</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<div class="section level3">
+<h3 id="development-version">Development Version<a class="anchor" aria-label="anchor" href="#development-version"></a>
+</h3>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Install from GitHub</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"sbalci/ClinicoPathDescriptives"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="jamovi-module">jamovi Module<a class="anchor" aria-label="anchor" href="#jamovi-module"></a>
+</h3>
+<p>Install the jamovi module from the jamovi library or visit <a href="https://sbalci.github.io/ClinicoPathJamoviModule/" class="external-link">ClinicoPath jamovi Module</a>.</p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="quick-start">Quick Start<a class="anchor" aria-label="anchor" href="#quick-start"></a>
+</h2>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">ClinicoPathDescriptives</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Load example clinical dataset</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"histopathology"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Generate Table One for baseline characteristics</span></span>
+<span><span class="va">tableone_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tableone.html">tableone</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">histopathology</span>,</span>
+<span>  grouping_variable <span class="op">=</span> <span class="st">"Treatment_Group"</span>,</span>
+<span>  explanatory_variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Age"</span>, <span class="st">"Gender"</span>, <span class="st">"Tumor_Size"</span>, <span class="st">"Grade"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create cross-tabulation with statistical tests</span></span>
+<span><span class="va">crosstable_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/crosstable.html">crosstable</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">histopathology</span>,</span>
+<span>  dependent_variable <span class="op">=</span> <span class="st">"Response"</span>,</span>
+<span>  explanatory_variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Treatment_Group"</span>, <span class="st">"Biomarker_Status"</span><span class="op">)</span>,</span>
+<span>  statistical_test <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Generate alluvial diagram for treatment pathways</span></span>
+<span><span class="va">alluvial_plot</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/alluvial.html">alluvial</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">histopathology</span>,</span>
+<span>  variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Initial_Treatment"</span>, <span class="st">"Response"</span>, <span class="st">"Second_Line_Treatment"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="documentation--support">Documentation &amp; Support<a class="anchor" aria-label="anchor" href="#documentation--support"></a>
+</h2>
+<ul>
+<li>
+<strong>Package Website</strong>: <a href="https://www.serdarbalci.com/ClinicoPathDescriptives/">https://www.serdarbalci.com/ClinicoPathDescriptives/</a>
+</li>
+<li>
+<strong>GitHub Repository</strong>: <a href="https://github.com/sbalci/ClinicoPathDescriptives/" class="external-link">https://github.com/sbalci/ClinicoPathDescriptives/</a>
+</li>
+<li>
+<strong>jamovi Module</strong>: <a href="https://sbalci.github.io/ClinicoPathJamoviModule/" class="external-link">https://sbalci.github.io/ClinicoPathJamoviModule/</a>
+</li>
+<li>
+<strong>Issue Tracking</strong>: <a href="https://github.com/sbalci/ClinicoPathJamoviModule/issues/" class="external-link">GitHub Issues</a>
+</li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
+</h2>
+<p>If you use ClinicoPathDescriptives in your research, please cite:</p>
+<pre><code>Balci, S. (2024). ClinicoPathDescriptives: Descriptive Analysis Tools for
+Clinicopathological Research. R package version 0.0.3.90.
+https://www.serdarbalci.com/ClinicoPathDescriptives/</code></pre>
+</div>
+<div class="section level2">
+<h2 id="license">License<a class="anchor" aria-label="anchor" href="#license"></a>
+</h2>
+<p>GPL (&gt;= 2) - see <a href="LICENSE">LICENSE</a> file for details.</p>
+</div>
+<div class="section level2">
+<h2 id="contributing">Contributing<a class="anchor" aria-label="anchor" href="#contributing"></a>
+</h2>
+<p>Contributions are welcome! Please see our <a href="CONTRIBUTING.html">contributing guidelines</a> and feel free to submit issues, feature requests, or pull requests.</p>
+</div>
 </div>
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
