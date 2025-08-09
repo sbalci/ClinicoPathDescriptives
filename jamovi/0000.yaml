@@ -1,12 +1,12 @@
 ---
 title: Descriptives Functions for Clinicopathological Research
 name: ClinicoPathDescriptives
-version: 0.0.3.91
+version: 0.0.3.98
 jms: '1.0'
 authors:
   - Serdar Balci
 maintainer: Serdar Balci <drserdarbalci@gmail.com>
-date: '2025-08-01'
+date: '2025-08-09'
 type: R
 description: >-
   Descriptives Functions for Clinicopathological Research Descriptive functions
