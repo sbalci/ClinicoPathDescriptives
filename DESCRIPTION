@@ -1,70 +1,37 @@
 Type: Package
 Package: ClinicoPathDescriptives
 Title: Descriptive Analysis Tools for Clinicopathological Research
-Version: 0.0.31
-Date: 2025-08-10
-Authors@R:
-    person(given = "Serdar",
-           family = "Balci",
-           role = c("aut", "cre"),
-           email = "<drserdarbalci@gmail.com>",
-           comment = c(ORCID = "0000-0002-7852-3851"))
+Version: 0.0.31.06
+Date: 2025-08-17
+Authors@R: person(given = "Serdar", family = "Balci", role = c("aut",
+        "cre"), email = "<drserdarbalci@gmail.com>", comment = c(ORCID
+        = "0000-0002-7852-3851"))
 Maintainer: Serdar Balci <drserdarbalci@gmail.com>
-Description: A comprehensive toolkit for descriptive analysis in clinicopathological research.
-    Provides interactive graphical user interface functions through the 'jamovi' statistical platform.
-    Features include generating descriptive summaries in natural language, creating cross tables
-    with appropriate statistical tests, performing survival analyses with tables and plots,
-    visualizing categorical data relationships through alluvial diagrams and Venn diagrams,
-    and conducting data quality assessments using Benford's law. The package emphasizes
-    reproducible research workflows and automated reporting capabilities for medical research.
-URL: <https://github.com/sbalci/ClinicoPathJamoviModule/>, <https://github.com/sbalci/ClinicoPathDescriptives/>, <https://sbalci.github.io/ClinicoPathJamoviModule/>, <https://www.serdarbalci.com/ClinicoPathDescriptives/>
-BugReports:
-    <https://github.com/sbalci/ClinicoPathJamoviModule/issues/>
+Description: A comprehensive toolkit for descriptive analysis in
+        clinicopathological research. Provides interactive graphical
+        user interface functions through the 'jamovi' statistical
+        platform. Features include generating descriptive summaries in
+        natural language, creating cross tables with appropriate
+        statistical tests, performing survival analyses with tables and
+        plots, visualizing categorical data relationships through
+        alluvial diagrams and Venn diagrams, and conducting data
+        quality assessments using Benford's law. The package emphasizes
+        reproducible research workflows and automated reporting
+        capabilities for medical research.
+URL: <https://github.com/sbalci/ClinicoPathJamoviModule/>,
+        <https://github.com/sbalci/ClinicoPathDescriptives/>,
+        <https://sbalci.github.io/ClinicoPathJamoviModule/>,
+        <https://www.serdarbalci.com/ClinicoPathDescriptives/>
+BugReports: <https://github.com/sbalci/ClinicoPathJamoviModule/issues/>
 License: GPL (>= 2)
-Depends:
-    R (>= 4.1.0)
-Imports:
-    dplyr,
-    magrittr,
-    ggplot2,
-    easyalluvial,
-    glue,
-    janitor,
-    jmvcore,
-    purrr,
-    R6,
-    scales,
-    tableone,
-    tibble,
-    tidyr,
-    kableExtra,
-    finalfit,
-    tangram,
-    arsenal,
-    ggvenn,
-    benford.analysis,
-    DiagrammeR,
-    DiagrammeRsvg,
-    rsvg,
-    shiny,
-    gtsummary,
-    gtExtras,
-    labelled,
-    stats,
-    utils,
-    gt,
-    htmltools,
-    moments,
-    rlang,
-    UpSetR,
-    ComplexUpset,
-    vtree,
-    ggswim,
-    lubridate,
-    pivottabler,
-    cardx
-Remotes:
-    CHOP-CGTInformatics/ggswim
+Depends: R (>= 4.1.0)
+Imports: arsenal, benford.analysis, cardx, ComplexUpset, DiagrammeR,
+        DiagrammeRsvg, dplyr, easyalluvial, finalfit, ggplot2, ggswim,
+        ggvenn, glue, grid, gt, gtExtras, gtsummary, htmltools,
+        janitor, jmvcore, kableExtra, labelled, lubridate, magrittr,
+        moments, pivottabler, purrr, R6, rlang, rsvg, scales, shiny,
+        stats, tableone, tangram, tibble, tidyr, UpSetR, utils, vtree
+Remotes: CHOP-CGTInformatics/ggswim
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
