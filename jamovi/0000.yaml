@@ -1,12 +1,12 @@
 ---
 title: Descriptives Functions for Clinicopathological Research
 name: ClinicoPathDescriptives
-version: 0.0.31.06
+version: 0.0.31.33
 jms: '1.0'
 authors:
   - Serdar Balci
 maintainer: Serdar Balci <drserdarbalci@gmail.com>
-date: '2025-08-17'
+date: '2025-08-19'
 type: R
 description: >-
   Descriptives Functions for Clinicopathological Research Descriptive functions
@@ -113,7 +113,7 @@ analyses:
   - title: Treatment Response Analysis
     name: waterfall
     ns: ClinicoPathDescriptives
-    menuGroup: Exploration
+    menuGroup: OncoPathology
     menuTitle: Treatment Response Analysis
     menuSubgroup: Patient Follow-Up Plots
     description: >
@@ -128,12 +128,14 @@ analyses:
     name: swimmerplot
     ns: ClinicoPathDescriptives
     ribbon: analyses
-    menuGroup: Exploration
+    menuGroup: OncoPathology
     menuSubgroup: Patient Follow-Up Plots
     menuTitle: Swimmer Plot
-    description: >-
-      Creates a swimmer plot to visualize individual patient timelines and
-      clinical events.
+    description: >
+      Creates comprehensive swimmer plots using the ggswim package to visualize
+      patient timelines,  clinical events, milestones, and treatment responses.
+      Features enhanced data validation  and complete ggswim integration for
+      professional clinical visualization.
     category: analyses
 datasets:
   - name: Histopathology Data Including Analysis

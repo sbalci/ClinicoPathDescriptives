@@ -1,8 +1,8 @@
 Type: Package
 Package: ClinicoPathDescriptives
 Title: Descriptive Analysis Tools for Clinicopathological Research
-Version: 0.0.31.06
-Date: 2025-08-17
+Version: 0.0.31.33
+Date: 2025-08-19
 Authors@R: person(given = "Serdar", family = "Balci", role = c("aut",
         "cre"), email = "<drserdarbalci@gmail.com>", comment = c(ORCID
         = "0000-0002-7852-3851"))
@@ -27,10 +27,11 @@ License: GPL (>= 2)
 Depends: R (>= 4.1.0)
 Imports: arsenal, benford.analysis, cardx, ComplexUpset, DiagrammeR,
         DiagrammeRsvg, dplyr, easyalluvial, finalfit, ggplot2, ggswim,
-        ggvenn, glue, grid, gt, gtExtras, gtsummary, htmltools,
-        janitor, jmvcore, kableExtra, labelled, lubridate, magrittr,
-        moments, pivottabler, purrr, R6, rlang, rsvg, scales, shiny,
-        stats, tableone, tangram, tibble, tidyr, UpSetR, utils, vtree
+        ggvenn, glue, grid, gridExtra, gt, gtExtras, gtsummary,
+        htmltools, janitor, jmvcore, kableExtra, labelled, lubridate,
+        magrittr, moments, pivottabler, purrr, R6, RColorBrewer, rlang,
+        rsvg, scales, shiny, stats, tableone, tangram, tibble, tidyr,
+        UpSetR, utils, vtree
 Remotes: CHOP-CGTInformatics/ggswim
 Encoding: UTF-8
 LazyData: true
