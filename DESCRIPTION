@@ -1,8 +1,8 @@
 Type: Package
 Package: ClinicoPathDescriptives
 Title: Descriptive Analysis Tools for Clinicopathological Research
-Version: 0.0.31.33
-Date: 2025-08-19
+Version: 0.0.31.36
+Date: 2025-08-22
 Authors@R: person(given = "Serdar", family = "Balci", role = c("aut",
         "cre"), email = "<drserdarbalci@gmail.com>", comment = c(ORCID
         = "0000-0002-7852-3851"))
