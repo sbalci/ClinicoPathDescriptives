@@ -1,12 +1,12 @@
 Type: Package
 Package: ClinicoPathDescriptives
 Title: Descriptive Analysis Tools for Clinicopathological Research
-Version: 0.0.31.36
-Date: 2025-08-22
+Version: 0.0.31.69
+Date: 2025-09-18
 Authors@R: person(given = "Serdar", family = "Balci", role = c("aut",
-        "cre"), email = "<drserdarbalci@gmail.com>", comment = c(ORCID
-        = "0000-0002-7852-3851"))
-Maintainer: Serdar Balci <drserdarbalci@gmail.com>
+        "cre"), email = "<serdarbalci@serdarbalci.com>", comment =
+        c(ORCID = "0000-0002-7852-3851"))
+Maintainer: Serdar Balci <serdarbalci@serdarbalci.com>
 Description: A comprehensive toolkit for descriptive analysis in
         clinicopathological research. Provides interactive graphical
         user interface functions through the 'jamovi' statistical
@@ -26,14 +26,14 @@ BugReports: <https://github.com/sbalci/ClinicoPathJamoviModule/issues/>
 License: GPL (>= 2)
 Depends: R (>= 4.1.0)
 Imports: arsenal, benford.analysis, cardx, ComplexUpset, DiagrammeR,
-        DiagrammeRsvg, dplyr, easyalluvial, finalfit, ggplot2, ggswim,
-        ggvenn, glue, grid, gridExtra, gt, gtExtras, gtsummary,
-        htmltools, janitor, jmvcore, kableExtra, labelled, lubridate,
-        magrittr, moments, pivottabler, purrr, R6, RColorBrewer, rlang,
-        rsvg, scales, shiny, stats, tableone, tangram, tibble, tidyr,
-        UpSetR, utils, vtree
+        DiagrammeRsvg, dplyr, easyalluvial, finalfit, ggcharts,
+        ggplot2, ggswim, ggvenn, glue, grid, gridExtra, gt, gtExtras,
+        gtsummary, htmltools, janitor, jmvcore, kableExtra, labelled,
+        lubridate, magrittr, moments, pivottabler, purrr, R6,
+        RColorBrewer, rlang, rsvg, scales, shiny, stats, tableone,
+        tangram, tibble, tidyr, UpSetR, utils, vcd, vtree
 Remotes: CHOP-CGTInformatics/ggswim
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3

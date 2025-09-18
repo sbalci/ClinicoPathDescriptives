@@ -106,12 +106,11 @@ alluvial_plot <- alluvial(
 
 ## Citation
 
-If you use ClinicoPathDescriptives in your research, please cite:
+If you use ClinicoPathDescriptives in your research, please cite the main ClinicoPath project:
 
 ```
-Balci, S. (2024). ClinicoPathDescriptives: Descriptive Analysis Tools for 
-Clinicopathological Research. R package version 0.0.3.90. 
-https://www.serdarbalci.com/ClinicoPathDescriptives/
+Serdar Balci (2025). ClinicoPath jamovi Module. doi:10.5281/zenodo.3997188
+[R package]. Retrieved from https://github.com/sbalci/ClinicoPathJamoviModule
 ```
 
 ## License

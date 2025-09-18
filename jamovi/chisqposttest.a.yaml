@@ -1,0 +1,202 @@
+---
+name:  chisqposttest
+title: Chi-Square Post-Hoc Tests
+menuGroup: Exploration
+menuSubgroup: ClinicoPath Comparisons
+version: '0.0.31'
+jas: '1.2'
+
+description:
+    main: Performs Chi-Square test and post-hoc pairwise comparisons.
+    R:
+        dontrun: true
+        usage: |
+            # example will be added
+
+options:
+    - name: data
+      type: Data
+      description:
+          R: >
+            The data as a data frame.
+
+    - name: rows
+      title: Rows
+      type: Variable
+      suggested: [ ordinal, nominal ]
+      permitted: [ factor ]
+      description: >
+                  variable in the rows
+
+    - name: cols 
+      title: Columns
+      type: Variable
+      suggested: [ ordinal, nominal ]
+      permitted: [ factor ]
+      description: >
+                  variable in the columns
+
+    - name: counts
+      title: Counts (optional)
+      type: Variable
+      suggested: [ continuous ]
+      permitted: [ numeric ]
+      description: >
+                  Frequency/weight variable for contingency table data.
+                  When specified, the data is treated as already summarized with counts per combination.
+
+    - name: posthoc
+      title: Post-Hoc Method
+      type: List
+      options:
+        - title: Bonferroni
+          name: bonferroni
+        - title: Holm
+          name: holm
+        - title: FDR
+          name: fdr
+        - title: None
+          name: none
+      default: bonferroni
+      description: >
+                  Method for p-value adjustment in post-hoc tests
+
+    - name: sig
+      title: Significance Level
+      type: Number
+      min: 0.001
+      max: 0.1
+      default: 0.05
+      description: >
+                  alpha level for significance testing
+
+    - name: excl
+      title: Exclude Missing (NA)
+      type: Bool
+      default: false
+      description: >
+                  exclude missing values from analysis
+
+    - name: exp
+      title: Show Expected Values
+      type: Bool
+      default: false
+      description: >
+                  show expected values in the table
+
+    - name: plot
+      title: Show Residual Plot
+      type: Bool
+      default: false
+      description: >
+                  display plot of standardized residuals
+
+    - name: showResiduals
+      title: Show Residuals Analysis
+      type: Bool
+      default: false
+      description: >
+                  display standardized residuals analysis with interpretation
+
+    - name: showEducational
+      title: Show Educational Panels
+      type: Bool
+      default: false
+      description: >
+                  display educational guidance and explanations
+
+    - name: showDetailedTables
+      title: Show Detailed Comparison Tables
+      type: Bool
+      default: false
+      description: >
+                  display individual 2x2 tables for each pairwise comparison
+
+    - name: residualsCutoff
+      title: Residuals Significance Cutoff
+      type: Number
+      min: 1.5
+      max: 4.0
+      default: 2.0
+      description: >
+                  critical value for identifying significant residuals (typically 2.0 or 3.0)
+
+    - name: testSelection
+      title: Statistical Test Selection
+      type: List
+      options:
+        - title: Automatic (Recommended)
+          name: auto
+        - title: Always Chi-Square
+          name: chisquare
+        - title: Always Fisher's Exact
+          name: fisher
+      default: auto
+      description: >
+                  method for selecting statistical test for pairwise comparisons
+
+    - name: exportResults
+      title: Export Detailed Results
+      type: Bool
+      default: false
+      description: >
+                  Export comprehensive analysis results to downloadable format for further analysis
+
+    - name: clinicalPreset
+      title: Clinical Preset
+      type: List
+      options:
+        - title: Custom Settings
+          name: custom
+        - title: 2×2 Diagnostic Test
+          name: diagnostic2x2
+        - title: Treatment Response (3+ groups)
+          name: treatment_response
+        - title: Pathology Grade Distribution
+          name: grade_distribution
+      default: custom
+      description: >
+                  Pre-configured settings for common clinical scenarios
+
+    - name: showClinicalSummary
+      title: Show Clinical Summary
+      type: Bool
+      default: true
+      description: >
+                  Display natural-language summary of results for clinical interpretation
+
+    - name: showExampleInterpretations
+      title: Show Example Interpretations
+      type: Bool
+      default: false
+      description: >
+                  Display example interpretations for significant findings
+
+    - name: copyReadySentences
+      title: Generate Report Sentences
+      type: Bool
+      default: false
+      description: >
+                  Generate copy-ready sentences for clinical reports
+
+    - name: showAssumptionsCheck
+      title: Show Assumptions Check
+      type: Bool
+      default: true
+      description: >
+                  Display validation of chi-square test assumptions
+
+    - name: showGlossary
+      title: Show Statistical Glossary
+      type: Bool
+      default: false
+      description: >
+                  Display glossary of statistical terms with clinical interpretations
+
+    - name: colorBlindSafe
+      title: Use Color-Blind Safe Palette
+      type: Bool
+      default: false
+      description: >
+                  Use color-blind friendly visualization options
+...

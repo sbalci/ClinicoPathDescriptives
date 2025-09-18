@@ -1,12 +1,12 @@
 ---
 title: Descriptives Functions for Clinicopathological Research
 name: ClinicoPathDescriptives
-version: 0.0.31.36
+version: 0.0.31.69
 jms: '1.0'
 authors:
   - Serdar Balci
-maintainer: Serdar Balci <drserdarbalci@gmail.com>
-date: '2025-08-22'
+maintainer: Serdar Balci <serdarbalci@serdarbalci.com>
+date: '2025-09-18'
 type: R
 description: >-
   Descriptives Functions for Clinicopathological Research Descriptive functions
@@ -110,33 +110,39 @@ analyses:
       functionality from legacy versions with modern vtree capabilities.
     ribbon: analyses
     category: analyses
-  - title: Treatment Response Analysis
-    name: waterfall
+  - title: Non-Parametric Statistical Methods
+    name: nonparametric
     ns: ClinicoPathDescriptives
-    menuGroup: OncoPathology
-    menuTitle: Treatment Response Analysis
-    menuSubgroup: Patient Follow-Up Plots
-    description: >
-      Creates waterfall and spider plots to analyze tumor response data
-      following RECIST criteria. Supports both raw tumor measurements and
-      pre-calculated percentage changes. Provides comprehensive response
-      analysis including ORR, DCR, and person-time metrics.
-    ribbon: analyses
-    menuSubtitle: Waterfall Plot, Spider Plot
     category: analyses
-  - title: Swimmer Plot
-    name: swimmerplot
+    menuGroup: Exploration
+    menuSubgroup: Advanced Statistical Tests
+    menuTitle: Non-Parametric Statistical Methods
+    menuSubtitle: Comprehensive non-parametric analysis with effect sizes and robust methods
+    description: >
+      Comprehensive non-parametric statistical methods including Kruskal-Wallis
+      test,
+
+      Friedman test, Mann-Whitney U test, and robust alternatives to classical
+      procedures.
+
+      Designed specifically for clinical research where normality assumptions
+      are violated.
+
+      This enhanced module combines distribution-free methods with proper effect
+      size calculations,
+
+      assumption checking, and post hoc analysis - addressing critical gaps
+      identified in 30% 
+
+      of pathology studies that use these methods.
+  - title: Chi-Square Post-Hoc Tests
+    name: chisqposttest
     ns: ClinicoPathDescriptives
-    ribbon: analyses
-    menuGroup: OncoPathology
-    menuSubgroup: Patient Follow-Up Plots
-    menuTitle: Swimmer Plot
-    description: >
-      Creates comprehensive swimmer plots using the ggswim package to visualize
-      patient timelines,  clinical events, milestones, and treatment responses.
-      Features enhanced data validation  and complete ggswim integration for
-      professional clinical visualization.
     category: analyses
+    menuGroup: Exploration
+    menuSubgroup: ClinicoPath Comparisons
+    menuTitle: Chi-Square Post-Hoc Tests
+    description: Performs Chi-Square test and post-hoc pairwise comparisons.
 datasets:
   - name: Histopathology Data Including Analysis
     path: histopathologyDescriptives.omv
@@ -147,31 +153,6 @@ datasets:
       - Cross Tables
       - Alluvial Diagrams
       - Venn Diagrams
-  - name: Swimmer Plot Analysis
-    path: swimmerplot_sample.omv
-    description: Example analysis for swimmer plot.
-    tags:
-      - Swimmer Plot
-      - Oncology
-      - Pathology
-      - Follow-up
-  - name: Waterfall Plot
-    path: waterfall_percentage_basic.omv
-    description: Example analysis for Waterfall Plot.
-    tags:
-      - Waterfall Plot
-      - Oncology
-      - Pathology
-      - Follow-up
-  - name: Waterfall and Spider Plot
-    path: waterfall_raw_longitudinal.omv
-    description: Example analysis for Waterfall Plot.
-    tags:
-      - Waterfall Plot
-      - Spider Plot
-      - Oncology
-      - Pathology
-      - Follow-up
 usesNative: true
 minApp: 1.6.0
 
