@@ -1,0 +1,106 @@
+---
+name: checkdata
+title: Single Variable Quality Check
+jrs: '1.1'
+
+items:
+    - name: todo
+      title: Getting Started
+      type: Html
+
+    - name: qualityText
+      title: Quality Assessment Summary
+      type: Preformatted
+
+    - name: missingVals
+      title: Missing Data Analysis
+      type: Table
+      rows: 0
+      columns:
+        - name: metric
+          title: "Metric"
+          type: text
+        - name: value
+          title: "Value"
+          type: text
+        - name: interpretation
+          title: "Interpretation"
+          type: text
+
+    - name: noOutliers
+      title: Outlier Detection (Z-Score > 3)
+      type: Html
+      visible: (showOutliers)
+
+    - name: outliers
+      title: Outlier Detection (Z-Score > 3)
+      type: Table
+      visible: (showOutliers)
+      rows: 0
+      columns:
+        - name: rowNumber
+          title: "Row"
+          type: integer
+        - name: value
+          title: "Value"
+          type: number
+        - name: zscore
+          title: "Z-Score"
+          type: number
+        - name: severity
+          title: "Severity"
+          type: text
+
+    - name: distribution
+      title: Distribution Analysis
+      type: Table
+      visible: (showDistribution)
+      rows: 0
+      columns:
+        - name: metric
+          title: "Metric"
+          type: text  
+        - name: value
+          title: "Value"
+          type: number
+        - name: interpretation
+          title: "Interpretation"
+          type: text
+
+    - name: duplicates
+      title: Duplicate Values
+      type: Table
+      visible: (showDuplicates)
+      rows: 0
+      columns:
+        - name: value
+          title: "Value"  
+          type: text
+        - name: count
+          title: "Count"
+          type: integer
+        - name: percentage
+          title: "% of Data"
+          type: number
+
+    - name: patterns
+      title: Data Patterns
+      type: Table
+      visible: (showPatterns)
+      rows: 0
+      columns:
+        - name: pattern
+          title: "Pattern"
+          type: text
+        - name: description
+          title: "Description"
+          type: text
+        - name: recommendation
+          title: "Recommendation"
+          type: text
+
+refs: 
+    - ClinicoPathJamoviModule
+
+
+...

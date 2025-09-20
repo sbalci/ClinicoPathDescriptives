@@ -1,0 +1,106 @@
+---
+name: dataquality
+title: Multi-Variable Visual Quality
+menuGroup: Exploration
+menuSubgroup: ClinicoPath Data Quality
+version: '0.0.31'
+jas: '1.2'
+
+description:
+  main: |
+    This module provides data quality assessment including duplicate detection,
+    missing value analysis, and data completeness summary (similar to sumvar's dup() function).
+  R:
+    dontrun: true
+    usage: |
+      # Example:
+      # 1. Load your data frame.
+      # 2. Select variables to check for data quality issues.
+      # 3. Choose analysis type (duplicates, missing values, or both).
+      # 4. Run the dataquality module to see comprehensive data quality report.
+
+options:
+
+    - name: data
+      type: Data
+      description:
+          R: >
+            The data as a data frame.
+
+    - name: vars
+      title: Variables
+      type: Variables
+      description:
+          R: >
+            Variables to assess for data quality. If none selected, 
+            entire dataset will be analyzed.
+
+    - name: check_duplicates
+      title: "Check for Duplicates"
+      type: Bool
+      default: true
+      description:
+        R: >
+          If TRUE, analyzes duplicate values within each variable or across 
+          the entire dataset.
+
+    - name: check_missing
+      title: "Missing Value Analysis"
+      type: Bool
+      default: true
+      description:
+        R: >
+          If TRUE, provides detailed missing value statistics and patterns.
+
+    - name: complete_cases_only
+      title: "Complete Cases Analysis"
+      type: Bool
+      default: false
+      description:
+        R: >
+          If TRUE, analyzes completeness across all selected variables simultaneously.
+
+    - name: plot_data_overview
+      title: "Data Overview Plot (vis_dat)"
+      type: Bool
+      default: false
+      description:
+        R: >
+          Show data overview visualization displaying variable types and missing values.
+
+    - name: plot_missing_patterns
+      title: "Missing Patterns Plot (vis_miss)"
+      type: Bool
+      default: false
+      description:
+        R: >
+          Show missing value patterns visualization.
+
+    - name: plot_data_types
+      title: "Data Types Plot (vis_guess)"
+      type: Bool
+      default: false
+      description:
+        R: >
+          Show data type detection and validation visualization.
+
+    - name: plot_value_expectations
+      title: "Value Expectations Plot (vis_expect)"
+      type: Bool
+      default: false
+      description:
+        R: >
+          Show value expectations analysis visualization.
+
+    - name: missing_threshold_visual
+      title: "Missing Data Highlight Threshold (%)"
+      type: Number
+      min: 0
+      max: 100
+      default: 10
+      description:
+        R: >
+          Threshold percentage for highlighting variables with missing values in visual analysis.
+
+
+...

@@ -1,0 +1,39 @@
+title: Multi-Variable Visual Quality
+name: dataquality
+jus: '3.0'
+stage: 0
+compilerMode: aggressive
+children:
+  - type: VariableSupplier
+    persistentItems: false
+    stretchFactor: 1
+    children:
+      - type: TargetLayoutBox
+        label: Variables
+        children:
+          - type: VariablesListBox
+            name: vars
+            isTarget: true
+  - type: LayoutBox
+    margin: large
+    children:
+      - type: CheckBox
+        name: check_duplicates
+      - type: CheckBox
+        name: check_missing
+      - type: CheckBox
+        name: complete_cases_only
+      - type: CheckBox
+        name: plot_data_overview
+      - type: CheckBox
+        name: plot_missing_patterns
+      - type: CheckBox
+        name: plot_data_types
+      - type: CheckBox
+        name: plot_value_expectations
+  - type: LayoutBox
+    margin: large
+    children:
+      - type: TextBox
+        name: missing_threshold_visual
+        format: number

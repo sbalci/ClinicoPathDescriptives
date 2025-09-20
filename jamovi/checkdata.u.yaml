@@ -1,5 +1,5 @@
-title: Benford Analysis
-name: benford
+title: Single Variable Quality Check
+name: checkdata
 jus: '3.0'
 stage: 0
 compilerMode: aggressive
@@ -9,7 +9,7 @@ children:
     stretchFactor: 1
     children:
       - type: TargetLayoutBox
-        label: Variable
+        label: Variable to Check
         children:
           - type: VariablesListBox
             name: var
@@ -18,6 +18,11 @@ children:
   - type: LayoutBox
     margin: large
     children:
-      - type: TextBox
-        name: digits
-        format: number
+      - type: CheckBox
+        name: showOutliers
+      - type: CheckBox
+        name: showDistribution
+      - type: CheckBox
+        name: showDuplicates
+      - type: CheckBox
+        name: showPatterns

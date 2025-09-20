@@ -1,12 +1,12 @@
 ---
 title: Descriptives Functions for Clinicopathological Research
 name: ClinicoPathDescriptives
-version: 0.0.31.69
+version: 0.0.31.70
 jms: '1.0'
 authors:
   - Serdar Balci
 maintainer: Serdar Balci <serdarbalci@serdarbalci.com>
-date: '2025-09-18'
+date: '2025-09-19'
 type: R
 description: >-
   Descriptives Functions for Clinicopathological Research Descriptive functions
@@ -143,6 +143,47 @@ analyses:
     menuSubgroup: ClinicoPath Comparisons
     menuTitle: Chi-Square Post-Hoc Tests
     description: Performs Chi-Square test and post-hoc pairwise comparisons.
+  - title: Single Variable Quality Check
+    name: checkdata
+    ns: ClinicoPathDescriptives
+    category: analyses
+    menuGroup: Exploration
+    menuSubgroup: ClinicoPath Data Quality
+    menuTitle: Single Variable Quality Check
+  - title: Multi-Variable Visual Quality
+    name: dataquality
+    ns: ClinicoPathDescriptives
+    category: analyses
+    menuGroup: Exploration
+    menuSubgroup: ClinicoPath Data Quality
+    menuTitle: Multi-Variable Visual Quality
+    description: >
+      This module provides data quality assessment including duplicate
+      detection,
+
+      missing value analysis, and data completeness summary (similar to sumvar's
+      dup() function).
+  - title: Advanced Outlier Detection
+    name: outlierdetection
+    ns: ClinicoPathDescriptives
+    category: analyses
+    menuGroup: Exploration
+    menuSubgroup: ClinicoPath Data Quality
+    menuTitle: Advanced Outlier Detection
+    description: >
+      Advanced outlier detection using multiple statistical methods from the
+      easystats performance package.
+
+      This module provides comprehensive outlier detection through univariate
+      methods (Z-scores, IQR, confidence intervals),
+
+      multivariate methods (Mahalanobis distance, MCD, OPTICS, LOF), and
+      composite scoring across multiple algorithms.
+
+      Complements existing data quality assessment modules with state-of-the-art
+      outlier detection capabilities.
+
+      Perfect for clinical research data quality control and preprocessing.
 datasets:
   - name: Histopathology Data Including Analysis
     path: histopathologyDescriptives.omv

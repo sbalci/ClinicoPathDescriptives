@@ -1,0 +1,48 @@
+---
+name:  checkdata
+title: Single Variable Quality Check
+menuGroup: Exploration
+menuSubgroup: ClinicoPath Data Quality
+version: '0.0.31'
+jas: '1.2'
+
+options:
+    - name: data
+      type: Data
+      
+    - name: var
+      title: Variable to Check
+      type: Variable
+
+    - name: showOutliers
+      title: Show Outlier Analysis
+      type: Bool
+      default: true
+      description:
+          R: >
+            Detect and display potential outliers using z-score method (|z| > 3).
+
+    - name: showDistribution
+      title: Show Distribution Analysis
+      type: Bool
+      default: true
+      description:
+          R: >
+            Display descriptive statistics and distribution characteristics.
+
+    - name: showDuplicates
+      title: Show Duplicate Analysis
+      type: Bool
+      default: true
+      description:
+          R: >
+            Identify and count duplicate values in the dataset.
+
+    - name: showPatterns
+      title: Show Data Patterns
+      type: Bool
+      default: false
+      description:
+          R: >
+            Analyze patterns in missing data and value distributions.
+...
