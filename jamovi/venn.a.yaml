@@ -145,12 +145,12 @@ options:
             Only show intersections with at least this many members.
 
     - name: showAnnotations
-      title: 'Show Statistical Annotations'
+      title: 'Show Percentage Labels'
       type: Bool
       default: false
       description:
           R: >
-            Add statistical annotations to the ComplexUpset plot.
+            Add percentage labels to intersection sizes in ComplexUpset plots or enhanced text scaling in UpSetR plots.
           jamovi: >
-            Add statistical information to the plot.
+            Add percentage labels and enhanced text formatting to the plot.
 ...

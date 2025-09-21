@@ -55,16 +55,20 @@ with more features).}
 
 \item{minSize}{Minimum size of intersections to display.}
 
-\item{showAnnotations}{Add statistical annotations to the ComplexUpset
-plot.}
+\item{showAnnotations}{Add percentage labels to intersection sizes in
+ComplexUpset plots or enhanced text scaling in UpSetR plots.}
 }
 \value{
 A results object containing:
 \tabular{llllll}{
 \code{results$todo} \tab \tab \tab \tab \tab a html \cr
+\code{results$aboutAnalysis} \tab \tab \tab \tab \tab a html \cr
+\code{results$clinicalSummary} \tab \tab \tab \tab \tab a html \cr
 \code{results$summary} \tab \tab \tab \tab \tab a table \cr
 \code{results$plot} \tab \tab \tab \tab \tab an image \cr
 \code{results$plot2} \tab \tab \tab \tab \tab an image \cr
+\code{results$reportSentences} \tab \tab \tab \tab \tab a html \cr
+\code{results$assumptions} \tab \tab \tab \tab \tab a html \cr
 }
 
 Tables can be converted to data frames with \code{asDF} or \code{\link{as.data.frame}}. For example:
