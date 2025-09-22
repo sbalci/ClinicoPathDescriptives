@@ -79,7 +79,8 @@ analyses:
     menuTitle: Multi-Variable Visual Quality
     description: >
       This module provides data quality assessment including duplicate
-      detection, 
+      detection,
+
       missing value analysis, and data completeness summary (similar to sumvar's
       dup() function).
   - title: Advanced Outlier Detection
@@ -103,7 +104,6 @@ analyses:
       outlier detection capabilities.
 
       Perfect for clinical research data quality control and preprocessing.
-
   - title: Age Pyramid
     name: agepyramid
     ns: ClinicoPathDescriptives
@@ -134,7 +134,6 @@ analyses:
       functionality from legacy versions with modern vtree capabilities.
     ribbon: analyses
     category: analyses
-
   - title: Alluvial Diagrams
     name: alluvial
     ns: ClinicoPathDescriptives
@@ -143,8 +142,6 @@ analyses:
     menuTitle: Alluvial Diagrams
     ribbon: analyses
     category: analyses
-
-
   - title: Cross Tables
     name: crosstable
     ns: ClinicoPathDescriptives
@@ -162,8 +159,6 @@ analyses:
     menuSubgroup: ClinicoPath Comparisons
     menuTitle: Chi-Square Post-Hoc Tests
     description: Performs Chi-Square test and post-hoc pairwise comparisons.
-
-
 datasets:
   - name: Histopathology Data Including Analysis
     path: histopathologyDescriptives.omv
