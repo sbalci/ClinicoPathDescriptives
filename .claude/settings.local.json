@@ -1,9 +1,14 @@
 {
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "permissions": {
     "allow": [
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "WebFetch(domain:jbengler.github.io)",
+      "Read(//Users/serdarbalci/Documents/GitHub/ClinicoPathJamoviModule/**)",
+      "Bash(node:*)",
+      "Bash(grep:*)",
+      "Bash(Rscript:*)"
     ],
     "deny": []
-  },
-  "$schema": "https://json.schemastore.org/claude-code-settings.json"
+  }
 }

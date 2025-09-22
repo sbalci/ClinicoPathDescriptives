@@ -1,12 +1,12 @@
 ---
 title: Descriptives Functions for Clinicopathological Research
 name: ClinicoPathDescriptives
-version: 0.0.31.72
+version: 0.0.31.73
 jms: '1.0'
 authors:
   - Serdar Balci
 maintainer: Serdar Balci <serdarbalci@serdarbalci.com>
-date: '2025-09-21'
+date: '2025-09-22'
 type: R
 description: >-
   Descriptives Functions for Clinicopathological Research Descriptive functions
@@ -55,37 +55,61 @@ analyses:
       distribution of your data.
     ribbon: analyses
     category: analyses
-  - title: Alluvial Diagrams
-    name: alluvial
-    ns: ClinicoPathDescriptives
-    menuGroup: Exploration
-    menuSubgroup: ClinicoPath Descriptive Plots
-    menuTitle: Alluvial Diagrams
-    ribbon: analyses
-    category: analyses
-  - title: Cross Tables
-    name: crosstable
-    ns: ClinicoPathDescriptives
-    menuGroup: Exploration
-    menuSubgroup: ClinicoPath Comparisons
-    menuTitle: Cross Tables
-    description: Function for making Cross Tables.
-    ribbon: analyses
-    category: analyses
-  - title: Age Pyramid
-    name: agepyramid
-    ns: ClinicoPathDescriptives
-    menuGroup: Exploration
-    menuSubgroup: ClinicoPath Descriptive Plots
-    menuTitle: Age Pyramid
-    ribbon: analyses
-    category: analyses
   - title: Benford Analysis
     name: benford
     ns: ClinicoPathDescriptives
     menuGroup: Exploration
     menuSubgroup: ClinicoPath Data Quality
     menuTitle: Benford Analysis
+    ribbon: analyses
+    category: analyses
+  - title: Single Variable Quality Check
+    name: checkdata
+    ns: ClinicoPathDescriptives
+    category: analyses
+    menuGroup: Exploration
+    menuSubgroup: ClinicoPath Data Quality
+    menuTitle: Single Variable Quality Check
+  - title: Multi-Variable Visual Quality
+    name: dataquality
+    ns: ClinicoPathDescriptives
+    category: analyses
+    menuGroup: Exploration
+    menuSubgroup: ClinicoPath Data Quality
+    menuTitle: Multi-Variable Visual Quality
+    description: >
+      This module provides data quality assessment including duplicate
+      detection, 
+      missing value analysis, and data completeness summary (similar to sumvar's
+      dup() function).
+  - title: Advanced Outlier Detection
+    name: outlierdetection
+    ns: ClinicoPathDescriptives
+    category: analyses
+    menuGroup: Exploration
+    menuSubgroup: ClinicoPath Data Quality
+    menuTitle: Advanced Outlier Detection
+    description: >
+      Advanced outlier detection using multiple statistical methods from the
+      easystats performance package.
+
+      This module provides comprehensive outlier detection through univariate
+      methods (Z-scores, IQR, confidence intervals),
+
+      multivariate methods (Mahalanobis distance, MCD, OPTICS, LOF), and
+      composite scoring across multiple algorithms.
+
+      Complements existing data quality assessment modules with state-of-the-art
+      outlier detection capabilities.
+
+      Perfect for clinical research data quality control and preprocessing.
+
+  - title: Age Pyramid
+    name: agepyramid
+    ns: ClinicoPathDescriptives
+    menuGroup: Exploration
+    menuSubgroup: ClinicoPath Descriptive Plots
+    menuTitle: Age Pyramid
     ribbon: analyses
     category: analyses
   - title: Venn Diagram
@@ -110,31 +134,26 @@ analyses:
       functionality from legacy versions with modern vtree capabilities.
     ribbon: analyses
     category: analyses
-  - title: Non-Parametric Statistical Methods
-    name: nonparametric
+
+  - title: Alluvial Diagrams
+    name: alluvial
     ns: ClinicoPathDescriptives
-    category: analyses
     menuGroup: Exploration
-    menuSubgroup: Advanced Statistical Tests
-    menuTitle: Non-Parametric Statistical Methods
-    menuSubtitle: Comprehensive non-parametric analysis with effect sizes and robust methods
-    description: >
-      Comprehensive non-parametric statistical methods including Kruskal-Wallis
-      test,
+    menuSubgroup: ClinicoPath Descriptive Plots
+    menuTitle: Alluvial Diagrams
+    ribbon: analyses
+    category: analyses
 
-      Friedman test, Mann-Whitney U test, and robust alternatives to classical
-      procedures.
 
-      Designed specifically for clinical research where normality assumptions
-      are violated.
-
-      This enhanced module combines distribution-free methods with proper effect
-      size calculations,
-
-      assumption checking, and post hoc analysis - addressing critical gaps
-      identified in 30% 
-
-      of pathology studies that use these methods.
+  - title: Cross Tables
+    name: crosstable
+    ns: ClinicoPathDescriptives
+    menuGroup: Exploration
+    menuSubgroup: ClinicoPath Comparisons
+    menuTitle: Cross Tables
+    description: Function for making Cross Tables.
+    ribbon: analyses
+    category: analyses
   - title: Chi-Square Post-Hoc Tests
     name: chisqposttest
     ns: ClinicoPathDescriptives
@@ -143,47 +162,8 @@ analyses:
     menuSubgroup: ClinicoPath Comparisons
     menuTitle: Chi-Square Post-Hoc Tests
     description: Performs Chi-Square test and post-hoc pairwise comparisons.
-  - title: Single Variable Quality Check
-    name: checkdata
-    ns: ClinicoPathDescriptives
-    category: analyses
-    menuGroup: Exploration
-    menuSubgroup: ClinicoPath Data Quality
-    menuTitle: Single Variable Quality Check
-  - title: Multi-Variable Visual Quality
-    name: dataquality
-    ns: ClinicoPathDescriptives
-    category: analyses
-    menuGroup: Exploration
-    menuSubgroup: ClinicoPath Data Quality
-    menuTitle: Multi-Variable Visual Quality
-    description: >
-      This module provides data quality assessment including duplicate
-      detection,
 
-      missing value analysis, and data completeness summary (similar to sumvar's
-      dup() function).
-  - title: Advanced Outlier Detection
-    name: outlierdetection
-    ns: ClinicoPathDescriptives
-    category: analyses
-    menuGroup: Exploration
-    menuSubgroup: ClinicoPath Data Quality
-    menuTitle: Advanced Outlier Detection
-    description: >
-      Advanced outlier detection using multiple statistical methods from the
-      easystats performance package.
 
-      This module provides comprehensive outlier detection through univariate
-      methods (Z-scores, IQR, confidence intervals),
-
-      multivariate methods (Mahalanobis distance, MCD, OPTICS, LOF), and
-      composite scoring across multiple algorithms.
-
-      Complements existing data quality assessment modules with state-of-the-art
-      outlier detection capabilities.
-
-      Perfect for clinical research data quality control and preprocessing.
 datasets:
   - name: Histopathology Data Including Analysis
     path: histopathologyDescriptives.omv
