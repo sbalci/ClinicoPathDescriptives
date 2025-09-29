@@ -1,8 +1,8 @@
 Type: Package
 Package: ClinicoPathDescriptives
 Title: Descriptive Analysis Tools for Clinicopathological Research
-Version: 0.0.31.73
-Date: 2025-09-22
+Version: 0.0.31.80
+Date: 2025-09-29
 Authors@R: person(given = "Serdar", family = "Balci", role = c("aut",
         "cre"), email = "<serdarbalci@serdarbalci.com>", comment =
         c(ORCID = "0000-0002-7852-3851"))
@@ -27,12 +27,12 @@ License: GPL (>= 2)
 Depends: R (>= 4.1.0)
 Imports: arsenal, benford.analysis, cardx, ComplexUpset, dbscan,
         DiagrammeR, DiagrammeRsvg, dplyr, easyalluvial, finalfit,
-        ggcharts, ggplot2, ggvenn, glue, grid, gridExtra, gt, gtExtras,
-        gtsummary, htmltools, janitor, jmvcore, kableExtra, labelled,
-        lubridate, magrittr, moments, performance, pivottabler, purrr,
-        R6, RColorBrewer, rlang, robustbase, rsvg, scales, shiny,
-        stats, stringr, tableone, tangram, tibble, tidyr, UpSetR,
-        utils, vcd, visdat, vtree
+        ggcharts, ggplot2, ggvenn, ggVennDiagram, glue, grid,
+        gridExtra, gt, gtExtras, gtsummary, htmltools, janitor,
+        jmvcore, kableExtra, labelled, lubridate, magrittr, moments,
+        performance, pivottabler, purrr, R6, RColorBrewer, rlang,
+        robustbase, rsvg, scales, shiny, stats, stringr, tableone,
+        tangram, tibble, tidyr, UpSetR, utils, vcd, visdat, vtree
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
