@@ -23,16 +23,16 @@ The package emphasizes reproducible research workflows, automated reporting capa
 
 - **Age Pyramid Plots** (`agepyramid`): Population structure visualizations for demographic analysis
 - **Alluvial Diagrams** (`alluvial`): Flow visualizations for tracking categorical variable relationships and patient pathways
-- **Venn Diagrams** (`venn`): Set relationship visualizations with statistical overlap analysis
-- **Swimmer Plots** (`swimmerplot`): Timeline visualizations for longitudinal clinical studies and treatment responses
-- **Waterfall Plots** (`waterfall`): Treatment response and biomarker change visualizations
+- **Venn Diagrams** (`venn`): Set relationship visualizations with statistical overlap analysis using ggVennDiagram (supports 2-7 sets)
 - **Variable Trees** (`vartree`): Hierarchical data structure visualizations for complex datasets
 
 ### 🔍 Data Quality & Validation
 
 - **Benford's Law Analysis** (`benford`): Statistical data quality assessment and fraud detection using first-digit distribution analysis
-- **Comprehensive Data Profiling**: Automated data quality reports with missing value analysis, distribution assessments, and outlier detection
-- **Variable Validation**: Built-in checks for data consistency and clinical plausibility
+- **Data Quality Assessment** (`dataquality`): Comprehensive data profiling with missing value analysis and distribution assessments
+- **Data Checking** (`checkdata`): Interactive data validation and quality control tools
+- **Outlier Detection** (`outlierdetection`): Multiple methods including DBSCAN, robust statistics, and visualization
+- **Chi-square Post-hoc Tests** (`chisqposttest`): Detailed post-hoc analysis for chi-square tests with pairwise comparisons
 
 ### 🎯 Clinical Research Focus
 
@@ -116,6 +116,10 @@ Serdar Balci (2025). ClinicoPath jamovi Module. doi:10.5281/zenodo.3997188
 ## License
 
 GPL (>= 2) - see [LICENSE](LICENSE) file for details.
+
+## Related Packages
+
+- **OncoPath**: Oncology-specific visualization tools including swimmer plots and waterfall plots for cancer research workflows. The swimmer plot and waterfall plot modules have been moved to this dedicated oncology package.
 
 ## Contributing
 
