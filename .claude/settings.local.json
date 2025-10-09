@@ -7,7 +7,8 @@
       "Read(//Users/serdarbalci/Documents/GitHub/ClinicoPathJamoviModule/**)",
       "Bash(node:*)",
       "Bash(grep:*)",
-      "Bash(Rscript:*)"
+      "Bash(Rscript:*)",
+      "Bash(sed:*)"
     ],
     "deny": []
   }

@@ -32,6 +32,7 @@ knitr::opts_chunk$set(
 
 
 ```{r setup 2, include=FALSE}
+
 library(ClinicoPathDescriptives)
 library(dplyr)
 library(knitr)
@@ -67,7 +68,7 @@ Let's start with a basic summary table using clinical trial data:
 
 ```{r basic-summary}
 # Create a basic summary table
-result1 <- ClinicoPathDescriptives::gtsummary(
+result1 <- ClinicoPath::gtsummary(
   data = gtsummary_clinical_trial,
   vars = c("age", "gender", "bmi", "diabetes"),
   tableType = "summary",
@@ -87,7 +88,7 @@ The most common use case is creating a "Table 1" for clinical papers - a summary
 
 ```{r grouped-summary}
 # Create a grouped summary table (classic "Table 1")
-result2 <- ClinicoPathDescriptives::gtsummary(
+result2 <- ClinicoPath::gtsummary(
   data = gtsummary_clinical_trial,
   vars = c("age", "gender", "race", "bmi", "diabetes", "disease_stage", "hemoglobin"),
   byvar = "treatment_group",
@@ -115,7 +116,7 @@ Cross-tabulation tables are essential for analyzing relationships between catego
 
 ```{r cross-tabulation}
 # Create a cross-tabulation table
-result3 <- ClinicoPathDescriptives::gtsummary(
+result3 <- ClinicoPath::gtsummary(
   data = gtsummary_cross_data,
   vars = c("treatment_response", "drug_dosage"),
   tableType = "cross",
@@ -135,7 +136,7 @@ cat("Column variable: drug_dosage (", length(unique(gtsummary_cross_data$drug_do
 
 ```{r complex-cross}
 # Create a more complex cross-tabulation
-result4 <- ClinicoPathDescriptives::gtsummary(
+result4 <- ClinicoPath::gtsummary(
   data = gtsummary_cross_data,
   vars = c("side_effects", "compliance"),
   tableType = "cross",
@@ -157,7 +158,7 @@ Regression tables are useful for presenting model results:
 
 ```{r regression-table}
 # Create a regression table
-result5 <- ClinicoPathDescriptives::gtsummary(
+result5 <- ClinicoPath::gtsummary(
   data = gtsummary_clinical_trial,
   vars = c("age", "gender", "bmi", "diabetes"),
   tableType = "regression",
@@ -177,7 +178,7 @@ Clinical laboratory data requires special consideration for reference ranges and
 
 ```{r laboratory-analysis}
 # Create laboratory summary table
-result6 <- ClinicoPathDescriptives::gtsummary(
+result6 <- ClinicoPath::gtsummary(
   data = gtsummary_laboratory_data,
   vars = c("glucose", "creatinine", "cholesterol_flag", "glucose_flag"),
   byvar = "department",
@@ -203,7 +204,7 @@ Survey data often requires special handling for Likert scales and categorical re
 
 ```{r survey-analysis}
 # Create survey data summary
-result7 <- ClinicoPathDescriptives::gtsummary(
+result7 <- ClinicoPath::gtsummary(
   data = gtsummary_survey_data,
   vars = c("age_group", "income_level", "education_level", "overall_satisfaction"),
   byvar = "region",
@@ -228,7 +229,7 @@ Manufacturing data demonstrates the versatility of gtsummary for quality control
 
 ```{r manufacturing-qc}
 # Create manufacturing quality control table
-result8 <- ClinicoPathDescriptives::gtsummary(
+result8 <- ClinicoPath::gtsummary(
   data = gtsummary_manufacturing_data,
   vars = c("actual_temperature", "pressure_psi", "overall_grade", "within_specification"),
   byvar = "shift",
@@ -253,7 +254,7 @@ cat("Process control parameters included\n")
 
 ```{r advanced-formatting}
 # Create a highly formatted table
-result9 <- ClinicoPathDescriptives::gtsummary(
+result9 <- ClinicoPath::gtsummary(
   data = gtsummary_clinical_trial,
   vars = c("age", "gender", "bmi_category", "hypertension", "diabetes"),
   byvar = "treatment_group",
@@ -285,7 +286,7 @@ cat("Features: FDR correction, custom digits, styling options\n")
 
 ```{r multiple-stats}
 # Show comprehensive statistics
-result10 <- ClinicoPathDescriptives::gtsummary(
+result10 <- ClinicoPath::gtsummary(
   data = gtsummary_laboratory_data,
   vars = c("glucose", "creatinine", "hemoglobin", "total_cholesterol"),
   byvar = "patient_sex",
@@ -308,7 +309,7 @@ The gtsummary function can generate the equivalent R code for transparency and r
 
 ```{r code-generation}
 # Create table with R code output
-result11 <- ClinicoPathDescriptives::gtsummary(
+result11 <- ClinicoPath::gtsummary(
   data = gtsummary_clinical_trial,
   vars = c("age", "gender", "bmi"),
   byvar = "treatment_group",
@@ -330,7 +331,7 @@ cat("Generated code can be used for reproducible research\n")
 
 ```{r auto-testing}
 # Demonstrate automatic test selection
-result12 <- ClinicoPathDescriptives::gtsummary(
+result12 <- ClinicoPath::gtsummary(
   data = gtsummary_clinical_trial,
   vars = c("age", "gender", "bmi", "diabetes", "disease_stage"),
   byvar = "treatment_group",
@@ -352,7 +353,7 @@ cat("Tests selected based on variable type and group structure\n")
 
 ```{r manual-testing}
 # Demonstrate manual test selection
-result13 <- ClinicoPathDescriptives::gtsummary(
+result13 <- ClinicoPath::gtsummary(
   data = gtsummary_clinical_trial,
   vars = c("age", "hemoglobin", "creatinine"),
   byvar = "treatment_group",
@@ -374,7 +375,7 @@ cat("Kruskal-Wallis test specified for non-parametric analysis\n")
 
 ```{r missing-values}
 # Demonstrate different missing value handling
-result14 <- ClinicoPathDescriptives::gtsummary(
+result14 <- ClinicoPath::gtsummary(
   data = gtsummary_clinical_trial,
   vars = c("age", "education", "biomarker_b", "qol_baseline"),
   byvar = "treatment_group",
@@ -392,7 +393,7 @@ cat("Strategy: Always show missing values\n")
 
 ```{r missing-values-conditional}
 # Show missing values only when present
-result15 <- ClinicoPathDescriptives::gtsummary(
+result15 <- ClinicoPath::gtsummary(
   data = gtsummary_clinical_trial,
   vars = c("age", "education", "biomarker_b", "qol_baseline"),
   byvar = "treatment_group",
@@ -414,7 +415,7 @@ cat("Strategy: Show missing values only when present\n")
 
 ```{r html-output}
 # HTML output format
-result16 <- ClinicoPathDescriptives::gtsummary(
+result16 <- ClinicoPath::gtsummary(
   data = gtsummary_survey_data,
   vars = c("age_group", "income_level", "overall_satisfaction"),
   byvar = "region",
@@ -433,7 +434,7 @@ cat("Best for interactive viewing and web-based reports\n")
 
 ```{r markdown-output}
 # Markdown output format
-result17 <- ClinicoPathDescriptives::gtsummary(
+result17 <- ClinicoPath::gtsummary(
   data = gtsummary_survey_data,
   vars = c("age_group", "income_level", "overall_satisfaction"),
   byvar = "region",
@@ -454,7 +455,7 @@ cat("Ideal for reproducible reports and documentation\n")
 
 ```{r clinical-table1}
 # Create a comprehensive clinical trial Table 1
-result18 <- ClinicoPathDescriptives::gtsummary(
+result18 <- ClinicoPath::gtsummary(
   data = gtsummary_clinical_trial,
   vars = c("age", "gender", "race", "education", "bmi_category", "hypertension", 
            "diabetes", "disease_stage", "hemoglobin", "creatinine", "cholesterol"),
@@ -480,7 +481,7 @@ cat("Publication-ready format with comprehensive baseline characteristics\n")
 
 ```{r biomarker-analysis}
 # Biomarker analysis table
-result19 <- ClinicoPathDescriptives::gtsummary(
+result19 <- ClinicoPath::gtsummary(
   data = gtsummary_clinical_trial,
   vars = c("biomarker_a", "biomarker_b", "hemoglobin", "creatinine", "cholesterol"),
   byvar = "response",
@@ -523,7 +524,7 @@ cat("Non-parametric analysis appropriate for biomarker data\n")
 
 ```{r best-practices}
 # Demonstrate best practices
-result20 <- ClinicoPathDescriptives::gtsummary(
+result20 <- ClinicoPath::gtsummary(
   data = gtsummary_clinical_trial,
   vars = c("age", "gender", "bmi", "diabetes", "disease_stage", "hemoglobin"),
   byvar = "treatment_group",

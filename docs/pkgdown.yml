@@ -28,6 +28,7 @@ articles:
   10-function-benford: 10-function-benford.html
   10-visualization-gallery: 10-visualization-gallery.html
   11-function-crosstable: 11-function-crosstable.html
+  12-chisqposttest: 12-chisqposttest.html
   12-function-reportcat: 12-function-reportcat.html
   13-cisingle: 13-cisingle.html
   13-enhancedcrosstable: 13-enhancedcrosstable.html
@@ -39,21 +40,30 @@ articles:
   15-function-venn: 15-function-venn.html
   15-groupsummary-comprehensive: 15-groupsummary-comprehensive.html
   16-coefficient-plots: 16-coefficient-plots.html
+  16-data-summary-legacy: 16-data-summary-legacy.html
   16-use-clinicopath-in-r: 16-use-clinicopath-in-r.html
   17-desctools: 17-desctools.html
+  17-introduction-legacy: 17-introduction-legacy.html
   18-consort-flowcharts: 18-consort-flowcharts.html
+  18-digital-pathology-validation-legacy: 18-digital-pathology-validation-legacy.html
   19-contingency-tables: 19-contingency-tables.html
   19-flowchart-comprehensive: 19-flowchart-comprehensive.html
+  19-molecular-pathology-workflow-legacy: 19-molecular-pathology-workflow-legacy.html
+  20-clinical-workflow-legacy: 20-clinical-workflow-legacy.html
   20-ggflowchart-comprehensive: 20-ggflowchart-comprehensive.html
+  20-ihcstats-comprehensive-legacy: 20-ihcstats-comprehensive-legacy.html
   20-paired-contingency-tables: 20-paired-contingency-tables.html
   21-correlation-analysis: 21-correlation-analysis.html
   21-ggprism-comprehensive: 21-ggprism-comprehensive.html
+  21-use-in-r-legacy: 21-use-in-r-legacy.html
+  21-visualization-gallery-legacy: 21-visualization-gallery-legacy.html
   22-gtsummary-comprehensive: 22-gtsummary-comprehensive.html
+  22-venn-legacy: 22-venn-legacy.html
   23-hullplot-comprehensive: 23-hullplot-comprehensive.html
   37-missingdata-comprehensive: 37-missingdata-comprehensive.html
-  swimmer-unified-datasets: swimmer-unified-datasets.html
-  swimmerplot-unified-comprehensive: swimmerplot-unified-comprehensive.html
-last_built: 2025-07-29T12:20Z
+  clinical-workflow: clinical-workflow.html
+  clinicopath-descriptives-01-oncodatasets-examples: clinicopath-descriptives-01-oncodatasets-examples.html
+last_built: 2025-10-09T15:58Z
 urls:
   reference: https://www.serdarbalci.com/ClinicoPathDescriptives/reference
   article: https://www.serdarbalci.com/ClinicoPathDescriptives/articles

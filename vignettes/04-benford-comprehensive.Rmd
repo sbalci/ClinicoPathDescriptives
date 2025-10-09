@@ -7,7 +7,6 @@ output: html_document
 ---
 
 
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
   comment = "#>", 
@@ -20,7 +19,6 @@ knitr::opts_chunk$set(
   eval = FALSE
 )
 ```
-
 
 # Introduction to Benford's Law
 

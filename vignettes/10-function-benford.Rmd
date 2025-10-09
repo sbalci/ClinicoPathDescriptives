@@ -33,7 +33,7 @@ head(payments)
 
 ```{r}
 # This code shows how to use the benford.analysis package directly
-# The ClinicoPathDescriptives::benford function is designed for jamovi and won't work in R Markdown
+# The ClinicoPath::benford function is designed for jamovi and won't work in R Markdown
 
 # Load required library
 library(benford.analysis)

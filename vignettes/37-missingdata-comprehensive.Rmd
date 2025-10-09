@@ -7,12 +7,6 @@ output: html_document
 editor: visual
 ---
 
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(comment = "#>", collapse = TRUE, eval = FALSE, fig.width = 7, fig.height = 5)
-```
-
-
 ## Overview
 
 The `missingdata` function in ClinicoPath provides comprehensive missing data analysis and multiple imputation capabilities using the powerful `mice` and `ggmice` packages.
@@ -38,7 +32,7 @@ Missing data analysis is essential when:
 
 ## Installation and Setup
 
-```{r setup 2, message=FALSE, warning=FALSE}
+```{r setup, message=FALSE, warning=FALSE}
 # Load required libraries
 library(ClinicoPathDescriptives)
 library(dplyr)
@@ -523,6 +517,4 @@ By combining pattern analysis, multiple imputation, and extensive diagnostics, i
 -   Little, R. J., & Rubin, D. B. (2019). *Statistical Analysis with Missing Data*. Wiley.
 
 For more information and updates, visit the [ClinicoPath documentation](https://github.com/sbalci/ClinicoPathJamoviModule).
-
-------------------------------------------------------------------------
 
