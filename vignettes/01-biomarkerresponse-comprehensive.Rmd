@@ -332,7 +332,7 @@ Receiver Operating Characteristic analysis provides comprehensive biomarker perf
 - FDA/EMA guidelines compliance
 - Good Laboratory Practice (GLP)
 - Clinical Laboratory Improvement Amendments (CLIA)
-- ISO 15189 medical laboratory accreditation
+- Medical laboratory accreditation
 
 # Real-World Clinical Applications
 
