@@ -64,6 +64,6 @@ items:
 
 refs:
     - ClinicoPathJamoviModule
-
+    - ggcharts
 
 ...

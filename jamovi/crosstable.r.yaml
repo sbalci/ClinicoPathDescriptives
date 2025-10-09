@@ -309,5 +309,9 @@ items:
 
 refs:
     - ClinicoPathJamoviModule
-
+    - janitor
+    - arsenal
+    - finalfit
+    - gtsummary
+    - tangram
 ...
