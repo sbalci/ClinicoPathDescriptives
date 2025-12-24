@@ -8,7 +8,8 @@
       "Bash(node:*)",
       "Bash(grep:*)",
       "Bash(Rscript:*)",
-      "Bash(sed:*)"
+      "Bash(sed:*)",
+      "Bash(ls:*)"
     ],
     "deny": []
   }
