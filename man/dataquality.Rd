@@ -7,14 +7,16 @@
 dataquality(
   data,
   vars,
-  check_duplicates = TRUE,
-  check_missing = TRUE,
+  check_duplicates = FALSE,
+  check_missing = FALSE,
   complete_cases_only = FALSE,
   plot_data_overview = FALSE,
   plot_missing_patterns = FALSE,
   plot_data_types = FALSE,
-  plot_value_expectations = FALSE,
-  missing_threshold_visual = 10
+  missing_threshold_visual = 10,
+  showSummary = TRUE,
+  showRecommendations = TRUE,
+  showExplanations = FALSE
 )
 }
 \arguments{
@@ -24,13 +26,14 @@ dataquality(
 dataset will be analyzed.}
 
 \item{check_duplicates}{If TRUE, analyzes duplicate values within each
-variable or across  the entire dataset.}
+variable or across the entire dataset.}
 
 \item{check_missing}{If TRUE, provides detailed missing value statistics
 and patterns.}
 
-\item{complete_cases_only}{If TRUE, analyzes completeness across all
-selected variables simultaneously.}
+\item{complete_cases_only}{If TRUE, checks for duplicate rows across all
+selected variables. If FALSE, checks for duplicate values within each
+variable separately.}
 
 \item{plot_data_overview}{Show data overview visualization displaying
 variable types and missing values.}
@@ -40,21 +43,29 @@ variable types and missing values.}
 \item{plot_data_types}{Show data type detection and validation
 visualization.}
 
-\item{plot_value_expectations}{Show value expectations analysis
-visualization.}
-
 \item{missing_threshold_visual}{Threshold percentage for highlighting
 variables with missing values in visual analysis.}
+
+\item{showSummary}{If TRUE, displays a concise plain-language summary of
+quality issues and overall assessment.}
+
+\item{showRecommendations}{If TRUE, provides specific recommendations for
+addressing identified quality issues.}
+
+\item{showExplanations}{If TRUE, includes explanations of quality metrics
+and statistical tests used in the analysis.}
 }
 \value{
 A results object containing:
 \tabular{llllll}{
 \code{results$todo} \tab \tab \tab \tab \tab a html \cr
 \code{results$text} \tab \tab \tab \tab \tab a html \cr
+\code{results$summary} \tab \tab \tab \tab \tab a html \cr
+\code{results$recommendations} \tab \tab \tab \tab \tab a html \cr
+\code{results$explanations} \tab \tab \tab \tab \tab a html \cr
 \code{results$plotDataOverview} \tab \tab \tab \tab \tab an image \cr
 \code{results$plotMissingPatterns} \tab \tab \tab \tab \tab an image \cr
 \code{results$plotDataTypes} \tab \tab \tab \tab \tab an image \cr
-\code{results$plotValueExpectations} \tab \tab \tab \tab \tab an image \cr
 }
 }
 \description{

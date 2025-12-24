@@ -2,7 +2,7 @@
 % Please edit documentation in R/outlierdetection.h.R
 \name{outlierdetection}
 \alias{outlierdetection}
-\title{Advanced Outlier Detection}
+\title{Outlier Detection}
 \usage{
 outlierdetection(
   data,
@@ -15,10 +15,10 @@ outlierdetection(
   iqr_multiplier = 1.7,
   confidence_level = 0.999,
   show_outlier_table = TRUE,
-  show_method_comparison = TRUE,
-  show_exclusion_summary = TRUE,
-  show_visualization = TRUE,
-  show_interpretation = TRUE
+  show_method_comparison = FALSE,
+  show_exclusion_summary = FALSE,
+  show_visualization = FALSE,
+  show_interpretation = FALSE
 )
 }
 \arguments{
@@ -81,6 +81,7 @@ detection results and methodological notes.}
 A results object containing:
 \tabular{llllll}{
 \code{results$todo} \tab \tab \tab \tab \tab a html \cr
+\code{results$warnings} \tab \tab \tab \tab \tab a html \cr
 \code{results$plot} \tab \tab \tab \tab \tab an image \cr
 \code{results$outlier_table} \tab \tab \tab \tab \tab a html \cr
 \code{results$method_comparison} \tab \tab \tab \tab \tab a html \cr
@@ -89,8 +90,8 @@ A results object containing:
 }
 }
 \description{
-Advanced outlier detection using multiple statistical methods from the
-easystats performance package.
+Outlier detection using multiple statistical methods from the easystats
+performance package.
 This module provides comprehensive outlier detection through univariate
 methods (Z-scores, IQR, confidence intervals),
 multivariate methods (Mahalanobis distance, MCD, OPTICS, LOF), and

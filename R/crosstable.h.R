@@ -11,7 +11,8 @@ crosstableOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             sty = "nejm",
             excl = FALSE,
             cont = "mean",
-            pcat = "chisq", ...) {
+            pcat = "chisq",
+            p_adjust = "none", ...) {
 
             super$initialize(
                 package="ClinicoPathDescriptives",
@@ -59,6 +60,16 @@ crosstableOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                     "chisq",
                     "fisher"),
                 default="chisq")
+            private$..p_adjust <- jmvcore::OptionList$new(
+                "p_adjust",
+                p_adjust,
+                options=list(
+                    "none",
+                    "bonferroni",
+                    "holm",
+                    "BH",
+                    "BY"),
+                default="none")
 
             self$.addOption(private$..vars)
             self$.addOption(private$..group)
@@ -66,6 +77,7 @@ crosstableOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             self$.addOption(private$..excl)
             self$.addOption(private$..cont)
             self$.addOption(private$..pcat)
+            self$.addOption(private$..p_adjust)
         }),
     active = list(
         vars = function() private$..vars$value,
@@ -73,20 +85,25 @@ crosstableOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
         sty = function() private$..sty$value,
         excl = function() private$..excl$value,
         cont = function() private$..cont$value,
-        pcat = function() private$..pcat$value),
+        pcat = function() private$..pcat$value,
+        p_adjust = function() private$..p_adjust$value),
     private = list(
         ..vars = NA,
         ..group = NA,
         ..sty = NA,
         ..excl = NA,
         ..cont = NA,
-        ..pcat = NA)
+        ..pcat = NA,
+        ..p_adjust = NA)
 )
 
 crosstableResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
     "crosstableResults",
     inherit = jmvcore::Group,
     active = list(
+        errorNotice = function() private$.items[["errorNotice"]],
+        dataQualityNotice = function() private$.items[["dataQualityNotice"]],
+        analysisInfo = function() private$.items[["analysisInfo"]],
         subtitle = function() private$.items[["subtitle"]],
         todo = function() private$.items[["todo"]],
         todo2 = function() private$.items[["todo2"]],
@@ -110,6 +127,31 @@ crosstableResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                     "finalfit",
                     "gtsummary",
                     "tangram"))
+            self$add(jmvcore::Html$new(
+                options=options,
+                name="errorNotice",
+                title="Error",
+                visible=FALSE,
+                clearWith=list(
+                    "vars",
+                    "group")))
+            self$add(jmvcore::Html$new(
+                options=options,
+                name="dataQualityNotice",
+                title="Data Quality Warnings",
+                visible=FALSE,
+                clearWith=list(
+                    "vars",
+                    "group")))
+            self$add(jmvcore::Html$new(
+                options=options,
+                name="analysisInfo",
+                title="Analysis Information",
+                visible=FALSE,
+                clearWith=list(
+                    "vars",
+                    "group",
+                    "sty")))
             self$add(jmvcore::Preformatted$new(
                 options=options,
                 name="subtitle",
@@ -118,6 +160,7 @@ crosstableResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 options=options,
                 name="todo",
                 title="To Do",
+                visible=TRUE,
                 clearWith=list(
                     "vars",
                     "group",
@@ -176,20 +219,22 @@ crosstableResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 options=options,
                 name="qvalueExplanation",
                 title="Q-value Explanation",
+                visible=FALSE,
                 clearWith=list(
                     "vars",
                     "group",
-                    "sty"),
-                visible="(sty:gtsummary)"))
+                    "sty",
+                    "p_adjust")))
             self$add(jmvcore::Html$new(
                 options=options,
                 name="testInformation",
                 title="Q-value Information",
+                visible=FALSE,
                 clearWith=list(
                     "vars",
                     "group",
-                    "sty"),
-                visible="(sty:gtsummary)"))}))
+                    "sty",
+                    "p_adjust")))}))
 
 crosstableBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
     "crosstableBase",
@@ -214,7 +259,20 @@ crosstableBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 
 #' Cross Tables
 #'
-#' Function for making Cross Tables.
+#' Function for making Cross Tables with multiple table styles.
+#' 
+#' Currently implemented features:
+#' - Multiple table styles (arsenal, finalfit, gtsummary, NEJM, Lancet, hmisc)
+#' - Automatic test selection (chi-square, Fisher's exact, t-test, ANOVA)
+#' - Multiple testing correction (Bonferroni, Holm, Benjamini-Hochberg, 
+#' Benjamini-Yekutieli)
+#' - Variable name safety (special characters, spaces)
+#' - Data quality validation warnings
+#' 
+#' Note: Advanced features (pairwise comparisons, effect sizes, residual 
+#' analysis,
+#' correspondence analysis) are planned but not yet available.
+#' 
 #'
 #' @examples
 #' \donttest{
@@ -227,8 +285,7 @@ crosstableBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 #' #   sty = "finalfit",
 #' #   excl = TRUE,
 #' #   cont = "mean",
-#' #   pcat = "chisq",
-#' #   exportCSV = TRUE
+#' #   pcat = "chisq"
 #' # )
 #'}
 #' @param data The data as a data frame.
@@ -239,8 +296,13 @@ crosstableBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 #' @param excl Exclude rows with missing values.
 #' @param cont .
 #' @param pcat .
+#' @param p_adjust Method for adjusting p-values for multiple comparisons
+#'   across variables. Only available with gtsummary table style.
 #' @return A results object containing:
 #' \tabular{llllll}{
+#'   \code{results$errorNotice} \tab \tab \tab \tab \tab a html \cr
+#'   \code{results$dataQualityNotice} \tab \tab \tab \tab \tab a html \cr
+#'   \code{results$analysisInfo} \tab \tab \tab \tab \tab a html \cr
 #'   \code{results$subtitle} \tab \tab \tab \tab \tab a preformatted \cr
 #'   \code{results$todo} \tab \tab \tab \tab \tab a html \cr
 #'   \code{results$todo2} \tab \tab \tab \tab \tab a html \cr
@@ -260,7 +322,8 @@ crosstable <- function(
     sty = "nejm",
     excl = FALSE,
     cont = "mean",
-    pcat = "chisq") {
+    pcat = "chisq",
+    p_adjust = "none") {
 
     if ( ! requireNamespace("jmvcore", quietly=TRUE))
         stop("crosstable requires jmvcore to be installed (restart may be required)")
@@ -281,7 +344,8 @@ crosstable <- function(
         sty = sty,
         excl = excl,
         cont = cont,
-        pcat = pcat)
+        pcat = pcat,
+        p_adjust = p_adjust)
 
     analysis <- crosstableClass$new(
         options = options,

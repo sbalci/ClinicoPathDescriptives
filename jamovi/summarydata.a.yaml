@@ -3,7 +3,7 @@ name: summarydata
 title: Summary of Continuous Variables
 menuGroup: Exploration
 menuSubgroup: ClinicoPath Descriptives
-version: '0.0.31'
+version: '0.0.32'
 jas: '1.2'
 
 description:
@@ -54,11 +54,29 @@ options:
       type: Integer
       min: 0
       max: 5
-      default: 1
+      default: 2
       description:
         R: >
           Number of decimal places to display for statistical measures.
+          Default of 2 aligns with standard laboratory reporting.
 
+    - name: outliers
+      title: "Outlier Detection"
+      type: Bool
+      default: false
+      description:
+        R: >
+          If TRUE, detect and report potential outliers using IQR method.
+          Helpful for quality control and identifying data entry errors.
+
+    - name: report_sentences
+      title: "Generate Report Sentences"
+      type: Bool
+      default: false
+      description:
+        R: >
+          If TRUE, generate copy-ready clinical report sentences
+          for direct use in medical documentation.
 
 #
 #     - name: grvar

@@ -22,7 +22,7 @@ venn(
   var7true,
   show_upsetR = FALSE,
   show_complexUpset = FALSE,
-  show_ggvenn = FALSE,
+  show_ggvenn = TRUE,
   show_ggVennDiagram = FALSE,
   sortBy = "freq",
   minSize = 0,
@@ -196,6 +196,9 @@ A results object containing:
 \code{results$welcome} \tab \tab \tab \tab \tab a html \cr
 \code{results$todo} \tab \tab \tab \tab \tab a html \cr
 \code{results$summary} \tab \tab \tab \tab \tab a table \cr
+\code{results$validationErrors} \tab \tab \tab \tab \tab a html \cr
+\code{results$validationWarnings} \tab \tab \tab \tab \tab a html \cr
+\code{results$analysisInfo} \tab \tab \tab \tab \tab a html \cr
 \code{results$plotGgvenn} \tab \tab \tab \tab \tab an image \cr
 \code{results$plotGgVennDiagram} \tab \tab \tab \tab \tab an image \cr
 \code{results$plotUpsetR} \tab \tab \tab \tab \tab an image \cr

@@ -5,6 +5,15 @@ jrs:   '1.1'
 
 items:
 
+    - name: welcome
+      title: 'Getting Started'
+      type: Html
+      visible: (!age || !gender)
+
+    - name: dataInfo
+      title: 'Data Summary & Quality Information'
+      type: Html
+      visible: true
 
     - name:  pyramidTable
       title: 'Population Data'
@@ -30,18 +39,13 @@ items:
           type: number
           format: 'zto;dp:1'
       clearWith:
+          # Only data-affecting options that require recomputing aggregations
           - age
           - gender
           - female
+          - male
           - bin_width
-          - plot_title
-          - color1
-          - color2
-          - color_palette
           - age_groups
-          - plot_engine
-
-
 
     - name: plot
       title: 'Age Pyramid'
@@ -51,19 +55,22 @@ items:
       renderFun: .plot
       requiresData: true
       clearWith:
+          # Data options - trigger .run() and clear state
           - age
           - gender
           - female
+          - male
           - bin_width
+          - age_groups
+          # Visual options - trigger re-render only
+          # Note: These clear state, but .plot() will rebuild data if needed
           - plot_title
           - color1
           - color2
           - color_palette
-          - age_groups
           - plot_engine
 
 refs:
     - ClinicoPathJamoviModule
     - ggcharts
-
 ...

@@ -5,9 +5,23 @@ jrs:   '1.1'
 
 items:
 
+    - name: welcome
+      title: 'Getting Started'
+      type: Html
+      visible: (!var)
+      clearWith: []
+
     - name:  explanation
       title: "About Benford's Law in Clinical Data"
       type:  Html
+
+    - name: dataWarning
+      title: Data Validation
+      type: Html
+      visible: true
+      clearWith:
+          - var
+          - digits
 
     - name:  summary
       title: Analysis Summary
@@ -52,6 +66,5 @@ items:
 refs:
     - benford.analysis
     - ClinicoPathJamoviModule
-
 
 ...

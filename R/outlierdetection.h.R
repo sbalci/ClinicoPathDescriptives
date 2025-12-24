@@ -15,10 +15,10 @@ outlierdetectionOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6
             iqr_multiplier = 1.7,
             confidence_level = 0.999,
             show_outlier_table = TRUE,
-            show_method_comparison = TRUE,
-            show_exclusion_summary = TRUE,
-            show_visualization = TRUE,
-            show_interpretation = TRUE, ...) {
+            show_method_comparison = FALSE,
+            show_exclusion_summary = FALSE,
+            show_visualization = FALSE,
+            show_interpretation = FALSE, ...) {
 
             super$initialize(
                 package="ClinicoPathDescriptives",
@@ -93,19 +93,19 @@ outlierdetectionOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6
             private$..show_method_comparison <- jmvcore::OptionBool$new(
                 "show_method_comparison",
                 show_method_comparison,
-                default=TRUE)
+                default=FALSE)
             private$..show_exclusion_summary <- jmvcore::OptionBool$new(
                 "show_exclusion_summary",
                 show_exclusion_summary,
-                default=TRUE)
+                default=FALSE)
             private$..show_visualization <- jmvcore::OptionBool$new(
                 "show_visualization",
                 show_visualization,
-                default=TRUE)
+                default=FALSE)
             private$..show_interpretation <- jmvcore::OptionBool$new(
                 "show_interpretation",
                 show_interpretation,
-                default=TRUE)
+                default=FALSE)
 
             self$.addOption(private$..vars)
             self$.addOption(private$..method_category)
@@ -156,6 +156,7 @@ outlierdetectionResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6
     inherit = jmvcore::Group,
     active = list(
         todo = function() private$.items[["todo"]],
+        warnings = function() private$.items[["warnings"]],
         plot = function() private$.items[["plot"]],
         outlier_table = function() private$.items[["outlier_table"]],
         method_comparison = function() private$.items[["method_comparison"]],
@@ -167,21 +168,35 @@ outlierdetectionResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6
             super$initialize(
                 options=options,
                 name="",
-                title="Advanced Outlier Detection",
+                title="Outlier Detection",
                 refs=list(
                     "ClinicoPathJamoviModule",
                     "performance",
-                    "anomalydetection",
-                    "lofoutlier"))
+                    "dbscan",
+                    "robustbase"))
             self$add(jmvcore::Html$new(
                 options=options,
                 name="todo",
                 title="Instructions",
-                visible=FALSE))
+                visible=TRUE))
+            self$add(jmvcore::Html$new(
+                options=options,
+                name="warnings",
+                title="Analysis Messages",
+                visible=TRUE,
+                clearWith=list(
+                    "vars",
+                    "method_category",
+                    "univariate_methods",
+                    "multivariate_methods",
+                    "composite_threshold",
+                    "zscore_threshold",
+                    "iqr_multiplier",
+                    "confidence_level")))
             self$add(jmvcore::Image$new(
                 options=options,
                 name="plot",
-                title="Advanced Outlier Detection Plot",
+                title="Outlier Detection Plot",
                 width=800,
                 height=600,
                 renderFun=".plot",
@@ -255,7 +270,7 @@ outlierdetectionBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Cla
             super$initialize(
                 package = "ClinicoPathDescriptives",
                 name = "outlierdetection",
-                version = c(0,0,31),
+                version = c(0,0,32),
                 options = options,
                 results = outlierdetectionResults$new(options=options),
                 data = data,
@@ -268,10 +283,10 @@ outlierdetectionBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Cla
                 weightsSupport = 'auto')
         }))
 
-#' Advanced Outlier Detection
+#' Outlier Detection
 #'
-#' Advanced outlier detection using multiple statistical methods from the 
-#' easystats performance package.
+#' Outlier detection using multiple statistical methods from the easystats 
+#' performance package.
 #' This module provides comprehensive outlier detection through univariate 
 #' methods (Z-scores, IQR, confidence intervals),
 #' multivariate methods (Mahalanobis distance, MCD, OPTICS, LOF), and 
@@ -333,6 +348,7 @@ outlierdetectionBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Cla
 #' @return A results object containing:
 #' \tabular{llllll}{
 #'   \code{results$todo} \tab \tab \tab \tab \tab a html \cr
+#'   \code{results$warnings} \tab \tab \tab \tab \tab a html \cr
 #'   \code{results$plot} \tab \tab \tab \tab \tab an image \cr
 #'   \code{results$outlier_table} \tab \tab \tab \tab \tab a html \cr
 #'   \code{results$method_comparison} \tab \tab \tab \tab \tab a html \cr
@@ -352,10 +368,10 @@ outlierdetection <- function(
     iqr_multiplier = 1.7,
     confidence_level = 0.999,
     show_outlier_table = TRUE,
-    show_method_comparison = TRUE,
-    show_exclusion_summary = TRUE,
-    show_visualization = TRUE,
-    show_interpretation = TRUE) {
+    show_method_comparison = FALSE,
+    show_exclusion_summary = FALSE,
+    show_visualization = FALSE,
+    show_interpretation = FALSE) {
 
     if ( ! requireNamespace("jmvcore", quietly=TRUE))
         stop("outlierdetection requires jmvcore to be installed (restart may be required)")

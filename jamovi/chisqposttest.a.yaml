@@ -3,11 +3,20 @@ name:  chisqposttest
 title: Chi-Square Post-Hoc Tests
 menuGroup: Exploration
 menuSubgroup: ClinicoPath Comparisons
-version: '0.0.31'
+version: '0.0.32'
 jas: '1.2'
 
 description:
-    main: Performs Chi-Square test and post-hoc pairwise comparisons.
+    main: >
+          Performs Chi-Square test and post-hoc pairwise comparisons.
+          Post-hoc pairwise comparisons are ONLY performed when the overall chi-square
+          test is significant (p < α). This enforces proper statistical workflow and
+          prevents data dredging.
+          Selecting 'None' for post-hoc method DISABLES all pairwise testing. If you
+          want unadjusted pairwise comparisons, this feature is not available (by design,
+          as it would encourage inappropriate multiple testing).
+          No automated validation against established packages exists. Use with caution
+          for clinical decision-making.
     R:
         dontrun: true
         usage: |
@@ -44,6 +53,7 @@ options:
       description: >
                   Frequency/weight variable for contingency table data.
                   When specified, the data is treated as already summarized with counts per combination.
+      default: NULL
 
     - name: posthoc
       title: Post-Hoc Method
@@ -55,11 +65,15 @@ options:
           name: holm
         - title: FDR
           name: fdr
-        - title: None
+        - title: None (Disable Post-Hoc)
           name: none
       default: bonferroni
       description: >
-                  Method for p-value adjustment in post-hoc tests
+                  Method for p-value adjustment in post-hoc tests. IMPORTANT: Selecting
+                  'None' DISABLES all pairwise comparisons entirely (not just adjustment).
+                  Unadjusted pairwise testing is not supported to prevent inappropriate
+                  multiple testing. Choose Bonferroni (most conservative), Holm (less
+                  conservative), or FDR (controls false discovery rate) for pairwise testing.
 
     - name: sig
       title: Significance Level
@@ -142,35 +156,12 @@ options:
       description: >
                   Export comprehensive analysis results to downloadable format for further analysis
 
-    - name: clinicalPreset
-      title: Clinical Preset
-      type: List
-      options:
-        - title: Custom Settings
-          name: custom
-        - title: 2×2 Diagnostic Test
-          name: diagnostic2x2
-        - title: Treatment Response (3+ groups)
-          name: treatment_response
-        - title: Pathology Grade Distribution
-          name: grade_distribution
-      default: custom
-      description: >
-                  Pre-configured settings for common clinical scenarios
-
     - name: showClinicalSummary
       title: Show Clinical Summary
       type: Bool
-      default: true
-      description: >
-                  Display natural-language summary of results for clinical interpretation
-
-    - name: showExampleInterpretations
-      title: Show Example Interpretations
-      type: Bool
       default: false
       description: >
-                  Display example interpretations for significant findings
+                  Display natural-language summary of results for clinical interpretation
 
     - name: copyReadySentences
       title: Generate Report Sentences
@@ -182,7 +173,7 @@ options:
     - name: showAssumptionsCheck
       title: Show Assumptions Check
       type: Bool
-      default: true
+      default: false
       description: >
                   Display validation of chi-square test assumptions
 
@@ -192,11 +183,4 @@ options:
       default: false
       description: >
                   Display glossary of statistical terms with clinical interpretations
-
-    - name: colorBlindSafe
-      title: Use Color-Blind Safe Palette
-      type: Bool
-      default: false
-      description: >
-                  Use color-blind friendly visualization options
 ...

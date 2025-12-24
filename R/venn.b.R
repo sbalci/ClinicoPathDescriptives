@@ -165,6 +165,9 @@ vennClass <- if (requireNamespace('jmvcore'))
         inherit = vennBase,
         private = list(
             .name_mapping = list(),
+            .errors = character(0),
+            .warnings = character(0),
+            .info = character(0),
 
             .init = function() {
                 # Count number of selected variables for dynamic sizing
@@ -212,11 +215,25 @@ vennClass <- if (requireNamespace('jmvcore'))
             .run = function() {
                 private$.checkpoint()
 
+                # Reset message accumulators at the start of each run
+                private$.errors <- character(0)
+                private$.warnings <- character(0)
+                private$.info <- character(0)
+
                 # Validate required variables and their true levels
-                validation_error <- private$.validateVariables()
-                if (!is.null(validation_error)) {
-                    self$results$todo$setContent(validation_error)
-                    return()
+                if (!private$.validateVariables()) {
+                    private$.displayNotices()
+                    return()  # Validation failed, errors already accumulated
+                }
+
+                # If no plot type selected, default to ggvenn for user feedback
+                if (!self$options$show_ggvenn && !self$options$show_ggVennDiagram &&
+                    !self$options$show_upsetR && !self$options$show_complexUpset) {
+                    self$options$show_ggvenn <- TRUE
+                    self$results$todo$setContent(
+                        paste0("<div class='alert alert-info'>",
+                               .("No plot type was selected; defaulting to ggvenn output."), "</div>")
+                    )
                 }
                 
                 # Control welcome panel visibility based on variable selection
@@ -311,7 +328,7 @@ vennClass <- if (requireNamespace('jmvcore'))
 
                 # Check if required variables (var1 and var2) are provided.
                 if (is.null(self$options$var1) || is.null(self$options$var2)) {
-                    # Display a friendly welcome and instruction message.
+                    # Keep the friendly welcome message in todo (non-critical guidance)
                     todo <- paste0(
                         "<br><strong>", .("Welcome to ClinicoPath Venn Diagram Tool"), "</strong>",
                         "<br><br>",
@@ -330,26 +347,29 @@ vennClass <- if (requireNamespace('jmvcore'))
                         "<hr><br>"
                     )
                     self$results$todo$setContent(todo)
+                    return()
                 } else {
                     # Clear welcome message once variables are selected.
                     self$results$todo$setContent("")
-                    
+
                     # Generate explanatory content if requested
                     if (self$options$explanatory || self$options$aboutAnalysis) {
                         private$.generateAboutAnalysis()
                     }
 
-                    # Ensure data contains complete rows.
-                    if (nrow(self$data) == 0)
-                        stop(.("Data contains no (complete) rows"))
-
-                    # Read and clean the data.
-                    private$.checkpoint()
-                    full_data <- jmvcore::naOmit(self$data)
-                    row_numbers <- suppressWarnings(as.integer(rownames(full_data)))
-                    if (length(row_numbers) != nrow(full_data) || any(is.na(row_numbers))) {
-                        row_numbers <- seq_len(nrow(full_data))
+                    # Empty dataset check
+                    if (nrow(self$data) == 0) {
+                        private$.errors <- c(private$.errors,
+                            'Dataset contains no complete rows. Please check your data and ensure at least one complete observation exists.')
+                        private$.displayNotices()
+                        return()
                     }
+
+                    # CRITICAL FIX: Capture original data BEFORE any filtering
+                    # This ensures we report actual missingness, not post-exclusion stats
+                    private$.checkpoint()
+                    original_data <- self$data
+                    original_n <- nrow(original_data)
 
                     # Retrieve variable names and their corresponding "true" level selections.
                     var1 <- self$options$var1
@@ -374,13 +394,33 @@ vennClass <- if (requireNamespace('jmvcore'))
 
                     if (!validation_result$valid) {
                         # Display warning but continue with analysis
-                        warning_html <- paste0(
-                            "<div style='background-color: #fff3cd; padding: 12px; border-left: 4px solid #ffc107; margin: 10px 0; border-radius: 4px;'>",
-                            "<h6 style='margin: 0 0 8px 0; color: #856404;'>Variable Name Format Warning</h6>",
-                            "<p style='margin: 0;'>", validation_result$message, "</p>",
-                            "</div>"
-                        )
-                        self$results$todo$setContent(warning_html)
+                        private$.warnings <- c(private$.warnings, validation_result$message)
+                    }
+
+                    # CRITICAL FIX: Select ONLY the variables needed for analysis
+                    # This prevents dropping cases with NAs in unrelated columns
+                    selected_data <- original_data[, selected_vars, drop = FALSE]
+
+                    # CRITICAL FIX: Calculate missingness BEFORE exclusion for transparency
+                    original_complete <- sum(complete.cases(selected_data))
+
+                    # Apply naOmit ONLY to selected variables, not entire dataset
+                    full_data <- jmvcore::naOmit(selected_data)
+                    excluded_n <- original_n - nrow(full_data)
+
+                    # CRITICAL WARNING: Report case loss if any exclusions occurred
+                    if (excluded_n > 0) {
+                        excluded_pct <- round(100 * excluded_n / original_n, 1)
+                        private$.warnings <- c(private$.warnings, sprintf(
+                            '<strong>CASE EXCLUSION:</strong> %d cases (%.1f%%) excluded due to missing values. Original N=%d, Final N=%d. Venn diagram counts and percentages reflect complete cases only. Consider implications for generalizability.',
+                            excluded_n, excluded_pct, original_n, nrow(full_data)
+                        ))
+                    }
+
+                    # Restore row numbers for tracking
+                    row_numbers <- suppressWarnings(as.integer(rownames(full_data)))
+                    if (length(row_numbers) != nrow(full_data) || any(is.na(row_numbers))) {
+                        row_numbers <- seq_len(nrow(full_data))
                     }
 
                     # Collect only selected variables and convert to logical values
@@ -560,6 +600,18 @@ vennClass <- if (requireNamespace('jmvcore'))
                     if (self$options$showSetCalculations && (self$options$showMembershipTable || self$options$membershipGroups)) {
                         private$.generateMembershipTable(mydata, names(mydata), private$.name_mapping, row_numbers)
                     }
+
+                    # Analysis completion info
+                    num_sets <- sum(!sapply(list(self$options$var1, self$options$var2, self$options$var3,
+                                                 self$options$var4, self$options$var5, self$options$var6,
+                                                 self$options$var7), is.null))
+                    private$.info <- c(private$.info, sprintf(
+                        'Venn diagram analysis completed successfully for %d categorical variables across N=%d observations.',
+                        num_sets, nrow(full_data)
+                    ))
+
+                    # Display all accumulated notices
+                    private$.displayNotices()
                 }
             },
 
@@ -699,132 +751,80 @@ vennClass <- if (requireNamespace('jmvcore'))
             
             # Validation helper method
             .validateVariables = function() {
+                # Returns TRUE if validation passes, FALSE if errors found (errors accumulated in private$.errors)
+
                 # Check if dataset is empty
                 if (nrow(self$data) == 0) {
-                    return(paste0("<div class='alert alert-danger'>",
-                        "<strong>", .("Empty Dataset"), "</strong><br>",
-                        .("Dataset is empty. Please provide data with observations."),
-                        "</div>"))
+                    private$.errors <- c(private$.errors, 'Dataset is empty. Please provide data with observations.')
+                    return(FALSE)
                 }
 
-                # Check that required variables have true levels selected and are valid
+                # Validate var1 (required)
                 if (!is.null(self$options$var1)) {
                     if (is.null(self$options$var1true)) {
-                        return(paste0("<div class='alert alert-warning'>",
-                            "<strong>", .("Variable 1 Selected but True Level Missing"), "</strong><br>",
-                            .("Please select which level in Variable 1 represents the 'true' condition."),
-                            "</div>"))
+                        private$.errors <- c(private$.errors,
+                            'Variable 1 selected but "true" level not specified. Please select which level represents the positive/true condition for Variable 1.')
+                        return(FALSE)
                     }
-
-                    # Check if variable exists and has data
                     var1_data <- self$data[[self$options$var1]]
                     if (all(is.na(var1_data))) {
-                        return(paste0("<div class='alert alert-danger'>",
-                            "<strong>", .("Variable 1 Contains Only Missing Values"), "</strong><br>",
-                            sprintf(.("Variable '%s' contains only missing values. Please select a different variable."), self$options$var1),
-                            "</div>"))
+                        private$.errors <- c(private$.errors,
+                            sprintf("Variable '%s' contains only missing values. Please select a different variable with valid data.", self$options$var1))
+                        return(FALSE)
                     }
-
-                    # Check if selected true level exists in the data
                     if (!self$options$var1true %in% levels(as.factor(var1_data))) {
-                        return(paste0("<div class='alert alert-danger'>",
-                            "<strong>", .("Variable 1 True Level Not Found"), "</strong><br>",
-                            sprintf(.("Selected true level '%s' does not exist in variable '%s'."), self$options$var1true, self$options$var1),
-                            "</div>"))
+                        available_levels <- paste(levels(as.factor(var1_data)), collapse=", ")
+                        private$.errors <- c(private$.errors,
+                            sprintf("Selected 'true' level '%s' not found in Variable '%s'. Available levels: %s", self$options$var1true, self$options$var1, available_levels))
+                        return(FALSE)
                     }
                 }
 
+                # Validate var2 (required)
                 if (!is.null(self$options$var2)) {
                     if (is.null(self$options$var2true)) {
-                        return(paste0("<div class='alert alert-warning'>",
-                            "<strong>", .("Variable 2 Selected but True Level Missing"), "</strong><br>",
-                            .("Please select which level in Variable 2 represents the 'true' condition."),
-                            "</div>"))
+                        private$.errors <- c(private$.errors,
+                            'Variable 2 selected but "true" level not specified. Please select which level represents the positive/true condition for Variable 2.')
+                        return(FALSE)
                     }
-
-                    # Check if variable exists and has data
                     var2_data <- self$data[[self$options$var2]]
                     if (all(is.na(var2_data))) {
-                        return(paste0("<div class='alert alert-danger'>",
-                            "<strong>", .("Variable 2 Contains Only Missing Values"), "</strong><br>",
-                            sprintf(.("Variable '%s' contains only missing values. Please select a different variable."), self$options$var2),
-                            "</div>"))
+                        private$.errors <- c(private$.errors,
+                            sprintf("Variable '%s' contains only missing values. Please select a different variable with valid data.", self$options$var2))
+                        return(FALSE)
                     }
-
-                    # Check if selected true level exists in the data
                     if (!self$options$var2true %in% levels(as.factor(var2_data))) {
-                        return(paste0("<div class='alert alert-danger'>",
-                            "<strong>", .("Variable 2 True Level Not Found"), "</strong><br>",
-                            sprintf(.("Selected true level '%s' does not exist in variable '%s'."), self$options$var2true, self$options$var2),
-                            "</div>"))
+                        available_levels <- paste(levels(as.factor(var2_data)), collapse=", ")
+                        private$.errors <- c(private$.errors,
+                            sprintf("Selected 'true' level '%s' not found in Variable '%s'. Available levels: %s", self$options$var2true, self$options$var2, available_levels))
+                        return(FALSE)
                     }
                 }
 
-                if (!is.null(self$options$var3)) {
-                    if (is.null(self$options$var3true)) {
-                        return(paste0("<div class='alert alert-warning'>",
-                            "<strong>", .("Variable 3 Selected but True Level Missing"), "</strong><br>",
-                            .("Please select which level in Variable 3 represents the 'true' condition."),
-                            "</div>"))
-                    }
+                # Validate optional variables (var3-7) - allow skipping if all NA
+                for (i in 3:7) {
+                    var_name <- paste0("var", i)
+                    var_true_name <- paste0("var", i, "true")
+                    var_value <- self$options[[var_name]]
+                    var_true_value <- self$options[[var_true_name]]
 
-                    # Check if variable exists and has data
-                    var3_data <- self$data[[self$options$var3]]
-                    if (all(is.na(var3_data))) {
-                        return(paste0("<div class='alert alert-warning'>",
-                            "<strong>", .("Variable 3 Contains Only Missing Values"), "</strong><br>",
-                            sprintf(.("Variable '%s' contains only missing values. This variable will be skipped."), self$options$var3),
-                            "</div>"))
+                    if (!is.null(var_value)) {
+                        if (is.null(var_true_value)) {
+                            private$.errors <- c(private$.errors,
+                                sprintf('Variable %d selected but "true" level not specified. Please select which level represents the positive/true condition.', i))
+                            return(FALSE)
+                        }
+                        var_data <- self$data[[var_value]]
+                        if (!var_true_value %in% levels(as.factor(var_data))) {
+                            available_levels <- paste(levels(as.factor(var_data)), collapse=", ")
+                            private$.errors <- c(private$.errors,
+                                sprintf("Selected 'true' level '%s' not found in Variable '%s'. Available levels: %s", var_true_value, var_value, available_levels))
+                            return(FALSE)
+                        }
                     }
                 }
 
-                if (!is.null(self$options$var4)) {
-                    if (is.null(self$options$var4true)) {
-                        return(paste0("<div class='alert alert-warning'>",
-                            "<strong>", .("Variable 4 Selected but True Level Missing"), "</strong><br>",
-                            .("Please select which level in Variable 4 represents the 'true' condition."),
-                            "</div>"))
-                    }
-
-                    # Check if variable exists and has data
-                    var4_data <- self$data[[self$options$var4]]
-                    if (all(is.na(var4_data))) {
-                        return(paste0("<div class='alert alert-warning'>",
-                            "<strong>", .("Variable 4 Contains Only Missing Values"), "</strong><br>",
-                            sprintf(.("Variable '%s' contains only missing values. This variable will be skipped."), self$options$var4),
-                            "</div>"))
-                    }
-                }
-
-                # Check variables 5-7 (automatically uses advanced engine)
-                if (!is.null(self$options$var5)) {
-                    if (is.null(self$options$var5true)) {
-                        return(paste0("<div class='alert alert-warning'>",
-                            "<strong>", .("Variable 5 Selected but True Level Missing"), "</strong><br>",
-                            .("Please select which level in Variable 5 represents the 'true' condition."),
-                            "</div>"))
-                    }
-                }
-
-                if (!is.null(self$options$var6)) {
-                    if (is.null(self$options$var6true)) {
-                        return(paste0("<div class='alert alert-warning'>",
-                            "<strong>", .("Variable 6 Selected but True Level Missing"), "</strong><br>",
-                            .("Please select which level in Variable 6 represents the 'true' condition."),
-                            "</div>"))
-                    }
-                }
-
-                if (!is.null(self$options$var7)) {
-                    if (is.null(self$options$var7true)) {
-                        return(paste0("<div class='alert alert-warning'>",
-                            "<strong>", .("Variable 7 Selected but True Level Missing"), "</strong><br>",
-                            .("Please select which level in Variable 7 represents the 'true' condition."),
-                            "</div>"))
-                    }
-                }
-                
-                return(NULL)  # No validation errors
+                return(TRUE)  # Validation passed
             },
             
             # Helper function for calculating summary statistics
@@ -1144,7 +1144,6 @@ vennClass <- if (requireNamespace('jmvcore'))
                 # Create the base ComplexUpset plot with proper annotations
                 base_annotations_list <- list(
                     'Intersection size' = ComplexUpset::intersection_size(
-                        counts = TRUE,
                         text = list(size = 3)
                     )
                 )
@@ -1154,7 +1153,6 @@ vennClass <- if (requireNamespace('jmvcore'))
                 annotations_list <- if (showAnnotations) {
                     list(
                         'Intersection percentages' = ComplexUpset::intersection_size(
-                            counts = FALSE,
                             text = list(size = 3),
                             text_mapping = ggplot2::aes(label = paste0(round(100 * !!rlang::sym('intersection_size') / sum(!!rlang::sym('intersection_size')), 1), '%'))
                         )
@@ -1471,19 +1469,40 @@ vennClass <- if (requireNamespace('jmvcore'))
                     if (length(calculations) > 0) {
                         if (!is.null(calculations$overlaps)) {
                             html_content <- paste0(html_content, "<h4>Overlapping Members:</h4>")
-                            if (!is.null(calculations$overlaps) && is.list(calculations$overlaps) && length(calculations$overlaps) > 0) {
-                                for (i in seq_along(calculations$overlaps)) {
-                                    set_name <- names(calculations$overlaps)[i]
-                                    # Use original name for display if available
-                                    display_name <- set_name
-                                    if (!is.null(private$.name_mapping) && set_name %in% names(private$.name_mapping)) {
-                                        display_name <- private$.name_mapping[[set_name]]
+                            # CRITICAL FIX: overlap() returns a NAMED VECTOR, not a list
+                            overlaps <- calculations$overlaps
+                            if (!is.null(overlaps) && length(overlaps) > 0) {
+                                # Check if it's a named vector or list
+                                overlap_names <- names(overlaps)
+                                if (!is.null(overlap_names) && length(overlap_names) > 0) {
+                                    # It's a named vector - process as vector
+                                    for (i in seq_along(overlaps)) {
+                                        set_name <- overlap_names[i]
+                                        count <- overlaps[i]
+                                        # Use original name for display if available
+                                        display_name <- set_name
+                                        if (!is.null(private$.name_mapping) && set_name %in% names(private$.name_mapping)) {
+                                            display_name <- private$.name_mapping[[set_name]]
+                                        }
+                                        html_content <- paste0(html_content,
+                                            "<p><strong>", display_name, ":</strong> ",
+                                            count, " members (",
+                                            round(count/total_observations*100, 1), "%)</p>")
                                     }
-                                    members <- calculations$overlaps[[i]]
-                                    html_content <- paste0(html_content,
-                                        "<p><strong>", display_name, ":</strong> ",
-                                        length(members), " members (",
-                                        round(length(members)/total_observations*100, 1), "%)</p>")
+                                } else if (is.list(overlaps)) {
+                                    # It's a list - process as list
+                                    for (i in seq_along(overlaps)) {
+                                        set_name <- names(overlaps)[i]
+                                        display_name <- set_name
+                                        if (!is.null(private$.name_mapping) && set_name %in% names(private$.name_mapping)) {
+                                            display_name <- private$.name_mapping[[set_name]]
+                                        }
+                                        members <- overlaps[[i]]
+                                        html_content <- paste0(html_content,
+                                            "<p><strong>", display_name, ":</strong> ",
+                                            length(members), " members (",
+                                            round(length(members)/total_observations*100, 1), "%)</p>")
+                                    }
                                 }
                             } else {
                                 html_content <- paste0(html_content, "<p>No overlaps found.</p>")
@@ -1492,19 +1511,40 @@ vennClass <- if (requireNamespace('jmvcore'))
 
                         if (!is.null(calculations$unique_members)) {
                             html_content <- paste0(html_content, "<h4>Unique Members per Set:</h4>")
-                            if (!is.null(calculations$unique_members) && is.list(calculations$unique_members) && length(calculations$unique_members) > 0) {
-                                for (i in seq_along(calculations$unique_members)) {
-                                    set_name <- names(calculations$unique_members)[i]
-                                    # Use original name for display if available
-                                    display_name <- set_name
-                                    if (!is.null(private$.name_mapping) && set_name %in% names(private$.name_mapping)) {
-                                        display_name <- private$.name_mapping[[set_name]]
+                            # CRITICAL FIX: discern() returns a NAMED VECTOR or LIST - handle both
+                            unique_members <- calculations$unique_members
+                            if (!is.null(unique_members) && length(unique_members) > 0) {
+                                # Check if it's a named vector or list
+                                member_names <- names(unique_members)
+                                if (!is.null(member_names) && length(member_names) > 0 && !is.list(unique_members)) {
+                                    # It's a named vector - process as vector
+                                    for (i in seq_along(unique_members)) {
+                                        set_name <- member_names[i]
+                                        count <- unique_members[i]
+                                        # Use original name for display if available
+                                        display_name <- set_name
+                                        if (!is.null(private$.name_mapping) && set_name %in% names(private$.name_mapping)) {
+                                            display_name <- private$.name_mapping[[set_name]]
+                                        }
+                                        html_content <- paste0(html_content,
+                                            "<p><strong>", display_name, ":</strong> ",
+                                            count, " unique members (",
+                                            round(count/total_observations*100, 1), "%)</p>")
                                     }
-                                    members <- calculations$unique_members[[i]]
-                                    html_content <- paste0(html_content,
-                                        "<p><strong>", display_name, ":</strong> ",
-                                        length(members), " unique members (",
-                                        round(length(members)/total_observations*100, 1), "%)</p>")
+                                } else if (is.list(unique_members)) {
+                                    # It's a list - process as list
+                                    for (i in seq_along(unique_members)) {
+                                        set_name <- names(unique_members)[i]
+                                        display_name <- set_name
+                                        if (!is.null(private$.name_mapping) && set_name %in% names(private$.name_mapping)) {
+                                            display_name <- private$.name_mapping[[set_name]]
+                                        }
+                                        members <- unique_members[[i]]
+                                        html_content <- paste0(html_content,
+                                            "<p><strong>", display_name, ":</strong> ",
+                                            length(members), " unique members (",
+                                            round(length(members)/total_observations*100, 1), "%)</p>")
+                                    }
                                 }
                             } else {
                                 html_content <- paste0(html_content, "<p>No unique members found.</p>")
@@ -1820,6 +1860,51 @@ vennClass <- if (requireNamespace('jmvcore'))
                 )
 
                 self$results$glossary$setContent(glossary_content)
-            }
+            },
+
+            # Helper function to display accumulated notices as HTML
+            .displayNotices = function() {
+                # Display errors
+                if (length(private$.errors) > 0) {
+                    error_html <- paste(
+                        "<div style='padding: 15px; background-color: #f8d7da; border-left: 4px solid #dc3545; border-radius: 4px;'>",
+                        "<h4 style='margin-top: 0; color: #721c24;'>⛔ Validation Errors</h4>",
+                        paste(sprintf("<p style='margin: 5px 0; color: #721c24;'>• %s</p>", private$.errors), collapse = ""),
+                        "</div>",
+                        sep = ""
+                    )
+                    self$results$validationErrors$setContent(error_html)
+                    self$results$validationErrors$setVisible(TRUE)
+                }
+
+                # Display warnings
+                if (length(private$.warnings) > 0) {
+                    warning_html <- paste(
+                        "<div style='padding: 15px; background-color: #fff3cd; border-left: 4px solid #ffc107; border-radius: 4px;'>",
+                        "<h4 style='margin-top: 0; color: #856404;'>⚠️ Important Warnings</h4>",
+                        paste(sprintf("<p style='margin: 5px 0; color: #856404;'>• %s</p>", private$.warnings), collapse = ""),
+                        "</div>",
+                        sep = ""
+                    )
+                    self$results$validationWarnings$setContent(warning_html)
+                    self$results$validationWarnings$setVisible(TRUE)
+                }
+
+                # Display info messages
+                if (length(private$.info) > 0) {
+                    info_html <- paste(
+                        "<div style='padding: 15px; background-color: #d1ecf1; border-left: 4px solid #17a2b8; border-radius: 4px;'>",
+                        "<h4 style='margin-top: 0; color: #0c5460;'>ℹ️ Analysis Information</h4>",
+                        paste(sprintf("<p style='margin: 5px 0; color: #0c5460;'>• %s</p>", private$.info), collapse = ""),
+                        "</div>",
+                        sep = ""
+                    )
+                    self$results$analysisInfo$setContent(info_html)
+                    self$results$analysisInfo$setVisible(TRUE)
+                }
+            },
+
+            # Private field to store exclusion warning message
+            .excluded_warning = NULL
         )
     )

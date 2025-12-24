@@ -3,7 +3,7 @@ name:  agepyramid
 title: Age Pyramid
 menuGroup: Exploration
 menuSubgroup: ClinicoPath Descriptive Plots
-version: '0.0.31'
+version: '0.0.32'
 jas: '1.2'
 
 options:
@@ -53,6 +53,17 @@ options:
             a string naming the level from `gender` that contains the
             level female
 
+    - name: male
+      title: Select Male
+      type: Level
+      variable: (gender)
+      description:
+          R: >
+            a string naming the level from `gender` that contains the
+            level male
+          jamovi: >
+            a string naming the level from `gender` that contains the
+            level male
 
     - name: bin_width
       title: Bin Width (Years)

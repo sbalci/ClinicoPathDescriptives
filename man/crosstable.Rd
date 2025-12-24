@@ -11,7 +11,8 @@ crosstable(
   sty = "nejm",
   excl = FALSE,
   cont = "mean",
-  pcat = "chisq"
+  pcat = "chisq",
+  p_adjust = "none"
 )
 }
 \arguments{
@@ -29,10 +30,16 @@ table.}
 \item{cont}{.}
 
 \item{pcat}{.}
+
+\item{p_adjust}{Method for adjusting p-values for multiple comparisons
+across variables. Only available with gtsummary table style.}
 }
 \value{
 A results object containing:
 \tabular{llllll}{
+\code{results$errorNotice} \tab \tab \tab \tab \tab a html \cr
+\code{results$dataQualityNotice} \tab \tab \tab \tab \tab a html \cr
+\code{results$analysisInfo} \tab \tab \tab \tab \tab a html \cr
 \code{results$subtitle} \tab \tab \tab \tab \tab a preformatted \cr
 \code{results$todo} \tab \tab \tab \tab \tab a html \cr
 \code{results$todo2} \tab \tab \tab \tab \tab a html \cr
@@ -45,7 +52,22 @@ A results object containing:
 }
 }
 \description{
-Function for making Cross Tables.
+Function for making Cross Tables with multiple table styles.
+}
+\details{
+Currently implemented features:
+\itemize{
+\item Multiple table styles (arsenal, finalfit, gtsummary, NEJM, Lancet, hmisc)
+\item Automatic test selection (chi-square, Fisher's exact, t-test, ANOVA)
+\item Multiple testing correction (Bonferroni, Holm, Benjamini-Hochberg,
+Benjamini-Yekutieli)
+\item Variable name safety (special characters, spaces)
+\item Data quality validation warnings
+}
+
+Note: Advanced features (pairwise comparisons, effect sizes, residual
+analysis,
+correspondence analysis) are planned but not yet available.
 }
 \examples{
 \donttest{
@@ -58,8 +80,7 @@ Function for making Cross Tables.
 #   sty = "finalfit",
 #   excl = TRUE,
 #   cont = "mean",
-#   pcat = "chisq",
-#   exportCSV = TRUE
+#   pcat = "chisq"
 # )
 }
 }

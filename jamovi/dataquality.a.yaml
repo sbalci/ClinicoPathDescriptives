@@ -3,7 +3,7 @@ name: dataquality
 title: Multi-Variable Visual Quality
 menuGroup: Exploration
 menuSubgroup: ClinicoPath Data Quality
-version: '0.0.31'
+version: '0.0.32'
 jas: '1.2'
 
 description:
@@ -38,27 +38,28 @@ options:
     - name: check_duplicates
       title: "Check for Duplicates"
       type: Bool
-      default: true
+      default: false
       description:
         R: >
-          If TRUE, analyzes duplicate values within each variable or across 
+          If TRUE, analyzes duplicate values within each variable or across
           the entire dataset.
 
     - name: check_missing
       title: "Missing Value Analysis"
       type: Bool
-      default: true
+      default: false
       description:
         R: >
           If TRUE, provides detailed missing value statistics and patterns.
 
     - name: complete_cases_only
-      title: "Complete Cases Analysis"
+      title: "Check for Duplicate Rows"
       type: Bool
       default: false
       description:
         R: >
-          If TRUE, analyzes completeness across all selected variables simultaneously.
+          If TRUE, checks for duplicate rows across all selected variables.
+          If FALSE, checks for duplicate values within each variable separately.
 
     - name: plot_data_overview
       title: "Data Overview Plot (vis_dat)"
@@ -84,13 +85,14 @@ options:
         R: >
           Show data type detection and validation visualization.
 
-    - name: plot_value_expectations
-      title: "Value Expectations Plot (vis_expect)"
-      type: Bool
-      default: false
-      description:
-        R: >
-          Show value expectations analysis visualization.
+    # NOTE: vis_expect disabled - requires expectation formula specification
+    # - name: plot_value_expectations
+    #   title: "Value Expectations Plot (vis_expect)"
+    #   type: Bool
+    #   default: false
+    #   description:
+    #     R: >
+    #       Show value expectations analysis visualization.
 
     - name: missing_threshold_visual
       title: "Missing Data Highlight Threshold (%)"
@@ -101,6 +103,30 @@ options:
       description:
         R: >
           Threshold percentage for highlighting variables with missing values in visual analysis.
+
+    - name: showSummary
+      title: "Show Plain-Language Summary"
+      type: Bool
+      default: true
+      description:
+        R: >
+          If TRUE, displays a concise plain-language summary of quality issues and overall assessment.
+
+    - name: showRecommendations
+      title: "Show Action Recommendations"
+      type: Bool
+      default: true
+      description:
+        R: >
+          If TRUE, provides specific recommendations for addressing identified quality issues.
+
+    - name: showExplanations
+      title: "Show Educational Notes"
+      type: Bool
+      default: false
+      description:
+        R: >
+          If TRUE, includes explanations of quality metrics and statistical tests used in the analysis.
 
 
 ...

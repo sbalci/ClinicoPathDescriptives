@@ -1,12 +1,12 @@
 ---
 title: Descriptives Functions for Clinicopathological Research
 name: ClinicoPathDescriptives
-version: 0.0.32.26
+version: 0.0.32.56
 jms: '1.0'
 authors:
   - Serdar Balci
 maintainer: Serdar Balci <serdarbalci@serdarbalci.com>
-date: '2025-11-16'
+date: '2025-12-24'
 type: R
 description: >-
   Descriptives Functions for Clinicopathological Research Descriptive functions
@@ -83,16 +83,16 @@ analyses:
 
       missing value analysis, and data completeness summary (similar to sumvar's
       dup() function).
-  - title: Advanced Outlier Detection
+  - title: Outlier Detection
     name: outlierdetection
     ns: ClinicoPathDescriptives
     category: analyses
     menuGroup: Exploration
     menuSubgroup: ClinicoPath Data Quality
-    menuTitle: Advanced Outlier Detection
+    menuTitle: Outlier Detection
     description: >
-      Advanced outlier detection using multiple statistical methods from the
-      easystats performance package.
+      Outlier detection using multiple statistical methods from the easystats
+      performance package.
 
       This module provides comprehensive outlier detection through univariate
       methods (Z-scores, IQR, confidence intervals),
@@ -148,7 +148,7 @@ analyses:
     menuGroup: Exploration
     menuSubgroup: ClinicoPath Comparisons
     menuTitle: Cross Tables
-    description: Function for making Cross Tables.
+    description: Function for making Cross Tables with multiple table styles.
     ribbon: analyses
     category: analyses
   - title: Chi-Square Post-Hoc Tests
@@ -158,7 +158,22 @@ analyses:
     menuGroup: Exploration
     menuSubgroup: ClinicoPath Comparisons
     menuTitle: Chi-Square Post-Hoc Tests
-    description: Performs Chi-Square test and post-hoc pairwise comparisons.
+    description: >
+      Performs Chi-Square test and post-hoc pairwise comparisons. Post-hoc
+      pairwise comparisons are ONLY performed when the overall chi-square test
+      is significant (p < α). This enforces proper statistical workflow and
+      prevents data dredging. Selecting 'None' for post-hoc method DISABLES all
+      pairwise testing. If you want unadjusted pairwise comparisons, this
+      feature is not available (by design, as it would encourage inappropriate
+      multiple testing). No automated validation against established packages
+      exists. Use with caution for clinical decision-making.
+  - title: Categorize Continuous Variables
+    name: categorize
+    ns: ClinicoPathDescriptives
+    category: analyses
+    menuGroup: Exploration
+    menuSubgroup: Data Preparation
+    menuTitle: Categorize Continuous Variables
 datasets:
   - name: Histopathology Data Including Analysis
     path: histopathologyDescriptives.omv

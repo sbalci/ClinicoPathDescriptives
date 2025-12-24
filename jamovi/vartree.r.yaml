@@ -18,6 +18,16 @@ items:
       type:  Preformatted
       visible: (ptable)
 
+    - name:  reportSentence
+      title: Copy-Ready Report Sentence
+      type:  Preformatted
+      visible: (showInterpretation)
+
+    - name:  interpretation
+      title: Clinical Interpretation
+      type:  Html
+      visible: (showInterpretation)
+
     # - name:  text3
     #   title: Venn Table
     #   type:  Preformatted
@@ -27,6 +37,5 @@ items:
 refs:
     - vtree
     - ClinicoPathJamoviModule
-
 
 ...

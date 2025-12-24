@@ -1,16 +1,30 @@
 ---
 name: outlierdetection
-title: Advanced Outlier Detection
+title: Outlier Detection
 jrs: '1.1'
 
 items:
     - name: todo
       title: Instructions
       type: Html
-      visible: false
+      visible: true
+
+    - name: warnings
+      title: Analysis Messages
+      type: Html
+      visible: true
+      clearWith:
+        - vars
+        - method_category
+        - univariate_methods
+        - multivariate_methods
+        - composite_threshold
+        - zscore_threshold
+        - iqr_multiplier
+        - confidence_level
 
     - name: plot
-      title: Advanced Outlier Detection Plot
+      title: Outlier Detection Plot
       type: Image
       width: 800
       height: 600
@@ -80,7 +94,7 @@ items:
 refs:
     - ClinicoPathJamoviModule
     - performance
-    - anomalydetection
-    - lofoutlier
+    - dbscan
+    - robustbase
 
 ...
