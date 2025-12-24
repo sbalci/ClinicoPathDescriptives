@@ -1,3 +1,31 @@
+# ClinicoPathDescriptives 0.0.32.56 (2025-12-24)
+
+## New Features
+
+### New Data and Documentation
+
+* **Data Checking Guide**: Added a comprehensive vignette/guide for data checking (`vignettes/ClinicoPathDescriptives-checkdata-guide.md`)
+* **Test Datasets**: Added new datasets for `chisqposttest` and `alluvial` modules to support testing and examples
+* **Legacy Vignettes**: Restored legacy vignettes and updated documentation links for better accessibility
+
+## Enhanced Existing Modules
+
+### Age Pyramid (`agepyramid`)
+
+* Major enhancement to robustly handle single-gender cohorts
+* Added detailed data quality and exclusion reporting
+* Improved HTML summaries for clearer analysis results
+* Enhanced plot and table logic for both standard and single-gender scenarios
+* Added explicit selection for both female and male levels
+
+## Package Infrastructure
+
+* **Dependencies**: Updated dependencies to support new features
+* **Documentation**: Updated `CLAUDE.md` and package documentation for AI-assisted development
+* **Bug Fixes**: Improved error handling and sample size reporting across modules
+
+---
+
 # ClinicoPathDescriptives 0.0.31.84 (2025-10-03)
 
 ## New Features
