@@ -9,7 +9,12 @@
       "Bash(grep:*)",
       "Bash(Rscript:*)",
       "Bash(sed:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Skill(pubmed-database)",
+      "Skill(citation-management)",
+      "Skill(scientific-writing)",
+      "Skill(statistical-analysis)",
+      "Skill(clinical-decision-support)"
     ],
     "deny": []
   }
