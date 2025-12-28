@@ -1,3 +1,15 @@
+# ClinicoPathDescriptives 0.0.32.60 (2025-12-28)
+
+## Bug Fixes
+
+* **Variable Selection**: Resolved variable renaming issues from `jmvcore::select` by differentiating actual and display names.
+
+## Improvements
+
+* **Menu Structure**: Updated the menu subgroup for better organization.
+
+---
+
 # ClinicoPathDescriptives 0.0.32.56 (2025-12-24)
 
 ## New Features
