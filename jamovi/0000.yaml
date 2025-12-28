@@ -1,12 +1,12 @@
 ---
 title: Descriptives Functions for Clinicopathological Research
 name: ClinicoPathDescriptives
-version: 0.0.32.56
+version: 0.0.32.60
 jms: '1.0'
 authors:
   - Serdar Balci
 maintainer: Serdar Balci <serdarbalci@serdarbalci.com>
-date: '2025-12-24'
+date: '2025-12-28'
 type: R
 description: >-
   Descriptives Functions for Clinicopathological Research Descriptive functions
@@ -172,7 +172,7 @@ analyses:
     ns: ClinicoPathDescriptives
     category: analyses
     menuGroup: Exploration
-    menuSubgroup: Data Preparation
+    menuSubgroup: ClinicoPath Data Preparation
     menuTitle: Categorize Continuous Variables
 datasets:
   - name: Histopathology Data Including Analysis
