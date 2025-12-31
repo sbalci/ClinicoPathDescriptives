@@ -296,7 +296,14 @@ outlierdetectionBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Cla
 #' Perfect for clinical research data quality control and preprocessing.
 #' 
 #'
-#'
+#' @examples
+#' \donttest{
+#' # Example:
+#' # 1. Select variables for outlier detection analysis.
+#' # 2. Choose detection methods (univariate, multivariate, or composite).
+#' # 3. Configure thresholds and visualization options.
+#' # 4. Review outlier results and exclusion recommendations.
+#'}
 #' @param data The data as a data frame.
 #' @param vars Continuous variables to analyze for outliers. The module will
 #'   detect outliers based on the selected variables using the chosen detection
@@ -316,17 +323,17 @@ outlierdetectionBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Cla
 #'   Default 0.5 means observations  classified as outliers by at least half of
 #'   the methods are considered outliers.
 #' @param zscore_threshold Threshold for Z-score based methods. CLINICAL
-#'   EXAMPLES: 3.0 = 99.7% confidence (standard screening for most lab values),
-#'   3.29 = 99.9% confidence (stringent, for critical values like cardiac
-#'   enzymes), 2.5 = 98.8% confidence (sensitive detection for research).
+#'   EXAMPLES: 3.0 = 99.7\% confidence (standard screening for most lab values),
+#'   3.29 = 99.9\% confidence (stringent, for critical values like cardiac
+#'   enzymes), 2.5 = 98.8\% confidence (sensitive detection for research).
 #'   Recommended: 3.29 for clinical quality control.
 #' @param iqr_multiplier Multiplier for IQR-based outlier detection. CLINICAL
-#'   EXAMPLES: 1.5 = Tukey's standard (sensitive, may flag ~0.7% of normal
+#'   EXAMPLES: 1.5 = Tukey's standard (sensitive, may flag ~0.7\% of normal
 #'   data), 1.7 = conservative (recommended for clinical screening), 2.0 = very
 #'   conservative (for critical biomarkers). Useful for non-normal distributions
 #'   common in clinical data.
 #' @param confidence_level Confidence level for interval-based methods (ETI,
-#'   HDI). Default 99.9% identifies the most extreme observations.
+#'   HDI). Default 99.9\% identifies the most extreme observations.
 #' @param show_outlier_table Display a comprehensive table of outlier
 #'   detection results including outlier scores, distances, and classification
 #'   for each observation.
@@ -348,15 +355,6 @@ outlierdetectionBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Cla
 #'   \code{results$exclusion_summary} \tab \tab \tab \tab \tab a html \cr
 #'   \code{results$interpretation} \tab \tab \tab \tab \tab a html \cr
 #' }
-#'
-#' @examples
-#' \donttest{
-#' # Example:
-#' # 1. Select variables for outlier detection analysis.
-#' # 2. Choose detection methods (univariate, multivariate, or composite).
-#' # 3. Configure thresholds and visualization options.
-#' # 4. Review outlier results and exclusion recommendations.
-#'}
 #'
 #' @export
 outlierdetection <- function(
