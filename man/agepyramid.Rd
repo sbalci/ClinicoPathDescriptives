@@ -10,13 +10,21 @@ agepyramid(
   gender,
   female,
   male,
-  bin_width = 5,
-  plot_title = "Age Pyramid",
-  color1 = "#1F77B4",
-  color2 = "#FF7F0E",
-  color_palette = "standard",
   age_groups = "custom",
-  plot_engine = "ggcharts"
+  bin_width = 5,
+  custom_breaks = "",
+  plot_title = "Age Pyramid",
+  color_palette = "standard",
+  female_color = "#E91E63",
+  male_color = "#2196F3",
+  originaltheme = FALSE,
+  enableGGCharts = FALSE,
+  ggcharts_sort = "no",
+  ggcharts_colors = "default",
+  ggcharts_color1 = "#1F77B4",
+  ggcharts_color2 = "#FF7F0E",
+  ggcharts_title = "Age Pyramid (ggcharts)",
+  ggcharts_xlab = "Population"
 )
 }
 \arguments{
@@ -34,24 +42,50 @@ the level female}
 \item{male}{a string naming the level from \code{gender} that contains the
 level male}
 
+\item{age_groups}{Predefined age group categories. Choose 'custom' to use
+bin_width, or select a preset.}
+
 \item{bin_width}{The width of the age bins in years. Adjust this to change
 the granularity of the age groups.}
 
+\item{custom_breaks}{Comma-separated age break points (e.g.,
+"0,18,25,50,65,100"). Only used when age_groups is set to 'custom'. Leave
+empty to use bin_width.}
+
 \item{plot_title}{The title displayed on the age pyramid plot.}
 
-\item{color1}{First color for the pyramid chart bars.}
+\item{color_palette}{Color palette for gender visualization. Choose
+'custom' to specify your own colors.}
 
-\item{color2}{Second color for the pyramid chart bars.}
+\item{female_color}{Custom color for female bars (hex code). Only used when
+color_palette is 'custom'.}
 
-\item{color_palette}{Choose color palette type. Standard uses traditional
-gender colors, Accessible is colorblind-friendly, Custom allows
-user-defined colors.}
+\item{male_color}{Custom color for male bars (hex code). Only used when
+color_palette is 'custom'.}
 
-\item{age_groups}{Preset age groupings for common clinical contexts. Custom
-uses bin_width setting.}
+\item{originaltheme}{Whether to apply the original custom theme
+(theme_minimal with custom tweaks) instead of jamovi's default theme.}
 
-\item{plot_engine}{Choose the plotting engine. ggcharts provides better
-pyramid styling, ggplot2 offers more customization.}
+\item{enableGGCharts}{Enable the ggcharts pyramid_chart() visualization as
+a second plot. This provides an alternative visualization style using the
+ggcharts package.}
+
+\item{ggcharts_sort}{Sort bars by population count. Options: 'no' (default
+order), 'ascending' (smallest to largest), 'descending' (largest to
+smallest).}
+
+\item{ggcharts_colors}{Color scheme for ggcharts pyramid. 'default' uses
+ggcharts defaults, or select from preset palettes or custom colors.}
+
+\item{ggcharts_color1}{Custom color for first group (hex code). Used when
+ggcharts_colors is 'custom'.}
+
+\item{ggcharts_color2}{Custom color for second group (hex code). Used when
+ggcharts_colors is 'custom'.}
+
+\item{ggcharts_title}{Title for the ggcharts pyramid plot.}
+
+\item{ggcharts_xlab}{X-axis label for ggcharts pyramid.}
 }
 \value{
 A results object containing:
@@ -60,6 +94,7 @@ A results object containing:
 \code{results$dataInfo} \tab \tab \tab \tab \tab a html \cr
 \code{results$pyramidTable} \tab \tab \tab \tab \tab a table \cr
 \code{results$plot} \tab \tab \tab \tab \tab an image \cr
+\code{results$plotGGCharts} \tab \tab \tab \tab \tab an image \cr
 }
 
 Tables can be converted to data frames with \code{asDF} or \code{\link{as.data.frame}}. For example:

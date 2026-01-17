@@ -3,7 +3,7 @@ name:  chisqposttest
 title: Chi-Square Post-Hoc Tests
 menuGroup: Exploration
 menuSubgroup: ClinicoPath Comparisons
-version: '0.0.32'
+version: '0.0.33'
 jas: '1.2'
 
 description:
@@ -134,6 +134,15 @@ options:
       default: 2.0
       description: >
                   critical value for identifying significant residuals (typically 2.0 or 3.0)
+
+    - name: phiCI
+      title: Bootstrap Confidence Intervals for Phi
+      type: Bool
+      default: false
+      description: >
+                  calculate bootstrap confidence intervals for the Phi coefficient
+                  using BCa method (Bias-Corrected and accelerated). Note: This is
+                  computationally intensive and may take longer for large tables.
 
     - name: testSelection
       title: Statistical Test Selection

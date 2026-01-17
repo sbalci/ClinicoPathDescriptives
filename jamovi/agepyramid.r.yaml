@@ -11,41 +11,39 @@ items:
       visible: (!age || !gender)
 
     - name: dataInfo
-      title: 'Data Summary & Quality Information'
+      title: 'Data Summary'
       type: Html
-      visible: true
 
     - name:  pyramidTable
       title: 'Population Data'
       type: Table
       rows: 0
       columns:
-      # columns: &idcols
         - name: Pop
           title: "Age Group"
           type: text
         - name: Female
           title: "Female (n)"
           type: number
-        - name: Female_Pct
-          title: "Female (%)"
-          type: number
-          format: 'zto;dp:1'
         - name: Male
           title: "Male (n)"
+          type: number
+        - name: Female_Pct
+          title: "Female (%)"
           type: number
         - name: Male_Pct
           title: "Male (%)"
           type: number
-          format: 'zto;dp:1'
       clearWith:
-          # Only data-affecting options that require recomputing aggregations
           - age
           - gender
           - female
           - male
-          - bin_width
           - age_groups
+          - bin_width
+          - custom_breaks
+
+
 
     - name: plot
       title: 'Age Pyramid'
@@ -55,22 +53,43 @@ items:
       renderFun: .plot
       requiresData: true
       clearWith:
-          # Data options - trigger .run() and clear state
           - age
           - gender
           - female
           - male
-          - bin_width
           - age_groups
-          # Visual options - trigger re-render only
-          # Note: These clear state, but .plot() will rebuild data if needed
+          - bin_width
+          - custom_breaks
           - plot_title
-          - color1
-          - color2
           - color_palette
-          - plot_engine
+          - female_color
+          - male_color
+          - originaltheme
+
+    - name: plotGGCharts
+      title: 'Age Pyramid (ggcharts)'
+      type: Image
+      width:  700
+      height: 500
+      renderFun: .plotGGCharts
+      visible: (enableGGCharts)
+      requiresData: true
+      clearWith:
+          - age
+          - gender
+          - female
+          - male
+          - age_groups
+          - bin_width
+          - custom_breaks
+          - ggcharts_sort
+          - ggcharts_colors
+          - ggcharts_color1
+          - ggcharts_color2
+          - ggcharts_title
+          - ggcharts_xlab
 
 refs:
     - ClinicoPathJamoviModule
-    - ggcharts
+
 ...

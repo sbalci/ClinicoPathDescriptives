@@ -1,12 +1,12 @@
 ---
 title: Descriptives Functions for Clinicopathological Research
 name: ClinicoPathDescriptives
-version: 0.0.32.64
+version: 0.0.33
 jms: '1.0'
 authors:
   - Serdar Balci
 maintainer: Serdar Balci <serdarbalci@serdarbalci.com>
-date: '2025-12-31'
+date: '2026-01-17'
 type: R
 description: >-
   Descriptives Functions for Clinicopathological Research Descriptive functions
@@ -184,6 +184,12 @@ datasets:
       - Cross Tables
       - Alluvial Diagrams
       - Venn Diagrams
+  - name: Table One
+    path: tableone_test.omv
+    description: Example analysis for Table One function.
+    tags:
+      - Table One
+      - Data Summary
 usesNative: true
 minApp: 1.6.0
 
