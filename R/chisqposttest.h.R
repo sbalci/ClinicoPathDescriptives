@@ -458,7 +458,7 @@ chisqposttestBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             super$initialize(
                 package = "ClinicoPathDescriptives",
                 name = "chisqposttest",
-                version = c(0,0,33),
+                version = c(0,0,37),
                 options = options,
                 results = chisqposttestResults$new(options=options),
                 data = data,

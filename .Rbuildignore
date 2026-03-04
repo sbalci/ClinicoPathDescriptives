@@ -86,3 +86,5 @@ R/utils-pipe.R
 
 ^.*\.code\-workspace$
 CITATION.cff
+^\.claude$
+^CLAUDE\.md$

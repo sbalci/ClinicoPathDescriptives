@@ -14,7 +14,8 @@
       "Skill(citation-management)",
       "Skill(scientific-writing)",
       "Skill(statistical-analysis)",
-      "Skill(clinical-decision-support)"
+      "Skill(clinical-decision-support)",
+      "Bash(python3:*)"
     ],
     "deny": []
   }
