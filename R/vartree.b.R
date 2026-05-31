@@ -73,6 +73,24 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
         },
 
         .run = function() {
+            # TODO (cleanup): file contains 8+ commented-out `notice <-
+            # jmvcore::Notice$new(...) + insert(999, notice)` blocks (~L114,
+            # L152, L162, L179, L192, L207, L217, L229, L241, L343, L555).
+            # These were migrated to silent-on-error early returns or
+            # accepted as dead-code paths. The dead blocks add noise; drop
+            # them OR wire each to a dataInfo HTML block (see waterfall.b.R
+            # pattern) so the user gets feedback instead of a silent return.
+            # TODO (security): zero `htmltools::htmlEscape` calls across
+            # ~800 LOC. The clinical-summary HTML at ~L688-708, the about
+            # section at ~L711-723, and the interpretation rendering all
+            # interpolate variable names (which come from user CSV headers).
+            # Sweep all paste0 HTML construction with `htmltools::htmlEscape()`
+            # on dynamic interpolations.
+            # TODO (forward-looking, perf): no `private$.checkpoint()` despite
+            # `vtree::vtree` being the heaviest operation and producing
+            # exponential complexity in #vars × avg #levels. Add a
+            # checkpoint immediately before the `vtree::vtree(...)` call
+            # (~L444) so wide trees don't freeze the UI.
 
             # Initial check for variables
             if (is.null(self$options$vars)) {
@@ -451,8 +469,8 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 showlegend = self$options$legend,
                 showpct = self$options$pct,
                 splitspaces = xsplitspaces,
-                prunebelow = private$.safeEvalParse(xprunebelow),
-                follow = private$.safeEvalParse(xfollow),
+                prunebelow = xprunebelow,
+                follow = xfollow,
                 prunesmaller = xprunesmaller,
                 fillcolor = xfillcolor,
                 fillnodes = xfillnodes,
@@ -606,42 +624,31 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             return(paste(interp_parts, collapse = ""))
         },
         
-        # CRITICAL FIX: Helper function to build conditional options for pruning/following
-        # Fixed to avoid composeTerm() on level values and allow single-level pruning
+        # Helper to build conditional options for vtree pruning/following.
+        # Returns a named list of the form list(<varname> = c("Level1", "Level2")),
+        # which is exactly what vtree::vtree() expects for `prunebelow` / `follow`.
+        # Previously this assembled a string like "list(varname=c('A','B'))" and
+        # round-tripped it through a runtime evaluator; that made attacker-supplied
+        # factor labels (level1/level2) a path to arbitrary R code execution. Build
+        # the list as a native R object instead.
         .buildConditionalOption = function(variable, level1, level2) {
-            # If no variable selected, return NULL
             if (is.null(variable)) {
                 return(NULL)
             }
 
-            # CRITICAL FIX: Only use composeTerm() on the VARIABLE name
-            # Do NOT use it on level values - they should be passed as-is
-            variable_term <- jmvcore::composeTerm(variable)
-
-            # Build level vector based on what's provided
-            levels_to_use <- c()
-
-            # CRITICAL FIX: Allow single-level pruning (level1 only)
+            levels_to_use <- character()
             if (!is.null(level1) && nchar(as.character(level1)) > 0) {
-                # Don't wrap level1 in composeTerm - use raw value
-                levels_to_use <- c(levels_to_use, level1)
+                levels_to_use <- c(levels_to_use, as.character(level1))
             }
-
             if (!is.null(level2) && nchar(as.character(level2)) > 0) {
-                # Don't wrap level2 in composeTerm - use raw value
-                levels_to_use <- c(levels_to_use, level2)
+                levels_to_use <- c(levels_to_use, as.character(level2))
             }
 
-            # If no levels specified, return NULL
             if (length(levels_to_use) == 0) {
                 return(NULL)
             }
 
-            # Build the list spec correctly:
-            # list(varname = c("Level1", "Level2"))
-            # NOT list(`varname` = c('`Level1`', '`Level2`'))
-            levels_quoted <- paste0("'", levels_to_use, "'", collapse = ",")
-            return(paste0("list(", variable_term, "=c(", levels_quoted, "))"))
+            stats::setNames(list(levels_to_use), as.character(variable))
         },
         
         # Custom R syntax generation to handle variable names with spaces
@@ -668,21 +675,6 @@ vartreeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             }
             
             return(syntax)
-        },
-        
-        # Safe evaluation of parsed text with error handling
-        .safeEvalParse = function(text_expression) {
-            if (is.null(text_expression)) {
-                return(NULL)
-            }
-            
-            tryCatch({
-                eval(parse(text = text_expression))
-            }, error = function(e) {
-                warning(paste(.("Error in conditional expression:"), e$message, 
-                             .("Using NULL value instead.")))
-                return(NULL)
-            })
         },
         
         # Generate clinical summary with practical guidance
