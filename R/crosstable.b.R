@@ -48,6 +48,11 @@
 NULL
 
 # Helper function to create styled HTML notice (replaces jmvcore::Notice to avoid serialization errors)
+# TODO (security, forward-looking): `message` is interpolated raw into the
+# notice HTML (line ~91 below). All current callers pass static strings, but
+# any future caller that interpolates a variable name or factor label would
+# inject. Defence-in-depth: `message <- htmltools::htmlEscape(message)` at
+# the top of the function. Currently safe but easy to regress.
 .createNoticeHTML <- function(message, type = c("ERROR", "STRONG_WARNING", "WARNING", "INFO")) {
     type <- match.arg(type)
 
@@ -87,7 +92,7 @@ NULL
         "border-left: 4px solid ", style$border, ";'>",
         "<p style='margin: 0; color: ", style$title_color, ";'>",
         "<strong>", style$icon, " ", type, ":</strong> ",
-        message,
+        htmltools::htmlEscape(message),
         "</p>",
         "</div>"
     )
@@ -190,14 +195,14 @@ NULL
         
         return(list(
             test = test_preference, 
-            reason = .("Test selected as requested"),
+            reason = "Test selected as requested",
             warning = FALSE,
             expected_min = expected_min
         ))
     }, error = function(e) {
         return(list(
             test = "fisher", 
-            reason = .("Cannot calculate expected frequencies. Using Fisher's exact test."),
+            reason = "Cannot calculate expected frequencies. Using Fisher's exact test.",
             warning = TRUE,
             expected_min = NA
         ))
@@ -236,25 +241,33 @@ NULL
 }
 
 # Helper function to validate sample size and data quality
-.validateAnalysisAssumptions <- function(mydata, myvars, mygroup) {
+# name_mapping: optional named character vector mapping cleaned -> original variable
+# names so user-facing warnings use the labels users actually selected.
+.validateAnalysisAssumptions <- function(mydata, myvars, mygroup, name_mapping = NULL) {
     issues <- list()
     warnings <- list()
-    
+
+    .display <- function(name) {
+        if (!is.null(name_mapping) && !is.null(name_mapping[[name]]))
+            return(name_mapping[[name]])
+        name
+    }
+
     # Check overall sample size
     n_total <- nrow(mydata)
     if (n_total < 20) {
-        issues <- append(issues, sprintf(.("Very small sample size (n = %d). Results may be unreliable."), n_total))
+        issues <- append(issues, sprintf("Very small sample size (n = %d). Results may be unreliable.", n_total))
     }
-    
+
     # Check group sizes
     if (!is.null(mygroup) && mygroup %in% names(mydata)) {
         group_sizes <- table(mydata[[mygroup]])
         min_group_size <- min(group_sizes)
-        
+
         if (min_group_size < 5) {
             warnings <- append(warnings, paste0("Small group detected (n = ", min_group_size, "). Consider combining categories or using exact tests."))
         }
-        
+
         # Check for empty cells in cross-tabulations (categorical variables only)
         for (var in myvars) {
             if (var %in% names(mydata)) {
@@ -267,23 +280,23 @@ NULL
                 if (is_categorical) {
                     cont_table <- table(mydata[[var]], mydata[[mygroup]])
                     if (any(cont_table == 0)) {
-                        warnings <- append(warnings, paste0("Empty cells detected in ", var, " × ", mygroup, " table. Results may be unstable."))
+                        warnings <- append(warnings, paste0("Empty cells detected in ", .display(var), " × ", .display(mygroup), " table. Results may be unstable."))
                     }
                 }
             }
         }
     }
-    
+
     # Check for excessive missing data
     for (var in c(myvars, mygroup)) {
         if (var %in% names(mydata)) {
             missing_pct <- mean(is.na(mydata[[var]])) * 100
             if (missing_pct > 20) {
-                warnings <- append(warnings, paste0("High missing data in ", var, " (", round(missing_pct, 1), "%). Consider imputation or sensitivity analysis."))
+                warnings <- append(warnings, paste0("High missing data in ", .display(var), " (", round(missing_pct, 1), "%). Consider imputation or sensitivity analysis."))
             }
         }
     }
-    
+
     return(list(
         critical_issues = issues,
         warnings = warnings,
@@ -294,7 +307,7 @@ NULL
 # Helper function to generate clinical interpretation
 .generateClinicalSummary <- function(results, myvars, mygroup, test_type = "crosstable") {
     if (is.null(results) || length(results) == 0) {
-        return(.("No results available for interpretation."))
+        return("No results available for interpretation.")
     }
     
     # Count significant associations (assuming p-value column exists)
@@ -302,19 +315,19 @@ NULL
     total_tests <- length(myvars)
     
     if (test_type == "crosstable") {
-        summary <- sprintf(.("Cross-table analysis comparing %d variable(s) across %s groups."),
+        summary <- sprintf("Cross-table analysis comparing %d variable(s) across %s groups.",
                           total_tests, mygroup)
 
         if (significant_count > 0) {
             summary <- paste0(summary, " ",
-                sprintf(.("Found %d significant association(s) (p < 0.05)."), significant_count))
+                sprintf("Found %d significant association(s) (p < 0.05).", significant_count))
         } else {
             summary <- paste0(summary, " ",
-                .("No significant associations detected (all p ≥ 0.05)."))
+                "No significant associations detected (all p ≥ 0.05).")
         }
 
         summary <- paste0(summary, " ",
-            .("Review individual test results below for detailed findings."))
+            "Review individual test results below for detailed findings.")
     }
     
     return(summary)
@@ -345,8 +358,8 @@ crosstableClass <- if (requireNamespace('jmvcore'))
 
                 # Report any critical issues
                 if (length(validation_results$issues) > 0) {
-                    stop(paste("Variable name issues detected:",
-                              paste(validation_results$issues, collapse = "; ")))
+                    jmvcore::reject("Variable name issues detected: {}",
+                                    paste(validation_results$issues, collapse = "; "))
                 }
 
                 # Create bidirectional mappings for robust variable handling
@@ -393,15 +406,18 @@ crosstableClass <- if (requireNamespace('jmvcore'))
                     }
 
                 }, error = function(e) {
-                    stop(paste("Variable matching failed:", e$message))
+                    jmvcore::reject("Variable matching failed: {}", e$message)
                 })
 
                 # Report warnings about variable names if any
                 if (length(validation_results$warnings) > 0) {
+                    # Escape each warning individually before joining with <br> so the
+                    # line-break markup is preserved while user-supplied column names
+                    # embedded in the warning text are rendered inert.
                     warning_msg <- paste0(
                         "<div style='background-color: #fff3cd; padding: 10px; margin: 10px 0; border-radius: 5px; border-left: 4px solid #ffc107;'>",
                         "<strong> Variable Name Warnings:</strong><br>",
-                        paste(validation_results$warnings, collapse = "<br>"),
+                        paste(htmltools::htmlEscape(unlist(validation_results$warnings)), collapse = "<br>"),
                         "</div>"
                     )
                     # Display in todo2 section
@@ -410,7 +426,7 @@ crosstableClass <- if (requireNamespace('jmvcore'))
 
                 # If any user-specified variable could not be matched, block analysis
                 if (length(myvars) == 0 || length(mygroup) == 0) {
-                    stop("Selected variables could not be matched to the dataset after cleaning labels. Please reselect variables.")
+                    jmvcore::reject("Selected variables could not be matched to the dataset after cleaning labels. Please reselect variables.")
                 }
 
                 return(list(
@@ -491,6 +507,15 @@ crosstableClass <- if (requireNamespace('jmvcore'))
 
             # .run ----
             .run = function() {
+                # TODO (forward-looking, perf): currently only 1
+                # `private$.checkpoint()` call despite 4 large style branches
+                # (`tablestyle1` tableone, `tablestyle2` finalfit, `tablestyle3`
+                # gtsummary, `tablestyle4` arsenal, `tablestyle5` tangram).
+                # Each branch invokes a different third-party table builder
+                # whose computation cost scales with #covariates * #groups.
+                # Add a checkpoint before each style branch (~L677 / L726 /
+                # L848 / L976 / and tablestyle5 site) to keep the UI thread
+                # responsive on wide datasets.
                 sty <- self$options$sty
                 # If required options are missing, show a welcome message with instructions.
                 if (is.null(self$options$vars) || is.null(self$options$group)) {
@@ -544,7 +569,7 @@ crosstableClass <- if (requireNamespace('jmvcore'))
                 } else {
                     "No group selected"
                 }
-                self$results$subtitle$setContent(paste0("Cross Table Analysis - Grouped by ", group_display))
+                self$results$subtitle$setContent(paste0("Cross Table Analysis - Grouped by ", htmltools::htmlEscape(group_display)))
 
                 # Provide additional information when using 'finalfit' style.
                 if (sty == "finalfit") {
@@ -597,14 +622,15 @@ crosstableClass <- if (requireNamespace('jmvcore'))
                 escaped_myvars <- .escapeVariableNames(myvars)
                 escaped_mygroup <- .escapeVariableNames(mygroup)
                 formula <- jmvcore::constructFormula(terms = escaped_myvars, dep = escaped_mygroup)
-                formula <- as.formula(formula)
+                formula <- jmvcore::asFormula(formula)
 
                 # Exclude missing data if requested.
                 if (self$options$excl)
                     mydata <- jmvcore::naOmit(mydata)
                 
                 # Validate analysis assumptions and data quality
-                validation_results <- .validateAnalysisAssumptions(mydata, myvars, mygroup)
+                validation_results <- .validateAnalysisAssumptions(mydata, myvars, mygroup,
+                                                                   name_mapping = original_names_mapping)
                 if (length(validation_results$warnings) > 0) {
                     # Accumulate all warnings into HTML (avoid serialization errors from dynamic Notice inserts)
                     warning_html_parts <- character(length(validation_results$warnings))
@@ -653,6 +679,7 @@ crosstableClass <- if (requireNamespace('jmvcore'))
                         stats.labels = list(meansd = "Mean (SD)", median = "Median", q1q3 = "Q1, Q3")
                     )
 
+                    # TODO (security, forward-looking): the four `tablestyleN$setContent(...)` paths at L677 (arsenal), L726 (finalfit), L848 (gtsummary), L976 (tangram) push raw HTML produced by third-party packages directly into the result pane. Those packages embed the user's column names and factor labels inside <th>/<td> cells, and header escaping is package-version-dependent — modern versions typically escape cell contents but not always headers. Wrapping the table HTML wholesale would break the table markup. The proper fix is one of: (a) verify each package version escapes headers (audit each release used in production), (b) rename columns to alphanumeric placeholders before passing to the package and substitute display labels via the package's labeling API (arsenal::labels<- / finalfit `dependent_label` / gtsummary `modify_header`), or (c) post-process the HTML with rvest/xml2 to selectively escape <th>/<td> text content. Approach (b) is least fragile but most invasive. Defense-in-depth, not a confirmed exploit chain — flagged forward-looking.
                     tablearsenal <- arsenal::tableby(
                         formula = formula,
                         data = mydata,
@@ -661,7 +688,12 @@ crosstableClass <- if (requireNamespace('jmvcore'))
                         digits.count = 1
                     )
                     tablearsenal <- summary(tablearsenal, text = 'html', pfootnote = 'html')
-                    tablearsenal <- capture.output(tablearsenal)
+                    # capture.output() returns a character vector with one element per
+                    # printed line; Html$setContent requires a SCALAR string, so collapse
+                    # to a single string. Passing the multi-element vector triggers the
+                    # jamovi 2.7 serialization error "cannot set non-repeated field to
+                    # vector of length > 1" (forum.jamovi.org/viewtopic.php?t=4163).
+                    tablearsenal <- paste(capture.output(tablearsenal), collapse = "\n")
                     self$results$tablestyle1$setContent(tablearsenal)
                 } else if (sty == "finalfit") {
                     myvars_term <- jmvcore::composeTerm(components = myvars)
@@ -1906,31 +1938,24 @@ crosstableClass <- if (requireNamespace('jmvcore'))
                 if (is.null(vars) || length(vars) == 0 || is.null(group))
                     return('')
 
-                # Escape variable names that contain spaces or special characters
-                vars_escaped <- sapply(vars, function(v) {
-                    if (!is.null(v) && !identical(make.names(v), v))
-                        paste0('`', v, '`')
-                    else
-                        v
-                })
+                # `deparse()` produces correctly quoted R literals — handles spaces,
+                # internal quotes, and backslashes, and is identical to the old output
+                # for syntactic names. (Backticks belong on bare symbols, not inside
+                # double-quoted string literals.)
+                vars_arg  <- paste0('vars = ',  paste(deparse(vars),  collapse = ' '))
+                group_arg <- paste0('group = ', deparse(group))
 
-                # Escape group variable name if needed
-                group_escaped <- if (!is.null(group) && !identical(make.names(group), group)) {
-                    paste0('`', group, '`')
-                } else {
-                    group
-                }
-
-                # Build vars argument
-                vars_arg <- paste0('vars = c(', paste(sapply(vars_escaped, function(v) paste0('"', v, '"')), collapse = ', '), ')')
-
-                # Build group argument
-                group_arg <- paste0('group = "', group_escaped, '"')
-
-                # Get other arguments using base helper (if available)
+                # Get other arguments using base helper (if available).
+                # .asArgs re-emits every option, so strip vars/group to avoid
+                # duplicating the manually-built (correctly backtick-quoted) versions.
                 args <- ''
                 if (!is.null(private$.asArgs)) {
                     args <- private$.asArgs(incData = FALSE)
+                }
+                if (args != '') {
+                    args_lines <- strsplit(args, ",\\s*\\n\\s*")[[1]]
+                    args_lines <- args_lines[!grepl("^\\s*(vars|group)\\s*=", args_lines)]
+                    args <- if (length(args_lines) > 0) paste(args_lines, collapse = ',\n    ') else ''
                 }
                 if (args != '')
                     args <- paste0(',\n    ', args)
