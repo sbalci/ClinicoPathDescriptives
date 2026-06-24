@@ -17,6 +17,16 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
     inherit = agepyramidBase,
     private = list(
         .run = function() {
+            # TODO (forward-looking): no `.()` wrapping anywhere in this file —
+            # the welcome HTML, error HTML, plot title fallback ("Age Pyramid"),
+            # and the data-summary section in `.build_data_summary_html` are all
+            # English-only. Address in a /prepare-translation pass for this
+            # function before the next release with i18n support.
+            # TODO (forward-looking, perf): `.run()` and `.plot()` do non-trivial
+            # ggplot/ggcharts work without a single `private$.checkpoint()` call.
+            # Large datasets (n > ~50k) freeze the UI thread until the plot is
+            # ready. Add checkpoints around the `dplyr` aggregation (~L218) and
+            # before the `ggplot2::ggplot` / `ggcharts::pyramid_chart` calls.
             # Check if required options (age and gender) are provided
             if (is.null(self$options$age) || is.null(self$options$gender)) {
                 self$results$welcome$setContent(
@@ -47,7 +57,7 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             }
 
             if (nrow(self$data) == 0)
-                stop("Data contains no (complete) rows")
+                jmvcore::reject("Data contains no (complete) rows")
 
             # Read and prepare data ----
             mydata <- self$data
@@ -59,14 +69,17 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             mydata <- jmvcore::select(mydata, c(age, gender))
             mydata <- jmvcore::naOmit(mydata)
 
-            # Convert age to numeric and gender to factor
-            # Use as.character before as.numeric to handle factors correctly
-            mydata[["Age"]] <- as.numeric(as.character(mydata[[age]]))
+            # Convert age to numeric and gender to factor.
+            age_values <- jmvcore::toNumeric(mydata[[age]])
+            if (!is.numeric(age_values)) {
+                age_values <- suppressWarnings(as.numeric(as.character(age_values)))
+            }
+            mydata[["Age"]] <- age_values
             mydata[["Gender"]] <- as.factor(mydata[[gender]])
-            
+
             # Filter out invalid ages (created by conversion)
             n_before_age_filter <- nrow(mydata)
-            mydata <- mydata %>% dplyr::filter(!is.na(Age))
+            mydata <- mydata %>% dplyr::filter(!is.na(Age), is.finite(Age), Age >= 0)
             n_invalid_age <- n_before_age_filter - nrow(mydata)
 
             # Determine gender levels with smart defaults ----
@@ -102,7 +115,7 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                     "<div style='background-color: #ffebee; padding: 20px; border-radius: 8px; border-left: 4px solid #f44336;'>",
                     "<h3 style='color: #c62828; margin-top: 0;'> Configuration Error</h3>",
                     "<p style='font-size: 15px;'><strong>Female and Male gender levels cannot be the same.</strong></p>",
-                    "<p style='font-size: 14px;'>You have selected '<strong>", female_level, "</strong>' for both Female and Male.</p>",
+                    "<p style='font-size: 14px;'>You have selected '<strong>", htmltools::htmlEscape(female_level), "</strong>' for both Female and Male.</p>",
                     "<h4 style='color: #c62828; margin-bottom: 8px;'>To fix this:</h4>",
                     "<ol style='font-size: 14px; line-height: 1.6;'>",
                     "    <li>Select different levels for Female and Male, OR</li>",
@@ -148,6 +161,10 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             n_final <- nrow(mydata)  # Track for data summary
 
+            if (n_final == 0) {
+                jmvcore::reject("No valid rows remain after filtering age and gender values")
+            }
+
             # Determine age group breaks based on preset or custom bin width ----
             age_groups <- if (!is.null(self$options$age_groups)) self$options$age_groups else 'custom'
             max_age <- max(mydata[["Age"]], na.rm = TRUE)
@@ -183,6 +200,10 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                     }, error = function(e) {
                         # Fall back to bin_width if parsing fails
                         bin_width <- if (!is.null(self$options$bin_width)) self$options$bin_width else 5
+                        if (!is.numeric(bin_width) || length(bin_width) != 1 ||
+                                is.na(bin_width) || !is.finite(bin_width) || bin_width <= 0) {
+                            jmvcore::reject("Bin width must be a positive number")
+                        }
                         breaks <- seq(from = 0, to = max_age, by = bin_width)
                         if (max_age > tail(breaks, n = 1)) {
                             breaks <- c(breaks, max_age)
@@ -192,6 +213,10 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 } else {
                     # Use bin_width
                     bin_width <- if (!is.null(self$options$bin_width)) self$options$bin_width else 5
+                    if (!is.numeric(bin_width) || length(bin_width) != 1 ||
+                            is.na(bin_width) || !is.finite(bin_width) || bin_width <= 0) {
+                        jmvcore::reject("Bin width must be a positive number")
+                    }
                     breaks_seq <- seq(from = 0, to = max_age, by = bin_width)
                     if (max_age > tail(breaks_seq, n = 1)) {
                         breaks_seq <- c(breaks_seq, max_age)
@@ -231,7 +256,7 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             # Also save state for ggcharts plot (if enabled)
             if (self$options$enableGGCharts) {
                 imageGGCharts <- self$results$plotGGCharts
-                imageGGCharts$setState(plotData)
+                imageGGCharts$setState(private$.prepare_ggcharts_data(plotData))
             }
 
             # Pivot data for table output ----
@@ -297,6 +322,14 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             if (is.null(self$options$age) || is.null(self$options$gender))
                 return()
 
+            # TODO (cleanup): this nrow == 0 check duplicates validation already done by
+            # .run() at L50 (which now uses jmvcore::reject). When .run() rejects, .plot()
+            # never gets meaningful plotData (image$state is NULL — caught by the L309
+            # `is.null(plotData)` guard below). The stop() here is therefore unreachable
+            # in normal use; if it does fire it bypasses jamovi's structured error UI.
+            # Either drop these two lines entirely (rely on the plotData NULL check at L309)
+            # or, if defensive-by-design is preferred, replace stop() with `return(FALSE)`
+            # to match the rest of .plot's failure handling.
             if (nrow(self$data) == 0)
                 stop("Data contains no (complete) rows")
 
@@ -404,6 +437,13 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             if (is.null(plotData))
                 return(FALSE)
 
+            # ggcharts::pyramid_chart() assigns sides and colors from the first
+            # appearance order of `group`. Use a completed Female/Male grid so
+            # side assignment and age-bin alignment are deterministic.
+            plotData <- private$.prepare_ggcharts_data(plotData)
+            if (nrow(plotData) == 0)
+                return(FALSE)
+
             # ggcharts pyramid_chart requires long-format data with:
             # - x: age groups (categorical)
             # - y: population counts (numeric)
@@ -489,6 +529,37 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             })
         },
 
+        .prepare_ggcharts_data = function(plotData) {
+            if (is.null(plotData) || nrow(plotData) == 0)
+                return(plotData)
+
+            observed_pop <- unique(as.character(plotData$Pop[!is.na(plotData$Pop)]))
+            pop_levels <- if (is.factor(plotData$Pop)) {
+                levels(plotData$Pop)[levels(plotData$Pop) %in% observed_pop]
+            } else {
+                observed_pop
+            }
+
+            if (length(pop_levels) == 0)
+                return(plotData[0, , drop = FALSE])
+
+            plotData %>%
+                dplyr::filter(!is.na(Pop)) %>%
+                dplyr::mutate(
+                    Gender = factor(as.character(Gender), levels = c("Female", "Male")),
+                    Pop = factor(as.character(Pop), levels = pop_levels)
+                ) %>%
+                dplyr::filter(!is.na(Gender), !is.na(Pop)) %>%
+                tidyr::complete(
+                    Gender = factor(c("Female", "Male"), levels = c("Female", "Male")),
+                    Pop = factor(pop_levels, levels = pop_levels),
+                    fill = list(n = 0)
+                ) %>%
+                dplyr::arrange(Gender, Pop) %>%
+                dplyr::mutate(Gender = as.character(Gender)) %>%
+                as.data.frame()
+        },
+
         .create_age_labels = function(breaks) {
             # Create readable labels from age breaks
             # With right=TRUE in cut(), intervals are (lower, upper]
@@ -538,10 +609,10 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             if (is_single_gender) {
                 html <- paste0(html, "<tr><td><strong>Cohort type:</strong></td><td style='color: #f57c00;'>",
-                    "Single-gender (", single_gender_label, ")</td></tr>")
+                    "Single-gender (", htmltools::htmlEscape(single_gender_label), ")</td></tr>")
             } else {
-                html <- paste0(html, "<tr><td><strong>Female level:</strong></td><td>", female_level, "</td></tr>")
-                html <- paste0(html, "<tr><td><strong>Male level:</strong></td><td>", male_level, "</td></tr>")
+                html <- paste0(html, "<tr><td><strong>Female level:</strong></td><td>", htmltools::htmlEscape(female_level), "</td></tr>")
+                html <- paste0(html, "<tr><td><strong>Male level:</strong></td><td>", htmltools::htmlEscape(male_level), "</td></tr>")
             }
 
             html <- paste0(html, "</table></div>")
