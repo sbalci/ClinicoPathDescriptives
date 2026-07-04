@@ -35,17 +35,11 @@ summarydataClass <- if (requireNamespace("jmvcore")) R6::R6Class("summarydataCla
             self$results$todo$setContent("")
             # Validate that the dataset contains complete rows.
             if (nrow(self$data) == 0) {
-                stop(.("Error: The provided dataset contains no complete rows. Please check your data and try again."))
+                jmvcore::reject(.("Error: The provided dataset contains no complete rows. Please check your data and try again."))
             }
             
             vars <- self$options$vars
 
-            # TODO (security, forward-looking): `var` (user CSV header name)
-            # is interpolated raw into `warning_msgs` here (L50, L53), which
-            # is then injected into the warning HTML at L58-60 with no
-            # `htmltools::htmlEscape()`. Variable names with `<`, `>`, or `&`
-            # corrupt the rendered HTML. Wrap each `var` with
-            # `htmltools::htmlEscape(var)` in the paste0 lines below.
             # TODO (forward-looking, perf): no `private$.checkpoint()` between
             # the heavy `gtExtras::gt_plt_summary()` call (~L177) and its
             # multi-layered fallback chain. On wide tables, gtExtras can hold
@@ -58,10 +52,10 @@ summarydataClass <- if (requireNamespace("jmvcore")) R6::R6Class("summarydataCla
             for (var in vars) {
                 if (!is.numeric(self$data[[var]])) {
                     vars_to_remove <- c(vars_to_remove, var)
-                    warning_msgs <- c(warning_msgs, paste0("Variable '", var, "' is not numeric"))
+                    warning_msgs <- c(warning_msgs, paste0("Variable '", htmltools::htmlEscape(var), "' is not numeric"))
                 } else if (all(is.na(self$data[[var]]))) {
                     vars_to_remove <- c(vars_to_remove, var)
-                    warning_msgs <- c(warning_msgs, paste0("Variable '", var, "' contains only missing values"))
+                    warning_msgs <- c(warning_msgs, paste0("Variable '", htmltools::htmlEscape(var), "' contains only missing values"))
                 }
             }
 
@@ -160,7 +154,11 @@ summarydataClass <- if (requireNamespace("jmvcore")) R6::R6Class("summarydataCla
                            max_x, "]) <br>", dist_text, "<br><br>", collapse = " ")
             }
             results <- purrr::map(.x = var_list, .f = mysummary)
-            results <- unlist(results)
+            # Collapse the per-variable summary strings into a single HTML string.
+            # setContent() on an Html result item writes to a non-repeated protobuf
+            # field, so a length > 1 vector (multiple variables) triggers a
+            # serialization error. Each element already ends with <br><br>.
+            results <- paste(unlist(results), collapse = "")
             self$results$text$setContent(results)
             # CORRECT IMPLEMENTATION: Use gtExtras as intended by the package
             plot_dataset <- tryCatch({

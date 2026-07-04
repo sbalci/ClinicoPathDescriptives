@@ -146,6 +146,7 @@ checkdataResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
     "checkdataResults",
     inherit = jmvcore::Group,
     active = list(
+        notices = function() private$.items[["notices"]],
         todo = function() private$.items[["todo"]],
         qualityText = function() private$.items[["qualityText"]],
         missingVals = function() private$.items[["missingVals"]],
@@ -167,6 +168,17 @@ checkdataResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 title="Single Variable Quality Check",
                 refs=list(
                     "ClinicoPathJamoviModule"))
+            self$add(jmvcore::Preformatted$new(
+                options=options,
+                name="notices",
+                title="Important Information",
+                clearWith=list(
+                    "var",
+                    "showOutliers",
+                    "showDistribution",
+                    "showDuplicates",
+                    "showPatterns",
+                    "clinicalValidation")))
             self$add(jmvcore::Html$new(
                 options=options,
                 name="todo",
@@ -337,7 +349,7 @@ checkdataBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             super$initialize(
                 package = "ClinicoPathDescriptives",
                 name = "checkdata",
-                version = c(0,0,38),
+                version = c(0,0,46),
                 options = options,
                 results = checkdataResults$new(options=options),
                 data = data,
@@ -382,6 +394,7 @@ checkdataBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 #'   quality assessment.
 #' @return A results object containing:
 #' \tabular{llllll}{
+#'   \code{results$notices} \tab \tab \tab \tab \tab a preformatted \cr
 #'   \code{results$todo} \tab \tab \tab \tab \tab a html \cr
 #'   \code{results$qualityText} \tab \tab \tab \tab \tab a preformatted \cr
 #'   \code{results$missingVals} \tab \tab \tab \tab \tab a table \cr
