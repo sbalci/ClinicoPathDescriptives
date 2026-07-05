@@ -1,3 +1,52 @@
+# ClinicoPathDescriptives 0.0.46 (2026-07-04)
+
+This release consolidates development across the 0.0.33–0.0.46 cycle. Its focus is **security hardening**, **input robustness**, and a **major overhaul of the Age Pyramid module**. The version is realigned with the umbrella **ClinicoPath** package.
+
+## Security & Robustness
+
+* **HTML output escaping (module-wide)**: All dynamically generated HTML content is now passed through `htmltools::htmlEscape()` before rendering, preventing user-supplied variable names, factor labels, and free-text options from injecting markup into results. Applied across `agepyramid`, `alluvial`, `benford`, `categorize`, `checkdata`, `chisqposttest`, `crosstable`, `dataquality`, `outlierdetection`, `reportcat`, `summarydata`, `tableone`, `vartree`, `venn`, and shared utilities.
+* **Safer variable-name handling**: Variable names containing spaces or special characters are now escaped with `jmvcore::composeTerm()` / `make.names()` when building formulas and are matched robustly against the dataset, preventing formula corruption and silent mismatch errors.
+* **Consistent error handling**: User-facing validation failures (empty data, invalid bin width, unmatched variables) now use `jmvcore::reject()` for clear, non-fatal messages in the jamovi interface instead of ad-hoc error paths.
+
+## Enhanced Existing Modules
+
+### Age Pyramid (`agepyramid`) — major overhaul
+
+* **Age group presets**: New *Age Group Presets* option with Pediatric (<18), Reproductive (15–50), Geriatric (65+), Life Course, and Custom (bin width) modes, plus user-defined *Custom Age Breaks*.
+* **Color customization**: New *Color Palette* option (Standard Pink/Blue, Colorblind-Friendly, Grayscale, Custom) with dedicated Female/Male color pickers.
+* **ggcharts rendering**: Optional *Enable GGCharts Pyramid* output with bar-sorting controls and deterministic formatting for reproducible plots.
+* **Single-gender robustness**: Further hardening of single-gender cohort handling with explicit level selection, input validation, and data cleaning, surfaced through a new *Data Summary* table with exclusion reporting.
+* **Backend migration**: Interactive logic moved out of client-side JavaScript (`agepyramid.events.js` removed) into the R backend for reliability.
+
+### Table One (`tableone`)
+
+* Reordered result outputs for a clearer reading flow (Copy-to-Manuscript → Summary → About → Data Quality & Assumptions).
+* Fixed notice priority ordering so the most important messages surface first.
+
+### Chi-square Post-hoc (`chisqposttest`)
+
+* Added a **95% confidence interval for the Phi effect size**.
+* Added **Residuals Interpretation Guidance** to aid interpretation of standardized residuals.
+* Refined UI layout.
+
+### User Notices
+
+* Added dedicated *Important Information* notice panels to `alluvial`, `checkdata`, `chisqposttest`, and `vartree` for clearer in-analysis guidance and warnings.
+
+## New & Updated Test Datasets
+
+* Added ready-to-use example datasets (CSV + jamovi `.omv`) for `agepyramid`, `benford`, `checkdata`, `dataquality`, `reportcat`, `summarydata`, and `tableone`.
+* Added scenario-specific age-pyramid datasets: cancer, geriatric, pediatric, reproductive, and unbalanced cohorts.
+* Refreshed the bundled `histopathology` dataset.
+
+## Package Infrastructure
+
+* Regenerated all jamovi analysis definitions and roxygen/`man` documentation.
+* Version realigned with the umbrella **ClinicoPath** package (0.0.33 → 0.0.46).
+* Updated package references, dependency metadata, and UI text throughout.
+
+---
+
 # ClinicoPathDescriptives 0.0.32.60 (2025-12-28)
 
 ## Bug Fixes

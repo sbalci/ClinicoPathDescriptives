@@ -34,3 +34,4 @@ build
 .Rprofile
 .DS_Store
 docs
+.positai

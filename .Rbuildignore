@@ -88,3 +88,4 @@ R/utils-pipe.R
 CITATION.cff
 ^\.claude$
 ^CLAUDE\.md$
+^\.positai$
