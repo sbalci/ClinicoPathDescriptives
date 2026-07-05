@@ -358,7 +358,7 @@ alluvialBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             super$initialize(
                 package = "ClinicoPathDescriptives",
                 name = "alluvial",
-                version = c(0,0,46),
+                version = c(0,0,47),
                 options = options,
                 results = alluvialResults$new(options=options),
                 data = data,

@@ -270,7 +270,7 @@ outlierdetectionBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Cla
             super$initialize(
                 package = "ClinicoPathDescriptives",
                 name = "outlierdetection",
-                version = c(0,0,46),
+                version = c(0,0,47),
                 options = options,
                 results = outlierdetectionResults$new(options=options),
                 data = data,
