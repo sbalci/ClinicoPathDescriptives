@@ -1,3 +1,10 @@
+# ClinicoPathDescriptives 0.0.47 (2026-07-05)
+
+## Bug Fixes
+
+* **Fixed a crash when a viridis colour palette is selected in the Venn/UpSet diagram.** `viridis::viridis()` (and `plasma`/`magma`/`inferno`/`cividis`) is used by `venn()`, but `viridis` was missing from the package `Imports`. Because jamovi installs only a package's `Imports`, selecting a viridis palette crashed on a clean install. `viridis` is now declared.
+* Declared `classInt`, `DescTools`, and `pwr` (previously used via `::` but undeclared).
+
 # ClinicoPathDescriptives 0.0.46 (2026-07-04)
 
 This release consolidates development across the 0.0.33–0.0.46 cycle. Its focus is **security hardening**, **input robustness**, and a **major overhaul of the Age Pyramid module**. The version is realigned with the umbrella **ClinicoPath** package.

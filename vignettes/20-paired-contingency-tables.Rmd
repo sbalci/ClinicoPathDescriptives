@@ -318,7 +318,7 @@ pathology_agreement <- contTablesPaired(
    - One consistently rates higher/lower than the other
    - Need to investigate source of bias
 
-2. **Non-significant McNemar test (p ≥ 0.05)**:
+2. **Non-significant McNemar test (p >= 0.05)**:
    - No systematic bias detected
    - Disagreements are balanced
    - Still need to assess overall agreement level

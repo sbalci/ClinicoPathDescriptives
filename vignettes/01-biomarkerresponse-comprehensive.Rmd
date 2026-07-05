@@ -515,7 +515,7 @@ original_analysis <- biomarkerresponse(
 ### **Data Appropriateness** ✓
 - [ ] Biomarker variable is continuous or ordinal
 - [ ] Response variable matches intended analysis type
-- [ ] Sample size adequate for analysis (n ≥ 30 per group)
+- [ ] Sample size adequate for analysis (n >= 30 per group)
 - [ ] Data quality acceptable (< 20% missing values)
 - [ ] Biomarker range appropriate for clinical context
 

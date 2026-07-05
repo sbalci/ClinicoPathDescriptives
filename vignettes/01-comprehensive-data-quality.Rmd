@@ -112,10 +112,10 @@ age_quality_assessment <- checkdata(
 )
 
 # View the comprehensive quality assessment
-print(age_quality_assessment$qualityText)       # Overall quality summary
-print(age_quality_assessment$missingVals)       # Missing data analysis
-print(age_quality_assessment$distribution)      # Statistical characteristics
-print(age_quality_assessment$outliers)          # Outlier detection results
+print(age_quality_assessment$qualityText) # Overall quality summary
+print(age_quality_assessment$missingVals) # Missing data analysis
+print(age_quality_assessment$distribution) # Statistical characteristics
+print(age_quality_assessment$outliers) # Outlier detection results
 ```
 
 **Expected Quality Characteristics for Clinical Age Data:**
@@ -136,7 +136,7 @@ measurement_quality <- checkdata(
   var = "MeasurementA",
   showOutliers = TRUE,
   showDistribution = TRUE,
-  showDuplicates = FALSE,  # Less relevant for continuous measures
+  showDuplicates = FALSE, # Less relevant for continuous measures
   showPatterns = TRUE
 )
 
@@ -165,9 +165,9 @@ Analyzing categorical clinical variables like treatment groups or outcomes.
 outcome_quality <- checkdata(
   data = histopathology,
   var = "Death",
-  showOutliers = FALSE,    # Not applicable for categorical
+  showOutliers = FALSE, # Not applicable for categorical
   showDistribution = FALSE, # Not applicable for categorical
-  showDuplicates = TRUE,   # Important for category balance
+  showDuplicates = TRUE, # Important for category balance
   showPatterns = TRUE
 )
 
@@ -198,14 +198,14 @@ key_variables <- c("Age", "Grade", "TStage", "MeasurementA", "MeasurementB")
 # Function to assess multiple variables
 assess_multiple_variables <- function(data, variables) {
   results <- list()
-  
+
   for (var in variables) {
     if (var %in% names(data)) {
       cat("Assessing variable:", var, "\n")
-      
+
       # Determine if numeric or categorical
       is_numeric <- is.numeric(data[[var]])
-      
+
       results[[var]] <- checkdata(
         data = data,
         var = var,
@@ -216,7 +216,7 @@ assess_multiple_variables <- function(data, variables) {
       )
     }
   }
-  
+
   return(results)
 }
 
@@ -340,7 +340,7 @@ data_mcar <- data.frame(
 )
 
 # Introduce random missing data (MCAR)
-missing_indices <- sample(1:n, 20)  # 10% random missing
+missing_indices <- sample(1:n, 20) # 10% random missing
 data_mcar$measurement[missing_indices] <- NA
 
 # Assess quality
@@ -364,7 +364,7 @@ data_mar <- data.frame(
 )
 
 # Missing more likely in older patients (MAR)
-missing_prob <- plogis((data_mar$age - 60) / 10)  # Higher prob for older patients
+missing_prob <- plogis((data_mar$age - 60) / 10) # Higher prob for older patients
 missing_mar <- rbinom(200, 1, missing_prob)
 data_mar$measurement[missing_mar == 1] <- NA
 
@@ -406,9 +406,9 @@ mnar_quality <- checkdata(
 outlier_demo <- data.frame(
   patient_id = 1:100,
   # Normal values with statistical outliers
-  lab_value = c(rnorm(95, 50, 5), c(80, 85, 20, 15, 90)),  # 5 statistical outliers
+  lab_value = c(rnorm(95, 50, 5), c(80, 85, 20, 15, 90)), # 5 statistical outliers
   # Clinical context matters
-  age = c(sample(30:70, 95, replace = TRUE), c(25, 28, 75, 78, 82))  # Extreme but plausible ages
+  age = c(sample(30:70, 95, replace = TRUE), c(25, 28, 75, 78, 82)) # Extreme but plausible ages
 )
 
 # Assess both variables
@@ -442,10 +442,10 @@ biomarker_data <- data.frame(
   her2_expression = c(
     # HER2 negative patients
     rlnorm(120, meanlog = 1.5, sdlog = 0.8),
-    # HER2 positive patients  
+    # HER2 positive patients
     rlnorm(30, meanlog = 3.2, sdlog = 0.6)
   ),
-  pdl1_percentage = pmax(0, pmin(100, rnorm(150, 25, 20)))  # Bounded 0-100%
+  pdl1_percentage = pmax(0, pmin(100, rnorm(150, 25, 20))) # Bounded 0-100%
 )
 
 # Assess biomarker quality
@@ -458,7 +458,7 @@ her2_quality <- checkdata(
 
 pdl1_quality <- checkdata(
   data = biomarker_data,
-  var = "pdl1_percentage", 
+  var = "pdl1_percentage",
   showOutliers = TRUE,
   showDistribution = TRUE
 )
@@ -485,9 +485,9 @@ trial_data <- data.frame(
   patient_id = paste0("CT", sprintf("%03d", 1:75)),
   enrollment_date = seq(as.Date("2024-01-01"), as.Date("2024-03-15"), length.out = 75),
   primary_endpoint = c(
-    rnorm(60, 2.5, 1.2),  # Most patients
-    rep(NA, 10),          # Recent enrollments, not yet assessed
-    c(8.5, -2.1, 15.3, 0.1, 9.8)  # Some outliers
+    rnorm(60, 2.5, 1.2), # Most patients
+    rep(NA, 10), # Recent enrollments, not yet assessed
+    c(8.5, -2.1, 15.3, 0.1, 9.8) # Some outliers
   ),
   safety_score = sample(0:4, 75, replace = TRUE, prob = c(0.4, 0.3, 0.2, 0.08, 0.02))
 )
@@ -519,13 +519,15 @@ ae_data <- data.frame(
   patient_id = paste0("AE", sprintf("%03d", 1:200)),
   severity_score = sample(1:5, 200, replace = TRUE, prob = c(0.4, 0.3, 0.2, 0.08, 0.02)),
   onset_days = c(
-    sample(1:30, 160, replace = TRUE),  # Normal onset times
-    c(rep(NA, 25)),                     # Missing onset times
-    c(365, 400, 500, -5, -10, 0, 2000, 1500, 750, 800, 1200, 850, 900, 950, 1100)  # Some problematic values
+    sample(1:30, 160, replace = TRUE), # Normal onset times
+    c(rep(NA, 25)), # Missing onset times
+    c(365, 400, 500, -5, -10, 0, 2000, 1500, 750, 800, 1200, 850, 900, 950, 1100) # Some problematic values
   ),
   recovery_status = factor(
-    sample(c("Recovered", "Recovering", "Not Recovered", "Unknown"), 
-           200, replace = TRUE, prob = c(0.6, 0.2, 0.1, 0.1))
+    sample(c("Recovered", "Recovering", "Not Recovered", "Unknown"),
+      200,
+      replace = TRUE, prob = c(0.6, 0.2, 0.1, 0.1)
+    )
   )
 )
 
@@ -548,32 +550,28 @@ print(onset_quality$qualityText)
 ```{r missing-data-strategy, eval=FALSE}
 # Function to recommend missing data strategy
 recommend_missing_strategy <- function(missing_pct, n_total, missing_pattern = "unknown") {
-  
   cat("MISSING DATA STRATEGY RECOMMENDATION\n")
   cat("=" %&% rep("=", 40) %&% "\n")
   cat("Missing percentage:", missing_pct, "%\n")
   cat("Total sample size:", n_total, "\n")
   cat("Missing pattern:", missing_pattern, "\n\n")
-  
+
   if (missing_pct <= 5) {
     cat("✅ RECOMMENDATION: Complete case analysis\n")
     cat("   - Missing data is minimal\n")
     cat("   - Unlikely to introduce significant bias\n")
     cat("   - Proceed with standard analysis\n")
-    
   } else if (missing_pct <= 15 && n_total >= 100) {
     cat("⚠️  RECOMMENDATION: Complete case analysis with sensitivity analysis\n")
     cat("   - Document missing data patterns\n")
     cat("   - Consider multiple imputation for sensitivity\n")
     cat("   - Compare results between methods\n")
-    
   } else if (missing_pct <= 30 && missing_pattern == "MAR") {
     cat("🔧 RECOMMENDATION: Multiple imputation\n")
     cat("   - Missing at random assumption reasonable\n")
     cat("   - Use multiple imputation (m=5-10)\n")
     cat("   - Include auxiliary variables\n")
     cat("   - Validate imputation model\n")
-    
   } else {
     cat("🚨 RECOMMENDATION: Investigate and consider additional data collection\n")
     cat("   - High missing data rate threatens validity\n")
@@ -595,36 +593,32 @@ recommend_missing_strategy(missing_pct = 40, n_total = 80, missing_pattern = "MN
 ```{r outlier-management, eval=FALSE}
 # Function to recommend outlier handling strategy
 recommend_outlier_strategy <- function(outlier_count, total_n, outlier_severity, clinical_context) {
-  
   outlier_pct <- 100 * outlier_count / total_n
-  
+
   cat("OUTLIER MANAGEMENT STRATEGY\n")
   cat("=" %&% rep("=", 30) %&% "\n")
   cat("Outliers detected:", outlier_count, "(", round(outlier_pct, 1), "%)\n")
   cat("Severity level:", outlier_severity, "\n")
   cat("Clinical context:", clinical_context, "\n\n")
-  
+
   if (outlier_pct <= 2 && outlier_severity %in% c("High", "Very High")) {
     cat("✅ RECOMMENDATION: Investigate and potentially retain\n")
     cat("   - Low outlier rate acceptable\n")
     cat("   - Verify data entry accuracy\n")
     cat("   - Check clinical plausibility\n")
     cat("   - Consider robust analysis methods\n")
-    
   } else if (outlier_pct <= 5 && clinical_context == "biomarker") {
     cat("⚠️  RECOMMENDATION: Detailed investigation required\n")
     cat("   - Biomarker data requires high precision\n")
     cat("   - Verify laboratory procedures\n")
     cat("   - Check sample handling\n")
     cat("   - Consider assay-specific thresholds\n")
-    
   } else if (outlier_severity == "Extreme") {
     cat("🔧 RECOMMENDATION: Exclude after documentation\n")
     cat("   - Extreme values likely data errors\n")
     cat("   - Document exclusion rationale\n")
     cat("   - Perform sensitivity analysis\n")
     cat("   - Report in methods section\n")
-    
   } else {
     cat("🚨 RECOMMENDATION: Comprehensive data audit\n")
     cat("   - High outlier rate indicates systematic issues\n")
@@ -651,7 +645,7 @@ recommend_outlier_strategy(15, 200, "Extreme", "patient_reported")
 - [ ] Missing data patterns documented and explained
 - [ ] Outliers identified and clinically validated
 - [ ] Distribution assumptions verified
-- [ ] Quality grades assigned (target: ≥80% Grade A/B)
+- [ ] Quality grades assigned (target: >=80% Grade A/B)
 
 **Phase 2: Interim Quality Monitoring** ✓
 - [ ] Weekly quality assessments for ongoing studies
@@ -673,7 +667,6 @@ recommend_outlier_strategy(15, 200, "Extreme", "patient_reported")
 ```{r quality-dashboard, eval=FALSE}
 # Function to create quality monitoring dashboard
 create_quality_dashboard <- function(data, key_variables) {
-  
   dashboard_results <- data.frame(
     Variable = character(),
     Total_N = integer(),
@@ -683,24 +676,23 @@ create_quality_dashboard <- function(data, key_variables) {
     Action_Required = character(),
     stringsAsFactors = FALSE
   )
-  
+
   for (var in key_variables) {
     if (var %in% names(data) && is.numeric(data[[var]])) {
-      
       # Basic quality metrics
       total_n <- length(data[[var]])
       missing_count <- sum(is.na(data[[var]]))
       missing_pct <- 100 * missing_count / total_n
-      
+
       # Outlier detection
       clean_data <- data[[var]][!is.na(data[[var]])]
       if (length(clean_data) > 3) {
-        z_scores <- scale(clean_data)[,1]
+        z_scores <- scale(clean_data)[, 1]
         outlier_count <- sum(abs(z_scores) > 3)
       } else {
         outlier_count <- 0
       }
-      
+
       # Quality grading
       if (missing_pct <= 5 && outlier_count <= 0.05 * length(clean_data)) {
         grade <- "A"
@@ -715,7 +707,7 @@ create_quality_dashboard <- function(data, key_variables) {
         grade <- "D"
         action <- "Major intervention required"
       }
-      
+
       # Add to dashboard
       dashboard_results <- rbind(dashboard_results, data.frame(
         Variable = var,
@@ -728,7 +720,7 @@ create_quality_dashboard <- function(data, key_variables) {
       ))
     }
   }
-  
+
   return(dashboard_results)
 }
 
@@ -763,68 +755,69 @@ if (nrow(action_needed) > 0) {
 ```{r gcp-compliance, eval=FALSE}
 # Function to assess GCP data quality compliance
 assess_gcp_compliance <- function(data, primary_endpoints, critical_variables) {
-  
   cat("📋 ICH E6 DATA QUALITY COMPLIANCE ASSESSMENT\n")
   cat("=" %&% rep("=", 50) %&% "\n\n")
-  
+
   compliance_report <- list()
-  
+
   # Section 5.0: Quality Management
   cat("🔍 SECTION 5.0: QUALITY MANAGEMENT\n")
   cat("-" %&% rep("-", 35) %&% "\n")
-  
+
   for (var in primary_endpoints) {
     if (var %in% names(data)) {
-      quality_result <- checkdata(data = data, var = var, 
-                                 showOutliers = TRUE, showPatterns = TRUE)
-      
+      quality_result <- checkdata(
+        data = data, var = var,
+        showOutliers = TRUE, showPatterns = TRUE
+      )
+
       missing_pct <- 100 * sum(is.na(data[[var]])) / nrow(data)
-      
+
       # ICH E6 Requirements Assessment
       cat("Primary Endpoint:", var, "\n")
-      
+
       # 5.0.1: Data should be reliable and accurate
       if (missing_pct <= 5) {
-        cat("  ✅ Data Reliability: COMPLIANT (≤5% missing)\n")
+        cat("  ✅ Data Reliability: COMPLIANT (<=5% missing)\n")
         compliance_report[[paste0(var, "_reliability")]] <- "COMPLIANT"
       } else {
         cat("  ❌ Data Reliability: NON-COMPLIANT (>5% missing)\n")
         compliance_report[[paste0(var, "_reliability")]] <- "NON-COMPLIANT"
       }
-      
+
       # 5.0.2: Data should be complete
       if (missing_pct <= 2) {
-        cat("  ✅ Data Completeness: EXCELLENT (≤2% missing)\n")
+        cat("  ✅ Data Completeness: EXCELLENT (<=2% missing)\n")
         compliance_report[[paste0(var, "_completeness")]] <- "EXCELLENT"
       } else if (missing_pct <= 5) {
-        cat("  ⚠️  Data Completeness: ACCEPTABLE (≤5% missing)\n")
+        cat("  ⚠️  Data Completeness: ACCEPTABLE (<=5% missing)\n")
         compliance_report[[paste0(var, "_completeness")]] <- "ACCEPTABLE"
       } else {
         cat("  ❌ Data Completeness: INADEQUATE (>5% missing)\n")
         compliance_report[[paste0(var, "_completeness")]] <- "INADEQUATE"
       }
-      
+
       cat("\n")
     }
   }
-  
+
   # Section 5.1: Data Integrity
   cat("🛡️  SECTION 5.1: DATA INTEGRITY (ALCOA+ PRINCIPLES)\n")
   cat("-" %&% rep("-", 45) %&% "\n")
-  
+
   # Attributable, Legible, Contemporaneous, Original, Accurate
   # + Complete, Consistent, Enduring, Available
-  
+
   overall_compliance <- TRUE
   for (var in critical_variables) {
     if (var %in% names(data)) {
       missing_pct <- 100 * sum(is.na(data[[var]])) / nrow(data)
-      
+
       # Accuracy assessment (outlier rate)
       if (is.numeric(data[[var]])) {
         clean_data <- data[[var]][!is.na(data[[var]])]
         if (length(clean_data) > 3) {
-          z_scores <- scale(clean_data)[,1]
+          z_scores <- scale(clean_data)[, 1]
           outlier_rate <- sum(abs(z_scores) > 3) / length(clean_data)
         } else {
           outlier_rate <- 0
@@ -832,24 +825,28 @@ assess_gcp_compliance <- function(data, primary_endpoints, critical_variables) {
       } else {
         outlier_rate <- 0
       }
-      
+
       # ALCOA+ Assessment
       accurate <- outlier_rate <= 0.05
       complete <- missing_pct <= 5
-      
+
       cat("Variable:", var, "\n")
-      cat("  📊 Accurate:", ifelse(accurate, "✅ PASS", "❌ FAIL"), 
-          "(outlier rate:", round(100*outlier_rate, 1), "%)\n")
-      cat("  📋 Complete:", ifelse(complete, "✅ PASS", "❌ FAIL"), 
-          "(missing:", round(missing_pct, 1), "%)\n")
-      
+      cat(
+        "  📊 Accurate:", ifelse(accurate, "✅ PASS", "❌ FAIL"),
+        "(outlier rate:", round(100 * outlier_rate, 1), "%)\n"
+      )
+      cat(
+        "  📋 Complete:", ifelse(complete, "✅ PASS", "❌ FAIL"),
+        "(missing:", round(missing_pct, 1), "%)\n"
+      )
+
       if (!accurate || !complete) {
         overall_compliance <- FALSE
       }
       cat("\n")
     }
   }
-  
+
   # Overall compliance summary
   cat("📊 OVERALL COMPLIANCE STATUS\n")
   cat("=" %&% rep("=", 30) %&% "\n")
@@ -865,7 +862,7 @@ assess_gcp_compliance <- function(data, primary_endpoints, critical_variables) {
     cat("   - Document all data cleaning activities\n")
     cat("   - Obtain quality review approval before proceeding\n")
   }
-  
+
   return(compliance_report)
 }
 
@@ -896,21 +893,20 @@ compliance_results <- assess_gcp_compliance(
 ```{r missing-data-troubleshooting, eval=FALSE}
 # Systematic approach to missing data investigation
 investigate_missing_data <- function(data, variable) {
-  
   cat("🔍 MISSING DATA INVESTIGATION PROTOCOL\n")
   cat("=" %&% rep("=", 40) %&% "\n")
-  
+
   missing_indices <- which(is.na(data[[variable]]))
   missing_pct <- 100 * length(missing_indices) / nrow(data)
-  
+
   cat("Variable:", variable, "\n")
   cat("Missing count:", length(missing_indices), "\n")
   cat("Missing percentage:", round(missing_pct, 1), "%\n\n")
-  
+
   # Step 1: Pattern analysis
   cat("STEP 1: MISSING DATA PATTERN ANALYSIS\n")
   cat("-" %&% rep("-", 35) %&% "\n")
-  
+
   if (missing_pct > 50) {
     cat("⚠️  SEVERE: >50% missing - systematic failure likely\n")
     cat("   Action: Investigate data collection procedures\n")
@@ -920,7 +916,7 @@ investigate_missing_data <- function(data, variable) {
   } else {
     cat("✅ ACCEPTABLE: <20% missing\n")
   }
-  
+
   # Step 2: Temporal pattern check (if date variable available)
   if ("SurgeryDate" %in% names(data) || "LastFollowUpDate" %in% names(data)) {
     cat("\nSTEP 2: TEMPORAL PATTERN ANALYSIS\n")
@@ -928,31 +924,32 @@ investigate_missing_data <- function(data, variable) {
     cat("   Recommendation: Plot missing data over time\n")
     cat("   Look for: Equipment failures, staff changes, protocol amendments\n")
   }
-  
+
   # Step 3: Subgroup analysis
   cat("\nSTEP 3: SUBGROUP MISSING DATA ANALYSIS\n")
   cat("-" %&% rep("-", 35) %&% "\n")
-  
+
   if ("Group" %in% names(data)) {
-    group_missing <- aggregate(is.na(data[[variable]]), 
-                              by = list(Group = data$Group), 
-                              FUN = function(x) 100 * mean(x))
+    group_missing <- aggregate(is.na(data[[variable]]),
+      by = list(Group = data$Group),
+      FUN = function(x) 100 * mean(x)
+    )
     names(group_missing)[2] <- "Missing_Pct"
-    
+
     cat("Missing data by group:\n")
     print(group_missing)
-    
+
     max_diff <- max(group_missing$Missing_Pct) - min(group_missing$Missing_Pct)
     if (max_diff > 10) {
       cat("⚠️  WARNING: >10% difference between groups\n")
       cat("   Potential differential missing data mechanisms\n")
     }
   }
-  
+
   # Step 4: Recommendations
   cat("\nSTEP 4: RECOMMENDED ACTIONS\n")
   cat("-" %&% rep("-", 25) %&% "\n")
-  
+
   if (missing_pct > 30) {
     cat("🚨 IMMEDIATE ACTIONS REQUIRED:\n")
     cat("   1. Halt further data collection pending investigation\n")
@@ -983,48 +980,45 @@ investigate_missing_data(histopathology, "MeasurementA")
 ```{r outlier-troubleshooting, eval=FALSE}
 # Systematic outlier investigation protocol
 investigate_outlier_patterns <- function(data, variable) {
-  
   cat("🎯 OUTLIER PATTERN INVESTIGATION\n")
   cat("=" %&% rep("=", 35) %&% "\n")
-  
+
   clean_data <- data[[variable]][!is.na(data[[variable]])]
-  z_scores <- scale(clean_data)[,1]
+  z_scores <- scale(clean_data)[, 1]
   outlier_indices <- which(abs(z_scores) > 3)
   outlier_rate <- length(outlier_indices) / length(clean_data)
-  
+
   cat("Variable:", variable, "\n")
   cat("Outlier count:", length(outlier_indices), "\n")
   cat("Outlier rate:", round(100 * outlier_rate, 1), "%\n\n")
-  
+
   # Pattern analysis
   if (outlier_rate > 0.1) {
     cat("🚨 SYSTEMATIC ISSUE DETECTED\n")
     cat("   >10% outlier rate suggests measurement problems\n")
-    
+
     # Check for clustering
     outlier_values <- clean_data[outlier_indices]
     if (length(unique(round(outlier_values))) < length(outlier_values) * 0.5) {
       cat("   PATTERN: Clustered outliers - possible systematic error\n")
       cat("   ACTION: Check calibration and measurement procedures\n")
     }
-    
+
     # Check for extreme values
     extreme_outliers <- sum(abs(z_scores) > 4)
     if (extreme_outliers > 0) {
       cat("   PATTERN:", extreme_outliers, "extreme outliers (|z| > 4)\n")
       cat("   ACTION: Verify data entry and instrument function\n")
     }
-    
   } else if (outlier_rate > 0.05) {
     cat("⚠️  ELEVATED OUTLIER RATE\n")
     cat("   5-10% outlier rate requires investigation\n")
     cat("   ACTION: Review measurement protocol consistency\n")
-    
   } else {
     cat("✅ ACCEPTABLE OUTLIER RATE\n")
     cat("   <5% outlier rate is within normal range\n")
   }
-  
+
   # Recommendations based on pattern
   cat("\nRECOMMENDATIONS:\n")
   if (outlier_rate > 0.1) {
@@ -1052,28 +1046,27 @@ investigate_outlier_patterns(histopathology, "MeasurementA")
 ```{r ml-quality-assessment, eval=FALSE}
 # Advanced quality scoring using multiple metrics
 calculate_composite_quality_score <- function(data, variable) {
-  
   # Initialize score components
   scores <- list()
-  
+
   # Completeness score (0-100)
   missing_pct <- 100 * sum(is.na(data[[variable]])) / length(data[[variable]])
   scores$completeness <- max(0, 100 - missing_pct)
-  
+
   # Accuracy score (based on outlier rate)
   if (is.numeric(data[[variable]])) {
     clean_data <- data[[variable]][!is.na(data[[variable]])]
     if (length(clean_data) > 3) {
-      z_scores <- scale(clean_data)[,1]
+      z_scores <- scale(clean_data)[, 1]
       outlier_rate <- sum(abs(z_scores) > 3) / length(clean_data)
-      scores$accuracy <- max(0, 100 - (outlier_rate * 1000))  # Penalize outliers heavily
+      scores$accuracy <- max(0, 100 - (outlier_rate * 1000)) # Penalize outliers heavily
     } else {
-      scores$accuracy <- 50  # Insufficient data
+      scores$accuracy <- 50 # Insufficient data
     }
   } else {
-    scores$accuracy <- 100  # Categorical data, different accuracy assessment needed
+    scores$accuracy <- 100 # Categorical data, different accuracy assessment needed
   }
-  
+
   # Consistency score (based on variability)
   if (is.numeric(data[[variable]])) {
     clean_data <- data[[variable]][!is.na(data[[variable]])]
@@ -1083,12 +1076,12 @@ calculate_composite_quality_score <- function(data, variable) {
       if (cv < 15) {
         scores$consistency <- 100
       } else if (cv < 30) {
-        scores$consistency <- 100 - ((cv - 15) * 2)  # Linear decrease
+        scores$consistency <- 100 - ((cv - 15) * 2) # Linear decrease
       } else {
         scores$consistency <- max(0, 70 - cv)
       }
     } else {
-      scores$consistency <- 0  # No variability or zero mean
+      scores$consistency <- 0 # No variability or zero mean
     }
   } else {
     # For categorical, assess balance
@@ -1097,10 +1090,10 @@ calculate_composite_quality_score <- function(data, variable) {
       balance_ratio <- min(freq_table) / max(freq_table)
       scores$consistency <- balance_ratio * 100
     } else {
-      scores$consistency <- 0  # Only one category
+      scores$consistency <- 0 # Only one category
     }
   }
-  
+
   # Precision score (based on unique values)
   clean_data <- data[[variable]][!is.na(data[[variable]])]
   unique_pct <- length(unique(clean_data)) / length(clean_data) * 100
@@ -1111,11 +1104,11 @@ calculate_composite_quality_score <- function(data, variable) {
   } else {
     scores$precision <- unique_pct
   }
-  
+
   # Calculate weighted composite score
   weights <- c(completeness = 0.3, accuracy = 0.3, consistency = 0.2, precision = 0.2)
   composite_score <- sum(unlist(scores) * weights)
-  
+
   # Convert to letter grade
   if (composite_score >= 90) {
     grade <- "A"
@@ -1126,7 +1119,7 @@ calculate_composite_quality_score <- function(data, variable) {
   } else {
     grade <- "D"
   }
-  
+
   return(list(
     scores = scores,
     composite_score = round(composite_score, 1),

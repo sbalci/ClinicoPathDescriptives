@@ -304,7 +304,7 @@ ciSingle(
 
 **Shapiro-Wilk Test**:
 - p > 0.05: Normal distribution (t-method appropriate)
-- p ≤ 0.05: Non-normal distribution (consider bootstrap)
+- p <= 0.05: Non-normal distribution (consider bootstrap)
 
 **Assumptions Met**:
 - "Met": Normal distribution, t-method recommended
@@ -432,7 +432,7 @@ Laboratory quality control and method validation:
 ciSingle(
   data = histopathology,
   deps = c("Anti-X-intensity", "Anti-Y-intensity"),
-  ciWidth = 99,  # Higher confidence for QC
+  ciWidth = 99, # Higher confidence for QC
   method = "t",
   showDiagnostics = TRUE
 )
@@ -456,7 +456,7 @@ When to use bootstrap confidence intervals:
 # Bootstrap for potentially skewed data
 ciSingle(
   data = histopathology,
-  deps = "OverallTime",  # Often skewed in survival data
+  deps = "OverallTime", # Often skewed in survival data
   ciWidth = 95,
   method = "bootstrap",
   bootstrapSamples = 2000,
@@ -485,7 +485,7 @@ cat("Effect of Sample Size on Confidence Interval Width:\n\n")
 for (n in sample_sizes) {
   subset_data <- histopathology[1:n, ]
   cat(paste0("Sample size n = ", n, ":\n"))
-  
+
   result <- ciSingle(
     data = subset_data,
     deps = "Age",
@@ -500,8 +500,8 @@ for (n in sample_sizes) {
 ### Sample Size Guidelines
 
 - **n < 30**: Use t-distribution or bootstrap
-- **30 ≤ n < 100**: t-distribution usually appropriate
-- **n ≥ 100**: Normal approximation acceptable
+- **30 <= n < 100**: t-distribution usually appropriate
+- **n >= 100**: Normal approximation acceptable
 - **Large n**: Narrower intervals, more precise estimates
 
 # Best Practices and Guidelines
@@ -512,7 +512,7 @@ for (n in sample_sizes) {
 cat("Confidence Interval Method Selection Guide:\n\n")
 cat("1. Check sample size:\n")
 cat("   - n < 30: Consider bootstrap or t-distribution\n")
-cat("   - n ≥ 30: Any method acceptable\n\n")
+cat("   - n >= 30: Any method acceptable\n\n")
 
 cat("2. Test normality (if using t-distribution):\n")
 cat("   - Normal: Use t-distribution\n")

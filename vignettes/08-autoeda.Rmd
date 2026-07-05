@@ -61,8 +61,10 @@ Comprehensive introduction to your dataset using DataExplorer's `introduce()` fu
 # Dataset Overview Analysis
 autoeda(
   data = mydata,
-  vars = c("Age", "Sex", "Grade", "TStage", "LVI", "PNI", 
-           "Death", "Recurrence", "OverallTime"),
+  vars = c(
+    "Age", "Sex", "Grade", "TStage", "LVI", "PNI",
+    "Death", "Recurrence", "OverallTime"
+  ),
   analysis_type = "overview",
   include_plots = TRUE,
   plot_theme = "clinical"
@@ -84,10 +86,12 @@ Comprehensive missing data pattern analysis:
 # Missing Value Analysis with Clinical Insights
 autoeda(
   data = mydata,
-  vars = c("Age", "Sex", "Grade", "TStage", "LVI", "PNI", 
-           "MarginDistance", "MeasurementA", "MeasurementB"),
+  vars = c(
+    "Age", "Sex", "Grade", "TStage", "LVI", "PNI",
+    "MarginDistance", "MeasurementA", "MeasurementB"
+  ),
   analysis_type = "missing",
-  missing_threshold = 10,  # Flag variables with >10% missing
+  missing_threshold = 10, # Flag variables with >10% missing
   plot_theme = "clinical"
 )
 ```
@@ -106,8 +110,10 @@ Automated univariate analysis for both numeric and categorical variables:
 # Distribution Analysis
 autoeda(
   data = mydata,
-  vars = c("Age", "Sex", "Grade", "TStage", "OverallTime", 
-           "MeasurementA", "MeasurementB"),
+  vars = c(
+    "Age", "Sex", "Grade", "TStage", "OverallTime",
+    "MeasurementA", "MeasurementB"
+  ),
   analysis_type = "distributions",
   include_plots = TRUE,
   categorical_limit = 15,
@@ -129,10 +135,12 @@ Relationship analysis between numeric variables:
 # Correlation Analysis with Multiple Methods
 autoeda(
   data = mydata,
-  vars = c("Age", "OverallTime", "MeasurementA", "MeasurementB", 
-           "MarginDistance"),
+  vars = c(
+    "Age", "OverallTime", "MeasurementA", "MeasurementB",
+    "MarginDistance"
+  ),
   analysis_type = "correlation",
-  correlation_method = "pearson",  # or "spearman", "kendall"
+  correlation_method = "pearson", # or "spearman", "kendall"
   include_plots = TRUE,
   plot_theme = "clinical"
 )
@@ -152,8 +160,10 @@ Dimensionality reduction and feature importance:
 # PCA Analysis
 autoeda(
   data = mydata,
-  vars = c("Age", "OverallTime", "MeasurementA", "MeasurementB", 
-           "MarginDistance"),
+  vars = c(
+    "Age", "OverallTime", "MeasurementA", "MeasurementB",
+    "MarginDistance"
+  ),
   analysis_type = "pca",
   pca_components = 5,
   include_plots = TRUE,
@@ -175,9 +185,11 @@ Supervised EDA with outcome variable relationships:
 # Target Variable Analysis for Survival Outcome
 autoeda(
   data = mydata,
-  vars = c("Age", "Sex", "Grade", "TStage", "LVI", "PNI", 
-           "MeasurementA", "MeasurementB"),
-  target_var = "Death",  # Outcome variable
+  vars = c(
+    "Age", "Sex", "Grade", "TStage", "LVI", "PNI",
+    "MeasurementA", "MeasurementB"
+  ),
+  target_var = "Death", # Outcome variable
   analysis_type = "target",
   include_plots = TRUE,
   plot_theme = "clinical"
@@ -187,7 +199,7 @@ autoeda(
 autoeda(
   data = mydata,
   vars = c("Age", "Sex", "Grade", "TStage", "LVI", "PNI"),
-  target_var = "OverallTime",  # Time to event
+  target_var = "OverallTime", # Time to event
   analysis_type = "target",
   include_plots = TRUE,
   plot_theme = "clinical"
@@ -208,8 +220,10 @@ Complete automated EDA report combining all analyses:
 # Comprehensive AutoEDA Report
 autoeda(
   data = mydata,
-  vars = c("Age", "Sex", "Grade", "TStage", "LVI", "PNI", 
-           "Death", "Recurrence", "OverallTime", "MeasurementA", "MeasurementB"),
+  vars = c(
+    "Age", "Sex", "Grade", "TStage", "LVI", "PNI",
+    "Death", "Recurrence", "OverallTime", "MeasurementA", "MeasurementB"
+  ),
   analysis_type = "comprehensive",
   target_var = "Death",
   correlation_method = "spearman",
@@ -239,9 +253,9 @@ The AutoEDA module includes specialized detection for clinical variable patterns
 # Advanced Clinical Analysis
 autoeda(
   data = mydata,
-  vars = names(mydata),  # Analyze all variables
+  vars = names(mydata), # Analyze all variables
   analysis_type = "comprehensive",
-  advanced_options = TRUE,  # Enable clinical insights
+  advanced_options = TRUE, # Enable clinical insights
   plot_theme = "clinical"
 )
 ```
@@ -263,10 +277,10 @@ Automatic detection of physiologically implausible values:
 # Create sample clinical data with potential outliers
 clinical_data <- data.frame(
   patient_id = 1:100,
-  age = c(rnorm(95, 65, 15), 150, 200, -5, 250, 300),  # Some impossible ages
-  weight = c(rnorm(95, 70, 15), 600, 700, -10, 0.1, 800),  # Impossible weights
-  systolic_bp = c(rnorm(95, 120, 20), 300, 400, 20, 500, 10),  # Impossible BP
-  temperature = c(rnorm(95, 36.5, 0.5), 50, 60, 10, 70, 0)  # Impossible temp
+  age = c(rnorm(95, 65, 15), 150, 200, -5, 250, 300), # Some impossible ages
+  weight = c(rnorm(95, 70, 15), 600, 700, -10, 0.1, 800), # Impossible weights
+  systolic_bp = c(rnorm(95, 120, 20), 300, 400, 20, 500, 10), # Impossible BP
+  temperature = c(rnorm(95, 36.5, 0.5), 50, 60, 10, 70, 0) # Impossible temp
 )
 
 # Analyze with reference range checking
@@ -320,35 +334,35 @@ autoeda(
 ```{r params-demo, eval=FALSE}
 autoeda(
   data = mydata,
-  
+
   # Variable selection
-  vars = c("Age", "Sex", "Grade"),  # Required: variables to analyze
-  
-  # Analysis configuration  
-  analysis_type = "overview",  # "overview", "missing", "distributions", 
-                              # "correlation", "pca", "target", "comprehensive"
-  target_var = "Death",       # Optional: for supervised analysis
-  
+  vars = c("Age", "Sex", "Grade"), # Required: variables to analyze
+
+  # Analysis configuration
+  analysis_type = "overview", # "overview", "missing", "distributions",
+  # "correlation", "pca", "target", "comprehensive"
+  target_var = "Death", # Optional: for supervised analysis
+
   # Missing value settings
-  missing_threshold = 5,      # Threshold % for flagging missing values
-  
+  missing_threshold = 5, # Threshold % for flagging missing values
+
   # Correlation settings
-  correlation_method = "pearson",  # "pearson", "spearman", "kendall"
-  
+  correlation_method = "pearson", # "pearson", "spearman", "kendall"
+
   # PCA settings
-  pca_components = 5,         # Number of components to analyze
-  
+  pca_components = 5, # Number of components to analyze
+
   # Visualization settings
-  include_plots = TRUE,       # Include automated plots
-  plot_theme = "clinical",    # "default", "minimal", "classic", "clinical"
-  
+  include_plots = TRUE, # Include automated plots
+  plot_theme = "clinical", # "default", "minimal", "classic", "clinical"
+
   # Output settings
   output_format = "combined", # "html", "tables", "combined"
-  
+
   # Advanced features
-  advanced_options = TRUE,    # Enable clinical insights
-  categorical_limit = 15,     # Max levels for categorical variables
-  generate_report = FALSE     # Generate comprehensive report file
+  advanced_options = TRUE, # Enable clinical insights
+  categorical_limit = 15, # Max levels for categorical variables
+  generate_report = FALSE # Generate comprehensive report file
 )
 ```
 
@@ -372,11 +386,13 @@ autoeda(
 # Comprehensive analysis for pathology research
 autoeda(
   data = histopathology,
-  vars = c("Age", "Sex", "Race", "Grade", "TStage", "NStage", 
-           "LVI", "PNI", "Death", "Recurrence", "OverallTime"),
+  vars = c(
+    "Age", "Sex", "Race", "Grade", "TStage", "NStage",
+    "LVI", "PNI", "Death", "Recurrence", "OverallTime"
+  ),
   analysis_type = "comprehensive",
   target_var = "Death",
-  correlation_method = "spearman",  # More robust for ordinal data
+  correlation_method = "spearman", # More robust for ordinal data
   missing_threshold = 5,
   advanced_options = TRUE,
   plot_theme = "clinical"
@@ -405,11 +421,13 @@ autoeda(
 # Prepare data for survival analysis
 autoeda(
   data = histopathology,
-  vars = c("Age", "Sex", "Grade", "TStage", "LVI", "PNI", 
-           "OverallTime", "Death"),
+  vars = c(
+    "Age", "Sex", "Grade", "TStage", "LVI", "PNI",
+    "OverallTime", "Death"
+  ),
   analysis_type = "comprehensive",
-  target_var = "OverallTime",  # Time to event
-  missing_threshold = 3,  # Strict threshold for survival data
+  target_var = "OverallTime", # Time to event
+  missing_threshold = 3, # Strict threshold for survival data
   advanced_options = TRUE,
   plot_theme = "clinical"
 )
@@ -461,8 +479,8 @@ autoeda(
 
 ## Sample Size Guidelines
 
-- **n ≥ 100**: Adequate for most analyses
-- **30 ≤ n < 100**: Acceptable with careful interpretation
+- **n >= 100**: Adequate for most analyses
+- **30 <= n < 100**: Acceptable with careful interpretation
 - **n < 30**: Limited power, consider descriptive analysis only
 
 # Advanced Topics

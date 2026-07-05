@@ -62,7 +62,7 @@ clinical_data <- histopathology %>%
     Age_Group = case_when(
       Age < 40 ~ "< 40 years",
       Age >= 40 & Age < 60 ~ "40-59 years",
-      Age >= 60 ~ "≥ 60 years"
+      Age >= 60 ~ ">= 60 years"
     ),
     # Combine invasion markers
     Invasion_Profile = case_when(

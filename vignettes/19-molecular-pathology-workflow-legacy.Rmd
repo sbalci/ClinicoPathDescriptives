@@ -495,7 +495,7 @@ print(cost_effectiveness)
 ## Quality Assurance Checklist
 
 ### Pre-analytical Phase
-1. **Specimen Adequacy**: ≥70% of cases should be adequate
+1. **Specimen Adequacy**: >=70% of cases should be adequate
 2. **Fixation Time**: 6-24 hours in neutral buffered formalin
 3. **Cold Ischemia**: <1 hour for optimal results
 

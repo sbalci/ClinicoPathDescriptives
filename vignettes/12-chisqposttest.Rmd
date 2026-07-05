@@ -26,8 +26,8 @@ When an overall chi-square test indicates a significant association, post-hoc te
 Chi-square post-hoc tests are appropriate when:
 
 1. **Overall chi-square test is significant** (p < 0.05)
-2. **At least one variable has ≥3 categories** (otherwise, no post-hoc testing needed)
-3. **Sample sizes are adequate** (expected frequencies ≥5 in most cells)
+2. **At least one variable has >=3 categories** (otherwise, no post-hoc testing needed)
+3. **Sample sizes are adequate** (expected frequencies >=5 in most cells)
 4. **Variables are categorical** (nominal or ordinal)
 5. **Observations are independent**
 
@@ -374,8 +374,8 @@ chisqposttest(
 ## Statistical Considerations
 
 ### Sample Size Requirements
-- **Expected frequencies**: ≥5 in at least 80% of cells
-- **Minimum cell frequency**: ≥1 in all cells
+- **Expected frequencies**: >=5 in at least 80% of cells
+- **Minimum cell frequency**: >=1 in all cells
 - **Large samples**: More stable results and better power
 
 ### Effect Size Interpretation

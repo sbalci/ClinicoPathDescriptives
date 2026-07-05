@@ -58,12 +58,16 @@ data(digital_pathology_validation)
 
 # Dataset overview
 str(digital_pathology_validation)
-cat("Dataset dimensions:", nrow(digital_pathology_validation), "cases ×", 
-    ncol(digital_pathology_validation), "variables\n")
+cat(
+  "Dataset dimensions:", nrow(digital_pathology_validation), "cases ×",
+  ncol(digital_pathology_validation), "variables\n"
+)
 
 # Key variables summary
-summary(digital_pathology_validation[, c("Ki67_Manual", "Ki67_AI_Assisted", 
-                                         "CD8_Count_per_mm2", "TIL_Percentage")])
+summary(digital_pathology_validation[, c(
+  "Ki67_Manual", "Ki67_AI_Assisted",
+  "CD8_Count_per_mm2", "TIL_Percentage"
+)])
 ```
 
 ## Study Design Elements
@@ -86,8 +90,10 @@ Simple correlation provides initial assessment but has limitations for method co
 
 ```{r correlation-analysis}
 # Basic correlation analysis
-correlation_ki67 <- cor(digital_pathology_validation$Ki67_Manual, 
-                       digital_pathology_validation$Ki67_AI_Assisted)
+correlation_ki67 <- cor(
+  digital_pathology_validation$Ki67_Manual,
+  digital_pathology_validation$Ki67_AI_Assisted
+)
 
 cat("Ki-67 Manual vs AI Correlation:", round(correlation_ki67, 3), "\n")
 
@@ -97,7 +103,7 @@ correlation_by_tumor <- digital_pathology_validation %>%
   summarise(
     correlation = round(cor(Ki67_Manual, Ki67_AI_Assisted), 3),
     n = n(),
-    .groups = 'drop'
+    .groups = "drop"
   ) %>%
   arrange(desc(correlation))
 
@@ -105,8 +111,10 @@ print("Correlation by Tumor Type (Top 10):")
 print(head(correlation_by_tumor, 10))
 
 # Statistical significance testing
-cor_test <- cor.test(digital_pathology_validation$Ki67_Manual, 
-                    digital_pathology_validation$Ki67_AI_Assisted)
+cor_test <- cor.test(
+  digital_pathology_validation$Ki67_Manual,
+  digital_pathology_validation$Ki67_AI_Assisted
+)
 
 cat("Correlation test p-value:", formatC(cor_test$p.value, format = "e", digits = 2), "\n")
 cat("95% CI:", round(cor_test$conf.int[1], 3), "to", round(cor_test$conf.int[2], 3), "\n")
@@ -118,8 +126,9 @@ Assess systematic bias and proportional error.
 
 ```{r regression-analysis}
 # Linear regression model
-regression_model <- lm(Ki67_AI_Assisted ~ Ki67_Manual, 
-                      data = digital_pathology_validation)
+regression_model <- lm(Ki67_AI_Assisted ~ Ki67_Manual,
+  data = digital_pathology_validation
+)
 
 # Model summary
 regression_summary <- summary(regression_model)
@@ -133,7 +142,7 @@ r_squared <- regression_summary$r.squared
 
 cat("\nRegression Parameters:\n")
 cat("Slope:", round(slope, 3), "\n")
-cat("Intercept:", round(intercept, 3), "\n") 
+cat("Intercept:", round(intercept, 3), "\n")
 cat("R-squared:", round(r_squared, 3), "\n")
 
 # Interpretation
@@ -179,8 +188,8 @@ cat("  Lower limit:", round(lower_limit, 2), "\n")
 cat("  Upper limit:", round(upper_limit, 2), "\n")
 
 # Calculate percentage within limits
-within_limits <- sum(digital_pathology_validation$ki67_diff >= lower_limit & 
-                    digital_pathology_validation$ki67_diff <= upper_limit)
+within_limits <- sum(digital_pathology_validation$ki67_diff >= lower_limit &
+  digital_pathology_validation$ki67_diff <= upper_limit)
 percentage_within <- round(within_limits / nrow(digital_pathology_validation) * 100, 1)
 
 cat("Percentage within limits:", percentage_within, "%\n")
@@ -192,8 +201,9 @@ cat("Percentage within limits:", percentage_within, "%\n")
 
 ```{r bland-altman-advanced}
 # Test for proportional bias
-proportional_test <- lm(ki67_diff ~ ki67_mean, 
-                       data = digital_pathology_validation)
+proportional_test <- lm(ki67_diff ~ ki67_mean,
+  data = digital_pathology_validation
+)
 
 prop_summary <- summary(proportional_test)
 prop_p_value <- prop_summary$coefficients[2, 4]
@@ -225,8 +235,8 @@ clinical_lower <- -5
 clinical_upper <- 5
 
 # Assess clinical acceptability
-within_clinical_limits <- sum(digital_pathology_validation$ki67_diff >= clinical_lower & 
-                             digital_pathology_validation$ki67_diff <= clinical_upper)
+within_clinical_limits <- sum(digital_pathology_validation$ki67_diff >= clinical_lower &
+  digital_pathology_validation$ki67_diff <= clinical_upper)
 clinical_acceptance <- round(within_clinical_limits / nrow(digital_pathology_validation) * 100, 1)
 
 cat("Clinical Acceptability Analysis:\n")
@@ -264,7 +274,7 @@ print("Agreement Analysis by Threshold:")
 print(agreement_analysis)
 
 # Binary agreement (within 5%)
-digital_pathology_validation$agreement_5pct <- 
+digital_pathology_validation$agreement_5pct <-
   abs(digital_pathology_validation$ki67_diff) <= 5
 
 overall_agreement <- mean(digital_pathology_validation$agreement_5pct)
@@ -275,24 +285,24 @@ cat("\nOverall Agreement (±5%):", round(overall_agreement * 100, 1), "%\n")
 
 ```{r icc-analysis}
 # Prepare data for ICC analysis
-if(requireNamespace("psych", quietly = TRUE)) {
+if (requireNamespace("psych", quietly = TRUE)) {
   library(psych)
-  
+
   # Create matrix for ICC
   icc_data <- digital_pathology_validation[, c("Ki67_Manual", "Ki67_AI_Assisted")]
-  
+
   # Calculate ICC(2,1) - two-way mixed effects, single measures
   icc_result <- ICC(icc_data)
-  
+
   cat("Intraclass Correlation Coefficient Results:\n")
   print(icc_result$results[2, ]) # ICC(2,1)
-  
+
   # Interpretation
   icc_value <- icc_result$results[2, "ICC"]
-  
+
   cat("\nICC Interpretation:\n")
   if (icc_value >= 0.9) {
-    cat("Excellent agreement (ICC ≥ 0.9)\n")
+    cat("Excellent agreement (ICC >= 0.9)\n")
   } else if (icc_value >= 0.75) {
     cat("Good agreement (ICC 0.75-0.9)\n")
   } else if (icc_value >= 0.5) {
@@ -318,7 +328,7 @@ agreement_by_experience <- digital_pathology_validation %>%
     sd_difference = round(sd(Ki67_AI_Assisted - Ki67_Manual), 2),
     agreement_5pct = round(mean(abs(Ki67_AI_Assisted - Ki67_Manual) <= 5) * 100, 1),
     high_confidence = round(mean(Diagnostic_Confidence == "High") * 100, 1),
-    .groups = 'drop'
+    .groups = "drop"
   ) %>%
   arrange(Pathologist_Experience)
 
@@ -326,16 +336,17 @@ print("Performance by Pathologist Experience:")
 print(agreement_by_experience)
 
 # Statistical test for differences between experience levels
-if(requireNamespace("car", quietly = TRUE)) {
+if (requireNamespace("car", quietly = TRUE)) {
   library(car)
-  
+
   # ANOVA for mean differences
-  diff_values <- digital_pathology_validation$Ki67_AI_Assisted - 
-                digital_pathology_validation$Ki67_Manual
-  
-  anova_result <- aov(diff_values ~ Pathologist_Experience, 
-                     data = digital_pathology_validation)
-  
+  diff_values <- digital_pathology_validation$Ki67_AI_Assisted -
+    digital_pathology_validation$Ki67_Manual
+
+  anova_result <- aov(diff_values ~ Pathologist_Experience,
+    data = digital_pathology_validation
+  )
+
   cat("\nANOVA for Differences by Experience:\n")
   print(summary(anova_result))
 }
@@ -353,7 +364,7 @@ agreement_by_institution <- digital_pathology_validation %>%
     mean_difference = round(mean(Ki67_AI_Assisted - Ki67_Manual), 2),
     agreement_5pct = round(mean(abs(Ki67_AI_Assisted - Ki67_Manual) <= 5) * 100, 1),
     adequate_specimens = round(mean(Specimen_Adequacy == "Adequate") * 100, 1),
-    .groups = 'drop'
+    .groups = "drop"
   )
 
 print("Performance by Institution Type:")
@@ -371,12 +382,12 @@ agreement_by_tumor_detailed <- digital_pathology_validation %>%
     correlation = round(cor(Ki67_Manual, Ki67_AI_Assisted), 3),
     mean_difference = round(mean(Ki67_AI_Assisted - Ki67_Manual), 2),
     agreement_5pct = round(mean(abs(Ki67_AI_Assisted - Ki67_Manual) <= 5) * 100, 1),
-    .groups = 'drop'
+    .groups = "drop"
   ) %>%
-  filter(n >= 10) %>%  # Only tumor types with adequate sample size
+  filter(n >= 10) %>% # Only tumor types with adequate sample size
   arrange(desc(agreement_5pct))
 
-print("Performance by Tumor Type (≥10 cases):")
+print("Performance by Tumor Type (>=10 cases):")
 print(head(agreement_by_tumor_detailed, 10))
 ```
 
@@ -393,26 +404,26 @@ quality_impact <- digital_pathology_validation %>%
     correlation = round(cor(Ki67_Manual, Ki67_AI_Assisted), 3),
     agreement_5pct = round(mean(abs(Ki67_AI_Assisted - Ki67_Manual) <= 5) * 100, 1),
     high_confidence = round(mean(Diagnostic_Confidence == "High") * 100, 1),
-    .groups = 'drop'
+    .groups = "drop"
   )
 
 print("Agreement by Specimen Adequacy:")
 print(quality_impact)
 
 # Statistical test
-if(nrow(quality_impact) > 1) {
+if (nrow(quality_impact) > 1) {
   adequate_cases <- digital_pathology_validation %>%
     filter(Specimen_Adequacy == "Adequate")
-  
+
   suboptimal_cases <- digital_pathology_validation %>%
     filter(Specimen_Adequacy != "Adequate")
-  
-  if(nrow(adequate_cases) > 10 && nrow(suboptimal_cases) > 10) {
+
+  if (nrow(adequate_cases) > 10 && nrow(suboptimal_cases) > 10) {
     t_test_result <- t.test(
       abs(adequate_cases$Ki67_AI_Assisted - adequate_cases$Ki67_Manual),
       abs(suboptimal_cases$Ki67_AI_Assisted - suboptimal_cases$Ki67_Manual)
     )
-    
+
     cat("\nT-test for Specimen Quality Impact:\n")
     cat("p-value:", round(t_test_result$p.value, 4), "\n")
   }
@@ -429,7 +440,7 @@ confidence_analysis <- digital_pathology_validation %>%
     n = n(),
     mean_agreement = round(mean(abs(Ki67_AI_Assisted - Ki67_Manual) <= 5) * 100, 1),
     mean_correlation = round(cor(Ki67_Manual, Ki67_AI_Assisted), 3),
-    .groups = 'drop'
+    .groups = "drop"
   )
 
 print("Agreement by Diagnostic Confidence:")
@@ -442,7 +453,7 @@ confidence_predictors <- digital_pathology_validation %>%
   summarise(
     n = n(),
     high_confidence_rate = round(mean(high_confidence) * 100, 1),
-    .groups = 'drop'
+    .groups = "drop"
   ) %>%
   filter(n >= 5)
 
@@ -468,11 +479,11 @@ cat("\nEffect Size Interpretation:\n")
 if (effect_size < 0.2) {
   cat("Small effect size (d < 0.2)\n")
 } else if (effect_size < 0.5) {
-  cat("Small to medium effect size (0.2 ≤ d < 0.5)\n")
+  cat("Small to medium effect size (0.2 <= d < 0.5)\n")
 } else if (effect_size < 0.8) {
-  cat("Medium to large effect size (0.5 ≤ d < 0.8)\n")
+  cat("Medium to large effect size (0.5 <= d < 0.8)\n")
 } else {
-  cat("Large effect size (d ≥ 0.8)\n")
+  cat("Large effect size (d >= 0.8)\n")
 }
 
 # Sample size recommendations for future studies
@@ -519,7 +530,7 @@ validation_summary <- data.frame(
     "Minimal bias",
     "Acceptable precision",
     "Lower agreement limit",
-    "Upper agreement limit", 
+    "Upper agreement limit",
     "High agreement rate",
     "Clinically acceptable"
   )
@@ -539,13 +550,11 @@ kpi_dashboard <- list(
     "Agreement Rate" = paste0(round(overall_agreement * 100, 1), "%"),
     "Clinical Acceptance" = paste0(clinical_acceptance, "%")
   ),
-  
   "Quality Metrics" = list(
     "Adequate Specimens" = paste0(round(mean(digital_pathology_validation$Specimen_Adequacy == "Adequate") * 100, 1), "%"),
     "High Confidence Rate" = paste0(round(mean(digital_pathology_validation$Diagnostic_Confidence == "High") * 100, 1), "%"),
     "Outlier Rate" = paste0(round(nrow(outliers) / nrow(digital_pathology_validation) * 100, 2), "%")
   ),
-  
   "Performance by Experience" = list(
     "Expert Agreement" = paste0(agreement_by_experience$agreement_5pct[agreement_by_experience$Pathologist_Experience == "Expert"], "%"),
     "Trainee Agreement" = paste0(agreement_by_experience$agreement_5pct[agreement_by_experience$Pathologist_Experience == "Trainee"], "%")
@@ -577,7 +586,7 @@ regulatory_checklist <- data.frame(
   ),
   Status = c(
     "✓ 4 institutions",
-    "✓ 4 experience levels", 
+    "✓ 4 experience levels",
     "✓ 16 tumor types",
     "✓ 400 cases",
     "✓ Correlation, agreement",
@@ -614,11 +623,11 @@ performance_standards <- data.frame(
     "Adequate Specimens"
   ),
   Minimum_Requirement = c(
-    "≥0.90",
-    "≥90%", 
-    "≥85%",
-    "≤5%",
-    "≥80%"
+    ">=0.90",
+    ">=90%",
+    ">=85%",
+    "<=5%",
+    ">=80%"
   ),
   Achieved = c(
     round(correlation_ki67, 3),
@@ -641,8 +650,10 @@ print(performance_standards)
 
 # Overall validation status
 all_pass <- all(performance_standards$Pass_Fail == "PASS")
-cat("\nOverall Validation Status:", 
-    ifelse(all_pass, "✓ VALIDATION SUCCESSFUL", "✗ VALIDATION REQUIRES IMPROVEMENT"), "\n")
+cat(
+  "\nOverall Validation Status:",
+  ifelse(all_pass, "✓ VALIDATION SUCCESSFUL", "✗ VALIDATION REQUIRES IMPROVEMENT"), "\n"
+)
 ```
 
 # Conclusion

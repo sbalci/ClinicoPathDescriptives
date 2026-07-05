@@ -9,7 +9,7 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
-  comment = "#>", 
+  comment = "#>",
   collapse = TRUE,
   warning = FALSE,
   message = FALSE,
@@ -83,7 +83,7 @@ library(ggplot2)
 
 # Load the comprehensive Benford analysis datasets
 data("financial_data")
-data("fraudulent_data") 
+data("fraudulent_data")
 data("natural_phenomena_data")
 data("scientific_data")
 data("economic_data")
@@ -121,9 +121,9 @@ benford_result_financial <- benford(
 )
 
 # View the results:
-print(benford_result_financial$text)    # Statistical analysis
-print(benford_result_financial$text2)   # Suspect identification
-print(benford_result_financial$plot)    # Visualization
+print(benford_result_financial$text) # Statistical analysis
+print(benford_result_financial$text2) # Suspect identification
+print(benford_result_financial$plot) # Visualization
 ```
 
 **Key Benford Characteristics in Financial Data:**
@@ -267,9 +267,9 @@ Alternative measure of Benford compliance:
 
 - **MAD = (1/9) × Σ|Observed% - Expected%|**
 - **Excellent compliance**: MAD < 0.006
-- **Acceptable compliance**: 0.006 ≤ MAD < 0.012
-- **Marginal compliance**: 0.012 ≤ MAD < 0.015
-- **Non-compliance**: MAD ≥ 0.015
+- **Acceptable compliance**: 0.006 <= MAD < 0.012
+- **Marginal compliance**: 0.012 <= MAD < 0.015
+- **Non-compliance**: MAD >= 0.015
 
 ## Digit Analysis Beyond First Digit
 
@@ -317,7 +317,7 @@ high_risk_items <- suspects[suspects$risk_score > threshold]
 
 # Step 3: Follow-up analysis
 # - Analyze by time period
-# - Analyze by employee/department  
+# - Analyze by employee/department
 # - Analyze by amount ranges
 # - Second digit analysis
 # - Cross-reference with other data
@@ -414,10 +414,10 @@ expense_categories <- unique(expense_data$category)
 
 for (category in expense_categories) {
   category_data <- expense_data[expense_data$category == category, ]
-  
+
   if (nrow(category_data) >= 100) {
     result <- benford(data = category_data, var = "amount")
-    
+
     # Document findings
     cat("Category:", category, "\n")
     cat("Sample size:", nrow(category_data), "\n")
@@ -435,14 +435,14 @@ vendor_analysis <- payment_data %>%
   summarise(
     payment_count = n(),
     total_amount = sum(amount),
-    .groups = 'drop'
+    .groups = "drop"
   ) %>%
-  filter(payment_count >= 50)  # Sufficient sample size
+  filter(payment_count >= 50) # Sufficient sample size
 
 # Analyze each major vendor
 for (vendor in vendor_analysis$vendor_id) {
   vendor_payments <- payment_data[payment_data$vendor_id == vendor, ]
-  
+
   result <- benford(data = vendor_payments, var = "amount")
   # Store results for comparison
 }
@@ -485,7 +485,7 @@ suspicious_digits <- digit_preferences[digit_preferences$deviation > 0.05, ]
 ### **Data Appropriateness** ✓
 - [ ] Data spans multiple orders of magnitude
 - [ ] Numbers result from natural processes
-- [ ] Sample size ≥ 100 observations
+- [ ] Sample size >= 100 observations
 - [ ] No artificial constraints or assignments
 - [ ] Positive real numbers only
 
@@ -573,7 +573,7 @@ if (nrow(large_dataset) > 10000) {
   # Stratified sampling to maintain distribution
   sample_data <- large_dataset %>%
     sample_n(size = min(5000, nrow(large_dataset)))
-    
+
   result <- benford(data = sample_data, var = "amount")
 } else {
   result <- benford(data = large_dataset, var = "amount")
@@ -585,7 +585,7 @@ if (nrow(large_dataset) > 10000) {
 # Automated Benford monitoring system
 benford_monitor <- function(dataset, var_name, threshold = 0.05) {
   result <- benford(data = dataset, var = var_name)
-  
+
   # Alert system
   if (result$p_value < threshold) {
     alert <- list(
@@ -595,11 +595,11 @@ benford_monitor <- function(dataset, var_name, threshold = 0.05) {
       p_value = result$p_value,
       risk_level = if (result$p_value < 0.01) "HIGH" else "MEDIUM"
     )
-    
+
     # Log alert and notify stakeholders
     return(alert)
   }
-  
+
   return(NULL)
 }
 ```

@@ -190,7 +190,7 @@ ci_99 <- jcorrelation(
 
 # 99% CI will be wider, indicating more uncertainty
 
-# Test narrow confidence intervals  
+# Test narrow confidence intervals
 ci_90 <- jcorrelation(
   data = histopathology,
   vars = c("MeasurementA", "MeasurementB"),
@@ -209,21 +209,21 @@ When analyzing multiple correlations, it's important to consider multiple compar
 conservative_analysis <- jcorrelation(
   data = histopathology,
   vars = c("Age", "OverallTime", "MeasurementA", "MeasurementB", "Measurement1"),
-  flagAlpha = 0.01  # Bonferroni-adjusted alpha
+  flagAlpha = 0.01 # Bonferroni-adjusted alpha
 )
 
-# Standard significance testing  
+# Standard significance testing
 standard_analysis <- jcorrelation(
   data = histopathology,
   vars = c("Age", "OverallTime", "MeasurementA", "MeasurementB", "Measurement1"),
-  flagAlpha = 0.05  # Standard alpha level
+  flagAlpha = 0.05 # Standard alpha level
 )
 
 # Very conservative testing for exploratory analysis
 very_conservative <- jcorrelation(
   data = histopathology,
   vars = c("Age", "OverallTime", "MeasurementA", "MeasurementB"),
-  flagAlpha = 0.001  # Very strict significance threshold
+  flagAlpha = 0.001 # Very strict significance threshold
 )
 ```
 
@@ -267,7 +267,7 @@ matrix_plot <- jcorrelation(
 pairs_plot <- jcorrelation(
   data = histopathology,
   vars = c("Age", "OverallTime", "MeasurementA", "MeasurementB"),
-  plots = FALSE  # Disabled for vignette
+  plots = FALSE # Disabled for vignette
 )
 
 # In practice, set plots = TRUE to see scatterplots, correlations, and distributions
@@ -283,7 +283,7 @@ The network plot visualizes correlations as a network where strong correlations 
 network_plot <- jcorrelation(
   data = histopathology,
   vars = c("Age", "OverallTime", "MeasurementA", "MeasurementB", "Anti-X-intensity"),
-  plots = FALSE  # Disabled for vignette
+  plots = FALSE # Disabled for vignette
 )
 
 # In practice, set plots = TRUE to see:
@@ -310,46 +310,55 @@ if (length(test_vars) < 4) {
 if (length(test_vars) >= 2) {
   # For vignette purposes, we'll run without plots to avoid rendering issues
   # The plots parameter is set to FALSE to ensure the analysis runs smoothly
-  
+
   # Matrix plot - hierarchical clustering of correlation matrix
-  tryCatch({
-    matrix_visualization <- jcorrelation(
-      data = histopathology,
-      vars = test_vars,
-      plots = FALSE  # Disable plots to avoid rendering issues
-    )
-    cat("Matrix correlation analysis completed successfully\n")
-  }, error = function(e) {
-    cat("Note: Plot generation skipped in vignette mode\n")
-  })
-  
-  # Pairs plot - scatterplot matrix with correlation coefficients  
-  tryCatch({
-    pairs_visualization <- jcorrelation(
-      data = histopathology,
-      vars = test_vars,
-      plots = FALSE  # Disable plots to avoid rendering issues
-    )
-    cat("Pairs correlation analysis completed successfully\n")
-  }, error = function(e) {
-    cat("Note: Plot generation skipped in vignette mode\n")
-  })
-  
+  tryCatch(
+    {
+      matrix_visualization <- jcorrelation(
+        data = histopathology,
+        vars = test_vars,
+        plots = FALSE # Disable plots to avoid rendering issues
+      )
+      cat("Matrix correlation analysis completed successfully\n")
+    },
+    error = function(e) {
+      cat("Note: Plot generation skipped in vignette mode\n")
+    }
+  )
+
+  # Pairs plot - scatterplot matrix with correlation coefficients
+  tryCatch(
+    {
+      pairs_visualization <- jcorrelation(
+        data = histopathology,
+        vars = test_vars,
+        plots = FALSE # Disable plots to avoid rendering issues
+      )
+      cat("Pairs correlation analysis completed successfully\n")
+    },
+    error = function(e) {
+      cat("Note: Plot generation skipped in vignette mode\n")
+    }
+  )
+
   # Network plot - graph-based correlation visualization
-  tryCatch({
-    network_visualization <- jcorrelation(
-      data = histopathology,
-      vars = test_vars,
-      plots = FALSE  # Disable plots to avoid rendering issues
-    )
-    cat("Network correlation analysis completed successfully\n")
-  }, error = function(e) {
-    cat("Note: Plot generation skipped in vignette mode\n")
-  })
-  
+  tryCatch(
+    {
+      network_visualization <- jcorrelation(
+        data = histopathology,
+        vars = test_vars,
+        plots = FALSE # Disable plots to avoid rendering issues
+      )
+      cat("Network correlation analysis completed successfully\n")
+    },
+    error = function(e) {
+      cat("Note: Plot generation skipped in vignette mode\n")
+    }
+  )
+
   cat("\nEach plot type offers different insights:\n")
   cat("- Matrix: Overall pattern identification\n")
-  cat("- Pairs: Individual relationship examination\n") 
+  cat("- Pairs: Individual relationship examination\n")
   cat("- Network: Correlation strength visualization\n")
 } else {
   cat("Not enough numeric variables available for this example\n")
@@ -402,8 +411,10 @@ ihc_correlation <- jcorrelation(
 # Large correlation matrix with summary statistics
 comprehensive_analysis <- jcorrelation(
   data = histopathology,
-  vars = c("Age", "Grade", "TStage", "Anti-X-intensity", "Anti-Y-intensity", 
-           "OverallTime", "MeasurementA", "MeasurementB")
+  vars = c(
+    "Age", "Grade", "TStage", "Anti-X-intensity", "Anti-Y-intensity",
+    "OverallTime", "MeasurementA", "MeasurementB"
+  )
 )
 
 # With >2 variables, summary statistics table is generated
@@ -429,10 +440,10 @@ reported_analysis <- jcorrelation(
 
 **Correlation Coefficient Interpretation**:
 - |r| < 0.1: Negligible
-- 0.1 ≤ |r| < 0.3: Weak
-- 0.3 ≤ |r| < 0.5: Moderate  
-- 0.5 ≤ |r| < 0.7: Strong
-- |r| ≥ 0.7: Very strong
+- 0.1 <= |r| < 0.3: Weak
+- 0.3 <= |r| < 0.5: Moderate  
+- 0.5 <= |r| < 0.7: Strong
+- |r| >= 0.7: Very strong
 
 ## Clinical Significance vs Statistical Significance
 
@@ -498,8 +509,10 @@ nonlinear_example <- jcorrelation(
 # Comprehensive analysis for publication
 publication_analysis <- jcorrelation(
   data = histopathology,
-  vars = c("Age", "OverallTime", "MeasurementA", "MeasurementB", 
-           "Anti-X-intensity", "Anti-Y-intensity")
+  vars = c(
+    "Age", "OverallTime", "MeasurementA", "MeasurementB",
+    "Anti-X-intensity", "Anti-Y-intensity"
+  )
 )
 ```
 
@@ -521,8 +534,10 @@ When reporting correlation results:
 # When testing many correlations, use conservative alpha
 multiple_testing <- jcorrelation(
   data = histopathology,
-  vars = c("Age", "Grade", "TStage", "Anti-X-intensity", "Anti-Y-intensity", 
-           "OverallTime", "MeasurementA", "MeasurementB")
+  vars = c(
+    "Age", "Grade", "TStage", "Anti-X-intensity", "Anti-Y-intensity",
+    "OverallTime", "MeasurementA", "MeasurementB"
+  )
 )
 
 # Consider Bonferroni correction: α/number_of_tests
@@ -534,14 +549,16 @@ multiple_testing <- jcorrelation(
 # Exploratory analysis - broader significance threshold
 exploratory <- jcorrelation(
   data = histopathology,
-  vars = c("Age", "OverallTime", "MeasurementA", "MeasurementB", 
-           "Anti-X-intensity", "Anti-Y-intensity")
+  vars = c(
+    "Age", "OverallTime", "MeasurementA", "MeasurementB",
+    "Anti-X-intensity", "Anti-Y-intensity"
+  )
 )
 
 # Confirmatory analysis - stricter threshold
 confirmatory <- jcorrelation(
   data = histopathology,
-  vars = c("MeasurementA", "MeasurementB")  # Pre-specified hypothesis
+  vars = c("MeasurementA", "MeasurementB") # Pre-specified hypothesis
 )
 ```
 

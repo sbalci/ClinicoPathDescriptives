@@ -211,7 +211,7 @@ enhancedcrosstable(
 The enhanced cross-table automatically selects appropriate statistical tests:
 
 ### **Test Selection Logic**
-- **Chi-square test**: For expected frequencies ≥ 5
+- **Chi-square test**: For expected frequencies >= 5
 - **Fisher's exact test**: For small expected frequencies (< 5)
 - **t-test**: For continuous variables with 2 groups
 - **ANOVA**: For continuous variables with >2 groups

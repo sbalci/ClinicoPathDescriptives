@@ -43,6 +43,7 @@ The choice of statistical test depends primarily on three factors:
 The independent samples t-test (also called the two-sample t-test) compares means between two independent groups. In clinical research, this test is commonly used to compare treatment groups in randomized trials, compare cases and controls in case-control studies, or compare exposed and unexposed groups in cohort studies.
 
 **Clinical examples:**
+
 - Comparing mean systolic blood pressure between treatment and control groups
 - Comparing mean tumor size between patients with and without a specific mutation
 - Comparing mean hospital length of stay between two surgical techniques
@@ -50,6 +51,7 @@ The independent samples t-test (also called the two-sample t-test) compares mean
 #### When to Use
 
 Use the independent t-test when:
+
 - You have **one continuous outcome variable** measured on an interval or ratio scale
 - You have **one categorical grouping variable with exactly two levels** (e.g., treatment vs. control)
 - Observations in one group are **independent** of observations in the other group
@@ -81,16 +83,19 @@ The t-test computes a t-statistic that measures how many standard errors the dif
 **t = (M₁ - M₂) / SE_diff**
 
 Where:
+
 - M₁ and M₂ are the sample means for groups 1 and 2
 - SE_diff is the standard error of the difference between means
 
 **Interpretation:**
+
 - **Null hypothesis (H₀)**: The population means are equal (μ₁ = μ₂)
 - **Alternative hypothesis (H₁)**: The population means are not equal (μ₁ ≠ μ₂) for two-tailed tests
 
 The p-value represents the probability of obtaining a difference as extreme as (or more extreme than) the observed difference if the null hypothesis were true. Conventional significance threshold: α = 0.05.
 
 **Effect size**: Cohen's d quantifies the magnitude of the difference:
+
 - **d = (M₁ - M₂) / SD_pooled**
 - Small effect: |d| ≈ 0.2
 - Medium effect: |d| ≈ 0.5
@@ -119,6 +124,7 @@ A complete report of an independent t-test should include:
 The paired samples t-test (also called the dependent t-test or repeated measures t-test) compares means when the same participants are measured twice (e.g., before and after treatment) or when participants are matched in pairs.
 
 **Clinical examples:**
+
 - Comparing blood pressure before and after medication in the same patients
 - Comparing tumor biomarker levels at diagnosis and after chemotherapy
 - Comparing outcomes in matched case-control pairs
@@ -126,6 +132,7 @@ The paired samples t-test (also called the dependent t-test or repeated measures
 #### When to Use
 
 Use the paired t-test when:
+
 - You have **one continuous outcome variable**
 - Measurements are taken **twice on the same individuals** (repeated measures) OR participants are **matched in pairs**
 - The **differences between paired observations** are approximately normally distributed
@@ -150,15 +157,18 @@ The paired t-test analyzes the differences within each pair:
 **t = M_diff / (SD_diff / √n)**
 
 Where:
+
 - M_diff is the mean of the paired differences
 - SD_diff is the standard deviation of the paired differences
 - n is the number of pairs
 
 **Interpretation:**
+
 - **Null hypothesis (H₀)**: The mean difference is zero (μ_diff = 0)
 - **Alternative hypothesis (H₁)**: The mean difference is not zero (μ_diff ≠ 0)
 
 **Effect size**: Cohen's d_z for paired data:
+
 - **d_z = M_diff / SD_diff**
 
 This represents the standardized mean difference and follows the same interpretation as independent samples Cohen's d (0.2 = small, 0.5 = medium, 0.8 = large).
@@ -177,6 +187,7 @@ This represents the standardized mean difference and follows the same interpreta
 The Mann-Whitney U test is the non-parametric alternative to the independent t-test. Instead of comparing means, it compares the distributions of two independent groups by analyzing the ranks of the data.
 
 **Clinical examples:**
+
 - Comparing median survival times between treatment groups when survival distributions are skewed
 - Comparing pain scores (ordinal scale) between groups
 - Comparing any continuous outcome when normality assumptions are violated
@@ -184,6 +195,7 @@ The Mann-Whitney U test is the non-parametric alternative to the independent t-t
 #### When to Use
 
 Use the Mann-Whitney U test when:
+
 - You have **one continuous or ordinal outcome variable**
 - You have **two independent groups**
 - **Normality assumptions are violated** and sample sizes are too small to rely on the Central Limit Theorem
@@ -203,16 +215,19 @@ Use the Mann-Whitney U test when:
 #### Test Statistic and Interpretation
 
 The Mann-Whitney U test:
+
 1. Combines all observations from both groups
 2. Ranks them from smallest to largest
 3. Computes the sum of ranks for each group
 4. Calculates the U statistic based on these rank sums
 
 **Interpretation:**
+
 - **Null hypothesis (H₀)**: The distributions of the two groups are identical
 - **Alternative hypothesis (H₁)**: The distributions differ in location (if shapes are similar, this means medians differ)
 
 **Effect size**: Rank-biserial correlation or common language effect size
+
 - **r = 1 - (2U)/(n₁ × n₂)** where U is the smaller of the two U statistics
 - Interpretation: 0 = no effect, 1 = complete separation
 
@@ -230,6 +245,7 @@ The Mann-Whitney U test:
 The Wilcoxon signed-rank test is the non-parametric alternative to the paired t-test. It compares two related samples by analyzing the ranks of the differences between paired observations.
 
 **Clinical examples:**
+
 - Comparing symptom scores before and after treatment when scores are ordinal
 - Comparing biomarker levels at two time points when data are skewed
 - Any repeated measures comparison when normality of differences is violated
@@ -237,6 +253,7 @@ The Wilcoxon signed-rank test is the non-parametric alternative to the paired t-
 #### When to Use
 
 Use the Wilcoxon signed-rank test when:
+
 - You have **two related/paired measurements** (repeated measures or matched pairs)
 - The **differences are not normally distributed**
 - You have **ordinal data** measured at two time points
@@ -254,6 +271,7 @@ Use the Wilcoxon signed-rank test when:
 #### Test Statistic and Interpretation
 
 The Wilcoxon signed-rank test:
+
 1. Calculates the difference for each pair
 2. Ranks the absolute values of the differences (ignoring zero differences)
 3. Assigns the original sign (+ or -) to each rank
@@ -261,10 +279,12 @@ The Wilcoxon signed-rank test:
 5. Uses the smaller of these sums as the test statistic
 
 **Interpretation:**
+
 - **Null hypothesis (H₀)**: The median difference is zero
 - **Alternative hypothesis (H₁)**: The median difference is not zero
 
 **Effect size**: Rank-biserial correlation for paired data
+
 - **r = Z / √n** where Z is the standardized test statistic
 
 #### Reporting Standards
@@ -281,6 +301,7 @@ The Wilcoxon signed-rank test:
 One-way ANOVA compares means across three or more independent groups. It tests whether at least one group mean differs from the others, extending the independent t-test to multiple groups.
 
 **Clinical examples:**
+
 - Comparing mean cholesterol levels across three diet intervention groups
 - Comparing tumor response across multiple treatment arms in a clinical trial
 - Comparing quality of life scores across disease severity categories (mild, moderate, severe)
@@ -288,6 +309,7 @@ One-way ANOVA compares means across three or more independent groups. It tests w
 #### When to Use
 
 Use one-way ANOVA when:
+
 - You have **one continuous outcome variable**
 - You have **one categorical predictor with three or more levels** (groups)
 - Groups are **independent** (between-subjects design)
@@ -315,6 +337,7 @@ Use one-way ANOVA when:
 #### Test Statistic and Interpretation
 
 ANOVA partitions total variance into:
+
 - **Between-groups variance**: Variability of group means around the grand mean
 - **Within-groups variance**: Variability of individual observations around their group means
 
@@ -323,12 +346,14 @@ ANOVA partitions total variance into:
 Where MS = mean square (variance estimate)
 
 **Interpretation:**
+
 - **Null hypothesis (H₀)**: All group means are equal (μ₁ = μ₂ = μ₃ = ... = μ_k)
 - **Alternative hypothesis (H₁)**: At least one group mean differs from the others
 
 **Important**: A significant F-test tells you that differences exist but does NOT tell you which specific groups differ. **Post-hoc tests** are required to identify which pairwise comparisons are significant.
 
 **Effect size**: Eta-squared (η²) or partial eta-squared (η²_p)
+
 - **η² = SS_between / SS_total**
 - Small effect: η² ≈ 0.01
 - Medium effect: η² ≈ 0.06
@@ -357,6 +382,7 @@ When ANOVA is significant, conduct post-hoc tests to determine which groups diff
 The Kruskal-Wallis test is the non-parametric alternative to one-way ANOVA. It compares distributions across three or more independent groups using rank-based methods.
 
 **Clinical examples:**
+
 - Comparing median hospital length of stay across multiple diagnostic categories when distributions are skewed
 - Comparing ordinal pain scores across treatment groups
 - Comparing any continuous outcome across groups when ANOVA assumptions are violated
@@ -364,6 +390,7 @@ The Kruskal-Wallis test is the non-parametric alternative to one-way ANOVA. It c
 #### When to Use
 
 Use the Kruskal-Wallis test when:
+
 - You have **one continuous or ordinal outcome variable**
 - You have **three or more independent groups**
 - **Normality assumptions are violated** in one or more groups
@@ -383,16 +410,19 @@ Use the Kruskal-Wallis test when:
 #### Test Statistic and Interpretation
 
 The Kruskal-Wallis test:
+
 1. Combines all observations from all groups
 2. Ranks them from smallest to largest
 3. Computes the sum of ranks for each group
 4. Calculates the H statistic (chi-square approximation) based on these rank sums
 
 **Interpretation:**
+
 - **Null hypothesis (H₀)**: All groups have identical distributions
 - **Alternative hypothesis (H₁)**: At least one group's distribution differs from the others
 
 **Effect size**: Epsilon-squared (ε²)
+
 - **ε² = H / ((n² - 1) / (n + 1))**
 - Small effect: ε² ≈ 0.01
 - Medium effect: ε² ≈ 0.06
@@ -421,6 +451,7 @@ When Kruskal-Wallis is significant, conduct post-hoc pairwise comparisons:
 The chi-square (χ²) test of independence examines whether two categorical variables are associated. It compares observed frequencies in a contingency table to frequencies expected under independence.
 
 **Clinical examples:**
+
 - Testing association between treatment group (A vs. B) and treatment response (responder vs. non-responder)
 - Examining relationship between smoking status (smoker vs. non-smoker) and lung cancer diagnosis (yes vs. no)
 - Assessing association between disease stage (I, II, III, IV) and molecular subtype (A, B, C)
@@ -428,6 +459,7 @@ The chi-square (χ²) test of independence examines whether two categorical vari
 #### When to Use
 
 Use the chi-square test when:
+
 - You have **two categorical variables** (can be binary or multi-category)
 - Observations are **independent** (each participant contributes to only one cell)
 - **Expected frequencies** are sufficiently large (see assumptions below)
@@ -436,7 +468,7 @@ Use the chi-square test when:
 
 1. **Independence of observations**: Each observation appears in only one cell of the contingency table. Participants are independent of each other.
 
-2. **Expected frequency requirement**: All expected cell counts should be at least 5. For 2×2 tables, some sources require all expected counts ≥ 10 for greater reliability.
+2. **Expected frequency requirement**: All expected cell counts should be at least 5. For 2×2 tables, some sources require all expected counts >= 10 for greater reliability.
    - **Expected count** = (row total × column total) / grand total
    - If this assumption is violated, use **Fisher's exact test** instead
 
@@ -453,12 +485,14 @@ The chi-square statistic measures the discrepancy between observed (O) and expec
 Summed across all cells in the contingency table.
 
 **Interpretation:**
+
 - **Null hypothesis (H₀)**: The two variables are independent (no association)
 - **Alternative hypothesis (H₁)**: The two variables are associated (dependent)
 
 Degrees of freedom: **df = (rows - 1) × (columns - 1)**
 
 **Effect size**: Cramér's V
+
 - **V = √(χ² / (n × min(rows-1, columns-1)))**
 - For 2×2 tables: Small V ≈ 0.10, Medium V ≈ 0.30, Large V ≈ 0.50
 - For larger tables, benchmarks adjust based on df
@@ -482,6 +516,7 @@ Degrees of freedom: **df = (rows - 1) × (columns - 1)**
 Fisher's exact test examines the association between two categorical variables when sample sizes are small or expected frequencies are low, making the chi-square approximation unreliable.
 
 **Clinical examples:**
+
 - Testing association between treatment and rare adverse events (when events are infrequent)
 - Examining relationship between rare genetic variant and disease status in small samples
 - Any 2×2 contingency table with small expected cell counts
@@ -489,6 +524,7 @@ Fisher's exact test examines the association between two categorical variables w
 #### When to Use
 
 Use Fisher's exact test when:
+
 - You have **two categorical variables** forming a 2×2 contingency table
 - **Expected frequencies are too small** for chi-square test (any expected count < 5)
 - Sample size is small (total N < 40 is a conservative guideline)
@@ -522,12 +558,14 @@ Total      a+c       b+d       n
 The exact probability is calculated using the hypergeometric distribution.
 
 **Interpretation:**
+
 - **Null hypothesis (H₀)**: The two variables are independent
 - **Alternative hypothesis (H₁)**: The two variables are associated
 
 The p-value represents the exact probability (not an approximation) of obtaining the observed association or stronger, given the marginal totals.
 
 **Effect size**: Odds ratio (OR) for 2×2 tables
+
 - **OR = (a × d) / (b × c)**
 - OR = 1: No association
 - OR > 1: Positive association (event more likely in Group A)
