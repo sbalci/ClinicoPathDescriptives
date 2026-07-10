@@ -1,19 +1,22 @@
 ---
 title: Descriptives Functions for Clinicopathological Research
 name: ClinicoPathDescriptives
-version: 0.0.47
+version: 0.0.5
 jms: '1.0'
 authors:
   - Serdar Balci
 maintainer: Serdar Balci <serdarbalci@serdarbalci.com>
-date: '2026-07-05'
+date: '2026-07-10'
 type: R
 description: >-
   Descriptives Functions for Clinicopathological Research Descriptive functions
   from ClinicoPath jamovi module. ClinicoPath help researchers to generate
   natural language summaries of their dataset, generate cross tables with
   statistical tests, and survival analysis with survival tables, survival plots,
-  and natural language summaries.
+  and natural language summaries. For comments, suggestions, feature requests or
+  reporting bugs, please open an issue <a
+  href="https://github.com/sbalci/ClinicoPathJamoviModule/issues/"
+  target="_blank">here</a>. 
 analyses:
   - title: Table One
     name: tableone
