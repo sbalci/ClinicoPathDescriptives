@@ -115,7 +115,7 @@ Serdar Balci (2025). ClinicoPath jamovi Module. doi:10.5281/zenodo.3997188
 
 ## License
 
-GPL (>= 2) - see [LICENSE](LICENSE) file for details.
+GPL (>= 2) - see [LICENSE](https://github.com/sbalci/ClinicoPathDescriptives/blob/master/LICENSE.md) file for details.
 
 ## Related Packages
 
@@ -123,4 +123,4 @@ GPL (>= 2) - see [LICENSE](LICENSE) file for details.
 
 ## Contributing
 
-Contributions are welcome! Please see our [contributing guidelines](CONTRIBUTING.md) and feel free to submit issues, feature requests, or pull requests.
+Contributions are welcome! Please see our [contributing guidelines](https://github.com/sbalci/ClinicoPathJamoviModule/blob/master/CONTRIBUTING.md) and feel free to submit issues, feature requests, or pull requests.

@@ -419,7 +419,7 @@ The ClinicoPath CONSORT function provides:
 ## References
 
 - Schulz KF, Altman DG, Moher D, for the CONSORT Group. CONSORT 2010 Statement: updated guidelines for reporting parallel group randomised trials. BMJ 2010;340:c332.
-- CONSORT website: http://www.consort-statement.org/
+- CONSORT website: https://www.consort-statement.org/
 - Clinical trial reporting guidelines: https://www.equator-network.org/
 
 ---
