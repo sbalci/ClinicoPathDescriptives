@@ -36,7 +36,6 @@ Imports: arsenal, benford.analysis, classInt, ComplexUpset, dbscan, DescTools,
         robustbase, scales, stats, stringr, tableone,
         tangram, tibble, tidyr, UpSetR, utils, vcd, viridis, visdat, vtree,
         boot, MASS
-Suggests: BaylorEdPsych
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
