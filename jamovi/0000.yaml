@@ -192,6 +192,41 @@ datasets:
     tags:
       - Table One
       - Data Summary
+  - name: Age Pyramid
+    path: agepyramid_test.omv
+    description: Example dataset for the Age Pyramid analysis.
+    tags:
+      - Age Pyramid
+  - name: Benford Analysis
+    path: benford_test.omv
+    description: Example dataset for the Benford Analysis analysis.
+    tags:
+      - Benford Analysis
+  - name: Data Quality Check
+    path: checkdata_test.omv
+    description: Example dataset for the Data Quality Check analysis.
+    tags:
+      - Data Quality Check
+  - name: Data Quality
+    path: dataquality_test.omv
+    description: Example dataset for the Data Quality analysis.
+    tags:
+      - Data Quality
+  - name: Categorical Variables Report
+    path: reportcat_test.omv
+    description: Example dataset for the Categorical Variables Report analysis.
+    tags:
+      - Categorical Variables Report
+  - name: Continuous Variables Summary
+    path: summarydata_test.omv
+    description: Example dataset for the Continuous Variables Summary analysis.
+    tags:
+      - Continuous Variables Summary
+  - name: Treatment Response
+    path: treatmentResponse.omv
+    description: Example dataset for the Treatment Response analysis.
+    tags:
+      - Treatment Response
 usesNative: true
 minApp: 2.7.27
 

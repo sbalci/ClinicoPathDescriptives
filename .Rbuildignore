@@ -89,3 +89,5 @@ CITATION.cff
 ^\.claude$
 ^CLAUDE\.md$
 ^\.positai$
+^data/.*\.omv$
+^inst/extdata/.*\.omv$
