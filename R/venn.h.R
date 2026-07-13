@@ -612,7 +612,7 @@ vennResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 requiresData=TRUE,
                 visible="(show_upsetR)",
                 refs=list(
-                    "upsetR")))
+                    "UpSetR")))
             self$add(jmvcore::Image$new(
                 options=options,
                 title="ComplexUpset Plot",
@@ -623,7 +623,7 @@ vennResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 requiresData=TRUE,
                 visible="(show_complexUpset)",
                 refs=list(
-                    "complexUpset")))
+                    "ComplexUpset")))
             self$add(jmvcore::Html$new(
                 options=options,
                 name="aboutAnalysis",
@@ -695,7 +695,7 @@ vennBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             super$initialize(
                 package = "ClinicoPathDescriptives",
                 name = "venn",
-                version = c(0,0,51),
+                version = c(1,0,0),
                 options = options,
                 results = vennResults$new(options=options),
                 data = data,

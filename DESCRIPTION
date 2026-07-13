@@ -1,8 +1,8 @@
 Type: Package
 Package: ClinicoPathDescriptives
 Title: Descriptive Analysis for Clinicopathological Research
-Version: 0.0.51
-Date: 2026-07-11
+Version: 1.0.0
+Date: 2026-07-13
 Authors@R: person(given = "Serdar", family = "Balci", role = c("aut",
         "cre", "cph"), email = "serdarbalci@serdarbalci.com", comment =
         c(ORCID = "0000-0002-7852-3851"))
@@ -34,7 +34,9 @@ Imports: arsenal, benford.analysis, classInt, ComplexUpset, dbscan, DescTools,
         jmvcore, kableExtra, labelled, magrittr, moments,
         performance, purrr, pwr, R6, RColorBrewer, rlang,
         robustbase, scales, stats, stringr, tableone,
-        tangram, tibble, tidyr, UpSetR, utils, vcd, viridis, visdat, vtree
+        tangram, tibble, tidyr, UpSetR, utils, vcd, viridis, visdat, vtree,
+        boot, MASS
+Suggests: BaylorEdPsych
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

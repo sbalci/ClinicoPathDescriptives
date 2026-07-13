@@ -106,8 +106,7 @@ benfordResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             self$add(jmvcore::Preformatted$new(
                 options=options,
                 name="text",
-                title="Detailed Analysis Results",
-                visible=FALSE))
+                title="Detailed Analysis Results"))
             self$add(jmvcore::Preformatted$new(
                 options=options,
                 name="text2",
@@ -133,7 +132,7 @@ benfordBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             super$initialize(
                 package = "ClinicoPathDescriptives",
                 name = "benford",
-                version = c(0,0,51),
+                version = c(1,0,0),
                 options = options,
                 results = benfordResults$new(options=options),
                 data = data,
