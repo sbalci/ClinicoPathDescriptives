@@ -19,24 +19,24 @@ Description: A comprehensive toolkit for descriptive analysis in
         reproducible research workflows and automated reporting
         capabilities for medical research. For comments, suggestions,
         feature requests or reporting bugs, please open an issue at
-        <https://github.com/sbalci/ClinicoPathJamoviModule/issues/>.
+        <https://github.com/sbalci/ClinicoPathDescriptives/issues/>.
 URL: https://github.com/sbalci/ClinicoPathJamoviModule/,
         https://github.com/sbalci/ClinicoPathDescriptives/,
-        https://sbalci.github.io/ClinicoPathJamoviModule/,
+        https://www.serdarbalci.com/ClinicoPathJamoviModule/,
         https://www.serdarbalci.com/ClinicoPathDescriptives/
-BugReports: https://github.com/sbalci/ClinicoPathJamoviModule/issues/
+BugReports: https://github.com/sbalci/ClinicoPathDescriptives/issues/
 License: GPL (>= 2)
 Depends: R (>= 4.1.0)
 Imports: arsenal, benford.analysis, classInt, ComplexUpset, dbscan, DescTools,
-        DiagrammeR, DiagrammeRsvg, dplyr, easyalluvial, finalfit,
+        DiagrammeRsvg, dplyr, easyalluvial, finalfit,
         ggalluvial, ggcharts, ggplot2, ggvenn, ggVennDiagram, glue,
         grid, gt, gtExtras, gtsummary, htmltools, janitor,
         jmvcore, kableExtra, labelled, magrittr, moments,
         performance, purrr, pwr, R6, RColorBrewer, rlang,
         robustbase, scales, stats, stringr, tableone,
-        tangram, tibble, tidyr, UpSetR, utils, vcd, viridis, visdat, vtree,
+        tangram, tidyr, UpSetR, utils, vcd, viridis, visdat, vtree,
         boot, MASS
-Suggests: testthat
+Suggests: naniar, testthat
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

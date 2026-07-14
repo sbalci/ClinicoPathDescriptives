@@ -13,8 +13,8 @@
 #  }
 #'
 #' For more documentation, see the
-#' \href{https://sbalci.github.io/ClinicoPathJamoviModule/}{ClinicoPathJamoviModule Website}.
-#' also see the \href{https://sbalci.github.io/ClinicoPathDescriptives/}{ClinicoPathDescriptives Website}.
+#' \href{https://www.serdarbalci.com/ClinicoPathJamoviModule/}{ClinicoPathJamoviModule Website}.
+#' also see the \href{https://www.serdarbalci.com/ClinicoPathDescriptives/}{ClinicoPathDescriptives Website}.
 #'
 #' @docType package
 #' @aliases ClinicoPathDescriptives ClinicoPathDescriptives-package

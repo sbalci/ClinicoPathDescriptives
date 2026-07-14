@@ -12,8 +12,8 @@ tests, and survival analysis with survival tables, survival plots,
 and natural language summaries.
 
 For more documentation, see the
-\href{https://sbalci.github.io/ClinicoPathJamoviModule/}{ClinicoPathJamoviModule Website}.
-also see the \href{https://sbalci.github.io/ClinicoPathDescriptives/}{ClinicoPathDescriptives Website}.
+\href{https://www.serdarbalci.com/ClinicoPathJamoviModule/}{ClinicoPathJamoviModule Website}.
+also see the \href{https://www.serdarbalci.com/ClinicoPathDescriptives/}{ClinicoPathDescriptives Website}.
 }
 \details{
 \code{ClinicoPathDescriptives}
@@ -23,9 +23,9 @@ Useful links:
 \itemize{
   \item \url{https://github.com/sbalci/ClinicoPathJamoviModule/}
   \item \url{https://github.com/sbalci/ClinicoPathDescriptives/}
-  \item \url{https://sbalci.github.io/ClinicoPathJamoviModule/}
+  \item \url{https://www.serdarbalci.com/ClinicoPathJamoviModule/}
   \item \url{https://www.serdarbalci.com/ClinicoPathDescriptives/}
-  \item Report bugs at \url{https://github.com/sbalci/ClinicoPathJamoviModule/issues/}
+  \item Report bugs at \url{https://github.com/sbalci/ClinicoPathDescriptives/issues/}
 }
 
 }

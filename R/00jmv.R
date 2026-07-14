@@ -188,10 +188,14 @@
         `title`="ggVennDiagram: R package", 
         `publisher`="[R package]. Retrieved from https://CRAN.R-project.org/package=ggVennDiagram", 
         `url`="https://CRAN.R-project.org/package=ggVennDiagram"), 
-    `BaylorEdPsych`=list(
-        `type`="software", 
-        `author`=NULL, 
-        `year`=NULL, 
-        `title`="BaylorEdPsych: R package", 
-        `publisher`="[R package]. Retrieved from https://CRAN.R-project.org/package=BaylorEdPsych", 
-        `url`="https://CRAN.R-project.org/package=BaylorEdPsych"))
+    `naniar`=list(
+        `type`="article", 
+        `author`="Tierney, N. J., Cook, D., McBain, M., & Fay, C.", 
+        `year`=2023, 
+        `title`="Expanding tidy data principles to facilitate missing data exploration, visualization and assessment of imputations", 
+        `publisher`="Journal of Statistical Software", 
+        `volume`=105, 
+        `issue`=7, 
+        `pages`="1-31", 
+        `doi`="10.18637/jss.v105.i07", 
+        `url`="https://www.jstatsoft.org/article/view/v105i07"))

@@ -65,7 +65,7 @@ devtools::install_github("sbalci/ClinicoPathDescriptives")
 
 ### jamovi Module
 
-Install the jamovi module from the jamovi library or visit [ClinicoPath jamovi Module](https://sbalci.github.io/ClinicoPathJamoviModule/).
+Install the jamovi module from the jamovi library or visit [ClinicoPath jamovi Module](https://www.serdarbalci.com/ClinicoPathJamoviModule/).
 
 ## Quick Start
 
@@ -101,7 +101,7 @@ alluvial_plot <- alluvial(
 
 - **Package Website**: [https://www.serdarbalci.com/ClinicoPathDescriptives/](https://www.serdarbalci.com/ClinicoPathDescriptives/)
 - **GitHub Repository**: [https://github.com/sbalci/ClinicoPathDescriptives/](https://github.com/sbalci/ClinicoPathDescriptives/)
-- **jamovi Module**: [https://sbalci.github.io/ClinicoPathJamoviModule/](https://sbalci.github.io/ClinicoPathJamoviModule/)
+- **jamovi Module**: [https://www.serdarbalci.com/ClinicoPathJamoviModule/](https://www.serdarbalci.com/ClinicoPathJamoviModule/)
 - **Issue Tracking**: [GitHub Issues](https://github.com/sbalci/ClinicoPathJamoviModule/issues/)
 
 ## Citation

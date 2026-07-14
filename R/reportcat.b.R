@@ -36,7 +36,11 @@ reportcatClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             } else {
                 # Clear the to-do message if variables are selected.
                 self$results$todo$setContent("")
-                
+
+                # Reset any stale error/warning from a previous run; the
+                # validation branches below re-show it when needed.
+                self$results$error$setVisible(FALSE)
+
                 # Enhanced input validation with proper error handling
                 if (nrow(self$data) == 0) {
                     self$results$error$setContent(glue::glue("<div style='padding: 15px; background-color: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px; color: #721c24;'><strong>{error_label}:</strong> {error_msg}</div>",
@@ -137,7 +141,7 @@ reportcatClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                         dplyr::mutate(
                             percent = n / validtotal,
                             level_description = glue::glue(
-                                .("{level}: n = {n}, {percent} of valid cases. "),
+                                .("{level}: n = {n}, {percent} of valid cases."),
                                 level = htmltools::htmlEscape(level),
                                 n = n,
                                 percent = scales::percent(percent)
@@ -146,17 +150,14 @@ reportcatClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                         dplyr::pull(level_description)
 
                     # Create overall summary sentences with HTML tags for styling.
-                    sentence1 <- glue::glue("<strong>{var}</strong> {has_obs} {obs} {observations} {and} {levels} {levels_text}.",
+                    sentence1 <- glue::glue(.("<strong>{var}</strong> has {observations} observations and {levels} levels."),
                         var = htmltools::htmlEscape(myvar),
-                        has_obs = .("has"),
-                        obs = total_obs,
-                        observations = .("observations"),
-                        and = .("and"),
-                        levels = num_levels,
-                        levels_text = .("levels"))
-                    sentence2 <- glue::glue("{missing_label}: {count}.",
-                        missing_label = .("Missing values"),
-                        count = missing_obs)
+                        observations = total_obs,
+                        levels = num_levels)
+                    sentence2 <- glue::glue(
+                        .("Missing values: {count}."),
+                        count = missing_obs
+                    )
                     full_description <- paste(c(sentence1, description, sentence2), collapse = "<br>")
                     return(full_description)
                 }
@@ -577,6 +578,5 @@ reportcatClass <- if (requireNamespace('jmvcore')) R6::R6Class(
         }
     )
 )
-
 
 

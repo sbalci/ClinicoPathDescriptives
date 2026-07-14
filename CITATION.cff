@@ -2,7 +2,7 @@
 # Visit https://bit.ly/cffinit to generate yours today!
 
 cff-version: 1.2.0
-title: "ClinicoPath jamovi Module"
+title: "ClinicoPathDescriptives: Descriptive Analysis for Clinicopathological Research"
 message: >-
   If you use this software, please cite it using the
   metadata from this file.
@@ -12,8 +12,8 @@ authors:
     family-names: Balci
     email: serdarbalci@serdarbalci.com
     orcid: 'https://orcid.org/0000-0002-7852-3851'
-date-released: '2025-09-18'
-version: "0.0.31.69"
+date-released: '2026-07-13'
+version: "1.0.0"
 identifiers:
   - type: doi
     value: 10.5281/zenodo.3997188
@@ -22,14 +22,14 @@ identifiers:
     value: 10.17605/OSF.IO/9SZUD
     description: OSF
   - type: url
-    value: 'https://github.com/sbalci/ClinicoPathJamoviModule/'
+    value: 'https://github.com/sbalci/ClinicoPathDescriptives/'
     description: GitHub
   - type: url
-    value: 'https://sbalci.github.io/ClinicoPathJamoviModule/'
+    value: 'https://www.serdarbalci.com/ClinicoPathDescriptives/'
     description: webpage
   - type: url
     value: >-
-      https://github.com/sbalci/ClinicoPathJamoviModule/issues/
+      https://github.com/sbalci/ClinicoPathDescriptives/issues/
     description: BugReports
   - type: url
     value: 'https://github.com/sbalci/ClinicoPathDescriptives/'
@@ -46,15 +46,12 @@ identifiers:
   - type: url
     value: 'https://github.com/sbalci/OncoPath'
     description: OncoPath
-repository-code: 'https://github.com/sbalci/ClinicoPathJamoviModule/'
-url: 'https://www.serdarbalci.com/ClinicoPathJamoviModule'
+repository-code: 'https://github.com/sbalci/ClinicoPathDescriptives/'
+url: 'https://www.serdarbalci.com/ClinicoPathDescriptives/'
 abstract: >-
-  Comprehensive Analysis for Clinicopathological Research: ClinicoPath
-  is a jamovi module that helps researchers generate natural language
-  summaries of their datasets, create cross tables with statistical tests,
-  perform survival analyses with tables and plots, conduct medical decision
-  analysis, create statistical visualizations, and perform specialized
-  oncological patient follow-up analyses including waterfall and swimmer plots. 
+  ClinicoPathDescriptives is a jamovi module for descriptive analysis in
+  clinicopathological research, including summary tables, categorical reports,
+  data-quality checks, outlier detection, and specialized visualizations.
 keywords:
   - jamovi
   - module
@@ -67,4 +64,4 @@ keywords:
   - agreement
   - descriptives
   - plots
-license: GPL-2.0
+license: GPL-2.0-or-later

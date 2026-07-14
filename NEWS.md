@@ -1,3 +1,19 @@
+# ClinicoPathDescriptives 1.0.0 (2026-07-13)
+
+## jamovi library audit fixes
+
+* Declared the `MASS` and `boot` runtime dependencies and moved Little's MCAR
+  test from the archived `BaylorEdPsych` package to guarded `naniar` support.
+* Repaired citation keys, exposed Benford's detailed output, and made
+  cross-table missing-value invalidation complete.
+* Added structured error handling for variable trees and table-generation
+  failures, cached prepared alluvial plot data, and honored listwise exclusion
+  consistently in standardized mean differences.
+* Normalized option labels and collapsible UI groups, removed dead cross-table
+  scaffolding, narrowed namespace imports, and strengthened dependency checks.
+* Added regression coverage for schema contracts, generated R code, alluvial
+  caching, chi-square chunking, and optional MCAR diagnostics.
+
 # ClinicoPathDescriptives 0.0.47 (2026-07-05)
 
 ## Bug Fixes
