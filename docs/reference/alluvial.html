@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ClinicoPathDescriptives</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -83,7 +83,7 @@
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/sbalci/ClinicoPathJamoviModule/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/sbalci/ClinicoPathDescriptives/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul></div>
 
 
@@ -93,7 +93,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Alluvial Diagrams</h1>
-      <small class="dont-index">Source: <a href="https://github.com/sbalci/ClinicoPathJamoviModule/blob/HEAD/R/alluvial.h.R" class="external-link"><code>R/alluvial.h.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/sbalci/ClinicoPathDescriptives/blob/HEAD/R/alluvial.h.R" class="external-link"><code>R/alluvial.h.R</code></a></small>
       <div class="d-none name"><code>alluvial.Rd</code></div>
     </div>
 
@@ -162,8 +162,8 @@ represented by color. Default is 'first_variable'.</p></dd>
 
 
 <dt id="arg-fillggalluvial">fillGgalluvial<a class="anchor" aria-label="anchor" href="#arg-fillggalluvial"></a></dt>
-<dd><p>A string naming the variable from <code>data</code> that
-will be used to color the flows in the ggalluvial plot.</p></dd>
+<dd><p>A string naming the categorical variable from
+<code>data</code> that will be used to color the flows in the ggalluvial plot.</p></dd>
 
 
 <dt id="arg-bin">bin<a class="anchor" aria-label="anchor" href="#arg-bin"></a></dt>
@@ -191,7 +191,8 @@ analysis.</p></dd>
 
 <dt id="arg-custombinlabels">custombinlabels<a class="anchor" aria-label="anchor" href="#arg-custombinlabels"></a></dt>
 <dd><p>Custom labels for bins, separated by commas (e.g.,
-"Low,Medium,High"). Leave empty to use bin option defaults.</p></dd>
+"Low,Medium,High"). The number of labels determines the number of bins.
+Leave empty to use the selected bin-label method.</p></dd>
 
 
 <dt id="arg-colorpalette">colorPalette<a class="anchor" aria-label="anchor" href="#arg-colorpalette"></a></dt>

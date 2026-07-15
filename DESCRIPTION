@@ -34,7 +34,9 @@ Imports: arsenal, benford.analysis, boot, classInt, ComplexUpset, dbscan,
         MASS, moments, naniar, performance, purrr, pwr, R6, RColorBrewer,
         rlang, robustbase, scales, stats, stringr, tableone, tangram, tidyr,
         UpSetR, utils, vcd, viridis, visdat, vtree
-Suggests: testthat
+Suggests: 
+    testthat,
+    yaml
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
