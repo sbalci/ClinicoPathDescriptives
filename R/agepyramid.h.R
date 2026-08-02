@@ -35,6 +35,7 @@ agepyramidOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             private$..age <- jmvcore::OptionVariable$new(
                 "age",
                 age,
+                default=NULL,
                 suggested=list(
                     "continuous"),
                 permitted=list(
@@ -43,6 +44,7 @@ agepyramidOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             private$..gender <- jmvcore::OptionVariable$new(
                 "gender",
                 gender,
+                default=NULL,
                 suggested=list(
                     "ordinal",
                     "nominal"),
@@ -314,7 +316,7 @@ agepyramidBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             super$initialize(
                 package = "ClinicoPathDescriptives",
                 name = "agepyramid",
-                version = c(1,0,1),
+                version = c(1,0,2),
                 options = options,
                 results = agepyramidResults$new(options=options),
                 data = data,
@@ -387,8 +389,8 @@ agepyramidBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 #' @export
 agepyramid <- function(
     data,
-    age,
-    gender,
+    age = NULL,
+    gender = NULL,
     female,
     male,
     age_groups = "custom",

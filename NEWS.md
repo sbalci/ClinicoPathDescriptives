@@ -1,3 +1,21 @@
+# ClinicoPathDescriptives 1.0.2 (2026-08-02)
+
+## Fixed
+
+- **Analysis variables were required arguments of the R function.** An option with no default in
+  its jamovi definition compiles to a bare parameter, so calling the analysis from R without it
+  failed with `argument "X" is missing, with no default` before the analysis's own validation
+  could produce a usable message. Now defaulting to `NULL`: `agepyramid` (`age`, `gender`),
+  `chisqposttest` (`rows`, `cols`), `crosstable` (`vars`, `group`) and `venn` (`var1`, `var2`).
+  Behaviour in the jamovi GUI is unchanged; no statistical method was altered.
+
+## Added
+
+- **Automated GitHub release (`.github/workflows/release.yaml`).** A push to the default branch
+  touching `DESCRIPTION` or `jamovi/0000.yaml` cross-checks the two version strings, refuses to
+  proceed if they disagree, and — if the tag does not already exist — tags `v<version>` and
+  publishes a release whose notes are the matching section of this file.
+
 # ClinicoPathDescriptives 1.0.0 (2026-07-13)
 
 ## jamovi library audit fixes
