@@ -1,4 +1,4 @@
-# ClinicoPathDescriptives 1.0.2 (2026-08-02)
+# ClinicoPathDescriptives 1.0.2 (2026-08-03)
 
 ## Fixed
 
@@ -8,6 +8,14 @@
   could produce a usable message. Now defaulting to `NULL`: `agepyramid` (`age`, `gender`),
   `chisqposttest` (`rows`, `cols`), `crosstable` (`vars`, `group`) and `venn` (`var1`, `var2`).
   Behaviour in the jamovi GUI is unchanged; no statistical method was altered.
+
+
+## Note
+
+- The pre-release review pass carried out this release covered the survival-family and
+  diagnostic-decision analyses (`jsurvival`, `meddecide`) and a package-wide `format()` namespace
+  fix in the umbrella package. **No analysis shipped here was changed** — none of the affected
+  files is distributed to this module.
 
 ## Added
 
