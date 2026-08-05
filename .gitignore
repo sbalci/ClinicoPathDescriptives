@@ -35,3 +35,8 @@ build
 .DS_Store
 docs
 .positai
+
+# local scratch copies - never commit (see main repo .gitignore)
+temp/
+temp*/
+backups/
