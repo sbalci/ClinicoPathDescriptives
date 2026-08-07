@@ -1,3 +1,33 @@
+# ClinicoPathDescriptives 1.0.4 (2026-08-07)
+
+## Note
+
+- **Version realignment only; no analysis shipped here was changed.** Between 1.0.2 and 1.0.4 the
+  only differences in this module are the version and date strings in `DESCRIPTION`,
+  `jamovi/0000.yaml`, the fourteen `jamovi/*.a.yaml` files and their generated `R/*.h.R` headers.
+  No `.b.R` backend, `.r.yaml`, `.u.yaml`, shared utility, dataset, manual page or test file was
+  touched. The 1.0.3/1.0.4 development cycle in the umbrella **ClinicoPath** package targeted the
+  `meddecide`, `jsurvival` and `OncoPath` analysis families, none of which is distributed to this
+  module.
+
+- **Known issue: "Getting Started" panels stay visible after an analysis has run.** A module-wide review found
+  that a `visible:` expression in a `.r.yaml` file which begins with `!` does not match jamovi's
+  routing pattern, so the expression is never evaluated and is treated as a plain non-empty string —
+  permanently true. The effect was reproduced here on `benford` (`!var`) and `agepyramid`
+  (`!age || !gender`), where the introductory welcome panel therefore sits above a completed
+  analysis instead of disappearing once the variables are assigned. Only panel visibility is
+  affected; no result, table or statistic is wrong. The fix is tracked and not yet applied in this
+  module. Note that `.u.yaml` visibility is evaluated by the jamovi front end, which handles `!`
+  correctly, and is unaffected.
+
+# ClinicoPathDescriptives 1.0.3 (2026-08-04)
+
+## Note
+
+- **Superseded version bump.** 1.0.3 was published to keep this module in step with the umbrella
+  **ClinicoPath** package and was replaced by 1.0.4 a day later. Nothing shipped in this module
+  changed between the two.
+
 # ClinicoPathDescriptives 1.0.2 (2026-08-03)
 
 ## Fixed
