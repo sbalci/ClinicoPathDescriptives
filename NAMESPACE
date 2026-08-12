@@ -163,10 +163,7 @@ importFrom(moments,
 importFrom(performance,check_outliers)
 importFrom(purrr,partial)
 importFrom(pwr,pwr.chisq.test)
-importFrom(rlang,
-  "%||%",
-  sym
-)
+importFrom(rlang,sym)
 importFrom(robustbase,covMcd)
 importFrom(scales,percent)
 importFrom(stats,
