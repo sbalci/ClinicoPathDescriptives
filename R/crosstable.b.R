@@ -1032,7 +1032,18 @@ crosstableClass <- if (requireNamespace('jmvcore'))
                             else
                                 "P-value adjustment is available in the gtsummary style only."),
                         type = "WARNING")
-                    self$results$dataQualityNotice$setContent(ignored_html)
+                    # Compose onto the data-quality warnings already written to this
+                    # same output element earlier in .run() (lines ~602 and ~799)
+                    # rather than replacing them. setContent() overwrites, and the
+                    # earlier block escalates to STRONG_WARNING for cells with n < 10 -
+                    # exactly the small-sample warning a pathologist most needs - so
+                    # replacing it silently dropped that warning whenever the user also
+                    # picked a style that ignores one of their statistical settings.
+                    data_quality_html <- paste(
+                        Filter(nzchar, c(data_quality_html, ignored_html)),
+                        collapse = "\n"
+                    )
+                    self$results$dataQualityNotice$setContent(data_quality_html)
                     self$results$dataQualityNotice$setVisible(TRUE)
                 }
 

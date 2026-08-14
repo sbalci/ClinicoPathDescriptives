@@ -418,9 +418,14 @@ outlierdetectionClass <- if (requireNamespace("jmvcore")) R6::R6Class("outlierde
             # (10000 / 5000) reproduce the previously hard-coded behaviour.
             sample_threshold <- private$.optionOr("sampleThreshold", 10000)
             sample_size_opt <- private$.optionOr("sampleSize", 5000)
-            # A retained size at or above the threshold would never subsample, and
-            # one larger than the data is meaningless - clamp rather than surprise.
-            sample_size_opt <- max(100, min(sample_size_opt, sample_threshold))
+            # Only a sane lower bound here. Do NOT clamp to sample_threshold: the two
+            # options are independent - the threshold decides WHEN to subsample, the
+            # size decides HOW MANY rows to keep. Clamping silently overrode an
+            # explicit user choice (threshold 1000 + size 5000 analysed 1000 rows,
+            # not 5000), contradicting the option's own help text "larger values
+            # recover more of them at the cost of speed". The data-size cap that
+            # actually matters is applied at the point of use below.
+            sample_size_opt <- max(100, sample_size_opt)
 
             if (nrow(analysis_data) > min(5000, sample_threshold)) {
                 performance_msg <- NULL

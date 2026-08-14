@@ -46,6 +46,7 @@ items:
           - female
           - male
           - age_groups
+          - age_interval
           - bin_width
           - custom_breaks
 
@@ -64,6 +65,7 @@ items:
           - female
           - male
           - age_groups
+          - age_interval
           - bin_width
           - custom_breaks
           - plot_title
@@ -86,6 +88,7 @@ items:
           - female
           - male
           - age_groups
+          - age_interval
           - bin_width
           - custom_breaks
           - ggcharts_sort
