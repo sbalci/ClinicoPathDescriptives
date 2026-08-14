@@ -1,5 +1,5 @@
-pandoc: 3.8.2.1
-pkgdown: 2.2.0
+pandoc: '3.10'
+pkgdown: 2.2.1
 pkgdown_sha: ~
 articles:
   01-biomarkerresponse-comprehensive: 01-biomarkerresponse-comprehensive.html
@@ -26,6 +26,7 @@ articles:
   09-crosstable: 09-crosstable.html
   09-function-alluvial: 09-function-alluvial.html
   10-function-benford: 10-function-benford.html
+  10-riverplot-comprehensive: 10-riverplot-comprehensive.html
   10-visualization-gallery: 10-visualization-gallery.html
   11-function-crosstable: 11-function-crosstable.html
   12-chisqposttest: 12-chisqposttest.html
@@ -60,10 +61,11 @@ articles:
   22-gtsummary-comprehensive: 22-gtsummary-comprehensive.html
   22-venn-legacy: 22-venn-legacy.html
   23-hullplot-comprehensive: 23-hullplot-comprehensive.html
+  24-categorize: 24-categorize.html
   37-missingdata-comprehensive: 37-missingdata-comprehensive.html
   clinical-workflow: clinical-workflow.html
   clinicopath-descriptives-01-oncodatasets-examples: clinicopath-descriptives-01-oncodatasets-examples.html
-last_built: 2026-07-15T10:00Z
+last_built: 2026-08-14T13:06Z
 urls:
   reference: https://www.serdarbalci.com/ClinicoPathDescriptives/reference
   article: https://www.serdarbalci.com/ClinicoPathDescriptives/articles

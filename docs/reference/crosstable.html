@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ClinicoPathDescriptives</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.52</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,6 +42,7 @@
     <li><a class="dropdown-item" href="../articles/09-crosstable.html">Vignette: Generating a Publication-Ready 'Table 1' with crosstable</a></li>
     <li><a class="dropdown-item" href="../articles/09-function-alluvial.html">Function Reference: alluvial() - Complete Parameter Guide</a></li>
     <li><a class="dropdown-item" href="../articles/10-function-benford.html">Vignette: Performing a Benford's Law Analysis</a></li>
+    <li><a class="dropdown-item" href="../articles/10-riverplot-comprehensive.html">riverplot: Comprehensive River Plot and Flow Visualization</a></li>
     <li><a class="dropdown-item" href="../articles/10-visualization-gallery.html">Visualization Gallery for Clinical Research</a></li>
     <li><a class="dropdown-item" href="../articles/11-function-crosstable.html">Vignette: Generating a Publication-Ready 'Table 1' with crosstable</a></li>
     <li><a class="dropdown-item" href="../articles/12-chisqposttest.html">Chi-Square Post-Hoc Tests for Clinicopathological Research</a></li>
@@ -76,6 +77,7 @@
     <li><a class="dropdown-item" href="../articles/22-gtsummary-comprehensive.html">Publication-Ready Tables with gtsummary</a></li>
     <li><a class="dropdown-item" href="../articles/22-venn-legacy.html">Vignette: Visualizing Co-occurrence with Venn &amp; Upset Plots</a></li>
     <li><a class="dropdown-item" href="../articles/23-hullplot-comprehensive.html">Hull Plot Visualization for Group Analysis</a></li>
+    <li><a class="dropdown-item" href="../articles/24-categorize.html">Vignette: Categorizing Continuous Variables for Clinicopathological Reporting</a></li>
     <li><a class="dropdown-item" href="../articles/37-missingdata-comprehensive.html">Missing Data Analysis and Multiple Imputation</a></li>
     <li><a class="dropdown-item" href="../articles/clinical-workflow.html">Clinical Research Workflow with ClinicoPathDescriptives</a></li>
     <li><a class="dropdown-item" href="../articles/clinicopath-descriptives-01-oncodatasets-examples.html">ClinicoPath Descriptives: Oncology Data Examples</a></li>
@@ -105,8 +107,8 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">crosstable</span><span class="op">(</span></span>
 <span>  <span class="va">data</span>,</span>
-<span>  <span class="va">vars</span>,</span>
-<span>  <span class="va">group</span>,</span>
+<span>  vars <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  group <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  sty <span class="op">=</span> <span class="st">"nejm"</span>,</span>
 <span>  excl <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  cont <span class="op">=</span> <span class="st">"mean"</span>,</span>
@@ -189,7 +191,7 @@ correspondence analysis) are planned but not yet available.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer></div>
