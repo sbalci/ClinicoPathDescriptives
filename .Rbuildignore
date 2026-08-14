@@ -90,3 +90,4 @@ CITATION.cff
 ^\.positai$
 ^data/.*\.omv$
 ^inst/extdata/.*\.omv$
+^data/.*\.csv$
