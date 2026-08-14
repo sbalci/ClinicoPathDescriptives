@@ -6,6 +6,48 @@ date: "`r Sys.Date()`"
 output: html_document
 ---
 
+> ### Module note --- the ggFlowchart analysis is not in ClinicoPathDescriptives
+>
+> **This analysis is under development and is not part of ClinicoPathDescriptives 1.0.52.
+> It is planned for a future release.** There is no `ggflowchart()` analysis in this
+> module, and none of the released sibling modules (jjstatsplot, meddecide, jsurvival,
+> OncoPath) provides one. The umbrella ClinicoPath repository still lists a `ggflowchart`
+> entry in its generated `jamovi/0000.yaml`, but that entry is stale: there is no
+> `ggflowchart.a.yaml`, no `ggflowchart.b.R` and no `NAMESPACE` export behind it, so the
+> analysis is not built into any shipped module.
+>
+> Please read the code below as a design sketch rather than a working API. Points to be
+> aware of, left in place deliberately so nothing is lost:
+>
+> * Every option shown (`from_var`, `to_var`, `group_var`, `node_fill_palette`,
+>   `plot_title`, `show_interpretation`, ...) and every palette name
+>   (`"clinical_blue"`, `"modern_gray"`, ...) is unverifiable, because there is no shipped
+>   `.a.yaml` to check it against.
+> * `ggflowchart` is also the name of a CRAN package. If that package is attached, a bare
+>   `ggflowchart()` call resolves to *its* function, which takes a completely different
+>   argument list --- so these examples would fail in a confusing way rather than cleanly.
+> * Of the twelve datasets loaded in the setup chunk, only `ggflowchart_comprehensive_data`
+>   and `multi_group_workflow` ship with ClinicoPathDescriptives. The other ten
+>   (`simple_process_flow`, `clinical_decision_flow`, `research_pipeline_flow`,
+>   `lab_workflow_flow`, `data_analysis_pipeline`, `patient_care_pathway`,
+>   `software_dev_flow`, `minimal_ggflow`, `complex_decision_tree`,
+>   `manufacturing_process`) ship with the umbrella ClinicoPath package.
+> * The comparison with the "DiagrammeR Flowchart" module below refers to another analysis
+>   that is likewise not shipped in ClinicoPathDescriptives 1.0.52.
+>
+> ClinicoPathDescriptives 1.0.52 ships exactly 14 analyses: `agepyramid`, `alluvial`,
+> `benford`, `categorize`, `checkdata`, `chisqposttest`, `crosstable`, `dataquality`,
+> `outlierdetection`, `reportcat`, `summarydata`, `tableone`, `vartree` and `venn`. For
+> flow between categorical stages today, use **`alluvial`**; for a hierarchical breakdown
+> of a cohort, use **`vartree`**.
+>
+> Every code chunk in this vignette is `eval = FALSE`.
+
+```{r vignette-options, include = FALSE}
+# All chunks are disabled: the analysis documented here is not shipped.
+knitr::opts_chunk$set(eval = FALSE)
+```
+
 # Introduction to ggFlowchart
 
 The `ggflowchart` function in ClinicoPath provides a modern alternative to traditional flowcharts by leveraging the power and aesthetics of ggplot2. This function complements the existing DiagrammeR-based flowchart module by offering contemporary styling and seamless integration with the ggplot2 ecosystem.

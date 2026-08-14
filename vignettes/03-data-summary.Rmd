@@ -16,29 +16,37 @@ This vignette focuses on the functions that generate tables and textual summarie
 
 ## Continuous Variables
 
-`summarydata()` provides descriptive statistics (mean, median, quartiles) for numeric variables.
+`summarydata()` provides descriptive statistics (mean, median, quartiles) for numeric
+variables. Beyond `vars` it accepts `distr`, `decimal_places`, `outliers` and
+`report_sentences`.
 
 ```{r cont-sum, eval=FALSE}
 summarydata(
   data = histopathology,
-  vars = vars(Age, TumorSize)
+  vars = vars(Age, OverallTime),  # `vars` is restricted to numeric variables
+  distr = TRUE,
+  decimal_places = 2
 )
 ```
 
 ## Categorical Variables
 
-`reportcat()` summarises categorical variables with counts and percentages.
+`reportcat()` summarises categorical variables with counts and percentages. Its `vars`
+argument only accepts categorical variables, so use `Grade_Level` (character) rather than
+`Grade` (numeric).
 
 ```{r cat-sum, eval=FALSE}
 reportcat(
   data = histopathology,
-  vars = vars(Sex, Grade)
+  vars = vars(Sex, Grade_Level)
 )
 ```
 
 ## Cross Tables
 
-Use `crosstable()` to create cross tabulations with statistical tests. The `group` argument defines the column variable.
+Use `crosstable()` to create cross tabulations with statistical tests. The `group`
+argument defines the column variable and must be categorical. Styles (`sty`) are
+`arsenal`, `finalfit`, `gtsummary`, `nejm` (default), `lancet` and `hmisc`.
 
 ```{r crosstable-vig, eval=FALSE}
 crosstable(
@@ -46,13 +54,17 @@ crosstable(
   vars = vars(Sex, Grade),
   group = "PreinvasiveComponent",
   sty = "nejm",
-  excl = TRUE
+  excl = TRUE,
+  cont = "mean",   # mean | median
+  pcat = "chisq"   # chisq | fisher
 )
 ```
 
 ## Table One for Publications
 
-`tableone()` creates publication-ready tables of baseline characteristics.
+`tableone()` creates publication-ready tables of baseline characteristics. `sty` selects
+the rendering engine: `t1` = tableone (default), `t2` = gtsummary, `t3` = arsenal,
+`t4` = janitor.
 
 ```{r tableone-vig, eval=FALSE}
 tableone(

@@ -5,6 +5,31 @@ date: "`r Sys.Date()`"
 output: html_document
 ---
 
+> ### Availability note (please read first)
+>
+> **This analysis is not part of ClinicoPathDescriptives 1.0.52.**
+>
+> The `gtsummary` jamovi analysis currently exists only in the development umbrella module
+> `ClinicoPath`, where it is still routed to a development menu group (`ExplorationD`) rather
+> than a released one. It is not shipped by `ClinicoPathDescriptives`, nor by `jjstatsplot`,
+> `meddecide`, `jsurvival` or `OncoPath`.
+> **It is under development and is planned for a future release.**
+>
+> (Note the name collision: the *R package* `gtsummary` on CRAN is a separate thing and is
+> installable today. This vignette documents the jamovi analysis that wraps it.)
+>
+> The 14 analyses that ClinicoPathDescriptives 1.0.52 actually ships are: `agepyramid`,
+> `alluvial`, `benford`, `categorize`, `checkdata`, `chisqposttest`, `crosstable`,
+> `dataquality`, `outlierdetection`, `reportcat`, `summarydata`, `tableone`, `vartree`
+> and `venn`. For publication-ready descriptive tables today, use **Table One**
+> (`tableone`) or **Cross Tables** (`crosstable`) — `crosstable` even offers a
+> `sty = "gtsummary"` output style.
+>
+> The example datasets used below (`gtsummary_clinical_trial`, `gtsummary_survey_data`, ...)
+> ship with the umbrella `ClinicoPath` package, not with `ClinicoPathDescriptives`. Because
+> neither the function nor the data is available here, **every code chunk in this vignette is
+> set to `eval = FALSE`** and the output shown is illustrative only.
+
 # Introduction
 
 The `gtsummary` function in ClinicoPath provides a comprehensive interface to the powerful gtsummary R package for creating publication-ready tables. This function is designed specifically for clinical and pathological research, offering multiple table types, statistical testing, and professional formatting options.

@@ -1,0 +1,404 @@
+---
+title: "Vignette: Categorizing Continuous Variables for Clinicopathological Reporting"
+author: "ClinicoPathDescriptives"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette: Categorize Continuous Variables}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  eval = FALSE,
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## What this analysis is for
+
+`categorize()` turns one continuous numeric variable into a factor, using a
+binning rule you choose, and reports the resulting break points, the frequency
+of each category, a distribution plot with the cut-points drawn on it, and the
+plain R code that reproduces the same recoding outside jamovi.
+
+Pathologists do this constantly, usually by hand:
+
+* Ki-67 labelling index into low / intermediate / high proliferation bands;
+* ER / PR percentage into negative, low-positive, positive;
+* eGFR into CKD stages at the conventional 30 / 60 / 90 thresholds;
+* tumour size into pT-like strata;
+* any laboratory analyte split at a reference cut-point before it goes into a
+  cross-table or a Kaplan-Meier plot.
+
+The point of the analysis is that the recoding is *visible*: you can see where
+the boundaries landed, how many cases fell into each band, and whether the split
+you chose produced a group of three patients that will not support any
+subsequent test.
+
+## The statistical caveat, up front
+
+Cutting a continuous measurement into categories throws information away. It
+costs power, it makes the result depend on where you happened to put the
+boundary, and it hides dose-response relationships by pretending that two
+patients on either side of a threshold differ while two patients at opposite
+ends of the same band do not. Optimal or "data-derived" cut-points found by
+trying several thresholds and keeping the most significant one are the worst
+case: they inflate the type I error rate and rarely replicate.
+
+> Altman DG, Royston P. **The cost of dichotomising continuous variables.**
+> *BMJ* 2006;332:1080. doi:10.1136/bmj.332.7549.1080
+
+The analysis itself repeats this citation in its completion notice. Categorize
+when there is a clinical reason to - an established reporting threshold, a
+guideline stage definition, a decision rule that a clinician will actually act
+on - and keep the continuous variable in the model whenever you can.
+
+## Example data
+
+```{r}
+set.seed(42)
+n <- 240
+
+path_data <- data.frame(
+  Ki67_Index   = pmin(pmax(rnorm(n, mean = 22, sd = 15), 0), 95),
+  TumorSize_mm = rlnorm(n, meanlog = 3, sdlog = 0.5),
+  eGFR         = rnorm(n, mean = 68, sd = 22)
+)
+
+head(path_data)
+```
+
+```{r}
+library(ClinicoPathDescriptives)
+```
+
+## Binning methods
+
+The `method` option is a list with exactly six levels:
+`equal`, `quantile` (the default), `manual`, `meansd`, `median`, `jenks`.
+
+### `quantile` - equal numbers per group (default)
+
+Break points are the sample quantiles at `seq(0, 1, length.out = nbins + 1)`,
+de-duplicated. Every category holds roughly the same number of patients, which
+is what you want for tertiles, quartiles or a median-free "balanced" split.
+
+```{r}
+res_q <- categorize(
+    data   = path_data,
+    var    = "Ki67_Index",
+    method = "quantile",   # default
+    nbins  = 4             # default 4 -> quartiles
+)
+
+res_q$freqTable
+res_q$breakpointsTable
+```
+
+Tied values collapse bins: if you ask for four quartiles of a variable where a
+quarter of the cases share one value, you may get three. The analysis raises a
+*bin collapse* warning when the number of categories it managed to build differs
+from `nbins`, because calling the result "quartiles" would then be wrong.
+
+### `equal` - equal-width intervals
+
+`seq(min(x), max(x), length.out = nbins + 1)`. Bands are the same width on the
+measurement scale, so counts can be wildly unequal on a skewed variable such as
+tumour size. Use it when the width itself is the meaningful thing (10 mm steps),
+not when you want comparable group sizes.
+
+```{r}
+res_eq <- categorize(
+    data   = path_data,
+    var    = "TumorSize_mm",
+    method = "equal",
+    nbins  = 5
+)
+```
+
+### `manual` - your own cut-points
+
+`breaks` is a **string** of comma-separated numbers (it is a `String` option,
+not a numeric vector). They are parsed, trimmed and sorted for you.
+
+```{r}
+res_ckd <- categorize(
+    data   = path_data,
+    var    = "eGFR",
+    method = "manual",
+    breaks = "30, 60, 90",     # the conventional CKD thresholds
+    labels = "custom",
+    customlabels = "Stage 4-5, Stage 3, Stage 2, Stage 1"
+)
+
+res_ckd$breakpointsTable
+```
+
+By default the outer break points are **extended** to the data minimum and
+maximum - a value below 30 or above 90 is not lost, it simply joins the first or
+last band. That is why the example above yields four categories from three
+entered break points: the observed minimum and maximum are prepended and
+appended. Count the categories before you write the labels.
+
+`nbins` is ignored for this method; the number of categories is determined by
+the break points.
+
+### `meansd` - mean +/- k standard deviations
+
+Break points are `c(min(x), mean - sdmult * sd, mean, mean + sdmult * sd,
+max(x))`, i.e. **four** categories regardless of `nbins`. `sdmult` is a number
+between 0.5 and 3, default 1.
+
+```{r}
+res_sd <- categorize(
+    data   = path_data,
+    var    = "Ki67_Index",
+    method = "meansd",
+    sdmult = 1        # default; 0.5 to 3 permitted
+)
+```
+
+Both the mean and the SD are pulled by outliers, so a handful of extreme values
+will drag every boundary. The analysis screens for extreme values with a 3 x IQR
+rule and warns you when it finds any, suggesting `quantile` or `jenks` instead.
+If the variable has zero variance the break points cannot be built and you get an
+explicit validation error rather than a silent result.
+
+### `median` - dichotomisation at the median
+
+Break points are `c(min(x), median(x), max(x))`: two groups, `nbins` ignored.
+Convenient, ubiquitous in the pathology literature, and precisely the practice
+Altman and Royston were writing against. Prefer a guideline threshold via
+`manual` when one exists.
+
+```{r}
+res_med <- categorize(
+    data   = path_data,
+    var    = "Ki67_Index",
+    method = "median",
+    labels = "semantic"    # -> "Low", "High"
+)
+```
+
+### `jenks` - natural breaks
+
+Fisher-Jenks natural breaks, computed with
+`classInt::classIntervals(x, n = nbins, style = "jenks")`. It places boundaries
+so that within-class variance is minimised, i.e. it cuts where the data are
+already sparse. Useful for a genuinely multimodal marker.
+
+`classInt` is consulted at run time; if it is not installed the analysis falls
+back to quantile break points and tells you so in a warning. Install it with
+`install.packages("classInt")` to get true Jenks optimisation.
+
+```{r}
+res_jk <- categorize(
+    data   = path_data,
+    var    = "Ki67_Index",
+    method = "jenks",
+    nbins  = 3
+)
+```
+
+## Number of categories
+
+`nbins` is an integer between 2 and 20, default 4. It is used by `equal`,
+`quantile` and `jenks` only - `manual` takes its category count from the break
+points, `meansd` always produces four bands and `median` always produces two.
+
+## Labelling the categories
+
+`labels` has five levels:
+
+| `labels` | What you get |
+|---|---|
+| `auto` (default) | Interval notation built from the break points, e.g. `[0.0, 12.4]`, `(12.4, 20.7]` - brackets follow the closure options below |
+| `semantic` | 2 bins: Low / High. 3: Low / Medium / High. 4: Low / Medium-Low / Medium-High / High. 5: Very Low / Low / Medium / High / Very High. 6-7: the first *n* of Very Low, Low, Medium-Low, Medium, Medium-High, High, Very High. More than 7: `Level 1`, `Level 2`, ... |
+| `numbered` | `1`, `2`, `3`, ... |
+| `lettered` | `A`, `B`, `C`, ... |
+| `custom` | Your own names, from `customlabels` |
+
+`customlabels` is a comma-separated string. It must supply exactly as many
+labels as there are categories, and they must be unique; if the count does not
+match or a label is duplicated the analysis warns and falls back to
+`Category 1`, `Category 2`, ... rather than silently merging levels. Count the
+categories first - remember that `manual` extends the outer breaks.
+
+```{r}
+res_lab <- categorize(
+    data         = path_data,
+    var          = "Ki67_Index",
+    method       = "quantile",
+    nbins        = 3,
+    labels       = "custom",
+    customlabels = "Low proliferation, Intermediate, High proliferation"
+)
+```
+
+`newvarname` (default `""`) names the derived variable. Left empty, the name is
+the original variable plus `_cat`, e.g. `Ki67_Index_cat`.
+
+## Interval closure
+
+These two options decide which side of a boundary a patient sitting exactly on
+it falls, and they matter a great deal at a reporting threshold.
+
+* `rightclosed` (default `TRUE`) - intervals are right-closed / left-open:
+  `(a, b]`. A Ki-67 of exactly 20 with a break at 20 falls in the *lower* band.
+  Set it to `FALSE` for left-closed / right-open intervals `[a, b)`, where 20
+  falls in the *upper* band. This is the usual convention for "Ki-67 >= 20%
+  is high", so set `rightclosed = FALSE` when your threshold is written with
+  `>=`.
+* `includelowest` (default `TRUE`) - the extreme interval is closed at the outer
+  end so the minimum (with `rightclosed = TRUE`) or the maximum (with
+  `rightclosed = FALSE`) is not left uncategorised.
+
+Both map directly onto `cut()`'s `right =` and `include.lowest =` arguments, and
+the bracket notation in the *Range* column of the frequency table follows
+whatever you chose.
+
+```{r}
+# "Ki-67 >= 20% is high" - the threshold belongs to the upper band
+res_ge20 <- categorize(
+    data        = path_data,
+    var         = "Ki67_Index",
+    method      = "manual",
+    breaks      = "20",
+    rightclosed = FALSE,      # [a, b) -> exactly 20 counts as high
+    includelowest = TRUE,
+    labels      = "semantic"
+)
+```
+
+`ordered` (default `TRUE`) makes the result an ordered factor, which preserves
+Low < Medium < High in every downstream table and plot. Turn it off only if a
+later analysis insists on an unordered factor.
+
+`excl` (default `TRUE`) excludes missing values when the break points are
+computed. Missing cases are still reported: the frequency table adds a
+*Missing* row, and percentages are calculated over valid observations only.
+
+## Outputs
+
+| Output | Contents |
+|---|---|
+| `todo` | Instructions before a variable is chosen; afterwards, the validation errors and the warning / information notices |
+| `summaryText` | N total, N valid, N missing, range, mean, median, SD of the input variable |
+| `breakpointsTable` | Every break point, in order, rounded to 4 decimals |
+| `freqTable` | Category, range, count, percent, cumulative percent (plus a Missing row when needed) |
+| `plot` | Histogram with density curve and the break points as red dashed lines, shown when `showplot = TRUE` (default) |
+| `rcode` | Copy-paste R that reproduces the recoding, shown when `showcode = TRUE` (default) |
+
+```{r}
+res <- categorize(
+    data     = path_data,
+    var      = "Ki67_Index",
+    method   = "quantile",
+    nbins    = 3,
+    labels   = "semantic",
+    showcode = TRUE,   # default
+    showplot = TRUE    # default
+)
+
+res$summaryText
+res$freqTable
+res$breakpointsTable
+res$rcode
+```
+
+## Warnings the analysis will raise
+
+These are quality gates worth reading rather than dismissing:
+
+* **Small bins** - at least one category has fewer than 5 observations. Any test
+  built on that category will be unreliable.
+* **Severe bin imbalance** - one category holds more than 70% of the valid
+  observations, which usually means the cut-points are in the wrong place.
+* **Bin collapse** - fewer distinct categories than `nbins` were achievable
+  because of ties or limited range, so "quartiles" or "tertiles" is no longer an
+  accurate description.
+* **Custom labels mismatch / duplicates** - label count does not match the
+  category count, or labels repeat; numbered labels are used instead.
+* **Jenks fallback** - `classInt` is not installed and quantile breaks were used.
+* **Outlier sensitivity** - extreme values detected while using `meansd`.
+* **Completion note** - N, number of groups, method, and the Altman & Royston
+  caveat.
+
+## Adding the result back to the dataset
+
+In jamovi, tick **Categorized variable** in the options panel (the `addtodata`
+output). The new column appears in the spreadsheet immediately, named by
+`newvarname` or `<variable>_cat`, and can be used straight away in Cross Tables,
+Alluvial Diagrams, Table One, survival analyses and so on.
+
+`addtodata` is an `Output`-type option: it exists to write a column into a
+jamovi data set, and it is **not** an argument of the `categorize()` R function.
+When you are working in R, take the generated code from the `rcode` output
+instead - it is exactly the `cut()` call the analysis performed, and it appends
+the new column to your own data frame:
+
+```{r}
+# The shape of what the rcode output prints for a quantile split:
+breaks <- unique(sort(quantile(path_data$Ki67_Index,
+                              probs = seq(0, 1, length.out = 4),
+                              na.rm = TRUE)))
+labels <- c("Low", "Medium", "High")
+
+path_data$Ki67_Index_cat <- cut(
+  path_data$Ki67_Index,
+  breaks = breaks,
+  labels = labels,
+  include.lowest = TRUE,
+  right = TRUE,
+  ordered_result = TRUE
+)
+
+table(path_data$Ki67_Index_cat)
+```
+
+## Values outside your break points
+
+With `method = "manual"`, your break points are used exactly as entered and the
+range is then **extended** to the data minimum and maximum, so every observation
+lands in a category and no case is lost. Entering `30,60,90` on eGFR data
+spanning 12.3-109.2 therefore gives five break points - `12.26, 30, 60, 90,
+109.21` - and four bins, which is what CKD staging wants.
+
+That also means you get a bin below your lowest threshold and one above your
+highest. If you would rather **drop** those observations and keep only the range
+you specified, set `excludeoutofrange = TRUE`:
+
+```{r exclude-oor, eval=FALSE}
+categorize(
+    data              = ckd_data,
+    var               = "eGFR",
+    method            = "manual",
+    breaks            = "30,60,90",
+    excludeoutofrange = TRUE      # keep 30-90 only; drop everything outside
+)
+```
+
+The break points are then exactly `30, 60, 90` (two bins), and observations
+below 30 or above 90 are excluded. The analysis reports how many went, split by
+direction - for example *"Excluded 60 observation(s) (33.3%) that fall outside
+the break points [30, 90]: 30 below and 30 above"* - so the loss is never
+silent.
+
+The option applies to `manual` only. The computed methods build their break
+points from the data minimum and maximum, so nothing can fall outside them.
+
+## Practical checklist
+
+1. Have a reason to categorise that is clinical, not statistical.
+2. Prefer an established threshold (`manual`) over a data-derived one.
+3. Check `rightclosed` against how your threshold is written (`>` vs `>=`).
+4. Read the break points table - especially after `manual`, where the outer
+   breaks are extended.
+5. Read the frequency table for tiny or dominant categories before you run
+   anything downstream.
+6. Report the cut-points and the rule in your methods section, and keep the
+   continuous analysis alongside the categorical one.

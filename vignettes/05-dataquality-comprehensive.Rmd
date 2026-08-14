@@ -33,11 +33,18 @@ The `dataquality` function in ClinicoPath provides sophisticated data quality as
 4. **Flexible Outputs**: HTML reports with interactive insights
 
 ### **Analysis Types Available**
-- **Data Overview (vis_dat)**: Variable types and missing value patterns
-- **Missing Patterns (vis_miss)**: Missing value clustering and relationships
-- **Data Types (vis_guess)**: Automatic type detection and validation
-- **Value Expectations (vis_expect)**: Expected vs actual data patterns
-- **Comprehensive Analysis**: All visual analyses combined
+
+Each visualisation is a separate boolean switch - there is no single
+"analysis type" selector. Turn on as many as you need:
+
+- **Data Overview** (`plot_data_overview`, uses `vis_dat`): Variable types and missing value patterns
+- **Missing Patterns** (`plot_missing_patterns`, uses `vis_miss`): Missing value clustering and relationships
+- **Data Types** (`plot_data_types`, uses `vis_guess`): Automatic type detection and validation
+- **Comprehensive Analysis**: enable all three switches together
+
+> **Not yet available:** a value-expectation plot (`vis_expect`) is not shipped in
+> this version - it requires an expectation formula that the module does not yet
+> expose. It is planned for a future release.
 
 # Getting Started
 
@@ -64,11 +71,11 @@ if(exists("treatmentResponse")) {
 
 The enhanced data quality assessment workflow follows these systematic steps:
 
-1. **Variable Selection**: Choose variables for quality assessment
-2. **Analysis Configuration**: Select missing data, duplicates, visual analysis options
-3. **Visual Analysis Type**: Choose specific visdat analysis type
-4. **Threshold Setting**: Configure missing data highlight thresholds
-5. **Export Options**: Enable plot export for publications
+1. **Variable Selection**: Choose variables for quality assessment (`vars`)
+2. **Analysis Configuration**: Enable `check_duplicates`, `check_missing`, `complete_cases_only`
+3. **Visual Analysis**: Switch on any of `plot_data_overview`, `plot_missing_patterns`, `plot_data_types`
+4. **Threshold Setting**: Configure `missing_threshold_visual` (default `10` percent)
+5. **Narrative Output**: Toggle `showSummary`, `showRecommendations`, `showExplanations`
 6. **Execution**: Run comprehensive quality assessment
 7. **Interpretation**: Review results and recommendations
 
@@ -85,11 +92,11 @@ basic_quality <- dataquality(
   vars = c("Age", "Sex", "Grade"),
   check_duplicates = TRUE,
   check_missing = TRUE,
-  complete_cases_only = FALSE,
-  visual_analysis = FALSE,  # Start without visual analysis
-  visdat_type = "vis_dat",
-  missing_threshold_visual = 10,
-  export_plots = FALSE
+  complete_cases_only = FALSE,  # FALSE = duplicate VALUES within each variable
+  plot_data_overview = FALSE,   # Start without any visual analysis
+  plot_missing_patterns = FALSE,
+  plot_data_types = FALSE,
+  missing_threshold_visual = 10
 )
 
 # View basic quality results
@@ -116,10 +123,8 @@ visual_quality <- dataquality(
   check_duplicates = TRUE,
   check_missing = TRUE,
   complete_cases_only = FALSE,
-  visual_analysis = TRUE,  # Enable visual analysis
-  visdat_type = "vis_dat",  # Data overview visualization
-  missing_threshold_visual = 5,  # Highlight variables with >5% missing
-  export_plots = FALSE
+  plot_data_overview = TRUE,     # Data overview visualization (vis_dat)
+  missing_threshold_visual = 5   # Highlight variables with >5% missing
 )
 
 # View visual quality results
@@ -129,7 +134,7 @@ print("Text Summary:")
 visual_quality$text
 
 print("\nVisual Analysis:")
-visual_quality$plot
+visual_quality$plotDataOverview
 ```
 
 **Visual Analysis Benefits:**
@@ -149,18 +154,16 @@ missing_analysis <- dataquality(
   vars = c("Age", "Grade", "TStage", "MeasurementA", "MeasurementB"),
   check_duplicates = FALSE,  # Focus on missing data
   check_missing = TRUE,
-  complete_cases_only = TRUE,  # Analyze complete cases
-  visual_analysis = TRUE,
-  visdat_type = "vis_miss",  # Missing pattern visualization
-  missing_threshold_visual = 10,
-  export_plots = FALSE
+  complete_cases_only = TRUE,     # TRUE = look for duplicate ROWS across all vars
+  plot_missing_patterns = TRUE,   # Missing pattern visualization (vis_miss)
+  missing_threshold_visual = 10
 )
 
 # Examine missing data insights
 print("🔍 Missing Data Pattern Analysis:")
 print("=================================")
 missing_analysis$text
-missing_analysis$plot
+missing_analysis$plotMissingPatterns
 ```
 
 **Missing Pattern Insights:**
@@ -181,17 +184,15 @@ type_validation <- dataquality(
   check_duplicates = FALSE,
   check_missing = FALSE,
   complete_cases_only = FALSE,
-  visual_analysis = TRUE,
-  visdat_type = "vis_guess",  # Type detection visualization
-  missing_threshold_visual = 15,
-  export_plots = TRUE  # Enable export for documentation
+  plot_data_types = TRUE,      # Type detection visualization (vis_guess)
+  missing_threshold_visual = 15
 )
 
 # Review type validation results
 print("🔢 Data Type Validation Analysis:")
 print("================================")
 type_validation$text
-type_validation$plot
+type_validation$plotDataTypes
 ```
 
 **Type Validation Applications:**
@@ -212,10 +213,13 @@ comprehensive_quality <- dataquality(
   check_duplicates = TRUE,
   check_missing = TRUE,
   complete_cases_only = TRUE,
-  visual_analysis = TRUE,
-  visdat_type = "all_visual",  # All visual analyses
+  plot_data_overview = TRUE,     # All three visual analyses
+  plot_missing_patterns = TRUE,
+  plot_data_types = TRUE,
   missing_threshold_visual = 5,
-  export_plots = TRUE
+  showSummary = TRUE,
+  showRecommendations = TRUE,
+  showExplanations = TRUE        # Add the educational notes
 )
 
 # Review comprehensive results
@@ -223,9 +227,14 @@ print("📊 Comprehensive Data Quality Assessment:")
 print("=======================================")
 print("Quality Summary:")
 comprehensive_quality$text
+comprehensive_quality$summary
+comprehensive_quality$recommendations
+comprehensive_quality$explanations
 
 print("\nVisual Analysis Suite:")
-comprehensive_quality$plot
+comprehensive_quality$plotDataOverview
+comprehensive_quality$plotMissingPatterns
+comprehensive_quality$plotDataTypes
 ```
 
 **Comprehensive Benefits:**
@@ -238,14 +247,13 @@ comprehensive_quality$plot
 
 ## Visual Analysis Types
 
-### **Data Overview (vis_dat)**
+### **Data Overview (`plot_data_overview`, vis_dat)**
 ```{r vis-dat-config, eval=FALSE}
 # Data overview configuration
 overview_config <- dataquality(
   data = histopathology,
   vars = c("Age", "Sex", "Grade", "TStage"),
-  visual_analysis = TRUE,
-  visdat_type = "vis_dat",
+  plot_data_overview = TRUE,
   missing_threshold_visual = 10
 )
 ```
@@ -256,14 +264,13 @@ overview_config <- dataquality(
 - Overall data structure assessment
 - Missing data overview
 
-### **Missing Patterns (vis_miss)**
+### **Missing Patterns (`plot_missing_patterns`, vis_miss)**
 ```{r vis-miss-config, eval=FALSE}
 # Missing pattern configuration
 missing_config <- dataquality(
   data = histopathology,
   vars = c("MeasurementA", "MeasurementB", "OverallTime"),
-  visual_analysis = TRUE,
-  visdat_type = "vis_miss",
+  plot_missing_patterns = TRUE,
   missing_threshold_visual = 5  # Stricter threshold for missing data
 )
 ```
@@ -274,14 +281,13 @@ missing_config <- dataquality(
 - Systematic missingness detection
 - Imputation planning
 
-### **Type Detection (vis_guess)**
+### **Type Detection (`plot_data_types`, vis_guess)**
 ```{r vis-guess-config, eval=FALSE}
 # Type detection configuration
 type_config <- dataquality(
   data = histopathology,
   vars = c("Age", "Sex", "Grade", "Death"),
-  visual_analysis = TRUE,
-  visdat_type = "vis_guess",
+  plot_data_types = TRUE,
   missing_threshold_visual = 15
 )
 ```
@@ -292,15 +298,31 @@ type_config <- dataquality(
 - Analysis preparation
 - Error detection
 
-### **Value Expectations (vis_expect)**
+### **Value Expectations (vis_expect) - planned for a future release**
+
+A value-expectation plot is **not available in this version** of
+`dataquality`; there is no option for it. It needs an expectation formula
+(e.g. "flag every value greater than 100") that the module does not yet let you
+specify. It is planned for a future release.
+
+Until then, use `plot_data_overview` together with the `checkdata` analysis,
+which reports out-of-range and outlier values for a single variable:
+
 ```{r vis-expect-config, eval=FALSE}
-# Value expectation configuration
+# Closest currently-available equivalent
 expect_config <- dataquality(
   data = histopathology,
   vars = c("Age", "OverallTime"),
-  visual_analysis = TRUE,
-  visdat_type = "vis_expect",
+  plot_data_overview = TRUE,
   missing_threshold_visual = 10
+)
+
+# Range / outlier checking for one variable at a time
+checkdata(
+  data = histopathology,
+  var = "Age",
+  showOutliers = TRUE,
+  clinicalValidation = TRUE
 )
 ```
 
@@ -319,8 +341,7 @@ expect_config <- dataquality(
 conservative_analysis <- dataquality(
   data = histopathology,
   vars = c("Age", "Sex", "Grade"),
-  visual_analysis = TRUE,
-  visdat_type = "vis_miss",
+  plot_missing_patterns = TRUE,
   missing_threshold_visual = 2  # Very strict
 )
 
@@ -328,17 +349,15 @@ conservative_analysis <- dataquality(
 standard_analysis <- dataquality(
   data = histopathology,
   vars = c("Age", "Sex", "Grade"),
-  visual_analysis = TRUE,
-  visdat_type = "vis_miss",
-  missing_threshold_visual = 10  # Recommended
+  plot_missing_patterns = TRUE,
+  missing_threshold_visual = 10  # The default
 )
 
 # Permissive threshold (highlight variables with >25% missing)
 permissive_analysis <- dataquality(
   data = histopathology,
   vars = c("Age", "Sex", "Grade"),
-  visual_analysis = TRUE,
-  visdat_type = "vis_miss",
+  plot_missing_patterns = TRUE,
   missing_threshold_visual = 25  # Lenient
 )
 ```
@@ -348,32 +367,39 @@ permissive_analysis <- dataquality(
 - **Secondary Variables**: 10-15% (standard clinical research)
 - **Exploratory Analysis**: 20-25% (hypothesis generation)
 
-## Export and Documentation Options
+## Narrative Output Options
 
-### **Publication-Ready Plots**
+There is **no `export_plots` option**. Plots are exported the usual jamovi way -
+right-click a plot and choose an image format, or save the whole output.
+What you *can* control is how much written interpretation accompanies the
+numbers:
+
 ```{r export-config, eval=FALSE}
-# Export-ready configuration
-export_analysis <- dataquality(
+# Full narrative configuration
+narrative_analysis <- dataquality(
   data = histopathology,
   vars = c("Age", "Sex", "Grade", "TStage"),
   check_duplicates = TRUE,
   check_missing = TRUE,
   complete_cases_only = FALSE,
-  visual_analysis = TRUE,
-  visdat_type = "all_visual",
+  plot_data_overview = TRUE,
+  plot_missing_patterns = TRUE,
+  plot_data_types = TRUE,
   missing_threshold_visual = 10,
-  export_plots = TRUE  # Enable export features
+  showSummary = TRUE,          # default TRUE  - plain-language summary
+  showRecommendations = TRUE,  # default TRUE  - concrete next actions
+  showExplanations = TRUE      # default FALSE - educational notes on the metrics
 )
 
-# Export information will be included in results
-export_analysis$plot
+narrative_analysis$summary
+narrative_analysis$recommendations
+narrative_analysis$explanations
 ```
 
-**Export Features:**
-- High-resolution plot generation ready for manuscripts
-- Code examples for reproducing analyses
-- Professional formatting for publications
-- Integration with visdat export capabilities
+**Narrative outputs:**
+- `summary`: a concise plain-language statement of the quality issues found
+- `recommendations`: specific actions for the issues identified
+- `explanations`: what each quality metric and test means (off by default)
 
 # Clinical Research Applications
 
@@ -402,15 +428,13 @@ biomarker_quality <- dataquality(
   check_duplicates = TRUE,
   check_missing = TRUE,
   complete_cases_only = FALSE,
-  visual_analysis = TRUE,
-  visdat_type = "vis_dat",
-  missing_threshold_visual = 5,  # Strict for biomarkers
-  export_plots = TRUE
+  plot_data_overview = TRUE,
+  missing_threshold_visual = 5  # Strict for biomarkers
 )
 
 print("🧬 Biomarker Data Quality Assessment:")
 biomarker_quality$text
-biomarker_quality$plot
+biomarker_quality$plotDataOverview
 ```
 
 **Biomarker Quality Standards:**
@@ -443,15 +467,13 @@ trial_quality <- dataquality(
   check_duplicates = FALSE,  # Not applicable for trial data
   check_missing = TRUE,
   complete_cases_only = TRUE,
-  visual_analysis = TRUE,
-  visdat_type = "vis_miss",  # Focus on missing patterns
-  missing_threshold_visual = 10,
-  export_plots = FALSE
+  plot_missing_patterns = TRUE,  # Focus on missing patterns
+  missing_threshold_visual = 10
 )
 
 print("🏥 Clinical Trial Data Quality Monitoring:")
 trial_quality$text
-trial_quality$plot
+trial_quality$plotMissingPatterns
 
 # Check if quality meets regulatory standards
 missing_pct <- 100 * sum(is.na(trial_data$primary_endpoint)) / nrow(trial_data)
@@ -488,15 +510,17 @@ ae_quality <- dataquality(
   check_duplicates = TRUE,
   check_missing = TRUE,
   complete_cases_only = FALSE,
-  visual_analysis = TRUE,
-  visdat_type = "all_visual",  # Comprehensive analysis for safety
-  missing_threshold_visual = 15,
-  export_plots = TRUE
+  plot_data_overview = TRUE,      # Comprehensive analysis for safety
+  plot_missing_patterns = TRUE,
+  plot_data_types = TRUE,
+  missing_threshold_visual = 15
 )
 
 print("⚠️ Pharmacovigilance Data Quality Assessment:")
 ae_quality$text
-ae_quality$plot
+ae_quality$plotDataOverview
+ae_quality$plotMissingPatterns
+ae_quality$plotDataTypes
 ```
 
 # Quality Assurance Best Practices
@@ -510,7 +534,9 @@ perform_preanalysis_quality_check <- function(data, primary_vars, secondary_vars
   
   cat("📋 PRE-ANALYSIS QUALITY ASSESSMENT\n")
   cat("=================================\n")
-  
+
+  secondary_quality <- NULL
+
   # Primary variables quality assessment
   primary_quality <- dataquality(
     data = data,
@@ -518,10 +544,10 @@ perform_preanalysis_quality_check <- function(data, primary_vars, secondary_vars
     check_duplicates = TRUE,
     check_missing = TRUE,
     complete_cases_only = TRUE,
-    visual_analysis = TRUE,
-    visdat_type = "all_visual",
-    missing_threshold_visual = 5,  # Strict for primary variables
-    export_plots = TRUE
+    plot_data_overview = TRUE,
+    plot_missing_patterns = TRUE,
+    plot_data_types = TRUE,
+    missing_threshold_visual = 5  # Strict for primary variables
   )
   
   cat("PRIMARY VARIABLES ASSESSMENT:\n")
@@ -536,10 +562,8 @@ perform_preanalysis_quality_check <- function(data, primary_vars, secondary_vars
       check_duplicates = TRUE,
       check_missing = TRUE,
       complete_cases_only = FALSE,
-      visual_analysis = TRUE,
-      visdat_type = "vis_miss",
-      missing_threshold_visual = 15,  # More lenient for secondary
-      export_plots = FALSE
+      plot_missing_patterns = TRUE,
+      missing_threshold_visual = 15  # More lenient for secondary
     )
     
     cat("\nSECONDARY VARIABLES ASSESSMENT:\n")
@@ -593,24 +617,27 @@ The dataquality function provides implicit quality grading based on analysis res
 
 ### **Menu Navigation**
 ```
-jamovi → Exploration → ClinicoPath Descriptives → Data Quality Assessment
+jamovi → Exploration → ClinicoPath Data Quality → Multi-Variable Visual Quality
 ```
 
 ### **Parameter Configuration in jamovi**
 1. **Variables**: Select variables for quality assessment
-2. **Duplicates**: Enable duplicate detection analysis
-3. **Missing Values**: Enable missing data analysis
-4. **Complete Cases**: Enable complete case analysis
-5. **Visual Analysis**: Enable visdat integration
-6. **Analysis Type**: Choose vis_dat, vis_miss, vis_guess, vis_expect, or all_visual
-7. **Missing Threshold**: Set percentage threshold for missing data highlighting
-8. **Export Plots**: Enable plot export functionality
+2. **Duplicate values**: `check_duplicates` - duplicate detection
+3. **Missing value analysis**: `check_missing` - detailed missing statistics
+4. **Duplicate rows**: `complete_cases_only` - when on, look for duplicate *rows*
+   across all selected variables instead of duplicate *values* within each variable
+5. **Data overview plot (vis_dat)**: `plot_data_overview`
+6. **Missing patterns plot (vis_miss)**: `plot_missing_patterns`
+7. **Data types plot (vis_guess)**: `plot_data_types`
+8. **Missing-data highlight threshold (percent)**: `missing_threshold_visual` (0-100, default 10)
+9. **Plain-language summary / Action recommendations / Educational notes**:
+   `showSummary`, `showRecommendations`, `showExplanations`
 
 ### **Interpreting jamovi Results**
 - **Instructions Panel**: Comprehensive guidance for using the function
 - **Text Results**: Detailed quality assessment summary
-- **Visual Results**: Interactive plots showing data quality patterns
-- **Export Information**: Guidelines for saving and sharing results
+- **Summary / Recommendations / Explanations**: Plain-language interpretation panels
+- **Visual Results**: Plots showing data quality patterns
 
 # Troubleshooting and Common Issues
 
@@ -642,10 +669,10 @@ no_visual_quality <- dataquality(
   check_duplicates = TRUE,
   check_missing = TRUE,
   complete_cases_only = FALSE,
-  visual_analysis = FALSE,  # Disable visual analysis
-  visdat_type = "vis_dat",
-  missing_threshold_visual = 10,
-  export_plots = FALSE
+  plot_data_overview = FALSE,   # All three plot switches off
+  plot_missing_patterns = FALSE,
+  plot_data_types = FALSE,
+  missing_threshold_visual = 10
 )
 
 print("📊 Data Quality Assessment (No Visual Analysis):")
@@ -666,10 +693,8 @@ subset_quality <- dataquality(
   check_duplicates = FALSE,  # Skip duplicates for speed
   check_missing = TRUE,
   complete_cases_only = FALSE,
-  visual_analysis = TRUE,
-  visdat_type = "vis_dat",  # Use faster vis_dat over all_visual
-  missing_threshold_visual = 10,
-  export_plots = FALSE
+  plot_data_overview = TRUE,  # One plot is faster than all three
+  missing_threshold_visual = 10
 )
 
 # 2. Use sampling for very large datasets
@@ -678,8 +703,9 @@ if (nrow(histopathology) > 1000) {
   sample_quality <- dataquality(
     data = sample_data,
     vars = c("Age", "Sex", "Grade"),
-    visual_analysis = TRUE,
-    visdat_type = "all_visual",
+    plot_data_overview = TRUE,
+    plot_missing_patterns = TRUE,
+    plot_data_types = TRUE,
     missing_threshold_visual = 10
   )
 }
@@ -694,8 +720,7 @@ cat("Memory usage before analysis:", format(object.size(histopathology), units =
 quality_result <- dataquality(
   data = histopathology,
   vars = c("Age", "Sex", "Grade"),
-  visual_analysis = TRUE,
-  visdat_type = "vis_dat"
+  plot_data_overview = TRUE
 )
 
 # Clean up if needed
@@ -715,8 +740,7 @@ quality_check <- dataquality(
   vars = c("Sex", "Grade", "Group"),
   check_duplicates = TRUE,
   check_missing = TRUE,
-  visual_analysis = TRUE,
-  visdat_type = "vis_miss"
+  plot_missing_patterns = TRUE
 )
 
 print("Quality assessment before crosstable analysis:")
@@ -744,9 +768,8 @@ survival_quality <- dataquality(
   vars = c("OverallTime", "Death", "Grade", "TStage"),
   check_duplicates = FALSE,  # Not applicable for survival data
   check_missing = TRUE,
-  complete_cases_only = TRUE,  # Critical for survival analysis
-  visual_analysis = TRUE,
-  visdat_type = "vis_dat",
+  complete_cases_only = TRUE,  # Look for duplicate rows across all four variables
+  plot_data_overview = TRUE,
   missing_threshold_visual = 5  # Strict for survival endpoints
 )
 
@@ -775,20 +798,27 @@ generate_quality_report <- function(data, variables, report_title = "Data Qualit
     check_duplicates = TRUE,
     check_missing = TRUE,
     complete_cases_only = TRUE,
-    visual_analysis = TRUE,
-    visdat_type = "all_visual",
+    plot_data_overview = TRUE,
+    plot_missing_patterns = TRUE,
+    plot_data_types = TRUE,
     missing_threshold_visual = 10,
-    export_plots = TRUE
+    showSummary = TRUE,
+    showRecommendations = TRUE,
+    showExplanations = TRUE
   )
-  
+
   cat("QUALITY ASSESSMENT RESULTS:\n")
   cat("-------------------------\n")
   quality_result$text
-  
+  quality_result$summary
+  quality_result$recommendations
+
   cat("\nVISUAL ANALYSIS:\n")
   cat("---------------\n")
-  quality_result$plot
-  
+  quality_result$plotDataOverview
+  quality_result$plotMissingPatterns
+  quality_result$plotDataTypes
+
   return(quality_result)
 }
 

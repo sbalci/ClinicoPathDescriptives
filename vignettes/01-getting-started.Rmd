@@ -36,10 +36,13 @@ ClinicoPathDescriptives is a comprehensive R package designed for descriptive an
 
 - **Descriptive Statistics**: Generate comprehensive "Table One" summaries
 - **Cross-tabulations**: Create contingency tables with appropriate statistical tests  
-- **Visualization Tools**: Age pyramids, alluvial diagrams, Venn diagrams, and more
-- **Treatment Response Analysis**: Waterfall and swimmer plots for oncology research
-- **Data Quality Assessment**: Benford's law analysis for fraud detection
+- **Visualization Tools**: Age pyramids, alluvial diagrams, Venn diagrams, variable trees, and more
+- **Data Quality Assessment**: Benford's law analysis, outlier detection, single- and multi-variable quality checks
 - **Dual Interface**: Use in R or through jamovi's point-and-click interface
+
+> **Note on treatment-response plots.** Waterfall and swimmer plots are *not* part of
+> ClinicoPathDescriptives. They are provided by the **OncoPath** module
+> (`Analyses > OncoPath > Patient Follow-Up Plots`).
 
 ## Installation
 
@@ -104,8 +107,10 @@ Generate detailed summaries for continuous variables:
 summarydata(
   data = histopathology,
   vars = c("Age", "OverallTime", "MeasurementA"),
-  date_vars = character(0),
-  grvar = "Grade"
+  distr = TRUE,          # add normality / distribution diagnostics
+  decimal_places = 2,    # digits used throughout the table
+  outliers = TRUE,       # flag outlying values
+  report_sentences = TRUE # copy-ready summary sentences
 )
 ```
 
@@ -114,9 +119,11 @@ summarydata(
 Analyze categorical variables with counts and percentages:
 
 ```{r}
+# `vars` is restricted to categorical variables (permitted: factor), so use
+# Grade_Level rather than the numeric Grade / TStage columns.
 reportcat(
   data = histopathology,
-  vars = c("Sex", "Grade", "TStage", "LVI", "PNI")
+  vars = c("Sex", "Grade_Level", "LVI", "PNI", "Group")
 )
 ```
 
@@ -148,11 +155,15 @@ crosstable(
 Visualize age and sex distribution:
 
 ```{r}
+# `female` and `male` are Level options: jamovi makes them REQUIRED arguments
+# of the R wrapper, so both must be supplied explicitly.
 agepyramid(
   data = histopathology,
   age = "Age",
   gender = "Sex",
-  female = "Female"
+  female = "Female",
+  male = "Male",
+  bin_width = 5
 )
 ```
 
@@ -173,25 +184,28 @@ alluvial(
 Analyze overlap between sets:
 
 ```{r}
-# Create binary indicators for Venn diagram
-histopathology_venn <- histopathology %>%
-  mutate(
-    LVI_present = ifelse(LVI == "Present", 1, 0),
-    PNI_present = ifelse(PNI == "Present", 1, 0),
-    Grade_high = ifelse(Grade == "High", 1, 0),
-    TStage_high = ifelse(TStage == "T3" | TStage == "T4", 1, 0)
-  )
-
+# var1..var7 must be categorical (permitted: factor), so the existing
+# Present/Absent columns can be used directly - no recoding needed.
+#
+# var1true..var7true are Level options. jamovi forbids defaults on Level, so all
+# seven are REQUIRED arguments of the R wrapper: pass NULL for the slots whose
+# parent variable is not supplied.
 venn(
-  data = histopathology_venn,
-  var1 = "LVI_present",
-  var1true = "1",
-  var2 = "PNI_present", 
-  var2true = "1",
-  var3 = "Grade_high",
-  var3true = "1",
-  var4 = NULL,
-  var4true = NULL
+  data = histopathology,
+  var1 = "LVI",
+  var1true = "Present",
+  var2 = "PNI",
+  var2true = "Present",
+  var3 = "PreinvasiveComponent",
+  var3true = "Present",
+  var4 = "Grade_Level",
+  var4true = "high",
+  var5 = NULL,
+  var5true = NULL,
+  var6 = NULL,
+  var6true = NULL,
+  var7 = NULL,
+  var7true = NULL
 )
 ```
 
@@ -214,10 +228,27 @@ Assess data quality using Benford's law - useful for detecting fabricated data:
 Get a hierarchical overview of your dataset:
 
 ```{r}
-# Variable tree visualization
-# Note: vartree requires specific parameter configuration
-# See the vartree vignette for detailed examples
-cat("Variable tree visualization available - see vartree documentation for usage examples")
+# Variable tree visualization.
+# vartree has five Level options (percvarLevel, pruneLevel1, pruneLevel2,
+# followLevel1, followLevel2). Level options can never carry a default, so all
+# five are REQUIRED arguments of the R wrapper - pass NULL when the parent
+# Variable (percvar / prunebelow / follow) is not supplied. The optional
+# Variable arguments of vartree carry no default either, so pass them too.
+vartree(
+  data = histopathology,
+  vars = c("Grade_Level", "LVI", "PNI"),  # vars is restricted to factors
+  percvar = NULL,
+  percvarLevel = NULL,
+  summaryvar = NULL,
+  prunebelow = NULL,
+  pruneLevel1 = NULL,
+  pruneLevel2 = NULL,
+  follow = NULL,
+  followLevel1 = NULL,
+  followLevel2 = NULL,
+  horizontal = TRUE,
+  showcount = TRUE
+)
 ```
 
 ## Working with Treatment Response Data
@@ -232,14 +263,13 @@ head(treatmentResponse)
 
 ### Waterfall Plot
 
-Visualize individual patient treatment responses:
+> **Not in this module.** `waterfall()` and `swimmerplot()` ship with the **OncoPath**
+> module (`Analyses > OncoPath > Patient Follow-Up Plots`). The `treatmentResponse`
+> dataset is bundled here for convenience, but the plotting analyses are not.
 
 ```{r}
-# Load treatment response data
+# The bundled dataset has two columns: PatientID and ResponseValue
 data(treatmentResponse)
-
-# Waterfall plot example
-# Note: column names may vary - check treatmentResponse dataset structure
 head(treatmentResponse)
 ```
 

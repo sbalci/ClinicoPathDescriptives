@@ -12,6 +12,12 @@ vignette: >
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 ```
 
+```{r libs, eval=FALSE}
+library(ClinicoPathDescriptives)
+library(dplyr)   # for vars()
+data("histopathology")
+```
+
 This vignette focuses on the functions that generate tables and textual summaries.
 
 ## Continuous Variables
@@ -21,7 +27,9 @@ This vignette focuses on the functions that generate tables and textual summarie
 ```{r cont-sum, eval=FALSE}
 summarydata(
   data = histopathology,
-  vars = vars(Age, TumorSize)
+  vars = vars(Age, OverallTime),
+  distr = TRUE,          # optional distribution diagnostics
+  decimal_places = 2     # 2 by default
 )
 ```
 

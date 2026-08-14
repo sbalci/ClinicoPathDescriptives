@@ -123,22 +123,25 @@ crosstable(
 ### Data Summary
 
 ```{r}
-# Example of proper summarydata usage
+# Example of proper summarydata usage.
+# summarydata() takes only: vars, distr, decimal_places, outliers, report_sentences.
 summarydata(
   data = histopathology,
   vars = c("Age", "OverallTime"),
-  date_vars = character(0),
-  grvar = "Group"
+  distr = TRUE,
+  outliers = TRUE
 )
 ```
 
 ### Categorical Reporting
 
 ```{r}
-# Example of proper reportcat usage
+# Example of proper reportcat usage.
+# `vars` only accepts categorical variables, so use Grade_Level (character)
+# rather than Grade (numeric).
 reportcat(
   data = histopathology,
-  vars = c("Sex", "Grade", "LVI", "PNI")
+  vars = c("Sex", "Grade_Level", "LVI", "PNI")
 )
 ```
 
@@ -163,15 +166,15 @@ benford(
 
 ### Agreement Analysis
 
-```{r}
-# Example agreement analysis (if rater variables exist)
-# Note: This requires specific rater variables in the dataset
-# agreement(
-#   data = histopathology,
-#   vars = c("Rater1", "Rater2")
-# )
+> **Not in this module.** `agreement()` is provided by the **meddecide** module, not by
+> ClinicoPathDescriptives. The chunk below is reference-only and is not evaluated.
 
-cat("Agreement analysis available - see agreement vignette for detailed examples")
+```{r eval=FALSE}
+# Requires the meddecide module to be installed
+# meddecide::agreement(
+#   data = histopathology,
+#   vars = c("Rater 1", "Rater 2")
+# )
 ```
 
 ## Best Practices Summary

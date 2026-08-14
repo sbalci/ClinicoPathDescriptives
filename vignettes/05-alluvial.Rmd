@@ -314,9 +314,14 @@ ggplot(treatment_data, aes(axis1 = PreTreatment, axis2 = Treatment, axis3 = Resp
 
 ### Survival Analysis Flow
 
-```{r survival-flow}
-# Using colon cancer dataset
-data("colon")
+> **Note:** the `colon` dataset is *not* shipped by ClinicoPathDescriptives - it
+> comes from the **survival** package, which is not a dependency of this module.
+> Run `install.packages("survival")` and use `survival::colon` if you want to
+> reproduce this example. The chunk is therefore not evaluated.
+
+```{r survival-flow, eval = FALSE}
+# Using the colon cancer dataset from the survival package
+data("colon", package = "survival")
 
 # Analyze factors leading to outcomes
 alluvial(
@@ -389,6 +394,20 @@ The `alluvial()` function supports the following parameters:
 | `orient` | List | `vert`, `horr` | `vert` | Plot orientation |
 | `usetitle` | Boolean | `TRUE`/`FALSE` | `FALSE` | Use custom title |
 | `mytitle` | String | - | `"Alluvial Plot"` | Custom title text |
+| `fillGgalluvial` | Variable | - | `NULL` | Fill variable, `ggalluvial` engine only |
+| `maxvars` | Integer | - | `8` | Maximum number of variables allowed |
+| `custombinlabels` | String | - | `""` | Comma-separated custom bin labels |
+| `colorPalette` | List | `default`, `viridis`, `plasma`, `set3`, `pastel1`, `dark2` | `default` | Colour palette |
+| `showCounts` | Boolean | `TRUE`/`FALSE` | `FALSE` | Show counts on nodes |
+| `themeStyle` | List | `default`, `minimal`, `classic`, `grey`, `bw` | `default` | ggplot2 theme |
+| `enhancedGradients` | Boolean | `TRUE`/`FALSE` | `FALSE` | Enhanced edge gradients |
+| `plotSubtitle` | String | - | `""` | Plot subtitle |
+| `weight` | Variable | - | `NULL` | Weight (frequency) variable |
+| `sankeyStyle` | Boolean | `TRUE`/`FALSE` | `FALSE` | Sankey-style rendering |
+| `curveType` | List | `cubic`, `linear`, `quintic`, `sine`, `arctangent`, `sigmoid` | `cubic` | Flow curve shape |
+| `flowDirection` | List | `left_right`, `top_bottom`, `right_left`, `bottom_top` | `left_right` | Flow direction |
+| `engine` | List | `easyalluvial`, `ggalluvial` | `easyalluvial` | Plotting engine |
+| `labelNodes` | Boolean | `TRUE`/`FALSE` | `FALSE` | Label the nodes |
 
 ## Best Practices
 
@@ -408,7 +427,7 @@ The `alluvial()` function supports the following parameters:
 
 ## Conclusion
 
-The ClinicoPath alluvial function provides comprehensive functionality for visualizing categorical data flows in clinical research. With 9 customizable parameters and dual plot capabilities, it supports both exploratory analysis and publication-ready visualizations for understanding complex relationships in clinical and pathological data.
+The ClinicoPath alluvial function provides comprehensive functionality for visualizing categorical data flows in clinical research. With 24 customizable parameters and dual plot capabilities, it supports both exploratory analysis and publication-ready visualizations for understanding complex relationships in clinical and pathological data.
 
 ## Session Information
 

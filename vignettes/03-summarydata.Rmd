@@ -40,13 +40,16 @@ head(brca_data)
 # Load the library
 library(ClinicoPathDescriptives)
 
-# Run the summarydata analysis with distribution diagnostics enabled
+# Run the summarydata analysis with distribution diagnostics enabled.
+# summarydata takes exactly five options besides `data`:
+#   vars, distr, decimal_places, outliers, report_sentences
 results <- summarydata(
     data = brca_data,
     vars = c("AgeAtDiagnosis", "TumorSize_mm", "Ki67_Index"),
-    date_vars = character(0),
-    grvar = NULL,
-    distr = TRUE
+    distr = TRUE,            # normality tests + distribution diagnostics (default FALSE)
+    decimal_places = 2,      # default 2
+    outliers = TRUE,         # outlier report (default FALSE)
+    report_sentences = TRUE  # copy-ready sentences (default FALSE)
 )
 
 # The results are HTML outputs that render directly in jamovi.

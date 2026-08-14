@@ -7,6 +7,34 @@ output: html_document
 editor: visual
 ---
 
+```{r knitr-defaults, include=FALSE}
+# The missingdata analysis is not installed with this module, so nothing here can run.
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
+
+> ### Availability note (please read first)
+>
+> **This analysis is not part of ClinicoPathDescriptives 1.0.52.**
+>
+> `missingdata` currently exists only in the development umbrella module `ClinicoPath`,
+> where it is still routed to a development menu group (`ExplorationD`) rather than a
+> released one. It is not shipped by `ClinicoPathDescriptives`, nor by `jjstatsplot`,
+> `meddecide`, `jsurvival` or `OncoPath`.
+> **It is under development and is planned for a future release.**
+>
+> The 14 analyses that ClinicoPathDescriptives 1.0.52 actually ships are: `agepyramid`,
+> `alluvial`, `benford`, `categorize`, `checkdata`, `chisqposttest`, `crosstable`,
+> `dataquality`, `outlierdetection`, `reportcat`, `summarydata`, `tableone`, `vartree`
+> and `venn`. For missing-data work available today in this module, see
+> **Single Variable Quality Check** (`checkdata`, which offers `mcarTest`) and
+> **Multi-Variable Visual Quality** (`dataquality`, which offers `check_missing`,
+> `plot_missing_patterns` and `complete_cases_only`). Neither performs imputation.
+>
+> The example datasets used below (`clinical_trial_data`, `biomarker_data`, ...) are not
+> shipped by `ClinicoPathDescriptives`. Because neither the function nor the data is
+> available here, **every code chunk in this vignette is set to `eval = FALSE`** and the
+> output shown is illustrative only.
+
 ## Overview
 
 The `missingdata` function in ClinicoPath provides comprehensive missing data analysis and multiple imputation capabilities using the powerful `mice` and `ggmice` packages.

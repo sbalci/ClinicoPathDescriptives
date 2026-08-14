@@ -5,6 +5,32 @@ date: "`r Sys.Date()`"
 output: html_document
 ---
 
+> ## Availability note — please read first
+>
+> **`eurostatmap` is NOT part of ClinicoPathDescriptives 1.0.52.**
+>
+> This analysis currently exists only in the `ClinicoPath` umbrella development tree, where
+> it is routed to a development-only menu group (`ExplorationD`). It is not shipped by
+> ClinicoPathDescriptives, and it is not shipped by any sibling module either
+> ([jjstatsplot](https://www.serdarbalci.com/jjstatsplot/),
+> [meddecide](https://www.serdarbalci.com/meddecide/),
+> [jsurvival](https://www.serdarbalci.com/jsurvival/), or OncoPath).
+>
+> **It is under development and planned for a future release.** Until then `eurostatmap()`
+> cannot be called from this package. The `eurostat_*` and `turkey_*` example datasets used
+> below are also not installed by ClinicoPathDescriptives, so every code chunk is set to
+> `eval = FALSE`.
+>
+> The 14 analyses ClinicoPathDescriptives 1.0.52 actually ships are: `agepyramid`, `alluvial`,
+> `benford`, `categorize`, `checkdata`, `chisqposttest`, `crosstable`, `dataquality`,
+> `outlierdetection`, `reportcat`, `summarydata`, `tableone`, `vartree` and `venn`.
+
+```{r global-eval-off, include=FALSE}
+# This vignette documents an analysis that is not shipped in this package.
+# Nothing below is executed at build time.
+knitr::opts_chunk$set(eval = FALSE)
+```
+
 # Introduction to Eurostat Maps
 
 The `eurostatmap` function in ClinicoPath allows researchers to create choropleth maps using European statistical data. This powerful visualization tool can display various health, demographic, and economic indicators across European countries and regions using official Eurostat data or your own datasets.
@@ -21,7 +47,7 @@ The `eurostatmap` function in ClinicoPath allows researchers to create choroplet
 
 Before using the eurostatmap function, ensure you have the required packages installed:
 
-```{r setup}
+```{r setup, eval=FALSE}
 library(ClinicoPathDescriptives)
 library(dplyr)
 library(knitr)

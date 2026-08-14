@@ -5,18 +5,44 @@ date: "`r Sys.Date()`"
 output: html_document
 ---
 
+> ## Availability note — please read first
+>
+> **There is no `consort()` analysis in ClinicoPathDescriptives 1.0.52 — nor in any released
+> ClinicoPath module.**
+>
+> No analysis named `consort` exists in ClinicoPathDescriptives, jjstatsplot, meddecide,
+> jsurvival or OncoPath. The closest thing that exists anywhere is `consortdiagram`
+> ("CONSORT Flow Diagram"), which lives only in the `ClinicoPath` umbrella development tree
+> and is routed to a development-only menu group under **OncoPath** (`OncoPathT`,
+> subgroup "Study Design").
+>
+> So: **CONSORT flow diagrams are under development, are not part of
+> ClinicoPathDescriptives, and are expected to ship in
+> [OncoPath](https://www.serdarbalci.com/OncoPath/) rather than here.** The function name and
+> the argument names used throughout this vignette (`consort(initialN = , notEligibleN = , ...)`)
+> are provisional and do not match any released API. The `consort_examples_data` dataset it
+> loads is also not installed by ClinicoPathDescriptives. Every code chunk is therefore set to
+> `eval = FALSE`.
+>
+> The 14 analyses ClinicoPathDescriptives 1.0.52 actually ships are: `agepyramid`, `alluvial`,
+> `benford`, `categorize`, `checkdata`, `chisqposttest`, `crosstable`, `dataquality`,
+> `outlierdetection`, `reportcat`, `summarydata`, `tableone`, `vartree` and `venn`.
+
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "vignettes/",
   warning = FALSE,
-  message = FALSE
+  message = FALSE,
+  # This vignette documents an analysis that is not shipped in this package.
+  # Nothing below is executed at build time.
+  eval = FALSE
 )
 
 # Load required libraries
 # library(ClinicoPathDescriptives)  # Commented out for vignette building
-library(DiagrammeR)
+# library(DiagrammeR)               # Not a dependency of ClinicoPathDescriptives
 ```
 
 # Introduction to CONSORT Flow Charts

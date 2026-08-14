@@ -74,9 +74,30 @@ Benford's Law works best with datasets that:
 
 # Getting Started with Benford Analysis
 
+## The `benford` analysis in one line
+
+The module's Benford analysis exposes exactly **two** options:
+
+| Option   | Type     | Default | Meaning |
+|----------|----------|---------|---------|
+| `var`    | Variable | -       | The numeric variable to analyse |
+| `digits` | Integer  | `2`     | Number of leading digits tested, min `1`, max `3` (`1` = first digit, `2` = first-two digits, `3` = first-three digits) |
+
+It returns `text` and `text2` (both `Preformatted`) and `plot` (an `Image`). There are no
+other options and no other result items - anything else you see referenced in older notes
+does not exist.
+
 ## Load Required Libraries and Data
 
-```{r setup 2, message=FALSE, warning=FALSE}
+> **Note:** the five datasets loaded below (`financial_data`, `fraudulent_data`,
+> `natural_phenomena_data`, `scientific_data`, `economic_data`) are **not shipped with
+> ClinicoPathDescriptives**. They are illustrative only, so every chunk in this guide is
+> set to `eval = FALSE`. To follow along, substitute any numeric column of your own -
+> for example the bundled `histopathology` dataset - or generate synthetic amounts with
+> `rlnorm()` as shown in the shorter "Checking Data Authenticity with Benford's Law"
+> vignette.
+
+```{r setup 2, message=FALSE, warning=FALSE, eval=FALSE}
 library(ClinicoPathDescriptives)
 library(dplyr)
 library(ggplot2)
@@ -117,7 +138,8 @@ Financial transaction data naturally follows Benford's Law due to the wide range
 # Analyze transaction amounts - should follow Benford's Law
 benford_result_financial <- benford(
   data = financial_data,
-  var = "transaction_amounts"
+  var = "transaction_amounts",
+  digits = 2                    # 2 is the default; use 1 for first-digit only
 )
 
 # View the results:
@@ -254,7 +276,9 @@ The primary statistical test for Benford compliance:
 
 - **Null hypothesis**: Data follows Benford's Law
 - **Test statistic**: χ² = Σ[(Observed - Expected)² / Expected]
-- **Degrees of freedom**: 8 (for 9 digits - 1)
+- **Degrees of freedom**: depends on the `digits` option - 8 with `digits = 1`
+  (9 first digits - 1), and 89 with the default `digits = 2` (90 first-two-digit
+  combinations 10-99, minus 1)
 - **Significance level**: Typically α = 0.05 or 0.01
 
 **Interpretation:**
@@ -265,13 +289,26 @@ The primary statistical test for Benford compliance:
 ### **Mean Absolute Deviation (MAD)**
 Alternative measure of Benford compliance:
 
-- **MAD = (1/9) × Σ|Observed% - Expected%|**
+- **MAD = (1/k) × Σ|Observed% - Expected%|**, where *k* is the number of digit categories
+
+The cut-offs below are Nigrini's **first-digit** thresholds and therefore apply when you
+set `digits = 1`:
+
 - **Excellent compliance**: MAD < 0.006
 - **Acceptable compliance**: 0.006 <= MAD < 0.012
 - **Marginal compliance**: 0.012 <= MAD < 0.015
 - **Non-compliance**: MAD >= 0.015
 
+With the module default `digits = 2` (first-two digits, 90 categories) the corresponding
+first-two-digit thresholds are much smaller - roughly 0.0012 / 0.0018 / 0.0022 - so read
+the MAD reported in `results$text` against the threshold set matching the `digits` you
+actually chose.
+
 ## Digit Analysis Beyond First Digit
+
+The `digits` option selects how many leading digits are tested: `1`, `2` (the default) or
+`3`. A standalone *second*-digit-only test is not offered by this module; the material
+below is background on what the different digit positions reveal.
 
 ### **Second Digit Analysis**
 Second digits (0-9) follow a different pattern:
@@ -309,11 +346,14 @@ Combinations 10-99 provide more granular detection:
 
 ```{r investigation-workflow, eval=FALSE}
 # Step 1: Initial Benford analysis
-initial_analysis <- benford(data = suspicious_dataset, var = "amounts")
+initial_analysis <- benford(data = suspicious_dataset, var = "amounts", digits = 2)
 
-# Step 2: Examine suspects
-suspects <- initial_analysis$text2
-high_risk_items <- suspects[suspects$risk_score > threshold]
+# Step 2: Examine suspects.
+# `text` and `text2` are Preformatted result items - they render the console output of
+# benford.analysis, they are NOT data frames, so they cannot be subset or filtered.
+# Read them, then go back to the raw data for programmatic follow-up:
+print(initial_analysis$text)   # test statistics and MAD conformity
+print(initial_analysis$text2)  # suspect records
 
 # Step 3: Follow-up analysis
 # - Analyze by time period
@@ -422,7 +462,8 @@ for (category in expense_categories) {
     cat("Category:", category, "\n")
     cat("Sample size:", nrow(category_data), "\n")
     print(result$text)
-    cat("Suspects:", length(result$text2), "\n\n")
+    print(result$text2)   # suspects, as Preformatted output
+    cat("\n")
   }
 }
 ```
@@ -458,8 +499,14 @@ measurement_result <- benford(
   var = "measurement_values"
 )
 
-# Check for data fabrication indicators
-if (measurement_result$p_value < 0.05) {
+# Check for data fabrication indicators.
+# NOTE: benford() returns only `text`, `text2` and `plot`; there is no `$p_value`
+# element to branch on. Read the chi-square result and MAD conformity out of `text`:
+print(measurement_result$text)
+
+# For a programmatic p-value, run benford.analysis directly on the same column:
+bfd <- benford.analysis::benford(clinical_data$measurement_values, number.of.digits = 2)
+if (benford.analysis::chisq(bfd)$p.value < 0.05) {
   warning("Clinical data shows deviation from Benford's Law")
   # Flag for additional validation
 }
@@ -473,9 +520,11 @@ survey_result <- benford(
   var = "response_values"
 )
 
-# Detect systematic response patterns
-digit_preferences <- survey_result$digit_analysis
-suspicious_digits <- digit_preferences[digit_preferences$deviation > 0.05, ]
+# Detect systematic response patterns.
+# There is no `$digit_analysis` element - the digit-by-digit table is printed inside
+# `text` and drawn in `plot`:
+print(survey_result$text)
+survey_result$plot
 ```
 
 # Quality Assurance Checklist
@@ -582,18 +631,23 @@ if (nrow(large_dataset) > 10000) {
 
 ### **Automation and Monitoring**
 ```{r automation, eval=FALSE}
-# Automated Benford monitoring system
+# Automated Benford monitoring system.
+# benford() returns rendered output items, not numbers, so an automated monitor should
+# compute the p-value with benford.analysis and use benford() for the human-readable
+# report alongside it.
 benford_monitor <- function(dataset, var_name, threshold = 0.05) {
-  result <- benford(data = dataset, var = var_name)
+  report <- benford(data = dataset, var = var_name, digits = 2)  # for the write-up
+  bfd    <- benford.analysis::benford(dataset[[var_name]], number.of.digits = 2)
+  p      <- benford.analysis::chisq(bfd)$p.value
 
   # Alert system
-  if (result$p_value < threshold) {
+  if (p < threshold) {
     alert <- list(
       timestamp = Sys.time(),
       dataset = deparse(substitute(dataset)),
       variable = var_name,
-      p_value = result$p_value,
-      risk_level = if (result$p_value < 0.01) "HIGH" else "MEDIUM"
+      p_value = p,
+      risk_level = if (p < 0.01) "HIGH" else "MEDIUM"
     )
 
     # Log alert and notify stakeholders

@@ -41,19 +41,24 @@ head(brca_data)
 # Load the library
 library(ClinicoPathDescriptives)
 
-# Run the summarydata analysis with distribution diagnostics enabled
+# Run the summarydata analysis with distribution diagnostics enabled.
+# summarydata() takes: vars, distr, decimal_places, outliers, report_sentences.
+# It has no grouping option - use tableone() or crosstable() to compare groups.
 results <- summarydata(
     data = brca_data,
     vars = c("AgeAtDiagnosis", "TumorSize_mm", "Ki67_Index"),
-    date_vars = character(0),
-    grvar = "TreatmentGroup",
-    distr = TRUE
+    distr = TRUE,
+    decimal_places = 2,
+    outliers = TRUE,
+    report_sentences = TRUE
 )
 
 # The results are HTML outputs that render directly in jamovi.
 # In R, you would access them like this:
-results$text  # (for the text summary)
-results$text1 # (for the visual summary table)
+results$text            # (for the text summary)
+results$text1           # (for the visual summary table)
+results$outlierReport   # (shown when outliers = TRUE)
+results$reportSentences # (shown when report_sentences = TRUE)
 ```
 
 

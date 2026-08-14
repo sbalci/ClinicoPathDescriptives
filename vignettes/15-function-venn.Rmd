@@ -38,7 +38,11 @@ head(histopathology)
 library(ClinicoPathDescriptives)
 # data(histopathology, package="ClinicoPathDescriptives") # if needed
 
-results_venn <- ClinicoPath::venn(
+# venn() accepts up to seven variables. Each `varNtrue` is a Level option, which
+# jamovi never gives a default, so every one of var1true ... var7true is a
+# REQUIRED argument of the R wrapper - pass NULL for the slots you do not use.
+# show_ggvenn is TRUE by default; the UpSet plot needs show_upsetR = TRUE.
+results_venn <- venn(
   data = histopathology,
   var1 = "LVI",
   var1true = "Present",
@@ -46,20 +50,26 @@ results_venn <- ClinicoPath::venn(
   var2true = "Present",
   var3 = "PreinvasiveComponent",
   var3true = "Yes",
-  var4 = NULL,      # Explicitly NULL for unused variable
-  var4true = NULL   # Explicitly NULL for unused true level
+  var4 = NULL, var4true = NULL,
+  var5 = NULL, var5true = NULL,
+  var6 = NULL, var6true = NULL,
+  var7 = NULL, var7true = NULL,
+  show_ggvenn = TRUE,
+  show_upsetR = TRUE
 )
 
 ```
 
 ```{r}
-results_venn$plot
+# Venn diagram (ggvenn engine)
+results_venn$plotGgvenn
 ```
 
 
 
 ```{r}
-results_venn$plot2
+# UpSet plot (requires show_upsetR = TRUE above)
+results_venn$plotUpsetR
 ```
 
 

@@ -5,6 +5,22 @@ date: "`r Sys.Date()`"
 output: html_document
 ---
 
+> ## Scope note: no ClinicoPathDescriptives analysis is demonstrated here
+>
+> **This vignette calls no analysis from ClinicoPathDescriptives 1.0.52.** It is a
+> methodological walkthrough written in plain R (`dplyr`, `psych::ICC()`, `lm()`, `t.test()`)
+> rather than a guide to any of the 14 analyses this module ships (`agepyramid`, `alluvial`,
+> `benford`, `categorize`, `checkdata`, `chisqposttest`, `crosstable`, `dataquality`,
+> `outlierdetection`, `reportcat`, `summarydata`, `tableone`, `vartree`, `venn`).
+>
+> The jamovi analyses that cover this material live in other modules:
+> reader-agreement and ICC in [meddecide](https://www.serdarbalci.com/meddecide/) (`agreement`),
+> and IHC quantification heterogeneity in [OncoPath](https://www.serdarbalci.com/OncoPath/)
+> (`ihcheterogeneity`).
+>
+> The `digital_pathology_validation` dataset used below is **not** shipped with
+> ClinicoPathDescriptives 1.0.52, so the chunks cannot run. All chunks are `eval = FALSE`.
+
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,

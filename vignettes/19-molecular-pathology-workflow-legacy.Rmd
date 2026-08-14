@@ -5,6 +5,38 @@ date: "`r Sys.Date()`"
 output: html_document
 ---
 
+> ### Module note --- this vignette does not use any ClinicoPathDescriptives analysis
+>
+> **Nothing in this document calls an analysis shipped by ClinicoPathDescriptives 1.0.52.**
+> The workflow is written entirely in base R plus **dplyr**, **ggplot2**, **pROC** and
+> **survival**; it is a narrative about molecular pathology practice, not a demonstration
+> of this module's functions. It is kept here for its clinical content.
+>
+> Two things will stop it from running as written:
+>
+> * All four datasets it loads --- `ihc_molecular_comprehensive`,
+>   `digital_pathology_validation`, `biomarker_validation_study` and
+>   `precision_oncology_data` --- ship with the **umbrella ClinicoPath module**
+>   (<https://www.serdarbalci.com/ClinicoPathJamoviModule/>), not with
+>   ClinicoPathDescriptives.
+> * The setup chunk attaches `ClinicoPathDescriptives`, which supplies neither those
+>   datasets nor any function used below.
+>
+> ClinicoPathDescriptives 1.0.52 ships exactly 14 analyses: `agepyramid`, `alluvial`,
+> `benford`, `categorize`, `checkdata`, `chisqposttest`, `crosstable`, `dataquality`,
+> `outlierdetection`, `reportcat`, `summarydata`, `tableone`, `vartree` and `venn`. The
+> jamovi equivalents of several steps described here are available: cohort and biomarker
+> summary tables via **`tableone`**, **`summarydata`** and **`reportcat`**; biomarker
+> versus outcome cross tabulation via **`crosstable`** and **`chisqposttest`**;
+> pre-analytical quality screening via **`checkdata`** and **`dataquality`**; and
+> continuous-to-categorical biomarker cutoffs via **`categorize`**. Survival modelling and
+> ROC/diagnostic-accuracy analysis are not in this module --- they live in
+> **jsurvival** (<https://www.serdarbalci.com/jsurvival/>) and **meddecide**
+> (<https://www.serdarbalci.com/meddecide/>).
+>
+> The chunk below already sets `eval = FALSE` for the whole document, so none of these
+> examples run.
+
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,

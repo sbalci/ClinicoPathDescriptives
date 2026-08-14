@@ -75,37 +75,52 @@ cat("Enhanced dataset prepared with", nrow(viz_data), "patients and", ncol(viz_d
 
 ### Age Pyramid - Population Structure
 
+`agepyramid()` has no grouping option, so a stratified pyramid is produced by
+subsetting the data and calling the analysis once per stratum. `female` and
+`male` are `Level` options and therefore **required** arguments of the R
+wrapper.
+
 ```{r}
 # Classic age pyramid showing population structure
 agepyramid(
   data = viz_data,
   age = "Age",
   gender = "Sex",
-  female = "Female"
+  female = "Female",
+  male = "Male"
 )
 ```
 
-### Age Pyramid by Treatment Group
+### Age Pyramid for the Treatment Arm
 
 ```{r}
-# Age pyramid comparing treatment groups
+# Pyramid restricted to the treatment arm
 agepyramid(
-  data = viz_data,
-  age = "Age", 
-  gender = "Sex",
-  female = "Female"
-)
-```
-
-### Age Pyramid by Risk Profile
-
-```{r}
-# Age pyramid by risk stratification
-agepyramid(
-  data = viz_data,
+  data = dplyr::filter(viz_data, Group == "Treatment"),
   age = "Age",
   gender = "Sex",
-  female = "Female"
+  female = "Female",
+  male = "Male",
+  plot_title = "Age Pyramid - Treatment Arm"
+)
+```
+
+### Age Pyramid for High-Risk Patients
+
+```{r}
+# Pyramid restricted to the high-risk stratum.
+# `age_groups` accepts custom, pediatric, reproductive, geriatric or lifecourse;
+# `bin_width` (default 5) applies to the "custom" scheme.
+agepyramid(
+  data = dplyr::filter(viz_data, Risk_Profile == "High Risk"),
+  age = "Age",
+  gender = "Sex",
+  female = "Female",
+  male = "Male",
+  age_groups = "custom",
+  bin_width = 10,
+  color_palette = "colorblind",
+  plot_title = "Age Pyramid - High Risk"
 )
 ```
 
@@ -148,27 +163,34 @@ alluvial(
 
 ### Venn Diagrams - Biomarker Overlap
 
+`venn()` only accepts **factor** variables, and the "true" level is named as a
+character string. `var1true` ... `var7true` are `Level` options, so all seven are
+required arguments of the R wrapper - pass `NULL` for unused slots.
+
 ```{r}
-# Prepare binary indicators for Venn analysis
+# Prepare categorical indicators for Venn analysis (factors, not 0/1 numerics)
 venn_data <- viz_data %>%
   mutate(
-    LVI_Present = ifelse(LVI == "Present", 1, 0),
-    PNI_Present = ifelse(PNI == "Present", 1, 0),
-    LN_Positive = ifelse(LymphNodeMetastasis == "Present", 1, 0),
-    High_Grade = ifelse(Grade == "3", 1, 0)
+    High_Grade = factor(ifelse(Grade == "3", "Yes", "No"))
   )
 
 # Three-way Venn diagram of invasion markers
 venn(
   data = venn_data,
-  var1 = "LVI_Present",
-  var1true = 1,
-  var2 = "PNI_Present",
-  var2true = 1,
-  var3 = "LN_Positive",
-  var3true = 1,
+  var1 = "LVI",
+  var1true = "Present",
+  var2 = "PNI",
+  var2true = "Present",
+  var3 = "LymphNodeMetastasis",
+  var3true = "Present",
   var4 = NULL,
-  var4true = NULL
+  var4true = NULL,
+  var5 = NULL,
+  var5true = NULL,
+  var6 = NULL,
+  var6true = NULL,
+  var7 = NULL,
+  var7true = NULL
 )
 ```
 
@@ -178,14 +200,21 @@ venn(
 # Four-way analysis including grade
 venn(
   data = venn_data,
-  var1 = "LVI_Present",
-  var1true = 1,
-  var2 = "PNI_Present",
-  var2true = 1,
-  var3 = "LN_Positive",
-  var3true = 1,
+  var1 = "LVI",
+  var1true = "Present",
+  var2 = "PNI",
+  var2true = "Present",
+  var3 = "LymphNodeMetastasis",
+  var3true = "Present",
   var4 = "High_Grade",
-  var4true = 1
+  var4true = "Yes",
+  var5 = NULL,
+  var5true = NULL,
+  var6 = NULL,
+  var6true = NULL,
+  var7 = NULL,
+  var7true = NULL,
+  show_upsetR = TRUE
 )
 ```
 
@@ -245,9 +274,16 @@ vartree(
 
 ## Section 5: Treatment Response Visualizations
 
+> **Not part of this module.** `waterfall()` and `swimmerplot()` are **not**
+> shipped by ClinicoPathDescriptives - they are provided by the companion
+> **OncoPath** module (jamovi menu: `Exploration > Patient Follow-Up Plots`).
+> The examples in Sections 5 and 6 are kept for reference and are set to
+> `eval = FALSE`; run them after installing OncoPath.
+
 ### Waterfall Plot - Individual Response
 
-```{r}
+```{r eval=FALSE}
+# Requires the OncoPath module - not available in ClinicoPathDescriptives
 # Check if treatmentResponse dataset exists, if not create sample data
 if(!exists("treatmentResponse")) {
   # Create sample treatment response data
@@ -289,7 +325,8 @@ waterfall(
 
 ### Waterfall with Response Categories
 
-```{r}
+```{r eval=FALSE}
+# Requires the OncoPath module - not available in ClinicoPathDescriptives
 # Waterfall colored by response category
 waterfall(
   data = response_enhanced,
@@ -303,7 +340,8 @@ waterfall(
 
 ### Swimmer Plot - Patient Timelines
 
-```{r}
+```{r eval=FALSE}
+# Requires the OncoPath module - not available in ClinicoPathDescriptives
 # Prepare swimmer plot data
 swimmer_data <- viz_data %>%
   filter(ID <= 30) %>%  # Limit for clarity
@@ -333,7 +371,8 @@ swimmerplot(
 
 ### Swimmer Plot by Treatment Group
 
-```{r}
+```{r eval=FALSE}
+# Requires the OncoPath module - not available in ClinicoPathDescriptives
 # Swimmer plot with grouping (using correct parameter names)
 swimmerplot(
   data = swimmer_data,
@@ -355,21 +394,28 @@ swimmerplot(
 ### Benford's Law Analysis
 
 ```{r}
-# Benford's law for measurement data
-# benford(
-#   data = viz_data,
-#   var = "MeasurementA"
-# )
+# Benford's law for measurement data.
+# `benford` takes exactly one variable (`var`); `digits` (default 2) selects
+# first-digit vs first-two-digit analysis.
+benford(
+  data = viz_data,
+  var = "MeasurementA",
+  digits = 2
+)
 ```
 
-### Multi-variable Benford Analysis
+### Benford Analysis of a Second Variable
+
+`benford()` analyses one variable per call, so a second variable means a second
+call.
 
 ```{r}
 # Benford's law for follow-up time
-# benford(
-#   data = viz_data,
-#   var = "OverallTime"
-# )
+benford(
+  data = viz_data,
+  var = "OverallTime",
+  digits = 1
+)
 ```
 
 ## Section 8: Advanced Composite Visualizations
@@ -481,14 +527,16 @@ cat("This approach provides comprehensive visual narrative of study results.\n")
 
 All visualizations are available through jamovi's interface:
 
-### Navigation Path
+### Navigation Path (ClinicoPathDescriptives)
 - **Demographics**: `Exploration > ClinicoPath Descriptive Plots > Age Pyramid`
 - **Relationships**: `Exploration > ClinicoPath Descriptive Plots > Alluvial Diagrams`
 - **Set Analysis**: `Exploration > ClinicoPath Descriptive Plots > Venn Diagram`
 - **Data Structure**: `Exploration > ClinicoPath Descriptive Plots > Variable Tree`
-- **Treatment Response**: `Exploration > Patient Follow-Up Plots > Treatment Response Analysis`
-- **Timelines**: `Exploration > Patient Follow-Up Plots > Swimmer Plot`
-- **Quality Assessment**: `Exploration > ClinicoPath Descriptives > Benford Analysis`
+- **Quality Assessment**: `Exploration > ClinicoPath Data Quality > Benford Analysis`
+
+### Navigation Path (other modules)
+- **Treatment Response**: `Exploration > Patient Follow-Up Plots > Treatment Response Analysis` (**OncoPath**)
+- **Timelines**: `Exploration > Patient Follow-Up Plots > Swimmer Plot` (**OncoPath**)
 
 ### jamovi Advantages for Visualization
 
@@ -522,4 +570,4 @@ All visualizations are available through jamovi's interface:
 3. **Regulatory Compliance**: Follow guidelines for clinical trial reporting
 4. **Peer Review**: Design with peer review process in mind
 
-This visualization gallery demonstrates the full range of clinical research visualization capabilities available in ClinicoPathDescriptives, providing templates and examples for creating impactful, publication-ready figures that effectively communicate research findings.
+This visualization gallery demonstrates the visualization capabilities of ClinicoPathDescriptives - age pyramids, alluvial diagrams, variable trees, Venn/UpSet plots and Benford analysis - together with the treatment-response plots contributed by the companion OncoPath module (Sections 5 and 6), providing templates and examples for creating impactful, publication-ready figures that effectively communicate research findings.

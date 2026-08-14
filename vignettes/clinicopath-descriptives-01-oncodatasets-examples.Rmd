@@ -20,6 +20,18 @@ knitr::opts_chunk$set(
 )
 ```
 
+> ### Scope note
+>
+> This vignette illustrates **jamovi menu workflows** for analyses that
+> ClinicoPathDescriptives 1.0.52 really does ship — `tableone`, `crosstable`, `summarydata`,
+> `checkdata` and `chisqposttest`. It calls no ClinicoPath R function directly; the R chunks
+> only prepare `OncoDataSets` data, and the workflow chunks are commented menu instructions
+> kept at `eval = FALSE`.
+>
+> The menu paths and option names below were checked against the shipped
+> `jamovi/*.a.yaml` definitions of version 1.0.52. Every analysis in this module lives under
+> the top-level **Exploration** menu.
+
 ## Introduction
 
 This vignette demonstrates the use of ClinicoPath Descriptives module with real oncology datasets from the `OncoDataSets` package. We'll explore descriptive statistics, cross-tabulations, and data summaries using cancer research data.
@@ -52,14 +64,20 @@ BreastCancerWI_df$diagnosis <- factor(BreastCancerWI_df$diagnosis,
 
 ### Table One Analysis
 
-Create a comprehensive summary table comparing benign and malignant cases:
+Create a baseline characteristics table for the cohort:
 
 ```{r table-one, eval=FALSE}
 # In jamovi, you would:
-# 1. Select Analyses → ClinicoPath → Descriptives → Table One
-# 2. Set 'diagnosis' as the grouping variable
-# 3. Add continuous variables: radius_mean, texture_mean, perimeter_mean, area_mean
-# 4. Enable median/IQR for non-normal distributions
+# 1. Select Analyses → Exploration → ClinicoPath Descriptives → Table One
+# 2. Add variables: radius_mean, texture_mean, perimeter_mean, area_mean, diagnosis
+# 3. Choose a "Table style": t1 (tableone, default), t2 (gtsummary),
+#    t3 (arsenal) or t4 (janitor)
+# 4. Optionally tick "Missing-value exclusion (NA)", "Analysis summary",
+#    "About this analysis" or "Copy-ready report text"
+#
+# Note: Table One in this module is UNGROUPED - it has no grouping/strata option.
+# To compare benign vs malignant side by side, use Cross Tables (next section),
+# which takes a grouping variable and reports a p-value per row.
 ```
 
 ### Cross-tabulation Example
@@ -78,9 +96,16 @@ table(BreastCancerWI_df$radius_category, BreastCancerWI_df$diagnosis)
 
 ```{r cross-tab, eval=FALSE}
 # In jamovi:
-# 1. Select Analyses → ClinicoPath → Comparisons → Cross Table
-# 2. Set 'radius_category' as rows and 'diagnosis' as columns
-# 3. Enable chi-square test and standardized residuals
+# 1. Select Analyses → Exploration → ClinicoPath Comparisons → Cross Tables
+# 2. Put 'radius_category' in "Variables" and 'diagnosis' in "Group Variable"
+#    (rows are the variables; the group variable forms the columns)
+# 3. Pick the categorical test with "pcat": chisq (default) or fisher
+# 4. Optional: "cont" = mean (default) or median for continuous rows,
+#    "p_adjust" = none (default) / bonferroni / holm / BH / BY, and "showSMD"
+#    for standardized mean differences
+#
+# Note: Cross Tables does not report standardized residuals. For residual analysis
+# use Chi-Square Post-Hoc Tests (see the last section of this vignette).
 ```
 
 ## Example 2: Childhood Cancer Dataset
@@ -101,10 +126,17 @@ summary(ChildCancer_df)
 
 ```{r child-cancer-desc, eval=FALSE}
 # In jamovi:
-# 1. Select Analyses → ClinicoPath → Descriptives → Summary Data
-# 2. Add variables for analysis
-# 3. Group by cancer type if available
-# 4. Request comprehensive statistics including skewness and kurtosis
+# 1. Select Analyses → Exploration → ClinicoPath Descriptives →
+#    Summary of Continuous Variables
+# 2. Add the continuous variables (e.g. SurvTime) to "Variables"
+# 3. Tick "Distribution diagnostics" (distr) for skewness/kurtosis and
+#    normality checks; tick "Outlier detection" (outliers) to flag extreme values
+# 4. Set "Decimal places" (default 2) and tick "Report sentences" for
+#    copy-ready narrative text
+#
+# Note: this analysis has no grouping option. For categorical variables such as
+# ICCGroup or Sex, use Summary of Categorical Variables instead; to describe one
+# variable across the levels of another, use Cross Tables.
 ```
 
 ## Example 3: Bladder Cancer Dataset
@@ -120,11 +152,22 @@ str(BladderCancer_df)
 ### Data Quality Check
 
 ```{r data-check, eval=FALSE}
-# In jamovi:
-# 1. Select Analyses → ClinicoPath → Descriptives → Check Data
-# 2. Select all variables for missing value analysis
-# 3. Enable outlier detection
-# 4. Request data quality report
+# In jamovi, for ONE variable at a time:
+# 1. Select Analyses → Exploration → ClinicoPath Data Quality →
+#    Single Variable Quality Check
+# 2. Put a single variable (e.g. 'size') in "Variable" - this analysis accepts one
+# 3. "Outlier analysis" (showOutliers) is on by default; optional extras are
+#    "Distribution analysis", "Duplicate analysis", "Data patterns"
+#    and "Little's MCAR test" (mcarTest)
+#
+# For several variables at once:
+# 1. Select Analyses → Exploration → ClinicoPath Data Quality →
+#    Multi-Variable Visual Quality
+# 2. Add all variables, then tick "check_missing", "check_duplicates" and the
+#    plot options ("plot_data_overview", "plot_missing_patterns", "plot_data_types")
+#
+# For pure outlier work across several numeric variables, use
+# Exploration → ClinicoPath Data Quality → Outlier Detection.
 ```
 
 ## Example 4: Smoking and Lung Cancer Relationship
@@ -137,15 +180,20 @@ str(SmokingLungCancer_df)
 head(SmokingLungCancer_df)
 ```
 
-### Enhanced Cross-tabulation
+### Cross-tabulation of Aggregated Data
 
 ```{r enhanced-crosstab, eval=FALSE}
 # In jamovi:
-# 1. Select Analyses → ClinicoPath → Comparisons → Enhanced Cross Table
-# 2. Set smoking status as rows and cancer status as columns
-# 3. Enable odds ratio calculation
-# 4. Add confidence intervals
-# 5. Request risk estimates
+# 1. Select Analyses → Exploration → ClinicoPath Comparisons → Cross Tables
+# 2. Put the exposure variable in "Variables" and the outcome in "Group Variable"
+# 3. Choose "pcat" = chisq or fisher, and a "Table style" (sty):
+#    nejm (default), lancet, hmisc, arsenal, finalfit or gtsummary
+# 4. Tick "showSMD" for standardized mean differences
+#
+# Note: there is no "Enhanced Cross Table" analysis in ClinicoPathDescriptives, and
+# Cross Tables does not compute odds ratios or risk estimates. For odds ratios with
+# confidence intervals, use the Odds Ratio analysis in the jsurvival module
+# (https://www.serdarbalci.com/jsurvival/).
 ```
 
 ## Example 5: Brain Cancer Geographic Distribution
@@ -161,10 +209,16 @@ str(BrainCancerGeo_df)
 
 ```{r geo-summary, eval=FALSE}
 # In jamovi:
-# 1. Select Analyses → ClinicoPath → Descriptives → Summary Data 2
-# 2. Group by geographic region
-# 3. Analyze incidence rates
-# 4. Create comparative statistics
+# 1. Select Analyses → Exploration → ClinicoPath Descriptives →
+#    Summary of Continuous Variables
+# 2. Add the numeric columns (here 'lat' and 'long') to "Variables"
+# 3. Tick "Distribution diagnostics" and "Outlier detection" as needed
+# 4. Describe the 'county' column with
+#    Exploration → ClinicoPath Descriptives → Summary of Categorical Variables
+#
+# Note: there is no "Summary Data 2" analysis in ClinicoPathDescriptives, and
+# Summary of Continuous Variables has no grouping option. BrainCancerGeo_df holds
+# only county / lat / long, so no incidence rates are available in this dataset.
 ```
 
 ## Best Practices for Oncology Data Analysis
@@ -185,8 +239,10 @@ str(BrainCancerGeo_df)
 #    - Check for errors and inconsistencies
 
 # 2. Initial Exploration
-#    - Use Check Data for quality assessment
-#    - Generate Summary Data reports
+#    - Use Single Variable Quality Check / Multi-Variable Visual Quality
+#      for quality assessment
+#    - Generate Summary of Continuous Variables and Summary of
+#      Categorical Variables reports
 
 # 3. Comparative Analysis
 #    - Create Table One for publication
@@ -206,10 +262,15 @@ For aggregated data (like the smoking-lung cancer contingency table):
 
 ```{r chisq-posthoc, eval=FALSE}
 # In jamovi:
-# 1. Select Analyses → ClinicoPath → Comparisons → Chi-Square Post-Hoc Tests
-# 2. Use the counts/weights option for pre-aggregated data
-# 3. Enable residuals analysis to identify significant cells
-# 4. Apply Bonferroni correction for multiple comparisons
+# 1. Select Analyses → Exploration → ClinicoPath Comparisons →
+#    Chi-Square Post-Hoc Tests
+# 2. Set "rows" and "cols"; for pre-aggregated tables put the frequency column
+#    in "counts"
+# 3. Tick "showResiduals" to identify the cells driving the association
+#    (with "residualsCutoff", default 2)
+# 4. "posthoc" is bonferroni by default; holm, fdr and none are also available.
+#    "sig" (default 0.05) sets the significance threshold, and "testSelection"
+#    (auto by default) chooses between chisquare and fisher
 ```
 
 ## Conclusion
@@ -224,4 +285,4 @@ The ClinicoPath Descriptives module provides comprehensive tools for analyzing o
 ## References
 
 - OncoDataSets package: https://cran.r-project.org/package=OncoDataSets
-- ClinicoPath documentation: https://www.serdarbalci.com/ClinicoPath/
+- ClinicoPathDescriptives documentation: https://www.serdarbalci.com/ClinicoPathDescriptives/

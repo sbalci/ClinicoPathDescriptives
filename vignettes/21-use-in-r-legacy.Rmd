@@ -35,23 +35,29 @@ dplyr::glimpse(histopathology)
 
 
 
+`female` and `male` are `Level` options. The jamovi compiler forbids defaults on
+`Level`, so both are **required** arguments of the generated R wrapper and must
+always be supplied.
+
 ```{r}
-ClinicoPath::agepyramid(
+ClinicoPathDescriptives::agepyramid(
     data = histopathology,
     age = Age,
     gender = Sex,
-    female = "Female")
+    female = "Female",
+    male = "Male")
 ```
 
 
 
 ```{r}
 age_pyramid <-
-ClinicoPath::agepyramid(
+ClinicoPathDescriptives::agepyramid(
     data = histopathology,
     age = Age,
     gender = Sex,
-    female = "Female")
+    female = "Female",
+    male = "Male")
 ```
 
 
@@ -108,76 +114,38 @@ htmlTable::htmlTable(
 
 
 
-Age Pyramid
+## Analyses shipped by ClinicoPathDescriptives
 
-agepyramidClass
-	
+Each analysis exposes a plain R function plus its R6 backend class
+(`<name>Class`).
 
-Age Pyramid
+| Function | Title |
+|---|---|
+| `agepyramid()` | Age Pyramid |
+| `alluvial()` | Alluvial Diagrams |
+| `benford()` | Benford Analysis |
+| `categorize()` | Categorize Continuous Variables |
+| `checkdata()` | Single Variable Quality Check |
+| `chisqposttest()` | Chi-Square Post-Hoc Tests |
+| `crosstable()` | Cross Tables |
+| `dataquality()` | Multi-Variable Visual Quality |
+| `outlierdetection()` | Outlier Detection |
+| `reportcat()` | Summary of Categorical Variables |
+| `summarydata()` | Summary of Continuous Variables |
+| `tableone()` | Table One |
+| `vartree()` | Variable Tree |
+| `venn()` | Venn Diagram |
 
-alluvial()
-	
+The bundled example dataset used above is `histopathology`.
 
-Alluvial Diagrams
+### Arguments that are always required
 
-alluvialClass
-	
+Options of type `Level` cannot carry a default, so they are always required
+arguments of the generated R wrapper. Pass `NULL` when the parent variable is
+not supplied:
 
-Alluvial Plot
-
-benford()
-	
-
-Benford Analysis
-
-crosstable()
-	
-
-Cross Tables
-
-crosstableClass
-	
-
-Cross Table
-
-histopathology
-	
-
-histopathology
-
-reportcat()
-	
-
-Summary of Categorical Variables
-
-reportcatClass
-	
-
-Summary of Categorical Variables
-
-summarydata()
-	
-
-Summary of Continuous Variables
-
-summarydataClass
-	
-
-Summary of Continuous Variables
-
-tableone()
-	
-
-Table One
-
-tableoneClass
-	
-
-Table One
-
-venn()
-	
-
-Venn Diagram
-
-vennClass 
+- `agepyramid()`: `female`, `male`
+- `venn()`: `var1true` ... `var7true`
+- `vartree()`: `percvarLevel`, `pruneLevel1`, `pruneLevel2`, `followLevel1`,
+  `followLevel2` (and the `Variable` options `vars`, `percvar`, `summaryvar`,
+  `prunebelow`, `follow`, which likewise have no defaults)

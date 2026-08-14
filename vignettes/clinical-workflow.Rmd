@@ -86,12 +86,14 @@ cat("Treatment Groups:", table(clinical_data$Group), "\n")
 
 ### Dataset Overview and Quality Check
 
-The `vartree` function from `ClinicoPath` provides a visual overview of the data structure and relationships between variables. Due to the complexity of rendering interactive `vartree` outputs directly within this static vignette, the code below demonstrates its usage. To view the full interactive output, please run this code locally in your R environment.
+The `vartree` function from `ClinicoPathDescriptives` provides a visual overview of the data structure and relationships between variables. Due to the complexity of rendering interactive `vartree` outputs directly within this static vignette, the code below demonstrates its usage. To view the full interactive output, please run this code locally in your R environment.
+
+Note that `vartree` has no defaults for `vars`, `percvar`, `summaryvar`, `prunebelow` and `follow`, nor for the `Level` options `percvarLevel`, `pruneLevel1`, `pruneLevel2`, `followLevel1` and `followLevel2` - the jamovi compiler forbids defaults on `Level`. All of them are therefore required arguments of the R wrapper and must be passed explicitly, using `NULL` where the feature is unused.
 
 ```{r}
 # Generate variable tree for data structure overview
 # Check if vartree function is available and works properly
-if(requireNamespace("ClinicoPath", quietly = TRUE)) {
+if(requireNamespace("ClinicoPathDescriptives", quietly = TRUE)) {
   tryCatch({
     results <- vartree(
       data = clinical_data,
@@ -136,7 +138,7 @@ if(requireNamespace("ClinicoPath", quietly = TRUE)) {
     print(summary(clinical_data[, c("Group", "Sex", "Age_Group", "Grade", "TStage")]))
   })
 } else {
-  cat("ClinicoPath package not available for variable tree\n")
+  cat("ClinicoPathDescriptives package not available for variable tree\n")
   print(summary(clinical_data))
 }
 ```
@@ -151,15 +153,15 @@ clean_vartree_html <- function(vartree_result, filepath = "vartree_final_clean.h
   raw <- gsub("character(0)", "", raw, fixed = TRUE)
   raw <- gsub("<div[^>]*>", "", raw)
   raw <- gsub("</div>", "", raw)
-  raw <- gsub("<\?xml[^>]*\?>", "", raw)
+  raw <- gsub("<\\?xml[^>]*\\?>", "", raw)
   raw <- gsub("<!DOCTYPE svg[^>]*>", "", raw)
-  raw <- gsub("#myDIV\s*\{[^}]*\}", "", raw, perl = TRUE)
+  raw <- gsub("#myDIV\\s*\\{[^}]*\\}", "", raw, perl = TRUE)
 
   # ❗ REMOVE illegal SVG text
-  raw <- gsub("(?<=<g[^>]*>)\s*vtree\s*(?=<g|<polygon)", "", raw, perl = TRUE)
+  raw <- gsub("(?<=<g[^>]*>)\\s*vtree\\s*(?=<g|<polygon)", "", raw, perl = TRUE)
 
   # Find actual SVG start
-  svg_start <- regexpr("<svg[\s\S]*", raw, perl = TRUE)
+  svg_start <- regexpr("<svg[\\s\\S]*", raw, perl = TRUE)
   svg_raw <- regmatches(raw, svg_start)
 
   if (length(svg_raw) == 0 || svg_raw == "") {
@@ -234,12 +236,16 @@ print(baseline_table)
 ### Age and Sex Distribution
 
 ```{r}
-# Age pyramid by treatment group
+# Age and sex distribution of the cohort.
+# `female` and `male` are Level options; the jamovi compiler forbids defaults on
+# Level, so both are REQUIRED arguments of the R wrapper.
+# `agepyramid` has no grouping option - subset the data for a per-group pyramid.
 agepyramid(
   data = clinical_data,
   age = "Age",
   gender = "Sex",
-  female = "Female"
+  female = "Female",
+  male = "Male"
 )
 ```
 
@@ -283,26 +289,28 @@ alluvial(
 ### Biomarker Distribution
 
 ```{r}
-# Summarize continuous biomarkers
+# Summarize continuous biomarkers.
+# `summarydata` accepts only continuous `vars`. It has no grouping option, so
+# stratified summaries are obtained by subsetting the data before the call.
 biomarker_summary <- summarydata(
   data = clinical_data,
   vars = c("MeasurementA", "MeasurementB", "OverallTime"),
-  date_vars = character(0),
-  grvar = "Group"
+  distr = TRUE,
+  outliers = TRUE,
+  decimal_places = 2
 )
 
 print(biomarker_summary)
 ```
 
-### Biomarker Correlations by Grade
+### Biomarker Distribution Within a Tumour Grade
 
 ```{r}
-# Biomarker analysis by tumor grade
+# Biomarker analysis for grade 3 tumours
 summarydata(
-  data = clinical_data,
+  data = dplyr::filter(clinical_data, Grade == 3),
   vars = c("MeasurementA", "MeasurementB"),
-  date_vars = character(0),
-  grvar = "Grade"
+  report_sentences = TRUE
 )
 ```
 
@@ -311,11 +319,15 @@ summarydata(
 ### Primary Outcome Analysis
 
 ```{r}
-# Outcome analysis by treatment group
+# Outcome analysis by treatment group.
+# `crosstable` requires `group` to be categorical (permitted: factor), so use the
+# recoded Outcome_Status / Survival_Status rather than the numeric `Outcome`.
 outcome_analysis <- crosstable(
   data = clinical_data,
-  vars = c("Outcome", "Death"),
-  group = "Group"
+  vars = c("Outcome_Status", "Survival_Status"),
+  group = "Group",
+  sty = "nejm",
+  pcat = "chisq"
 )
 
 print(outcome_analysis)
@@ -327,7 +339,7 @@ print(outcome_analysis)
 # Survival status by treatment
 crosstable(
   data = clinical_data,
-  vars = c("Death"),
+  vars = c("Survival_Status"),
   group = "Group"
 )
 ```
@@ -335,11 +347,14 @@ crosstable(
 ### Outcome by Pathological Factors
 
 ```{r}
-# Analyze outcomes by key pathological factors
+# Analyze outcomes by key pathological factors.
+# `p_adjust` controls multiple-testing correction:
+# none (default), bonferroni, holm, BH or BY.
 crosstable(
   data = clinical_data,
   vars = c("Grade", "TStage", "LymphNodeMetastasis"),
-  group = "Outcome"
+  group = "Outcome_Status",
+  p_adjust = "holm"
 )
 ```
 
@@ -352,7 +367,7 @@ crosstable(
 alluvial(
   data = clinical_data,
   vars = c("Group", "Grade", "LymphNodeMetastasis"),
-  condensationvar = "Outcome"
+  condensationvar = "Outcome_Status"
 )
 ```
 
@@ -372,32 +387,39 @@ clinical_data_biomarker <- clinical_data %>%
 crosstable(
   data = clinical_data_biomarker,
   vars = c("MeasurementA_Level", "MeasurementB_Level"),
-  group = "Outcome"
+  group = "Outcome_Status"
 )
 ```
 
 ### Invasion Pattern and Outcome Correlation
 
 ```{r}
-# Venn diagram of invasion markers and outcomes
+# Venn diagram of invasion markers and outcome.
+# `venn` only accepts FACTOR variables (permitted: factor), so keep the original
+# factors instead of recoding them to 0/1 numerics.
+# `var1true` ... `var7true` are Level options and therefore REQUIRED arguments of
+# the R wrapper: pass the positive level, or NULL for an unused variable slot.
 clinical_venn <- clinical_data %>%
   mutate(
-    LVI_positive = ifelse(LVI == "Present", 1, 0),
-    PNI_positive = ifelse(PNI == "Present", 1, 0),
-    LN_positive = ifelse(LymphNodeMetastasis == "Present", 1, 0),
-    Poor_outcome = ifelse(Outcome_Status == "Event Occurred", 1, 0)
+    Poor_outcome = factor(ifelse(Outcome_Status == "Event Occurred", "Yes", "No"))
   )
 
 venn(
   data = clinical_venn,
-  var1 = "LVI_positive",
-  var1true = "1",
-  var2 = "PNI_positive",
-  var2true = "1",
-  var3 = "LN_positive",
-  var3true = "1",
-  var4 = NULL,
-  var4true = NULL
+  var1 = "LVI",
+  var1true = "Present",
+  var2 = "PNI",
+  var2true = "Present",
+  var3 = "LymphNodeMetastasis",
+  var3true = "Present",
+  var4 = "Poor_outcome",
+  var4true = "Yes",
+  var5 = NULL,
+  var5true = NULL,
+  var6 = NULL,
+  var6true = NULL,
+  var7 = NULL,
+  var7true = NULL
 )
 ```
 
@@ -406,17 +428,25 @@ venn(
 ### Benford's Law Analysis
 
 ```{r}
-# Check data quality using Benford's law
-# benford(
-#   data = clinical_data,
-#   var = "MeasurementA"
-# )
+# Check data quality using Benford's law.
+# `benford` takes a single continuous variable; `digits` (default 2, range 1-3)
+# selects first-digit vs first-two-digit analysis.
+benford(
+  data = clinical_data,
+  var = "MeasurementA",
+  digits = 2
+)
 ```
 
-### Inter-rater Reliability Analysis
+### Distribution of Rater Scores
+
+Note: ClinicoPathDescriptives does not compute inter-rater agreement
+statistics - `agreement()` and `icccoeff()` belong to the **meddecide** module.
+`reportcat()` below reports the frequency distribution of each rater's
+categorical scores only.
 
 ```{r}
-# Analyze inter-rater agreement
+# Frequency summary of each rater's scores
 rater_data <- clinical_data %>%
   select(starts_with("Rater")) %>%
   select_if(~!all(is.na(.)))

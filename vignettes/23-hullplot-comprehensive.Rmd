@@ -5,6 +5,25 @@ date: "`r Sys.Date()`"
 output: html_document
 ---
 
+> ### Availability note (please read first)
+>
+> **This analysis ships in the [jjstatsplot module](https://www.serdarbalci.com/jjstatsplot/),
+> not in ClinicoPathDescriptives.**
+>
+> `hullplot` is a released analysis of `jjstatsplot`
+> (menu: **Analyses → JJStatsPlot → Continuous vs Continuous → Hull Plot**), and its five
+> example datasets (`hullplot_customer_data`, `hullplot_clinical_data`,
+> `hullplot_experimental_data`, `hullplot_survey_data`, `hullplot_quality_data`) ship with
+> that package too. Nothing in this vignette is provided by
+> `ClinicoPathDescriptives` 1.0.52, whose 14 analyses are `agepyramid`, `alluvial`,
+> `benford`, `categorize`, `checkdata`, `chisqposttest`, `crosstable`, `dataquality`,
+> `outlierdetection`, `reportcat`, `summarydata`, `tableone`, `vartree` and `venn`.
+>
+> To run the examples, install and load `jjstatsplot` and call `jjstatsplot::hullplot()`
+> with `package = "jjstatsplot"` when loading the data. The chunks below have been updated
+> accordingly, but are kept at **`eval = FALSE`** because `jjstatsplot` is not a dependency
+> of this package; the output shown is illustrative only.
+
 # Introduction
 
 The `hullplot` function in ClinicoPath provides powerful cluster visualization capabilities using hull polygons to show group boundaries in scatter plots. This function is built on the ggforce package and is perfect for identifying customer segments, patient subgroups, experimental conditions, and quality control clusters.
@@ -32,7 +51,7 @@ knitr::opts_chunk$set(
 
 ```{r setup 2, include=FALSE}
 
-library(ClinicoPathDescriptives)
+library(jjstatsplot)
 library(dplyr)
 library(knitr)
 ```
@@ -43,11 +62,11 @@ ClinicoPath provides comprehensive test datasets specifically designed for hull 
 
 ```{r load-data}
 # Load all hullplot test datasets
-data(hullplot_customer_data, package = "ClinicoPath")
-data(hullplot_clinical_data, package = "ClinicoPath")
-data(hullplot_experimental_data, package = "ClinicoPath")
-data(hullplot_survey_data, package = "ClinicoPath")
-data(hullplot_quality_data, package = "ClinicoPath")
+data(hullplot_customer_data, package = "jjstatsplot")
+data(hullplot_clinical_data, package = "jjstatsplot")
+data(hullplot_experimental_data, package = "jjstatsplot")
+data(hullplot_survey_data, package = "jjstatsplot")
+data(hullplot_quality_data, package = "jjstatsplot")
 
 # Display dataset dimensions
 cat("Dataset Dimensions:\n")
@@ -66,7 +85,7 @@ Let's start with a basic hull plot showing customer segmentation:
 
 ```{r basic-hull}
 # Create a basic hull plot
-result1 <- ClinicoPath::hullplot(
+result1 <- jjstatsplot::hullplot(
   data = hullplot_customer_data,
   x_var = "annual_spending",
   y_var = "purchase_frequency",
@@ -85,7 +104,7 @@ Add color mapping for better visualization:
 
 ```{r enhanced-hull}
 # Create an enhanced hull plot with color mapping
-result2 <- ClinicoPath::hullplot(
+result2 <- jjstatsplot::hullplot(
   data = hullplot_customer_data,
   x_var = "annual_spending",
   y_var = "purchase_frequency",
@@ -112,7 +131,7 @@ Hull plots are excellent for visualizing patient subgroups based on biomarker da
 
 ```{r clinical-hull}
 # Create clinical biomarker hull plot
-result3 <- ClinicoPath::hullplot(
+result3 <- jjstatsplot::hullplot(
   data = hullplot_clinical_data,
   x_var = "biomarker_x",
   y_var = "biomarker_y",
@@ -136,7 +155,7 @@ cat("Includes statistics and outlier detection\n")
 
 ```{r advanced-clinical}
 # Advanced clinical analysis with multiple features
-result4 <- ClinicoPath::hullplot(
+result4 <- jjstatsplot::hullplot(
   data = hullplot_clinical_data,
   x_var = "biomarker_x",
   y_var = "biomarker_y",
@@ -166,7 +185,7 @@ Visualize experimental treatment responses with hull plots:
 
 ```{r experimental-hull}
 # Create experimental response hull plot
-result5 <- ClinicoPath::hullplot(
+result5 <- jjstatsplot::hullplot(
   data = hullplot_experimental_data,
   x_var = "response_x",
   y_var = "response_y",
@@ -190,7 +209,7 @@ cat("Time points analyzed:", length(unique(hullplot_experimental_data$timepoint)
 
 ```{r experimental-qc}
 # Quality control analysis
-result6 <- ClinicoPath::hullplot(
+result6 <- jjstatsplot::hullplot(
   data = hullplot_experimental_data,
   x_var = "response_x",
   y_var = "response_y",
@@ -216,7 +235,7 @@ Hull plots can effectively visualize survey data and political orientations:
 
 ```{r survey-hull}
 # Create political orientation hull plot
-result7 <- ClinicoPath::hullplot(
+result7 <- jjstatsplot::hullplot(
   data = hullplot_survey_data,
   x_var = "economic_conservatism",
   y_var = "social_conservatism",
@@ -240,7 +259,7 @@ cat("Geographic regions:", length(unique(hullplot_survey_data$region)), "\n")
 
 ```{r demographic-analysis}
 # Demographic clustering analysis
-result8 <- ClinicoPath::hullplot(
+result8 <- jjstatsplot::hullplot(
   data = hullplot_survey_data,
   x_var = "economic_conservatism",
   y_var = "social_conservatism",
@@ -267,7 +286,7 @@ Hull plots are valuable for quality control and manufacturing analysis:
 
 ```{r quality-hull}
 # Create quality control hull plot
-result9 <- ClinicoPath::hullplot(
+result9 <- jjstatsplot::hullplot(
   data = hullplot_quality_data,
   x_var = "dimensional_accuracy",
   y_var = "surface_finish",
@@ -290,7 +309,7 @@ cat("Material grades:", length(unique(hullplot_quality_data$material_grade)), "\
 
 ```{r production-analysis}
 # Production line comparison
-result10 <- ClinicoPath::hullplot(
+result10 <- jjstatsplot::hullplot(
   data = hullplot_quality_data,
   x_var = "dimensional_accuracy",
   y_var = "surface_finish",
@@ -315,7 +334,7 @@ cat("Production shift comparison with defect tracking\n")
 
 ```{r hull-customization}
 # Demonstrate hull appearance options
-result11 <- ClinicoPath::hullplot(
+result11 <- jjstatsplot::hullplot(
   data = hullplot_customer_data,
   x_var = "annual_spending",
   y_var = "purchase_frequency",
@@ -340,7 +359,7 @@ cat("Features: concave hulls, custom transparency, expanded boundaries\n")
 palettes_to_test <- c("viridis", "clinical", "set1", "set2", "dark2")
 
 for (palette in palettes_to_test[1:3]) {  # Test first 3 for brevity
-  result <- ClinicoPath::hullplot(
+  result <- jjstatsplot::hullplot(
     data = hullplot_clinical_data,
     x_var = "biomarker_x",
     y_var = "biomarker_y",
@@ -361,7 +380,7 @@ cat("Color palette comparison completed\n")
 themes_to_test <- c("minimal", "classic", "clinical")
 
 for (theme in themes_to_test) {
-  result <- ClinicoPath::hullplot(
+  result <- jjstatsplot::hullplot(
     data = hullplot_survey_data,
     x_var = "economic_conservatism",
     y_var = "social_conservatism",
@@ -381,7 +400,7 @@ cat("Theme variations demonstrated\n")
 
 ```{r group-statistics}
 # Comprehensive group statistics
-result12 <- ClinicoPath::hullplot(
+result12 <- jjstatsplot::hullplot(
   data = hullplot_clinical_data,
   x_var = "biomarker_x",
   y_var = "biomarker_y",
@@ -398,7 +417,7 @@ cat("Includes mean, SD, and sample sizes for each group\n")
 
 ```{r outlier-detection}
 # Outlier detection analysis
-result13 <- ClinicoPath::hullplot(
+result13 <- jjstatsplot::hullplot(
   data = hullplot_quality_data,
   x_var = "dimensional_accuracy",
   y_var = "surface_finish",
@@ -415,7 +434,7 @@ cat("Uses IQR method to identify potential outliers within groups\n")
 
 ```{r confidence-ellipses}
 # Confidence ellipses analysis
-result14 <- ClinicoPath::hullplot(
+result14 <- jjstatsplot::hullplot(
   data = hullplot_experimental_data,
   x_var = "response_x",
   y_var = "response_y",
@@ -435,7 +454,7 @@ cat("95% confidence ellipses show statistical boundaries\n")
 
 ```{r multi-variable}
 # Complex multi-variable analysis
-result15 <- ClinicoPath::hullplot(
+result15 <- jjstatsplot::hullplot(
   data = hullplot_clinical_data,
   x_var = "biomarker_x",
   y_var = "biomarker_y",
@@ -462,7 +481,7 @@ cat("Integrates grouping, coloring, sizing, statistics, and outliers\n")
 
 ```{r time-series}
 # Time-based experimental analysis
-result16 <- ClinicoPath::hullplot(
+result16 <- jjstatsplot::hullplot(
   data = hullplot_experimental_data,
   x_var = "response_x",
   y_var = "response_y",
@@ -487,7 +506,7 @@ cat("Shows treatment evolution across timepoints\n")
 
 ```{r marketing-application}
 # Professional customer segmentation
-result17 <- ClinicoPath::hullplot(
+result17 <- jjstatsplot::hullplot(
   data = hullplot_customer_data,
   x_var = "annual_spending",
   y_var = "purchase_frequency",
@@ -511,7 +530,7 @@ cat("Professional customer segmentation for business strategy\n")
 
 ```{r clinical-publication}
 # Publication-ready clinical plot
-result18 <- ClinicoPath::hullplot(
+result18 <- jjstatsplot::hullplot(
   data = hullplot_clinical_data,
   x_var = "biomarker_x",
   y_var = "biomarker_y",
@@ -535,7 +554,7 @@ cat("Publication-ready format for medical journals\n")
 
 ```{r qa-dashboard}
 # Quality assurance visualization
-result19 <- ClinicoPath::hullplot(
+result19 <- jjstatsplot::hullplot(
   data = hullplot_quality_data,
   x_var = "dimensional_accuracy",
   y_var = "surface_finish",
@@ -577,7 +596,7 @@ cat("Real-time quality monitoring visualization\n")
 
 ```{r best-practices}
 # Demonstrate best practices
-result20 <- ClinicoPath::hullplot(
+result20 <- jjstatsplot::hullplot(
   data = hullplot_clinical_data,
   x_var = "biomarker_x",
   y_var = "biomarker_y",

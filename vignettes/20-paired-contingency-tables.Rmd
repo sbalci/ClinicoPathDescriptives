@@ -9,6 +9,31 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+> ### Module note --- `contTablesPaired` is not in ClinicoPathDescriptives
+>
+> **This analysis ships in the umbrella ClinicoPath module**
+> (<https://www.serdarbalci.com/ClinicoPathJamoviModule/>), **not in
+> ClinicoPathDescriptives 1.0.52.** `contTablesPaired` is defined and exported there;
+> calling it after `library(ClinicoPathDescriptives)` will fail with
+> *"could not find function"*.
+>
+> In the umbrella build it is routed to a development menu group (`ExplorationD`), so it
+> may not be visible in a released jamovi menu. jamovi's own built-in **jmv** module
+> already provides the equivalent McNemar analysis under
+> **Frequencies -> Paired Samples**.
+>
+> The `prostate_agreement_data` dataset used below also ships with the umbrella
+> ClinicoPath package, not with ClinicoPathDescriptives.
+>
+> ClinicoPathDescriptives 1.0.52 ships exactly 14 analyses: `agepyramid`, `alluvial`,
+> `benford`, `categorize`, `checkdata`, `chisqposttest`, `crosstable`, `dataquality`,
+> `outlierdetection`, `reportcat`, `summarydata`, `tableone`, `vartree` and `venn`.
+> None of them performs McNemar's test; for unpaired categorical association in this
+> module see **`crosstable`** or **`chisqposttest`**.
+>
+> Every code chunk in this vignette is `eval = FALSE`; the examples are retained for
+> reference and are not executed when the site is built.
+
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   echo = TRUE,
@@ -36,8 +61,10 @@ Paired contingency tables are used when:
 **Key Difference from Independent Samples**: Unlike regular contingency tables, paired samples account for the correlation between measurements on the same subjects.
 
 ```{r}
-# Load required libraries
-library(ClinicoPathDescriptives)
+# Load required libraries.
+# NOTE: contTablesPaired lives in the umbrella ClinicoPath package, NOT in
+# ClinicoPathDescriptives -- see the module note at the top of this vignette.
+library(ClinicoPath)
 
 # Load datasets
 data(histopathology, package = "ClinicoPath")

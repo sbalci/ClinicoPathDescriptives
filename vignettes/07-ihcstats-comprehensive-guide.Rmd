@@ -20,6 +20,21 @@ knitr::opts_chunk$set(
 )
 ```
 
+> ## Not part of ClinicoPathDescriptives 1.0.52
+>
+> **`ihcstats()` is under development and is not shipped by ClinicoPathDescriptives 1.0.52.**
+> No released module exposes an analysis by that name — not ClinicoPathDescriptives,
+> jjstatsplot, meddecide, jsurvival or OncoPath. In the umbrella
+> [ClinicoPath](https://github.com/sbalci/ClinicoPathJamoviModule) development tree the IHC
+> work has since been split into several separate analyses (`ihcbasic`, `ihcadvanced`,
+> `ihccluster`, `ihcscoring`, `ihcdiagnostic`, `ihcpredict`, `ihcsurvival`, `ihcimmune`,
+> `ihcthreshold`), all of which still carry development/test menu groups. `ihcheterogeneity`
+> is the only IHC analysis released so far, and it ships in
+> [OncoPath](https://www.serdarbalci.com/OncoPath/), not in this module.
+>
+> Everything below therefore describes a planned, not-yet-released feature; option names and
+> defaults will change. All code chunks are already `eval = FALSE`.
+
 ## Introduction
 
 The `ihcstats` function in ClinicoPath provides comprehensive immunohistochemical (IHC) expression analysis implementing methodologies from landmark research papers:
@@ -32,6 +47,8 @@ The `ihcstats` function in ClinicoPath provides comprehensive immunohistochemica
 ## Setup
 
 ```{r setup}
+# NOTE: ihcstats() is NOT exported by ClinicoPathDescriptives 1.0.52.
+# Only the bundled ihc_test_data dataset below comes from this package.
 library(ClinicoPathDescriptives)
 library(dplyr)
 library(ggplot2)

@@ -6,6 +6,31 @@ date: "`r Sys.Date()`"
 output: html_document
 ---
 
+```{r knitr-defaults, include=FALSE}
+# The ggprism analysis is not installed with this module, so nothing here can run.
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
+
+> ### Availability note (please read first)
+>
+> **This analysis is not part of ClinicoPathDescriptives 1.0.52.**
+>
+> `ggprism` currently exists only in the development umbrella module `ClinicoPath`, where it
+> is still routed to a development menu group (`JJStatsPlotD`) rather than a released one.
+> It is not shipped by `ClinicoPathDescriptives`, and it is not yet in the released
+> [jjstatsplot module](https://www.serdarbalci.com/jjstatsplot/) either.
+> **It is under development and is planned for a future release.**
+>
+> The 14 analyses that ClinicoPathDescriptives 1.0.52 actually ships are: `agepyramid`,
+> `alluvial`, `benford`, `categorize`, `checkdata`, `chisqposttest`, `crosstable`,
+> `dataquality`, `outlierdetection`, `reportcat`, `summarydata`, `tableone`, `vartree`
+> and `venn`.
+>
+> The example datasets used below (`clinical_prism_data`, `dose_response_prism_data`, ...)
+> ship with the umbrella `ClinicoPath` package, not with `ClinicoPathDescriptives`. Because
+> neither the function nor the data is available here, **every code chunk in this vignette is
+> set to `eval = FALSE`** and the output shown is illustrative only.
+
 # Introduction to GraphPad Prism Style Plots
 
 The `ggprism` function in ClinicoPath brings the professional look and feel of GraphPad Prism to R-based analysis workflows. This function provides authentic Prism styling, comprehensive color palettes, and publication-ready formatting for scientific visualizations.
@@ -34,7 +59,7 @@ The `ggprism` function in ClinicoPath brings the professional look and feel of G
 
 # Package Setup and Data Loading
 
-```{r setup}
+```{r setup, eval=FALSE}
 library(ClinicoPathDescriptives)
 library(dplyr)
 library(knitr)

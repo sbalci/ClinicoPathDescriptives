@@ -31,10 +31,45 @@ head(payments)
 ```
 
 
-```{r}
-# This code shows how to use the benford.analysis package directly
-# The ClinicoPath::benford function is designed for jamovi and won't work in R Markdown
+## Running the analysis in ClinicoPathDescriptives
 
+The `benford` analysis takes exactly two arguments beyond `data`:
+
+- `var` - the continuous variable to test (numeric).
+- `digits` - the number of leading digits to analyse, an integer between 1 and 3
+  (default `2`). Values above 3 are not offered because `benford.analysis` does
+  not provide a MAD conformity classification beyond three digits.
+
+```{r}
+library(ClinicoPathDescriptives)
+
+# Default: two leading digits
+results <- benford(
+    data = payments,
+    var = "amount",
+    digits = 2
+)
+
+# First-digit only
+results_1d <- benford(
+    data = payments,
+    var = "amount",
+    digits = 1
+)
+
+# In jamovi the outputs render automatically. In R they are accessed as:
+# results$summary          # conformity summary table
+# results$text             # printed benford.analysis object
+# results$text2            # suspect records
+# results$plot             # digit-distribution plot
+```
+
+## What the module does under the hood
+
+The chunk below reproduces the same computation with `benford.analysis`
+directly, which is useful when you want to work with the fitted object.
+
+```{r}
 # Load required library
 library(benford.analysis)
 

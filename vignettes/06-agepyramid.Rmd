@@ -40,11 +40,15 @@ head(cohort_data)
 library(ClinicoPathDescriptives)
 
 # Example 1: Basic age pyramid analysis
+# NOTE: `female` and `male` are `Level` options. jamovi forbids defaults on
+# `Level`, so BOTH are required arguments of the R wrapper and must be passed
+# explicitly (pass NULL if the corresponding level is not present in the data).
 results1 <- agepyramid(
     data = cohort_data,
     age = "age",
     gender = "gender",
     female = "F", # Specify that 'F' represents females
+    male = "M",   # Specify that 'M' represents males
     bin_width = 10, # Use 10-year age bins
     plot_title = "Age Distribution of Study Cohort"
 )
@@ -59,7 +63,9 @@ print(results1$plot)
 
 ## Example 2: Customizing Colors
 
-You can customize the colors of the age pyramid bars using the `color1` and `color2` parameters:
+Bar colours are chosen with `color_palette`, which accepts `"standard"` (the
+default), `"colorblind"`, `"grayscale"` or `"custom"`. The `female_color` and
+`male_color` parameters are only honoured when `color_palette = "custom"`:
 
 ```{r}
 # Age pyramid with custom colors
@@ -68,10 +74,12 @@ results2 <- agepyramid(
     age = "age",
     gender = "gender",
     female = "F",
+    male = "M",
     bin_width = 5, # Use 5-year age bins for more detail
     plot_title = "Age Distribution with Custom Colors",
-    color1 = "#E74C3C", # Red for first group
-    color2 = "#3498DB"  # Blue for second group
+    color_palette = "custom",  # Required for female_color / male_color to apply
+    female_color = "#E74C3C",  # Red for the female bars
+    male_color = "#3498DB"     # Blue for the male bars
 )
 
 # View the customized plot
@@ -88,10 +96,12 @@ results3 <- agepyramid(
     age = "age",
     gender = "gender",
     female = "F",
+    male = "M",
     bin_width = 2,
     plot_title = "Detailed Age Distribution (2-year bins)",
-    color1 = "#2ECC71", # Green
-    color2 = "#F39C12"  # Orange
+    color_palette = "custom",
+    female_color = "#2ECC71", # Green
+    male_color = "#F39C12"    # Orange
 )
 
 print(results3$plot)
@@ -109,10 +119,12 @@ clinical_results <- agepyramid(
     age = "Age",
     gender = "Sex",
     female = "Female",
+    male = "Male",
     bin_width = 10,
     plot_title = "Clinical Cohort Age Distribution",
-    color1 = "#9B59B6", # Purple
-    color2 = "#1ABC9C"  # Teal
+    color_palette = "custom",
+    female_color = "#9B59B6", # Purple
+    male_color = "#1ABC9C"    # Teal
 )
 
 # View results
@@ -122,11 +134,64 @@ print(clinical_results$plot)
 
 ## Color Options
 
-The `color1` and `color2` parameters accept any valid color specification:
+`color_palette` selects the colour scheme:
+
+- `"standard"` (default) - the built-in pink/blue pair
+- `"colorblind"` - a colour-vision-deficiency safe pair
+- `"grayscale"` - print-friendly greys
+- `"custom"` - use `female_color` and `male_color`
+
+When `color_palette = "custom"`, `female_color` (default `"#E91E63"`) and
+`male_color` (default `"#2196F3"`) accept any string R recognises as a colour:
 
 - **Hex codes**: `"#FF5733"`, `"#3498DB"`
 - **Named colors**: `"red"`, `"blue"`, `"darkgreen"`
-- **RGB values**: `"rgb(255, 87, 51)"`
+
+## Age Grouping
+
+`bin_width` (default `5`) sets equal-width age bins. Alternatively,
+`age_groups` selects a preset grouping - `"custom"` (the default, which uses
+`bin_width`, or `custom_breaks` when you supply a comma-separated list of cut
+points), `"who"`, `"who_infant"`, `"pediatric"`, `"reproductive"`,
+`"geriatric"` or `"lifecourse"`.
+
+### WHO/UN standard age bands
+
+Two presets give the published standard groupings:
+
+- `"who"` - the WHO/UN standard five-year bands `0-4, 5-9, ... 80-84, 85+`
+  (18 groups). These are the groups of the WHO World Standard Population
+  (Ahmad OB *et al.*, *Age standardization of rates: a new WHO standard*,
+  GPE Discussion Paper 31, WHO 2001) and the UN convention for population
+  pyramids.
+- `"who_infant"` - the WHO abridged life-table grouping, which reports infants
+  separately from young children: `<1, 1-4, 5-9, ... 85+`.
+
+```{r who-preset, eval=FALSE}
+agepyramid(
+    data       = histopathology,
+    age        = "Age",
+    gender     = "Sex",
+    female     = "Female",
+    male       = "Male",
+    age_groups = "who"        # 0-4, 5-9, ... 85+
+)
+```
+
+### Which bin edge is closed
+
+`age_interval` controls how an age that falls exactly on a boundary is
+assigned:
+
+- `"left"` (the default) gives left-closed bands `[lower, upper)`. A person
+  aged exactly 65 starts the `65-69` band, and equal-width bands hold equal
+  numbers of single years. This is the WHO/UN and demographic convention, and
+  it is what the presets above assume.
+- `"right"` gives right-closed bands `(lower, upper]`, reproducing the
+  behaviour of releases before 1.0.52. Note that this makes the lowest band one
+  year wider than the others, which inflates the youngest bar of the pyramid.
+
+Leave this at `"left"` unless you are reproducing an older analysis.
 
 ## Interpretation
 

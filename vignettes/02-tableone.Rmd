@@ -50,9 +50,10 @@ results <- tableone(
     data = histopathology,
     vars = vars(Age, Sex, Grade, LVI), # From dplyr
     # Or: vars = c("Age", "Sex", "Grade", "LVI"),
-    sty = "t2",  # This corresponds to gtsummary
+    sty = "t2",  # t1 = tableone (default), t2 = gtsummary, t3 = arsenal, t4 = janitor
     excl = FALSE # Do not exclude NAs for this example to show how they are handled
 )
+# tableone() accepts only: vars, sty, excl, showSummary, showAbout, showReportSentence.
 
 # To render in a Quarto/R Markdown document for HTML output:
 # The object 'results$tablestyle2' (for gtsummary) contains HTML.

@@ -5,6 +5,27 @@ date: "`r Sys.Date()`"
 output: html_document
 ---
 
+> ## Scope note — please read first
+>
+> **This vignette does not document any ClinicoPathDescriptives analysis.**
+>
+> It is a general statistical-methods tutorial on digital pathology validation. Every
+> computation below is plain R (`cor`, `lm`, `t.test`, `dplyr`) plus `psych::ICC()`; it does
+> not call any jamovi analysis from ClinicoPathDescriptives, jjstatsplot, meddecide,
+> jsurvival or OncoPath. The `digital_pathology_validation` dataset it loads is **not**
+> installed by ClinicoPathDescriptives, and `psych` / `broom` are not dependencies of this
+> package, so all chunks are non-evaluating (`eval = FALSE` is already set globally below).
+>
+> This file is retained as a "legacy" methodological reference only. The closest released
+> tooling for the agreement analyses described here is `agreement` in
+> [meddecide](https://www.serdarbalci.com/meddecide/) and `ihcheterogeneity` in
+> [OncoPath](https://www.serdarbalci.com/OncoPath/) — neither of which is exercised in this
+> vignette.
+>
+> The 14 analyses ClinicoPathDescriptives 1.0.52 actually ships are: `agepyramid`, `alluvial`,
+> `benford`, `categorize`, `checkdata`, `chisqposttest`, `crosstable`, `dataquality`,
+> `outlierdetection`, `reportcat`, `summarydata`, `tableone`, `vartree` and `venn`.
+
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,

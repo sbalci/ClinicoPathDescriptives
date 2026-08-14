@@ -50,7 +50,8 @@ head(crc_cases)
 # Load the library
 library(ClinicoPathDescriptives)
 
-# Run the reportcat analysis
+# Run the reportcat analysis.
+# `vars` is reportcat's only option - there is no grouping or sub-setting argument.
 results <- reportcat(
     data = crc_cases,
     vars = c("Histology", "Differentiation", "MMR_Status")

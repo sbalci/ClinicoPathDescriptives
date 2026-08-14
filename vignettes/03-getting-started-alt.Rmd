@@ -27,8 +27,7 @@ ClinicoPathDescriptives is a comprehensive R package designed for descriptive an
 - **Descriptive Statistics**: Generate comprehensive "Table One" summaries
 - **Cross-tabulations**: Create contingency tables with appropriate statistical tests  
 - **Visualization Tools**: Age pyramids, alluvial diagrams, Venn diagrams, and more
-- **Treatment Response Analysis**: Waterfall and swimmer plots for oncology research
-- **Data Quality Assessment**: Benford's law analysis for fraud detection
+- **Data Quality Assessment**: Benford's law analysis, single- and multi-variable quality checks, outlier detection
 - **Dual Interface**: Use in R or through jamovi's point-and-click interface
 
 ## Installation
@@ -95,8 +94,10 @@ Generate detailed summaries for continuous variables:
 summarydata(
   data = histopathology,
   vars = c("Age", "OverallTime", "MeasurementA"),
-  date_vars = NULL,
-  grvar = "Grade"
+  distr = TRUE,          # add normality / distribution diagnostics
+  decimal_places = 2,
+  outliers = FALSE,
+  report_sentences = FALSE
 )
 ```
 
@@ -136,14 +137,18 @@ crosstable(
 
 ### Age Pyramid
 
-Visualize age and sex distribution:
+Visualize age and sex distribution. `female` and `male` are `Level` options, so the R
+wrapper treats them as required arguments - always name both explicitly:
 
 ```{r}
 agepyramid(
   data = histopathology,
   age = "Age",
   gender = "Sex",
-  female = "Female"
+  female = "Female",
+  male = "Male",
+  age_groups = "custom",   # custom | pediatric | reproductive | geriatric | lifecourse
+  bin_width = 5
 )
 ```
 
@@ -172,16 +177,24 @@ histopathology_venn <- histopathology %>%
     LN_positive = ifelse(LymphNodeMetastasis == "Present", 1, 0)
   )
 
+# venn supports up to seven sets. var1true ... var7true are `Level` options and are
+# therefore required arguments of the R wrapper - pass NULL for any unused set.
 venn(
   data = histopathology_venn,
   var1 = "LVI_present",
-  var1true = 1,
+  var1true = "1",
   var2 = "PNI_present",
-  var2true = 1,
+  var2true = "1",
   var3 = "LN_positive",
-  var3true = 1,
+  var3true = "1",
   var4 = NULL,
-  var4true = NULL
+  var4true = NULL,
+  var5 = NULL,
+  var5true = NULL,
+  var6 = NULL,
+  var6true = NULL,
+  var7 = NULL,
+  var7true = NULL
 )
 ```
 
@@ -253,6 +266,11 @@ if(exists("treatmentResponse")) {
 
 ### Waterfall Plot
 
+> **Note:** `waterfall()` is **not** part of ClinicoPathDescriptives. Treatment-response
+> visualisations (waterfall, swimmer, spider plots) are provided by the companion
+> **OncoPath** module. The chunk below is kept for reference only and is not evaluated;
+> install OncoPath to run it.
+
 Visualize individual patient treatment responses:
 
 ```{r eval=FALSE}
@@ -294,7 +312,7 @@ All functions in this package are also available through jamovi's graphical inte
 This vignette covered the basic functionality of ClinicoPathDescriptives. For more advanced usage, see:
 
 - **Clinical Workflow Vignette**: Complete analysis workflows for clinical research
-- **Treatment Response Analysis**: Advanced oncology analysis techniques  
+- **Treatment Response Analysis**: Advanced oncology analysis techniques (provided by the separate **OncoPath** module)
 - **Data Quality and Exploration**: Comprehensive data assessment methods
 - **Visualization Gallery**: Advanced plotting techniques and customization
 

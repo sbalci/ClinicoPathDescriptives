@@ -6,6 +6,26 @@ author: "ClinicoPath"
 output: html_document
 ---
 
+> ## Not part of ClinicoPathDescriptives 1.0.52
+>
+> **`autoeda()` — Automated Exploratory Data Analysis — is under development and is not shipped
+> by ClinicoPathDescriptives 1.0.52.** It exists only in the umbrella
+> [ClinicoPath](https://github.com/sbalci/ClinicoPathJamoviModule) development tree, where it
+> currently carries a development menu group, so it does not appear in the jamovi menu of a
+> released build and the R wrapper is not exported. No sibling module (jjstatsplot, meddecide,
+> jsurvival, OncoPath) ships it either.
+>
+> Option names, defaults and level names shown below are provisional and may change before it
+> ships. Every code chunk in this vignette is therefore set to `eval = FALSE`.
+>
+> For released descriptive/data-screening analyses in this module today, see `dataquality`,
+> `checkdata`, `summarydata`, `reportcat` and `outlierdetection`.
+
+```{r vignette-eval-guard, include = FALSE}
+# This vignette documents an unreleased analysis; nothing here is executed.
+knitr::opts_chunk$set(eval = FALSE)
+```
+
 # Introduction to AutoEDA
 
 The AutoEDA module provides comprehensive automated exploratory data analysis capabilities specifically designed for clinical and pathological research. Built on the DataExplorer package framework, it offers intelligent automation while maintaining clinical relevance and interpretation.
@@ -28,6 +48,8 @@ Based on research from *R Journal 2019: The Landscape of R Packages for Automate
 ## Load Required Libraries
 
 ```{r setup, message=FALSE, warning=FALSE}
+# NOTE: autoeda() is NOT exported by ClinicoPathDescriptives 1.0.52.
+# Only the bundled histopathology dataset below comes from this package.
 library(ClinicoPathDescriptives)
 library(dplyr)
 library(ggplot2)

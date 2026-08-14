@@ -6,6 +6,24 @@ author: "ClinicoPath"
 output: html_document
 ---
 
+> ## Status of this vignette
+>
+> **`enhancedcrosstable` is not shipped by ClinicoPathDescriptives.** This
+> module provides 14 analyses (`agepyramid`, `alluvial`, `benford`,
+> `categorize`, `checkdata`, `chisqposttest`, `crosstable`, `dataquality`,
+> `outlierdetection`, `reportcat`, `summarydata`, `tableone`, `vartree`,
+> `venn`); `enhancedcrosstable` is not among them.
+>
+> The document below is a **design note for a planned future release** and is
+> kept for reference. None of its `enhancedcrosstable()` code is executed, and
+> the option names, defaults and levels it shows are provisional - they have not
+> been fixed against a shipped analysis definition and should not be relied on.
+>
+> For cross-tabulation available **today**, use `crosstable()` (see
+> *Generating a Publication-Ready 'Table 1' with crosstable*) or `tableone()`.
+> The section *Comparison with Standard Cross Tables* below documents the real
+> `crosstable()` options.
+
 # Introduction to Enhanced Cross Tables
 
 The `enhancedcrosstable` function in ClinicoPath integrates the powerful danchaltiel/crosstable package to provide advanced cross-tabulation capabilities beyond standard contingency tables. This module offers sophisticated data analysis features specifically designed for clinical research, including automated statistical test selection, comprehensive effect size calculations, and publication-ready formatting.
@@ -64,15 +82,21 @@ install.packages(c("janitor", "labelled", "stringr", "dplyr"))
 ### **Standard crosstable vs Enhanced crosstable**
 
 ```r
-# Standard ClinicoPath crosstable
+# Standard ClinicoPath crosstable (shipped today).
+# Options: vars, group, sty, excl, cont, pcat, p_adjust, showSMD.
 crosstable(
   data = histopathology,
-  row_var = "Grade_Level",
-  col_var = "Group",
-  add_margins = TRUE
+  vars = c("Grade_Level", "LVI", "PNI"),
+  group = "Group",
+  sty = "nejm",        # arsenal | finalfit | gtsummary | nejm | lancet | hmisc
+  cont = "mean",       # mean | median
+  pcat = "chisq",      # chisq | fisher
+  p_adjust = "none",   # none | bonferroni | holm | BH | BY
+  excl = FALSE,
+  showSMD = FALSE
 )
 
-# Enhanced crosstable with danchaltiel integration
+# Enhanced crosstable with danchaltiel integration (planned, not yet shipped)
 enhancedcrosstable(
   data = histopathology,
   vars = c("Grade_Level", "LVI", "PNI"),
@@ -394,30 +418,30 @@ enhancedcrosstable(
 
 ## Functionality Comparison
 
-| Feature | Standard crosstable | Enhanced crosstable |
+| Feature | Standard crosstable (shipped) | Enhanced crosstable (planned) |
 |---------|-------------------|-------------------|
-| **Variable Selection** | Single pair | Multiple variables |
-| **Statistical Tests** | Manual selection | Automated selection |
-| **Effect Sizes** | Manual calculation | Automated calculation |
-| **Export Options** | Basic HTML | HTML, Word, CSV |
-| **Missing Data** | Basic handling | Comprehensive options |
+| **Variable Selection** | Multiple variables via `vars`, one grouping variable via `group` | Multiple variables |
+| **Statistical Tests** | `pcat`: `chisq` or `fisher` | Automated selection |
+| **Multiplicity** | `p_adjust`: `none`, `bonferroni`, `holm`, `BH`, `BY` | Automated |
+| **Effect Sizes** | Standardized mean differences via `showSMD` | Automated calculation |
+| **Output Styles** | `sty`: `arsenal`, `finalfit`, `gtsummary`, `nejm`, `lancet`, `hmisc` | HTML, Word, CSV |
+| **Missing Data** | `excl` (exclude incomplete cases) | Comprehensive options |
 | **Tidyselect Syntax** | Not supported | Full support |
-| **Formula Interface** | Limited | Advanced transformations |
+| **Formula Interface** | Not supported | Advanced transformations |
 
 ## When to Use Each Approach
 
-### **Standard crosstable**
-- Quick exploratory analysis
-- Simple 2×2 or small contingency tables
-- Basic statistical requirements
-- Limited formatting needs
+### **Standard crosstable** (available now)
+- Multi-variable "Table 1" for a single grouping variable
+- Journal-specific layouts through `sty`
+- Chi-square or Fisher tests with optional multiplicity adjustment
+- Group-balance checking through `showSMD`
 
-### **Enhanced crosstable**
-- Comprehensive clinical research
-- Multiple variable analysis
-- Publication-ready output
-- Advanced statistical features
-- Regulatory submission requirements
+### **Enhanced crosstable** (planned for a future release)
+- Automated per-variable test selection
+- Comprehensive effect sizes with confidence intervals
+- Word/CSV export paths
+- Tidyselect and formula-based variable transformation
 
 # Troubleshooting and Support
 
@@ -459,7 +483,8 @@ enhancedcrosstable(
 ## Getting Help
 
 ### **Documentation Resources**
-- **Function Help**: `?enhancedcrosstable` for parameter details
+- **Function Help**: `?crosstable` for the parameters available today
+  (`?enhancedcrosstable` will exist only once the analysis ships)
 - **Package Documentation**: `help(package = "crosstable")` for advanced features
 - **Clinical Examples**: Additional vignettes for specific research contexts
 
@@ -533,7 +558,10 @@ multi_center_analysis <- function(data, site_var) {
 
 # Conclusion
 
-The enhanced cross-table functionality represents a significant advancement in clinical research analysis capabilities. By integrating the sophisticated danchaltiel/crosstable package with ClinicoPath's clinical focus, researchers gain access to:
+The enhanced cross-table functionality is **planned for a future release** and is
+not part of ClinicoPathDescriptives today. By integrating the sophisticated
+danchaltiel/crosstable package with ClinicoPath's clinical focus, it is intended
+to offer:
 
 - **Professional Quality**: Publication-ready outputs that meet journal standards
 - **Statistical Rigor**: Automated test selection and comprehensive effect sizes

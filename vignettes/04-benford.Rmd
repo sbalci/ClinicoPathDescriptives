@@ -31,9 +31,31 @@ head(payments)
 ```
 
 
+The module's own analysis takes exactly two options: `var` (the numeric variable) and
+`digits` (how many leading digits to analyse; default `2`).
+
 ```{r}
-# This code shows how to use the benford.analysis package directly
-# The ClinicoPath::benford function is designed for jamovi and won't work in R Markdown
+library(ClinicoPathDescriptives)
+
+results <- benford(
+    data   = payments,
+    var    = "amount",
+    digits = 2      # default is 2
+)
+
+# Result items available on the returned object:
+results$text   # Preformatted: benford.analysis print output
+results$text2  # Preformatted: suspect records
+results$plot   # Image: digit-distribution plot
+```
+
+For full control over the underlying computation you can also call the
+`benford.analysis` package directly:
+
+```{r}
+# NOTE: `benford()` below is benford.analysis::benford(), which has a different
+# signature to ClinicoPathDescriptives::benford(). Attach the packages in this order,
+# or qualify the call, to avoid masking.
 
 # Load required library
 library(benford.analysis)

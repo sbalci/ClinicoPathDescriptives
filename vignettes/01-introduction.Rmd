@@ -26,13 +26,23 @@ The ClinicoPathDescriptives domain provides comprehensive tools for descriptive 
 ClinicoPathDescriptives is a specialized suite of statistical analysis tools within the ClinicoPath package that focuses on:
 
 - **Clinical Data Summarization**: Generate Table One summaries, cross-tabulations, and descriptive statistics tailored for medical research
-- **Quality Assessment**: Data quality checks, missing data analysis, and validation metrics
-- **Agreement Analysis**: Inter-rater reliability, diagnostic test agreement, and measurement concordance
+- **Quality Assessment**: Data quality checks, missing data analysis, outlier detection, and Benford's law screening
+- **Visual Exploration**: Age pyramids, alluvial diagrams, Venn diagrams, and variable trees
 - **Enhanced Reporting**: Medical terminology, clinical guidelines compliance, and journal-ready outputs
+
+> **Scope note.** Agreement / inter-rater reliability analyses (`agreement()`, `icccoeff()`)
+> are **not** part of ClinicoPathDescriptives - they are provided by the **meddecide**
+> module. This module ships exactly fourteen analyses: `agepyramid`, `alluvial`, `benford`,
+> `categorize`, `checkdata`, `chisqposttest`, `crosstable`, `dataquality`,
+> `outlierdetection`, `reportcat`, `summarydata`, `tableone`, `vartree`, `venn`.
 
 ## Key Features
 
 ### 1. Table One Generation
+
+`tableone()` takes a single `vars` list. There is no `explanatory`/`dependent` split -
+use `crosstable()` when you need a grouping (column) variable.
+
 ```{r table-one-example}
 # Generate comprehensive Table One
 library(ClinicoPathDescriptives)
@@ -41,44 +51,52 @@ data(histopathology)
 # Basic Table One
 tableone(
   data = histopathology,
-  explanatory = c("Grade", "Age", "Size"),
-  dependent = "Outcome"
+  vars = c("Grade", "Age", "MeasurementA"),
+  sty = "t1",   # t1 = tableone, t2 = gtsummary, t3 = arsenal, t4 = janitor
+  excl = FALSE
 )
 ```
 
 ### 2. Advanced Cross-tabulations
+
+`crosstable()` uses `vars` (the row variables) and `group` (the column variable).
+
 ```{r crosstable-example}
 # Enhanced cross-tabulation with medical formatting
 crosstable(
   data = histopathology,
-  row_var = "Grade",
-  col_var = "Outcome",
-  add_margins = TRUE,
-  statistical_test = TRUE
+  vars = c("Grade", "LVI"),
+  group = "Group",  # must be a factor - `Outcome` is stored as numeric 0/1
+  sty = "nejm",     # arsenal | finalfit | gtsummary | nejm | lancet | hmisc
+  pcat = "chisq"    # chisq | fisher
 )
 ```
 
 ### 3. Agreement Analysis
-```{r agreement-example}
-# Inter-rater agreement analysis
-data(breast_agreement_data)
 
-agreement(
-  data = breast_agreement_data,
-  rater1_var = "Pathologist_1_Score",
-  rater2_var = "Pathologist_2_Score",
-  agreement_type = "kappa"
-)
+> **Not in this module.** `agreement()` and the `breast_agreement_data` dataset are
+> provided by the **meddecide** module (`Analyses > meddecide > Agreement`), not by
+> ClinicoPathDescriptives. The chunk below is kept for reference only and is not
+> evaluated.
+
+```{r agreement-example, eval=FALSE}
+# Inter-rater agreement analysis - requires the meddecide module
+# meddecide::agreement(...)
 ```
 
 ### 4. Data Quality Assessment
+
 ```{r data-quality-example}
 # Comprehensive data quality check
 dataquality(
   data = histopathology,
-  missing_threshold = 0.1,
-  outlier_detection = TRUE,
-  generate_report = TRUE
+  vars = c("Age", "Grade", "TStage", "MeasurementA"),
+  check_missing = TRUE,
+  check_duplicates = TRUE,
+  missing_threshold_visual = 10,  # percent, not a proportion
+  plot_missing_patterns = TRUE,
+  showSummary = TRUE,
+  showRecommendations = TRUE
 )
 ```
 
@@ -113,27 +131,39 @@ ClinicoPathDescriptives is designed to integrate seamlessly with:
 
 ## Available Functions
 
+These are the fourteen analyses shipped by ClinicoPathDescriptives.
+
 ### Core Descriptive Functions
-- `tableone()`: Comprehensive Table One generation
-- `crosstable()`: Enhanced cross-tabulation
-- `summarydata()`: Clinical data summarization
-- `groupsummary()`: Stratified descriptive statistics
+- `tableone()`: Comprehensive Table One generation (`sty`: t1/t2/t3/t4)
+- `crosstable()`: Cross-tabulation with statistical tests (`vars` x `group`)
+- `summarydata()`: Descriptive statistics for continuous variables
+- `reportcat()`: Counts and percentages for categorical variables
 
 ### Data Quality Functions
-- `dataquality()`: Data quality assessment
-- `checkdata()`: Data validation and cleaning
-- `missingdata()`: Missing data analysis
-- `outlierdetection()`: Clinical outlier identification
+- `dataquality()`: Multi-variable visual quality assessment
+- `checkdata()`: Single-variable quality check (completeness, outliers, patterns)
+- `outlierdetection()`: Univariate / multivariate / composite outlier identification
+- `benford()`: Benford's law screening for fabricated or unusual numeric data
+- `categorize()`: Convert a continuous variable into categories
 
-### Agreement Functions
-- `agreement()`: Inter-rater reliability analysis
-- `icccoeff()`: Intraclass correlation coefficients
-- `reportcat()`: Categorical agreement reporting
+### Visualization and Exploration
+- `agepyramid()`: Age-sex pyramid
+- `alluvial()`: Alluvial / Sankey diagrams
+- `venn()`: Venn and UpSet diagrams (up to 7 sets)
+- `vartree()`: Hierarchical variable tree
+- `chisqposttest()`: Chi-square post-hoc pairwise comparisons
 
-### Enhanced Reporting
-- `enhancedcrosstable()`: Publication-ready cross-tables
-- `gtsummary()`: Modern table formatting
-- `tinytable()`: Flexible table creation
+### Functions provided by other modules
+
+Documentation occasionally refers to the following; they are **not** installed with
+ClinicoPathDescriptives:
+
+- `agreement()`, `icccoeff()` - **meddecide** module
+- `waterfall()`, `swimmerplot()` - **OncoPath** module
+- `groupsummary()`, `missingdata()`, `enhancedcrosstable()` - present in the upstream
+  ClinicoPath development module only; not shipped here
+- `gtsummary`, `tinytable` - third-party R packages used internally for table styling,
+  not analyses in this module
 
 ## Getting Started
 
@@ -153,21 +183,24 @@ library(ClinicoPathDescriptives)
 # 1. Load your clinical data
 data(histopathology)
 
-# 2. Check data quality
-quality_check <- dataquality(histopathology)
+# 2. Check data quality (`vars` is required)
+quality_check <- dataquality(
+  data = histopathology,
+  vars = c("Age", "Grade", "MeasurementA"),
+  check_missing = TRUE
+)
 
 # 3. Generate descriptive statistics
 table_one <- tableone(
   data = histopathology,
-  explanatory = c("Age", "Grade", "Size"),
-  dependent = "Outcome"
+  vars = c("Age", "Grade", "MeasurementA")
 )
 
 # 4. Create cross-tabulations
 cross_tab <- crosstable(
   data = histopathology,
-  row_var = "Grade",
-  col_var = "Outcome"
+  vars = c("Grade"),
+  group = "Group"
 )
 
 # 5. Export results
@@ -204,18 +237,18 @@ cross_tab <- crosstable(
 
 For more specific applications, see:
 
-- [Agreement Analysis in Digital Pathology](ClinicoPathDescriptives-agreement-analysis.html)
-- [Digital Pathology Validation Studies](ClinicoPathDescriptives-digital-pathology-validation.html)
-- [Modern Molecular Pathology Workflows](ClinicoPathDescriptives-modern-molecular-pathology-workflow.html)
-- [Data Quality and Exploration](data-quality-exploration.html)
-- [Clinical Examples](clinical-examples.html)
+- [Digital Pathology Validation Studies](05-digital-pathology.html)
+- [Modern Molecular Pathology Workflows](06-molecular-workflow.html)
+- [Data Quality and Exploration](04-data-quality-exploration.html)
+- [Comprehensive Data Quality Guide](01-comprehensive-data-quality.html)
+- [Clinical Workflow](clinical-workflow.html)
 
 ## Support and Resources
 
 ### Documentation
 - Function reference: `?tableone`, `?crosstable`, etc.
-- Package documentation: `help(package = "ClinicoPath")`
-- Online documentation: [ClinicoPath Website](https://www.clinicopath.org)
+- Package documentation: `help(package = "ClinicoPathDescriptives")`
+- Online documentation: [ClinicoPathDescriptives Website](https://www.serdarbalci.com/ClinicoPathDescriptives/)
 
 ### Community
 - GitHub Issues: Report bugs and request features

@@ -34,11 +34,16 @@ head(histopathology)
 ```
 
 
+`venn()` accepts up to seven variables. `var1true` ... `var7true` are `Level`
+options; the jamovi compiler forbids defaults on `Level`, so all seven are
+**required** arguments of the R wrapper and must be passed explicitly - `NULL`
+for any variable slot left unused.
+
 ```{r}
 library(ClinicoPathDescriptives)
 # data(histopathology, package="ClinicoPathDescriptives") # if needed
 
-results_venn <- ClinicoPath::venn(
+results_venn <- ClinicoPathDescriptives::venn(
   data = histopathology,
   var1 = "LVI",
   var1true = "Present",
@@ -47,19 +52,32 @@ results_venn <- ClinicoPath::venn(
   var3 = "PreinvasiveComponent",
   var3true = "Yes",
   var4 = NULL,      # Explicitly NULL for unused variable
-  var4true = NULL   # Explicitly NULL for unused true level
+  var4true = NULL,  # Explicitly NULL for unused true level
+  var5 = NULL,
+  var5true = NULL,
+  var6 = NULL,
+  var6true = NULL,
+  var7 = NULL,
+  var7true = NULL,
+  show_ggvenn = TRUE,
+  show_ggVennDiagram = TRUE
 )
 
 ```
 
+The plot outputs are named after the package that draws them: `plotGgvenn`
+(shown by default via `show_ggvenn = TRUE`), `plotGgVennDiagram`, `plotUpsetR`
+and `plotComplexUpset`. Each is rendered only when its corresponding
+`show_*` option is `TRUE`.
+
 ```{r}
-results_venn$plot
+results_venn$plotGgvenn
 ```
 
 
 
 ```{r}
-results_venn$plot2
+results_venn$plotGgVennDiagram
 ```
 
 

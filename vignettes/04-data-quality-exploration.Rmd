@@ -80,6 +80,43 @@ kable(missing_summary %>% filter(Missing_Count > 0),
       col.names = c("Variable", "Missing Count", "Missing %", "Quality Rating"))
 ```
 
+The same assessment is available as a shipped analysis. `dataquality()` covers a set of
+variables at once, and `checkdata()` drills into a single variable:
+
+```{r}
+# Multi-variable visual quality overview
+dataquality(
+  data = histopathology,
+  vars = c("Age", "Sex", "Grade", "TStage", "MeasurementA", "MeasurementB"),
+  check_duplicates = TRUE,           # default FALSE
+  check_missing = TRUE,              # default FALSE
+  complete_cases_only = FALSE,       # default FALSE
+  plot_data_overview = TRUE,         # default FALSE
+  plot_missing_patterns = TRUE,      # default FALSE
+  plot_data_types = FALSE,           # default FALSE
+  missing_threshold_visual = 10,     # default 10 (%)
+  showSummary = TRUE,                # default TRUE
+  showRecommendations = TRUE,        # default TRUE
+  showExplanations = TRUE            # default FALSE
+)
+
+# Single-variable deep dive
+checkdata(
+  data = histopathology,
+  var = "Age",
+  showOutliers = TRUE,               # default TRUE
+  showDistribution = TRUE,           # default FALSE
+  showDuplicates = TRUE,             # default FALSE
+  showPatterns = FALSE,              # default FALSE
+  rareCategoryThreshold = 5,         # default 5 (%)
+  clinicalValidation = TRUE,         # default TRUE
+  unitSystem = "auto",               # auto | metric | imperial
+  outlierTransform = "none",         # none | log | sqrt
+  mcarTest = FALSE,                  # default FALSE
+  cvMinMean = 0.01                   # default 0.01
+)
+```
+
 ### Completeness by Variable Type
 
 ```{r}
@@ -144,8 +181,8 @@ if(length(available_vars) > 0) {
     summarydata(
       data = histopathology,
       vars = available_vars,
-      date_vars = NULL,
-      grvar = NULL
+      distr = TRUE,        # normality / distribution diagnostics (default FALSE)
+      outliers = TRUE      # outlier report (default FALSE)
     )
   }, error = function(e) {
     cat("Error with summarydata:", conditionMessage(e), "\n")
@@ -298,8 +335,9 @@ cat("\nRange ratio (should be > 10 for Benford's Law):",
     max(financial_data$FinancialAmount)/min(financial_data$FinancialAmount), "\n")
 cat("Sample size:", nrow(financial_data), "\n")
 
-# Note: Benford analysis would be performed here
-# benford(data = financial_data, var = "FinancialAmount")
+# Note: Benford analysis would be performed here.
+# benford() takes only `var` and `digits` (Integer, default 2, range 1-3):
+# benford(data = financial_data, var = "FinancialAmount", digits = 2)
 cat("\nBenford's Law Analysis:\n")
 cat("This dataset would be suitable for Benford analysis due to:\n")
 cat("- Large range ratio (>", round(max(financial_data$FinancialAmount)/min(financial_data$FinancialAmount)), "x)\n")
@@ -329,7 +367,7 @@ cat("Number of suspicious round amounts:", length(round_numbers), "\n")
 cat("Percentage of suspicious entries:", round(length(round_numbers)/nrow(expense_data)*100, 1), "%\n")
 
 # Note: Benford analysis would be performed here
-# benford(data = expense_data, var = "ExpenseAmount")
+# benford(data = expense_data, var = "ExpenseAmount", digits = 2)
 cat("\nBenford's Law Analysis Indicators:\n")
 cat("- Presence of suspicious round numbers suggests potential manipulation\n")
 cat("- High frequency of amounts ending in 000 may indicate fraud\n")
@@ -347,7 +385,7 @@ cat("\nRange ratio:", max(histopathology$OverallTime, na.rm=TRUE)/min(histopatho
 cat("Sample size:", sum(!is.na(histopathology$OverallTime)), "\n")
 
 # Note: Benford analysis would be performed here if data is suitable
-# benford(data = histopathology, var = "OverallTime")
+# benford(data = histopathology, var = "OverallTime", digits = 2)
 cat("\nBenford's Law Assessment:\n")
 cat("- Range ratio is", round(max(histopathology$OverallTime, na.rm=TRUE)/min(histopathology$OverallTime, na.rm=TRUE), 1), 
     "(should be > 10 for optimal Benford analysis)\n")
@@ -417,7 +455,58 @@ if(length(rater_vars) >= 2) {
 
 ## Phase 6: Outlier Detection
 
-### Statistical Outlier Analysis
+### Using the shipped `outlierdetection` analysis
+
+```{r}
+outlierdetection(
+  data = histopathology,
+  vars = c("Age", "OverallTime", "MeasurementA", "MeasurementB"),
+  method_category = "composite",           # univariate | multivariate | composite | all
+  univariate_methods = "zscore_robust",    # zscore_robust | zscore | iqr | eti | hdi
+  multivariate_methods = "mahalanobis",    # mahalanobis | mahalanobis_robust | mcd | optics | lof
+  composite_threshold = 0.5,               # default 0.5
+  zscore_threshold = 3.29,                 # default 3.29
+  iqr_multiplier = 1.7,                    # default 1.7
+  confidence_level = 0.999,                # default 0.999
+  show_outlier_table = TRUE,               # default TRUE
+  show_method_comparison = TRUE,           # default FALSE
+  show_exclusion_summary = TRUE,           # default FALSE
+  show_visualization = TRUE,               # default FALSE
+  show_interpretation = TRUE,              # default FALSE
+  sampleThreshold = 10000,                 # default 10000
+  sampleSize = 5000,                       # default 5000
+  seed = 123                               # default 123
+)
+```
+
+#### Large datasets are subsampled — and that costs you outliers
+
+Above `sampleThreshold` rows (default `10000`), the analysis draws a random
+subsample of `sampleSize` rows (default `5000`) and works on that. This matters
+more here than for most statistics: a random subset can only reveal the outliers
+it happens to *contain*, so the reported count is a **lower bound**, not a
+complete list. On a 12,000-row dataset with four planted gross outliers, only the
+one that fell in the subsample could be found.
+
+The analysis says so in its own panel, reports the original N alongside the
+subsample, and names the proportion retained. If you are screening for individual
+erroneous values to verify against source records — rather than looking for a
+systematic pattern — raise `sampleThreshold` above your row count so the whole
+dataset is analysed:
+
+```{r outlier-full-dataset, eval=FALSE}
+outlierdetection(
+  data            = big_cohort,
+  vars            = c("Age", "MeasurementA"),
+  sampleThreshold = 100000    # above nrow(big_cohort): analyse every row
+)
+```
+
+Raising `sampleSize` instead keeps more of the data without disabling subsampling
+altogether. Both are slower; `seed` makes whichever subsample you get
+reproducible.
+
+### Statistical Outlier Analysis (manual, for comparison)
 
 ```{r}
 # Identify potential outliers in continuous variables
@@ -614,10 +703,13 @@ kable(benford_summary,
 
 Data quality assessment functions are available in jamovi:
 
-1. **Benford's Law**: `Exploration > ClinicoPath Descriptives > Benford Analysis`
-2. **Variable Summary**: `Exploration > ClinicoPath Descriptives > Summary of Continuous/Categorical Variables`
-3. **Cross-tabulations**: `Exploration > ClinicoPath Comparisons > Cross Tables`
-4. **Variable Tree**: `Exploration > ClinicoPath Descriptive Plots > Variable Tree`
+1. **Benford's Law**: `Exploration > ClinicoPath Data Quality > Benford Analysis`
+2. **Single Variable Quality Check**: `Exploration > ClinicoPath Data Quality > Single Variable Quality Check`
+3. **Multi-Variable Visual Quality**: `Exploration > ClinicoPath Data Quality > Multi-Variable Visual Quality`
+4. **Outlier Detection**: `Exploration > ClinicoPath Data Quality > Outlier Detection`
+5. **Variable Summary**: `Exploration > ClinicoPath Descriptives > Summary of Continuous Variables` / `Summary of Categorical Variables`
+6. **Cross-tabulations**: `Exploration > ClinicoPath Comparisons > Cross Tables`
+7. **Variable Tree**: `Exploration > ClinicoPath Descriptive Plots > Variable Tree`
 
 ## Conclusions
 

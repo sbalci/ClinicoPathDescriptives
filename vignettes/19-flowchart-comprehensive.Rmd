@@ -6,6 +6,45 @@ date: "`r Sys.Date()`"
 output: html_document
 ---
 
+> ### Module note --- the flowchart analysis is not in ClinicoPathDescriptives
+>
+> **This analysis is under development and is not part of ClinicoPathDescriptives 1.0.52.
+> It is planned for a future release.** There is no `flowchart()` function in this module,
+> and no released sibling module (jjstatsplot, meddecide, jsurvival, OncoPath) provides one
+> either. In the umbrella ClinicoPath repository the analysis was renamed `jflowchart` and
+> its source now sits in a `legacy/` folder, so it is not currently built into any shipped
+> module. The `jflowchart` entry that still appears in the umbrella's generated
+> `jamovi/0000.yaml` is stale.
+>
+> Please read the code below as a design sketch rather than as a working API. Known
+> discrepancies, left in place deliberately so nothing is lost:
+>
+> * The title refers to `jflowchart` while the prose and every example call `flowchart()`.
+>   Neither name is callable today.
+> * Every option shown (`nodes`, `counts`, `direction`, `nodeWidth`, `nodeHeight`,
+>   `fontSize`, `showPercentages`, `showExclusions`, `nodeColor`, `includeTitle`, ...) is
+>   unverifiable, because there is no shipped `.a.yaml` to check it against.
+> * None of the eleven datasets loaded in the setup chunk ship with
+>   ClinicoPathDescriptives. Ten of them (`clinical_trial_flow`, `cancer_pathway_flow`,
+>   `biomarker_discovery_flow`, `multiarm_trial_flow`, `diagnostic_validation_flow`,
+>   `epidemiology_study_flow`, `lab_workflow_flow`, `minimal_flow`,
+>   `research_pipeline_flow`, `patient_journey_flow`) ship with the umbrella ClinicoPath
+>   package; `flowchart_comprehensive_data` does not exist in any repository --- the
+>   equivalent object there is named `jflowchart_comprehensive_data`.
+>
+> ClinicoPathDescriptives 1.0.52 ships exactly 14 analyses: `agepyramid`, `alluvial`,
+> `benford`, `categorize`, `checkdata`, `chisqposttest`, `crosstable`, `dataquality`,
+> `outlierdetection`, `reportcat`, `summarydata`, `tableone`, `vartree` and `venn`. For
+> visualising participant flow between categorical stages today, use **`alluvial`**;
+> for a hierarchical breakdown of a cohort, use **`vartree`**.
+>
+> Every code chunk in this vignette is `eval = FALSE`.
+
+```{r vignette-options, include = FALSE}
+# All chunks are disabled: the analysis documented here is not shipped.
+knitr::opts_chunk$set(eval = FALSE)
+```
+
 # Introduction to Study Flowcharts
 
 The `flowchart` function in ClinicoPath provides a powerful tool for creating visual representations of study workflows, clinical pathways, and research processes. Unlike CONSORT diagrams which are specifically designed for randomized controlled trials, the flowchart function offers flexibility for various types of studies and processes.

@@ -6,9 +6,28 @@ date: "`r Sys.Date()`"
 output: html_document
 ---
 
+> **Note — `coefplot` is not part of ClinicoPathDescriptives.**
+> This analysis is not one of the 14 analyses shipped by this module (agepyramid,
+> alluvial, benford, categorize, checkdata, chisqposttest, crosstable, dataquality,
+> outlierdetection, reportcat, summarydata, tableone, vartree, venn). It currently
+> lives in the umbrella **ClinicoPath** module only, where it is still menu-routed to
+> a development group, so `ClinicoPathDescriptives::coefplot()` does not exist.
+> Every code chunk below is therefore kept for reference but not executed
+> (`eval = FALSE`). The document is retained so the material is not lost if the
+> analysis is later released.
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  eval = FALSE,
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
 # Introduction
 
-The `coefplot` function in ClinicoPath creates professional coefficient plots (forest plots) for regression models. These visualizations are essential for presenting regression results in clinical research, epidemiological studies, and statistical reports.
+The `coefplot` function creates professional coefficient plots (forest plots) for regression models. These visualizations are essential for presenting regression results in clinical research, epidemiological studies, and statistical reports.
 
 ## Clinical Motivation
 
@@ -695,6 +714,13 @@ clinical_analysis <- function(data, outcome_var, predictors, model_type) {
 ```
 
 ## Integration with Other ClinicoPath Functions
+
+Of the functions named below, only `tableone()`, `summarydata()`, `crosstable()`,
+`checkdata()` and `outlierdetection()` ship in ClinicoPathDescriptives.
+`survival()` is provided by the **jsurvival** module; ROC analysis lives in
+**meddecide** (as `psychopdaROC()` / `enhancedROC()`) and correlation matrices in
+**jjstatsplot** (as `jjcorrmat()`). `nomogram()` and `missingdata()` are not
+released in any of these modules.
 
 ```{r integration-example}
 cat("Integration with ClinicoPath Workflow:\n\n")

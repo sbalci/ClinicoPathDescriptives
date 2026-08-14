@@ -9,6 +9,29 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+> ### Module note --- `contTables` is not in ClinicoPathDescriptives
+>
+> **This analysis ships in the umbrella ClinicoPath module**
+> (<https://www.serdarbalci.com/ClinicoPathJamoviModule/>), **not in
+> ClinicoPathDescriptives 1.0.52.** `contTables` is defined and exported there; in
+> ClinicoPathDescriptives it does not exist, so `library(ClinicoPathDescriptives)`
+> followed by `contTables(...)` will fail with *"could not find function"*.
+>
+> Two further caveats about the umbrella build: `contTables` is currently routed to a
+> development menu group (`ExplorationD`), so it may not be visible in a released jamovi
+> menu; and jamovi's own built-in **jmv** module already provides the same analysis under
+> **Frequencies -> Independent Samples**, which is the version most users will reach.
+>
+> ClinicoPathDescriptives 1.0.52 ships exactly 14 analyses: `agepyramid`, `alluvial`,
+> `benford`, `categorize`, `checkdata`, `chisqposttest`, `crosstable`, `dataquality`,
+> `outlierdetection`, `reportcat`, `summarydata`, `tableone`, `vartree` and `venn`.
+> The closest in-module equivalents to the material below are **`crosstable`**
+> (grouped cross tables with chi-square / Fisher p-values) and **`chisqposttest`**
+> (chi-square plus post-hoc pairwise comparisons).
+>
+> Every code chunk in this vignette is `eval = FALSE`; the examples are retained for
+> reference and are not executed when the site is built.
+
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   echo = TRUE,
@@ -34,8 +57,10 @@ Contingency tables are used to:
 - Perform exact tests for small samples
 
 ```{r}
-# Load required libraries
-library(ClinicoPathDescriptives)
+# Load required libraries.
+# NOTE: contTables lives in the umbrella ClinicoPath package, NOT in
+# ClinicoPathDescriptives -- see the module note at the top of this vignette.
+library(ClinicoPath)
 
 # Use the histopathology dataset included with ClinicoPath
 # For demonstration, ensure we have the data

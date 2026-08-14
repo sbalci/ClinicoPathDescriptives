@@ -34,10 +34,24 @@ alluvial(
   excl = FALSE,
   marg = FALSE,
   fill = "first_variable",
+  fillGgalluvial = NULL,
   bin = "default",
   orient = "vert",
   usetitle = FALSE,
-  mytitle = "Alluvial Plot"
+  mytitle = "Alluvial Plot",
+  maxvars = 8,
+  custombinlabels = "",
+  colorPalette = "default",
+  showCounts = FALSE,
+  themeStyle = "default",
+  enhancedGradients = FALSE,
+  plotSubtitle = "",
+  weight = NULL,
+  sankeyStyle = FALSE,
+  curveType = "cubic",
+  flowDirection = "left_right",
+  engine = "easyalluvial",
+  labelNodes = FALSE
 )
 ```
 
@@ -135,6 +149,25 @@ alluvial(
 - **Note**: Only used when `usetitle = TRUE`
 - **Example**: `mytitle = "Patient Flow Analysis"`
 
+### Appearance and Engine Parameters
+
+| Parameter | Type | Default | Options / Range | Description |
+|-----------|------|---------|-----------------|-------------|
+| `fillGgalluvial` | Variable | `NULL` | - | Fill variable; used by the `ggalluvial` engine only |
+| `maxvars` | Integer | `8` | 2-20 | Maximum number of variables accepted in `vars` |
+| `custombinlabels` | String | `""` | - | Comma-separated bin labels (e.g. `"Low,Medium,High"`); the number of labels sets the number of bins. Empty means use `bin` |
+| `colorPalette` | List | `"default"` | `default`, `viridis`, `plasma`, `set3`, `pastel1`, `dark2` | Colour palette for the flows |
+| `showCounts` | Boolean | `FALSE` | `TRUE`/`FALSE` | Print counts on the nodes |
+| `themeStyle` | List | `"default"` | `default`, `minimal`, `classic`, `grey`, `bw` | ggplot2 theme applied to the plot |
+| `enhancedGradients` | Boolean | `FALSE` | `TRUE`/`FALSE` | Use enhanced edge gradients |
+| `plotSubtitle` | String | `""` | - | Subtitle text |
+| `weight` | Variable | `NULL` | - | Weight (frequency) variable |
+| `sankeyStyle` | Boolean | `FALSE` | `TRUE`/`FALSE` | Sankey-style rendering (`ggalluvial` engine) |
+| `curveType` | List | `"cubic"` | `cubic`, `linear`, `quintic`, `sine`, `arctangent`, `sigmoid` | Flow curve shape (`ggalluvial` engine) |
+| `flowDirection` | List | `"left_right"` | `left_right`, `top_bottom`, `right_left`, `bottom_top` | Direction of the flows |
+| `engine` | List | `"easyalluvial"` | `easyalluvial`, `ggalluvial` | `easyalluvial` for automatic plots; `ggalluvial` for manual control over curve type and Sankey styling |
+| `labelNodes` | Boolean | `FALSE` | `TRUE`/`FALSE` | Show node labels (`ggalluvial` engine) |
+
 ## Parameter Constraints and Interactions
 
 ### Mutual Exclusions
@@ -227,9 +260,14 @@ alluvial(
 
 ### Different Datasets
 
-```{r dataset-examples}
-# Colon cancer analysis
-data("colon")
+> **Note:** the `colon` dataset is *not* shipped by ClinicoPathDescriptives - it
+> comes from the **survival** package, which is not a dependency of this module.
+> Install it with `install.packages("survival")` to run this example; the chunk
+> is not evaluated here.
+
+```{r dataset-examples, eval = FALSE}
+# Colon cancer analysis (dataset supplied by the survival package)
+data("colon", package = "survival")
 # Convert numeric variables to factors for alluvial plot
 colon$sex <- factor(colon$sex, levels = c(0, 1), labels = c("Female", "Male"))
 colon$differ <- factor(colon$differ, levels = c(1, 2, 3), labels = c("Well", "Moderate", "Poor"))
@@ -255,8 +293,9 @@ alluvial(
 ## Technical Details
 
 ### Underlying Implementation
-- Uses the `easyalluvial` R package for core functionality
-- Supports up to 8 variables (`max_variables = 8` in easyalluvial)
+- Uses the `easyalluvial` R package for core functionality (`engine = "easyalluvial"`),
+  or `ggalluvial` when `engine = "ggalluvial"`
+- Supports up to 8 variables by default; raise or lower the cap with `maxvars` (2-20)
 - Integrates with jamovi's R6 class system
 - Provides dual plot functionality (main + condensation)
 
@@ -281,9 +320,12 @@ The function includes comprehensive error handling:
 ## See Also
 
 - [Comprehensive Alluvial Guide](clinicopath-descriptives-05-alluvial.html) - Complete usage examples
-- `easyalluvial` package documentation
-- Related ClinicoPath visualization functions: `jjalluvial()`, `riverplot()`
+- `easyalluvial` and `ggalluvial` package documentation
+- Related visualization functions: `riverplot()` and `alluvialsurvival()` are **not**
+  part of ClinicoPathDescriptives - they are provided by the umbrella
+  **ClinicoPath** module. (Earlier revisions of this page also mentioned
+  `jjalluvial()`; no such function exists in any ClinicoPath module.)
 
 ## Version Information
 
-This documentation is current as of ClinicoPath version 0.0.3.32.
+This documentation is current as of ClinicoPathDescriptives version 1.0.52.

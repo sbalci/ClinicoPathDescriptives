@@ -207,10 +207,14 @@ chisqposttest(
 
 ## Standardized Residuals Plot
 
-The residuals plot feature is available in the jamovi interface and visualizes patterns of association:
+Two separate options control residuals output:
+
+- `plot` (default `FALSE`) draws the standardized residual heatmap.
+- `showResiduals` (default `FALSE`) adds the residuals analysis tables.
+- `residualsCutoff` (default `2`) sets the |residual| threshold flagged as a
+  notable contribution to the chi-square statistic.
 
 ```{r residuals-plot-demo, eval=FALSE}
-# Plot functionality available in jamovi interface
 chisqposttest(
   data = histopathology,
   rows = "Grade_Level",
@@ -220,13 +224,15 @@ chisqposttest(
   sig = 0.05,
   excl = TRUE,
   exp = FALSE,
-  plot = FALSE  # Plot available in jamovi interface     # Generate residuals plot
+  plot = TRUE,            # Generate residuals plot
+  showResiduals = TRUE,   # Add residuals analysis tables
+  residualsCutoff = 2
 )
 ```
 
 ### Plot Interpretation
 
-When using the plot option in jamovi:
+When the residual plot is enabled:
 - **Blue cells**: Negative residuals (observed < expected)
 - **Red cells**: Positive residuals (observed > expected)
 - **Intensity**: Magnitude of standardized residuals
@@ -267,7 +273,7 @@ chisqposttest(
   sig = 0.05,
   excl = TRUE,
   exp = TRUE,
-  plot = FALSE  # Plot available in jamovi interface
+  plot = FALSE   # set TRUE for the residual heatmap
 )
 ```
 
@@ -293,7 +299,7 @@ chisqposttest(
   sig = 0.05,
   excl = TRUE,
   exp = TRUE,
-  plot = FALSE  # Plot available in jamovi interface
+  plot = FALSE   # set TRUE for the residual heatmap
 )
 ```
 
@@ -319,7 +325,7 @@ chisqposttest(
   sig = 0.05,
   excl = TRUE,
   exp = TRUE,
-  plot = FALSE  # Plot available in jamovi interface
+  plot = FALSE   # set TRUE for the residual heatmap
 )
 ```
 

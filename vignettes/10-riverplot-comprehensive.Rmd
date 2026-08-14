@@ -12,11 +12,21 @@ output: html_document
 > group, so it does not appear in the jamovi menu in a released build and the R wrapper is
 > not exported.
 >
-> This vignette moved here from the jjstatsplot collection, where it was written against
-> the earlier name `jjriverplot`. The analysis lives in this module's family, so the
-> documentation follows it. Option names and defaults may still change before it ships.
+> `riverplot` exists only in the umbrella
+> [ClinicoPath](https://github.com/sbalci/ClinicoPathJamoviModule) development tree. No
+> released module ships it: **not jjstatsplot** (which was where this vignette came from,
+> written against the earlier name `jjriverplot`), and not meddecide, jsurvival or OncoPath.
+> Option names and defaults may still change before it ships.
+>
+> The released equivalent in ClinicoPathDescriptives 1.0.52 today is **`alluvial`** (Alluvial
+> Diagrams), which draws the same flow diagrams via `easyalluvial`/`ggalluvial`.
+>
+> Every code chunk below is `eval = FALSE`.
 
-
+```{r vignette-eval-guard, include = FALSE}
+# This vignette documents an unreleased analysis; nothing here is executed.
+knitr::opts_chunk$set(eval = FALSE)
+```
 
 ## Overview
 
@@ -48,10 +58,9 @@ River plots excel at visualizing:
 #| echo: true
 #| eval: false
 
-# Install ClinicoPath if not already installed
-library(jjstatsplot)
-
-library(jjstatsplot)
+# NOTE: riverplot() is not exported by any released module. jjstatsplot does NOT
+# provide it. Once released it will be reachable from the ClinicoPath umbrella module.
+library(ClinicoPath)
 library(ggplot2)
 ```
 

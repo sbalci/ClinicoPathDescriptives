@@ -18,6 +18,38 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+> ### Module note --- `ihcstats` is not in ClinicoPathDescriptives
+>
+> **This analysis is under development and is not part of ClinicoPathDescriptives 1.0.52.
+> It is planned for a future release.** No shipped module provides `ihcstats`: it is absent
+> from ClinicoPathDescriptives, from the umbrella ClinicoPath module (no `.a.yaml`, no
+> `.b.R`, no `NAMESPACE` export) and from jjstatsplot, meddecide, jsurvival and OncoPath.
+> Its only source lives in a private work-in-progress checkout. The sentence below stating
+> that "the ihcstats function is fully operational" in the jamovi interface is therefore
+> **not true of any released build**.
+>
+> Please read the code below as a design sketch rather than a working API. Every option
+> shown --- `markers`, `clusterMethod`, `distanceMetric`, `linkageMethod`, `nClusters`,
+> `computeHScore`, `scoringScale`, `prognosticClustering`, `iterativeClustering`,
+> `differentialDiagnosis`, `sterlacciAnalysis`, `tilAnalysisMode`, `optimalKMethod`,
+> `supervisedClustering`, `tumorRegionAnalysis`, and the rest --- is unverifiable, because
+> there is no shipped `.a.yaml` to check names, defaults or permitted levels against.
+> Nothing here should be relied on for clinical or diagnostic work.
+>
+> The three datasets loaded with `data()` further down (`nsclc_til_data`,
+> `colorectal_ihc_data`, `renal_ihc_data`) ship with the umbrella ClinicoPath package
+> (<https://www.serdarbalci.com/ClinicoPathJamoviModule/>), not with
+> ClinicoPathDescriptives. The `sarcoma_ihc_data` frame is built inline in the chunk below.
+>
+> ClinicoPathDescriptives 1.0.52 ships exactly 14 analyses: `agepyramid`, `alluvial`,
+> `benford`, `categorize`, `checkdata`, `chisqposttest`, `crosstable`, `dataquality`,
+> `outlierdetection`, `reportcat`, `summarydata`, `tableone`, `vartree` and `venn`. For
+> describing IHC marker distributions today, use **`reportcat`** or **`crosstable`**; for
+> co-expression overlap between markers, use **`venn`**.
+>
+> The chunk below already sets `eval = FALSE` for the whole document, so none of these
+> examples run.
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
   echo = TRUE,
@@ -41,11 +73,13 @@ The `ihcstats` function in the ClinicoPath jamovi module provides comprehensive 
 
 This vignette demonstrates the theoretical framework and clinical applications of the `ihcstats` function with comprehensive synthetic datasets that cover all implemented methodologies.
 
-**Note**: This vignette focuses on the conceptual understanding and clinical applications. For hands-on analysis, use the interactive jamovi interface where the ihcstats function is fully operational.
+**Note**: This vignette focuses on the conceptual understanding and clinical applications. It is a design document for a planned analysis --- `ihcstats` is not available in the jamovi interface of ClinicoPathDescriptives 1.0.52, nor in any other released ClinicoPath module (see the module note at the top).
 
 ## Loading Required Libraries and Data
 
 ```{r libraries}
+# NOTE: attaching the package does not make ihcstats() available -- the analysis is not
+# shipped in ClinicoPathDescriptives 1.0.52. See the module note at the top.
 library(ClinicoPathDescriptives)
 library(dplyr)
 library(ggplot2)

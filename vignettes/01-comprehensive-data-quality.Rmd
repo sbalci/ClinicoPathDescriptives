@@ -72,6 +72,16 @@ library(dplyr)
 library(ggplot2)
 library(knitr)
 
+# `%&%` is a small convenience operator used throughout this vignette to build
+# separator rules, e.g. "=" %&% rep("=", 50) %&% "\n". Base R has no such
+# operator, so it is defined here - without this the helper chunks below fail
+# with 'could not find function "%&%"'.
+#
+# It COLLAPSES its operands into a single string. paste0() alone would not do:
+# paste0("=", rep("=", 50)) is vectorised and returns fifty two-character
+# strings rather than one fifty-one character rule.
+`%&%` <- function(a, b) paste(c(a, b), collapse = "")
+
 # Load the clinical datasets
 data("histopathology")
 data("treatmentResponse")
@@ -206,9 +216,12 @@ assess_multiple_variables <- function(data, variables) {
       # Determine if numeric or categorical
       is_numeric <- is.numeric(data[[var]])
 
+      # `!!` is required inside a loop: jmvcore resolves a bare symbol to its
+      # own NAME, so a plain `var = var` asks for a column literally called
+      # "var" and fails with "invalid 'row.names' length".
       results[[var]] <- checkdata(
         data = data,
-        var = var,
+        var = !!var,
         showOutliers = is_numeric,
         showDistribution = is_numeric,
         showDuplicates = TRUE,
@@ -766,8 +779,10 @@ assess_gcp_compliance <- function(data, primary_endpoints, critical_variables) {
 
   for (var in primary_endpoints) {
     if (var %in% names(data)) {
+      # `!!` unquotes the loop variable - see the note in the multi-variable
+      # assessment chunk above.
       quality_result <- checkdata(
-        data = data, var = var,
+        data = data, var = !!var,
         showOutliers = TRUE, showPatterns = TRUE
       )
 

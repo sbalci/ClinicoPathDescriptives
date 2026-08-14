@@ -35,23 +35,31 @@ dplyr::glimpse(histopathology)
 
 
 
+`female` and `male` are `Level` options. jamovi never allows a default on a
+`Level`, so both are REQUIRED arguments of the generated R wrapper and must be
+passed explicitly (use `NULL` if `gender` itself is not supplied).
+
 ```{r}
-ClinicoPath::agepyramid(
+agepyramid(
     data = histopathology,
     age = Age,
     gender = Sex,
-    female = "Female")
+    female = "Female",
+    male = "Male")
 ```
 
 
 
 ```{r}
 age_pyramid <-
-ClinicoPath::agepyramid(
+agepyramid(
     data = histopathology,
     age = Age,
     gender = Sex,
-    female = "Female")
+    female = "Female",
+    male = "Male",
+    age_groups = "custom",   # custom | pediatric | reproductive | geriatric | lifecourse
+    bin_width = 5)
 ```
 
 

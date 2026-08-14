@@ -82,10 +82,16 @@ cat("Treatment Groups:", table(clinical_data$Group), "\n")
 
 ### Dataset Overview and Quality Check
 
+`vartree` has no defaults for `vars`, `percvar`, `summaryvar`, `prunebelow` and
+`follow`, nor for the `Level` options `percvarLevel`, `pruneLevel1`,
+`pruneLevel2`, `followLevel1` and `followLevel2` - the jamovi compiler forbids
+defaults on `Level`. All of them are therefore required arguments of the R
+wrapper and must be passed explicitly, using `NULL` where the feature is unused.
+
 ```{r}
 # Generate variable tree for data structure overview
 # Check if vartree function is available and works properly
-if(requireNamespace("ClinicoPath", quietly = TRUE)) {
+if(requireNamespace("ClinicoPathDescriptives", quietly = TRUE)) {
   tryCatch({
     results <- vartree(
       data = clinical_data,
@@ -130,7 +136,7 @@ if(requireNamespace("ClinicoPath", quietly = TRUE)) {
     print(summary(clinical_data[, c("Group", "Sex", "Age_Group", "Grade", "TStage")]))
   })
 } else {
-  cat("ClinicoPath package not available for variable tree\n")
+  cat("ClinicoPathDescriptives package not available for variable tree\n")
   print(summary(clinical_data))
 }
 ```
@@ -228,13 +234,18 @@ print(baseline_table)
 ### Age and Sex Distribution
 
 ```{r}
-# Age pyramid by treatment group
+# Age and sex distribution of the whole cohort.
+# `female` and `male` are Level options and therefore REQUIRED arguments of the
+# R wrapper - they name the levels of `gender` to place on each side.
+# `agepyramid` has no grouping option, so a per-group pyramid means calling it
+# once per subset.
 agepyramid(
   data = clinical_data,
   age = "Age",
   gender = "Sex",
   female = "Female",
-  plot_title = "Age and Sex Distribution by Treatment Group"
+  male = "Male",
+  plot_title = "Age and Sex Distribution"
 )
 ```
 
@@ -278,26 +289,27 @@ alluvial(
 ### Biomarker Distribution
 
 ```{r}
-# Summarize continuous biomarkers
+# Summarize continuous biomarkers.
+# `summarydata` takes only continuous `vars`; it has no grouping option, so
+# stratified summaries are produced by calling it on each subset.
 biomarker_summary <- summarydata(
   data = clinical_data,
   vars = c("MeasurementA", "MeasurementB", "OverallTime"),
-  date_vars = NULL,
-  grvar = "Group"
+  distr = TRUE,
+  outliers = TRUE
 )
 
 print(biomarker_summary)
 ```
 
-### Biomarker Correlations by Grade
+### Biomarker Distribution Within a Treatment Group
 
 ```{r}
-# Biomarker analysis by tumor grade
+# Stratification is done by subsetting the data before the call
 summarydata(
-  data = clinical_data,
+  data = dplyr::filter(clinical_data, Group == "Treatment"),
   vars = c("MeasurementA", "MeasurementB"),
-  date_vars = NULL,
-  grvar = NULL
+  decimal_places = 2
 )
 ```
 
@@ -374,25 +386,27 @@ crosstable(
 ### Invasion Pattern and Outcome Correlation
 
 ```{r}
-# Venn diagram of invasion markers and outcomes
-clinical_venn <- clinical_data %>%
-  mutate(
-    LVI_positive = ifelse(LVI == "Present", 1, 0),
-    PNI_positive = ifelse(PNI == "Present", 1, 0),
-    LN_positive = ifelse(LymphNodeMetastasis == "Present", 1, 0),
-    Poor_outcome = ifelse(Outcome_Status == "Event Occurred", 1, 0)
-  )
-
+# Venn diagram of invasion markers and outcomes.
+# `venn` only accepts FACTOR variables (permitted: factor), so keep the original
+# factors rather than recoding to 0/1 numerics.
+# `var1true` ... `var7true` are Level options and therefore REQUIRED arguments of
+# the R wrapper: pass the positive level, or NULL when the variable is unused.
 venn(
-  data = clinical_venn,
-  var1 = "LVI_positive",
-  var1true = 1,
-  var2 = "PNI_positive", 
-  var2true = 1,
-  var3 = "LN_positive",
-  var3true = 1,
+  data = clinical_data,
+  var1 = "LVI",
+  var1true = "Present",
+  var2 = "PNI",
+  var2true = "Present",
+  var3 = "LymphNodeMetastasis",
+  var3true = "Present",
   var4 = NULL,
-  var4true = NULL
+  var4true = NULL,
+  var5 = NULL,
+  var5true = NULL,
+  var6 = NULL,
+  var6true = NULL,
+  var7 = NULL,
+  var7true = NULL
 )
 ```
 
@@ -401,17 +415,25 @@ venn(
 ### Benford's Law Analysis
 
 ```{r}
-# Check data quality using Benford's law
-# benford(
-#   data = clinical_data,
-#   var = "MeasurementA"
-# )
+# Check data quality using Benford's law.
+# `benford` takes a single continuous variable; `digits` (default 2) controls
+# whether first or first-two digits are analysed.
+benford(
+  data = clinical_data,
+  var = "MeasurementA",
+  digits = 2
+)
 ```
 
-### Inter-rater Reliability Analysis
+### Distribution of Rater Scores
+
+Note: ClinicoPathDescriptives does not compute inter-rater agreement
+statistics - `agreement()` and `icccoeff()` are provided by the **meddecide**
+module. `reportcat()` below only tabulates the frequency distribution of each
+rater's categorical scores.
 
 ```{r}
-# Analyze inter-rater agreement
+# Frequency summary of each rater's scores
 rater_data <- clinical_data %>%
   select(starts_with("Rater")) %>%
   select_if(~!all(is.na(.)))

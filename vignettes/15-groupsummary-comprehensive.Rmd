@@ -5,7 +5,27 @@ date: "`r Sys.Date()`"
 output: html_document
 ---
 
-
+> ## Availability note — please read first
+>
+> **`groupsummary` ("Group and Summarize") is NOT part of ClinicoPathDescriptives 1.0.52.**
+>
+> This analysis currently exists only in the `ClinicoPath` umbrella development tree, where
+> it is routed to a development-only menu group (`ExplorationD`). It is not shipped by
+> ClinicoPathDescriptives, and it is not shipped by any sibling module either
+> ([jjstatsplot](https://www.serdarbalci.com/jjstatsplot/),
+> [meddecide](https://www.serdarbalci.com/meddecide/),
+> [jsurvival](https://www.serdarbalci.com/jsurvival/), or OncoPath).
+>
+> **It is under development and planned for a future release.** Until then `groupsummary()`
+> cannot be called from this package. All chunks in this vignette are already non-evaluating
+> (`eval = FALSE` is set globally below), and the options documented here describe the
+> in-development version, not a released API.
+>
+> The 14 analyses ClinicoPathDescriptives 1.0.52 actually ships are: `agepyramid`, `alluvial`,
+> `benford`, `categorize`, `checkdata`, `chisqposttest`, `crosstable`, `dataquality`,
+> `outlierdetection`, `reportcat`, `summarydata`, `tableone`, `vartree` and `venn`.
+> For descriptive summaries that ARE available today, see `summarydata`, `tableone` and
+> `reportcat`.
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(

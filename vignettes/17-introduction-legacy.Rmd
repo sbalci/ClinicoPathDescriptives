@@ -26,9 +26,12 @@ The ClinicoPathDescriptives domain provides comprehensive tools for descriptive 
 ClinicoPathDescriptives is a specialized suite of statistical analysis tools within the ClinicoPath package that focuses on:
 
 - **Clinical Data Summarization**: Generate Table One summaries, cross-tabulations, and descriptive statistics tailored for medical research
-- **Quality Assessment**: Data quality checks, missing data analysis, and validation metrics
-- **Agreement Analysis**: Inter-rater reliability, diagnostic test agreement, and measurement concordance
+- **Quality Assessment**: Data quality checks, missing data analysis, outlier detection, and Benford's law screening
+- **Distribution and Set Visualization**: Age pyramids, alluvial diagrams, variable trees, and Venn/UpSet plots
 - **Enhanced Reporting**: Medical terminology, clinical guidelines compliance, and journal-ready outputs
+
+Inter-rater agreement and diagnostic-test analyses are **not** part of
+ClinicoPathDescriptives; they are provided by the companion **meddecide** module.
 
 ## Key Features
 
@@ -39,46 +42,56 @@ library(ClinicoPathDescriptives)
 data(histopathology)
 
 # Basic Table One
+# `vars` takes every variable to describe; `sty` selects the table style
+# (t1 = tableone, t2 = gtsummary, t3 = arsenal, t4 = janitor).
 tableone(
   data = histopathology,
-  explanatory = c("Grade", "Age", "Size"),
-  dependent = "Outcome"
+  vars = c("Grade", "Age", "TStage"),
+  sty = "t1",
+  excl = FALSE
 )
 ```
 
 ### 2. Advanced Cross-tabulations
 ```{r crosstable-example}
 # Enhanced cross-tabulation with medical formatting
+# `vars` are the row variables, `group` is the column (grouping) variable.
 crosstable(
   data = histopathology,
-  row_var = "Grade",
-  col_var = "Outcome",
-  add_margins = TRUE,
-  statistical_test = TRUE
+  vars = c("Grade", "TStage"),
+  group = "Group",
+  sty = "nejm",
+  cont = "mean",
+  pcat = "chisq"
 )
 ```
 
-### 3. Agreement Analysis
-```{r agreement-example}
-# Inter-rater agreement analysis
-data(breast_agreement_data)
+### 3. Categorical and Continuous Summaries
+```{r summary-example}
+# Frequency summaries for categorical variables
+reportcat(
+  data = histopathology,
+  vars = c("Grade", "LVI", "PNI")
+)
 
-agreement(
-  data = breast_agreement_data,
-  rater1_var = "Pathologist_1_Score",
-  rater2_var = "Pathologist_2_Score",
-  agreement_type = "kappa"
+# Descriptive statistics for continuous variables
+summarydata(
+  data = histopathology,
+  vars = c("Age", "MeasurementA", "MeasurementB"),
+  distr = TRUE,
+  outliers = TRUE
 )
 ```
 
 ### 4. Data Quality Assessment
 ```{r data-quality-example}
-# Comprehensive data quality check
+# Comprehensive data quality check across several variables
 dataquality(
   data = histopathology,
-  missing_threshold = 0.1,
-  outlier_detection = TRUE,
-  generate_report = TRUE
+  vars = c("Age", "Sex", "Grade", "MeasurementA"),
+  check_duplicates = TRUE,
+  check_missing = TRUE,
+  missing_threshold_visual = 10
 )
 ```
 
@@ -113,27 +126,33 @@ ClinicoPathDescriptives is designed to integrate seamlessly with:
 
 ## Available Functions
 
+ClinicoPathDescriptives ships exactly fourteen analyses.
+
 ### Core Descriptive Functions
-- `tableone()`: Comprehensive Table One generation
-- `crosstable()`: Enhanced cross-tabulation
-- `summarydata()`: Clinical data summarization
-- `groupsummary()`: Stratified descriptive statistics
+- `tableone()`: Table One generation (styles `t1`-`t4`)
+- `crosstable()`: Cross-tabulation with automatic test selection
+- `summarydata()`: Descriptive statistics for continuous variables
+- `reportcat()`: Frequency summaries for categorical variables
+- `chisqposttest()`: Chi-square post-hoc pairwise comparisons
 
 ### Data Quality Functions
-- `dataquality()`: Data quality assessment
-- `checkdata()`: Data validation and cleaning
-- `missingdata()`: Missing data analysis
-- `outlierdetection()`: Clinical outlier identification
+- `dataquality()`: Multi-variable visual quality assessment
+- `checkdata()`: Single-variable quality check
+- `outlierdetection()`: Outlier identification (univariate/multivariate/composite)
+- `benford()`: Benford's law screening for data integrity
+- `categorize()`: Convert continuous variables into categories
 
-### Agreement Functions
-- `agreement()`: Inter-rater reliability analysis
-- `icccoeff()`: Intraclass correlation coefficients
-- `reportcat()`: Categorical agreement reporting
+### Visualization Functions
+- `agepyramid()`: Age and sex distribution pyramids
+- `alluvial()`: Alluvial / Sankey flow diagrams
+- `vartree()`: Hierarchical variable trees
+- `venn()`: Venn diagrams and UpSet plots
 
-### Enhanced Reporting
-- `enhancedcrosstable()`: Publication-ready cross-tables
-- `gtsummary()`: Modern table formatting
-- `tinytable()`: Flexible table creation
+### Functions provided by other ClinicoPath modules
+The following are frequently confused with this module but live elsewhere:
+`agreement()` and `icccoeff()` (**meddecide**), survival analyses
+(**jsurvival**), `waterfall()` and `swimmerplot()` (**OncoPath**), and the
+ggstatsplot wrappers (**jjstatsplot**).
 
 ## Getting Started
 
@@ -153,21 +172,23 @@ library(ClinicoPathDescriptives)
 # 1. Load your clinical data
 data(histopathology)
 
-# 2. Check data quality
-quality_check <- dataquality(histopathology)
+# 2. Check data quality (`vars` is required)
+quality_check <- dataquality(
+  data = histopathology,
+  vars = c("Age", "Grade", "TStage", "MeasurementA")
+)
 
 # 3. Generate descriptive statistics
 table_one <- tableone(
   data = histopathology,
-  explanatory = c("Age", "Grade", "Size"),
-  dependent = "Outcome"
+  vars = c("Age", "Grade", "TStage")
 )
 
 # 4. Create cross-tabulations
 cross_tab <- crosstable(
   data = histopathology,
-  row_var = "Grade",
-  col_var = "Outcome"
+  vars = c("Grade", "TStage"),
+  group = "Group"
 )
 
 # 5. Export results
@@ -204,18 +225,18 @@ cross_tab <- crosstable(
 
 For more specific applications, see:
 
-- [Agreement Analysis in Digital Pathology](ClinicoPathDescriptives-agreement-analysis.html)
-- [Digital Pathology Validation Studies](ClinicoPathDescriptives-digital-pathology-validation.html)
-- [Modern Molecular Pathology Workflows](ClinicoPathDescriptives-modern-molecular-pathology-workflow.html)
-- [Data Quality and Exploration](data-quality-exploration.html)
-- [Clinical Examples](clinical-examples.html)
+- [Data Quality and Exploration](04-data-quality-exploration.html)
+- [Digital Pathology](05-digital-pathology.html)
+- [Molecular Pathology Workflow](06-molecular-workflow.html)
+- [Digital Pathology Validation Studies](18-digital-pathology-validation-legacy.html)
+- [Modern Molecular Pathology Workflows](19-molecular-pathology-workflow-legacy.html)
 
 ## Support and Resources
 
 ### Documentation
 - Function reference: `?tableone`, `?crosstable`, etc.
-- Package documentation: `help(package = "ClinicoPath")`
-- Online documentation: [ClinicoPath Website](https://www.clinicopath.org)
+- Package documentation: `help(package = "ClinicoPathDescriptives")`
+- Online documentation: [ClinicoPathDescriptives Website](https://www.serdarbalci.com/ClinicoPathDescriptives/)
 
 ### Community
 - GitHub Issues: Report bugs and request features

@@ -6,6 +6,27 @@ author: "ClinicoPath"
 output: html_document
 ---
 
+> ## Not part of ClinicoPathDescriptives 1.0.52
+>
+> **`biomarkerresponse()` — Biomarker Response Association — is under development and is not
+> shipped by ClinicoPathDescriptives 1.0.52.** It exists only in the umbrella
+> [ClinicoPath](https://github.com/sbalci/ClinicoPathJamoviModule) development tree, where it
+> currently carries a development/test menu group, so it does not appear in the jamovi menu of
+> any released module and the R wrapper is not exported. Its intended home on release is
+> [OncoPath](https://www.serdarbalci.com/OncoPath/), which does not ship it yet either.
+>
+> Option names, defaults and level names shown below are provisional and may change before it
+> ships. Every code chunk in this vignette is therefore set to `eval = FALSE`.
+>
+> The 14 analyses ClinicoPathDescriptives 1.0.52 actually ships are: `agepyramid`, `alluvial`,
+> `benford`, `categorize`, `checkdata`, `chisqposttest`, `crosstable`, `dataquality`,
+> `outlierdetection`, `reportcat`, `summarydata`, `tableone`, `vartree`, `venn`.
+
+```{r vignette-eval-guard, include = FALSE}
+# This vignette documents an unreleased analysis; nothing here is executed.
+knitr::opts_chunk$set(eval = FALSE)
+```
+
 # Introduction to Biomarker Response Analysis
 
 Biomarker response association analysis forms the cornerstone of precision medicine, enabling clinicians and researchers to understand the relationships between biological markers and treatment outcomes. This comprehensive guide demonstrates how to analyze biomarker-response relationships using the ClinicoPath module for clinical decision support and research validation.
@@ -64,6 +85,8 @@ Biomarker-response associations quantify how biological markers predict, correla
 ## Load Required Libraries and Data
 
 ```{r setup, message=FALSE, warning=FALSE}
+# NOTE: biomarkerresponse() is NOT exported by ClinicoPathDescriptives 1.0.52.
+# Only the bundled datasets below come from this package.
 library(ClinicoPathDescriptives)
 library(dplyr)
 library(ggplot2)

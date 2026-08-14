@@ -22,6 +22,28 @@ knitr::opts_chunk$set(
 )
 ```
 
+> ### Availability note (please read first)
+>
+> **This analysis is not part of ClinicoPathDescriptives 1.0.52.**
+>
+> The analysis documented here is `jcorrelation` ("Correlation Analysis"). It currently
+> exists only in the development umbrella module `ClinicoPath`, where it is still routed to
+> a development menu group (`ExplorationD`) rather than a released one. It is not shipped by
+> `ClinicoPathDescriptives`, nor by `jjstatsplot`, `meddecide`, `jsurvival` or `OncoPath`.
+> **It is under development and is planned for a future release.**
+>
+> The 14 analyses that ClinicoPathDescriptives 1.0.52 actually ships are: `agepyramid`,
+> `alluvial`, `benford`, `categorize`, `checkdata`, `chisqposttest`, `crosstable`,
+> `dataquality`, `outlierdetection`, `reportcat`, `summarydata`, `tableone`, `vartree`
+> and `venn`.
+>
+> If you need a correlation matrix today, use **Correlation Matrix** (`jjcorrmat`) in the
+> [jjstatsplot module](https://www.serdarbalci.com/jjstatsplot/).
+>
+> Because the function is not installed, **every code chunk in this vignette is set to
+> `eval = FALSE`** and the output shown is illustrative only. The prose below also refers to
+> the function as `correlation`; the actual analysis name is `jcorrelation`.
+
 # Introduction
 
 The `correlation` function in ClinicoPath provides comprehensive correlation analysis for exploring relationships between continuous variables. It supports multiple correlation methods (Pearson, Spearman, Kendall), significance testing, confidence intervals, and various visualization options. The function is designed for clinical researchers who need robust correlation analysis with publication-ready output.

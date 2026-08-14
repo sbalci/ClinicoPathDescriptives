@@ -75,37 +75,53 @@ cat("Enhanced dataset prepared with", nrow(viz_data), "patients and", ncol(viz_d
 
 ### Age Pyramid - Population Structure
 
+`female` and `male` are `Level` options, so both are required arguments of the R
+wrapper and must name the levels of `gender` explicitly.
+
 ```{r}
 # Classic age pyramid showing population structure
 agepyramid(
   data = viz_data,
   age = "Age",
   gender = "Sex",
-  female = "Female"
+  female = "Female",
+  male = "Male"
 )
 ```
 
-### Age Pyramid by Treatment Group
+### Changing the Age Bands
+
+`agepyramid` has no grouping option beyond `gender` - to compare subgroups, run
+the analysis once per subset. What you can vary is how ages are binned, via
+`age_groups` (`custom`, `pediatric`, `reproductive`, `geriatric`, `lifecourse`)
+and `bin_width`.
 
 ```{r}
-# Age pyramid comparing treatment groups
-agepyramid(
-  data = viz_data,
-  age = "Age", 
-  gender = "Sex",
-  female = "Female"
-)
-```
-
-### Age Pyramid by Risk Profile
-
-```{r}
-# Age pyramid by risk stratification
+# Ten-year bins instead of the default five
 agepyramid(
   data = viz_data,
   age = "Age",
   gender = "Sex",
-  female = "Female"
+  female = "Female",
+  male = "Male",
+  age_groups = "custom",
+  bin_width = 10
+)
+```
+
+### Clinically Meaningful Bands
+
+```{r}
+# Geriatric-oriented age bands with a colourblind-safe palette
+agepyramid(
+  data = viz_data,
+  age = "Age",
+  gender = "Sex",
+  female = "Female",
+  male = "Male",
+  age_groups = "geriatric",
+  color_palette = "colorblind",
+  plot_title = "Age Pyramid - Geriatric Bands"
 )
 ```
 
@@ -159,16 +175,24 @@ venn_data <- viz_data %>%
   )
 
 # Three-way Venn diagram of invasion markers
+# var1true .. var7true are Level options, so all seven are required arguments of
+# the R wrapper - pass NULL for the sets you are not using.
 venn(
   data = venn_data,
   var1 = "LVI_Present",
-  var1true = 1,
-  var2 = "PNI_Present", 
-  var2true = 1,
+  var1true = "1",
+  var2 = "PNI_Present",
+  var2true = "1",
   var3 = "LN_Positive",
-  var3true = 1,
+  var3true = "1",
   var4 = NULL,
-  var4true = NULL
+  var4true = NULL,
+  var5 = NULL,
+  var5true = NULL,
+  var6 = NULL,
+  var6true = NULL,
+  var7 = NULL,
+  var7true = NULL
 )
 ```
 
@@ -179,13 +203,19 @@ venn(
 venn(
   data = venn_data,
   var1 = "LVI_Present",
-  var1true = 1,
-  var2 = "PNI_Present", 
-  var2true = 1,
+  var1true = "1",
+  var2 = "PNI_Present",
+  var2true = "1",
   var3 = "LN_Positive",
-  var3true = 1,
+  var3true = "1",
   var4 = "High_Grade",
-  var4true = 1
+  var4true = "1",
+  var5 = NULL,
+  var5true = NULL,
+  var6 = NULL,
+  var6true = NULL,
+  var7 = NULL,
+  var7true = NULL
 )
 ```
 
@@ -255,9 +285,16 @@ tryCatch({
 
 ## Section 5: Treatment Response Visualizations
 
+> **Note:** `waterfall()` and `swimmerplot()` are **not** part of
+> ClinicoPathDescriptives. They are provided by the **OncoPath** module
+> (`Exploration > Patient Follow-Up Plots`). The `treatmentResponse` dataset
+> below *is* bundled here, so the data-preparation steps are reproducible, but
+> the plotting calls in Sections 5 and 6 are shown for reference only and are
+> not evaluated.
+
 ### Waterfall Plot - Individual Response
 
-```{r}
+```{r, eval = FALSE}
 # Prepare response data with enhanced categorization
 response_enhanced <- treatmentResponse %>%
   mutate(
@@ -291,8 +328,8 @@ waterfall(
 
 ### Waterfall with Response Categories
 
-```{r}
-# Waterfall colored by response category
+```{r, eval = FALSE}
+# Waterfall colored by response category (OncoPath module)
 waterfall(
   data = response_enhanced,
   patientID = "PatientID",
@@ -305,7 +342,10 @@ waterfall(
 
 ### Swimmer Plot - Patient Timelines
 
-```{r}
+`swimmerplot()` is provided by the **OncoPath** module, not by
+ClinicoPathDescriptives.
+
+```{r, eval = FALSE}
 # Prepare swimmer plot data
 swimmer_data <- viz_data %>%
   filter(ID <= 30) %>%  # Limit for clarity
@@ -338,8 +378,8 @@ swimmerplot(
 
 ### Swimmer Plot by Treatment Group
 
-```{r}
-# Swimmer plot with grouping
+```{r, eval = FALSE}
+# Swimmer plot with grouping (OncoPath module)
 swimmerplot(
   data = swimmer_data,
   patientID = "PatientID",
@@ -361,20 +401,25 @@ swimmerplot(
 
 ```{r}
 # Benford's law for measurement data
-# benford(
-#   data = viz_data,
-#   var = "MeasurementA"
-# )
+benford(
+  data = viz_data,
+  var = "MeasurementA",
+  digits = 2
+)
 ```
 
-### Multi-variable Benford Analysis
+### First-digit Benford Analysis
+
+`benford` takes a single variable at a time. `digits` selects how many leading
+digits are analysed and accepts 1, 2 or 3 only.
 
 ```{r}
-# Benford's law for follow-up time
-# benford(
-#   data = viz_data,
-#   var = "OverallTime"
-# )
+# Benford's law for follow-up time, first digit only
+benford(
+  data = viz_data,
+  var = "OverallTime",
+  digits = 1
+)
 ```
 
 ## Section 8: Advanced Composite Visualizations
@@ -484,16 +529,23 @@ cat("This approach provides comprehensive visual narrative of study results.\n")
 
 ## Implementation in jamovi
 
-All visualizations are available through jamovi's interface:
+All visualizations are available through jamovi's interface, though not all of
+them from this module:
 
 ### Navigation Path
+
+Provided by ClinicoPathDescriptives:
+
 - **Demographics**: `Exploration > ClinicoPath Descriptive Plots > Age Pyramid`
 - **Relationships**: `Exploration > ClinicoPath Descriptive Plots > Alluvial Diagrams`
 - **Set Analysis**: `Exploration > ClinicoPath Descriptive Plots > Venn Diagram`
 - **Data Structure**: `Exploration > ClinicoPath Descriptive Plots > Variable Tree`
+- **Quality Assessment**: `Exploration > ClinicoPath Data Quality > Benford Analysis`
+
+Provided by the separate **OncoPath** module:
+
 - **Treatment Response**: `Exploration > Patient Follow-Up Plots > Treatment Response Analysis`
 - **Timelines**: `Exploration > Patient Follow-Up Plots > Swimmer Plot`
-- **Quality Assessment**: `Exploration > ClinicoPath Descriptives > Benford Analysis`
 
 ### jamovi Advantages for Visualization
 
