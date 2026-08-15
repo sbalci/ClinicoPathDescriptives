@@ -4,7 +4,7 @@ author: "ClinicoPath Development Team"
 date: "`r Sys.Date()`"
 output: html_document
 vignette: >
-  %\VignetteIndexEntry{Comprehensive Guide to Alluvial Diagrams}
+  %\VignetteIndexEntry{Comprehensive Guide to Alluvial Diagrams in ClinicoPath}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

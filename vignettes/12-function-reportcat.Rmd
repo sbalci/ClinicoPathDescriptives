@@ -4,7 +4,7 @@ author: "Analysis by Gemini"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette: Summarizing Categorical Data}
+  %\VignetteIndexEntry{Vignette: Generating Quick Summaries of Categorical Pathology Data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

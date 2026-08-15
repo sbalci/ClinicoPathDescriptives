@@ -4,7 +4,7 @@ author: "Analysis by Gemini"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette: Creating an Age Pyramid}
+  %\VignetteIndexEntry{Vignette: Creating an Age Pyramid with ClinicoPathDescriptives}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

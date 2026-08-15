@@ -4,7 +4,7 @@ author: "Analysis by Gemini"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette: Creating a Table 1}
+  %\VignetteIndexEntry{Vignette: Generating a 'Table 1' with ClinicoPathDescriptives}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

@@ -4,7 +4,7 @@ author: "Analysis by Gemini"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette: Venn and Upset Plots}
+  %\VignetteIndexEntry{Vignette: Visualizing Co-occurrence with Venn & Upset Plots}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
