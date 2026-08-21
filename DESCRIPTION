@@ -1,8 +1,8 @@
 Type: Package
 Package: ClinicoPathDescriptives
 Title: Descriptive Analysis for Clinicopathological Research
-Version: 1.0.6
-Date: 2026-08-15
+Version: 1.0.6.02
+Date: 2026-08-21
 Authors@R: person(given = "Serdar", family = "Balci", role = c("aut",
  "cre", "cph"), email = "serdarbalci@serdarbalci.com", comment =
  c(ORCID = "0000-0002-7852-3851"))
@@ -29,7 +29,8 @@ License: GPL (>= 2)
 Depends: R (>= 4.1.0)
 Imports: arsenal, benford.analysis, boot, classInt, ComplexUpset, dbscan,
         DescTools, DiagrammeRsvg, dplyr, easyalluvial, finalfit, ggalluvial,
-        ggcharts, ggplot2, ggvenn, ggVennDiagram, glue, grid, gt, gtExtras,
+        ggcharts, ggplot2, ggvenn, ggVennDiagram, glue, grDevices, grid, gt,
+        gtExtras,
         gtsummary, htmltools, janitor, jmvcore, kableExtra, labelled, magrittr,
         MASS, moments, naniar, performance, purrr, pwr, R6, RColorBrewer,
         rlang, robustbase, scales, stats, stringr, tableone, tangram, tidyr,

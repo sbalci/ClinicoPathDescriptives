@@ -214,6 +214,19 @@ vennClass <- if (requireNamespace('jmvcore'))
 
                 self$results$plotUpsetR$setSize(upset_width, upset_height)
                 self$results$plotComplexUpset$setSize(upset_width, upset_height)
+
+                # The summary table carries one row per selected variable, which
+                # is fully determined by the options. Build that structure here so
+                # the table does not restructure on every run; .run() fills the
+                # computed counts with setRow().
+                selected_vars <- Filter(Negate(is.null), list(
+                    self$options$var1, self$options$var2, self$options$var3,
+                    self$options$var4, self$options$var5, self$options$var6,
+                    self$options$var7))
+
+                for (i in seq_along(selected_vars))
+                    self$results$summary$addRow(rowKey = i, values = list(
+                        variable = selected_vars[[i]]))
             },
 
             .run = function() {
@@ -257,12 +270,12 @@ vennClass <- if (requireNamespace('jmvcore'))
                     # Create professional welcome message following decisionpanel style
                     welcome_content <- paste0(
                         "<div style='font-family: Arial, sans-serif; max-width: 800px; line-height: 1.4;'>",
-                        "<div style='background: #f5f5f5; border: 2px solid #333; padding: 20px; margin-bottom: 20px;'>",
+                        "<div style='background-color: rgba(88, 88, 88, 0.06); border: 2px solid #333; padding: 20px; margin-bottom: 20px; color: inherit;'>",
                         "<h2 style='margin: 0 0 10px 0; font-size: 20px; color: #333;'>Venn Diagram Analysis</h2>",
                         "<p style='margin: 0; font-size: 14px; color: #666;'>Visualize overlaps and intersections between categorical variables</p>",
                         "</div>",
 
-                        "<div style='background: #f9f9f9; border-left: 4px solid #333; padding: 15px; margin-bottom: 20px;'>",
+                        "<div style='background-color: rgba(155, 155, 155, 0.06); border-left: 4px solid #333; padding: 15px; margin-bottom: 20px; color: inherit;'>",
                         "<h3 style='margin: 0 0 10px 0; color: #333; font-size: 16px;'>Setup Progress</h3>"
                     )
 
@@ -311,7 +324,7 @@ vennClass <- if (requireNamespace('jmvcore'))
                         "<li><strong>Set calculations:</strong> Detailed overlap statistics</li>",
                         "</ul></td></tr></table>",
 
-                        "<div style='background: #f9f9f9; border: 1px solid #ccc; padding: 15px;'>",
+                        "<div style='background-color: rgba(155, 155, 155, 0.06); border: 1px solid #ccc; padding: 15px; color: inherit;'>",
                         "<h4 style='margin: 0 0 10px 0; font-size: 15px;'>Clinical Applications</h4>",
                         "<ul style='margin: 0; padding-left: 20px; font-size: 14px;'>",
                         "<li><strong>Biomarker overlap:</strong> Analyze multiple tumor markers or expression patterns</li>",
@@ -581,7 +594,7 @@ vennClass <- if (requireNamespace('jmvcore'))
                     # Set the summary results
                     if (!is.null(self$results$summary)) {
                         for (i in seq_len(nrow(summaryData))) {
-                            self$results$summary$addRow(rowKey = i, values = list(
+                            self$results$summary$setRow(rowKey = i, values = list(
                                 variable = summaryData$Variable[i],
                                 trueCount = summaryData$TrueCount[i],
                                 falseCount = summaryData$FalseCount[i],
@@ -689,6 +702,9 @@ vennClass <- if (requireNamespace('jmvcore'))
 
                 # Retrieve the prepared data.
                 results <- image$state
+
+                if (is.null(results))
+                    return(FALSE)
                 mydata2 <- results$mydata
                 namescolumn2 <- results$names
 
@@ -711,6 +727,9 @@ vennClass <- if (requireNamespace('jmvcore'))
 
                 # Retrieve the prepared data.
                 results <- image$state
+
+                if (is.null(results))
+                    return(FALSE)
                 mydata2 <- results$mydata
                 namescolumn2 <- results$names
 
@@ -733,6 +752,9 @@ vennClass <- if (requireNamespace('jmvcore'))
 
                 # Retrieve the prepared data.
                 results <- image$state
+
+                if (is.null(results))
+                    return(FALSE)
                 mydata2 <- results$mydata
 
                 # Generate the UpSetR plot
@@ -754,6 +776,9 @@ vennClass <- if (requireNamespace('jmvcore'))
 
                 # Retrieve the prepared data.
                 results <- image$state
+
+                if (is.null(results))
+                    return(FALSE)
                 mydata2 <- results$mydata
 
                 # Generate the ComplexUpset plot
@@ -882,7 +907,7 @@ vennClass <- if (requireNamespace('jmvcore'))
             # Generate About This Analysis content
             .generateAboutAnalysis = function() {
                 about_content <- paste0(
-                    "<div style='background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 15px;'>",
+                    "<div style='background-color: rgba(138, 155, 172, 0.06); padding: 15px; border-radius: 5px; margin-bottom: 15px; color: inherit;'>",
                     "<h4 style='color: #2c3e50; margin-top: 0;'>", .("About Venn Diagrams"), "</h4>",
                     "<p><strong>", .("Purpose:"), "</strong> ", .("Venn diagrams visualize overlaps and intersections between categorical variables, commonly used in clinical research to analyze:"), "</p>",
                     "<ul style='margin-left: 20px;'>",
@@ -898,7 +923,7 @@ vennClass <- if (requireNamespace('jmvcore'))
                     "<li>", .("Choose the 'true' level for each variable (e.g., 'Positive', 'Present', 'Yes')"), "</li>",
                     "<li>", .("Select one or more plot engines in the Plot Selection panel"), "</li>",
                     "<li>", .("Adjust visualization options as needed"), "</li>",
-                    "<li>", .("Interpret intersections - larger overlaps indicate stronger associations"), "</li>",
+                    "<li>", .("Interpret intersections - larger overlaps mean more shared cases; overlap size also depends on how common each variable is"), "</li>",
                     "</ol>",
                     "<p><strong>", .("Choosing a Plot Engine:"), "</strong></p>",
                     "<ul style='margin-left: 20px;'>",
@@ -949,7 +974,7 @@ vennClass <- if (requireNamespace('jmvcore'))
                 statistical_warnings <- private$.validateStatisticalPower(summaryData, total_n)
 
                 clinical_summary <- paste0(
-                    "<div style='background-color: #e8f4fd; padding: 15px; border-radius: 5px; border-left: 4px solid #3498db;'>",
+                    "<div style='background-color: rgba(33, 149, 236, 0.1); padding: 15px; border-radius: 5px; border-left: 4px solid #3498db; color: inherit;'>",
                     "<h4 style='color: #2980b9; margin-top: 0;'>", .("Clinical Summary"), "</h4>",
                     "<p><strong>", .("Dataset:"), "</strong> ", sprintf(.("%s cases analyzed"), total_n), "</p>",
                     "<p><strong>", .("Most Prevalent:"), "</strong> ", 
@@ -1008,17 +1033,19 @@ vennClass <- if (requireNamespace('jmvcore'))
 
                 # Generate comprehensive clinical paragraph
                 clinical_paragraph <- sprintf(
-                    "Analysis of %s cases revealed distinct patterns of variable expression. %s The intersection analysis demonstrated %s overlap patterns, which may have clinical implications for patient stratification and treatment planning.",
+                    "Analysis of %s cases revealed distinct patterns of variable expression. %s%s",
                     total_n,
                     paste(individual_sentences, collapse = " "),
                     if (length(var_names) >= 2) {
                         mean_overlap <- mean(summaryData$TrueCount) / total_n
-                        if (mean_overlap > 0.5) "significant" else if (mean_overlap > 0.2) "moderate" else "limited"
-                    } else "individual variable"
+                        sprintf(paste0(" Across the selected variables, the average share of positive cases was %s;",
+                                       " overlap between variables is shown in the diagram and depends on how common each variable is."),
+                                if (mean_overlap > 0.5) "high" else if (mean_overlap > 0.2) "moderate" else "low")
+                    } else ""
                 )
 
                 report_content <- paste0(
-                    "<div style='background-color: #f0f8f0; padding: 15px; border-radius: 5px; border-left: 4px solid #27ae60;'>",
+                    "<div style='background-color: rgba(33, 152, 33, 0.07); padding: 15px; border-radius: 5px; border-left: 4px solid #27ae60; color: inherit;'>",
                     "<h4 style='color: #27ae60; margin-top: 0;'> Copy-Ready Clinical Summary</h4>",
                     "<div style='background-color: white; padding: 12px; border-radius: 3px; font-family: Georgia, serif; line-height: 1.6; border: 1px solid #e9ecef;'>",
                     "<h6 style='margin: 0 0 8px 0; color: #495057;'>Clinical Report Template</h6>",
@@ -1031,7 +1058,7 @@ vennClass <- if (requireNamespace('jmvcore'))
                     paste0("<li>", individual_sentences, "</li>", collapse = ""),
                     "</ul>",
                     "</div>",
-                    "<div style='margin-top: 10px; padding: 8px; background-color: #e7f3ff; border-radius: 3px;'>",
+                    "<div style='margin-top: 10px; padding: 8px; background-color: rgba(33, 144, 255, 0.11); border-radius: 3px; color: inherit;'>",
                     "<small> <strong>Usage:</strong> Select and copy text from either template above. ",
                     "The clinical report template provides publication-ready prose, while the summary offers bullet-point details.</small>",
                     "</div>",
@@ -1044,12 +1071,12 @@ vennClass <- if (requireNamespace('jmvcore'))
             # Generate assumptions and interpretation guide
             .generateAssumptions = function() {
                 assumptions_content <- paste0(
-                    "<div style='background-color: #fff8dc; padding: 15px; border-radius: 5px; border-left: 4px solid #f39c12;'>",
+                    "<div style='background-color: rgba(255, 211, 33, 0.16); padding: 15px; border-radius: 5px; border-left: 4px solid #f39c12; color: inherit;'>",
                     "<h4 style='color: #e67e22; margin-top: 0;'>", .("Interpretation Guide & Assumptions"), "</h4>",
                     
                     "<h5>", .("How to Interpret:"), "</h5>",
                     "<ul style='margin-left: 20px;'>",
-                    "<li><strong>", .("Venn Diagram:"), "</strong> ", .("Circle overlaps show shared cases. Larger intersections indicate stronger associations."), "</li>",
+                    "<li><strong>", .("Venn Diagram:"), "</strong> ", .("Circle overlaps show shared cases. Intersection size depends on how common each variable is and does not by itself measure association."), "</li>",
                     "<li><strong>", .("UpSet Plot:"), "</strong> ", .("Bar heights show intersection sizes. Dots below indicate which variables are included."), "</li>",
                     "<li><strong>", .("Summary Table:"), "</strong> ", .("Shows counts and percentages for each variable individually."), "</li>",
                     "</ul>",
@@ -1065,7 +1092,7 @@ vennClass <- if (requireNamespace('jmvcore'))
                     "<h5>", .("Clinical Considerations:"), "</h5>",
                     "<ul style='margin-left: 20px;'>",
                     "<li>", .("Consider sample size when interpreting small intersections"), "</li>",
-                    "<li>", .("Large overlaps may suggest related biological pathways"), "</li>",
+                    "<li>", .("Large overlaps may reflect high positivity rates rather than a shared mechanism; test association formally before interpreting them"), "</li>",
                     "<li>", .("Use statistical tests for formal association analysis"), "</li>",
                     "<li>", .("Consider clinical context when interpreting patterns"), "</li>",
                     "</ul>",
@@ -1588,7 +1615,7 @@ vennClass <- if (requireNamespace('jmvcore'))
                         }
                     } else {
                         html_content <- paste0(html_content,
-                            "<div style='background: #fff3cd; padding: 10px; border: 1px solid #ffeaa7; border-radius: 4px; margin: 10px 0;'>",
+                            "<div style='background-color: rgba(255, 202, 33, 0.23); padding: 10px; border: 1px solid #ffeaa7; border-radius: 4px; margin: 10px 0; color: inherit;'>",
                             "<p><strong> Enable Calculations:</strong></p>",
                             "<p>To see detailed set calculations, please enable the specific options:</p>",
                             "<ul>",
@@ -1787,14 +1814,19 @@ vennClass <- if (requireNamespace('jmvcore'))
                 overlap_level <- if (mean_overlap / total_n > 0.5) "high" else if (mean_overlap / total_n > 0.2) "moderate" else "low"
 
                 interpretation <- paste0(
-                    "<div style='background: #f8f9fa; padding: 15px; border-left: 4px solid #28a745; margin: 10px 0; border-radius: 4px;'>",
+                    "<div style='background-color: rgba(138, 155, 172, 0.06); padding: 15px; border-left: 4px solid #28a745; margin: 10px 0; border-radius: 4px; color: inherit;'>",
                     "<h5 style='margin: 0 0 10px 0; color: #155724;'> Clinical Interpretation</h5>",
                     "<p style='margin: 0 0 8px 0;'><strong>Key Finding:</strong> In this dataset of ", total_n, " cases, ",
                     "'", largest_var, "' shows the highest prevalence with ", largest_count, " positive cases (", largest_pct, "%).</p>",
-                    "<p style='margin: 0 0 8px 0;'><strong>Overlap Pattern:</strong> The variables show ", overlap_level, " levels of intersection, ",
-                    if (overlap_level == "high") "suggesting strong associations between the measured characteristics."
-                    else if (overlap_level == "moderate") "indicating meaningful but not dominant relationships."
-                    else "suggesting the variables capture largely distinct characteristics.", "</p>",
+                    "<p style='margin: 0 0 8px 0;'><strong>Overlap Pattern:</strong> Across the selected variables, the average share of positive cases is ", overlap_level, ". ",
+                    # `intersection_data` is summaryData: one row PER VARIABLE, so
+                    # mean_overlap / total_n is the average positivity ACROSS variables.
+                    # Phrasing it as "each variable" was false whenever the variables
+                    # differ in prevalence (e.g. 90% and 20% average to "high").
+                    if (overlap_level == "high") "That is, averaged over the variables, more than half of cases are positive; single variables can sit far above or below that average, so read the True % column of the Summary of True Counts table."
+                    else if (overlap_level == "moderate") "That is, averaged over the variables, between one fifth and one half of cases are positive; single variables can sit outside that range, so read the True % column of the Summary of True Counts table."
+                    else "That is, averaged over the variables, under one fifth of cases are positive; single variables can sit outside that range, so read the True % column of the Summary of True Counts table.",
+                    " Overlap size depends on how common each variable is and does not by itself measure association.", "</p>",
                     "<p style='margin: 0; font-size: 0.9em; color: #6c757d;'>",
                     " <em>Clinical Relevance:</em> Use Venn diagrams to identify patient subgroups, assess diagnostic overlap, ",
                     "or evaluate multi-marker patterns in pathology and oncology research.</p>",
@@ -1838,7 +1870,7 @@ vennClass <- if (requireNamespace('jmvcore'))
 
                 if (length(warnings) > 0) {
                     warning_html <- paste0(
-                        "<div style='background: #fff3cd; padding: 12px; border-left: 4px solid #ffc107; margin: 10px 0; border-radius: 4px;'>",
+                        "<div style='background-color: rgba(255, 202, 33, 0.23); padding: 12px; border-left: 4px solid #ffc107; margin: 10px 0; border-radius: 4px; color: inherit;'>",
                         "<h6 style='margin: 0 0 8px 0; color: #856404;'>Statistical Considerations</h6>",
                         paste(warnings, collapse = "<br><br>"),
                         "</div>"
@@ -1852,7 +1884,7 @@ vennClass <- if (requireNamespace('jmvcore'))
             # Generate statistical glossary
             .generateGlossary = function() {
                 glossary_content <- paste0(
-                    "<div style='background-color: #f8f9fa; padding: 20px; border-radius: 8px; border-left: 4px solid #6f42c1;'>",
+                    "<div style='background-color: rgba(138, 155, 172, 0.06); padding: 20px; border-radius: 8px; border-left: 4px solid #6f42c1; color: inherit;'>",
                     "<h4 style='color: #6f42c1; margin-top: 0;'> Statistical Glossary & Clinical Guide</h4>",
 
                     "<div style='display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;'>",
@@ -1893,7 +1925,7 @@ vennClass <- if (requireNamespace('jmvcore'))
                     "</div>",
 
                     # Statistical Considerations
-                    "<div style='background: #fff3cd; padding: 12px; border-radius: 6px; border: 1px solid #ffeaa7;'>",
+                    "<div style='background-color: rgba(255, 202, 33, 0.23); padding: 12px; border-radius: 6px; border: 1px solid #ffeaa7; color: inherit;'>",
                     "<h6 style='margin: 0 0 8px 0; color: #856404;'> Statistical Considerations</h6>",
                     "<p style='margin: 0 0 6px 0; font-size: 0.9em;'><strong>Sample Size:</strong> Ensure adequate cases in each intersection for reliable interpretation</p>",
                     "<p style='margin: 0 0 6px 0; font-size: 0.9em;'><strong>Independence:</strong> Venn diagrams show overlap but don't imply causal relationships</p>",
@@ -1911,7 +1943,7 @@ vennClass <- if (requireNamespace('jmvcore'))
                 # Display errors
                 if (length(private$.errors) > 0) {
                     error_html <- paste(
-                        "<div style='padding: 15px; background-color: #f8d7da; border-left: 4px solid #dc3545; border-radius: 4px;'>",
+                        "<div style='padding: 15px; background-color: rgba(216, 33, 50, 0.18); border-left: 4px solid #dc3545; border-radius: 4px; color: inherit;'>",
                         "<h4 style='margin-top: 0; color: #721c24;'> Validation Errors</h4>",
                         paste(sprintf("<p style='margin: 5px 0; color: #721c24;'>\u{2022} %s</p>", htmltools::htmlEscape(private$.errors)), collapse = ""),
                         "</div>",
@@ -1924,7 +1956,7 @@ vennClass <- if (requireNamespace('jmvcore'))
                 # Display warnings
                 if (length(private$.warnings) > 0) {
                     warning_html <- paste(
-                        "<div style='padding: 15px; background-color: #fff3cd; border-left: 4px solid #ffc107; border-radius: 4px;'>",
+                        "<div style='padding: 15px; background-color: rgba(255, 202, 33, 0.23); border-left: 4px solid #ffc107; border-radius: 4px; color: inherit;'>",
                         "<h4 style='margin-top: 0; color: #856404;'> Important Warnings</h4>",
                         paste(sprintf("<p style='margin: 5px 0; color: #856404;'>\u{2022} %s</p>", htmltools::htmlEscape(private$.warnings)), collapse = ""),
                         "</div>",
@@ -1937,7 +1969,7 @@ vennClass <- if (requireNamespace('jmvcore'))
                 # Display info messages
                 if (length(private$.info) > 0) {
                     info_html <- paste(
-                        "<div style='padding: 15px; background-color: #d1ecf1; border-left: 4px solid #17a2b8; border-radius: 4px;'>",
+                        "<div style='padding: 15px; background-color: rgba(33, 163, 188, 0.21); border-left: 4px solid #17a2b8; border-radius: 4px; color: inherit;'>",
                         "<h4 style='margin-top: 0; color: #0c5460;'> Analysis Information</h4>",
                         paste(sprintf("<p style='margin: 5px 0; color: #0c5460;'>\u{2022} %s</p>", htmltools::htmlEscape(private$.info)), collapse = ""),
                         "</div>",
