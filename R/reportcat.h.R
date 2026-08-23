@@ -43,6 +43,7 @@ reportcatResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
         text = function() private$.items[["text"]],
         text1 = function() private$.items[["text1"]],
         reportSentences = function() private$.items[["reportSentences"]],
+        dataWarnings = function() private$.items[["dataWarnings"]],
         error = function() private$.items[["error"]]),
     private = list(),
     public=list(
@@ -52,20 +53,21 @@ reportcatResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 name="",
                 title="Summary of Categorical Variables",
                 refs=list(
-                    "report",
+                    "gt",
                     "gtExtras",
                     "ClinicoPathJamoviModule"))
             self$add(jmvcore::Html$new(
                 options=options,
                 name="todo",
                 title="To Do",
+                visible=FALSE,
                 clearWith=list(
                     "vars")))
             self$add(jmvcore::Html$new(
                 options=options,
                 name="clinicalSummary",
                 title="Clinical Interpretation",
-                visible="(vars)",
+                visible=FALSE,
                 clearWith=list(
                     "vars")))
             self$add(jmvcore::Html$new(
@@ -77,35 +79,44 @@ reportcatResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 options=options,
                 name="assumptions",
                 title="Data Quality & Assumptions",
-                visible="(vars)",
+                visible=FALSE,
                 clearWith=list(
                     "vars")))
             self$add(jmvcore::Html$new(
                 options=options,
                 name="text",
                 title="Variable Summaries",
-                visible="(vars)",
+                visible=FALSE,
                 clearWith=list(
                     "vars")))
             self$add(jmvcore::Html$new(
                 options=options,
                 name="text1",
                 title="Summary Table",
-                visible="(vars)",
+                visible=FALSE,
                 clearWith=list(
                     "vars")))
             self$add(jmvcore::Html$new(
                 options=options,
                 name="reportSentences",
                 title="Copy-Ready Clinical Summary",
-                visible="(vars)",
+                visible=FALSE,
+                clearWith=list(
+                    "vars")))
+            self$add(jmvcore::Html$new(
+                options=options,
+                name="dataWarnings",
+                title="Data Warnings",
+                visible=FALSE,
                 clearWith=list(
                     "vars")))
             self$add(jmvcore::Html$new(
                 options=options,
                 name="error",
                 title="Error Message",
-                visible=FALSE))}))
+                visible=FALSE,
+                clearWith=list(
+                    "vars")))}))
 
 reportcatBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
     "reportcatBase",
@@ -148,6 +159,7 @@ reportcatBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 #'   \code{results$text} \tab \tab \tab \tab \tab a html \cr
 #'   \code{results$text1} \tab \tab \tab \tab \tab a html \cr
 #'   \code{results$reportSentences} \tab \tab \tab \tab \tab a html \cr
+#'   \code{results$dataWarnings} \tab \tab \tab \tab \tab a html \cr
 #'   \code{results$error} \tab \tab \tab \tab \tab a html \cr
 #' }
 #'

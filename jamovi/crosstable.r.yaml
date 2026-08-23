@@ -5,6 +5,19 @@ jrs:   '1.1'
 
 items:
 
+    - name: notices
+      title: Important Information
+      type: Preformatted
+      visible: false
+      clearWith:
+          - vars
+          - group
+          - excl
+          - sty
+          - cont
+          - pcat
+          - p_adjust
+
     - name: errorNotice
       title: Error
       type: Html
@@ -21,6 +34,9 @@ items:
       clearWith:
           - vars
           - group
+          - sty
+          - cont
+          - pcat
           - p_adjust
           - excl
 
@@ -49,8 +65,9 @@ items:
           - excl
 
     - name: todo2
-      title: To Do
+      title: Method Note (finalfit)
       type: Html
+      visible: (sty:finalfit)
       clearWith:
           - vars
           - group
@@ -73,6 +90,8 @@ items:
           - vars
           - group
           - sty
+          - cont
+          - pcat
           - excl
       visible: (sty:arsenal)
       refs: arsenal
@@ -98,6 +117,7 @@ items:
           - group
           - sty
           - cont
+          - pcat
           - p_adjust
           - excl
       visible: (sty:gtsummary)
@@ -140,6 +160,7 @@ items:
       title: "Standardized Mean Differences (Balance)"
       type: Table
       visible: (showSMD)
+      refs: MASS
       clearWith:
           - vars
           - group
@@ -169,5 +190,8 @@ refs:
     - finalfit
     - gtsummary
     - tangram
+    - labelled
+    - yangdalton2012
+    - kableExtra
 
 ...

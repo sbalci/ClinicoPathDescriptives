@@ -91,3 +91,4 @@ CITATION.cff
 ^data/.*\.omv$
 ^inst/extdata/.*\.omv$
 ^data/.*\.csv$
+^.*\.tar\.gz$

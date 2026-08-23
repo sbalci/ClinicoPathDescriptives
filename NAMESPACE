@@ -20,7 +20,10 @@ export(tableone)
 export(vartree)
 export(venn)
 import(jmvcore)
-importFrom(ComplexUpset,intersection_size)
+importFrom(ComplexUpset,
+  get_size_mode,
+  intersection_size
+)
 importFrom(DescTools,BreslowDayTest)
 importFrom(DiagrammeRsvg,export_svg)
 importFrom(MASS,ginv)
@@ -41,7 +44,6 @@ importFrom(dbscan,
 importFrom(dplyr,
   inner_join,
   mutate,
-  n_distinct,
   row_number
 )
 importFrom(easyalluvial,
@@ -51,10 +53,8 @@ importFrom(easyalluvial,
 )
 importFrom(finalfit,summary_factorlist)
 importFrom(ggVennDiagram,
-  Venn,
-  discern,
-  ggVennDiagram,
-  overlap
+  get_shapes,
+  ggVennDiagram
 )
 importFrom(ggalluvial,
   StatStratum,
@@ -68,16 +68,15 @@ importFrom(ggplot2,
   aes,
   after_stat,
   coord_flip,
+  discrete_scale,
   element_text,
   geom_hline,
   geom_point,
   geom_text,
   ggplot,
-  ggsave,
   ggtitle,
   labs,
   scale_color_manual,
-  scale_fill_brewer,
   scale_fill_viridis_d,
   scale_x_reverse,
   scale_y_reverse,
@@ -90,9 +89,11 @@ importFrom(ggplot2,
 importFrom(ggvenn,ggvenn)
 importFrom(glue,glue)
 importFrom(grDevices,hcl.colors)
+importFrom(graphics,par)
 importFrom(grid,
   gpar,
-  grid.text
+  grid.text,
+  upViewport
 )
 importFrom(gt,
   cell_fill,
@@ -169,20 +170,19 @@ importFrom(scales,percent)
 importFrom(stats,
   binomial,
   chisq.test,
+  complete.cases,
   cov,
   fisher.test,
   glm,
   median,
   p.adjust,
-  pairwise.table,
-  pnorm,
   predict,
   qbeta,
-  qchisq,
   qnorm,
   quantile,
   sd,
-  var
+  var,
+  xtabs
 )
 importFrom(stringr,str_to_title)
 importFrom(tableone,CreateTableOne)
@@ -192,15 +192,10 @@ importFrom(tidyr,
   pivot_wider
 )
 importFrom(utils,
+  combn,
   packageVersion,
   sessionInfo,
   tail
 )
-importFrom(vcd,mosaic)
 importFrom(viridis,viridis)
-importFrom(visdat,
-  vis_dat,
-  vis_guess,
-  vis_miss
-)
 importFrom(vtree,vtree)

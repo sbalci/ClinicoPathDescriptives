@@ -113,6 +113,7 @@ dataqualityResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class
     "dataqualityResults",
     inherit = jmvcore::Group,
     active = list(
+        notices = function() private$.items[["notices"]],
         todo = function() private$.items[["todo"]],
         text = function() private$.items[["text"]],
         summary = function() private$.items[["summary"]],
@@ -127,13 +128,26 @@ dataqualityResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class
             super$initialize(
                 options=options,
                 name="",
-                title="Data Quality Assessment",
+                title="Multi-Variable Visual Quality",
                 refs=list(
                     "ClinicoPathJamoviModule",
                     "visdat",
                     "naniar",
                     "dplyr",
                     "ggplot2"))
+            self$add(jmvcore::Preformatted$new(
+                options=options,
+                name="notices",
+                title="Important Information",
+                clearWith=list(
+                    "vars",
+                    "check_duplicates",
+                    "check_missing",
+                    "complete_cases_only",
+                    "missing_threshold_visual",
+                    "plot_data_overview",
+                    "plot_missing_patterns",
+                    "plot_data_types")))
             self$add(jmvcore::Html$new(
                 options=options,
                 name="todo",
@@ -141,22 +155,48 @@ dataqualityResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class
             self$add(jmvcore::Html$new(
                 options=options,
                 name="text",
-                title="Data Quality Summary"))
+                title="Data Quality Summary",
+                clearWith=list(
+                    "vars",
+                    "check_duplicates",
+                    "check_missing",
+                    "complete_cases_only",
+                    "missing_threshold_visual",
+                    "plot_data_overview",
+                    "plot_missing_patterns",
+                    "plot_data_types")))
             self$add(jmvcore::Html$new(
                 options=options,
                 name="summary",
                 title="Plain-Language Summary",
-                visible="(showSummary)"))
+                visible="(showSummary)",
+                clearWith=list(
+                    "vars",
+                    "check_duplicates",
+                    "check_missing",
+                    "complete_cases_only",
+                    "missing_threshold_visual")))
             self$add(jmvcore::Html$new(
                 options=options,
                 name="recommendations",
                 title="Recommended Actions",
-                visible="(showRecommendations)"))
+                visible="(showRecommendations)",
+                clearWith=list(
+                    "vars",
+                    "check_duplicates",
+                    "check_missing",
+                    "complete_cases_only",
+                    "missing_threshold_visual")))
             self$add(jmvcore::Html$new(
                 options=options,
                 name="explanations",
                 title="Understanding Quality Metrics",
-                visible="(showExplanations)"))
+                visible="(showExplanations)",
+                clearWith=list(
+                    "vars",
+                    "plot_data_overview",
+                    "plot_missing_patterns",
+                    "plot_data_types")))
             self$add(jmvcore::Image$new(
                 options=options,
                 name="plotDataOverview",
@@ -220,6 +260,20 @@ dataqualityBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 #' missing value analysis, and data completeness summary (similar to sumvar's 
 #' dup() function).
 #' 
+#'
+#' @examples
+#' data('histopathology', package = 'ClinicoPath')
+#'
+#' dataquality(
+#'     data = histopathology,
+#'     vars = c('Age', 'Sex', 'Grade'),
+#'     check_missing = TRUE,
+#'     check_duplicates = TRUE,
+#'     # NOTE: despite its name this does NOT restrict to complete cases; it
+#'     # switches duplicate detection from value-level to row-level.
+#'     complete_cases_only = TRUE
+#' )
+#'
 #' @param data The data as a data frame.
 #' @param vars Variables to assess for data quality. At least one variable
 #'   must be selected; the analysis does not fall back to the whole dataset.
@@ -227,9 +281,11 @@ dataqualityBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 #'   variable or across the entire dataset.
 #' @param check_missing If TRUE, provides detailed missing value statistics
 #'   and patterns.
-#' @param complete_cases_only If TRUE, checks for duplicate rows across all
-#'   selected variables. If FALSE, checks for duplicate values within each
-#'   variable separately.
+#' @param complete_cases_only Granularity of the duplicate check; this option
+#'   does NOT restrict the analysis to complete cases despite its name. If TRUE,
+#'   checks for duplicate rows across all selected variables (requires at least
+#'   two variables). If FALSE, checks for duplicate values within each variable
+#'   separately. Has no effect unless check_duplicates is TRUE.
 #' @param plot_data_overview Show data overview visualization displaying
 #'   variable types and missing values.
 #' @param plot_missing_patterns Show missing value patterns visualization.
@@ -245,6 +301,7 @@ dataqualityBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 #'   and statistical tests used in the analysis.
 #' @return A results object containing:
 #' \tabular{llllll}{
+#'   \code{results$notices} \tab \tab \tab \tab \tab a preformatted \cr
 #'   \code{results$todo} \tab \tab \tab \tab \tab a html \cr
 #'   \code{results$text} \tab \tab \tab \tab \tab a html \cr
 #'   \code{results$summary} \tab \tab \tab \tab \tab a html \cr
