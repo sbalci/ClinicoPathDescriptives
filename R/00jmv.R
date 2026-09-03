@@ -213,6 +213,13 @@
         `title`="moments: R package", 
         `publisher`="[R package]. Retrieved from https://CRAN.R-project.org/package=moments", 
         `url`="https://CRAN.R-project.org/package=moments"), 
+    `ggcharts`=list(
+        `type`="software", 
+        `author`="Thomas Neitmann", 
+        `year`=2020, 
+        `title`="ggcharts: R package", 
+        `publisher`="[R package]. Retrieved from https://CRAN.R-project.org/package=ggcharts", 
+        `url`="https://CRAN.R-project.org/package=ggcharts"), 
     `labelled`=list(
         `type`="software", 
         `author`="Joseph Larmarange", 

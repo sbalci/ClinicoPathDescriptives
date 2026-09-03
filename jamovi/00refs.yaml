@@ -250,6 +250,14 @@ refs:
 
 
 
+    ggcharts:
+        type: 'software'
+        author: Thomas Neitmann
+        year: 2020
+        title: "ggcharts: R package"
+        publisher: '[R package]. Retrieved from https://CRAN.R-project.org/package=ggcharts'
+        url: https://CRAN.R-project.org/package=ggcharts
+
     labelled:
         type: 'software'
         author: "Joseph Larmarange"

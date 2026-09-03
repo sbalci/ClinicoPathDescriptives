@@ -41,11 +41,7 @@ importFrom(dbscan,
   lof,
   optics
 )
-importFrom(dplyr,
-  inner_join,
-  mutate,
-  row_number
-)
+importFrom(dplyr,inner_join)
 importFrom(easyalluvial,
   add_marginal_histograms,
   alluvial_wide,
@@ -184,7 +180,6 @@ importFrom(stats,
   var,
   xtabs
 )
-importFrom(stringr,str_to_title)
 importFrom(tableone,CreateTableOne)
 importFrom(tangram,html5)
 importFrom(tidyr,
