@@ -81,6 +81,7 @@ refs:
         year: 1977
         title: "Exploratory Data Analysis"
         publisher: 'Addison-Wesley, Reading, MA'
+        url: https://archive.org/details/exploratorydataa00tuke_0
 
     agresti2013:
         type: 'book'
@@ -237,6 +238,16 @@ refs:
         title: "gtExtras"
         publisher: '[R package]. Retrieved from https://cran.r-project.org/web/packages/gtExtras/'
         url: https://cran.r-project.org/web/packages/gtExtras/
+
+
+    moments:
+        type: 'software'
+        author: "Lukasz Komsta, Frederick Novomestky"
+        year: 2015
+        title: "moments: R package"
+        publisher: '[R package]. Retrieved from https://CRAN.R-project.org/package=moments'
+        url: https://CRAN.R-project.org/package=moments
+
 
 
     labelled:

@@ -96,7 +96,6 @@ importFrom(grid,
   upViewport
 )
 importFrom(gt,
-  cell_fill,
   cell_text,
   cells_column_labels,
   cols_label,
@@ -143,6 +142,7 @@ importFrom(janitor,
   tabyl
 )
 importFrom(jmvcore,
+  .,
   constructFormula,
   naOmit,
   select,
@@ -192,8 +192,8 @@ importFrom(tidyr,
   pivot_wider
 )
 importFrom(utils,
+  capture.output,
   combn,
-  packageVersion,
   sessionInfo,
   tail
 )

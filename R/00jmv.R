@@ -75,7 +75,8 @@
         `author`="Tukey, J. W.", 
         `year`=1977, 
         `title`="Exploratory Data Analysis", 
-        `publisher`="Addison-Wesley, Reading, MA"), 
+        `publisher`="Addison-Wesley, Reading, MA", 
+        `url`="https://archive.org/details/exploratorydataa00tuke_0"), 
     `agresti2013`=list(
         `type`="book", 
         `author`="Agresti, A.", 
@@ -205,6 +206,13 @@
         `title`="gtExtras", 
         `publisher`="[R package]. Retrieved from https://cran.r-project.org/web/packages/gtExtras/", 
         `url`="https://cran.r-project.org/web/packages/gtExtras/"), 
+    `moments`=list(
+        `type`="software", 
+        `author`="Lukasz Komsta, Frederick Novomestky", 
+        `year`=2015, 
+        `title`="moments: R package", 
+        `publisher`="[R package]. Retrieved from https://CRAN.R-project.org/package=moments", 
+        `url`="https://CRAN.R-project.org/package=moments"), 
     `labelled`=list(
         `type`="software", 
         `author`="Joseph Larmarange", 

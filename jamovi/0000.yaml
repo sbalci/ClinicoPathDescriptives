@@ -24,9 +24,11 @@ analyses:
     menuSubgroup: ClinicoPath Descriptives
     menuTitle: Table One
     description: >
-      This function generates a "Table One", a descriptive summary table
-      frequently used in  clinicopathological research manuscripts. It supports
-      multiple output styles for flexible formatting.
+      Generate an overall-cohort descriptive Table One for clinicopathological
+      research. Four output styles are available. This analysis does not
+      stratify by group or compute p-values, confidence intervals or
+      standardized mean differences. Each row is treated as one case; check for
+      repeated records before interpreting counts as patients.
     ribbon: analyses
     category: analyses
   - title: Summary of Continuous Variables
@@ -66,10 +68,14 @@ analyses:
     ribbon: analyses
     category: analyses
     description: >
-      Tests whether the leading digits of a numeric variable follow Benford's
-      Law, using the MAD conformity classification, a chi-square goodness-of-fit
-      test and the Mantissa Arc Test. Intended as a screen for systematic
-      recording artefacts such as rounding or preferred values.
+      Compares the leading digits of a positive numeric variable against
+      Benford's Law, using a chi-square goodness-of-fit test, the Mantissa Arc
+      Test and Nigrini's MAD conformity classification. The MAD classification
+      is reported only when the sample is large enough for its cut-offs to
+      exceed sampling noise; otherwise the chi-square test carries the finding.
+      Benford's Law applies to data spanning at least two orders of magnitude.
+      The analysis reports whether a departure from the expected leading-digit
+      frequencies was detected; it does not identify a cause.
   - title: Single Variable Quality Check
     name: checkdata
     ns: ClinicoPathDescriptives
