@@ -13,7 +13,6 @@ checkdataOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             showPatterns = FALSE,
             rareCategoryThreshold = 5,
             clinicalValidation = TRUE,
-            unitSystem = "auto",
             outlierTransform = "none",
             mcarTest = FALSE,
             cvMinMean = 0.01,
@@ -57,14 +56,6 @@ checkdataOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 "clinicalValidation",
                 clinicalValidation,
                 default=TRUE)
-            private$..unitSystem <- jmvcore::OptionList$new(
-                "unitSystem",
-                unitSystem,
-                options=list(
-                    "auto",
-                    "metric",
-                    "imperial"),
-                default="auto")
             private$..outlierTransform <- jmvcore::OptionList$new(
                 "outlierTransform",
                 outlierTransform,
@@ -103,7 +94,6 @@ checkdataOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             self$.addOption(private$..showPatterns)
             self$.addOption(private$..rareCategoryThreshold)
             self$.addOption(private$..clinicalValidation)
-            self$.addOption(private$..unitSystem)
             self$.addOption(private$..outlierTransform)
             self$.addOption(private$..mcarTest)
             self$.addOption(private$..cvMinMean)
@@ -119,7 +109,6 @@ checkdataOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
         showPatterns = function() private$..showPatterns$value,
         rareCategoryThreshold = function() private$..rareCategoryThreshold$value,
         clinicalValidation = function() private$..clinicalValidation$value,
-        unitSystem = function() private$..unitSystem$value,
         outlierTransform = function() private$..outlierTransform$value,
         mcarTest = function() private$..mcarTest$value,
         cvMinMean = function() private$..cvMinMean$value,
@@ -134,7 +123,6 @@ checkdataOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
         ..showPatterns = NA,
         ..rareCategoryThreshold = NA,
         ..clinicalValidation = NA,
-        ..unitSystem = NA,
         ..outlierTransform = NA,
         ..mcarTest = NA,
         ..cvMinMean = NA,
@@ -182,7 +170,6 @@ checkdataResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                     "showOutliers",
                     "outlierTransform",
                     "clinicalValidation",
-                    "unitSystem",
                     "cvMinMean")))
             self$add(jmvcore::Html$new(
                 options=options,
@@ -200,7 +187,6 @@ checkdataResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                     "showPatterns",
                     "mcarTest",
                     "clinicalValidation",
-                    "unitSystem",
                     "cvMinMean")))
             self$add(jmvcore::Table$new(
                 options=options,
@@ -351,9 +337,9 @@ checkdataResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 clearWith=list(
                     "var",
                     "showPatterns",
+                    "rareCategoryThreshold",
                     "mcarTest",
-                    "clinicalValidation",
-                    "unitSystem"),
+                    "clinicalValidation"),
                 rows=0,
                 columns=list(
                     list(
@@ -377,8 +363,7 @@ checkdataResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                     "var",
                     "showOutliers",
                     "outlierTransform",
-                    "clinicalValidation",
-                    "unitSystem")))
+                    "clinicalValidation")))
             self$add(jmvcore::Html$new(
                 options=options,
                 name="aboutAnalysis",
@@ -402,7 +387,7 @@ checkdataBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             super$initialize(
                 package = "ClinicoPathDescriptives",
                 name = "checkdata",
-                version = c(1,0,7),
+                version = c(1,0,8),
                 options = options,
                 results = checkdataResults$new(options=options),
                 data = data,
@@ -459,8 +444,6 @@ checkdataBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 #'   categories (important for chi-squared assumptions and modeling).
 #' @param clinicalValidation Perform context-specific validation for clinical
 #'   variables (age, lab values, etc.). Heuristic ranges may need adjustment.
-#' @param unitSystem Unit system for clinical plausibility checks. Auto-detect
-#'   attempts to infer from data ranges.
 #' @param outlierTransform Apply transformation before outlier detection to
 #'   handle skewed distributions (especially right-skewed lab values).
 #' @param mcarTest Explain whether the missingness mechanism can be tested
@@ -511,7 +494,6 @@ checkdata <- function(
     showPatterns = FALSE,
     rareCategoryThreshold = 5,
     clinicalValidation = TRUE,
-    unitSystem = "auto",
     outlierTransform = "none",
     mcarTest = FALSE,
     cvMinMean = 0.01,
@@ -537,7 +519,6 @@ checkdata <- function(
         showPatterns = showPatterns,
         rareCategoryThreshold = rareCategoryThreshold,
         clinicalValidation = clinicalValidation,
-        unitSystem = unitSystem,
         outlierTransform = outlierTransform,
         mcarTest = mcarTest,
         cvMinMean = cvMinMean,
