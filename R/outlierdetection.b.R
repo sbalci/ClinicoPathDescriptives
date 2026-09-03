@@ -609,7 +609,7 @@ outlierdetectionClass <- if (requireNamespace("jmvcore")) R6::R6Class("outlierde
                 failed <- !is.na(column) & is.na(converted)
                 if (any(failed))
                     jmvcore::reject(
-                        jmvcore::format(
+                        .fmt(
                             .("Variable '{var}' contains {n} non-missing value(s) that cannot be converted to numbers, so outlier detection cannot run on it. Correct those values or select a continuous variable."),
                             var = var,
                             n = sum(failed)),
@@ -857,7 +857,7 @@ outlierdetectionClass <- if (requireNamespace("jmvcore")) R6::R6Class("outlierde
                     if (nrow(data) < n_needed) {
                         max_ci <- floor((1 - 1 / nrow(data)) * 1000) / 1000
                         jmvcore::reject(
-                            jmvcore::format(
+                            .fmt(
                                 .("The highest density interval cannot be estimated at a confidence level of {ci} from {n} complete cases: that level needs at least {needed} observations to place the interval bounds, so every observation would come back unclassified and the analysis would report zero outliers whether or not extreme values are present. Lower the confidence level to at most {maxci} for this sample size, or choose the Equal-tailed interval or Robust Z-score method, which work at this sample size."),
                                 ci = base::format(ci),
                                 n = nrow(data),
@@ -919,8 +919,8 @@ outlierdetectionClass <- if (requireNamespace("jmvcore")) R6::R6Class("outlierde
                 }
 
                 # Robust Mahalanobis is routed through bigutilsr, which is not
-                # installed with this module, so without this guard the user got a
-                # raw "install.packages()" error they cannot act on inside jamovi.
+                # installed with this module, so without this guard the user gets
+                # a raw R error they cannot act on inside jamovi.
                 if (method == "mahalanobis_robust") {
                     if (!requireNamespace("bigutilsr", quietly = TRUE)) {
                         jmvcore::reject("Robust Mahalanobis distance is computed through the bigutilsr package, which is not installed with this module, so no result can be produced for this method. Choose Minimum covariance determinant (MCD) for a robust multivariate distance, or Mahalanobis distance for the classical one.")
@@ -982,7 +982,7 @@ outlierdetectionClass <- if (requireNamespace("jmvcore")) R6::R6Class("outlierde
                 if (length(flag_cols) > 0 &&
                     all(vapply(outlier_data[flag_cols], function(x) all(is.na(x)), logical(1)))) {
                     jmvcore::reject(
-                        jmvcore::format(
+                        .fmt(
                             .("{method} returned no classification for any of the {n} observations analysed, so no outlier result can be shown. This happens when the method cannot be estimated at the requested setting rather than because the data are clean - reporting it as zero outliers would be misleading. Lower the confidence level, or select Robust Z-score or the Interquartile range method, and run the analysis again."),
                             method = private$.get_method_description(),
                             n = nrow(data)),
@@ -1284,10 +1284,10 @@ outlierdetectionClass <- if (requireNamespace("jmvcore")) R6::R6Class("outlierde
             # sampled could be found.
             subsampled <- !is.null(original_n) && original_n != n_total
             scope_text <- if (subsampled) {
-                sprintf("a random subsample of %d observations drawn from the %d complete cases",
+                sprintf("a random subsample of %d observations drawn from the %d-observation dataset",
                         n_total, original_n)
             } else {
-                sprintf("the %d complete cases analysed", n_total)
+                sprintf("your dataset of %d observations", n_total)
             }
             sampling_caveat <- if (subsampled) {
                 sprintf(paste0(
