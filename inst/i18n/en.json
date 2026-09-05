@@ -7,9 +7,6 @@
                 "lang": "en",
                 "plural_forms": "nplurals=2; plural=(n != 1)"
             },
-            " %d of the %d cells had an expected count below 5.": [
-                ""
-            ],
             " %s: 'Equal variances' is ticked, so Student's test is being reported despite that. Untick it to use Welch's test, which does not assume equal variances.": [
                 ""
             ],
@@ -64,9 +61,6 @@
             " different categories across ": [
                 ""
             ],
-            " Fisher's exact test was used for the pairwise comparisons whose expected counts fell below 5.": [
-                ""
-            ],
             " Individual trajectories shown": [
                 ""
             ],
@@ -76,9 +70,6 @@
             " Laboratory preset: Enable centrality plotting to see overall trends<br>": [
                 ""
             ],
-            " No pairwise comparisons were performed for this table.": [
-                ""
-            ],
             " nodes": [
                 ""
             ],
@@ -86,9 +77,6 @@
                 ""
             ],
             " stages or time points.": [
-                ""
-            ],
-            " The pairwise comparisons below were computed with the chi-square test and rest on the same approximation.": [
                 ""
             ],
             " time points or stages for individual patients/subjects.": [
@@ -124,25 +112,28 @@
             "; {missing} of the {total} rows were missing": [
                 ""
             ],
+            "; split panels use Pearson's chi-squared test": [
+                ""
+            ],
             "...": [
                 ""
             ],
             "... and {more} more (showing the first {shown} of {total})": [
                 ""
             ],
-            "'": [
-                ""
-            ],
-            "' and '": [
-                ""
-            ],
-            "' level of '": [
+            "... and {n} more": [
                 ""
             ],
             "'{analysis}' is not available with Multiple Event Levels enabled. Recurrence-based endpoints (RFS, PFS, DFS, TTP) are built from the Recurrence/Progression variable together with the outcome, not from the four vital-status categories. Turn Multiple Event Levels off and select a Recurrence/Progression variable, or choose Overall Survival, Cause-Specific, Competing Risks or Multistate.": [
                 ""
             ],
+            "'{name}' is selected as a prune-below or follow-below variable, but it is not one of the tree variables, so it has no effect on the figure. Add it to Variables, or clear the setting.": [
+                ""
+            ],
             "'{weight}' must be numeric (current type: {type}). Select a numeric variable containing counts, frequencies, or sampling weights.": [
+                ""
+            ],
+            "'%s' and '%s'": [
                 ""
             ],
             "'%s' contains a zero or negative proportion.": [
@@ -238,6 +229,9 @@
             "(adequate)": [
                 ""
             ],
+            "(Expected)": [
+                ""
+            ],
             "(ggcharts received {nRows} rows covering {nGroups} age group(s).)": [
                 ""
             ],
@@ -286,6 +280,9 @@
             "). Consider reducing groups or using faceting for clarity.": [
                 ""
             ],
+            "[Enter the test statistic, effect estimate, confidence interval and p-value or Bayes factor from the relevant chart.]": [
+                ""
+            ],
             "[Experimental] Cure Models": [
                 ""
             ],
@@ -308,9 +305,6 @@
                 ""
             ],
             "[Experimental] Win Ratio Analysis": [
-                ""
-            ],
-            "[Results will be automatically filled when analysis is complete]": [
                 ""
             ],
             "{} group(s) have fewer than 5 observations. Results may be unreliable for small samples.": [
@@ -377,6 +371,9 @@
                 ""
             ],
             "{head} and {last}": [
+                ""
+            ],
+            "{hidden} branch(es) are hidden by the minimum-size setting.": [
                 ""
             ],
             "{ipa} vs Kaplan-Meier ({reference})": [
@@ -508,6 +505,9 @@
             "{nExcluded} of the {nTotal} rows ({pct}%) are not in this pyramid. The largest single reason was {reason} ({nReason} rows). Every count and percentage shown describes only the {nFinal} rows that remained, so the figure is representative of the whole dataset only if the excluded rows have the same age and gender make-up as the kept ones. The full breakdown is in the Data Summary.": [
                 ""
             ],
+            "{nodes} node(s) holding {cases} case(s) are not shown, because 'Prune nodes smaller than' is set to {threshold}.": [
+                ""
+            ],
             "{nSparse} of the {nBands} occupied age bands hold fewer than 5 observations. The percentages shown for those bands move by a large step per case, so differences between neighbouring short bars are not informative. Widening the bin width pools them into steadier bands.": [
                 ""
             ],
@@ -572,6 +572,9 @@
                 ""
             ],
             "{variables}, and {n} other variables": [
+                ""
+            ],
+            "* marks cells with |residual| > %.2f": [
                 ""
             ],
             "* Model did not converge for: {fits} (likely small-sample separation); interpret these HRs with extreme caution.": [
@@ -665,6 +668,9 @@
                 ""
             ],
             "\\u{2265}30% decrease in sum of target lesion diameters": [
+                ""
+            ],
+            "\\u{B1}%s for significance": [
                 ""
             ],
             "&alpha; level": [
@@ -847,6 +853,9 @@
             "%.0f%% intervals are Wilson score intervals for agreement with the observed reference rule.": [
                 ""
             ],
+            "%.0f%% of cells have expected counts below 5, so the chi-square test assumptions are violated. Use Fisher's exact test for more reliable results.": [
+                ""
+            ],
             "%.1f time units (n=%d responders)": [
                 ""
             ],
@@ -875,6 +884,9 @@
                 ""
             ],
             "%d cases analyzed with %d regional measurements each plus a reference measurement": [
+                ""
+            ],
+            "%d cell(s) have an expected count below 1. Use Fisher's exact test or merge the sparse category.": [
                 ""
             ],
             "%d competing event(s) are present. Counts and the minimum-event summaries below refer to the event of interest only; competing events are a separate terminal state, not events.": [
@@ -919,7 +931,13 @@
             "%d of %d cells (%.0f%%) have an expected count below 5, above the usual 20%% limit. The chi-square approximation breaks down in that situation, so the overall p-value above is not dependable. Fisher's exact test, or merging categories that are sparse for substantive reasons, gives a p-value that does not rely on the approximation. Turn on the Assumptions check panel for the per-cell detail.": [
                 ""
             ],
+            "%d of %d cells have an expected count below 1. The chi-square approximation is not valid for that table even though most cells are adequate, so the overall p-value above is not dependable. Use Fisher's exact test, or merge the sparse category if there is a substantive reason to, and see the Assumptions check panel for the per-cell detail.": [
+                ""
+            ],
             "%d of %d cells have expected counts below 5, so the chi-square approximation is unreliable here.": [
+                ""
+            ],
+            "%d of %d cells significant": [
                 ""
             ],
             "%d of %d censoring/event values could not be interpreted; those patients are treated as completed follow-up (events) in the reverse Kaplan-Meier estimate and receive no ongoing-treatment arrow. Use 0/FALSE/no/censored/alive for ongoing and 1/TRUE/yes/event/dead for completed.": [
@@ -952,6 +970,9 @@
             "%d of %d selected variables are positive in fewer than 5%% of the %d analysed cases (%s). The Venn shapes this analysis draws are fixed geometry: a region holding one case is drawn the same size as a region holding a hundred, so a rare set is easy to over-read. Go by the counts and percentages printed inside the regions, by the Summary of True Counts table, and by the UpSet plots if you switch them on.": [
                 ""
             ],
+            "%d of %d selected variables are positive in more than 95%% of the %d analysed cases (%s). A set that contains almost every case fills the diagram, leaving the regions outside it nearly empty, so the picture separates almost nothing. Check that the level nominated as positive is the one you meant, and read the Summary of True Counts table rather than the shapes.": [
+                ""
+            ],
             "%d of %d selected variables have fewer than 5 positive cases (%s). The counts and percentages printed in the regions built from those variables rest on a handful of cases and move substantially when a single case changes. Report the raw counts next to the percentages, and consider collapsing categories or adding cases before reading anything into those regions.": [
                 ""
             ],
@@ -964,7 +985,13 @@
             "%d of %d supplied rows analysed": [
                 ""
             ],
+            "%d of the %d cells had an expected count below 5.": [
+                ""
+            ],
             "%d paired comparisons are reported; p-values are unadjusted. With several regions the chance of at least one p < 0.05 under no true bias exceeds 5%% - interpret individual p-values accordingly, and prefer the mean difference and its clinical impact over statistical significance alone.": [
+                ""
+            ],
+            "%d pairwise comparisons with %s adjustment, %d significant": [
                 ""
             ],
             "%d patient(s) had a change below -100%%, which is not physically possible: -100%% already means the tumour has disappeared completely. The most extreme was %.1f%%. These values were capped at -100%% (complete response) for the analysis and the plot: %s. Check the response column for data-entry errors.": [
@@ -1055,6 +1082,9 @@
                 ""
             ],
             "%d%% (%d of %d evaluable patients achieved response or stable disease)": [
+                ""
+            ],
+            "%g observations in a %d x %d table; Pearson chi-square without continuity correction, p %s at alpha = %g; %s.": [
                 ""
             ],
             "%s - see the main figure for the test statistic": [
@@ -1166,6 +1196,9 @@
                 ""
             ],
             "%s was skipped because the %s package is not installed. Install it and re-run to enable that output.": [
+                ""
+            ],
+            "%s were equally the most common (%s cases each, %s%%).": [
                 ""
             ],
             "%s were used exactly as entered (%s) and are read in %s, the selected time unit. Note that \"12, 36, 60\" is also the built-in default, which is written in months; if you meant 1, 3 and 5 years, enter %s.": [
@@ -3037,9 +3070,6 @@
             "95% CI Upper": [
                 ""
             ],
-            "95% confidence ellipses around groups": [
-                ""
-            ],
             "95% Confidence Interval": [
                 ""
             ],
@@ -3064,10 +3094,19 @@
             "95% CrI Upper": [
                 ""
             ],
+            "95% data ellipses": [
+                ""
+            ],
+            "95% data ellipses around groups": [
+                ""
+            ],
             "95% PI Lower": [
                 ""
             ],
             "95% PI Upper": [
+                ""
+            ],
+            "95%% CI (Median): (%.1f%%, %.1f%%)": [
                 ""
             ],
             "97.5%": [
@@ -3287,6 +3326,9 @@
                 ""
             ],
             "A recursive optimal split could not be estimated. Quantile-based cut-points were used for the remaining groups.": [
+                ""
+            ],
+            "A reference variable ('{variable}') and level ('{level}') are selected, but the 'Percentages' option is switched off, so no percentage for that level is drawn in any node. Tick 'Percentages' to display it.": [
                 ""
             ],
             "A residual above %.2f (the 5%% point of chi-squared on 1 degree of freedom) is evidence that the pair does not err independently. This is a descriptive check, not a formal test: the residuals are correlated with one another and no multiplicity adjustment is applied.": [
@@ -4141,9 +4183,6 @@
             "Add confidence bands to survival curves.": [
                 ""
             ],
-            "Add confidence ellipses": [
-                ""
-            ],
             "Add confidence intervals to survival curves.": [
                 ""
             ],
@@ -4925,6 +4964,9 @@
                 ""
             ],
             "Adjusted Standardized Residuals": [
+                ""
+            ],
+            "Adjusted Standardized Residuals: %s vs %s": [
                 ""
             ],
             "Adjusted Survival": [
@@ -5989,6 +6031,9 @@
             "All {n} analysed observations fall in the male group, so the figure is a one-sided age distribution rather than a two-sided pyramid, and the female column of the Population Data table is zero in every band. If the data do contain both groups, check the 'Female level' and 'Male level' selectors and the 'Missing/unrecognized gender' count in the Data Summary.": [
                 ""
             ],
+            "All analyses were performed using jamovi statistical software. Specify your prespecified significance threshold when reporting frequentist tests.": [
+                ""
+            ],
             "All Appropriate Tests": [
                 ""
             ],
@@ -6008,6 +6053,9 @@
                 ""
             ],
             "All cases had tied modes; no per-category summary computable.": [
+                ""
+            ],
+            "All cases were removed by missing-value exclusion. No complete observations remain for the selected variables. Disable missing-value exclusion (NA) or check your data.": [
                 ""
             ],
             "All Chart Types": [
@@ -6544,9 +6592,6 @@
             "Analysis assumptions, data requirements, and methodological considerations": [
                 ""
             ],
-            "Analysis based on complete paired observations. Change scores calculated as (Follow-up - Baseline) values.": [
-                ""
-            ],
             "Analysis Category": [
                 ""
             ],
@@ -6790,6 +6835,9 @@
             "Analysis Settings": [
                 ""
             ],
+            "Analysis settings": [
+                ""
+            ],
             "Analysis Setup": [
                 ""
             ],
@@ -6857,6 +6905,9 @@
                 ""
             ],
             "Analysis Type:": [
+                ""
+            ],
+            "Analysis uses each subject’s last available level after baseline, according to the group factor order. Change = follow-up minus baseline; percent change = 100 × change / absolute baseline. Zero baselines are excluded from the response percentage denominator. These thresholds describe change and do not establish clinical benefit.": [
                 ""
             ],
             "analysis variables": [
@@ -7453,6 +7504,9 @@
             "Arterial blood pressure measurements in mmHg. Used for calculating  multiple hemodynamic indices including PRx, Mx, Sx, Dx, CVRi, and COest.": [
                 ""
             ],
+            "As expected": [
+                ""
+            ],
             "As in Data": [
                 ""
             ],
@@ -7753,6 +7807,9 @@
             "At least 2 groups required for ridge plot comparison": [
                 ""
             ],
+            "At least 2 groups with complete observations are required.": [
+                ""
+            ],
             "At least 2 raters required for correlation analysis.": [
                 ""
             ],
@@ -7784,6 +7841,9 @@
                 ""
             ],
             "At least four complete cases are required for combination analysis; only {used} of {total} cases remain after excluding missing values.": [
+                ""
+            ],
+            "At least one expected count is below 1": [
                 ""
             ],
             "At least one marker separates the two classes completely in this sample (AUC 1.000). The confidence interval collapses to a single point and the p-value is undefined because the variance is zero - those columns are not showing precision, they are showing that the estimate is degenerate. Complete separation in a sample this size is far more often label leakage, an outcome-derived predictor, or overfitting than a genuinely perfect test. Validate externally before drawing any conclusion.": [
@@ -10705,6 +10765,9 @@
             "Bootstrap confidence intervals": [
                 ""
             ],
+            "Bootstrap Confidence Intervals (Any Data Type)": [
+                ""
+            ],
             "Bootstrap Confidence Intervals for Agreement Metrics": [
                 ""
             ],
@@ -11186,6 +11249,9 @@
                 ""
             ],
             "Branch:": [
+                ""
+            ],
+            "Branches hidden by the minimum-size setting": [
                 ""
             ],
             "Brazilian Population (WHO)": [
@@ -12478,6 +12544,9 @@
             "Case agreement categorization": [
                 ""
             ],
+            "Case Agreement Categorization (Any Data Type)": [
+                ""
+            ],
             "Case agreement categorization column": [
                 ""
             ],
@@ -12520,7 +12589,13 @@
             "Case exclusion": [
                 ""
             ],
+            "Case Exclusion": [
+                ""
+            ],
             "Case exclusion summary: {details}. {analysed} of {total} cases analysed.": [
+                ""
+            ],
+            "CASE EXCLUSION: {excluded} cases ({pct}%) excluded due to missing values. Original N={original}, Final N={final}. Tree counts and percentages reflect complete cases only. Consider implications for generalizability.": [
                 ""
             ],
             "Case ID": [
@@ -13144,6 +13219,9 @@
             "Cell Population Clustering": [
                 ""
             ],
+            "Cell Residuals": [
+                ""
+            ],
             "Cell Shape": [
                 ""
             ],
@@ -13663,6 +13741,12 @@
             "Chi-square / Contingency Table": [
                 ""
             ],
+            "Chi-square = %s": [
+                ""
+            ],
+            "Chi-square = %s, p = %s, adjusted p = %s": [
+                ""
+            ],
             "Chi-square goodness-of-fit test indicates a departure from Benford's Law (p={p}). MAD = {mad}, which is {ratio} times the deviation expected from sampling noise alone at N={n} with {digits}-digit analysis ({floor}). The '{label}' label is not informative at this sample size, so this conclusion rests on the chi-square test and the size of the deviation relative to that noise level.": [
                 ""
             ],
@@ -13679,6 +13763,9 @@
                 ""
             ],
             "Chi-Square Post-Hoc Tests": [
+                ""
+            ],
+            "Chi-Square Statistic": [
                 ""
             ],
             "Chi-Square Test": [
@@ -16066,9 +16153,6 @@
             "Cohen's d (unpooled SD, matching Welch's t):": [
                 ""
             ],
-            "Cohen's d is only reported for the parametric t-test; it is not defined for the Wilcoxon rank-sum test.": [
-                ""
-            ],
             "Cohen's d is the standardized difference in a marker's mean between the positive and negative classes (pooled SD), given for each marker of the pair. The three difference columns are second marker minus first marker; Glass' delta uses the negative-class SD and Hedges' g applies the small-sample correction J to each d before differencing. No interval or test accompanies these point estimates.": [
                 ""
             ],
@@ -16459,7 +16543,16 @@
             "Colour Not Recognised": [
                 ""
             ],
+            "Colour palette": [
+                ""
+            ],
             "Colour palette stretched": [
+                ""
+            ],
+            "Colour-blind safe": [
+                ""
+            ],
+            "Colour-blind-safe palette applied: blue, orange, purple and brown shades in place of the default red/green rotation": [
                 ""
             ],
             "Column": [
@@ -16478,6 +16571,9 @@
                 ""
             ],
             "Column Annotations (Optional)": [
+                ""
+            ],
+            "column categories with no observations: %s": [
                 ""
             ],
             "Column Chart": [
@@ -20353,7 +20449,7 @@
             "Could not compute": [
                 ""
             ],
-            "Could not compute:": [
+            "Could not compute: %s": [
                 ""
             ],
             "Could not compute: insufficient data or computational error": [
@@ -20440,6 +20536,9 @@
             "Counts and percentages per subgroup, and optionally the mean and SD of one continuous variable within each subgroup. It fits no model and performs no test.": [
                 ""
             ],
+            "Counts are not whole numbers": [
+                ""
+            ],
             "Counts are projected to a population of {n} from the complete-case cohort.": [
                 ""
             ],
@@ -20480,6 +20579,9 @@
                 ""
             ],
             "Counts variable validated successfully.": [
+                ""
+            ],
+            "Counts within a branch will therefore not add up to the count above it.": [
                 ""
             ],
             "County Level": [
@@ -20905,6 +21007,9 @@
             "Create comprehensive swimmer plots for visualizing patient timelines, treatments, and clinical events using the advanced ggswim package.": [
                 ""
             ],
+            "Create Consensus Variable (Any Data Type)": [
+                ""
+            ],
             "Create contour plots for factor interactions": [
                 ""
             ],
@@ -21170,6 +21275,9 @@
                 ""
             ],
             "Critical value for identifying significant residuals (typically 2.0 or 3.0). Used only when 'Residual significance criterion' is set to 'Fixed cutoff'.": [
+                ""
+            ],
+            "Critical value for significance:": [
                 ""
             ],
             "Critical Value Monitoring": [
@@ -22777,6 +22885,9 @@
             "Data contains no (complete) rows. Check your data for missing values or filtering.": [
                 ""
             ],
+            "Data contains no (complete) rows. Please check your dataset and variable selections.": [
+                ""
+            ],
             "Data contains no complete rows. Check the data.": [
                 ""
             ],
@@ -23839,6 +23950,9 @@
             "Default (theme_minimal)": [
                 ""
             ],
+            "Default (vtree)": [
+                ""
+            ],
             "Default (Weakly Informative)": [
                 ""
             ],
@@ -23882,6 +23996,9 @@
                 ""
             ],
             "Default to Positive (Conservative)": [
+                ""
+            ],
+            "Defaulting to the ggvenn Diagram": [
                 ""
             ],
             "Defect Rate (ppm)": [
@@ -24701,6 +24818,9 @@
                 ""
             ],
             "DF": [
+                ""
+            ],
+            "df = %s": [
                 ""
             ],
             "df1": [
@@ -27928,6 +28048,9 @@
             "Effect Size (Phi/V)": [
                 ""
             ],
+            "Effect size (Phi/V) = %s": [
+                ""
+            ],
             "Effect Size & Comparisons": [
                 ""
             ],
@@ -28097,6 +28220,9 @@
                 ""
             ],
             "Effective Sample Size": [
+                ""
+            ],
+            "Effective test type: %s. Paired: %s. Confidence level: %.1f%%.": [
                 ""
             ],
             "Effectiveness Distribution for PSA": [
@@ -32836,7 +32962,16 @@
             "Fisher's exact test": [
                 ""
             ],
+            "Fisher's exact test for the sparse two-way chart": [
+                ""
+            ],
             "Fisher's exact test was selected for the comparison %s because at least one of its expected counts is below 5, but it could not be computed, and the Monte Carlo version of it failed as well. The chi-square p-value is reported for that comparison instead. It relies on a large-sample approximation that the low expected counts undermine, so read it with that in mind.": [
+                ""
+            ],
+            "Fisher's exact test was used for the pairwise comparisons whose expected counts fell below 5.": [
+                ""
+            ],
+            "Fisher's exact test, OR = %.2f": [
                 ""
             ],
             "Fisher's Exact Test:": [
@@ -33304,6 +33439,12 @@
             "Follow the standard decision analysis workflow": [
                 ""
             ],
+            "Follow Variable Not Found": [
+                ""
+            ],
+            "Follow variable not found in dataset. Please verify your variable selection.": [
+                ""
+            ],
             "Follow-up": [
                 ""
             ],
@@ -33524,9 +33665,6 @@
                 ""
             ],
             "For continuous variables, use the categorize function to create groups first": [
-                ""
-            ],
-            "For datasets >10,000 rows, randomly sample 5,000 rows for faster visualization while maintaining statistical validity": [
                 ""
             ],
             "For date/time data, ensure correct format is selected": [
@@ -36307,6 +36445,9 @@
             "Gwet's AC1/AC2": [
                 ""
             ],
+            "Gwet's AC1/AC2 (Categorical/Ordinal)": [
+                ""
+            ],
             "Gwet's AC1/AC2 Coefficients (prevalence-robust)": [
                 ""
             ],
@@ -37055,6 +37196,9 @@
                 ""
             ],
             "Hidden State Covariates": [
+                ""
+            ],
+            "Hidden: {hidden}": [
                 ""
             ],
             "Hide categories with frequency below this threshold (0 = show all)": [
@@ -37834,6 +37978,9 @@
             "How the critical value for flagging a cell residual is chosen. 'Bonferroni-corrected z' divides the significance level by the number of cells and uses the corresponding normal deviate, so it accounts for the number of cells tested (2.64 for a 2x3 table, 2.96 for a 4x4). 'Fixed cutoff' uses the value in the 'Residual significance cutoff' box unchanged.": [
                 ""
             ],
+            "How the Percentages Are Calculated": [
+                ""
+            ],
             "How to analyze spatial compartments": [
                 ""
             ],
@@ -38065,7 +38212,7 @@
             "Hull Points": [
                 ""
             ],
-            "Hull Shape (0 = curved boundaries, 2 = straight edges)": [
+            "Hull shape (lower values follow the points more closely)": [
                 ""
             ],
             "Hull Shape & Appearance": [
@@ -41143,6 +41290,9 @@
             "Invalid Partial AUC Range": [
                 ""
             ],
+            "Invalid Percentage Level": [
+                ""
+            ],
             "Invalid person-time cutpoints ignored": [
                 ""
             ],
@@ -41561,9 +41711,6 @@
                 ""
             ],
             "Jittered": [
-                ""
-            ],
-            "JJStatsPlot": [
                 ""
             ],
             "JJStatsPlotD": [
@@ -42166,6 +42313,9 @@
             "Krippendorff's alpha": [
                 ""
             ],
+            "Krippendorff's Alpha (Any Data Type)": [
+                ""
+            ],
             "Krippendorff's Alpha (any number)": [
                 ""
             ],
@@ -42677,6 +42827,9 @@
                 ""
             ],
             "Large Risk Change (%)": [
+                ""
+            ],
+            "Large Tree Complexity": [
                 ""
             ],
             "Large-change labels": [
@@ -45850,7 +46003,7 @@
             "McNemar Test (paired categorical)": [
                 ""
             ],
-            "McNemar test requires a 2×2 contingency table. Your data has %d×%d levels (%s: %d levels, %s: %d levels). For paired data with more than 2 categories, use Cochran Q test or marginal homogeneity test instead. Consider dichotomizing your outcome variable or use parametric/nonparametric options instead of paired analysis.": [
+            "McNemar test requires a 2×2 contingency table. Your data has %d×%d levels (%s: %d levels, %s: %d levels). For paired outcomes with more than two categories, use an appropriate test of marginal homogeneity. Do not substitute an independent-samples test or dichotomize solely to obtain this test.": [
                 ""
             ],
             "McNemar test requires a grouping variable (e.g., Pre vs Post, Treatment A vs B). No grouping variable specified.": [
@@ -45869,6 +46022,9 @@
                 ""
             ],
             "McNemar χ²": [
+                ""
+            ],
+            "McNemar's test": [
                 ""
             ],
             "McNemar's Test (Matched)": [
@@ -45938,6 +46094,9 @@
                 ""
             ],
             "Mean Agreement": [
+                ""
+            ],
+            "Mean and SD Shown for Very Small Subgroups": [
                 ""
             ],
             "Mean and standard deviation of CV metrics": [
@@ -46852,6 +47011,9 @@
             "Members": [
                 ""
             ],
+            "Membership Groups Column Was Not Added": [
+                ""
+            ],
             "Membership Table": [
                 ""
             ],
@@ -47278,6 +47440,9 @@
             "Method Note (finalfit)": [
                 ""
             ],
+            "Method notice: Fisher's exact test was selected in the options and used for every pairwise comparison; the reported p-values use that exact method.": [
+                ""
+            ],
             "Method notice: Pairwise comparisons with expected cell counts below 5 are automatically analysed with Fisher's exact test; the reported p-values use that exact method.": [
                 ""
             ],
@@ -47354,6 +47519,15 @@
                 ""
             ],
             "Method: %s": [
+                ""
+            ],
+            "Method: %s (chosen in the options for every comparison)": [
+                ""
+            ],
+            "Method: %s (standard approach)": [
+                ""
+            ],
+            "Method: %s (used because an expected count is below 5)": [
                 ""
             ],
             "Methodological Notes": [
@@ -47696,6 +47870,9 @@
                 ""
             ],
             "Minimal": [
+                ""
+            ],
+            "minimal": [
                 ""
             ],
             "Minimal (<5%)": [
@@ -48491,6 +48668,9 @@
                 ""
             ],
             "Missing-data handling": [
+                ""
+            ],
+            "Missing-value (NA) nodes are exempt from the threshold while 'Valid percentages' is on, so an NA node holding fewer cases than the threshold is still drawn.": [
                 ""
             ],
             "Missing-value exclusion": [
@@ -51835,7 +52015,22 @@
             "No pairwise comparison beyond the overall test when the explanatory variable has fewer than 3 levels.": [
                 ""
             ],
+            "no pairwise comparisons (overall test not significant)": [
+                ""
+            ],
+            "no pairwise comparisons (post-hoc method set to None)": [
+                ""
+            ],
+            "No pairwise comparisons were performed for this table.": [
+                ""
+            ],
+            "No pairwise comparisons were performed. Select Bonferroni, Holm or FDR to obtain them.": [
+                ""
+            ],
             "No pairwise correlation reaches the warning threshold; this does not rule out multivariable linear dependencies.": [
+                ""
+            ],
+            "no pairwise sub-comparisons for this table shape": [
                 ""
             ],
             "No patients with valid response data found.": [
@@ -51844,7 +52039,7 @@
             "No Pattern": [
                 ""
             ],
-            "No plot type was selected; defaulting to ggvenn output.": [
+            "No plot type is selected, so the classic ggvenn diagram below is drawn by default. Tick ggVennDiagram, UpSetR or ComplexUpset in Plot Selection to choose a different one.": [
                 ""
             ],
             "No positive test results": [
@@ -51956,6 +52151,9 @@
                 ""
             ],
             "No statistically significant %s (p = %s, alpha = %s)": [
+                ""
+            ],
+            "No statistically significant association detected at \\u{3B1} = %g; absence of evidence is not evidence of absence, so read the effect size and its precision alongside this": [
                 ""
             ],
             "No statistically significant association was identified for the 1 factor examined (p-value ≥ 0.05).": [
@@ -52157,6 +52355,12 @@
                 ""
             ],
             "Node Percentage:": [
+                ""
+            ],
+            "Node percentages use the count in the node directly above as the denominator (the root node at the first split). 'Valid percentages' is OFF, so cases with a missing value on the splitting variable are counted in that denominator and the NA node carries its own percentage.": [
+                ""
+            ],
+            "Node percentages use the count in the node directly above as the denominator (the root node at the first split). 'Valid percentages' is ON, so cases with a missing value on the splitting variable are left out of that denominator and appear in a separate NA node with no percentage.": [
                 ""
             ],
             "Node Size": [
@@ -52876,6 +53080,12 @@
             "Not shown: {variables}": [
                 ""
             ],
+            "Not significant": [
+                ""
+            ],
+            "Not significant after correction": [
+                ""
+            ],
             "not significant at the 0.05 level": [
                 ""
             ],
@@ -52961,9 +53171,6 @@
                 ""
             ],
             "Notable Correlations:": [
-                ""
-            ],
-            "Notable variation observed between groups, suggesting clinically meaningful differences.": [
                 ""
             ],
             "Note": [
@@ -54157,9 +54364,6 @@
             "observations": [
                 ""
             ],
-            "observations across": [
-                ""
-            ],
             "Observations falling in the 2 most-deviating leading-digit bins. This is bin membership, not a count of outliers - compare it with the share those bins hold under Benford's Law, shown in the listing below.": [
                 ""
             ],
@@ -54215,6 +54419,9 @@
                 ""
             ],
             "Observed complete-case proportions projected to a population of {n} patients.": [
+                ""
+            ],
+            "Observed count: %s": [
                 ""
             ],
             "Observed counts": [
@@ -54514,7 +54721,7 @@
             "One row per path through the plotted variables, commonest first. Percentages are of all plotted cases.": [
                 ""
             ],
-            "One row per path through the plotted variables, largest weight first. Cases and percentages count rows; Weight total is the sum of the weight variable over those rows, which is what the ribbon width shows.": [
+            "One row per path through the plotted variables, largest weight first. Cases and percentages count the rows that carry a weight, the rows the diagram is drawn from; Weight total is the sum of the weight variable over those rows, which is what the ribbon width shows.": [
                 ""
             ],
             "One rule per line. Format: oldvalue -> newvalue": [
@@ -54614,6 +54821,9 @@
                 ""
             ],
             "Only {count} events observed": [
+                ""
+            ],
+            "Only {n} cases are available. Each additional variable splits those cases further, so the subgroups at the bottom of the tree will hold very few cases and their percentages move substantially with a single observation. N>=50 is a common rule of thumb for describing subgroups stably. Consider using fewer variables or collapsing levels so each node keeps a usable count.": [
                 ""
             ],
             "Only {n} cases in the smaller reference-standard group": [
@@ -56122,6 +56332,9 @@
             "Over a narrow range the leading-digit frequencies are set by where the range starts and stops, not by Benford's Law": [
                 ""
             ],
+            "Over-represented": [
+                ""
+            ],
             "Over-represented. There are MORE observations in this cell than expected.": [
                 ""
             ],
@@ -56273,6 +56486,9 @@
                 ""
             ],
             "Overall Survival Time": [
+                ""
+            ],
+            "Overall Test": [
                 ""
             ],
             "Overall Time (in months)": [
@@ -56726,6 +56942,9 @@
                 ""
             ],
             "PABAK & prevalence/bias indices": [
+                ""
+            ],
+            "PABAK & Prevalence/Bias Indices (2 Raters)": [
                 ""
             ],
             "PABAK Analysis": [
@@ -57850,6 +58069,12 @@
             "Pattern Mixture Models": [
                 ""
             ],
+            "Pattern Mode": [
+                ""
+            ],
+            "PATTERN MODE: Tree groups cases by unique variable combinations (patterns) regardless of order. Each branch represents a distinct pattern. Use this mode to identify common patient profiles or covariate combinations. Refer to pattern table for detailed counts.": [
+                ""
+            ],
             "Pattern of patient enrollment over time. Uniform = constant rate; Increasing/Decreasing = linear change; Exponential = curved pattern.": [
                 ""
             ],
@@ -57860,6 +58085,9 @@
                 ""
             ],
             "Pattern table": [
+                ""
+            ],
+            "Pattern Table Not Available": [
                 ""
             ],
             "Pattern tree": [
@@ -58357,7 +58585,7 @@
             "Percentage Bend": [
                 ""
             ],
-            "Percentage calculated for '": [
+            "Percentage calculated for the '{level}' level of '{variable}'": [
                 ""
             ],
             "Percentage Changes": [
@@ -58426,6 +58654,12 @@
             "Percentage Type": [
                 ""
             ],
+            "Percentage Variable Not Found": [
+                ""
+            ],
+            "Percentage variable not found in dataset. Please verify your variable selection.": [
+                ""
+            ],
             "Percentages": [
                 ""
             ],
@@ -58445,6 +58679,9 @@
                 ""
             ],
             "Percentages in cells": [
+                ""
+            ],
+            "Percentages Shown for Very Small Subgroups": [
                 ""
             ],
             "Percentile": [
@@ -59005,7 +59242,7 @@
             "Performs Bayesian meta-analysis using hierarchical models for evidence \nsynthesis across multiple studies. This approach accounts for both \nwithin-study and between-study variability using informative prior \ndistributions and MCMC sampling methods.\n\nKey features:\n- Random effects and fixed effects Bayesian meta-analysis\n- Multiple outcome types (continuous, binary, time-to-event)\n- Hierarchical modeling with informative and non-informative priors\n- MCMC sampling with convergence diagnostics\n- Posterior predictive checking and model comparison\n- Meta-regression with study-level covariates\n- Publication bias assessment and adjustment": [
                 ""
             ],
-            "Performs Chi-Square test and post-hoc pairwise comparisons. Post-hoc pairwise comparisons are ONLY performed when the overall chi-square test is significant (p < α). This enforces proper statistical workflow and prevents data dredging. Selecting 'None' for post-hoc method DISABLES all pairwise testing. If you want unadjusted pairwise comparisons, this feature is not available (by design, as it would encourage inappropriate multiple testing). No automated validation against established packages exists. Use with caution for clinical decision-making.": [
+            "Performs Chi-Square test and post-hoc pairwise comparisons. Post-hoc pairwise comparisons are ONLY performed when the overall chi-square test is significant (p < α). This enforces proper statistical workflow and prevents data dredging. Selecting 'None' for post-hoc method DISABLES all pairwise testing. If you want unadjusted pairwise comparisons, this feature is not available (by design, as it would encourage inappropriate multiple testing). The chi-square statistic, the pairwise p-values and their adjustment are checked against base R (chisq.test, fisher.test, p.adjust) in the package tests. Read the pairwise results together with the effect sizes and the residuals, not from the p-values alone.": [
                 ""
             ],
             "Performs comprehensive survival analysis with time-dependent variables using the Simon-Makuch method. This specialized analysis addresses the critical challenge of immortal time bias when studying treatments, biomarkers, or exposures that change during patient follow-up.\n**Clinical Applications:** - Treatment effectiveness when therapy timing varies (e.g., adjuvant therapy, targeted agents) - Biomarker evolution studies (e.g., mutation status, protein expression changes) - Disease progression impact on outcomes (e.g., metastasis development, grade progression) - Healthcare intervention timing effects (e.g., surgery, radiation, supportive care)\n**Key Statistical Methods:** - Simon-Makuch plots: Modified Kaplan-Meier curves for time-dependent exposures - Landmark analysis: Conditional survival from fixed time points - Time-dependent Cox regression: Hazard ratios accounting for exposure timing - Immortal time bias assessment: Comparison of naive vs. proper methods - Mantel-Byar testing: Specialized tests for time-dependent comparisons\n**Why Use Simon-Makuch Analysis:** Standard survival analysis assumes fixed baseline characteristics, leading to immortal time bias when exposures change during follow-up. Simon-Makuch methods properly account for the timing of exposure changes, providing unbiased survival estimates and valid statistical comparisons.": [
@@ -60224,6 +60461,9 @@
                 ""
             ],
             "Plots Explanations": [
+                ""
+            ],
+            "plotted values across": [
                 ""
             ],
             "PLR": [
@@ -63583,7 +63823,16 @@
             "Proximity Threshold (pixels)": [
                 ""
             ],
+            "Prune / Follow Variable Not in the Tree": [
+                ""
+            ],
             "Prune below": [
+                ""
+            ],
+            "Prune Below Variable Not Found": [
+                ""
+            ],
+            "Prune below variable not found in dataset. Please verify your variable selection.": [
                 ""
             ],
             "Prune counts <": [
@@ -64648,6 +64897,9 @@
             "Random seed for reproducible bootstrap results": [
                 ""
             ],
+            "Random seed for the bootstrap confidence intervals, so that the interval reported for a given table is reproducible. Change it to see how much the interval depends on the resampling. Used only when bootstrap confidence intervals are requested.": [
+                ""
+            ],
             "Random seed used to select candidate combinations when the minimum-P-value search space is too large for exhaustive evaluation.": [
                 ""
             ],
@@ -64709,6 +64961,9 @@
                 ""
             ],
             "Randomized Block": [
+                ""
+            ],
+            "Randomly sample for faster plots. Tests use the sampled data and may lose precision; repeated continuous outcomes retain whole subjects.": [
                 ""
             ],
             "Range": [
@@ -65234,6 +65489,9 @@
                 ""
             ],
             "Raw Numeric:": [
+                ""
+            ],
+            "Raw p = %s": [
                 ""
             ],
             "Raw p-value": [
@@ -65941,6 +66199,9 @@
             "Reference-Based Imputation": [
                 ""
             ],
+            "Reference-Level Percentage Not Shown": [
+                ""
+            ],
             "Reference-negative participants testing negative in illustrative scenario 1.": [
                 ""
             ],
@@ -66419,9 +66680,6 @@
                 ""
             ],
             "Relative vs Absolute:": [
-                ""
-            ],
-            "Relatively consistent values across groups with minimal variation.": [
                 ""
             ],
             "Relevant for high-sensitivity screening applications (minimizing false negatives)": [
@@ -67031,6 +67289,9 @@
                 ""
             ],
             "Residuals analysis": [
+                ""
+            ],
+            "Residuals Analysis": [
                 ""
             ],
             "Residuals Analysis:": [
@@ -68620,6 +68881,9 @@
             "Row Annotations (Optional)": [
                 ""
             ],
+            "row categories with no observations: %s": [
+                ""
+            ],
             "Row Cluster Assignments": [
                 ""
             ],
@@ -69005,6 +69269,9 @@
                 ""
             ],
             "Sample Size for Agreement Study": [
+                ""
+            ],
+            "Sample Size for Agreement Study (Design)": [
                 ""
             ],
             "Sample size for an interobserver agreement study sized to reject a null kappa (kappa0) in favour of an alternative kappa (kappa1) at a given two-sided significance level and power - the power approach of the kappaSize package. Use kappaSizeCI for a target confidence-interval width, and kappaSizeFixedN when the number of subjects is already fixed.": [
@@ -70219,6 +70486,9 @@
             "Select diagnostic tests (lab values, imaging findings, clinical signs) and your gold standard reference": [
                 ""
             ],
+            "Select different dependent and grouping variables.": [
+                ""
+            ],
             "Select different levels for positive and negative outcomes.": [
                 ""
             ],
@@ -70559,6 +70829,9 @@
                 ""
             ],
             "Selected Original Predictors": [
+                ""
+            ],
+            "Selected percentage level '{level}' not present in percentage variable. Available levels: {available}": [
                 ""
             ],
             "Selected positive outcome level '{level}' not found in data. Available levels: {levels}": [
@@ -70952,6 +71225,12 @@
                 ""
             ],
             "Sequence Group": [
+                ""
+            ],
+            "Sequence Mode": [
+                ""
+            ],
+            "SEQUENCE MODE: Tree preserves variable order to show progression patterns. Same combinations in different orders create separate branches. Use this mode for temporal sequences (diagnosis to treatment to outcome) or ordered clinical pathways. Particularly useful for longitudinal or staged data.": [
                 ""
             ],
             "Sequence tree": [
@@ -73915,7 +74194,13 @@
             "significant": [
                 ""
             ],
+            "Significant after correction": [
+                ""
+            ],
             "Significant asymmetry detected": [
+                ""
+            ],
+            "Significant Cells": [
                 ""
             ],
             "Significant Coefficients": [
@@ -74498,6 +74783,9 @@
                 ""
             ],
             "Small-node pruning": [
+                ""
+            ],
+            "Small-Node Pruning Not Applied": [
                 ""
             ],
             "Smallest group: n=%d": [
@@ -76765,9 +77053,6 @@
             "Statistical Significance Testing": [
                 ""
             ],
-            "Statistical significance was set at p < 0.05. All analyses were performed using jamovi statistical software.": [
-                ""
-            ],
             "Statistical summaries (mean, SD) are shown for the continuous variable": [
                 ""
             ],
@@ -76916,6 +77201,9 @@
                 ""
             ],
             "Statistically significant %s (p = %s, alpha = %s)": [
+                ""
+            ],
+            "Statistically significant association at \\u{3B1} = %g": [
                 ""
             ],
             "statistically significant at \\u{3B1} = %g": [
@@ -77845,6 +78133,9 @@
             "Subject ID (patient mode)": [
                 ""
             ],
+            "Subject ID (Repeated Continuous Outcomes)": [
+                ""
+            ],
             "Subject ID Variable": [
                 ""
             ],
@@ -78266,6 +78557,18 @@
                 ""
             ],
             "Summary Upper CI": [
+                ""
+            ],
+            "Summary variable is not numeric. Statistical summaries (mean, SD) may not be meaningful. Consider selecting a continuous variable.": [
+                ""
+            ],
+            "Summary Variable Not Found": [
+                ""
+            ],
+            "Summary variable not found in dataset. Please verify your variable selection.": [
+                ""
+            ],
+            "Summary Variable Not Numeric": [
                 ""
             ],
             "Summary-Mode Inputs": [
@@ -79702,6 +80005,9 @@
             "Test": [
                 ""
             ],
+            "test": [
+                ""
+            ],
             "Test '{test}' has a category with fewer than 5 observations. Estimates may be unstable. Combine categories only when substantively defensible.": [
                 ""
             ],
@@ -80143,6 +80449,9 @@
             "Test Method for Informative Censoring": [
                 ""
             ],
+            "Test method: %s": [
+                ""
+            ],
             "Test names are similar (\"%s\" vs \"%s\"). If tests measure similar biomarkers or use similar technology, they may be conditionally dependent. This can bias combined sensitivity and specificity in opposite directions.": [
                 ""
             ],
@@ -80261,6 +80570,9 @@
                 ""
             ],
             "Test Results Variable": [
+                ""
+            ],
+            "Test Results:": [
                 ""
             ],
             "Test Scenario": [
@@ -80536,6 +80848,9 @@
             "The 'Logistic' rows are unpenalized refits (shown for AIC comparability); their apparent AUC is typically higher than the penalized LASSO row because refitting removes LASSO shrinkage. All metrics are apparent (in-sample) - use Bootstrap Internal Validation for optimism-corrected discrimination.": [
                 ""
             ],
+            "The 'Prune counts <' threshold has to be a whole number of 2 or more before it can hide anything, because every displayed node holds at least one case. The current setting removed no branches.": [
+                ""
+            ],
             "The 'rms' package is required for nomogram generation but is not available.": [
                 ""
             ],
@@ -80561,9 +80876,6 @@
                 ""
             ],
             "The %s predictor demonstrated %s diagnostic performance with an AUC of %.3f (%s%% CI: %s--%s). At the optimal cutoff of %.3f, the test achieved %s sensitivity (%.1f%%) and %s specificity (%.1f%%), resulting in a Youden Index of %.3f.": [
-                ""
-            ],
-            "The %s variance estimate was negative and has been truncated to zero.": [
                 ""
             ],
             "The <b>{highest}</b> group showed the highest median risk score ({score}) with <b>{events} events</b> observed, while the <b>{lowest}</b> group had <b>{lowestevents} events</b>.": [
@@ -80606,6 +80918,9 @@
                 ""
             ],
             "The alternative kappa ({kappa1}) is BELOW the null ({kappa0}). This sizes a study to demonstrate that agreement is WORSE than the null value, not better. If you meant to detect an improvement, swap the two values - the required sample size is not the same either way.": [
+                ""
+            ],
+            "The analysis cannot proceed": [
                 ""
             ],
             "The analysis continues without confidence intervals; the point estimates are unaffected.": [
@@ -80701,6 +81016,12 @@
             "The candidate-rule ranking is a descriptive argmax over observed Youden's J with no significance test and no multiplicity correction. On data with no real signal it will still name a winner. It is a hypothesis to confirm in new data, not a validated recommendation.": [
                 ""
             ],
+            "The case and method variance estimates were negative and have been truncated to zero.": [
+                ""
+            ],
+            "The case variance estimate was negative and has been truncated to zero.": [
+                ""
+            ],
             "The chart subtitle still reports an uncorrected Pearson chi-square - no statistic option changes that, as the plotting package offers no exact test. Fisher's exact test on this table gives <b>%s</b>; quote that value, not the subtitle.": [
                 ""
             ],
@@ -80708,6 +81029,12 @@
                 ""
             ],
             "The chart subtitle therefore reports Fisher's exact test instead of the chi-square.": [
+                ""
+            ],
+            "The chi-square test could not be computed: %s. Check that both variables are categorical with valid, nonnegative counts.": [
+                ""
+            ],
+            "The chi-square test is undefined because of %s. Drop or merge empty categories and re-run.": [
                 ""
             ],
             "The chi-square test needs the summed values to be frequencies. Tick 'Value Variable counts cases' to confirm that '%s' counts cases, not a measurement such as cost, size or score. The test manufactures significance on a measurement because its value depends on the unit you measured in.": [
@@ -80752,7 +81079,16 @@
             "The contingency table consisted of %d rows and %d columns with a total sample size of %d.": [
                 ""
             ],
+            "The contingency table could not be created. Please check your data format and variable selections, and ensure the row and column variables are categorical.": [
+                ""
+            ],
             "The contingency table generates %d pairwise comparisons, exceeding the safety threshold of 500. Pairwise comparisons were disabled to avoid computational freezing and extreme multiple-testing penalties. Please bin continuous variables or group factor levels.": [
+                ""
+            ],
+            "The contingency table is empty: no rows are complete on both selected variables. Check the selected variables, and the counts variable if one is used.": [
+                ""
+            ],
+            "The contingency table must have at least 2 rows and 2 columns. Please check that each variable has at least 2 categories.": [
                 ""
             ],
             "The continuous explanatory variable to be used in the analysis.": [
@@ -80774,6 +81110,12 @@
                 ""
             ],
             "The correlation summary could not be computed. This is an unavailable diagnostic, not evidence that collinearity is absent.": [
+                ""
+            ],
+            "The counts variable '%s' does not exist in the data. Please select a valid numeric variable for counts.": [
+                ""
+            ],
+            "The counts variable contains non-integer values. A frequency table needs whole-number counts; the chi-square statistic was computed on the values as given, but they do not describe a table of observed cases.": [
                 ""
             ],
             "The Cox model is stratified by these variables, allowing for different baseline hazards in each stratum while estimating common covariate effects.": [
@@ -80857,6 +81199,9 @@
             "The data has %s rows, well above the 50,000-row point where building this table starts to feel slow. Nothing is wrong with the results - every row is used - but the table can take a while to appear and is rebuilt each time you change an option. If you are still exploring, apply a row filter while you settle on the options and remove it for the final table.": [
                 ""
             ],
+            "The data is being treated as frequency counts. Each row represents a combination of categories with the specified count/weight.": [
+                ""
+            ],
             "The data to be analyzed": [
                 ""
             ],
@@ -80900,6 +81245,9 @@
                 ""
             ],
             "The dataset for survival analysis.": [
+                ""
+            ],
+            "The dataset has no rows, so there is nothing to build a tree from. Check that a data file is loaded and that any row filters are not excluding every case.": [
                 ""
             ],
             "The dataset has no rows, so there is nothing to chart. If a row filter is active, it may be excluding every case.": [
@@ -81151,6 +81499,9 @@
             "The leading-digit distribution departs from Benford's Law (MAD={mad}, {label}; chi-square p={p}). The deviation exceeds Nigrini's nonconformity cut-off for this digit setting. Benford's Law describes how leading digits are distributed in data spanning several orders of magnitude; a departure indicates the values do not follow that pattern and does not by itself identify a cause.": [
                 ""
             ],
+            "The level '{level}' contains characters that cannot be used in a tree summary; only letters, digits and the symbols ~ @ # ( ) _ | , . are accepted there. No reference-level percentage is drawn in the nodes. Recode that level to a name without '+', '-', '/' or '=' to display it.": [
+                ""
+            ],
             "The level '{level}' is selected for BOTH the female and the male side, so there is nothing to compare and no pyramid was drawn. Choose two different levels of '{gender}', or clear one or both selectors to let the analysis read the levels from their names.": [
                 ""
             ],
@@ -81250,6 +81601,9 @@
             "The median time to the event of interest was not reached: the cumulative incidence of the event of interest stayed below 50%% within the observed follow-up (longest follow-up %.1f %s). With competing risks this is expected whenever the competing event is frequent, since the cumulative incidence can plateau below 50%% however long follow-up continues; it is not a statement that outcomes were good": [
                 ""
             ],
+            "The membership group for each case could not be written back into the dataset, so no new column has appeared. Everything else in this analysis is computed separately and is unaffected, and the same assignment is shown in the Membership Table if you switch it on. Technical detail: %s": [
+                ""
+            ],
             "The metafor package is not available, so heterogeneity could not be assessed.": [
                 ""
             ],
@@ -81257,6 +81611,9 @@
                 ""
             ],
             "The metafor package is not available, so publication bias could not be assessed.": [
+                ""
+            ],
+            "The method variance estimate was negative and has been truncated to zero.": [
                 ""
             ],
             "the metric you chose under Optimization Metric": [
@@ -81388,6 +81745,9 @@
             "The outcome variable to be used in the analysis.": [
                 ""
             ],
+            "The overall chi-square test is not significant (p = %s \\u{2265} %g). Post-hoc pairwise comparisons are only valid when the overall test is significant: running them after a non-significant omnibus test inflates the Type I error rate and constitutes data dredging.": [
+                ""
+            ],
             "The overall probability of observing the event (e.g., death) during the study period. This affects the number of events observed, which is crucial for power.": [
                 ""
             ],
@@ -81403,7 +81763,13 @@
             "The paired/repeated-measures option requires a two-way (grouped) comparison, so the single-variable pie chart cannot be drawn. Disable the \"Paired\" option to display this chart, or use the grouped charts for the paired analysis.": [
                 ""
             ],
+            "The pairwise comparisons below were computed with the chi-square test and rest on the same approximation.": [
+                ""
+            ],
             "The path legend uses a compact layout and abbreviates long names. Predictor encoding lists the complete design-column names.": [
+                ""
+            ],
+            "The pattern table could not be built for this combination of variables and options ({reason}). The tree above is unaffected. Try fewer variables, or switch the pattern table off.": [
                 ""
             ],
             "The pattern-type and statistic filters affect the plots only. The performance tables always show every row.": [
@@ -81527,6 +81893,9 @@
                 ""
             ],
             "The reference standard and tests must use different variables. Select a different variable for: {variables}.": [
+                ""
+            ],
+            "The reference-level percentage printed inside each node uses a different denominator: that node's count of cases with a non-missing value on the reference variable. 'mv=N' beside it reports how many cases were left out.": [
                 ""
             ],
             "The Reitsma bivariate model could not be fitted (%s). Pooled sensitivity and specificity are unavailable; the SROC plot and summary fall back to descriptive output.": [
@@ -81658,6 +82027,9 @@
             "The selected variable contains {zeros} zero and {negatives} negative values. A leading digit is undefined for these, so nothing below was computed. Filter them out, analyse increases and decreases separately if the variable is a change score, or choose a naturally positive measurement.": [
                 ""
             ],
+            "The selected variables allow up to {possible} subgroup combinations ({variables}); {observed} of them contain at least one case. A tree this wide is hard to read on screen and to print. Consider: (1) using fewer variables, (2) collapsing variable levels, or (3) using the pruning options to focus on the larger branches.": [
+                ""
+            ],
             "The selected-variable Schoenfeld-residual diagnostic could not be computed. This is an unavailable diagnostic, not evidence that proportional hazards holds.": [
                 ""
             ],
@@ -81692,6 +82064,12 @@
                 ""
             ],
             "The smaller outcome group has only %.1f%% of observations (%d cases). This may affect ROC reliability.": [
+                ""
+            ],
+            "The smallest subgroup displayed in this tree holds {n} case(s), and mean/SD for '{variable}' are printed there in the same form as for the large nodes. SD is undefined for a single case (vtree prints SD=NA) and a mean over two cases carries almost no precision. Mean and SD also describe only the non-missing values of '{variable}' within each node, independently of the missing-value exclusion setting. Read the node count next to each mean before using it.": [
+                ""
+            ],
+            "The smallest subgroup with a percentage in this tree holds {n} case(s). A percentage based on that many cases moves by a large amount with a single observation, and it is printed in the same form as a percentage from a large node. Read the count beside each percentage.": [
                 ""
             ],
             "The smoothed hazard curve was not estimated: automatic binning produced %d usable interval(s) from %d event(s), but at least three interval-rate estimates are needed for the local-constant smoother. The unsmoothed piecewise table can still be reported when requested.": [
@@ -81844,6 +82222,12 @@
             "The variable that will appear as columns (groups) in the table.": [
                 ""
             ],
+            "The variable tree could not be generated: {reason}. Try selecting fewer variables, or adjusting the pruning / follow options.": [
+                ""
+            ],
+            "The variable tree could not be rendered to SVG: {reason}.": [
+                ""
+            ],
             "The variable used for grouping (table columns).": [
                 ""
             ],
@@ -81946,6 +82330,9 @@
             "These are descriptive screening heuristics, not validated clinical cutoffs or tests of statistical assumptions.": [
                 ""
             ],
+            "These are descriptive summaries of the plotted values. When aggregation is selected, each point represents a group summary. Clinical importance requires a prespecified threshold and appropriate comparison; it cannot be inferred from the range or standard deviation.": [
+                ""
+            ],
             "These are fixed-prior penalized-EM point estimates, not posterior summaries. Accuracy terminology also assumes that the high-positive latent class represents disease.": [
                 ""
             ],
@@ -82022,6 +82409,9 @@
                 ""
             ],
             "These variables form a two-by-two table with the grouping variable: %s. With Chi-square selected, the finalfit style applies Yates' continuity correction to them while the arsenal and gtsummary styles report the uncorrected Pearson chi-square. The corrected p-value is never the smaller of the two, so a two-by-two p-value can move to the other side of 0.05 when nothing but the style is changed. Fisher's exact test does not involve this choice.": [
+                ""
+            ],
+            "These variables have more than 12 levels ({levels}), so the tree fans out into that many branches at that split and every branch below it holds only a few cases. Consider collapsing rare levels into an 'Other' category, or using the pruning options.": [
                 ""
             ],
             "These variables hold numbers and are drawn with their own recorded values as categories: {variables}.": [
@@ -82348,6 +82738,9 @@
             "This output is for model development only. Use bootstrap optimism correction or nested cross-validation that repeats preprocessing and tuning, followed by external validation, before considering clinical use.": [
                 ""
             ],
+            "This panel reports standardized mean differences only with the t-test. A rank-based effect size for the Wilcoxon test is not implemented.": [
+                ""
+            ],
             "This point scale spans up to %d points per factor, which is too wide to be used as a bedside score. It happens when one selected predictor has a far smaller effect than the others and the chosen method scales relative to it. Try the Max-scaled method, which caps the strongest predictor at the Maximum Points you set, or drop the negligible predictor.": [
                 ""
             ],
@@ -82436,6 +82829,9 @@
                 ""
             ],
             "This typically indicates:": [
+                ""
+            ],
+            "This variable has more than 12 levels ({levels}), so the tree fans out into that many branches at that split and every branch below it holds only a few cases. Consider collapsing rare levels into an 'Other' category, or using the pruning options.": [
                 ""
             ],
             "This visualization helps understand categorical patterns and transitions in clinical data.": [
@@ -84931,6 +85327,9 @@
             "Treatment/observation start time": [
                 ""
             ],
+            "Tree built from {nvars} categorical variable(s) across N={n} observations. {combos} combination(s) of those variables occur in the data.": [
+                ""
+            ],
             "Tree Configuration": [
                 ""
             ],
@@ -85421,6 +85820,9 @@
                 ""
             ],
             "Turkey Population (WHO)": [
+                ""
+            ],
+            "Turn the setting off to see every branch.": [
                 ""
             ],
             "Turner et al. (2012) Predictive": [
@@ -86009,6 +86411,9 @@
                 ""
             ],
             "undefined (no positive cases)": [
+                ""
+            ],
+            "Under-represented": [
                 ""
             ],
             "Under-represented. There are FEWER observations in this cell than expected.": [
@@ -87685,6 +88090,9 @@
             "Values run from {min} to {max}, a range of {decades} orders of magnitude. Benford's Law describes data spanning several orders of magnitude; between one and two decades the leading-digit frequencies are dominated by where the range starts and stops rather than by Benford's Law, so the tests below are not calibrated and can report a large departure for data that were recorded perfectly (on simulated conforming data spanning 1.3 decades the chi-square test rejected in 38 percent of runs at a nominal 5 percent). The statistics are shown for completeness, but the leading-digit finding is reported as \\u{201C}Not assessable\\u{201D} for this variable rather than being interpreted.": [
                 ""
             ],
+            "Values shown as: Observed": [
+                ""
+            ],
             "Values Variable (Optional)": [
                 ""
             ],
@@ -87734,6 +88142,9 @@
                 ""
             ],
             "Variable '{name}' not found in data": [
+                ""
+            ],
+            "Variable '{name}' not found in dataset. Please verify variable selection.": [
                 ""
             ],
             "Variable '{var}' appears to be continuous ({n} unique values). Bar charts are for categorical data. Consider converting to groups first.": [
@@ -88178,6 +88589,9 @@
                 ""
             ],
             "Variable Weights (optional)": [
+                ""
+            ],
+            "Variable With Many Levels": [
                 ""
             ],
             "Variable-by-variable summaries with counts and percentages, visual summary table, clinical interpretation, and copy-ready report sentences.": [
@@ -88660,6 +89074,9 @@
             "Very high event rate ({rate}%). Consider competing risks or cause-specific analysis.": [
                 ""
             ],
+            "Very High Prevalence": [
+                ""
+            ],
             "Very High Risk": [
                 ""
             ],
@@ -88700,6 +89117,9 @@
                 ""
             ],
             "Very small sample size (n = {n}). Results may be unreliable. Recommend n ≥ 50 for stable cut-off analysis.": [
+                ""
+            ],
+            "Very small sample size (n = %d). The chi-square approximation may be unreliable. Consider using Fisher's exact test and interpreting results with caution.": [
                 ""
             ],
             "Very small sample size (n<20): Results should be interpreted with extreme caution. Confidence intervals will be very wide.": [
@@ -89503,6 +89923,9 @@
             "Weighted Cox Regression": [
                 ""
             ],
+            "Weighted Data Analysis": [
+                ""
+            ],
             "Weighted Data Fusion": [
                 ""
             ],
@@ -89525,6 +89948,9 @@
                 ""
             ],
             "Weighted Kappa (Ordinal Variables only)": [
+                ""
+            ],
+            "Weighted Kappa (Ordinal)": [
                 ""
             ],
             "Weighted Kappa (Quadratic)": [
@@ -90889,6 +91315,9 @@
             "You have selected more than two variables.": [
                 ""
             ],
+            "You selected 'None' for the post-hoc method, so no pairwise comparisons were performed. Pairwise comparisons without p-value adjustment are not offered. Select Bonferroni, Holm or FDR to run pairwise tests with a multiple-testing correction.": [
+                ""
+            ],
             "You selected %s%snot yet implemented, so nothing was computed for %s: %s. The rest of the analysis is unaffected. Clear these boxes to remove this message.": [
                 ""
             ],
@@ -91216,40 +91645,13 @@
             "χ² Tests": [
                 ""
             ],
-            "%.1f%%, %.1f%%\u000495%% CI (Median):": [
-                ""
-            ],
             "0,1\u0004Scale to": [
-                ""
-            ],
-            "2 Raters\u0004PABAK & Prevalence/Bias Indices": [
-                ""
-            ],
-            "Any Data Type\u0004Bootstrap Confidence Intervals": [
-                ""
-            ],
-            "Any Data Type\u0004Case Agreement Categorization": [
-                ""
-            ],
-            "Any Data Type\u0004Create Consensus Variable": [
-                ""
-            ],
-            "Any Data Type\u0004Krippendorff's Alpha": [
-                ""
-            ],
-            "Categorical/Ordinal\u0004Gwet's AC1/AC2": [
-                ""
-            ],
-            "Design\u0004Sample Size for Agreement Study": [
                 ""
             ],
             "IQR\u0004Mean ± SD, Median": [
                 ""
             ],
             "IQR\u0004Median": [
-                ""
-            ],
-            "Ordinal\u0004Weighted Kappa": [
                 ""
             ],
             "Q1-Q3\u0004Median": [

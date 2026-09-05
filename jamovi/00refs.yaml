@@ -250,6 +250,22 @@ refs:
 
 
 
+    viridis:
+        type: 'software'
+        author: "Simon Garnier"
+        year: 2024
+        title: "viridis: R package"
+        publisher: '[R package]. Retrieved from https://CRAN.R-project.org/package=viridis'
+        url: https://CRAN.R-project.org/package=viridis
+
+    RColorBrewer:
+        type: 'software'
+        author: "Erich Neuwirth"
+        year: 2022
+        title: "RColorBrewer: R package"
+        publisher: '[R package]. Retrieved from https://CRAN.R-project.org/package=RColorBrewer'
+        url: https://CRAN.R-project.org/package=RColorBrewer
+
     ggcharts:
         type: 'software'
         author: Thomas Neitmann

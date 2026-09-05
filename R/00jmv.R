@@ -213,6 +213,20 @@
         `title`="moments: R package", 
         `publisher`="[R package]. Retrieved from https://CRAN.R-project.org/package=moments", 
         `url`="https://CRAN.R-project.org/package=moments"), 
+    `viridis`=list(
+        `type`="software", 
+        `author`="Simon Garnier", 
+        `year`=2024, 
+        `title`="viridis: R package", 
+        `publisher`="[R package]. Retrieved from https://CRAN.R-project.org/package=viridis", 
+        `url`="https://CRAN.R-project.org/package=viridis"), 
+    `RColorBrewer`=list(
+        `type`="software", 
+        `author`="Erich Neuwirth", 
+        `year`=2022, 
+        `title`="RColorBrewer: R package", 
+        `publisher`="[R package]. Retrieved from https://CRAN.R-project.org/package=RColorBrewer", 
+        `url`="https://CRAN.R-project.org/package=RColorBrewer"), 
     `ggcharts`=list(
         `type`="software", 
         `author`="Thomas Neitmann", 

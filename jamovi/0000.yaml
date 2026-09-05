@@ -200,8 +200,10 @@ analyses:
       prevents data dredging. Selecting 'None' for post-hoc method DISABLES all
       pairwise testing. If you want unadjusted pairwise comparisons, this
       feature is not available (by design, as it would encourage inappropriate
-      multiple testing). No automated validation against established packages
-      exists. Use with caution for clinical decision-making.
+      multiple testing). The chi-square statistic, the pairwise p-values and
+      their adjustment are checked against base R (chisq.test, fisher.test,
+      p.adjust) in the package tests. Read the pairwise results together with
+      the effect sizes and the residuals, not from the p-values alone.
   - title: Categorize Continuous Variables
     name: categorize
     ns: ClinicoPathDescriptives
