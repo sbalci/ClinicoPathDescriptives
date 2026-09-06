@@ -62,7 +62,7 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             vals
         },
 
-        .validateBreaks = function(breaks, method) {
+        .validateBreaks = function(breaks) {
             if (is.null(breaks) || length(breaks) < 2) {
                 return(list(valid = FALSE, message = "Insufficient break points generated."))
             }
@@ -212,7 +212,12 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             # so values outside them fall outside every bin and are excluded. The
             # count is reported to the user in .run(); silently losing cases would
             # be the same class of defect as silently moving the break points.
-            if (!is.null(breaks) && length(breaks) > 1 && isTRUE(extend_to_data)) {
+            # A single manual cut-off (the usual clinical case: one threshold)
+            # is a length-1 vector; the old `length(breaks) > 1` guard skipped
+            # the extension for it, so validation then failed with
+            # "Insufficient break points" while the generated R code, which
+            # extends unconditionally, produced two categories.
+            if (!is.null(breaks) && length(breaks) >= 1 && isTRUE(extend_to_data)) {
                 if (min(breaks) > min(x, na.rm = TRUE))
                     breaks <- c(min(x, na.rm = TRUE), breaks)
                 if (max(breaks) < max(x, na.rm = TRUE))
@@ -488,8 +493,9 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             # jmvcore::Notice objects (see
             # docs/NOTICE_TO_HTML_CONVERSION_GUIDE.md). `todo` keeps the welcome
             # text only, so a warning never appears under "Instructions".
-            .errBox <- function(msg)
+            .errBox <- function(msg) {
                 paste0("<div style='padding: 15px; background-color: rgba(216, 33, 50, 0.18); border-left: 4px solid #dc3545; color: inherit; border-radius: 5px;'><strong>Error:</strong> ", msg, "</div>")
+            }
 
             if (!(varname %in% names(self$data))) {
                 self$results$notices$setContent(.errBox(.fmt(
@@ -508,14 +514,27 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 return()
             }
 
+            # Inf/-Inf cannot lie in any interval, and they made sd() return
+            # NaN, which crashed the variability check below with a raw
+            # "missing value where TRUE/FALSE needed". Treat them as missing
+            # and report the count further down.
+            n_nonfinite <- sum(is.infinite(x))
+            if (n_nonfinite > 0) x[is.infinite(x)] <- NA
+
             # Break points are always computed on the non-missing values -
             # .calculateBreaks() drops NA as its first statement either way.
             # The `excl` option controls the DENOMINATOR of the frequency table
             # instead (see below), which is the only place it can be observed.
             x_clean <- x[!is.na(x)]
 
-            # Basic sanity check for variability
-            if (sum(!is.na(x_clean)) < 2 || sd(x_clean, na.rm = TRUE) == 0) {
+            # Basic sanity checks: enough observations, then variability
+            if (length(x_clean) < 2) {
+                self$results$notices$setContent(.errBox(.fmt(
+                    "Variable '{}' has {} non-missing observation(s). At least two are needed to form categories.",
+                    htmltools::htmlEscape(varname), length(x_clean))))
+                return()
+            }
+            if (sd(x_clean) == 0) {
                 self$results$notices$setContent(.errBox(.fmt(
                     "Variable '{}' has zero variability (constant value). Cannot create categories from a constant variable.",
                     htmltools::htmlEscape(varname))))
@@ -550,12 +569,32 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             manual_breaks <- self$options$breaks
             sdmult <- self$options$sdmult
 
-            private$.checkpoint()
             # Only the manual method can have break points that do not span the
             # data; the computed methods build theirs from min(x)/max(x), so the
             # switch is deliberately ignored for them.
             exclude_oor <- isTRUE(self$options$excludeoutofrange) &&
                 identical(method, "manual")
+
+            # Checked before anything is computed: with an unparsable entry
+            # .calculateBreaks() returns NULL and .validateBreaks() would
+            # report the generic "Insufficient break points" instead.
+            if (method == "manual") {
+                manual_vals <- private$.parseManualBreaks(manual_breaks)
+                if (is.null(manual_vals)) {
+                    self$results$notices$setContent(.errBox(
+                        "Invalid manual break points. Please enter comma-separated numeric values (e.g., 0, 25, 50, 75, 100)."))
+                    return()
+                }
+                # One break point defines no interval once the data range is
+                # no longer added around it.
+                if (exclude_oor && length(unique(manual_vals)) < 2) {
+                    self$results$notices$setContent(.errBox(
+                        "Out-of-range value exclusion needs at least two distinct break points, because a single break point defines no interval. Enter two or more, or turn the exclusion off so the data minimum and maximum supply the outer bounds."))
+                    return()
+                }
+            }
+
+            private$.checkpoint()
 
             breaks <- private$.calculateBreaks(
                 x_clean,
@@ -572,7 +611,7 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             }
 
             # Validate breaks with detailed error messages
-            validation <- private$.validateBreaks(breaks, method)
+            validation <- private$.validateBreaks(breaks)
             if (!validation$valid) {
                 self$results$notices$setContent(.errBox(.fmt(
                     "Break point validation failed: {}",
@@ -590,15 +629,6 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                     varname     = varname,
                     exclude_oor = exclude_oor
                 ))
-            }
-
-            # Additional check for manual breaks
-            if (method == "manual") {
-                if (is.null(private$.parseManualBreaks(manual_breaks))) {
-                    self$results$notices$setContent(.errBox(
-                        "Invalid manual break points. Please enter comma-separated numeric values (e.g., 0, 25, 50, 75, 100)."))
-                    return()
-                }
             }
 
             # Check if custom labels match number of categories
@@ -624,6 +654,20 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                     "; border-radius: 4px;'><strong>", cfg$title, ":</strong> ", msg, "</div>")
             }
 
+            # WARNING: Inf/-Inf were set to missing above
+            if (n_nonfinite > 0) {
+                notice_html$nonFinite <- .noticeBox("WARNING", .fmt(
+                    "Infinite values: {} observation(s) are Inf or -Inf and were treated as missing; they are included in the missing count.",
+                    n_nonfinite))
+            }
+
+            # WARNING: more than a fifth of the rows take no part in the result
+            if (n_missing / n_total > 0.20) {
+                notice_html$missingness <- .noticeBox("WARNING", .fmt(
+                    "Missing values: {} of {} observations ({}%) are missing and take no part in the break points or the categories. Check whether they are missing at random before using the categories in a model.",
+                    n_missing, n_total, round(100 * n_missing / n_total, 1)))
+            }
+
             # WARNING: Jenks falls back to quantile
             if (method == "jenks" && !requireNamespace("classInt", quietly = TRUE)) {
                 notice_html$jenksFallback <- .noticeBox("WARNING",
@@ -644,16 +688,21 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                     length(x_clean), n_subsample))
             }
 
-            # WARNING: Custom labels mismatch
-            if (self$options$labels == "custom" && self$options$customlabels != "") {
-                custom_labels <- trimws(strsplit(self$options$customlabels, ",")[[1]])
-                if (length(custom_labels) != n_categories) {
-                    notice_html$labelMismatch <- .noticeBox("WARNING", .fmt(
-                        "Custom labels mismatch: provided {} labels but have {} categories. Using numbered labels instead.",
-                        length(custom_labels), n_categories))
-                } else if (anyDuplicated(custom_labels) > 0) {
-                    notice_html$labelMismatch <- .noticeBox("WARNING",
-                        "Custom labels contain duplicate values. Category labels must be unique; using numbered labels instead.")
+            # Custom labels: empty box (INFO), wrong count or duplicates (WARNING)
+            if (self$options$labels == "custom") {
+                if (!nzchar(trimws(self$options$customlabels))) {
+                    notice_html$customEmpty <- .noticeBox("INFO",
+                        "Custom labels were selected but none were entered, so generic 'Category 1, 2, ...' labels are used. Enter comma-separated labels, one per category.")
+                } else {
+                    custom_labels <- trimws(strsplit(self$options$customlabels, ",")[[1]])
+                    if (length(custom_labels) != n_categories) {
+                        notice_html$labelMismatch <- .noticeBox("WARNING", .fmt(
+                            "Custom labels mismatch: provided {} labels but have {} categories. Using numbered labels instead.",
+                            length(custom_labels), n_categories))
+                    } else if (anyDuplicated(custom_labels) > 0) {
+                        notice_html$labelMismatch <- .noticeBox("WARNING",
+                            "Custom labels contain duplicate values. Category labels must be unique; using numbered labels instead.")
+                    }
                 }
             }
 
@@ -764,11 +813,22 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 # STRONG_WARNING: Severe imbalance (one bin has >70% of observations)
                 max_prop <- max(bin_counts) / n_valid_for_check
                 if (max_prop > 0.70) {
+                    # Quantile bins can only be unbalanced when values are
+                    # tied, so "use quantiles" is the wrong advice there: say
+                    # which value is tied and how much of the sample it holds.
+                    advice <- if (method == "quantile") {
+                        tab <- table(x_clean)
+                        .fmt("Quantile binning cannot split tied values: {}% of the observations equal {}. Use fewer categories or a clinically defined cut-off.",
+                             round(100 * max(tab) / length(x_clean), 1),
+                             names(tab)[which.max(tab)])
+                    } else {
+                        "Consider quantile-based binning for balanced groups."
+                    }
                     # sprintf("%.1f%%", x) retained intentionally to preserve trailing-zero
                     # formatting (e.g. "50.0%"). Translation pass will revisit.
-                    notice_html$binImbalance <- .noticeBox("STRONG_WARNING", sprintf(
-                        "Severe bin imbalance: one bin contains %.1f%% of observations. This may reduce statistical power and affect clinical interpretations; consider using quantile-based binning for balanced groups.",
-                        max_prop * 100))
+                    notice_html$binImbalance <- .noticeBox("STRONG_WARNING", paste(sprintf(
+                        "Severe bin imbalance: one bin contains %.1f%% of observations. This may reduce statistical power and affect clinical interpretations.",
+                        max_prop * 100), advice))
                 }
             }
 
@@ -797,6 +857,9 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             # Populate break points table ----
             breakTable <- self$results$breakpointsTable
+            # addRow() appends without a duplicate-key check, so a second
+            # $run() on the same analysis object would double every row.
+            breakTable$deleteRows()
             for (i in seq_along(breaks)) {
                 breakTable$addRow(rowKey = i, values = list(
                     index = i,
@@ -809,6 +872,7 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             # Populate frequency table ----
             freqTable <- self$results$freqTable
+            freqTable$deleteRows()
 
             # Calculate frequencies. Break points come from the non-missing
             # values, but x_cat carries NA wherever x was NA (and wherever a
@@ -881,12 +945,14 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 # Calculate percentages based on valid observations only.
                 # Guard the denominator: manual breaks can leave zero valid
                 # categorized observations, which would give NaN/Inf.
+                # NA renders as a blank cell; NaN is serialized as
+                # NOT_A_NUMBER and jamovi prints the word "NaN".
                 if (pct_denom > 0) {
                     pct_val <- freq[i] / pct_denom
                     cum_pct_val <- cumsum_freq[row_idx] / pct_denom
                 } else {
-                    pct_val <- NaN
-                    cum_pct_val <- NaN
+                    pct_val <- NA_real_
+                    cum_pct_val <- NA_real_
                 }
 
                 freqTable$addRow(rowKey = row_idx, values = list(
@@ -906,8 +972,8 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                     range = "NA",
                     n = as.integer(n_missing_obs),
                     percent = if (isTRUE(self$options$excl) || pct_denom <= 0)
-                        NaN else n_missing_obs / pct_denom,
-                    cumPercent = NaN
+                        NA_real_ else n_missing_obs / pct_denom,
+                    cumPercent = NA_real_
                 ))
                 row_idx <- row_idx + 1
             }
@@ -935,8 +1001,8 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                     range = oor_range,
                     n = as.integer(n_oor_obs),
                     percent = if (isTRUE(self$options$excl) || pct_denom <= 0)
-                        NaN else n_oor_obs / pct_denom,
-                    cumPercent = NaN
+                        NA_real_ else n_oor_obs / pct_denom,
+                    cumPercent = NA_real_
                 ))
                 row_idx <- row_idx + 1
             }
@@ -945,6 +1011,17 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             # and the generated R snippet so the two cannot disagree.
             new_name <- trimws(self$options$newvarname)
             if (!nzchar(new_name)) new_name <- paste0(varname, "_cat")
+
+            # The generated R code assigns data$<new_name>, so naming the
+            # result after its source overwrites the source values with
+            # their categories. Only this clash can be seen here: jamovi
+            # supplies just the selected columns, so a clash with any other
+            # column in the dataset is invisible to the backend.
+            if (identical(new_name, varname)) {
+                notice_html$nameClash <- .noticeBox("STRONG_WARNING", .fmt(
+                    "The new variable name is the same as the source variable '{}'. The generated R code would overwrite the source values with their categories. Choose a different name.",
+                    htmltools::htmlEscape(new_name)))
+            }
 
             # Add categorized variable to data ----
             if (self$options$addtodata && self$results$addtodata$isNotFilled()) {
@@ -967,13 +1044,21 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 # set() re-initialises keys/titles/measure types exactly as
                 # Output$initialize does, then setRowNums/setValues refill it;
                 # guarded so a jmvcore change cannot take the analysis down.
-                try(self$results$addtodata$set(
+                set_ok <- try(self$results$addtodata$set(
                         keys = 1L,
                         titles = new_name,
                         descriptions = paste0("Categorized version of ", varname,
                                               " using ", method, " method"),
                         measureTypes = if (isTRUE(self$options$ordered)) "ordinal" else "nominal"),
                     silent = TRUE)
+                if (inherits(set_ok, "try-error")) {
+                    # Silently shipping a nominal <var>_cat would ignore both
+                    # the name and the ordered option the user set.
+                    notice_html$outputSetFailed <- .noticeBox("WARNING", .fmt(
+                        "The categorized variable was added under the default name '{}' as a nominal variable, because the requested name and measure type could not be applied ({}).",
+                        htmltools::htmlEscape(paste0(varname, "_cat")),
+                        htmltools::htmlEscape(trimws(conditionMessage(attr(set_ok, "condition"))))))
+                }
 
                 # Row numbers must be the ORIGINAL dataset rows. seq_along() of
                 # the filtered frame shifted every value up by however many rows
@@ -1006,12 +1091,14 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 "Categorization completed: {} observations placed into {} groups using {} method. Note: Categorization reduces statistical power and may obscure dose-response relationships (Altman & Royston, BMJ 2006;332:1080). Continuous analyses are generally preferred unless there is strong clinical justification.",
                 n_valid_obs, n_categories, self$options$method))
 
-            # Render notices in priority order: STRONG_WARNING -> WARNING -> INFO
-            # 'outOfRange' is a data-loss warning and was missing here, which
-            # silently discarded the only feedback the exclusion feature has.
-            priority_order <- c('outOfRange', 'boundaryDropped', 'smallBins', 'binImbalance', 'meansdCollapse',
-                                'jenksSubsample', 'jenksFallback', 'labelMismatch',
-                                'binCollapse', 'outlierSensitivity', 'analysisComplete')
+            # Render notices by severity: STRONG_WARNING -> WARNING -> INFO.
+            # 'outOfRange' leads the warnings: it is the only feedback the
+            # exclusion feature has, and it was once dropped from this list.
+            priority_order <- c(
+                "boundaryDropped", "nameClash", "smallBins", "binImbalance", "meansdCollapse",
+                "outOfRange", "nonFinite", "missingness", "outputSetFailed", "jenksSubsample",
+                "jenksFallback", "labelMismatch", "binCollapse", "outlierSensitivity",
+                "customEmpty", "analysisComplete")
             rendered <- character()
             # Anything not listed above still gets rendered, at the end. A
             # notice that was built and then dropped because its name was

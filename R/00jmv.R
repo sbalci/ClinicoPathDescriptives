@@ -104,6 +104,13 @@
         `title`="ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics", 
         `publisher`="[R package]. Retrieved from https://CRAN.R-project.org/package=ggplot2", 
         `url`="https://CRAN.R-project.org/package=ggplot2"), 
+    `classInt`=list(
+        `type`="software", 
+        `author`="Bivand, R.", 
+        `year`=2023, 
+        `title`="classInt: Choose Univariate Class Intervals", 
+        `publisher`="[R package]. Retrieved from https://CRAN.R-project.org/package=classInt", 
+        `url`="https://CRAN.R-project.org/package=classInt"), 
     `arsenal`=list(
         `type`="software", 
         `author`="Heinzen, E Sinnwell, J Atkinson, E Gunderson, T Dougherty, G", 
@@ -153,6 +160,16 @@
         `title`="easyalluvial: Generate Alluvial Plots with a Single Line of Code.", 
         `publisher`="[R package]. Retrieved from https://CRAN.R-project.org/package=easyalluvial", 
         `url`="https://CRAN.R-project.org/package=easyalluvial"), 
+    `dichotomizing`=list(
+        `type`="article", 
+        `title`="Dichotomizing continuous predictors in multiple regression: a bad idea.", 
+        `year`=2006, 
+        `author`="Royston, P., Altman, D.G. and Sauerbrei, W.", 
+        `publisher`="Statist. Med.", 
+        `volume`=25, 
+        `pages`="127-141", 
+        `doi`="10.1002/sim.2331", 
+        `url`="https://onlinelibrary.wiley.com/doi/abs/10.1002/sim.2331"), 
     `tangram`=list(
         `type`="software", 
         `author`="Garbett, S.", 
