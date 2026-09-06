@@ -472,8 +472,10 @@ tableoneClass <- if (requireNamespace("jmvcore", quietly = TRUE)) R6::R6Class(
                 formula_obj <- jmvcore::asFormula(paste('~', formula_str))
                 mytable <- tryCatch({
                     arsenal_data <- private$.htmlSafeTableData(data)
-                    if (!identical(is.na(arsenal_data), is.na(data)))
-                        stop(.("Formatting changed missing values; no table or report was produced."))
+                    if (!identical(is.na(arsenal_data), is.na(data))) {
+                        private$.rejectPlain(.("Formatting changed missing values; no table or report was produced."))
+                        return(invisible(NULL))
+                    }
                     categories <- private$.categoryLabels(data)
                     stats_labels <- list()
                     if ("N-Miss" %in% categories) {

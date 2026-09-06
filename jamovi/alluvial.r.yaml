@@ -113,6 +113,7 @@ items:
           - vars
           - condensationvar
           - excl
+          - maxvars
           - colorPalette
           - themeStyle
       visible: (condensationvar)

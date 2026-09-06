@@ -64,21 +64,21 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
         .validateBreaks = function(breaks) {
             if (is.null(breaks) || length(breaks) < 2) {
-                return(list(valid = FALSE, message = "Insufficient break points generated."))
+                return(list(valid = FALSE, message = .("Insufficient break points generated.")))
             }
 
             # Check for NaN or Inf
             if (any(is.na(breaks)) || any(is.infinite(breaks))) {
-                return(list(valid = FALSE, message = "Break points contain invalid values (NA or Inf)."))
+                return(list(valid = FALSE, message = .("Break points contain invalid values (NA or Inf).")))
             }
 
             # Check for strict monotonicity (no duplicates, strictly increasing)
             if (any(diff(breaks) <= 0)) {
                 return(list(valid = FALSE,
-                    message = paste0("Break points are not strictly increasing. ",
-                                   "This can occur with: (1) tied/constant values in quantile methods, ",
-                                   "(2) duplicate manual breaks, or (3) zero variance in mean/median\u{00B1}SD methods. ",
-                                   "Please check your data or adjust the binning method.")))
+                    message = paste0(.("Break points are not strictly increasing. "),
+                                   .("This can occur with: (1) tied/constant values in quantile methods, "),
+                                   .("(2) duplicate manual breaks, or (3) zero variance in mean/median\u{00B1}SD methods. "),
+                                   .("Please check your data or adjust the binning method."))))
             }
 
             # Check minimum separation (relative to range)
@@ -86,7 +86,7 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             min_diff <- min(diff(breaks))
             if (breaks_range > 0 && min_diff / breaks_range < 1e-10) {
                 return(list(valid = FALSE,
-                    message = "Break points are too close together (possible numerical precision issue)."))
+                    message = .("Break points are too close together (possible numerical precision issue).")))
             }
 
             return(list(valid = TRUE, message = NULL))
@@ -453,32 +453,31 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             # Input Validation ----
             if (is.null(self$options$var) || length(self$options$var) == 0) {
-                todo <- "
-                <div style='font-family: Arial, sans-serif; color: inherit;'>
-                  <h2>Categorize Continuous Variables</h2>
-                  <p>This tool converts continuous numeric variables into categorical variables.</p>
-                  <hr>
-                  <h3>Instructions</h3>
-                  <ol>
-                    <li><strong>Select a variable</strong> - Choose a continuous numeric variable</li>
-                    <li><strong>Choose binning method</strong>:
-                      <ul>
-                        <li><em>Equal Intervals</em>: Divide range into equal-width bins</li>
-                        <li><em>Quantiles</em>: Create bins with equal number of observations</li>
-                        <li><em>Manual Breaks</em>: Specify your own cut points</li>
-                        <li><em>Mean +/- SD</em>: Use mean and standard deviation</li>
-                        <li><em>Median Split</em>: Simple dichotomization at median</li>
-                        <li><em>Natural Breaks (Jenks)</em>: Minimize within-class variance</li>
-                      </ul>
-                    </li>
-                    <li><strong>Set number of categories</strong> and label style</li>
-                    <li><strong>Review</strong> the frequency table and distribution plot</li>
-                    <li><strong>Add to data</strong> - Enable the 'Categorized variable' output (below the binning options) to add it directly to your dataset</li>
-                  </ol>
-                  <hr>
-                  <p><strong>Tip:</strong> The new categorized variable will appear in your data view and can be used in other analyses like Alluvial Diagrams, Cross Tables, etc.</p>
-                </div>
-                "
+                todo <- paste0(
+                    "<div style='font-family: Arial, sans-serif; color: inherit;'>",
+                    "<h2>", .("Categorize Continuous Variables"), "</h2>",
+                    "<p>", .("This tool converts continuous numeric variables into categorical variables."), "</p>",
+                    "<hr>",
+                    "<h3>", .("Instructions"), "</h3>",
+                    "<ol>",
+                    "<li><strong>", .("Select a variable"), "</strong> - ", .("Choose a continuous numeric variable"), "</li>",
+                    "<li><strong>", .("Choose binning method"), "</strong>:",
+                    "<ul>",
+                    "<li><em>", .("Equal Intervals"), "</em>: ", .("Divide range into equal-width bins"), "</li>",
+                    "<li><em>", .("Quantiles"), "</em>: ", .("Create bins with equal number of observations"), "</li>",
+                    "<li><em>", .("Manual Breaks"), "</em>: ", .("Specify your own cut points"), "</li>",
+                    "<li><em>", .("Mean +/- SD"), "</em>: ", .("Use mean and standard deviation"), "</li>",
+                    "<li><em>", .("Median Split"), "</em>: ", .("Simple dichotomization at median"), "</li>",
+                    "<li><em>", .("Natural Breaks (Jenks)"), "</em>: ", .("Minimize within-class variance"), "</li>",
+                    "</ul>",
+                    "</li>",
+                    "<li><strong>", .("Set number of categories"), "</strong> ", .("and label style"), "</li>",
+                    "<li><strong>", .("Review"), "</strong> ", .("the frequency table and distribution plot"), "</li>",
+                    "<li><strong>", .("Add to data"), "</strong> - ", .("Enable the 'Categorized variable' output (below the binning options) to add it directly to your dataset"), "</li>",
+                    "</ol>",
+                    "<hr>",
+                    "<p><strong>", .("Tip:"), "</strong> ", .("The new categorized variable will appear in your data view and can be used in other analyses like Alluvial Diagrams, Cross Tables, etc."), "</p>",
+                    "</div>")
                 self$results$todo$setContent(todo)
                 return()
             } else {
@@ -494,12 +493,12 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             # docs/NOTICE_TO_HTML_CONVERSION_GUIDE.md). `todo` keeps the welcome
             # text only, so a warning never appears under "Instructions".
             .errBox <- function(msg) {
-                paste0("<div style='padding: 15px; background-color: rgba(216, 33, 50, 0.18); border-left: 4px solid #dc3545; color: inherit; border-radius: 5px;'><strong>Error:</strong> ", msg, "</div>")
+                paste0("<div style='padding: 15px; background-color: rgba(216, 33, 50, 0.18); border-left: 4px solid #dc3545; color: inherit; border-radius: 5px;'><strong>", .("Error"), ":</strong> ", msg, "</div>")
             }
 
             if (!(varname %in% names(self$data))) {
                 self$results$notices$setContent(.errBox(.fmt(
-                    "Variable '{}' not found in dataset. Please select a valid variable from the data.",
+                    .("Variable '{}' not found in dataset. Please select a valid variable from the data."),
                     htmltools::htmlEscape(varname))))
                 return()
             }
@@ -509,7 +508,7 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             # Check if numeric
             if (!is.numeric(x)) {
                 self$results$notices$setContent(.errBox(.fmt(
-                    "Variable '{}' is not numeric. Categorization requires a continuous numeric variable.",
+                    .("Variable '{}' is not numeric. Categorization requires a continuous numeric variable."),
                     htmltools::htmlEscape(varname))))
                 return()
             }
@@ -530,13 +529,13 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             # Basic sanity checks: enough observations, then variability
             if (length(x_clean) < 2) {
                 self$results$notices$setContent(.errBox(.fmt(
-                    "Variable '{}' has {} non-missing observation(s). At least two are needed to form categories.",
+                    .("Variable '{}' has {} non-missing observation(s). At least two are needed to form categories."),
                     htmltools::htmlEscape(varname), length(x_clean))))
                 return()
             }
             if (sd(x_clean) == 0) {
                 self$results$notices$setContent(.errBox(.fmt(
-                    "Variable '{}' has zero variability (constant value). Cannot create categories from a constant variable.",
+                    .("Variable '{}' has zero variability (constant value). Cannot create categories from a constant variable."),
                     htmltools::htmlEscape(varname))))
                 return()
             }
@@ -548,17 +547,17 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             # Variable summary ----
             summary_html <- paste0(
                 "<div style='padding: 10px;'>",
-                "<strong>Variable:</strong> ", htmltools::htmlEscape(varname), "<br>",
-                "<strong>N (total):</strong> ", n_total, "<br>",
-                "<strong>N (valid):</strong> ", n_valid, "<br>",
-                "<strong>N (missing):</strong> ", n_missing, "<br>",
+                "<strong>", .("Variable:"), "</strong> ", htmltools::htmlEscape(varname), "<br>",
+                "<strong>", .("N (total):"), "</strong> ", n_total, "<br>",
+                "<strong>", .("N (valid):"), "</strong> ", n_valid, "<br>",
+                "<strong>", .("N (missing):"), "</strong> ", n_missing, "<br>",
                 # signif(), not round(x, 2): a fixed 2 decimals prints every
                 # summary of a proportion, index or ratio as 0 or 0.01.
-                "<strong>Range:</strong> ", signif(min(x, na.rm = TRUE), 4), " - ",
+                "<strong>", .("Range:"), "</strong> ", signif(min(x, na.rm = TRUE), 4), " - ",
                 signif(max(x, na.rm = TRUE), 4), "<br>",
-                "<strong>Mean:</strong> ", signif(mean(x, na.rm = TRUE), 4), "<br>",
-                "<strong>Median:</strong> ", signif(median(x, na.rm = TRUE), 4), "<br>",
-                "<strong>SD:</strong> ", signif(sd(x, na.rm = TRUE), 4),
+                "<strong>", .("Mean:"), "</strong> ", signif(mean(x, na.rm = TRUE), 4), "<br>",
+                "<strong>", .("Median:"), "</strong> ", signif(median(x, na.rm = TRUE), 4), "<br>",
+                "<strong>", .("SD:"), "</strong> ", signif(sd(x, na.rm = TRUE), 4),
                 "</div>"
             )
             self$results$summaryText$setContent(summary_html)
@@ -582,14 +581,14 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 manual_vals <- private$.parseManualBreaks(manual_breaks)
                 if (is.null(manual_vals)) {
                     self$results$notices$setContent(.errBox(
-                        "Invalid manual break points. Please enter comma-separated numeric values (e.g., 0, 25, 50, 75, 100)."))
+                        .("Invalid manual break points. Please enter comma-separated numeric values (e.g., 0, 25, 50, 75, 100).")))
                     return()
                 }
                 # One break point defines no interval once the data range is
                 # no longer added around it.
                 if (exclude_oor && length(unique(manual_vals)) < 2) {
                     self$results$notices$setContent(.errBox(
-                        "Out-of-range value exclusion needs at least two distinct break points, because a single break point defines no interval. Enter two or more, or turn the exclusion off so the data minimum and maximum supply the outer bounds."))
+                        .("Out-of-range value exclusion needs at least two distinct break points, because a single break point defines no interval. Enter two or more, or turn the exclusion off so the data minimum and maximum supply the outer bounds.")))
                     return()
                 }
             }
@@ -614,7 +613,7 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             validation <- private$.validateBreaks(breaks)
             if (!validation$valid) {
                 self$results$notices$setContent(.errBox(.fmt(
-                    "Break point validation failed: {}",
+                    .("Break point validation failed: {}"),
                     htmltools::htmlEscape(validation$message))))
                 return()
             }
@@ -645,9 +644,9 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 # .errBox above and the R-code box below. An opaque pastel with
                 # pinned dark text renders as a bright island in dark mode.
                 cfg <- switch(level,
-                    STRONG_WARNING = list(bg = "rgba(255, 193, 7, 0.18)", border = "#ff9800", title = "Warning"),
-                    WARNING        = list(bg = "rgba(255, 193, 7, 0.12)", border = "#ffc107", title = "Warning"),
-                    INFO           = list(bg = "rgba(23, 162, 184, 0.12)", border = "#17a2b8", title = "Note"))
+                    STRONG_WARNING = list(bg = "rgba(255, 193, 7, 0.18)", border = "#ff9800", title = .("Warning")),
+                    WARNING        = list(bg = "rgba(255, 193, 7, 0.12)", border = "#ffc107", title = .("Warning")),
+                    INFO           = list(bg = "rgba(23, 162, 184, 0.12)", border = "#17a2b8", title = .("Note")))
                 paste0(
                     "<div style='padding: 12px 15px; margin: 6px 0; background-color: ", cfg$bg,
                     "; border-left: 4px solid ", cfg$border, "; color: inherit",
@@ -657,21 +656,21 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             # WARNING: Inf/-Inf were set to missing above
             if (n_nonfinite > 0) {
                 notice_html$nonFinite <- .noticeBox("WARNING", .fmt(
-                    "Infinite values: {} observation(s) are Inf or -Inf and were treated as missing; they are included in the missing count.",
+                    .("Infinite values: {} observation(s) are Inf or -Inf and were treated as missing; they are included in the missing count."),
                     n_nonfinite))
             }
 
             # WARNING: more than a fifth of the rows take no part in the result
             if (n_missing / n_total > 0.20) {
                 notice_html$missingness <- .noticeBox("WARNING", .fmt(
-                    "Missing values: {} of {} observations ({}%) are missing and take no part in the break points or the categories. Check whether they are missing at random before using the categories in a model.",
+                    .("Missing values: {} of {} observations ({}%) are missing and take no part in the break points or the categories. Check whether they are missing at random before using the categories in a model."),
                     n_missing, n_total, round(100 * n_missing / n_total, 1)))
             }
 
             # WARNING: Jenks falls back to quantile
             if (method == "jenks" && !requireNamespace("classInt", quietly = TRUE)) {
                 notice_html$jenksFallback <- .noticeBox("WARNING",
-                    "Natural Breaks (Jenks) requires the 'classInt' package. Using quantile-based binning instead. Install classInt with install.packages('classInt') to enable true Jenks optimization.")
+                    .("Natural Breaks (Jenks) requires the 'classInt' package. Using quantile-based binning instead. Install classInt with install.packages('classInt') to enable true Jenks optimization."))
             }
 
             # WARNING: Jenks breaks computed on a subsample
@@ -684,7 +683,7 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 # report the count that is actually used, not a fixed share.
                 n_subsample <- min(ceiling(0.1 * length(x_clean)), 3000L)
                 notice_html$jenksSubsample <- .noticeBox("WARNING", .fmt(
-                    "Natural-breaks approximation: with {} observations the break points were computed on a random subsample of {} values (plus the minimum and maximum) rather than the full data, because the exact algorithm is too slow at this size. The subsample is drawn with a fixed seed, so repeated runs give the same break points, but they are an approximation to the optimum. Quantile binning uses every observation if exact boundaries matter.",
+                    .("Natural-breaks approximation: with {} observations the break points were computed on a random subsample of {} values (plus the minimum and maximum) rather than the full data, because the exact algorithm is too slow at this size. The subsample is drawn with a fixed seed, so repeated runs give the same break points, but they are an approximation to the optimum. Quantile binning uses every observation if exact boundaries matter."),
                     length(x_clean), n_subsample))
             }
 
@@ -692,16 +691,16 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             if (self$options$labels == "custom") {
                 if (!nzchar(trimws(self$options$customlabels))) {
                     notice_html$customEmpty <- .noticeBox("INFO",
-                        "Custom labels were selected but none were entered, so generic 'Category 1, 2, ...' labels are used. Enter comma-separated labels, one per category.")
+                        .("Custom labels were selected but none were entered, so generic 'Category 1, 2, ...' labels are used. Enter comma-separated labels, one per category."))
                 } else {
                     custom_labels <- trimws(strsplit(self$options$customlabels, ",")[[1]])
                     if (length(custom_labels) != n_categories) {
                         notice_html$labelMismatch <- .noticeBox("WARNING", .fmt(
-                            "Custom labels mismatch: provided {} labels but have {} categories. Using numbered labels instead.",
+                            .("Custom labels mismatch: provided {} labels but have {} categories. Using numbered labels instead."),
                             length(custom_labels), n_categories))
                     } else if (anyDuplicated(custom_labels) > 0) {
                         notice_html$labelMismatch <- .noticeBox("WARNING",
-                            "Custom labels contain duplicate values. Category labels must be unique; using numbered labels instead.")
+                            .("Custom labels contain duplicate values. Category labels must be unique; using numbered labels instead."))
                     }
                 }
             }
@@ -709,7 +708,7 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             # WARNING: Bin collapse
             if (method %in% c("equal", "quantile", "jenks") && n_categories != nbins) {
                 notice_html$binCollapse <- .noticeBox("WARNING", .fmt(
-                    "Bin collapse: requested {} categories but only {} distinct bins could be created due to tied values or limited range. Interpretations based on '{}-tiles' (e.g., quartiles, tertiles) may be misleading; verify bin boundaries before use.",
+                    .("Bin collapse: requested {} categories but only {} distinct bins could be created due to tied values or limited range. Interpretations based on '{}-tiles' (e.g., quartiles, tertiles) may be misleading; verify bin boundaries before use."),
                     nbins, n_categories, nbins))
             }
 
@@ -741,7 +740,7 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             # labels; this catches anything it cannot.
             if (nlevels(x_cat) != n_categories) {
                 self$results$notices$setContent(.errBox(.fmt(
-                    "Category labels collided: {} break points define {} intervals but only {} distinct categories were produced, so two or more intervals would be merged into one row. The frequency table and the added variable would not match the break points, so no results are shown. Choose a different label style (Numbered or Lettered), or reduce the number of categories so the boundaries are further apart.",
+                    .("Category labels collided: {} break points define {} intervals but only {} distinct categories were produced, so two or more intervals would be merged into one row. The frequency table and the added variable would not match the break points, so no results are shown. Choose a different label style (Numbered or Lettered), or reduce the number of categories so the boundaries are further apart."),
                     length(breaks), n_categories, nlevels(x_cat))))
                 return()
             }
@@ -774,7 +773,7 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                     below <- sum(!is.na(x) & is.na(x_cat) & x < min(breaks))
                     above <- n_outside - below
                     notice_html$outOfRange <- .noticeBox("WARNING", .fmt(
-                        "Excluded {} observation(s) ({}%) that fall outside the break points [{}, {}]: {} below and {} above. These are not counted in any category. Turn off 'Out-of-range value exclusion' to extend the outer breaks and keep every case.",
+                        .("Excluded {} observation(s) ({}%) that fall outside the break points [{}, {}]: {} below and {} above. These are not counted in any category. Turn off 'Out-of-range value exclusion' to extend the outer breaks and keep every case."),
                         n_outside,
                         round(100 * n_outside / sum(!is.na(x)), 1),
                         base::format(min(breaks)), base::format(max(breaks)),
@@ -785,7 +784,7 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                     open_end <- if (isTRUE(self$options$rightclosed))
                         base::format(min(breaks)) else base::format(max(breaks))
                     notice_html$boundaryDropped <- .noticeBox("STRONG_WARNING", .fmt(
-                        "Boundary values not categorized: {} observation(s) ({}%) are exactly equal to {} and fall outside every interval, because 'Lowest value in first bin' is switched off. They are not counted in any category. Switch that option on to keep them.",
+                        .("Boundary values not categorized: {} observation(s) ({}%) are exactly equal to {} and fall outside every interval, because 'Lowest value in first bin' is switched off. They are not counted in any category. Switch that option on to keep them."),
                         n_boundary,
                         round(100 * n_boundary / sum(!is.na(x)), 1),
                         open_end))
@@ -806,7 +805,7 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 small_bins <- sum(bin_counts < 5 | bin_counts <= sliver_cut)
                 if (small_bins > 0) {
                     notice_html$smallBins <- .noticeBox("STRONG_WARNING", .fmt(
-                        "Small bins detected: {} of {} bin(s) hold fewer than 5 observations or under 2% of the sample (smallest bin n = {}). Estimates within such groups are very imprecise and tests involving them have little power; consider reducing the number of categories or using quantile binning for more even group sizes.",
+                        .("Small bins detected: {} of {} bin(s) hold fewer than 5 observations or under 2% of the sample (smallest bin n = {}). Estimates within such groups are very imprecise and tests involving them have little power; consider reducing the number of categories or using quantile binning for more even group sizes."),
                         small_bins, length(bin_counts), min(bin_counts)))
                 }
 
@@ -818,17 +817,15 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                     # which value is tied and how much of the sample it holds.
                     advice <- if (method == "quantile") {
                         tab <- table(x_clean)
-                        .fmt("Quantile binning cannot split tied values: {}% of the observations equal {}. Use fewer categories or a clinically defined cut-off.",
+                        .fmt(.("Quantile binning cannot split tied values: {}% of the observations equal {}. Use fewer categories or a clinically defined cut-off."),
                              round(100 * max(tab) / length(x_clean), 1),
                              names(tab)[which.max(tab)])
                     } else {
-                        "Consider quantile-based binning for balanced groups."
+                        .("Consider quantile-based binning for balanced groups.")
                     }
-                    # sprintf("%.1f%%", x) retained intentionally to preserve trailing-zero
-                    # formatting (e.g. "50.0%"). Translation pass will revisit.
-                    notice_html$binImbalance <- .noticeBox("STRONG_WARNING", paste(sprintf(
-                        "Severe bin imbalance: one bin contains %.1f%% of observations. This may reduce statistical power and affect clinical interpretations.",
-                        max_prop * 100), advice))
+                    notice_html$binImbalance <- .noticeBox("STRONG_WARNING", paste(.fmt(
+                        .("Severe bin imbalance: one bin contains {}% of observations. This may reduce statistical power and affect clinical interpretations."),
+                        sprintf("%.1f", max_prop * 100)), advice))
                 }
             }
 
@@ -836,7 +833,7 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             if (method == "meansd" && length(private$.meansdDropped) > 0) {
                 which_band <- paste(private$.meansdDropped, collapse = " and ")
                 notice_html$meansdCollapse <- .noticeBox("STRONG_WARNING", .fmt(
-                    "Mean\u{00B1}SD boundary outside the data: the {} boundary (mean +/- {} SD) lies beyond the observed range, so that band cannot be formed and {} categories were created instead of the usual 4. This happens on skewed distributions (CRP, ferritin, tumour burden). Quantile or natural-breaks binning gives bands that always fall inside the data.",
+                    .("Mean\u{00B1}SD boundary outside the data: the {} boundary (mean +/- {} SD) lies beyond the observed range, so that band cannot be formed and {} categories were created instead of the usual 4. This happens on skewed distributions (CRP, ferritin, tumour burden). Quantile or natural-breaks binning gives bands that always fall inside the data."),
                     which_band, sdmult, n_categories))
             }
 
@@ -850,7 +847,7 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
                 if (outliers > 0) {
                     notice_html$outlierSensitivity <- .noticeBox("WARNING", .fmt(
-                        "Outlier sensitivity: detected {} extreme outlier(s). Mean\u{00B1}SD binning is sensitive to outliers, which can create poorly distributed categories. Consider using quantile or natural breaks methods.",
+                        .("Outlier sensitivity: detected {} extreme outlier(s). Mean\u{00B1}SD binning is sensitive to outliers, which can create poorly distributed categories. Consider using quantile or natural breaks methods."),
                         outliers))
                 }
             }
@@ -968,7 +965,7 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             # Add a row for genuinely missing source values
             if (n_missing_obs > 0) {
                 freqTable$addRow(rowKey = row_idx, values = list(
-                    category = "Missing",
+                    category = .("Missing"),
                     range = "NA",
                     n = as.integer(n_missing_obs),
                     percent = if (isTRUE(self$options$excl) || pct_denom <= 0)
@@ -987,14 +984,14 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 n_boundary_obs <- sum(!is.na(x) & is.na(x_cat) &
                                       x >= min(breaks) & x <= max(breaks))
                 if (n_boundary_obs == 0) {
-                    oor_category <- "Out of range"
-                    oor_range <- "outside the break points"
+                    oor_category <- .("Out of range")
+                    oor_range <- .("outside the break points")
                 } else if (n_boundary_obs == n_oor_obs) {
-                    oor_category <- "Not categorized"
-                    oor_range <- "on the open outer break point"
+                    oor_category <- .("Not categorized")
+                    oor_range <- .("on the open outer break point")
                 } else {
-                    oor_category <- "Not categorized"
-                    oor_range <- "outside or on the open outer break point"
+                    oor_category <- .("Not categorized")
+                    oor_range <- .("outside or on the open outer break point")
                 }
                 freqTable$addRow(rowKey = row_idx, values = list(
                     category = oor_category,
@@ -1019,7 +1016,7 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             # column in the dataset is invisible to the backend.
             if (identical(new_name, varname)) {
                 notice_html$nameClash <- .noticeBox("STRONG_WARNING", .fmt(
-                    "The new variable name is the same as the source variable '{}'. The generated R code would overwrite the source values with their categories. Choose a different name.",
+                    .("The new variable name is the same as the source variable '{}'. The generated R code would overwrite the source values with their categories. Choose a different name."),
                     htmltools::htmlEscape(new_name)))
             }
 
@@ -1055,7 +1052,7 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                     # Silently shipping a nominal <var>_cat would ignore both
                     # the name and the ordered option the user set.
                     notice_html$outputSetFailed <- .noticeBox("WARNING", .fmt(
-                        "The categorized variable was added under the default name '{}' as a nominal variable, because the requested name and measure type could not be applied ({}).",
+                        .("The categorized variable was added under the default name '{}' as a nominal variable, because the requested name and measure type could not be applied ({})."),
                         htmltools::htmlEscape(paste0(varname, "_cat")),
                         htmltools::htmlEscape(trimws(conditionMessage(attr(set_ok, "condition"))))))
                 }
@@ -1088,7 +1085,7 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             # INFO: Analysis complete with methodological note
             notice_html$analysisComplete <- .noticeBox("INFO", .fmt(
-                "Categorization completed: {} observations placed into {} groups using {} method. Note: Categorization reduces statistical power and may obscure dose-response relationships (Altman & Royston, BMJ 2006;332:1080). Continuous analyses are generally preferred unless there is strong clinical justification.",
+                .("Categorization completed: {} observations placed into {} groups using {} method. Note: Categorization reduces statistical power and may obscure dose-response relationships (Altman & Royston, BMJ 2006;332:1080). Continuous analyses are generally preferred unless there is strong clinical justification."),
                 n_valid_obs, n_categories, self$options$method))
 
             # Render notices by severity: STRONG_WARNING -> WARNING -> INFO.
@@ -1184,11 +1181,10 @@ categorizeClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                     linewidth = 0.8
                 ) +
                 ggplot2::labs(
-                    title = paste("Distribution of", varname),
-                    subtitle = paste("Red dashed lines show category boundaries (",
-                                    self$options$method, " method)"),
+                    title = .fmt(.("Distribution of {var}"), var = varname),
+                    subtitle = .fmt(.("Red dashed lines show category boundaries ({method} method)"), method = self$options$method),
                     x = varname,
-                    y = "Density"
+                    y = .("Density")
                 ) +
                 # ggtheme is jamovi's theme-aware ggplot theme; theme_minimal()
                 # drew black titles and grey axis text onto the transparent png,

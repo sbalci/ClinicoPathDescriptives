@@ -1014,19 +1014,19 @@ checkdataClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 # factor/character - rendered a visible table whose Value and
                 # Interpretation cells were all blank, with nothing to say why.
                 reason <- if (is_numeric) {
-                    sprintf("Distribution statistics need at least 2 complete numeric observations; this variable has %d.",
-                            n_complete)
+                    .fmt(.("Distribution statistics need at least 2 complete numeric observations; this variable has {n}."),
+                         n = n_complete)
                 } else if (is_categorical) {
-                    "Distribution statistics need at least 1 complete observation; every value of this variable is missing."
+                    .("Distribution statistics need at least 1 complete observation; every value of this variable is missing.")
                 } else {
-                    paste("Distribution statistics are computed for numeric and for factor/character variables only.",
-                          "This variable is neither (for example a date, date-time or logical column);",
-                          "convert it to a numeric or a nominal variable to describe it here.")
+                    paste(.("Distribution statistics are computed for numeric and for factor/character variables only."),
+                          .("This variable is neither (for example a date, date-time or logical column);"),
+                          .("convert it to a numeric or a nominal variable to describe it here."))
                 }
                 self$results$distribution$setNote("notComputable", reason)
                 for (key in self$results$distribution$rowKeys)
                     self$results$distribution$setRow(rowKey=key, values=list(
-                        value=NA, interpretation="Not computable"))
+                        value=NA, interpretation=.("Not computable")))
             }
         },
 
@@ -1052,8 +1052,8 @@ checkdataClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 # Show informative-only warning if small sample
                 if (!is.null(outlier_analysis$is_informative_only) && outlier_analysis$is_informative_only) {
                     # Update table title to show informative-only status
-                    self$results$outliers$setTitle(paste0("Outlier Detection - ", outlier_analysis$consensus_note))
-                    self$results$outlierMethodSummary$setTitle("Method Summary (INFORMATIVE ONLY - n<10)")
+                    self$results$outliers$setTitle(paste0(.("Outlier Detection"), " - ", outlier_analysis$consensus_note))
+                    self$results$outlierMethodSummary$setTitle(.("Method Summary (INFORMATIVE ONLY - n<10)"))
                 }
 
                 # Populate method summary table (always shown when outlier
@@ -1074,7 +1074,7 @@ checkdataClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 } else {
                     self$results$outlierMethodSummary$setRow(rowKey="mad", values=list(
                         outliers_detected=NA,
-                        note="Not computed: needs more than 3 complete values and a non-zero MAD; detection here rests on the other two methods"))
+                        note=.("Not computed: needs more than 3 complete values and a non-zero MAD; detection here rests on the other two methods")))
                 }
 
                 # Transformation status is a table note rather than a fourth row,
@@ -1083,12 +1083,10 @@ checkdataClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 transform_status <- if (!is.null(outlier_analysis$transform_skipped)) {
                     outlier_analysis$transform_skipped
                 } else if (outlier_analysis$transform_applied != "none") {
-                    sprintf(paste("Counts were computed after a %s transformation.",
-                                  "Flagged values are reported on the original scale, while thresholds and scores are on the %s scale,",
-                                  "so do not compare a reported bound directly against a reported value."),
-                            outlier_analysis$transform_applied, outlier_analysis$transform_applied)
+                    .fmt(.("Counts were computed after a {trans} transformation. Flagged values are reported on the original scale, while thresholds and scores are on the {trans} scale, so do not compare a reported bound directly against a reported value."),
+                         trans = outlier_analysis$transform_applied)
                 } else {
-                    "Counts were computed on the raw (untransformed) values."
+                    .("Counts were computed on the raw (untransformed) values.")
                 }
                 self$results$outlierMethodSummary$setNote("transform", transform_status)
 
@@ -1102,9 +1100,7 @@ checkdataClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                     # so - the surrounding text asks the user to go and check
                     # each flagged row in the spreadsheet.
                     complete_indices <- which(!is.na(variable))
-                    self$results$outliers$setNote("rowRef", paste(
-                        "Row numbers refer to the rows included in this analysis.",
-                        "If a row filter is active they will not match the spreadsheet row numbers."))
+                    self$results$outliers$setNote("rowRef", .("Row numbers refer to the rows included in this analysis. If a row filter is active they will not match the spreadsheet row numbers."))
 
                     for (i in seq_along(outlier_analysis$outlier_indices)) {
                         outlier_idx <- outlier_analysis$outlier_indices[i]
@@ -1456,12 +1452,12 @@ checkdataClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                         ))
                     }
                     if (length(freq_table_sorted) > max_display)
-                        self$results$duplicates$setNote("truncated", sprintf(
-                            "Showing the %d most frequent of %d categories.",
-                            max_display, length(freq_table_sorted)))
+                        self$results$duplicates$setNote("truncated", .fmt(
+                            .("Showing the {max} most frequent of {total} categories."),
+                            max = max_display, total = length(freq_table_sorted)))
                 } else {
                     # For numeric data, show only duplicates
-                    self$results$duplicates$setTitle("Duplicate Values")
+                    self$results$duplicates$setTitle(.("Duplicate Values"))
                     duplicates <- freq_table[freq_table > 1]
                     
                     if (length(duplicates) > 0) {
@@ -1478,9 +1474,9 @@ checkdataClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                             ))
                         }
                         if (length(duplicates) > max_display)
-                            self$results$duplicates$setNote("truncated", sprintf(
-                                "Showing the %d most frequent of %d duplicated values.",
-                                max_display, length(duplicates)))
+                            self$results$duplicates$setNote("truncated", .fmt(
+                                .("Showing the {max} most frequent of {total} duplicated values."),
+                                max = max_display, total = length(duplicates)))
                     }
                 }
             }
@@ -1523,9 +1519,9 @@ checkdataClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 if (!is.null(clinical_issues) && length(clinical_issues) > 0) {
                     for (issue_name in names(clinical_issues)) {
                         self$results$patterns$addRow(rowKey=pattern_count, values=list(
-                            pattern=paste("Clinical Validation:", stringr::str_to_title(gsub("_", " ", issue_name))),
+                            pattern=paste(.("Clinical Validation:"), stringr::str_to_title(gsub("_", " ", issue_name))),
                             description=clinical_issues[[issue_name]],
-                            recommendation="Verify clinical plausibility and measurement units"
+                            recommendation=.("Verify clinical plausibility and measurement units")
                         ))
                         pattern_count <- pattern_count + 1
                     }
@@ -1547,9 +1543,9 @@ checkdataClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 if (length(validation_results$warnings) > 0) {
                     for (warning_msg in validation_results$warnings) {
                         self$results$patterns$addRow(rowKey=pattern_count, values=list(
-                            pattern="Data Validation Warning",
+                            pattern=.("Data Validation Warning"),
                             description=warning_msg,
-                            recommendation="Review data collection procedures"
+                            recommendation=.("Review data collection procedures")
                         ))
                         pattern_count <- pattern_count + 1
                     }
@@ -1557,15 +1553,15 @@ checkdataClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 
                 # Low uniqueness pattern (enhanced)
                 if (n_complete > 0 && (n_unique / n_complete < 0.1)) {
-                    uniqueness_interpretation <- ifelse(n_unique == 1, "Constant value detected",
-                                                      ifelse(n_unique / n_complete < 0.05, "Very low uniqueness",
-                                                            "Low uniqueness"))
+                    uniqueness_interpretation <- ifelse(n_unique == 1, .("Constant value detected"),
+                                                      ifelse(n_unique / n_complete < 0.05, .("Very low uniqueness"),
+                                                            .("Low uniqueness")))
                     self$results$patterns$addRow(rowKey=pattern_count, values=list(
-                        pattern="Data Variability",
-                        description=sprintf("%s: %.1f%% unique values (%d/%d)", 
+                        pattern=.("Data Variability"),
+                        description=sprintf(.("%s: %.1f%% unique values (%d/%d)"), 
                                           uniqueness_interpretation, unique_pct, n_unique, n_complete),
-                        recommendation=ifelse(n_unique == 1, "Investigate constant value cause", 
-                                            "Verify if low variability reflects true data structure")
+                        recommendation=ifelse(n_unique == 1, .("Investigate constant value cause"), 
+                                            .("Verify if low variability reflects true data structure"))
                     ))
                     pattern_count <- pattern_count + 1
                 }
@@ -1573,14 +1569,14 @@ checkdataClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 # High outlier rate pattern (enhanced)
                 if (outliers_scored && outliers_found > 0.05 * n_complete) {
                     outlier_rate_pct <- round(100 * outliers_found / n_complete, 1)
-                    severity_desc <- ifelse(outlier_rate_pct > 15, "Very high",
-                                          ifelse(outlier_rate_pct > 10, "High", "Elevated"))
+                    severity_desc <- ifelse(outlier_rate_pct > 15, .("Very high"),
+                                          ifelse(outlier_rate_pct > 10, .("High"), .("Elevated")))
 
                     self$results$patterns$addRow(rowKey=pattern_count, values=list(
-                        pattern="Outlier Pattern",
-                        description=sprintf("%s outlier rate: %d outliers (%.1f%% of data)",
+                        pattern=.("Outlier Pattern"),
+                        description=sprintf(.("%s outlier rate: %d outliers (%.1f%% of data)"),
                                           severity_desc, outliers_found, outlier_rate_pct),
-                        recommendation="Investigate measurement procedures and consider robust analysis methods"
+                        recommendation=.("Investigate measurement procedures and consider robust analysis methods")
                     ))
                     pattern_count <- pattern_count + 1
                 }
@@ -1594,11 +1590,11 @@ checkdataClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                         skewness <- private$.computeSkewness(clean_var)
 
                         if (abs(skewness) > 1) {
-                            skew_direction <- ifelse(skewness > 0, "right-skewed", "left-skewed")
+                            skew_direction <- ifelse(skewness > 0, .("right-skewed"), .("left-skewed"))
                             self$results$patterns$addRow(rowKey=pattern_count, values=list(
-                                pattern="Distribution Shape",
-                                description=sprintf("Highly %s distribution (skewness: %.2f)", skew_direction, skewness),
-                                recommendation="Consider data transformation or non-parametric methods"
+                                pattern=.("Distribution Shape"),
+                                description=sprintf(.("Highly %s distribution (skewness: %.2f)"), skew_direction, skewness),
+                                recommendation=.("Consider data transformation or non-parametric methods")
                             ))
                             pattern_count <- pattern_count + 1
                         }
@@ -1608,9 +1604,9 @@ checkdataClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                     range_val <- max(clean_var) - min(clean_var)
                     if (all(clean_var == round(clean_var))) {
                         self$results$patterns$addRow(rowKey=pattern_count, values=list(
-                            pattern="Data Precision",
-                            description="All values are integers (whole numbers)",
-                            recommendation="Verify if decimal precision is needed for analysis"
+                            pattern=.("Data Precision"),
+                            description=.("All values are integers (whole numbers)"),
+                            recommendation=.("Verify if decimal precision is needed for analysis")
                         ))
                         pattern_count <- pattern_count + 1
                     }
@@ -1619,9 +1615,9 @@ checkdataClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                     if (length(unique(clean_var)) < n_complete * 0.5 && length(unique(clean_var)) > 2) {
                         concentration_pct <- round(100 * length(unique(clean_var)) / n_complete, 1)
                         self$results$patterns$addRow(rowKey=pattern_count, values=list(
-                            pattern="Value Concentration",
-                            description=sprintf("Moderate value clustering: %.1f%% unique values", concentration_pct),
-                            recommendation="Check for rounding, grouping, or measurement intervals"
+                            pattern=.("Value Concentration"),
+                            description=sprintf(.("Moderate value clustering: %.1f%% unique values"), concentration_pct),
+                            recommendation=.("Check for rounding, grouping, or measurement intervals")
                         ))
                         pattern_count <- pattern_count + 1
                     }
@@ -1630,9 +1626,9 @@ checkdataClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 # If no patterns were found, add a general assessment
                 if (pattern_count == 1) {
                     self$results$patterns$addRow(rowKey=pattern_count, values=list(
-                        pattern="Overall Assessment",
-                        description="No significant data quality issues detected",
-                        recommendation="Data appears suitable for standard statistical analysis"
+                        pattern=.("Overall Assessment"),
+                        description=.("No significant data quality issues detected"),
+                        recommendation=.("Data appears suitable for standard statistical analysis")
                     ))
                 }
             }
@@ -1811,9 +1807,9 @@ checkdataClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             # were the last light-mode-only panels left in this file.
             .noticeBox <- function(level, msg) {
                 cfg <- switch(level,
-                    STRONG_WARNING = list(bg = "rgba(255, 152, 0, 0.20)", border = "#e65100", title = "Important Warning"),
-                    WARNING        = list(bg = "rgba(255, 193, 7, 0.14)", border = "#ffc107", title = "Warning"),
-                    INFO           = list(bg = "rgba(23, 162, 184, 0.14)", border = "#17a2b8", title = "Note"))
+                    STRONG_WARNING = list(bg = "rgba(255, 152, 0, 0.20)", border = "#e65100", title = .("Important Warning")),
+                    WARNING        = list(bg = "rgba(255, 193, 7, 0.14)", border = "#ffc107", title = .("Warning")),
+                    INFO           = list(bg = "rgba(23, 162, 184, 0.14)", border = "#17a2b8", title = .("Note")))
                 paste0(
                     "<div style='padding: 12px 15px; margin: 6px 0; background-color: ", cfg$bg,
                     "; border-left: 4px solid ", cfg$border, "; color: inherit",
@@ -1823,11 +1819,11 @@ checkdataClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             # STRONG_WARNING: Severe missing data (>30%)
             if (missing_pct > 30) {
                 quality_notices_html$severeMissing <- .noticeBox("STRONG_WARNING", sprintf(
-                    "Severe missing data: %.1f%% missing values. Results may be unreliable; investigate missing data mechanisms (MCAR/MAR/MNAR) before analysis.",
+                    .("Severe missing data: %.1f%% missing values. Results may be unreliable; investigate missing data mechanisms (MCAR/MAR/MNAR) before analysis."),
                     missing_pct))
             } else if (missing_pct > 15) {
                 quality_notices_html$substantialMissing <- .noticeBox("WARNING", sprintf(
-                    "Substantial missing data: %.1f%% missing values. Consider sensitivity analysis with multiple imputation methods.",
+                    .("Substantial missing data: %.1f%% missing values. Consider sensitivity analysis with multiple imputation methods."),
                     missing_pct))
             }
 
@@ -1841,22 +1837,22 @@ checkdataClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 # the table title and in the LIMITATIONS section
             } else if (outlier_rate > 0.15) {
                 quality_notices_html$veryHighOutliers <- .noticeBox("STRONG_WARNING", sprintf(
-                    "Very high outlier rate: %.1f%% of data flagged as outliers. Verify measurement procedures and consider robust analysis methods.",
+                    .("Very high outlier rate: %.1f%% of data flagged as outliers. Verify measurement procedures and consider robust analysis methods."),
                     outlier_rate * 100))
             } else if (outlier_rate > 0.10) {
                 quality_notices_html$highOutliers <- .noticeBox("WARNING", sprintf(
-                    "High outlier rate: %.1f%% of data flagged as outliers. Review each outlier for data entry errors and clinical plausibility.",
+                    .("High outlier rate: %.1f%% of data flagged as outliers. Review each outlier for data entry errors and clinical plausibility."),
                     outlier_rate * 100))
             }
 
             # STRONG_WARNING: Very small sample (n<10)
             if (n_total < 10) {
                 quality_notices_html$verySmallSample <- .noticeBox("STRONG_WARNING", sprintf(
-                    "Very small sample size (n=%d). Statistical analyses unreliable; outlier detection is informative-only. Consider collecting additional data.",
+                    .("Very small sample size (n=%d). Statistical analyses unreliable; outlier detection is informative-only. Consider collecting additional data."),
                     n_total))
             } else if (n_total < 30) {
                 quality_notices_html$smallSample <- .noticeBox("WARNING", sprintf(
-                    "Small sample size (n=%d). Use appropriate methods for small samples and consider collecting additional data for robust analysis.",
+                    .("Small sample size (n=%d). Use appropriate methods for small samples and consider collecting additional data for robust analysis."),
                     n_total))
             }
 
@@ -1871,29 +1867,29 @@ checkdataClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             # report that does.
             if (variability_penalty == 25) {
                 quality_notices_html$extremeLowVar <- .noticeBox("STRONG_WARNING", sprintf(
-                    "No variability: all %d complete observations hold the same value. Investigate the constant value or the data collection procedure.",
+                    .("No variability: all %d complete observations hold the same value. Investigate the constant value or the data collection procedure."),
                     n_complete))
             }
 
             # WARNING: Clinical plausibility issues (if enabled and issues found)
             if (self$options$clinicalValidation && length(penalizable_clinical) > 0) {
                 quality_notices_html$clinicalIssues <- .noticeBox("WARNING", sprintf(
-                    "Clinical plausibility issues: %d validation checks failed. Verify measurement units and clinical plausibility before analysis.",
+                    .("Clinical plausibility issues: %d validation checks failed. Verify measurement units and clinical plausibility before analysis."),
                     length(penalizable_clinical)))
             }
 
             # INFO: Analysis complete with quality summary
-            grade_desc <- ifelse(quality_score >= 90, "Excellent",
-                         ifelse(quality_score >= 80, "Good",
-                         ifelse(quality_score >= 70, "Fair", "Poor")))
-            quality_notices_html$analysisComplete <- .noticeBox("INFO", sprintf(
-                "Quality assessment completed: %d observations analyzed. Overall quality: %s (Grade %s). Note: Scoring is heuristic-based; review component breakdown for details.%s",
-                n_total, grade_desc, quality_grade,
-                if (outliers_scored) ""
+            grade_desc <- ifelse(quality_score >= 90, .("Excellent"),
+                         ifelse(quality_score >= 80, .("Good"),
+                         ifelse(quality_score >= 70, .("Fair"), .("Poor"))))
+            outlier_extra <- if (outliers_scored) ""
                 else if (!outliers_assessed)
-                    " Outlier screening did not run for this variable, so the grade excludes it and says nothing about extreme values."
+                    .(" Outlier screening did not run for this variable, so the grade excludes it and says nothing about extreme values.")
                 else
-                    " Outlier flags below n = 10 are informative-only, so the grade excludes them."))
+                    .(" Outlier flags below n = 10 are informative-only, so the grade excludes them.")
+            quality_notices_html$analysisComplete <- .noticeBox("INFO", sprintf(
+                .("Quality assessment completed: %d observations analyzed. Overall quality: %s (Grade %s). Note: Scoring is heuristic-based; review component breakdown for details.%s"),
+                n_total, grade_desc, quality_grade, outlier_extra))
 
             # Render notices in priority order: STRONG_WARNING -> WARNING -> INFO
             priority_order <- c('severeMissing', 'substantialMissing', 'veryHighOutliers', 'highOutliers',

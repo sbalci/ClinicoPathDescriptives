@@ -111,6 +111,13 @@
         `title`="classInt: Choose Univariate Class Intervals", 
         `publisher`="[R package]. Retrieved from https://CRAN.R-project.org/package=classInt", 
         `url`="https://CRAN.R-project.org/package=classInt"), 
+    `MASS`=list(
+        `type`="software", 
+        `author`="Ripley, B., Venables W., Bates, D. M., Hornik, K., Gebhardt, A., & Firth, D.", 
+        `year`=2018, 
+        `title`="MASS: Support Functions and Datasets for Venables and Ripley's MASS", 
+        `publisher`="[R package]. Retrieved from https://CRAN.R-project.org/package=MASS", 
+        `url`="https://CRAN.R-project.org/package=MASS"), 
     `arsenal`=list(
         `type`="software", 
         `author`="Heinzen, E Sinnwell, J Atkinson, E Gunderson, T Dougherty, G", 

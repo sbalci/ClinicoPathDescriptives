@@ -46,9 +46,9 @@ dataqualityClass <- if (requireNamespace("jmvcore")) R6::R6Class("dataqualityCla
         # output item renders this literally (no markup, no injection surface).
         blocks <- vapply(private$.noticeList, function(notice) {
             prefix <- switch(notice$type,
-                ERROR          = "ERROR: ",
-                STRONG_WARNING = "WARNING: ",
-                WARNING        = "WARNING: ",
+                ERROR          = paste0(.("ERROR"), ": "),
+                STRONG_WARNING = paste0(.("WARNING"), ": "),
+                WARNING        = paste0(.("WARNING"), ": "),
                 "")
             paste0(prefix, notice$title, "\n", notice$content)
         }, character(1))
@@ -84,67 +84,53 @@ dataqualityClass <- if (requireNamespace("jmvcore")) R6::R6Class("dataqualityCla
         # variable, so the scope has to be stated or the result reads as a
         # statement about the whole selection.
         scope_note <- if (n_non_numeric > 0) {
-            sprintf(
-                paste0(
-                    " Computed on the %d numeric variable(s) (%s); missingness in the ",
-                    "%d non-numeric variable(s) was not tested."
-                ),
-                ncol(numeric_data),
-                paste(names(numeric_data), collapse = ", "),
-                n_non_numeric
-            )
+            paste0(" ", .fmt(
+                .("Computed on the {n_num} numeric variable(s) ({names}); missingness in the {n_non} non-numeric variable(s) was not tested."),
+                n_num = ncol(numeric_data),
+                names = paste(names(numeric_data), collapse = ", "),
+                n_non = n_non_numeric
+            ))
         } else {
             ""
         }
-        assumption_note <- paste0(
-            " Little's test assumes multivariate normality within missing-data ",
-            "patterns and has little power when patterns contain few cases."
+        assumption_note <- paste0(" ",
+            .("Little's test assumes multivariate normality within missing-data patterns and has little power when patterns contain few cases.")
         )
         if (ncol(numeric_data) < 2) {
-            return(paste0(
-                "Little's MCAR test was not run because it requires at least two ",
-                "numeric variables; it is computed on numeric variables only, and ",
-                sprintf("the selection contains %d numeric variable(s).", ncol(numeric_data))
+            return(.fmt(
+                .("Little's MCAR test was not run because it requires at least two numeric variables; it is computed on numeric variables only, and the selection contains {n} numeric variable(s)."),
+                n = ncol(numeric_data)
             ))
         }
         if (!anyNA(numeric_data)) {
-            return("Little's MCAR test was not run because the selected numeric variables have no missing values.")
+            return(.("Little's MCAR test was not run because the selected numeric variables have no missing values."))
         }
 
         if (!requireNamespace("naniar", quietly = TRUE)) {
-            return("Little's MCAR test is unavailable because the optional naniar package is not installed.")
+            return(.("Little's MCAR test is unavailable because the optional naniar package is not installed."))
         }
 
         tryCatch({
             result <- as.data.frame(.quietly(naniar::mcar_test(numeric_data)))[1, , drop = FALSE]
             interpretation <- if (result$p.value < 0.05) {
-                "The data provide evidence against the MCAR assumption."
+                .("The data provide evidence against the MCAR assumption.")
             } else {
-                paste0(
-                    "The test does not reject the MCAR assumption, but this does not ",
-                    "prove that the data are MCAR."
-                )
+                .("The test does not reject the MCAR assumption, but this does not prove that the data are MCAR.")
             }
             paste0(
-                sprintf(
-                    paste0(
-                        "Little's MCAR test (naniar): chi-square = %.2f, df = %s, ",
-                        "p = %.4f, missing patterns = %s. %s"
-                    ),
-                    result$statistic,
-                    result$df,
-                    result$p.value,
-                    result$missing.patterns,
-                    interpretation
+                .fmt(
+                    .("Little's MCAR test (naniar): chi-square = {chi2}, df = {df}, p = {p}, missing patterns = {patterns}. {interp}"),
+                    chi2 = sprintf("%.2f", result$statistic),
+                    df = result$df,
+                    p = sprintf("%.4f", result$p.value),
+                    patterns = result$missing.patterns,
+                    interp = interpretation
                 ),
                 scope_note,
                 assumption_note
             )
         }, error = function(e) {
-            paste0(
-                "Little's MCAR test could not be computed for the selected variables. ",
-                "Review variable types and missing-data patterns."
-            )
+            .("Little's MCAR test could not be computed for the selected variables. Review variable types and missing-data patterns.")
         })
     },
 
@@ -207,9 +193,12 @@ dataqualityClass <- if (requireNamespace("jmvcore")) R6::R6Class("dataqualityCla
         # Notices are rendered as HTML to avoid the jamovi protobuf serialization
         # error triggered by dynamically inserted jmvcore::Notice objects.
         if (nrow(self$data) == 0) {
-            self$results$todo$setContent(
-                "<div style='padding: 15px; background-color: rgba(216, 33, 50, 0.18); border-left: 4px solid #dc3545; color: inherit; border-radius: 5px;'><strong>Error:</strong> Dataset contains no rows. Please provide data with at least one observation.</div>"
-            )
+            self$results$todo$setContent(paste0(
+                "<div style='padding: 15px; background-color: rgba(216, 33, 50, 0.18); border-left: 4px solid #dc3545; color: inherit; border-radius: 5px;'><strong>",
+                .("Error"), ":</strong> ",
+                .("Dataset contains no rows. Please provide data with at least one observation."),
+                "</div>"
+            ))
             return()
         }
 
@@ -226,9 +215,11 @@ dataqualityClass <- if (requireNamespace("jmvcore")) R6::R6Class("dataqualityCla
             missing_vars <- var_list[!var_list %in% names(dataset)]
             if (length(missing_vars) > 0) {
                 missing_safe <- paste(vapply(missing_vars, htmltools::htmlEscape, character(1)), collapse = ", ")
-                self$results$todo$setContent(sprintf(
-                    "<div style='padding: 15px; background-color: rgba(216, 33, 50, 0.18); border-left: 4px solid #dc3545; color: inherit; border-radius: 5px;'><strong>Error:</strong> Variables not found in dataset: %s. Please check variable names and try again.</div>",
-                    missing_safe
+                self$results$todo$setContent(paste0(
+                    "<div style='padding: 15px; background-color: rgba(216, 33, 50, 0.18); border-left: 4px solid #dc3545; color: inherit; border-radius: 5px;'><strong>",
+                    .("Error"), ":</strong> ",
+                    .fmt(.("Variables not found in dataset: {vars}. Please check variable names and try again."), vars = missing_safe),
+                    "</div>"
                 ))
                 return()
             }
@@ -524,17 +515,8 @@ dataqualityClass <- if (requireNamespace("jmvcore")) R6::R6Class("dataqualityCla
             if (!requireNamespace("visdat", quietly = TRUE)) {
                 private$.addNotice(
                     "WARNING",
-                    "Visual plots unavailable",
-                    paste0(
-                        "The requested visual data quality plots cannot be drawn ",
-                        "because the visdat package is not installed on this ",
-                        "computer. All numeric checks above - missing values, ",
-                        "duplicates, constant variables and outliers - are complete ",
-                        "and unaffected. To get the plots, install the package with ",
-                        "install.packages('visdat') and re-run the analysis; ",
-                        "otherwise switch the plot options off to hide the empty ",
-                        "plot areas."
-                    )
+                    .("Visual plots unavailable"),
+                    .("The requested visual data quality plots cannot be drawn because the visdat package is not installed on this computer. All numeric checks above - missing values, duplicates, constant variables and outliers - are complete and unaffected. To get the plots, install the package with install.packages('visdat') and re-run the analysis; otherwise switch the plot options off to hide the empty plot areas.")
                 )
             }
             visdat_results <- private$.generate_visdat_analysis(analysis_data)
@@ -832,7 +814,7 @@ dataqualityClass <- if (requireNamespace("jmvcore")) R6::R6Class("dataqualityCla
                 show_perc_col = TRUE  # Show percentage by column
             )) +
                 ggplot2::labs(
-                    subtitle = paste0("Missing value patterns (threshold for warnings: ", plotData$threshold, "%)")
+                    subtitle = .fmt(.("Missing value patterns (threshold for warnings: {threshold}%)"), threshold = plotData$threshold)
                 ) +
                 ggtheme +
                 ggplot2::theme(

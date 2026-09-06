@@ -96,7 +96,7 @@ options:
                   alpha level for significance testing
 
     - name: excl
-      title: Exclude missing values (always applied)
+      title: Missing-value exclusion (always applied)
       type: Bool
       default: true
       description: >

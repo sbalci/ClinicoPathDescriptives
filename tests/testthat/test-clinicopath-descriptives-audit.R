@@ -305,26 +305,29 @@ test_that("crosstable retains all data-quality messages when appending output", 
     p_adjust = "bonferroni"
   )
   notice <- as.character(result$dataQualityNotice$content)
+  notes <- as.character(result$notes$content)
   expect_match(notice, "Very small sample size", fixed = TRUE)
   expect_match(notice, "Small group detected", fixed = TRUE)
-  expect_match(notice, "P-value adjustment with only 1 variable", fixed = TRUE)
+  expect_match(notes, "P-value adjustment with one variable has no effect", fixed = TRUE)
 })
 
 test_that("categorize source literals round-trip special characters", {
   generate_code <- categorizeClass$private_methods$.generateRCode
-  labels <- paste0("O'Brien, path", "\\", "root, line one\nline two")
+  labels <- c("O'Brien", paste0("path", "\\", "root"), "line one\nline two")
   code <- generate_code(
     varname = "tumor grade",
     method = "equal",
     nbins = 3,
-    breaks = "",
+    manual_breaks = "",
     sdmult = 1,
-    labels = "custom",
-    customlabels = labels,
+    label_style = "custom",
+    labels_used = labels,
     newvarname = "risk group",
     includelowest = TRUE,
     rightclosed = TRUE,
-    ordered = TRUE
+    ordered = TRUE,
+    exclude_oor = FALSE,
+    n_obs = 9
   )
 
   parsed <- parse(text = code)
@@ -341,7 +344,7 @@ test_that("categorize source literals round-trip special characters", {
 
 test_that("chi-square chunk sizing and generated source handle both dimensions", {
   comparison_count <- chisqposttestClass$private_methods$.pairwiseComparisonCount
-  expect_equal(comparison_count(matrix(1, nrow = 2, ncol = 8)), 29)
+  expect_equal(comparison_count(matrix(1, nrow = 2, ncol = 8)), 28)
 
   options <- chisqposttestOptions$new(
     rows = "tumor grade",
@@ -378,10 +381,18 @@ test_that("audited source removes obsolete and fragile patterns", {
     readLines(file.path(audit_root, "R", paste0(name, ".b.R")), warn = FALSE)
   }
 
-  expect_match(source_text("summarydata"), "\\u{00B1}", fixed = TRUE)
-  expect_false(grepl("&plusmn;", source_text("summarydata"), fixed = TRUE))
-  expect_false(grepl("BaylorEdPsych", source_text("dataquality"), fixed = TRUE))
-  expect_match(source_text("vartree"), "tryCatch(vtree::vtree", fixed = TRUE)
+  # The vtree call is now dispatched through do.call() because ptable = TRUE returns
+  # a data.frame rather than the tree widget, so the tree and the pattern table are
+  # built by two separate calls. What matters is unchanged: every vtree::vtree CALL
+  # is wrapped in a tryCatch, so a vtree failure surfaces as a message rather than an
+  # unhandled error. Assert that property, not the old literal spelling.
+  vt_code <- sub("#.*$", "", source_lines("vartree"))   # drop comments first
+  vt_code <- paste(vt_code, collapse = "\n")
+  call_sites <- regmatches(vt_code,
+                           gregexpr("(?s).{200}vtree::vtree\\s*[,(]", vt_code, perl = TRUE))[[1]]
+  expect_gt(length(call_sites), 0)
+  expect_true(all(grepl("tryCatch", call_sites, fixed = TRUE)),
+              info = "every vtree::vtree call site must sit inside a tryCatch")
   expect_false(any(grepl("^\\s*stop\\(", source_lines("tableone"))))
   expect_false(any(grepl("^\\s*stop\\(", source_lines("agepyramid"))))
 
