@@ -63,6 +63,7 @@ items:
           - maxvars
           - weight
           - engine
+          - fillGgalluvial
           - showFlowTable
 
     - title: Alluvial Diagrams

@@ -28,6 +28,9 @@ items:
           - includelowest
           - rightclosed
           - excl
+          - newvarname
+          - addtodata
+          - ordered
 
     - name: summaryText
       title: Variable Summary
@@ -153,5 +156,6 @@ refs:
     - ClinicoPathJamoviModule
     - classInt
     - dichotomizing
+    - AltmanRoyston2006
 
 ...

@@ -5,15 +5,12 @@ export("%||%")
 export(agepyramid)
 export(alluvial)
 export(benford)
-export(bootstrapIDI)
 export(categorize)
 export(checkdata)
 export(chisqposttest)
-export(clinicopath_startup_message)
 export(crosstable)
 export(dataquality)
 export(outlierdetection)
-export(raw_to_prob)
 export(reportcat)
 export(summarydata)
 export(tableone)
@@ -84,10 +81,8 @@ importFrom(ggplot2,
 )
 importFrom(ggvenn,ggvenn)
 importFrom(glue,glue)
-importFrom(grDevices,hcl.colors)
 importFrom(graphics,par)
 importFrom(grid,
-  gpar,
   grid.text,
   upViewport
 )
@@ -166,7 +161,6 @@ importFrom(scales,percent)
 importFrom(stats,
   binomial,
   chisq.test,
-  complete.cases,
   cov,
   fisher.test,
   glm,

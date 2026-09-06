@@ -76,7 +76,6 @@ Imports:
     tidyr,
     UpSetR,
     utils,
-    vcd,
     viridis,
     visdat,
     vtree
