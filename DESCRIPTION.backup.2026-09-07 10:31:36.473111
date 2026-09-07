@@ -35,7 +35,6 @@ Imports:
     classInt,
     ComplexUpset,
     dbscan,
-    DescTools,
     DiagrammeRsvg,
     dplyr,
     easyalluvial,
