@@ -16,49 +16,7 @@
             " %d patient(s) were left untouched because they have no follow-up time or no cut-off value; they keep their full follow-up and their original event status, so the cut-off applies to only part of the cohort. Supply the missing values, or exclude those rows, before comparing groups.": [
                 ""
             ],
-            " %s: 'Equal variances' is ticked, so Student's test is being reported despite that. Untick it to use Welch's test, which does not assume equal variances.": [
-                ""
-            ],
-            " %s: Data may not be normally distributed in group '%s' (Shapiro-Wilk p = %.3f, consider non-parametric)": [
-                ""
-            ],
-            " %s: Large sample (n = %d) in group '%s' shows substantial skewness (%.2f). Visual inspection recommended.": [
-                ""
-            ],
-            " %s: Minimum group size is %d (recommend ≥3)": [
-                ""
-            ],
-            " %s: Variances differ significantly between groups (Levene's test p = %.3f).": [
-                ""
-            ],
-            " <strong>Biomarker Tracking (Guidance Only):</strong> Optimized for laboratory values. Please manually ensure 'Nonparametric' is selected if data is skewed.<br>": [
-                ""
-            ],
-            " <strong>Bonferroni Correction Guidance (Manual Application Required):</strong><br>You are testing %d endpoints. To control family-wise error rate at 5%%:<br>• <strong>Adjusted significance threshold: α = %.4f</strong><br>• Compare each p-value from the plots below to %.4f (NOT 0.05)<br>• Only results with p < %.4f should be considered statistically significant<br>• Example: If cholesterol shows p = 0.03, it is NOT significant (0.03 > %.4f)<br> <strong>IMPORTANT:</strong> This correction is not applied automatically. You must manually compare reported p-values to the adjusted threshold.": [
-                ""
-            ],
-            " <strong>CRITICAL: MULTIPLE ENDPOINT TESTING WITHOUT CORRECTION</strong><br>You are testing %d dependent variables simultaneously without adjustment. This inflates your family-wise error rate from 5%% to approximately %.1f%%.<br><strong>RECOMMENDATION:</strong> Select a correction method to see guidance, or interpret all p-values cautiously acknowledging this inflated error rate.": [
-                ""
-            ],
-            " <strong>FDR Correction Guidance (Manual Application Required):</strong><br>You are testing %d endpoints. To control false discovery rate at 5%% using Benjamini-Hochberg:<br>1. Rank all p-values from smallest to largest (p₁ ≤ p₂ ≤ ... ≤ p%d)<br>2. Find the largest i where: pᵢ ≤ (i/%d) × 0.05<br>3. Reject hypotheses 1 through i<br>4. Collect p-values from plots below and apply this procedure in external software (e.g., R's p.adjust() function)<br> <strong>IMPORTANT:</strong> FDR correction requires manual calculation. This analysis does not automatically adjust p-values.": [
-                ""
-            ],
-            " <strong>Holm Correction Guidance (Manual Application Required):</strong><br>You are testing %d endpoints. To apply Holm's step-down procedure:<br>1. Rank all p-values from smallest to largest<br>2. For the smallest p-value, use threshold: α = 0.05/%d = %.4f<br>3. For the second smallest, use: α = 0.05/%d = %.4f<br>4. Continue until a p-value fails to meet its threshold<br>5. All subsequent tests are considered non-significant<br> <strong>IMPORTANT:</strong> This correction requires manual application. Collect p-values from plots below and apply the step-down procedure.": [
-                ""
-            ],
-            " <strong>Laboratory Values:</strong> Optimized for clinical lab value monitoring<br>": [
-                ""
-            ],
-            " <strong>Treatment Response:</strong> Optimized for clinical treatment monitoring<br>": [
-                ""
-            ],
-            " <strong>What to look for:</strong><br>• A small p-value is evidence against the null under the model assumptions; it does not prove a treatment effect<br>• Compare effect estimates and uncertainty with a prespecified clinically important difference<br>• Individual trajectories reveal response patterns<br>• Outliers may indicate treatment non-responders or measurement errors": [
-                ""
-            ],
             " All times reported here are measured FROM the landmark, not from study entry, and all estimates are conditional on being event-free at the landmark. They are not comparable with unlandmarked survival times.": [
-                ""
-            ],
-            " Biomarker preset: Consider using Nonparametric test for skewed biomarker data<br>": [
                 ""
             ],
             " Calibration slope < 0.8 suggests the model predictions are too extreme (overfitting).": [
@@ -73,9 +31,6 @@
             " categories across ": [
                 ""
             ],
-            " Central tendency displayed": [
-                ""
-            ],
             " different categories across ": [
                 ""
             ],
@@ -85,15 +40,6 @@
             " Full state breakdown (of {total} coded records): {states}.": [
                 ""
             ],
-            " Individual trajectories shown": [
-                ""
-            ],
-            " Laboratory preset: Consider Robust test to handle outliers common in lab values<br>": [
-                ""
-            ],
-            " Laboratory preset: Enable centrality plotting to see overall trends<br>": [
-                ""
-            ],
             " nodes": [
                 ""
             ],
@@ -101,9 +47,6 @@
                 ""
             ],
             " Outlier screening did not run for this variable, so the grade excludes it and says nothing about extreme values.": [
-                ""
-            ],
-            " Pairwise comparisons enabled": [
                 ""
             ],
             " stages or time points.": [
@@ -116,9 +59,6 @@
                 ""
             ],
             " Tip: Use this glossary as a quick reference when interpreting network statistics and visualizations.": [
-                ""
-            ],
-            " Treatment preset: Enable pairwise comparisons to identify when treatment effects occur<br>": [
                 ""
             ],
             " You would need to screen approximately %d people to identify one true positive case.": [
@@ -134,6 +74,9 @@
                 ""
             ],
             "- Consider sensitivity analysis treating death as competing risk": [
+                ""
+            ],
+            "- could not be computed for this data, so no test statistic, Bayes factor or effect size is available (see Data Diagnostics)": [
                 ""
             ],
             "- Cox proportional hazards for multivariable analysis": [
@@ -220,6 +163,12 @@
             "'{name}' is selected as the prune-below variable, but no level is chosen, so no branch is pruned. Pick Level 1 (and optionally Level 2) from: {levels}.": [
                 ""
             ],
+            "'{name}' takes the same value ({value}) in every row, so there is no variation to compare between groups. Check that the correct variable is selected.": [
+                ""
+            ],
+            "'{var}' takes the same value in every row": [
+                ""
+            ],
             "'{weight}' must be numeric (current type: {type}). Select a numeric variable containing counts, frequencies, or sampling weights.": [
                 ""
             ],
@@ -262,6 +211,12 @@
             "'Age band boundaries' is set to right-closed, but the {preset} preset is defined by its source as left-closed bands, so the bands below are the preset's own (for the WHO/UN preset: 0-4, 5-9, ... 85+). Applying right-closure would have moved every boundary by one year and the result could no longer be described as {preset} age groups. The 'Age band boundaries' selector is greyed out while a preset is chosen: set 'Age group preset' back to 'Custom (use bin width)' to use right-closed bands, or to set that selector back to left-closed and remove this note.": [
                 ""
             ],
+            "'Always Fisher's exact' is selected, but Fisher's exact test could not be computed for this table, and the Monte Carlo version of it failed as well. The Pearson chi-square result is shown instead. It relies on a large-sample approximation, so read it with that in mind, and consider merging sparse categories.": [
+                ""
+            ],
+            "'Central Tendency Precision' no longer has any effect - the statistics package dropped that setting. Use 'Statistical Precision (Decimal Places)' instead; it controls the centrality labels too.": [
+                ""
+            ],
             "'Create advanced ridgeline plots.\nVisualize distributions across groups with multiple style options, annotations,\nstatistical overlays, and publication-ready formatting. Supports both basic and\ncomplex ridge plots with inside plots, double ridgelines, and color gradients.'": [
                 ""
             ],
@@ -275,6 +230,9 @@
                 ""
             ],
             "'Creates waffle charts to visualize categorical distributions and proportions using colored squares. Ideal for showing parts-of-whole relationships in clinical data such as disease subtypes, treatment outcomes, or risk category distributions. Each square represents a proportion of the total sample, making it easy to see relative frequencies across categories.'": [
+                ""
+            ],
+            "'Effect Size Measure' applies to the parametric test only. The {test} test reports its own effect size instead, so your selection was not used.": [
                 ""
             ],
             "'Residual significance criterion' is set to the Bonferroni-corrected z, so cells are flagged at +/-%.2f and the 'Residual significance cutoff' value of %.2f is ignored. Set the criterion to 'Fixed cutoff' to use the value in the box.": [
@@ -643,10 +601,19 @@
             "{n} plausibility checks failed": [
                 ""
             ],
+            "{n} plotted value(s) lie more than three interquartile ranges beyond the quartiles and will stretch the axis so the remaining lollipops look nearly equal; check these entries and consider a log scale.": [
+                ""
+            ],
             "{n} row(s) had no value for the weight variable '{weight}' and were removed.": [
                 ""
             ],
+            "{n} row(s) held an infinite value for the dependent variable and were removed; an infinite value usually means a division by zero or an out-of-range entry.": [
+                ""
+            ],
             "{n} rows": [
+                ""
+            ],
+            "{n} rows ({pct}%) had a missing value in the selected variables and were removed before plotting.": [
                 ""
             ],
             "{n} rows excluded; {constants} constant predictors or columns removed": [
@@ -677,6 +644,9 @@
                 ""
             ],
             "{name} must be a positive numeric value.": [
+                ""
+            ],
+            "{names} had no usable measurements and were excluded from the comparison entirely.": [
                 ""
             ],
             "{nBad} of the {nAll} entries in 'Custom age breaks' are not numbers and were left out: {entries}. Enter the break points as plain numbers separated by commas, for example 0,18,45,65.": [
@@ -1168,7 +1138,7 @@
             "%d of %d cases (%.1f%%) were excluded%s; the analysis uses the remaining %d cases.%s": [
                 ""
             ],
-            "%d of %d cells (%.0f%%) have an expected count below 5, above the usual 20%% limit. The chi-square approximation breaks down in that situation, so the overall p-value above is not dependable. Fisher's exact test, or merging categories that are sparse for substantive reasons, gives a p-value that does not rely on the approximation. Turn on the Assumptions check panel for the per-cell detail.": [
+            "%d of %d cells (%.0f%%) have an expected count below 5, above the usual 20%% limit. The chi-square approximation breaks down in that situation, so the overall p-value above is not dependable. Set 'Statistical test selection' to 'Always Fisher's exact' to replace it with an exact p-value that does not rely on the approximation, or merge categories that are sparse for substantive reasons. Turn on the Assumptions check panel for the per-cell detail.": [
                 ""
             ],
             "%d of %d cells have an expected count below 1. The chi-square approximation is not valid for that table even though most cells are adequate, so the overall p-value above is not dependable. Use Fisher's exact test, or merge the sparse category if there is a substantive reason to, and see the Assumptions check panel for the per-cell detail.": [
@@ -1279,6 +1249,9 @@
             "%d row(s) have an interval start later than their interval end. An interval must run forwards - Surv(type='interval2') requires start <= end - so these rows cannot be used as they stand. Check that the Interval Start and Interval End variables are not swapped.": [
                 ""
             ],
+            "%d row(s) have no value for the grouping variable and are excluded from the grouped correlation table.": [
+                ""
+            ],
             "%d row(s) held infinite values (Inf or -Inf) and were excluded; %d rows were analysed. Infinite values are usually a division by zero or a log of zero upstream - check the source variable.": [
                 ""
             ],
@@ -1304,6 +1277,9 @@
                 ""
             ],
             "%d study/studies contain a zero cell. No user correction is selected, so mada's default single-study 0.5 correction is applied inside the models; choose a Zero-Cell Correction option to see how sensitive the pooled estimates are.": [
+                ""
+            ],
+            "%d subject(s) have missing intermediate or follow-up time points and are partially connected or unconnected without imputation.": [
                 ""
             ],
             "%d time value%s infinite (Inf). Follow-up time must be a finite number; an infinite time makes total person-time, incidence rates and the restricted mean undefined. Replace the value with the observed follow-up duration, or leave the cell empty to have the subject excluded as missing.": [
@@ -1385,9 +1361,6 @@
                 ""
             ],
             "%s (%s = %.2f) - Regional measurements show moderate agreement with the reference region.": [
-                ""
-            ],
-            "%s (%s = %s)": [
                 ""
             ],
             "%s (binary: %s vs %s)": [
@@ -1498,16 +1471,28 @@
             "%s, analysed separately within each level of %s": [
                 ""
             ],
+            "%s: 'Equal variances' is ticked, so Student's test is being reported despite that. Untick it to use Welch's test, which does not assume equal variances.": [
+                ""
+            ],
             "%s: %d event(s), %d censored, %d competing, %d missing.": [
                 ""
             ],
             "%s: %s": [
                 ""
             ],
+            "%s: Data may not be normally distributed in group '%s' (Shapiro-Wilk p = %.3f, consider non-parametric)": [
+                ""
+            ],
             "%s: events include recurrence/progression and death (%d events, %d censored, %d missing). This analysis produces the STATUS only - it has no recurrence-time variable and therefore cannot compute time to FIRST event.": [
                 ""
             ],
             "%s: F(%d, %.0f) = %.2f, p = %.4g": [
+                ""
+            ],
+            "%s: Large sample (n = %d) in group '%s' shows substantial skewness (%.2f). Visual inspection recommended.": [
+                ""
+            ],
+            "%s: Minimum group size is %d (recommend ≥3)": [
                 ""
             ],
             "%s: net benefit is computed on the direction the data support, which is the opposite of the Classification Direction you selected. Under the direction you selected this marker performs worse than shown here.": [
@@ -1517,6 +1502,9 @@
                 ""
             ],
             "%s: QM(%d) = %.2f, p = %.4g": [
+                ""
+            ],
+            "%s: Variances differ significantly between groups (Levene's test p = %.3f).": [
                 ""
             ],
             "%s. The accompanying F-test (p = %.3f) only asks whether agreement exceeds chance, which is rarely the question of interest; judge adequacy from the coefficient itself and its precision, not from the p-value. The variance-based approach is especially useful when rater variance is low.": [
@@ -1579,10 +1567,10 @@
             "• These correlations are exploratory and hypothesis-generating; they describe association within this sample only.": [
                 ""
             ],
-            "`${dep} - {group} by {grvar}`": [
+            "`${dep} - ${group} by ${grvar}`": [
                 ""
             ],
-            "`${dep} - {group}`": [
+            "`${dep} - ${group}`": [
                 ""
             ],
             "`${dep} by {group}, split by {grvar}`": [
@@ -1591,10 +1579,10 @@
             "`${dep} by {group}`": [
                 ""
             ],
-            "`${dep} vs {group} by {grvar}`": [
+            "`${dep} vs ${group} by ${grvar}`": [
                 ""
             ],
-            "`${dep} vs {group}`": [
+            "`${dep} vs ${group}`": [
                 ""
             ],
             "`${dep}`": [
@@ -1690,7 +1678,7 @@
             "`Pairwise Comparison Table - ${explanatory}`": [
                 ""
             ],
-            "`Plot with Aesthetics - ${dep} vs {group}`": [
+            "`Plot with Aesthetics - ${dep} vs ${group}`": [
                 ""
             ],
             "`Proportional Hazards Assumption - ${explanatory}`": [
@@ -1777,10 +1765,19 @@
             "<= (lower values indicate positive class)": [
                 ""
             ],
+            "<b>{pct}% of rows could not be used:</b> the correlation below is computed on {used} of {total} rows. The remaining {lost} have a missing or non-numeric value in '{xvar}' or '{yvar}'. Complete-case analysis assumes what is missing is unrelated to the relationship being measured; if the missingness is informative (sicker patients missing a lab value, say) this coefficient is biased.": [
+                ""
+            ],
             "<b>95% CI</b> - pointwise interval for the incidence at that single time point; it is not a confidence band over the whole curve, so do not read a series of them as one simultaneous statement.": [
                 ""
             ],
             "<b>Clinical Validation rows are heuristic screening flags, not clinical judgements.</b>": [
+                ""
+            ],
+            "<b>Colour palette not applied:</b> the publication-ready panel draws a single ungrouped set of points, so there is no grouping for a journal palette to colour. Set a 'Split By' variable to see the palette take effect.": [
+                ""
+            ],
+            "<b>Correlation not computed:</b> {reason}. A correlation needs at least 3 complete pairs and variation in both variables; the plot below shows the points but no coefficient is meaningful.": [
                 ""
             ],
             "<b>Cumulative incidence</b> - the proportion of the original cohort who have had the event of interest by that time. It never decreases.": [
@@ -1789,7 +1786,16 @@
             "<b>Do not compare it with a Kaplan-Meier median</b> from the same data. A Kaplan-Meier analysis censors the competing event and therefore reports a shorter time to a risk that is over-stated.": [
                 ""
             ],
+            "<b>Heavy ties in '{var}':</b> only {levels} distinct values across {n} observations. Spearman's p-value then falls back on a normal approximation rather than an exact test, and rho itself is attenuated by the ties. For a variable with this few levels, a test designed for ordered categories is usually the better choice.": [
+                ""
+            ],
             "<b>No confidence interval is reported.</b> A valid interval for this quantile requires inverting a confidence band for the cumulative incidence curve, or bootstrapping; a pointwise variance at the median does not give one. The cells are left empty rather than filled with an approximation.": [
+                ""
+            ],
+            "<b>Non-finite values removed:</b> {dropped} rows contained an infinite value (Inf or -Inf) in '{xvar}' or '{yvar}'. Infinite values are not missing values, so they pass the usual completeness checks while making every correlation undefined; they have been excluded and all statistics below are computed on the {kept} remaining rows.": [
+                ""
+            ],
+            "<b>Non-finite values removed:</b> one row contained an infinite value (Inf or -Inf) in '{xvar}' or '{yvar}'. Infinite values are not missing values, so they pass the usual completeness checks while making every correlation undefined; it has been excluded and all statistics below are computed on the {kept} remaining rows.": [
                 ""
             ],
             "<b>Not reached</b> is common and expected here: whenever competing events are frequent, the cumulative incidence of the event of interest can plateau below 50%, so no such time exists no matter how long follow-up continues.": [
@@ -1798,19 +1804,37 @@
             "<b>Number at Risk</b> - subjects still under follow-up and still free of both events at that time.": [
                 ""
             ],
+            "<b>One observation is driving this result:</b> dropping a single point changes the correlation from {full} to {dropped} (a shift of {delta}). A coefficient that depends this heavily on one patient should not be reported on its own - inspect that point on the plot, and consider the 'Robust (Winsorized Pearson)' or 'Nonparametric (Spearman)' test type, which are far less sensitive to it.": [
+                ""
+            ],
+            "<b>One test per group, unadjusted.</b> Each of the {groups} panels shows its own correlation tested at the nominal level, with no correction for the fact that {groups} tests are being read together. If you are screening groups rather than testing one pre-specified comparison, adjust the p-values yourself (Holm or FDR over the {groups} values) before drawing conclusions.": [
+                ""
+            ],
             "<b>p (adjusted)</b> applies the %s correction across pairwise tests within each split panel (not across panels). This is the p-value the plot uses to mark cells as non-significant at %s.": [
+                ""
+            ],
+            "<b>Shape mapping skipped:</b> '{var}' has {levels} levels and ggplot2 provides only 6 distinct shapes. Mapping it would have drawn no point at all for the surplus levels while the correlation still used every case. Use colour for a variable with this many levels, or group the rare categories.": [
+                ""
+            ],
+            "<b>Small sample (n = {n}):</b> the confidence interval on this coefficient is wide, and a single unusual observation can move the estimate substantially. Report the interval, not just the point estimate.": [
+                ""
+            ],
+            "<b>The panel below is not showing your analysis type.</b> The main plot runs a {method} correlation, which the publication-ready panel cannot draw; that panel instead reports an ordinary <b>{fallback}</b> coefficient computed on the same two variables. Quote the main plot's subtitle for the {method} result.": [
+                ""
+            ],
+            "<b>The relationship is not a straight line:</b> a curved fit explains {quad}% of the variation where a straight one explains {lin}%. Spearman's rho measures only the monotonic part, so it understates a real association here - a coefficient near zero does NOT mean the two variables are unrelated. Read the scatter plot itself before concluding anything.": [
+                ""
+            ],
+            "<b>The relationship is not a straight line:</b> a curved fit explains {quad}% of the variation where a straight one explains {lin}%. This correlation measures only the linear part, so it understates a real association here - a coefficient near zero does NOT mean the two variables are unrelated. Read the scatter plot itself before concluding anything.": [
+                ""
+            ],
+            "<b>Very small sample (n = {n}):</b> a correlation estimated from fewer than 10 pairs is extremely unstable - its confidence interval typically spans most of the range from -1 to 1, so a large coefficient here is not evidence of a large association. Treat this as descriptive only.": [
                 ""
             ],
             "<br>\n                         <b>finalfit</b> style compares continuous variables with <em>aov</em> (one-way analysis of variance) when Mean (SD) is displayed. For two groups this is the pooled-variance t-test, so it assumes equal variances in the groups; that assumption is not checked here.\n                         When Median (IQR) is displayed, Kruskal-Wallis is used instead (equivalent to the Mann-Whitney U / Wilcoxon rank sum test in two-group settings).\n                         Categorical variables use the chi-square or Fisher's exact test selected in Options, and numeric variables with fewer than 5 distinct values, counting missing as one of them, are summarised as categories rather than as measurements.\n                         See full documentation <a href='https://finalfit.org/reference/summary_factorlist.html'>here</a>.\n                         ": [
                 ""
             ],
             "<br> {var} has {n_outliers} potential outlier(s) detected<br>": [
-                ""
-            ],
-            "<br> <strong>Data Processing:</strong> {final_n} subjects retained. {dropped_n} incomplete cases removed.<br>": [
-                ""
-            ],
-            "<br> <strong>Data Processing:</strong> All {final_n} subjects retained (complete data).<br>": [
                 ""
             ],
             "<br> <strong>Many Outliers Detected:</strong> Consider Robust test type to reduce outlier influence<br>": [
@@ -1891,13 +1915,13 @@
             "<br><em>Distribution diagnostics for {variable}:</em> {assessment}": [
                 ""
             ],
-            "<br><em>Distribution diagnostics for {variable}:</em> Shapiro-Wilk p-value &lt; 0.001; skewness = {skewness}; kurtosis = {kurtosis}. {assessment}": [
+            "<br><em>Distribution diagnostics for {variable}:</em> Shapiro-Wilk p-value &lt; 0.001; skewness = {skewness}; kurtosis = {kurtosis} (Pearson, normal = 3). {assessment}": [
                 ""
             ],
-            "<br><em>Distribution diagnostics for {variable}:</em> Shapiro-Wilk p-value = {p}; skewness = {skewness}; kurtosis = {kurtosis}. {assessment}": [
+            "<br><em>Distribution diagnostics for {variable}:</em> Shapiro-Wilk p-value = {p}; skewness = {skewness}; kurtosis = {kurtosis} (Pearson, normal = 3). {assessment}": [
                 ""
             ],
-            "<br><em>Distribution diagnostics for {variable}:</em> skewness = {skewness}; kurtosis = {kurtosis}. {assessment}": [
+            "<br><em>Distribution diagnostics for {variable}:</em> skewness = {skewness}; kurtosis = {kurtosis} (Pearson, normal = 3). {assessment}": [
                 ""
             ],
             "<br><hr>": [
@@ -1912,6 +1936,18 @@
             "<br><strong>Clinical Note:</strong> This suggests a meaningful association that may warrant further investigation.": [
                 ""
             ],
+            "<br><strong>Data Processing:</strong> {final_n} subjects retained. {dropped_n} incomplete cases removed.<br>": [
+                ""
+            ],
+            "<br><strong>Data Processing:</strong> All {final_n} subjects retained (complete data).<br>": [
+                ""
+            ],
+            "<br><strong>Note:</strong> with two measurements the comparison is a paired t-test, for which partial eta-squared and omega-squared are not defined; '%s' has been reported as %s instead.<br>": [
+                ""
+            ],
+            "<br>Analysis cannot proceed with the current data. See the Messages panel for the reason.<br><hr>": [
+                ""
+            ],
             "<br>Analysis summary temporarily unavailable<br>": [
                 ""
             ],
@@ -1924,7 +1960,7 @@
             "<br>No complete data rows available after removing missing values.<br>Please check your data for missing values in the selected variables.<br><hr>": [
                 ""
             ],
-            "<br>Processing {length(vars)} measurements for within-subjects analysis...<br>": [
+            "<br>Processing {length(vars)} measurements for within-subjects analysis.<br>": [
                 ""
             ],
             "<br>The primary within-subjects plot above is unaffected.<br><hr>": [
@@ -2587,6 +2623,15 @@
             "<strong>Analysis:</strong> %s with %d measurements per subject": [
                 ""
             ],
+            "<strong>Bayesian:</strong> reports a Bayes factor quantifying evidence strength.": [
+                ""
+            ],
+            "<strong>Biomarker tracking (guidance only):</strong> Optimized for laboratory values. Please manually ensure 'Nonparametric' is selected if data is skewed.<br>": [
+                ""
+            ],
+            "<strong>Bonferroni Correction Guidance (Manual Application Required):</strong><br>You are testing %d endpoints. To control family-wise error rate at 5%%:<br>• <strong>Adjusted significance threshold: α = %.4f</strong><br>• Compare each p-value from the plots below to %.4f (NOT 0.05)<br>• Only results with p < %.4f should be considered statistically significant<br>• Example: If cholesterol shows p = 0.03, it is NOT significant (0.03 > %.4f)<br> <strong>IMPORTANT:</strong> This correction is not applied automatically. You must manually compare reported p-values to the adjusted threshold.": [
+                ""
+            ],
             "<strong>Clinical Trials:</strong> Regulatory compliance and data monitoring": [
                 ""
             ],
@@ -2602,6 +2647,12 @@
             "<strong>Continuous Y-variable:</strong> The outcome variable should be numeric and measurable.": [
                 ""
             ],
+            "<strong>Correlation coefficient</strong> with p-value and confidence interval": [
+                ""
+            ],
+            "<strong>CRITICAL: MULTIPLE ENDPOINT TESTING WITHOUT CORRECTION</strong><br>You are testing %d dependent variables simultaneously without adjustment. This inflates your family-wise error rate from 5%% to approximately %.1f%%.<br><strong>RECOMMENDATION:</strong> Select a correction method to see guidance, or interpret all p-values cautiously acknowledging this inflated error rate.": [
+                ""
+            ],
             "<strong>Directed:</strong> Edges have direction (A→B is different from B→A), suitable for regulatory relationships or causal pathways. <strong>Undirected:</strong> Edges are bidirectional (A-B same as B-A), suitable for similarity or co-occurrence networks. <strong>Note:</strong> Arc diagrams do not display arrows even for directed networks.": [
                 ""
             ],
@@ -2612,6 +2663,9 @@
                 ""
             ],
             "<strong>ER H-Score</strong> (0-300) or Percentage (0-100)": [
+                ""
+            ],
+            "<strong>FDR Correction Guidance (Manual Application Required):</strong><br>You are testing %d endpoints. To control false discovery rate at 5%% using Benjamini-Hochberg:<br>1. Rank all p-values from smallest to largest (p₁ ≤ p₂ ≤ ... ≤ p%d)<br>2. Find the largest i where: pᵢ ≤ (i/%d) × 0.05<br>3. Reject hypotheses 1 through i<br>4. Collect p-values from plots below and apply this procedure in external software (e.g., R's p.adjust() function)<br> <strong>IMPORTANT:</strong> FDR correction requires manual calculation. This analysis does not automatically adjust p-values.": [
                 ""
             ],
             "<strong>Grade A:</strong> Excellent quality - ready for analysis": [
@@ -2627,6 +2681,9 @@
                 ""
             ],
             "<strong>HER2 Status</strong> (positive/negative)": [
+                ""
+            ],
+            "<strong>Holm Correction Guidance (Manual Application Required):</strong><br>You are testing %d endpoints. To apply Holm's step-down procedure:<br>1. Rank all p-values from smallest to largest<br>2. For the smallest p-value, use threshold: α = 0.05/%d = %.4f<br>3. For the second smallest, use: α = 0.05/%d = %.4f<br>4. Continue until a p-value fails to meet its threshold<br>5. All subsequent tests are considered non-significant<br> <strong>IMPORTANT:</strong> This correction requires manual application. Collect p-values from plots below and apply the step-down procedure.": [
                 ""
             ],
             "<strong>Homoscedasticity:</strong> Variance of residuals is constant across fitted values.": [
@@ -2656,7 +2713,13 @@
             "<strong>Interpretation:</strong> at this specificity an appreciable share of positive results are expected to be false positives. ": [
                 ""
             ],
+            "<strong>Laboratory values:</strong> Optimized for clinical lab value monitoring<br>": [
+                ""
+            ],
             "<strong>Linearity:</strong> The relationship between variables is approximately linear.": [
+                ""
+            ],
+            "<strong>Marginal distributions</strong> on both axes": [
                 ""
             ],
             "<strong>Method:</strong> %s": [
@@ -2672,6 +2735,9 @@
                 ""
             ],
             "<strong>Negative Likelihood Ratio:</strong> Not estimable with the current data. LR- is (1 - sensitivity) / specificity, so it needs a pooled specificity above zero and finite pooled estimates; here the pooled specificity is 0 or an estimate did not converge. Read the pooled specificity and its confidence interval in the summary above to see which.": [
+                ""
+            ],
+            "<strong>Nonparametric (Spearman):</strong> any monotonic relationship; ordinal scores, skewed lab values.": [
                 ""
             ],
             "<strong>Normality:</strong> Residuals are approximately normally distributed.": [
@@ -2692,7 +2758,13 @@
             "<strong>Outlier Analysis:</strong> Consensus-based detection ({ge}2 of 3 methods: Z-score |z|>3, IQR 1.5{times}rule, Modified Z-score |z|>3.5)": [
                 ""
             ],
+            "<strong>Parametric (Pearson):</strong> linear relationship, roughly normal data.": [
+                ""
+            ],
             "<strong>Pattern Analysis:</strong> Missing data mechanisms and systematic issues": [
+                ""
+            ],
+            "<strong>Per-group panels</strong> when a Split By variable is set": [
                 ""
             ],
             "<strong>Positive Likelihood Ratio:</strong> %.2f - A positive test is %.1fx more likely in disease than healthy": [
@@ -2705,6 +2777,9 @@
                 ""
             ],
             "<strong>Publication Preparation:</strong> Data quality documentation": [
+                ""
+            ],
+            "<strong>Publication-ready output</strong> in journal colour palettes": [
                 ""
             ],
             "<strong>Purpose:</strong> Comprehensive evaluation of data completeness, accuracy, and patterns for clinical research.": [
@@ -2725,6 +2800,12 @@
             "<strong>R² ≥ 0.50:</strong> Large effect - at least 50% of the variance accounted for": [
                 ""
             ],
+            "<strong>Robust (Winsorized Pearson):</strong> pulls extreme values in before computing r; use when outliers dominate.": [
+                ""
+            ],
+            "<strong>Scatter plot</strong> with a fitted trend line and confidence band": [
+                ""
+            ],
             "<strong>Studies corrected:</strong> %d of %d (%s)": [
                 ""
             ],
@@ -2734,10 +2815,16 @@
             "<strong>Timeline Data:</strong> Complete patient timeline dataset with processed variables": [
                 ""
             ],
+            "<strong>Treatment response:</strong> Optimized for clinical treatment monitoring<br>": [
+                ""
+            ],
             "<strong>Usage:</strong> This text is formatted for direct use in manuscripts and clinical reports. Copy and paste into your document and adjust as needed for your specific requirements.": [
                 ""
             ],
             "<strong>Variable to Check:</strong> Select any variable for quality assessment": [
+                ""
+            ],
+            "<strong>What to look for:</strong><br>• A small p-value is evidence against the null under the model assumptions; it does not prove a treatment effect<br>• Compare effect estimates and uncertainty with a prespecified clinically important difference<br>• Individual trajectories reveal response patterns<br>• Outliers may indicate treatment non-responders or measurement errors": [
                 ""
             ],
             "<strong>Your negative LR of %.2f</strong> provides <em>%s</em> evidence AGAINST disease when test is negative. ": [
@@ -3481,13 +3568,13 @@
             "A {strength} {direction} trend was detected (R² = {r2}).": [
                 ""
             ],
-            "A %s %s correlation (%s = %s) between %s and %s that is %s, using %s.": [
-                ""
-            ],
             "A %s comparing %s did not find a statistically significant difference in %s (%s). This does not establish that the groups are equivalent; the study may simply lack the power to detect a difference of clinical interest.": [
                 ""
             ],
             "A %s comparing %s found a statistically significant difference in %s (%s).": [
+                ""
+            ],
+            "A %s correlation (%s = %s) between %s and %s that is %s, using %s.": [
                 ""
             ],
             "A = 1 - within-case variance / total variance (Robinson 1957): 1 means every rater gave every case the same value, 0 means raters disagree on a case as much as cases differ from one another. %s (A = %.3f). The interval is a percentile bootstrap over cases (%d resamples, seed %d) at the %d%% level. Bands used for the label: below 0.50 poor, 0.50 to 0.75 moderate, 0.75 to 0.90 good, 0.90 and above excellent.": [
@@ -3499,7 +3586,16 @@
             "A 3% discount rate means $100 next year is worth $97 today": [
                 ""
             ],
+            "A Bayes factor near 1 means the data do not discriminate between the hypotheses - which is different from evidence of no difference, and is worth stating explicitly when you report it.": [
+                ""
+            ],
+            "a Bayesian analysis of variance": [
+                ""
+            ],
             "a Bayesian contingency table analysis": [
+                ""
+            ],
+            "a Bayesian t-test": [
                 ""
             ],
             "A between-marker correlation of 1.0 means the two AUCs are identical, so their difference has zero variance and no sample size can be computed for it - the required N is left blank. Enter the correlation you actually expect between the two markers; 0.5 is a common default for two tests measured on the same patients.": [
@@ -3511,6 +3607,9 @@
             "A bound at or below zero means this many subjects cannot rule out agreement no better than chance.": [
                 ""
             ],
+            "A centrality type is selected but centrality plotting is switched off, so the type setting has no effect.": [
+                ""
+            ],
             "A chi-square test of independence, without continuity correction, was performed to examine the relationship between two binary categorical variables.": [
                 ""
             ],
@@ -3518,6 +3617,9 @@
                 ""
             ],
             "A clinical scoring system was developed using %s regression with %d predictors and %s. The %s scoring method was applied to convert model coefficients to integer points. ": [
+                ""
+            ],
+            "A comparison of {outcome} across {groups} groups of {factor} was performed using {test}, with {effect} reported as the effect size and a {level} per cent {interval} interval. {pairwise}": [
                 ""
             ],
             "A connection or relationship between two nodes (e.g., regulatory link, similarity score, co-occurrence). In arc diagrams, edges are visualized as curved arcs connecting nodes.": [
@@ -3575,6 +3677,9 @@
                 ""
             ],
             "A hazard ratio above 1 means a higher instantaneous event rate and below 1 a lower one. It is a rate ratio, not a ratio of cumulative risks and not a difference in survival time.": [
+                ""
+            ],
+            "a heteroscedastic one-way comparison of trimmed means": [
                 ""
             ],
             "A high %Duplicates is expected for categorical variables with few levels (a binary variable in n=500 reads about 99.6%) and only signals a problem for identifier variables.": [
@@ -3656,6 +3761,9 @@
                 ""
             ],
             "A p-value adjustment was requested, but only one comparison is being made, so there is nothing to adjust for. Adjustment applies to the pairwise comparisons shown when there are three or more groups.": [
+                ""
+            ],
+            "A paired t-test for two measurements, or a repeated-measures ANOVA with a Greenhouse-Geisser sphericity correction for three or more. This assumes the within-subject differences are approximately normal.": [
                 ""
             ],
             "A PATTERN row (\"+/-\") is a mutually exclusive group of patients: those whose results were exactly that. It can be read as a rule -- \"call positive only when the results are exactly this\" -- and the ranking treats it that way, but then every column refers to that exact pattern. Sensitivity is the share of diseased patients showing it; Specificity the share of non-diseased patients showing anything else; LR- the likelihood ratio for \"any other pattern\" rather than for a negative test.": [
@@ -3817,6 +3925,9 @@
             "A treatment-by-biomarker interaction supports a predictive-biomarker claim only in an appropriate treatment-comparison design with pre-specified validation.": [
                 ""
             ],
+            "A trimmed-means test that resists outliers, which are common in laboratory values.": [
+                ""
+            ],
             "A two-class conditional-independence mixture model for three or more tests.": [
                 ""
             ],
@@ -3833,6 +3944,9 @@
                 ""
             ],
             "A way to model how patients move between different health states over time": [
+                ""
+            ],
+            "A Wilcoxon signed-rank test for two measurements, or a Friedman test for three or more. These make no distributional assumption.": [
                 ""
             ],
             "A zero-cell correction (%s) was applied to %d study/studies (%s). Corrected counts are used by all analyses and plots; the Individual Study Results table shows the raw counts.": [
@@ -4585,9 +4699,6 @@
             "Add correlation": [
                 ""
             ],
-            "Add correlation (ggpubr)": [
-                ""
-            ],
             "Add correlation coefficient and p-value (for scatter plots)": [
                 ""
             ],
@@ -4645,9 +4756,6 @@
             "Add ggpubr plot variant": [
                 ""
             ],
-            "Add ggpubr scatter plot": [
-                ""
-            ],
             "Add GGStatsPlot layer": [
                 ""
             ],
@@ -4664,9 +4772,6 @@
                 ""
             ],
             "Add Individual Points": [
-                ""
-            ],
-            "Add individual points": [
                 ""
             ],
             "Add individual points (ggpubr)": [
@@ -4850,9 +4955,6 @@
                 ""
             ],
             "Add smooth line": [
-                ""
-            ],
-            "Add smooth line (ggpubr)": [
                 ""
             ],
             "Add Smooth Trend Line": [
@@ -5128,6 +5230,9 @@
             "Additive Model": [
                 ""
             ],
+            "Adds a caption reporting the Bayes factor in favour of NO association. Applies to the parametric (Pearson) test only.": [
+                ""
+            ],
             "Adds detailed clinical interpretation help to all result tables.": [
                 ""
             ],
@@ -5314,9 +5419,6 @@
             "Adjusted p": [
                 ""
             ],
-            "adjusted p": [
-                ""
-            ],
             "Adjusted p-value": [
                 ""
             ],
@@ -5399,6 +5501,9 @@
                 ""
             ],
             "Adjustment Method": [
+                ""
+            ],
+            "Adjustment method": [
                 ""
             ],
             "Adjustment method: {method}.": [
@@ -6172,6 +6277,9 @@
             "Aggregate trend charts": [
                 ""
             ],
+            "Aggregation Hides Within-Group Spread": [
+                ""
+            ],
             "Aggregation Method": [
                 ""
             ],
@@ -6586,6 +6694,9 @@
             "All ordinal/binary": [
                 ""
             ],
+            "All pairs": [
+                ""
+            ],
             "All Pairwise Comparisons": [
                 ""
             ],
@@ -6617,9 +6728,6 @@
                 ""
             ],
             "All QoL Domains": [
-                ""
-            ],
-            "All ratio values must be positive (> 0). Negative or zero values are not allowed in proportion specifications. Using equal proportions as fallback.": [
                 ""
             ],
             "All requested effect size measures with interpretations": [
@@ -7346,6 +7454,9 @@
                 ""
             ],
             "Analysis Summary in Plain Language": [
+                ""
+            ],
+            "Analysis summary: {groups} groups, {total} total observations.": [
                 ""
             ],
             "Analysis tailored to specific biomarker characteristics": [
@@ -8227,6 +8338,12 @@
             "Assumptions and Caveats": [
                 ""
             ],
+            "Assumptions and interpretation": [
+                ""
+            ],
+            "Assumptions and Interpretation": [
+                ""
+            ],
             "Assumptions check": [
                 ""
             ],
@@ -8351,6 +8468,9 @@
                 ""
             ],
             "At least two finite studies are required for %s": [
+                ""
+            ],
+            "At least two groups with data are required for a comparison. Groups found with complete data: {found}. Please check for missing values or select different variables.": [
                 ""
             ],
             "At least two non-constant encoded predictor columns are required by this LASSO engine.": [
@@ -9451,6 +9571,12 @@
             "Baseline event rate for binary outcomes": [
                 ""
             ],
+            "Baseline Falls Inside the Data Range": [
+                ""
+            ],
+            "Baseline Far From the Data": [
+                ""
+            ],
             "Baseline Function": [
                 ""
             ],
@@ -9745,7 +9871,10 @@
             "Bayes Factor Analysis": [
                 ""
             ],
-            "Bayes factor interpretation": [
+            "Bayes factor caption": [
+                ""
+            ],
+            "Bayes factor for the null (BF01)": [
                 ""
             ],
             "Bayes factor message": [
@@ -9829,7 +9958,7 @@
             "Bayesian confidence intervals (credible intervals) as alternative to frequentist confidence intervals. This analysis provides credible intervals using Beta-posterior distributions, Monte Carlo sampling, and various prior specifications for continuous and binary outcome data. Essential for Bayesian statistical inference in clinical research.": [
                 ""
             ],
-            "Bayesian correlations report the median posterior estimate and BF<sub>10</sub>; no p-value is defined.": [
+            "Bayesian correlations report the median posterior estimate, a credible interval from the posterior (not a confidence interval) and BF<sub>10</sub>; no p-value is defined.": [
                 ""
             ],
             "Bayesian Credible Intervals": [
@@ -9964,6 +10093,9 @@
             "Bayesian repeated measures analysis": [
                 ""
             ],
+            "Bayesian seed": [
+                ""
+            ],
             "Bayesian Survival Analysis": [
                 ""
             ],
@@ -9983,6 +10115,9 @@
                 ""
             ],
             "Bayesian variable selection for high-dimensional data": [
+                ""
+            ],
+            "Bayesian:": [
                 ""
             ],
             "BBC Blue (#1380A1)": [
@@ -10049,6 +10184,9 @@
                 ""
             ],
             "Before interpreting results, verify these assumptions:": [
+                ""
+            ],
+            "Before you report this": [
                 ""
             ],
             "Before-After": [
@@ -10127,6 +10265,12 @@
                 ""
             ],
             "Benford's Law works best when data spans multiple orders of magnitude (e.g., values ranging from 10 to 1000+).": [
+                ""
+            ],
+            "Benjamini-Hochberg": [
+                ""
+            ],
+            "Benjamini-Hochberg (false discovery rate)": [
                 ""
             ],
             "Benjamini-Hochberg (FDR)": [
@@ -10498,6 +10642,9 @@
             "Bias-Corrected": [
                 ""
             ],
+            "Bias-corrected - Hedge's g with 2 groups, omega-squared with 3+": [
+                ""
+            ],
             "Bias-Corrected (BCa)": [
                 ""
             ],
@@ -10849,6 +10996,9 @@
             "Biomarker positivity rates across different thresholds": [
                 ""
             ],
+            "Biomarker preset: Consider using Nonparametric test for skewed biomarker data<br>": [
+                ""
+            ],
             "Biomarker Prevalence": [
                 ""
             ],
@@ -11180,6 +11330,9 @@
                 ""
             ],
             "Bonferroni (manual guidance)": [
+                ""
+            ],
+            "Bonferroni (most conservative)": [
                 ""
             ],
             "Bonferroni Correction": [
@@ -11599,6 +11752,9 @@
             "Both rows are unpenalized Cox fits on the same development data. The first is fitted only after those columns were selected by LASSO; it is not the penalized model. C-index, log-likelihood, and AIC are apparent and selection-biased. In particular, the AIC values must not be used as a formal model-selection comparison because the candidate model was chosen from these same data.": [
                 ""
             ],
+            "Both scatterplot variables must be numeric.": [
+                ""
+            ],
             "Both Sensitivity and Specificity": [
                 ""
             ],
@@ -11609,6 +11765,9 @@
                 ""
             ],
             "Both Types": [
+                ""
+            ],
+            "Both variables selected - the analysis runs automatically.": [
                 ""
             ],
             "Bottlenecks": [
@@ -11729,6 +11888,9 @@
                 ""
             ],
             "Box Plots with Individual Data Points": [
+                ""
+            ],
+            "Box plots:": [
                 ""
             ],
             "Box-Behnken Design": [
@@ -13993,13 +14155,13 @@
             "Central Tendency Display": [
                 ""
             ],
+            "Central tendency displayed": [
+                ""
+            ],
             "Central tendency lines": [
                 ""
             ],
             "Central Tendency Measure": [
-                ""
-            ],
-            "Central tendency of patient follow-up duration": [
                 ""
             ],
             "Central Tendency Only": [
@@ -14038,10 +14200,16 @@
             "Centrality path": [
                 ""
             ],
+            "Centrality plotting is enabled but the centrality parameter is set to none, so no centrality lines will be displayed.": [
+                ""
+            ],
             "Centrality Settings": [
                 ""
             ],
             "Centrality Type": [
+                ""
+            ],
+            "Centrality type": [
                 ""
             ],
             "Centroid": [
@@ -14776,6 +14944,9 @@
             "Choosing a Plot Engine:": [
                 ""
             ],
+            "Choosing a test": [
+                ""
+            ],
             "Chord Diagram": [
                 ""
             ],
@@ -15209,6 +15380,9 @@
                 ""
             ],
             "Clinical Analysis Preset": [
+                ""
+            ],
+            "Clinical analysis preset": [
                 ""
             ],
             "Clinical Analysis Report": [
@@ -16783,9 +16957,6 @@
             "Cohen's d (second)": [
                 ""
             ],
-            "Cohen's d (standardized mean difference)": [
-                ""
-            ],
             "Cohen's d (unpooled SD, matching Welch's t):": [
                 ""
             ],
@@ -17081,9 +17252,6 @@
                 ""
             ],
             "Color Theme": [
-                ""
-            ],
-            "Color Threshold": [
                 ""
             ],
             "Color threshold": [
@@ -17725,9 +17893,6 @@
             "Compare distributions using AIC and BIC": [
                 ""
             ],
-            "Compare each time point pair": [
-                ""
-            ],
             "Compare fitted curves with Kaplan-Meier estimates": [
                 ""
             ],
@@ -17915,6 +18080,9 @@
                 ""
             ],
             "Compares two groups on an ordinal Desirability of Outcome Ranking (DOOR), a composite that ranks each patient by overall clinical desirability combining efficacy and safety. The DOOR probability is the chance that a randomly chosen patient from the index group has a more desirable outcome than a randomly chosen patient from the reference group (ties split evenly) - equivalent to a Mann-Whitney / AUC estimand. Values above 0.5 favour the index group. This approach, developed for antimicrobial and benefit-risk trials, avoids collapsing outcomes of differing severity into a single binary endpoint.": [
+                ""
+            ],
+            "Comparing {groups} groups with N = {n} observations using a {test} test.": [
                 ""
             ],
             "Comparing across groups:": [
@@ -19000,7 +19168,10 @@
             "Compute Specificity": [
                 ""
             ],
-            "Computed %d %s %s of %d variables.": [
+            "Computed %d partial %s of %d variables.": [
+                ""
+            ],
+            "Computed %d zero-order %s of %d variables.": [
                 ""
             ],
             "Computed on the {n_num} numeric variable(s) ({names}); missingness in the {n_non} non-numeric variable(s) was not tested.": [
@@ -19231,6 +19402,12 @@
             "Conditional coloring": [
                 ""
             ],
+            "Conditional Coloring": [
+                ""
+            ],
+            "Conditional colouring is active, so the highlighted category is not drawn differently; turn conditional colouring off to use highlighting.": [
+                ""
+            ],
             "Conditional Entropy H(Y|X)": [
                 ""
             ],
@@ -19354,7 +19531,13 @@
             "Confidence": [
                 ""
             ],
+            "confidence": [
+                ""
+            ],
             "Confidence (%)": [
+                ""
+            ],
+            "Confidence / credible level": [
                 ""
             ],
             "Confidence Band": [
@@ -20779,6 +20962,12 @@
             "Correlation Analysis Method": [
                 ""
             ],
+            "Correlation analysis requires at least 2 numeric variables with sufficient variation. Found %d valid variable(s). Please select additional variables.": [
+                ""
+            ],
+            "Correlation analysis requires numeric variables. The following are categorical: %s. Please select continuous numeric variables.": [
+                ""
+            ],
             "Correlation Analysis Summary": [
                 ""
             ],
@@ -20809,13 +20998,22 @@
             "Correlation between texture features": [
                 ""
             ],
+            "Correlation between two continuous variables, with optional grouping, marginal distributions and publication-ready output.": [
+                ""
+            ],
             "Correlation Biplot": [
+                ""
+            ],
+            "Correlation calculation failed: {reason}": [
                 ""
             ],
             "Correlation Coefficient": [
                 ""
             ],
             "Correlation Coefficient (association strength)": [
+                ""
+            ],
+            "Correlation coefficient (ggpubr)": [
                 ""
             ],
             "Correlation Coefficients": [
@@ -20837,6 +21035,9 @@
                 ""
             ],
             "Correlation Heatmaps": [
+                ""
+            ],
+            "Correlation is not causation, and a coefficient assumes the relationship has the shape the test looks for - always read the scatter itself.": [
                 ""
             ],
             "Correlation matrices and relationship analysis": [
@@ -20863,6 +21064,9 @@
             "Correlation Matrix Variables": [
                 ""
             ],
+            "Correlation matrix with %d variables may be complex to interpret. Consider focusing on key variables of interest.": [
+                ""
+            ],
             "correlation matrix with significance tests": [
                 ""
             ],
@@ -20882,6 +21086,9 @@
                 ""
             ],
             "Correlation metrics were not estimable with the available data. ": [
+                ""
+            ],
+            "Correlation not computed (insufficient data)": [
                 ""
             ],
             "Correlation Parameters": [
@@ -20935,7 +21142,13 @@
             "Correlation type": [
                 ""
             ],
-            "Correlation type: %s": [
+            "Correlation type: Partial": [
+                ""
+            ],
+            "Correlation type: Zero-order": [
+                ""
+            ],
+            "Correlation variables must be numeric.": [
                 ""
             ],
             "Correlation Visualization Plots": [
@@ -21256,9 +21469,6 @@
             "Counts and percentages per subgroup, and optionally the mean and SD of one continuous variable within each subgroup. It fits no model and performs no test.": [
                 ""
             ],
-            "Counts are not whole numbers": [
-                ""
-            ],
             "Counts are projected to a population of {n} from the complete-case cohort.": [
                 ""
             ],
@@ -21266,6 +21476,9 @@
                 ""
             ],
             "Counts in cells": [
+                ""
+            ],
+            "Counts must be finite, non-negative whole numbers. No test was computed. Supply observed frequencies rather than fractional weights.": [
                 ""
             ],
             "Counts on nodes": [
@@ -21949,7 +22162,13 @@
             "Creating riverplot object": [
                 ""
             ],
+            "credible": [
+                ""
+            ],
             "Credible Interval": [
+                ""
+            ],
+            "Credible interval": [
                 ""
             ],
             "Credible Interval (%)": [
@@ -23623,9 +23842,6 @@
             "Data & Statistics": [
                 ""
             ],
-            "Data Aggregation": [
-                ""
-            ],
             "Data aggregation": [
                 ""
             ],
@@ -23668,7 +23884,16 @@
             "Data contains no (complete) rows. Please check your dataset and variable selections.": [
                 ""
             ],
+            "Data contains no complete rows after filtering. Please check for missing values.": [
+                ""
+            ],
             "Data contains no complete rows. Check the data.": [
+                ""
+            ],
+            "Data contains no complete rows. Please check for missing values in selected variables.": [
+                ""
+            ],
+            "Data contains no complete rows. Please check for missing values in your selected variables.": [
                 ""
             ],
             "Data contains no rows": [
@@ -23855,6 +24080,9 @@
                 ""
             ],
             "Data Processing Error:": [
+                ""
+            ],
+            "Data processing failed: {reason}. Please check your variable selections and try again.": [
                 ""
             ],
             "Data processing failed. Please check your input variables.": [
@@ -24446,6 +24674,9 @@
                 ""
             ],
             "Decimal places (percentages)": [
+                ""
+            ],
+            "Decimal Places (plot annotation)": [
                 ""
             ],
             "Decimal places (statistics)": [
@@ -28387,6 +28618,12 @@
             "Draws an alluvial diagram: a flow picture of how cases move between the categories of several categorical variables. Ribbon width is the number of cases taking that path; with the GG Alluvial engine and a weight variable it is the total of that weight over those cases, while the Easy Alluvial engine always counts cases. Every axis variable is drawn with its own recorded values as the strata.": [
                 ""
             ],
+            "Drop a continuous variable into <strong>x-axis</strong> (e.g. biomarker level).": [
+                ""
+            ],
+            "Drop a second continuous variable into <strong>y-axis</strong>.": [
+                ""
+            ],
             "Dropout Analysis": [
                 ""
             ],
@@ -28442,6 +28679,9 @@
                 ""
             ],
             "Duplicate Detection:": [
+                ""
+            ],
+            "Duplicate Groups Detected": [
                 ""
             ],
             "Duplicate Model Names": [
@@ -28622,6 +28862,9 @@
                 ""
             ],
             "Each category should have sufficient sample size for reliable percentages": [
+                ""
+            ],
+            "Each group is drawn as a violin (the shape of its distribution), a boxplot (median and quartiles) and its individual observations.": [
                 ""
             ],
             "Each measurement must be a different variable ('{var}' is selected more than once).": [
@@ -29023,6 +29266,9 @@
             "Effect size for interaction between main exposure and other covariates. Used when testing interaction effects.": [
                 ""
             ],
+            "Effect size for parametric tests": [
+                ""
+            ],
             "Effect Size Interpretation": [
                 ""
             ],
@@ -29375,6 +29621,9 @@
                 ""
             ],
             "Enable 'Show RECIST Thresholds' for clinical interpretation": [
+                ""
+            ],
+            "Enable \"Statistical results\" to show that exact value on the chart.": [
                 ""
             ],
             "Enable accessibility features including color-blind safe palettes,  high contrast visualizations, larger font sizes, and enhanced table readability. Ensures outputs are accessible to users with visual impairments.": [
@@ -30655,9 +30904,6 @@
             "Error parsing datetimes with format {fmt}. • Parser error: {msg} • Try selecting a different format. • Check that your data matches the selected format.": [
                 ""
             ],
-            "Error parsing ratio specification: %s. Please use comma-separated decimal values (e.g., \"0.5,0.5\"). Using equal proportions as fallback.": [
-                ""
-            ],
             "Error Plot": [
                 ""
             ],
@@ -30925,13 +31171,13 @@
             "Eta-squared": [
                 ""
             ],
-            "Eta-squared (variance explained)": [
-                ""
-            ],
             "Eta-squared (η²)": [
                 ""
             ],
             "Eta-squared can be used for 2 groups, but Cliff's Delta may provide more intuitive interpretation.": [
+                ""
+            ],
+            "Eta-squared with 3+ groups (Cohen's d with 2 groups)": [
                 ""
             ],
             "Eta-squared, omega-squared, and related measures": [
@@ -31427,6 +31673,9 @@
                 ""
             ],
             "Every one of the %s patients is set to <i>%s</i> = each level in turn%s, a survival curve is predicted for each patient from the fitted model, and those curves are averaged. The procedure repeats for every level.": [
+                ""
+            ],
+            "every pair of groups": [
                 ""
             ],
             "Every pattern and strategy is reported together with no adjustment for multiple comparisons. Treat the best-looking row as a hypothesis to confirm in new data, not as an established result.": [
@@ -32926,6 +33175,9 @@
             "EXTREME VALUES DETECTED": [
                 ""
             ],
+            "Extreme Values Present": [
+                ""
+            ],
             "Extreme Variables": [
                 ""
             ],
@@ -33995,6 +34247,9 @@
                 ""
             ],
             "Fisher's exact test": [
+                ""
+            ],
+            "Fisher's exact test (Monte Carlo, B = 2000)": [
                 ""
             ],
             "Fisher's exact test (Monte Carlo)": [
@@ -36415,6 +36670,9 @@
             "ggpubr Color Palette": [
                 ""
             ],
+            "ggpubr colour palette": [
+                ""
+            ],
             "ggpubr Fill Color": [
                 ""
             ],
@@ -36427,6 +36685,9 @@
             "ggpubr Plot Type": [
                 ""
             ],
+            "ggpubr plot type": [
+                ""
+            ],
             "ggpubr Plots": [
                 ""
             ],
@@ -36437,6 +36698,9 @@
                 ""
             ],
             "ggstatsplot theme": [
+                ""
+            ],
+            "GGStatsPlot theme layer": [
                 ""
             ],
             "ggswim (Dark)": [
@@ -37201,6 +37465,9 @@
             "Group Sizes": [
                 ""
             ],
+            "Group sizes range from {lo} to {hi} observations, so the lollipops are not estimated with equal precision; read the sparsely sampled groups with more caution.": [
+                ""
+            ],
             "Group Statistics": [
                 ""
             ],
@@ -37423,10 +37690,22 @@
             "Groups defined by empirical quantiles of the Cox relative-risk score": [
                 ""
             ],
+            "Groups do NOT have to share the same spread.": [
+                ""
+            ],
+            "Groups do NOT have to share the same spread. Welch's correction is used throughout, which is why the degrees of freedom are fractional.": [
+                ""
+            ],
+            "Groups dropped": [
+                ""
+            ],
             "Groups of similar features": [
                 ""
             ],
             "Groups Selected": [
+                ""
+            ],
+            "Groups should have a broadly similar distribution SHAPE if you want to read the result as a difference in medians; otherwise read it as stochastic dominance.": [
                 ""
             ],
             "Groups with fewer than {min} observations may show unreliable density estimates: {groups}": [
@@ -38066,9 +38345,6 @@
                 ""
             ],
             "Hedge's g": [
-                ""
-            ],
-            "Hedge's g (unbiased, small samples)": [
                 ""
             ],
             "Hedges' g": [
@@ -38749,10 +39025,10 @@
             "Highlight clusters": [
                 ""
             ],
-            "Highlight Level": [
+            "Highlight level": [
                 ""
             ],
-            "Highlight level": [
+            "Highlight Level Not Found": [
                 ""
             ],
             "Highlight Maximum Values": [
@@ -38792,6 +39068,9 @@
                 ""
             ],
             "Highlighting": [
+                ""
+            ],
+            "Highlighting Ignored": [
                 ""
             ],
             "highly": [
@@ -38927,6 +39206,9 @@
                 ""
             ],
             "Holm (manual guidance)": [
+                ""
+            ],
+            "Holm (recommended)": [
                 ""
             ],
             "Holm (Sequential Bonferroni)": [
@@ -40255,6 +40537,9 @@
             "Importance Type": [
                 ""
             ],
+            "Important": [
+                ""
+            ],
             "Important Assumptions:": [
                 ""
             ],
@@ -41257,6 +41542,9 @@
             "Individual patient tracking enables identification of personalized care pathways and treatment response patterns.": [
                 ""
             ],
+            "Individual points": [
+                ""
+            ],
             "Individual prediction explanation": [
                 ""
             ],
@@ -41324,6 +41612,9 @@
                 ""
             ],
             "Individual tracking assumes unique patient identifiers and accurate linkage across time points.": [
+                ""
+            ],
+            "Individual trajectories shown": [
                 ""
             ],
             "Individual Trajectory Plot": [
@@ -42481,6 +42772,9 @@
             "Invalid data: {count} observation(s) have negative survival times. Check that follow-up dates are after diagnosis dates and that time values are correct.": [
                 ""
             ],
+            "Invalid frequency counts": [
+                ""
+            ],
             "Invalid landmark time": [
                 ""
             ],
@@ -42749,6 +43043,9 @@
                 ""
             ],
             "It is reported against the Kaplan-Meier model fitted to the same data, because a fixed cut-off such as 0.25 is the non-informative benchmark only when the event probability is 50%.": [
+                ""
+            ],
+            "It tests whether the measurements differ across time points or conditions.": [
                 ""
             ],
             "Italian Population (WHO)": [
@@ -43756,6 +44053,12 @@
             "Laboratory Method Validation Protocols": [
                 ""
             ],
+            "Laboratory preset: Consider Robust test to handle outliers common in lab values<br>": [
+                ""
+            ],
+            "Laboratory preset: Enable centrality plotting to see overall trends<br>": [
+                ""
+            ],
             "Laboratory Quality Control Statistics": [
                 ""
             ],
@@ -44045,6 +44348,9 @@
                 ""
             ],
             "Large Dataset Optimization": [
+                ""
+            ],
+            "Large dataset processed in {seconds} seconds.": [
                 ""
             ],
             "Large effect": [
@@ -44881,6 +45187,9 @@
             "Line Width": [
                 ""
             ],
+            "Line width": [
+                ""
+            ],
             "Line width (0.5-5)": [
                 ""
             ],
@@ -45679,6 +45988,9 @@
             "LOOIC": [
                 ""
             ],
+            "Looking for a Cleveland dot chart - one summary point per group, tested against a reference value? Use 'Dot Chart (Summary vs Reference Value)' instead. This analysis uses every observation and compares the groups with each other.": [
+                ""
+            ],
             "Loss to Follow-up Rate (per Year)": [
                 ""
             ],
@@ -46411,6 +46723,9 @@
             "Many categories - consider grouping": [
                 ""
             ],
+            "Many Group Levels": [
+                ""
+            ],
             "Many narrow age bands": [
                 ""
             ],
@@ -46460,6 +46775,9 @@
                 ""
             ],
             "Marginal Correlation Weights": [
+                ""
+            ],
+            "Marginal distributions (this panel only)": [
                 ""
             ],
             "Marginal Effect": [
@@ -47299,6 +47617,9 @@
             "MCMC Trace Plots": [
                 ""
             ],
+            "McNemar analysis requires paired categorical observations with matching category coding. Pairs must be independent of one another. An independent-samples Fisher test is not a replacement.": [
+                ""
+            ],
             "McNemar test": [
                 ""
             ],
@@ -47332,10 +47653,13 @@
             "McNemar χ²": [
                 ""
             ],
-            "McNemar's test": [
+            "McNemar's exact test, a binomial test on the discordant pairs": [
                 ""
             ],
             "McNemar's Test (Matched)": [
+                ""
+            ],
+            "McNemar's test without continuity correction": [
                 ""
             ],
             "MCP (Minimax Concave Penalty)": [
@@ -47362,9 +47686,6 @@
             "Mean (average value, sensitive to outliers)": [
                 ""
             ],
-            "Mean (average, affected by outliers)": [
-                ""
-            ],
             "mean (parametric)": [
                 ""
             ],
@@ -47386,7 +47707,7 @@
             "Mean ± SD, Min-Max": [
                 ""
             ],
-            "Mean =": [
+            "Mean = {val}": [
                 ""
             ],
             "Mean |SHAP Value|": [
@@ -47575,6 +47896,9 @@
             "Mean line": [
                 ""
             ],
+            "Mean Line Averages the Group Summaries": [
+                ""
+            ],
             "Mean LNR": [
                 ""
             ],
@@ -47588,6 +47912,9 @@
                 ""
             ],
             "Mean Obs": [
+                ""
+            ],
+            "Mean of group values = {val}": [
                 ""
             ],
             "Mean of Log": [
@@ -47795,6 +48122,9 @@
                 ""
             ],
             "Measure of variability around the mean.": [
+                ""
+            ],
+            "Measured from the baseline of {base}, the differences between groups occupy only {pct}% of each stem, so the lollipops look almost equal; set the baseline near the lower end of the data to make the comparison visible.": [
                 ""
             ],
             "Measured Value": [
@@ -48775,9 +49105,6 @@
             "Method for selecting spline knots": [
                 ""
             ],
-            "method for selecting statistical test for pairwise comparisons": [
-                ""
-            ],
             "Method for selecting time horizon (tau). User-specified allows manual entry; automatic methods select based on data characteristics.": [
                 ""
             ],
@@ -48965,6 +49292,9 @@
                 ""
             ],
             "Methods Section:": [
+                ""
+            ],
+            "Methods sentence you can copy": [
                 ""
             ],
             "Methods:": [
@@ -49909,6 +50239,9 @@
             "Missing data patterns should be examined for potential bias": [
                 ""
             ],
+            "Missing Data Removed": [
+                ""
+            ],
             "Missing Data Report": [
                 ""
             ],
@@ -49937,6 +50270,9 @@
                 ""
             ],
             "Missing data, outliers, and technical quality": [
+                ""
+            ],
+            "Missing data:": [
                 ""
             ],
             "Missing Data: {kind}": [
@@ -49991,6 +50327,9 @@
                 ""
             ],
             "Missing required columns for proportional-hazards SROC analysis": [
+                ""
+            ],
+            "Missing Required Packages": [
                 ""
             ],
             "Missing required variables": [
@@ -51037,6 +51376,9 @@
             "Moderate missing data were observed ({percent} of cases incomplete).": [
                 ""
             ],
+            "moderate negative": [
+                ""
+            ],
             "Moderate number of categories": [
                 ""
             ],
@@ -51047,6 +51389,9 @@
                 ""
             ],
             "Moderate Parsing Success Rate": [
+                ""
+            ],
+            "moderate positive": [
                 ""
             ],
             "Moderate relative variability": [
@@ -51073,7 +51418,10 @@
             "Moderate variability": [
                 ""
             ],
-            "moderate-to-strong": [
+            "moderate-to-strong negative": [
+                ""
+            ],
+            "moderate-to-strong positive": [
                 ""
             ],
             "moderately": [
@@ -53212,6 +53560,9 @@
             "No": [
                 ""
             ],
+            "no": [
+                ""
+            ],
             "No 'Custom Reference Date' provided; using 'Custom Reference Time' as an offset from the earliest start date.": [
                 ""
             ],
@@ -53231,6 +53582,9 @@
                 ""
             ],
             "No Aggregation (Plot All Points)": [
+                ""
+            ],
+            "No Bayes factor caption is shown because {reason}.": [
                 ""
             ],
             "no better than ignoring covariates": [
@@ -53290,6 +53644,9 @@
             "No complete cases for the required variables.": [
                 ""
             ],
+            "No complete cases found for the selected variables.": [
+                ""
+            ],
             "No complete cases found. Please check for missing values in selected variables.": [
                 ""
             ],
@@ -53347,7 +53704,16 @@
             "No Correction": [
                 ""
             ],
+            "No correction for multiple comparisons is applied across %d correlation tests at a threshold of %s, so about %s of them are expected to reach significance by chance alone. Select a p-value adjustment (Holm is the default) or report these as exploratory rather than confirmatory.": [
+                ""
+            ],
             "No correction for multiple comparisons was applied, so <b>p (adjusted)</b> repeats the unadjusted p-value. Each additional variable adds several pairwise tests.": [
+                ""
+            ],
+            "No correlations could be computed for group \"%s\"; it is omitted from the table.": [
+                ""
+            ],
+            "No correlations could be computed with the selected options. If partial correlations are switched on, check that the variables are not collinear and that enough complete rows remain.": [
                 ""
             ],
             "No covariates are available for single-term deletion; the model contains only stratification or clustering terms.": [
@@ -53429,6 +53795,9 @@
                 ""
             ],
             "No difference in the spread of per-case CVs between compartments was detected; this does not establish that they are the same": [
+                ""
+            ],
+            "No distributional assumption. The test compares ranks, so it answers whether one group tends to give higher values, not whether the means differ.": [
                 ""
             ],
             "No entry in 'Custom age breaks' could be read as a number, so the age bands below come from the bin width ({width} years) and not from what you typed. Clear the box to remove this message, or enter the break points as plain numbers separated by commas, for example 0,18,45,65.": [
@@ -53597,6 +53966,9 @@
                 ""
             ],
             "no pairwise comparisons (post-hoc method set to None)": [
+                ""
+            ],
+            "No pairwise comparisons were drawn.": [
                 ""
             ],
             "No pairwise comparisons were performed for this table.": [
@@ -54121,6 +54493,9 @@
             "Non-finite values excluded": [
                 ""
             ],
+            "Non-finite Values Removed": [
+                ""
+            ],
             "Non-finite Weights": [
                 ""
             ],
@@ -54343,6 +54718,9 @@
             "None (no central line)": [
                 ""
             ],
+            "None (not recommended)": [
+                ""
+            ],
             "None (raw p-values)": [
                 ""
             ],
@@ -54422,6 +54800,9 @@
                 ""
             ],
             "Nonparametric Model Options (npcure)": [
+                ""
+            ],
+            "Nonparametric:": [
                 ""
             ],
             "Nonzero columns in the full model": [
@@ -54748,6 +55129,12 @@
             "not statistically significant": [
                 ""
             ],
+            "not statistically significant (adjusted p = %s)": [
+                ""
+            ],
+            "not statistically significant (p = %s)": [
+                ""
+            ],
             "not statistically significant at \\u{3B1} = %g": [
                 ""
             ],
@@ -54838,6 +55225,9 @@
             "NOTE ON THE CLINICAL PENALTY": [
                 ""
             ],
+            "Note on the Wilcoxon p-value:": [
+                ""
+            ],
             "Note that kappa0 here is the agreement you anticipate observing, not a null hypothesis value as it is in kappaSizePower.": [
                 ""
             ],
@@ -54848,6 +55238,12 @@
                 ""
             ],
             "NOTE:": [
+                ""
+            ],
+            "Note: 'Bayes factor message' has no effect here. A Bayes factor caption is available only for a parametric comparison of exactly two groups; for other statistical approaches, or three or more groups, no Bayes factor is reported.": [
+                ""
+            ],
+            "Note: 'Equal variances' applies to the overall test only. The pairwise brackets are computed by ggstatsplot and always use the Welch-type (Games-Howell) comparison, which does not assume equal variances, so they may disagree with the overall result shown in the subtitle.": [
                 ""
             ],
             "Note: 'psych' package not available. Install 'psych' for enhanced reliability metrics (ICC).": [
@@ -54937,6 +55333,9 @@
             "Note: the chart subtitle reports the bias-corrected Cramér's V (Bergsma 2013), which is smaller than the classical statistic these landmarks describe - especially in small samples and larger tables. Treat the thresholds as approximate, and read the confidence interval next to V rather than the point estimate alone.": [
                 ""
             ],
+            "Note: the non-parametric p-value is computed from the normal approximation with a continuity correction, not the exact test. For small samples without ties, stats::wilcox.test() in R defaults to the exact test and may report a slightly different p-value.": [
+                ""
+            ],
             "Note: the plot subtitle fell back to the package default (%s), so 'Equal variances', 'Effect size type' and 'Decimal places' did not affect the reported statistic. Welch's variant and the default effect size were used.": [
                 ""
             ],
@@ -54953,6 +55352,9 @@
                 ""
             ],
             "Note: this table reports the Cumulative Incidence of the event of interest (outcome code 1), not survival. No such event was observed, so the point estimate is 0 throughout. The asymptotic Aalen-Johansen interval degenerates to 0%-0% at this boundary and is therefore left blank; absence of observed events does not prove zero population risk.": [
+                ""
+            ],
+            "NOTE: this test could not be computed for the present data - do not report it; choose a different statistical approach before using this text.": [
                 ""
             ],
             "Note: Unequal time intervals detected. Trend interpretation should account for irregular spacing.": [
@@ -55663,6 +56065,9 @@
             "Number of planned interim analyses for sequential designs. More looks require larger sample sizes to maintain overall Type I error.": [
                 ""
             ],
+            "Number of Plotted Points": [
+                ""
+            ],
             "Number of PLS Components": [
                 ""
             ],
@@ -56047,6 +56452,15 @@
             "Observations are censored at a specified administrative date.": [
                 ""
             ],
+            "Observations are independent.": [
+                ""
+            ],
+            "Observations are independent. Repeated measurements on the same patient, or several blocks from one specimen, break this and need a paired or mixed model instead.": [
+                ""
+            ],
+            "Observations are independent. With small groups, trimming 20 percent from each tail can leave very few values - check the per-group sizes.": [
+                ""
+            ],
             "Observations falling in the 2 most-deviating leading-digit bins. This is bin membership, not a count of outliers - compare it with the share those bins hold under Benford's Law, shown in the listing below.": [
                 ""
             ],
@@ -56063,6 +56477,9 @@
                 ""
             ],
             "Observations should be independent": [
+                ""
+            ],
+            "Observations within a single group vary by up to {sd} (one standard deviation), which is more than half the {span} spread between the plotted group summaries; each lollipop is a single point with no error bar, so the chart shows less disagreement than the data contains.": [
                 ""
             ],
             "Observations: {n}": [
@@ -56338,10 +56755,10 @@
             "Omega-squared": [
                 ""
             ],
-            "Omega-squared (adjusted variance explained)": [
+            "Omega-squared (ω²)": [
                 ""
             ],
-            "Omega-squared (ω²)": [
+            "Omega-squared with 3+ groups (Hedge's g with 2 groups)": [
                 ""
             ],
             "Omentum Sampling": [
@@ -56351,6 +56768,9 @@
                 ""
             ],
             "Omitted Study": [
+                ""
+            ],
+            "omnibus comparison across all groups": [
                 ""
             ],
             "Omnibus test of the covariate effect - %s.": [
@@ -56578,6 +56998,12 @@
             "Only %d of %d row(s) (%.1f%%) have an outcome value; the other %.1f%% are missing in the outcome variable and are dropped from every number below, so the denominator is smaller than your dataset and any percentage is over the survivors of that filtering. The levels you assigned (%s) cover every value that IS present, so this is missing data rather than a mis-selected level. Check that the outcome column is complete before reporting these numbers.": [
                 ""
             ],
+            "Only %d of the %d pairs are discordant. McNemar's chi-square is an asymptotic test on the discordant pairs alone, so below about 25 of them it is anti-conservative. The exact binomial test on those pairs gives <b>%s</b>; quote that value.": [
+                ""
+            ],
+            "Only %d of the %d pairs disagree. McNemar's chi-square is an asymptotic test on the discordant pairs alone and is anti-conservative below about 25 of them, and the plotting package computes it without a continuity correction. The exact binomial test on the discordant pairs gives %s. %s": [
+                ""
+            ],
             "Only %d studies available. At least 3 studies are required for meta-analysis.": [
                 ""
             ],
@@ -56633,6 +57059,9 @@
                 ""
             ],
             "Only show labels for segments above this percentage threshold.": [
+                ""
+            ],
+            "Only subjects with a value for every selected measurement are analysed, because a paired comparison needs complete records.": [
                 ""
             ],
             "Only the first {shown} of {selected} selected variables are plotted, because 'Maximum variables' is set to {max}.": [
@@ -57199,6 +57628,9 @@
             "Optionally select a third diagnostic test for three-way comparison.  This allows comprehensive evaluation of multiple testing strategies simultaneously.": [
                 ""
             ],
+            "Optionally set <strong>Split By</strong> to get one panel per group.": [
+                ""
+            ],
             "Options": [
                 ""
             ],
@@ -57310,6 +57742,9 @@
             "Ordinal Benefit-Risk Comparison of Two Groups": [
                 ""
             ],
+            "ordinal epsilon-squared": [
+                ""
+            ],
             "Ordinal Mixed Models (Cumulative Link)": [
                 ""
             ],
@@ -57356,9 +57791,6 @@
                 ""
             ],
             "organ, used to apply the limit of two target lesions per organ": [
-                ""
-            ],
-            "Orientation": [
                 ""
             ],
             "Orientation for factor level bar plots": [
@@ -58393,9 +58825,6 @@
             "Overview Summary": [
                 ""
             ],
-            "p": [
-                ""
-            ],
             "p (adjusted)": [
                 ""
             ],
@@ -58921,10 +59350,19 @@
             "Pairwise Comparisons (Post-hoc Tests)": [
                 ""
             ],
+            "Pairwise comparisons are shown without any adjustment for multiple testing. With {groups} groups that is {pairs} comparisons, so even if no groups truly differ there is about a {risk} percent chance that at least one of them reaches significance. Use Holm unless you have a specific reason not to.": [
+                ""
+            ],
+            "Pairwise comparisons between {which} are shown as brackets, with {adjustment} adjustment for multiple testing.": [
+                ""
+            ],
             "Pairwise comparisons between ROC curves": [
                 ""
             ],
             "Pairwise comparisons disabled for high-cardinality table": [
+                ""
+            ],
+            "Pairwise comparisons enabled": [
                 ""
             ],
             "Pairwise comparisons test whether group differences are statistically significant.": [
@@ -58964,6 +59402,9 @@
                 ""
             ],
             "Pairwise Display": [
+                ""
+            ],
+            "Pairwise display": [
                 ""
             ],
             "Pairwise distances": [
@@ -59320,16 +59761,13 @@
             "Parametric Tests": [
                 ""
             ],
+            "Parametric:": [
+                ""
+            ],
             "Parametric: Use for normally distributed continuous data. Nonparametric: Best for skewed data or ordinal scales. Robust: Good when outliers are present. Bayesian: Provides strength of evidence": [
                 ""
             ],
             "Parsing Error": [
-                ""
-            ],
-            "Partial": [
-                ""
-            ],
-            "partial": [
                 ""
             ],
             "Partial area under curve analysis": [
@@ -59416,6 +59854,9 @@
             "Partial correlations require at least 3 variables to control for confounding effects": [
                 ""
             ],
+            "Partial correlations require at least 3 variables to control for confounding. Found %d variable(s). Computing zero-order correlations instead.": [
+                ""
+            ],
             "Partial correlations show the relationship between two variables while controlling for all other variables in the analysis": [
                 ""
             ],
@@ -59440,6 +59881,9 @@
             "Partial Effect Plots": [
                 ""
             ],
+            "partial eta-squared": [
+                ""
+            ],
             "Partial Eta-squared (ηₚ²)": [
                 ""
             ],
@@ -59459,6 +59903,9 @@
                 ""
             ],
             "Partial Likelihood Deviance": [
+                ""
+            ],
+            "partial omega-squared": [
                 ""
             ],
             "Partial r": [
@@ -61429,6 +61876,9 @@
             "Physical Functioning Domains": [
                 ""
             ],
+            "Pick a <strong>Statistical Test Type</strong> that suits the distribution.": [
+                ""
+            ],
             "Pie Chart": [
                 ""
             ],
@@ -61558,6 +62008,9 @@
             "Plain language summary of key findings": [
                 ""
             ],
+            "Plain median of the observed durations, because the reverse Kaplan-Meier estimate was not available. Read it as the median time to event-or-censoring, not as the length of follow-up.": [
+                ""
+            ],
             "Plain-English Summary": [
                 ""
             ],
@@ -61676,6 +62129,9 @@
                 ""
             ],
             "Please cite jamovi and the packages as given below.": [
+                ""
+            ],
+            "Please cite jamovi and the packages listed in the references below.": [
                 ""
             ],
             "Please cite the packages and jamovi as referenced below.": [
@@ -62725,6 +63181,9 @@
             "Population Impact Measures": [
                 ""
             ],
+            "Population is declared as '%s'. This setting applies an analytical label to the study report; adherence and protocol deviations are assumed as specified by the investigator.": [
+                ""
+            ],
             "Population life tables": [
                 ""
             ],
@@ -63304,6 +63763,9 @@
             "Potential non-linear relationship detected. Consider polynomial or spline fitting.": [
                 ""
             ],
+            "Potential outliers detected in {name}: {count}.": [
+                ""
+            ],
             "Potential outliers flagged using the IQR method (values beyond Q1-1.5{times}IQR or Q3+1.5{times}IQR):": [
                 ""
             ],
@@ -63470,6 +63932,9 @@
                 ""
             ],
             "Power/sample size sensitivity across parameter ranges": [
+                ""
+            ],
+            "PowerT": [
                 ""
             ],
             "PPS Advantage": [
@@ -64384,6 +64849,9 @@
             "Prepare for Decision Curve Analysis": [
                 ""
             ],
+            "Preparing analysis options...": [
+                ""
+            ],
             "Preparing pie chart analysis options...": [
                 ""
             ],
@@ -65090,6 +65558,9 @@
                 ""
             ],
             "Processing data for pie chart analysis...": [
+                ""
+            ],
+            "Processing data for the comparison...": [
                 ""
             ],
             "Product Kernel": [
@@ -65929,6 +66400,9 @@
             "Publication Plot (ggpubr)": [
                 ""
             ],
+            "Publication plot (ggpubr)": [
+                ""
+            ],
             "Publication Ready": [
                 ""
             ],
@@ -65975,6 +66449,9 @@
                 ""
             ],
             "Publication-Ready Plot (ggpubr)": [
+                ""
+            ],
+            "Publication-ready plot (ggpubr)": [
                 ""
             ],
             "Publication-Ready Plots (ggpubr)": [
@@ -66524,6 +67001,9 @@
                 ""
             ],
             "Quick Start": [
+                ""
+            ],
+            "Quick start": [
                 ""
             ],
             "Quick Start Checklist": [
@@ -67366,9 +67846,6 @@
             "Ratio of treatment to control group sizes (1 = balanced).": [
                 ""
             ],
-            "Ratio specification contains non-numeric values. Expected format: \"0.5,0.5\" for two equal groups or \"0.25,0.5,0.25\" for three groups. Using equal proportions as fallback.": [
-                ""
-            ],
             "Ratio threshold for imbalance detection (e.g., 3.0 means 3:1 or 1:3 ratio)": [
                 ""
             ],
@@ -67379,9 +67856,6 @@
                 ""
             ],
             "Rationale": [
-                ""
-            ],
-            "Ratios must sum to 1.0 but your values sum to %s. Example valid input: \"0.3,0.7\" (sums to 1.0). Using equal proportions as fallback.": [
                 ""
             ],
             "Raw Combination Counts": [
@@ -67490,6 +67964,9 @@
                 ""
             ],
             "Reading the columns": [
+                ""
+            ],
+            "Reading the figure": [
                 ""
             ],
             "Reading the finding:": [
@@ -69712,6 +70189,9 @@
             "Reverse Color Palette": [
                 ""
             ],
+            "Reverse Kaplan-Meier estimate (Schemper & Smith 1996): event and censoring roles are swapped, so this estimates how long patients would have been observed. The plain median of observed durations is the median time to event-or-censoring and understates follow-up when events are common.": [
+                ""
+            ],
             "Reverse Predictor Direction": [
                 ""
             ],
@@ -70402,6 +70882,9 @@
             "Robust": [
                 ""
             ],
+            "Robust (20 percent trimmed means, handles outliers)": [
+                ""
+            ],
             "Robust (bootstrap-t, trimmed mean)": [
                 ""
             ],
@@ -70423,10 +70906,10 @@
             "Robust (Trimmed Mean)": [
                 ""
             ],
-            "Robust (trimmed means, handles outliers)": [
+            "Robust (Trimmed Means)": [
                 ""
             ],
-            "Robust (Trimmed Means)": [
+            "robust (Winsorized Pearson)": [
                 ""
             ],
             "Robust (Winsorized Pearson) - handles outliers well": [
@@ -70571,6 +71054,9 @@
                 ""
             ],
             "Robust Z-score (MAD-based)": [
+                ""
+            ],
+            "Robust:": [
                 ""
             ],
             "Robustness": [
@@ -70975,7 +71461,13 @@
             "Rows Excluded (Missing Data)": [
                 ""
             ],
+            "Rows excluded because {name} held an infinite value: {count}. Infinite values usually indicate a division by zero or an out-of-range entry - check the source data.": [
+                ""
+            ],
             "Rows excluded for missing values": [
+                ""
+            ],
+            "Rows excluded for missing values in the analysis variables: {dropped}.": [
                 ""
             ],
             "Rows excluded from analysis": [
@@ -70997,6 +71489,9 @@
                 ""
             ],
             "Rows with a missing value on the row, column or counts variable are always excluded before the contingency table is built, whether or not this box is ticked. Counting missing values as a category of their own would add a row or a column to the table and change the degrees of freedom of the chi-square test.": [
+                ""
+            ],
+            "Rows with data: {kept} of {total} ({percent} percent).": [
                 ""
             ],
             "Rows with missing values were excluded": [
@@ -72454,6 +72949,9 @@
             "Select a categorical variable, or group the values with Data > Transform first.": [
                 ""
             ],
+            "Select a continuous dependent variable and a categorical grouping variable to begin.": [
+                ""
+            ],
             "Select a continuous predictor variable to assess for non-linear effects. The variable will be modeled with restricted cubic splines and compared to a linear model. Common candidates include age, tumor size, biomarker levels, and follow-up duration.": [
                 ""
             ],
@@ -72497,6 +72995,9 @@
                 ""
             ],
             "Select BBC standard colors or create custom color schemes.": [
+                ""
+            ],
+            "Select both variables to run the correlation.": [
                 ""
             ],
             "Select categorical variable for the x-axis categories.": [
@@ -73483,6 +73984,9 @@
             "Setup Guidance": [
                 ""
             ],
+            "Setup progress": [
+                ""
+            ],
             "Seventh variable for 7+ set analysis.": [
                 ""
             ],
@@ -73744,7 +74248,10 @@
             "Shiny Application": [
                 ""
             ],
-            "Short median follow-up ({time} {units}). May be insufficient for meaningful survival analysis.": [
+            "Short median follow-up ({time} {units}, reverse Kaplan-Meier). May be insufficient for meaningful survival analysis.": [
+                ""
+            ],
+            "Short median observed time ({time} {units}). Median follow-up could not be estimated by reverse Kaplan-Meier, so this is the median time to event-or-censoring, which understates how long the cohort was observed. Interpret the adequacy of follow-up with that in mind.": [
                 ""
             ],
             "Show 1-KM vs CIF Comparison": [
@@ -73991,6 +74498,9 @@
                 ""
             ],
             "Show Clinical Annotations": [
+                ""
+            ],
+            "Show Clinical Cutoff": [
                 ""
             ],
             "Show Clinical Decision Guidance": [
@@ -74830,6 +75340,9 @@
             "Show Lesion-Level Table": [
                 ""
             ],
+            "Show line (measure taken from Central Tendency Measure)": [
+                ""
+            ],
             "Show LN Ratio & Staging": [
                 ""
             ],
@@ -75395,6 +75908,9 @@
                 ""
             ],
             "Show Reference Lines": [
+                ""
+            ],
+            "Show Reference Range": [
                 ""
             ],
             "Show References": [
@@ -76315,6 +76831,9 @@
             "Significant optimization potential; classifier may benefit from recalibration": [
                 ""
             ],
+            "Significant pairs only": [
+                ""
+            ],
             "Significantly different": [
                 ""
             ],
@@ -76849,6 +77368,9 @@
             "Small sample size (n = {n}). Consider larger sample for more reliable cut-off analysis.": [
                 ""
             ],
+            "Small sample size (N = %d complete cases). Correlations with N &lt; 20 may be unreliable. Consider collecting more data or interpreting results cautiously.": [
+                ""
+            ],
             "small sample size (n<30)": [
                 ""
             ],
@@ -76892,6 +77414,9 @@
                 ""
             ],
             "Small to moderate sample size may limit generalizability to broader patient populations.": [
+                ""
+            ],
+            "Small total sample size (N = {n}). Statistical tests may be unreliable below 30 observations. Interpret the result cautiously or collect more data.": [
                 ""
             ],
             "Small-node pruning": [
@@ -76967,6 +77492,9 @@
                 ""
             ],
             "Smooth Time-Varying Effects": [
+                ""
+            ],
+            "Smooth trend line (ggpubr)": [
                 ""
             ],
             "Smooth trend lines": [
@@ -77168,6 +77696,9 @@
                 ""
             ],
             "Some groups have zero observations": [
+                ""
+            ],
+            "Some groups hold several observations (up to {n}, for example {groups}), and with no aggregation every one of them is drawn on the same stem, so the chart over-plots and hides how many points each lollipop stands for; choose Mean, Median or Sum under Data aggregation.": [
                 ""
             ],
             "Some hazard ratios are extreme (HR > 10 or < 0.1), which may indicate sparse data, complete separation, or data quality issues. Verify group sizes and event counts.": [
@@ -78967,6 +79498,9 @@
             "Statistical Comparison Table": [
                 ""
             ],
+            "Statistical comparisons": [
+                ""
+            ],
             "Statistical Comparisons Across Cut-offs": [
                 ""
             ],
@@ -79270,6 +79804,9 @@
             "Statistical Test Type": [
                 ""
             ],
+            "Statistical test type": [
+                ""
+            ],
             "Statistical Testing": [
                 ""
             ],
@@ -79324,6 +79861,9 @@
             "STATISTICAL TESTS:": [
                 ""
             ],
+            "Statistical tests:": [
+                ""
+            ],
             "Statistical threshold for detecting significant patterns (typical: 0.05 = 5%)": [
                 ""
             ],
@@ -79342,7 +79882,16 @@
             "statistically significant": [
                 ""
             ],
-            "statistically significant (%s < 0.001)": [
+            "statistically significant (adjusted p < 0.001)": [
+                ""
+            ],
+            "statistically significant (adjusted p = %s)": [
+                ""
+            ],
+            "statistically significant (p < 0.001)": [
+                ""
+            ],
+            "statistically significant (p = %s)": [
                 ""
             ],
             "Statistically significant %s (p = %s, alpha = %s)": [
@@ -79370,6 +79919,9 @@
                 ""
             ],
             "Statistics & Lines": [
+                ""
+            ],
+            "Statistics describe the {n} plotted per-group {method} values aggregated from {raw} observations, not the raw observations themselves.": [
                 ""
             ],
             "Statistics for Categorical Variables": [
@@ -79894,7 +80446,13 @@
             "Strong Heredity": [
                 ""
             ],
+            "strong negative": [
+                ""
+            ],
             "Strong partial correlations suggest a direct relationship that persists even after controlling for other factors": [
+                ""
+            ],
+            "strong positive": [
                 ""
             ],
             "STRONG WARNING": [
@@ -81254,6 +81812,9 @@
                 ""
             ],
             "Survival Power Analysis": [
+                ""
+            ],
+            "Survival Power analysis": [
                 ""
             ],
             "Survival Prediction Metrics": [
@@ -83026,6 +83587,9 @@
             "The '%s' preset replaced settings you can still see in the options panel: %s. Choose the Custom preset if you want the values you entered to be used.": [
                 ""
             ],
+            "The 'Effect Size Measure' setting does not reach the Split By panels: the statistics package computes one subtitle per panel internally and always uses its own default there. The single unsplit figure below honours your selection.": [
+                ""
+            ],
             "The 'Exclude missing values' box has no effect": [
                 ""
             ],
@@ -83056,13 +83620,19 @@
             "The {} was conducted to compare groups.": [
                 ""
             ],
+            "The {comparison} tells you that the groups differ, not by how much any one pair differs or whether that difference matters clinically. Read the effect size and its interval, not the p value alone.": [
+                ""
+            ],
             "The {digits}-digit analysis spreads {n} observations over {bins} digit bins. The smallest expected count is {minexp} and {sparse} percent of the bins have an expected count below 5, so the chi-square approximation is only approximate here and rejects more often than its nominal rate: on simulated conforming data the rejection rate in this regime ran between 6 and 14 percent against a nominal 5 percent, worst at the 3-digit setting. Read the p-value as indicative rather than exact. A 1-digit analysis uses 9 bins and puts far more observations in each.": [
                 ""
             ],
-            "The {landmark} landmark excluded no participants, because it is only {share}% of the median follow-up in these data ({median} {unit}). It still subtracted {amount} from every interval, so every duration and the total person-time below are that much smaller than the follow-up observed. Check that the landmark is expressed in the same unit as the results ({unit}): entering a value meant as months while the output unit is days is the usual cause.": [
+            "The {groups} groups hold {raw} observations between them, fewer than three per group on average, so each plotted point rests on very little data; consider pooling categories or reporting the individual observations.": [
                 ""
             ],
-            "The {landmark} landmark is later than the median follow-up in these data ({median} {unit}), so more than half the cohort could not reach it and {excluded} of {total} observations were excluded. What remains is a subgroup defined by having been followed to the landmark, and the total person-time above is the denominator for that subgroup only: a rate computed from it answers \"among those still under observation at {amount}, how often did events occur\", not the same question for the cohort you enrolled. This analysis has no event indicator, so it cannot tell you whether the excluded participants had short follow-up because they died early or simply because they were enrolled recently - check that before interpreting the selection. Report the landmark, the number excluded and the reason alongside any rate taken from this analysis.": [
+            "The {landmark} landmark excluded no participants, because it is only {share}% of the median observed interval in these data ({median} {unit}). It still subtracted {amount} from every interval, so every duration and the total person-time below are that much smaller than the follow-up observed. Check that the landmark is expressed in the same unit as the results ({unit}): entering a value meant as months while the output unit is days is the usual cause.": [
+                ""
+            ],
+            "The {landmark} landmark is later than the median observed interval in these data ({median} {unit}), so more than half the cohort could not reach it and {excluded} of {total} observations were excluded. What remains is a subgroup defined by having been followed to the landmark, and the total person-time above is the denominator for that subgroup only: a rate computed from it answers \"among those still under observation at {amount}, how often did events occur\", not the same question for the cohort you enrolled. This analysis has no event indicator, so it cannot tell you whether the excluded participants had short follow-up because they died early or simply because they were enrolled recently - check that before interpreting the selection. Report the landmark, the number excluded and the reason alongside any rate taken from this analysis.": [
                 ""
             ],
             "The {palette} palette publishes {cap} distinguishable colours, and this diagram has at least {groups} groups to colour.": [
@@ -83179,7 +83749,13 @@
             "The bands are not all the same width: '{widest}' spans {widestYears} year(s) while '{narrowest}' spans {narrowestYears} year(s). The bar lengths and the 'Female (%)' / 'Male (%)' columns are counts per band, not per year of age, so a wider band collects more people simply by covering more years and its bar is longer for that reason alone. Compare bands of equal width with each other, or divide a band's count by its width in years before comparing. Bands of one fixed width come from the 'Custom (use bin width)' preset.": [
                 ""
             ],
+            "The baseline of {base} sits inside the range of the data, so {above} lollipop(s) point one way and {below} point the other; stem length now shows distance from the baseline rather than magnitude, which is easy to misread.": [
+                ""
+            ],
             "the baseline visit must be present (default: time = 0)": [
+                ""
+            ],
+            "The Bayes factor is computed against a default (Cauchy) prior on the effect size, not one elicited for your setting. Treat it as evidence strength under a conventional prior, not as a posterior probability that the groups differ.": [
                 ""
             ],
             "the Bayes factor message is switched on, which ggstatsplot renders alongside its own subtitle": [
@@ -83230,6 +83806,12 @@
             "The categorized variable was added under the default name '{name}' as a nominal variable, because the requested name and measure type could not be applied ({reason}).": [
                 ""
             ],
+            "The chart rests on {n} observations in total, too few for the differences between groups to be stable; treat the ordering as provisional.": [
+                ""
+            ],
+            "The chart subtitle reports that exact value.": [
+                ""
+            ],
             "The chart subtitle still reports an uncorrected Pearson chi-square - no statistic option changes that, as the plotting package offers no exact test. Fisher's exact test on this table gives <b>%s</b>; quote that value, not the subtitle.": [
                 ""
             ],
@@ -83275,6 +83857,12 @@
             "the combined specificity above is too high and the combined sensitivity too low": [
                 ""
             ],
+            "The comparison is horizontal, so values run along the bottom axis and group labels down the side.": [
+                ""
+            ],
+            "The comparison uses 20 percent trimmed means, so the most extreme 20 percent at each end of every group is discarded before testing. This is the right choice when outliers are real measurements you do not want to delete but do not want to dominate the result either.": [
+                ""
+            ],
             "The competing-risk CIF plot does not display {options}. The cumulative-incidence table remains available for estimates, confidence intervals, and counts at selected times.": [
                 ""
             ],
@@ -83288,6 +83876,9 @@
                 ""
             ],
             "The confidence interval includes 1, so the data are compatible with no difference.": [
+                ""
+            ],
+            "The confidence interval on the effect size is obtained by resampling. It is computed with a fixed random seed ({seed}) so this figure reproduces exactly; change the seed under Plot Configuration to check that a borderline interval is not an artefact of one resample.": [
                 ""
             ],
             "The constant flag identifies variables with no variation at all; it does not screen for the broader near-zero variance case (very low but non-zero variation), for which caret::nearZeroVar() is the appropriate tool.": [
@@ -83333,9 +83924,6 @@
                 ""
             ],
             "The counts variable '%s' does not exist in the data. Please select a valid numeric variable for counts.": [
-                ""
-            ],
-            "The counts variable contains non-integer values. A frequency table needs whole-number counts; the chi-square statistic was computed on the values as given, but they do not describe a table of observed cases.": [
                 ""
             ],
             "The Cox model is stratified by these variables, allowing for different baseline hazards in each stratum while estimating common covariate effects.": [
@@ -83455,6 +84043,9 @@
             "The data-derived cut-off point for {variable} is {cutoff}; it separates lower and higher marker values in this dataset.": [
                 ""
             ],
+            "The dataset contains %d observations. Rendering individual raw jitter points with transparency may increase render times; consider disabling data points or using boxplot/violin mode for faster display.": [
+                ""
+            ],
             "The dataset contains no rows. Add data (or clear the active filter) and re-run.": [
                 ""
             ],
@@ -83560,6 +84151,12 @@
             "The displayed score is the Fine-Gray relative subdistribution-hazard score, exp(centered linear predictor), calculated from all model coefficients. It is a ranking score, not an absolute event probability; a higher score indicates a higher fitted subdistribution hazard for the event of interest.": [
                 ""
             ],
+            "The effect size is estimated from the same Welch model as the test, so it will not match the value a classical equal-variance ANOVA reports for these data. That is expected, not an error.": [
+                ""
+            ],
+            "The effect size measure you selected could not be applied ({reason}), so the plot shows the statistics package default instead.": [
+                ""
+            ],
             "The endpoint of a decision path where final outcomes (costs, utilities) are specified. Represented by triangles in decision trees.": [
                 ""
             ],
@@ -83578,10 +84175,16 @@
             "The event time variable contains calendar dates, but the timeline uses raw numeric times, so these events cannot be placed on the time axis. Switch Time Input Type to Date/Time (or supply numeric event times) to show them.": [
                 ""
             ],
+            "The exact test could not be computed for the whole table": [
+                ""
+            ],
             "The expected lower bound for kappa is {bound}.": [
                 ""
             ],
             "The expected lower bound is {bound}, at or below zero, so even if the study observes the anticipated kappa it will not be able to rule out agreement no better than chance. Enrol more subjects, add raters, or relax the significance level.": [
+                ""
+            ],
+            "the explanatory measure of effect size (xi)": [
                 ""
             ],
             "The explanatory variable has only two levels, so there is a single comparison and no multiplicity adjustment is applied; it is equivalent to the overall log-rank test above.": [
@@ -83683,6 +84286,12 @@
             "The grouping variable '%s' has fewer than two groups among the rows being analysed, so there is nothing to compare across and no significance test can be computed. %s Rows dropped by a row filter or by the missing-value setting are not counted here. Widen or remove the row filter, switch off missing-value exclusion, or choose a grouping variable that has at least two levels present in the data.": [
                 ""
             ],
+            "The grouping variable has {n} levels, more than a single chart can label legibly; consider pooling categories or splitting the chart.": [
+                ""
+            ],
+            "The Grouping Variable must differ from the X and Y variables ('{var}' is used for both). Grouping by an axis variable would place every distinct value in its own hull.": [
+                ""
+            ],
             "The hazard ratio is the effect per one-unit increase, assuming a constant step in log hazard between consecutive values. If the categories are not equally spaced, move the variable to Explanatory Variables to estimate a separate hazard ratio for each level.": [
                 ""
             ],
@@ -83776,6 +84385,9 @@
             "The level '{level}' is used as the positive/exposure category as specified.": [
                 ""
             ],
+            "The level {level} does not occur in the grouping variable, so nothing is highlighted; pick a level that is present in the data.": [
+                ""
+            ],
             "The level in `var1` that represents the true condition.": [
                 ""
             ],
@@ -83827,6 +84439,9 @@
             "The log-rank p above is EXPLORATORY: the cut-points were selected from these same data, so it is the largest of many statistics reported as a single test and is optimistic. No selection-adjusted p-value is reported: a single-split maximally selected-rank test does not adjust a multiple-cutoff procedure. Validate every cut-point in independent data before clinical use.": [
                 ""
             ],
+            "The lollipop chart needs the following R packages, which are not installed: {packages}. Install them with install.packages() and re-run the analysis.": [
+                ""
+            ],
             "the lower boundary (mean - {k} SD)": [
                 ""
             ],
@@ -83840,6 +84455,9 @@
                 ""
             ],
             "The main variable to be plotted on the Y-axis.": [
+                ""
+            ],
+            "the Mann-Whitney U test": [
                 ""
             ],
             "The maximum amount society is willing to pay for an additional unit of health benefit, typically expressed per QALY.": [
@@ -83857,7 +84475,13 @@
             "The maximum value that perfect information about all uncertain parameters would have for the decision maker.": [
                 ""
             ],
-            "The MCD method needs the robustbase package, which is not available in this session. Choose Mahalanobis distance or a univariate method instead, or reinstall the module.": [
+            "The MCD method needs the MASS package, which is not available in this session. Choose Mahalanobis distance or a univariate method instead, or reinstall the module.": [
+                ""
+            ],
+            "The McNemar chi-square reported by the plotting package is computed without a continuity correction, so it will not match the base R default.": [
+                ""
+            ],
+            "The mean reference line is the unweighted mean of the {groups} plotted group summaries, not the mean of the {raw} underlying observations; because the groups differ greatly in size these two means differ, and the line does not mark the overall average.": [
                 ""
             ],
             "The median survival time for patients with {group} was {median} {time_unit}.": [
@@ -84070,6 +84694,9 @@
             "The paired/repeated-measures option requires a two-way (grouped) comparison, so the single-variable pie chart cannot be drawn. Disable the \"Paired\" option to display this chart, or use the grouped charts for the paired analysis.": [
                 ""
             ],
+            "the pairs that reached significance": [
+                ""
+            ],
             "The pairwise comparisons below were computed with the chi-square test and rest on the same approximation.": [
                 ""
             ],
@@ -84097,6 +84724,9 @@
             "The PH diagnostic uses an exploratory unpenalized refit of selected columns. It is not a test of post-selection inference for the penalized estimator.": [
                 ""
             ],
+            "The plot could not be drawn: {reason}. Check the dependent variable for constant values, extreme outliers or too few observations per group, or try a different statistical test.": [
+                ""
+            ],
             "The point-scoring guide and the nomogram plot are shown below.": [
                 ""
             ],
@@ -84116,6 +84746,9 @@
                 ""
             ],
             "The post-hoc tests help identify which specific group combinations contribute to the significant overall effect.": [
+                ""
+            ],
+            "the posterior median difference": [
                 ""
             ],
             "The pre-study probability that the tested relationships are true. In exploratory research fields, this may be 10 percent or lower. In confirmatory research with strong theoretical basis, it may be higher.": [
@@ -84184,10 +84817,16 @@
             "The proportional-hazards test plot could not be created: {message}": [
                 ""
             ],
+            "The publication-ready panel is reporting a <b>{panel}</b> correlation while the main plot reports <b>{main}</b>, because 'Correlation method (ggpubr)' is set independently of 'Statistical Test Type'. Both coefficients are correct for this data, but they are different statistics - set the two to match unless you intend to show both.": [
+                ""
+            ],
             "The pyramid is built on {n} observations spread over {nBands} age band(s). Counts this small change by whole percentage points when a single case is added or removed, so the percentages in the table and the outline of the figure describe these particular cases and not a stable estimate of the age distribution they came from.": [
                 ""
             ],
             "The R package 'ggcharts' is not installed, so the second pyramid (the 'Age Pyramid (ggcharts)' plot) is empty. The main Age Pyramid plot and the Population Data table above are complete and unaffected. To get the ggcharts version, install the package with install.packages(\"ggcharts\") and re-run; otherwise clear the 'ggcharts pyramid' checkbox to hide the empty plot.": [
+                ""
+            ],
+            "the rank-biserial correlation": [
                 ""
             ],
             "The ranking": [
@@ -84277,6 +84916,9 @@
             "The risk scores show a <b>{fold}-fold difference</b> between the highest and lowest risk groups.": [
                 ""
             ],
+            "the robust (AKP) standardised difference": [
+                ""
+            ],
             "the row and column variables": [
                 ""
             ],
@@ -84328,6 +84970,9 @@
             "The selected cross-validation rule produced a valid empty model. No less-penalized model was substituted.": [
                 ""
             ],
+            "the selected effect size": [
+                ""
+            ],
             "the selected event type": [
                 ""
             ],
@@ -84356,6 +85001,9 @@
                 ""
             ],
             "The selected stratification variable has fewer than two observed levels. The Cox model was not fitted.": [
+                ""
+            ],
+            "the selected test": [
                 ""
             ],
             "The selected test (t-test or Wilcoxon) requires exactly two groups, but the grouping variable has {n} levels. Choose ANOVA or Kruskal-Wallis, or use Automatic selection.": [
@@ -84397,6 +85045,9 @@
             "The Shapiro-Wilk test showed {verdict} (p = {p}).": [
                 ""
             ],
+            "The signed-rank p-value is computed from the normal approximation with a continuity correction, not from the exact permutation distribution that stats::wilcox.test uses by default, so it may differ from base R for small samples without ties.": [
+                ""
+            ],
             "The significance level ({alpha}) must be below the power ({power}). A study whose power does not exceed its type I error rate provides no evidence, and the sample size cannot be computed for it. Conventional values are alpha 0.05 and power 0.80.": [
                 ""
             ],
@@ -84431,6 +85082,9 @@
                 ""
             ],
             "The spline calibration curve for '%s' could not be fitted with %s knots: it needs at least %s events and %s non-events, more distinct predicted probabilities than knots, and a converging fit. Reduce the number of knots or check the predictor. ICI, E50, E90 and Emax are left blank.": [
+                ""
+            ],
+            "The split figure could not be drawn: {reason}. Check that every level of the Split By variable has enough data in at least two groups.": [
                 ""
             ],
             "The spread of per-case CVs differs between compartments (unequal variance of heterogeneity); this does not by itself mean one compartment is more heterogeneous on average": [
@@ -84574,6 +85228,9 @@
             "The UTC timezone setting applies only to the \"YYYY-MM-DD HH:MM:SS\" format, the only one carrying a time of day. These dates were read as \"{format}\", so they are calendar days and the timezone has no effect on the intervals.": [
                 ""
             ],
+            "The values are roughly symmetric within each group. The test tolerates mild skew at these sample sizes but not a long tail or a floor/ceiling effect - read the violins.": [
+                ""
+            ],
             "The values span {decades} orders of magnitude. Benford's Law describes data spanning several orders of magnitude, so below two decades the leading-digit frequencies are determined by where the range starts and stops rather than by how the values were recorded. The measured MAD of {mad} and chi-square p of {p} are reported above, but for this variable they carry no information about recording quality and are not interpreted here.": [
                 ""
             ],
@@ -84691,7 +85348,13 @@
             "There are {nEvents} events for {nColumns} encoded predictor columns. Regularization permits fitting in this setting but does not guarantee stable selection or performance; use resampling that repeats the entire modeling process.": [
                 ""
             ],
+            "there are only {n} complete pairs of values": [
+                ""
+            ],
             "There is no loading above cutoff for {pc}": [
+                ""
+            ],
+            "there is only one complete pair of values": [
                 ""
             ],
             "These are apparent (in-sample) estimates.": [
@@ -84781,6 +85444,12 @@
             "These rows have a 2-by-2 cell count below 5 (smallest cell {minimum}): {rows}. Their likelihood ratios, diagnostic odds ratios and confidence intervals rest on very few cases and may be unstable even when they look informative. Sensitivity, specificity and Youden's J on the same rows can still be sound, because those depend on the size of the two reference groups rather than on the smallest cell. Treat the ratio columns as exploratory and validate them in a larger independent sample.": [
                 ""
             ],
+            "These show the distribution of the data; wider sections contain more observations.": [
+                ""
+            ],
+            "These show the median (middle line) and the quartiles (box edges).": [
+                ""
+            ],
             "These statistics help assess data distribution, identify unusual values, and guide appropriate statistical analyses.": [
                 ""
             ],
@@ -84850,6 +85519,9 @@
             "Thin Plate Spline": [
                 ""
             ],
+            "Thinly Replicated Groups": [
+                ""
+            ],
             "Thinning Factor": [
                 ""
             ],
@@ -84880,6 +85552,12 @@
             "This analysis compares %d measurements from the same subjects. Useful for: biomarker tracking, treatment response monitoring, disease progression assessment.": [
                 ""
             ],
+            "This analysis compares a continuous variable across groups and draws the comparison horizontally, as a box-violin figure with the individual observations shown.": [
+                ""
+            ],
+            "This analysis compares repeated measurements taken from the same subjects (a within-subjects design).": [
+                ""
+            ],
             "This analysis describes the overall cohort only. It does not compare groups or compute p-values, confidence intervals or standardized mean differences.": [
                 ""
             ],
@@ -84902,6 +85580,9 @@
                 ""
             ],
             "This analysis has %d group(s) and %d fill level(s). The raincloud (ggrain) layer is skipped above 15 groups or 5 fill levels to keep the plot readable, in which case standard violin, boxplot and point layers are drawn instead.": [
+                ""
+            ],
+            "This analysis is built on the {pkg1} and {pkg2} packages; please cite jamovi and the packages listed below.": [
                 ""
             ],
             "This analysis is optimized for biomarker distribution analysis with robust statistical methods.": [
@@ -85163,6 +85844,9 @@
                 ""
             ],
             "This rank-based measure is less sensitive to extreme values than Pearson correlation.": [
+                ""
+            ],
+            "This reports a Bayes factor, quantifying the evidence for and against the null hypothesis.": [
                 ""
             ],
             "This represents the rate at which events occurred in your study population. The incidence rate is calculated as the number of events divided by the total person-time at risk.": [
@@ -85439,6 +86123,9 @@
                 ""
             ],
             "Thresholds Tested": [
+                ""
+            ],
+            "Tick <strong>Statistical results</strong> to print the coefficient on the plot.": [
                 ""
             ],
             "Tick marks:": [
@@ -86641,10 +87328,16 @@
             "Too few complete observations (%d). Need at least 10.": [
                 ""
             ],
+            "Too few discordant pairs for McNemar": [
+                ""
+            ],
             "Too few non-degenerate predictor columns.": [
                 ""
             ],
             "Too many age bands to draw": [
+                ""
+            ],
+            "Too many age bands to draw. Increase the bin width, use at most 200 bands, or choose an age group preset.": [
                 ""
             ],
             "Too Many Categories": [
@@ -87671,6 +88364,9 @@
                 ""
             ],
             "Treatment Pathway Plot": [
+                ""
+            ],
+            "Treatment preset: Enable pairwise comparisons to identify when treatment effects occur<br>": [
                 ""
             ],
             "Treatment Ranking Analysis": [
@@ -88792,6 +89488,9 @@
             "Unanimous Only": [
                 ""
             ],
+            "Unbalanced Group Sizes": [
+                ""
+            ],
             "unbiased": [
                 ""
             ],
@@ -88871,6 +89570,9 @@
                 ""
             ],
             "Unconfirmed (n)": [
+                ""
+            ],
+            "Uncorrected - Cohen's d with 2 groups, eta-squared with 3+": [
                 ""
             ],
             "undefined": [
@@ -89875,9 +90577,6 @@
             "Use Highest Posterior Density Intervals": [
                 ""
             ],
-            "Use highlight": [
-                ""
-            ],
             "Use individual trajectory patterns to develop personalized treatment protocols.": [
                 ""
             ],
@@ -90577,6 +91276,9 @@
             "Values >= this are classified as High": [
                 ""
             ],
+            "Values above {thr} are drawn in orange and the rest in blue, so colour encodes the threshold rather than the group.": [
+                ""
+            ],
             "Values between 0 and 1 are accepted as probabilities, but this analysis does not verify calibration.": [
                 ""
             ],
@@ -90652,6 +91354,12 @@
             "Variable '{name}' not found in dataset. Please verify variable selection.": [
                 ""
             ],
+            "Variable '{name}' was not found in the data. Available variables are: {available}. Please select a valid continuous variable for the dependent variable.": [
+                ""
+            ],
+            "Variable '{name}' was not found in the data. Available variables are: {available}. Please select a valid grouping variable.": [
+                ""
+            ],
             "Variable '{var}' appears to be continuous ({n} unique values). Bar charts are for categorical data. Consider converting to groups first.": [
                 ""
             ],
@@ -90722,6 +91430,9 @@
                 ""
             ],
             "Variable \"%s\" has %d missing values (%.1f%%). These observations will be excluded from analysis. Consider investigating the pattern of missingness and whether imputation is appropriate.": [
+                ""
+            ],
+            "Variable \"%s\" not found in data. Please select valid variables and re-run.": [
                 ""
             ],
             "Variable {var} contains only missing values": [
@@ -91297,6 +92008,9 @@
             "Variables not found in data: {vars}": [
                 ""
             ],
+            "Variables not found in dataset: {missing}": [
+                ""
+            ],
             "Variables not found in dataset: {vars}. Please check variable names and try again.": [
                 ""
             ],
@@ -91729,6 +92443,9 @@
             "Very small group size after cut-off: \"%s\" has only %d observations (%d events). Statistical tests (log-rank, Cox regression) are unreliable with such small groups. Consider: (1) alternative cut-off methods, (2) treating variable as continuous, or (3) collecting more data.": [
                 ""
             ],
+            "Very small group sizes detected: the smallest is n = {n} in group '{group}'. Groups below 10 observations may produce unreliable test results. Consider combining groups or collecting more data.": [
+                ""
+            ],
             "VERY SMALL SAMPLE": [
                 ""
             ],
@@ -91789,7 +92506,10 @@
             "very strong": [
                 ""
             ],
-            "very weak": [
+            "very weak negative": [
+                ""
+            ],
+            "very weak positive": [
                 ""
             ],
             "VERY WIDE CONFIDENCE INTERVAL": [
@@ -91846,16 +92566,13 @@
             "Violin Plots": [
                 ""
             ],
-            "Violin Plots to Compare Between Groups": [
-                ""
-            ],
-            "Violin Plots to Compare Within Groups": [
-                ""
-            ],
             "Violin plots with boxplots and group means": [
                 ""
             ],
             "Violin Plots with Distribution Shapes": [
+                ""
+            ],
+            "Violin plots:": [
                 ""
             ],
             "Violin Ridges": [
@@ -92239,6 +92956,12 @@
             "WARNING: ": [
                 ""
             ],
+            "Warning: {name} has fewer than 3 valid observations.": [
+                ""
+            ],
+            "Warning: {name} has no variation - every value is the same.": [
+                ""
+            ],
             "WARNING: {title}": [
                 ""
             ],
@@ -92377,7 +93100,10 @@
             "Weak Heredity": [
                 ""
             ],
-            "weak-to-moderate": [
+            "weak-to-moderate negative": [
+                ""
+            ],
+            "weak-to-moderate positive": [
                 ""
             ],
             "Weakly Informative": [
@@ -92710,6 +93436,9 @@
             "Welch's Correction": [
                 ""
             ],
+            "Welch's one-way analysis of variance": [
+                ""
+            ],
             "Welch's t-test": [
                 ""
             ],
@@ -92821,6 +93550,9 @@
             "What it reports:": [
                 ""
             ],
+            "What this analysis assumes": [
+                ""
+            ],
             "What this analysis does": [
                 ""
             ],
@@ -92870,6 +93602,9 @@
                 ""
             ],
             "What type of effect are you combining?": [
+                ""
+            ],
+            "What you will get": [
                 ""
             ],
             "What you'll get": [
@@ -93104,6 +93839,9 @@
                 ""
             ],
             "Which statistical components to extract": [
+                ""
+            ],
+            "Which test to use. Automatic applies Fisher's exact test to any pairwise comparison whose expected counts fall below 5. Always Fisher's exact applies it to the overall table as well as to every pairwise comparison.": [
                 ""
             ],
             "While such large increases are possible, please verify:": [
@@ -93664,6 +94402,12 @@
             "x-axis (First Variable)": [
                 ""
             ],
+            "x-axis (first variable)": [
+                ""
+            ],
+            "X-Axis and Y-Axis variables must be different (both are set to '{var}').": [
+                ""
+            ],
             "X-Axis Label": [
                 ""
             ],
@@ -93833,6 +94577,9 @@
                 ""
             ],
             "y-axis (Second Variable)": [
+                ""
+            ],
+            "y-axis (second variable)": [
                 ""
             ],
             "Y-axis End": [
@@ -94102,6 +94849,12 @@
             "Your Result": [
                 ""
             ],
+            "Your two central-tendency settings disagree: 'Central Tendency Display' still carries the legacy value '{legacy}' while 'Central Tendency Measure' selects {selected}. The plot shows the {drawn}, because 'Central Tendency Display' only decides whether a line is drawn at all.": [
+                ""
+            ],
+            "Yuen's trimmed-mean test": [
+                ""
+            ],
             "YYYY-DD-MM": [
                 ""
             ],
@@ -94205,12 +94958,6 @@
                 ""
             ],
             "Zero-Inflated Model": [
-                ""
-            ],
-            "Zero-order": [
-                ""
-            ],
-            "zero-order": [
                 ""
             ],
             "Zero-Order Correlations": [

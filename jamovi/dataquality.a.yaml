@@ -13,7 +13,7 @@ description:
   R:
     dontrun: false
     usage: |
-      data('histopathology', package = 'ClinicoPath')
+      data('histopathology', package = 'ClinicoPathDescriptives')
 
       dataquality(
           data = histopathology,

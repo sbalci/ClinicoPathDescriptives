@@ -351,7 +351,7 @@ outlierdetectionBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Cla
 #'
 #' @examples
 #' \donttest{
-#' data(histopathology, package = "ClinicoPath")
+#' data(histopathology, package = "ClinicoPathDescriptives")
 #'
 #' # Composite detection (the default): robust Z-score, IQR and Mahalanobis
 #' # distance combined; an observation is an outlier when at least half of
