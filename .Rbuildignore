@@ -9,15 +9,12 @@ build
 .gitignore
 jamovi
 ^.*\.jmo
-
 ### R user files
 .RProfile
-
 ### R Studio files
 \.Rproj$
 ^.*\.Rproj$
 ^\.Rproj\.user$
-
 ### Configuration
 ^_pkgdown\.yml$
 ^\.github/
@@ -26,26 +23,20 @@ jamovi
 ^img$
 ^renv$
 ^renv\.lock$
-
 ### pkgdown websites
 ^public/
 ^docs/
-
 ### Obsolete and temporary files/directories
 ^delete/
 ^temp/
-
 ### Uncompiled documentation files
 ^README\.Rmd$
 ^.*Class.Rd$
 ^.*\.gif$
 ^.*\.png$
 ^.*\.mp4$
-
-
 ### License
 ^LICENSE\.md$
-
 ### Jamovi
 ^jamovi/
 .jmo$
@@ -60,11 +51,9 @@ tododata
 ^build/
 ^.*\.jmo$
 ^.*\.omv$
-
 ### Other R codes
 ^data-raw$
 R/utils-pipe.R
-
 ### CI
 ^\.travis\.yml$
 ^codecov\.yml$
@@ -82,7 +71,6 @@ R/utils-pipe.R
 ^\.github$
 ^clang-.*
 ^gfortran.*
-
 ^.*\.code\-workspace$
 CITATION.cff
 ^\.claude$
@@ -92,3 +80,5 @@ CITATION.cff
 ^inst/extdata/.*\.omv$
 ^data/.*\.csv$
 ^.*\.tar\.gz$
+^DESCRIPTION\.backup\..*$
+^i18n-plans$

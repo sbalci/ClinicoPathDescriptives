@@ -344,6 +344,8 @@ test_that("categorize source literals round-trip special characters", {
 
 test_that("chi-square chunk sizing and generated source handle both dimensions", {
   comparison_count <- chisqposttestClass$private_methods$.pairwiseComparisonCount
+  # A dimension with fewer than 3 levels yields no pairwise comparison (a 2-level
+  # dimension's only "pair" is the whole table, which the omnibus test answers).
   expect_equal(comparison_count(matrix(1, nrow = 2, ncol = 8)), 28)
 
   options <- chisqposttestOptions$new(
@@ -357,7 +359,13 @@ test_that("chi-square chunk sizing and generated source handle both dimensions",
 })
 
 test_that("MCAR diagnostics have explicit safe preconditions", {
+  # The method is translated with jmvcore::.(), which resolves `self` from the
+  # caller frame; a private method pulled off the generator has no instance, so
+  # give its execution environment a minimal self before calling it detached.
   mcar_message <- dataqualityClass$private_methods$.mcarTestMessage
+  env <- new.env(parent = environment(mcar_message))
+  env$self <- list(options = list(translate = function(text, n = 1) text))
+  environment(mcar_message) <- env
   expect_match(
     mcar_message(data.frame(x = c(1, NA))),
     "at least two numeric variables",
@@ -381,6 +389,9 @@ test_that("audited source removes obsolete and fragile patterns", {
     readLines(file.path(audit_root, "R", paste0(name, ".b.R")), warn = FALSE)
   }
 
+  expect_match(source_text("summarydata"), "\\u{00B1}", fixed = TRUE)
+  expect_false(grepl("&plusmn;", source_text("summarydata"), fixed = TRUE))
+  expect_false(grepl("BaylorEdPsych", source_text("dataquality"), fixed = TRUE))
   # The vtree call is now dispatched through do.call() because ptable = TRUE returns
   # a data.frame rather than the tree widget, so the tree and the pattern table are
   # built by two separate calls. What matters is unchanged: every vtree::vtree CALL

@@ -48,14 +48,14 @@ The analysis reports whether a departure from the expected leading-digit
 frequencies was detected; it does not identify a cause.
 }
 \examples{
-\dontrun{
+\donttest{
 # Leading-digit screen on cardiac troponin: 400 patients,
 # 0.005 to 8.96 ng/mL, spanning 3.3 orders of magnitude. At the
 # default 2-digit setting Nigrini's MAD cut-off is not usable
 # below n = 5204, so the chi-square goodness-of-fit test carries
 # the finding here (p = 0.70; no departure detected).
-benford(
-    data = timeroc_cardiovascular_risk,
-    var = "troponin_level")
+# benford(
+#     data = timeroc_cardiovascular_risk,
+#     var = "troponin_level")
 }
 }

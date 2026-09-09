@@ -11,5 +11,9 @@
 #' @importFrom scales percent
 #' @importFrom tangram html5
 #' @importFrom viridis viridis
+#' @importFrom grDevices adjustcolor col2rgb colorRampPalette
+#' @importFrom naniar mcar_test
+#' @importFrom stringr str_to_sentence str_to_title
+#' @importFrom visdat vis_dat vis_guess vis_miss
 NULL
 

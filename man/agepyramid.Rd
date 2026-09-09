@@ -153,7 +153,7 @@ Tables can be converted to data frames with \code{asDF} or \code{\link{as.data.f
 Generates an age pyramid from an age variable and a gender variable.
 }
 \examples{
-\dontrun{
+\donttest{
 # `female` and `male` are Level options: jamovi forbids a default on
 # them, so they are REQUIRED arguments of this function. Pass NULL to
 # have the levels read from their names.

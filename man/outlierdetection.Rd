@@ -130,7 +130,7 @@ outlier detection capabilities.
 Perfect for clinical research data quality control and preprocessing.
 }
 \examples{
-\dontrun{
+\donttest{
 data(histopathology, package = "ClinicoPathDescriptives")
 
 # Composite detection (the default): robust Z-score, IQR and Mahalanobis

@@ -81,6 +81,11 @@ importFrom(ggplot2,
 )
 importFrom(ggvenn,ggvenn)
 importFrom(glue,glue)
+importFrom(grDevices,
+  adjustcolor,
+  col2rgb,
+  colorRampPalette
+)
 importFrom(graphics,par)
 importFrom(grid,
   grid.text,
@@ -152,6 +157,7 @@ importFrom(moments,
   kurtosis,
   skewness
 )
+importFrom(naniar,mcar_test)
 importFrom(performance,check_outliers)
 importFrom(purrr,partial)
 importFrom(pwr,pwr.chisq.test)
@@ -173,6 +179,10 @@ importFrom(stats,
   var,
   xtabs
 )
+importFrom(stringr,
+  str_to_sentence,
+  str_to_title
+)
 importFrom(tableone,CreateTableOne)
 importFrom(tangram,html5)
 importFrom(tidyr,
@@ -186,4 +196,9 @@ importFrom(utils,
   tail
 )
 importFrom(viridis,viridis)
+importFrom(visdat,
+  vis_dat,
+  vis_guess,
+  vis_miss
+)
 importFrom(vtree,vtree)

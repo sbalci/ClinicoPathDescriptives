@@ -66,7 +66,7 @@ Optionally, you can enable distribution diagnostics to examine normality,
 skewness, and kurtosis.
 }
 \examples{
-\dontrun{
+\donttest{
 data(histopathology)
 
 # Descriptive statistics for two continuous variables

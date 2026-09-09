@@ -85,7 +85,7 @@ differences. Each row is treated as one case; check for repeated records
 before interpreting counts as patients.
 }
 \examples{
-\dontrun{
+\donttest{
 data(histopathology)
 
 # Standard Table One: mean (SD) for the numeric Age,

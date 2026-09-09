@@ -116,7 +116,7 @@ engine always counts cases. Every axis variable is drawn with its own
 recorded values as the strata.
 }
 \examples{
-\dontrun{
+\donttest{
 # Flow of lymphovascular invasion, perineural invasion and treatment group
 alluvial(
     data = histopathology,
