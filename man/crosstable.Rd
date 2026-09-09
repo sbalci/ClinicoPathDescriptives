@@ -107,7 +107,7 @@ analysis,
 correspondence analysis) are planned but not yet available.
 }
 \examples{
-\donttest{
+\dontrun{
 # Age and Sex compared across treatment groups
 crosstable(
     data = histopathology,

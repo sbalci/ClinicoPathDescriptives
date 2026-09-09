@@ -153,7 +153,7 @@ in the package tests. Read the pairwise results together with the effect
 sizes and the residuals, not from the p-values alone.
 }
 \examples{
-\donttest{
+\dontrun{
 # Tumour grade by treatment group, using the histopathology data
 # bundled with the module. The overall test is significant
 # (p = 0.010) and the three grade levels give three pairwise

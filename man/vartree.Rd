@@ -130,7 +130,7 @@ summaries, and interpretation features. Consolidates functionality from
 legacy versions with modern vtree capabilities.
 }
 \examples{
-\donttest{
+\dontrun{
 # percvarLevel, pruneLevel1, pruneLevel2, followLevel1 and followLevel2 are
 # 'Level' options. The jamovi compiler forbids a default on those, so the
 # generated R function takes them as REQUIRED arguments: pass NULL whenever

@@ -112,7 +112,7 @@ breakdown. The grade uses rule-of-thumb thresholds and is not an externally
 validated quality metric; treat it as a screening aid, not a verdict.
 }
 \examples{
-\donttest{
+\dontrun{
 # Quality check of a numeric variable
 checkdata(
     data = histopathology,

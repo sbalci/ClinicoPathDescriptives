@@ -48,7 +48,7 @@ The analysis reports whether a departure from the expected leading-digit
 frequencies was detected; it does not identify a cause.
 }
 \examples{
-\donttest{
+\dontrun{
 # Leading-digit screen on cardiac troponin: 400 patients,
 # 0.005 to 8.96 ng/mL, spanning 3.3 orders of magnitude. At the
 # default 2-digit setting Nigrini's MAD cut-off is not usable

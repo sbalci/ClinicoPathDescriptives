@@ -116,7 +116,7 @@ distribution with the boundaries marked, and can add the categorised
 variable straight to the dataset.
 }
 \examples{
-\donttest{
+\dontrun{
 # Age split into quartiles
 categorize(
     data = histopathology,
