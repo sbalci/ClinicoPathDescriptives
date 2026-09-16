@@ -21,7 +21,6 @@ importFrom(ComplexUpset,
   get_size_mode,
   intersection_size
 )
-importFrom(DescTools,BreslowDayTest)
 importFrom(DiagrammeRsvg,export_svg)
 importFrom(MASS,ginv)
 importFrom(R6,R6Class)

@@ -1,7 +1,7 @@
 Type: Package
 Package: ClinicoPathDescriptives
 Title: Descriptive Analysis for Clinicopathological Research
-Version: 1.0.82
+Version: 1.0.82.02
 Date: 2026-09-16
 Authors@R: person(given = "Serdar", family = "Balci", role = c("aut",
  "cre", "cph"), email = "serdarbalci@serdarbalci.com", comment =
@@ -35,7 +35,6 @@ Imports:
     classInt,
     ComplexUpset,
     dbscan,
-    DescTools,
     DiagrammeRsvg,
     dplyr,
     easyalluvial,
