@@ -188,7 +188,8 @@ categorizeResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                     "ClinicoPathJamoviModule",
                     "classInt",
                     "dichotomizing",
-                    "AltmanRoyston2006"))
+                    "AltmanRoyston2006",
+                    "questionr"))
             self$add(jmvcore::Html$new(
                 options=options,
                 name="todo",

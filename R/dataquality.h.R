@@ -134,7 +134,9 @@ dataqualityResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class
                     "visdat",
                     "naniar",
                     "dplyr",
-                    "ggplot2"))
+                    "ggplot2",
+                    "caret",
+                    "mice"))
             self$add(jmvcore::Preformatted$new(
                 options=options,
                 name="notices",

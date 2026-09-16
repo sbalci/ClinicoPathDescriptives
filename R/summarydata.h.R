@@ -94,10 +94,10 @@ summarydataResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class
                 name="",
                 title="Summary of Continuous Variables",
                 refs=list(
+                    "ClinicoPathJamoviModule",
                     "gt",
                     "gtExtras",
-                    "moments",
-                    "ClinicoPathJamoviModule"))
+                    "moments"))
             self$add(jmvcore::Preformatted$new(
                 options=options,
                 name="notices",

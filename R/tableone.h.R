@@ -106,7 +106,8 @@ tableoneResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                     "gtsummary",
                     "arsenal",
                     "janitor",
-                    "whoisinthisstudy"))
+                    "whoisinthisstudy",
+                    "knitr"))
             self$add(jmvcore::Html$new(
                 options=options,
                 name="todo",

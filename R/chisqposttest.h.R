@@ -247,13 +247,15 @@ chisqposttestResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Cla
                 name="",
                 title="Chi-Square Post-Hoc Tests",
                 refs=list(
-                    "Cohen1988",
                     "ClinicoPathJamoviModule",
+                    "Cohen1988",
                     "chisq.posthoc.test",
                     "agresti2013",
                     "sharpe2015",
                     "holm1979",
-                    "benjaminihochberg1995"))
+                    "benjaminihochberg1995",
+                    "boot",
+                    "pwr"))
             self$add(jmvcore::Html$new(
                 options=options,
                 name="todo",
