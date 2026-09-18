@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" version="1.1" viewBox="0 0 74 44" width="74" height="44">
+  <metadata>
+    <rdf:RDF>
+      <cc:Work rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+        <dc:title>ClinicoPathDescriptives module icon</dc:title>
+        <dc:creator><cc:Agent><dc:title>Serdar Balci</dc:title></cc:Agent></dc:creator>
+        <cc:license rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/"/>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <!-- Baseline axis -->
+  <path d="M 6 38 L 68 38" stroke="#3e6da9" stroke-width="1.5" stroke-dasharray="1, 3" fill="none"/>
+  
+  <!-- Continuous Distribution Normal Curve -->
+  <path d="M 8 38 C 16 38, 22 36, 26 26 C 31 13, 35 7, 39 7 C 43 7, 47 13, 52 26 C 56 36, 62 38, 66 38" 
+        fill="none" stroke="#6b9de8" stroke-width="2.5" stroke-linecap="round"/>
+        
+  <!-- Mean / Median Line -->
+  <path d="M 39 7 L 39 38" stroke="#e6ac40" stroke-width="1.8" stroke-dasharray="2, 2"/>
+  
+  <!-- Interquartile / Confidence Range box at bottom -->
+  <rect x="29" y="32" width="20" height="6" fill="#ffffff" stroke="#3e6da9" stroke-width="1.8" rx="1"/>
+  <line x1="39" y1="32" x2="39" y2="38" stroke="#e6ac40" stroke-width="2"/>
+  
+  <!-- Summary metrics markers (Quartiles Q1 & Q3) -->
+  <circle cx="29" cy="22" r="2.8" fill="#ffffff" stroke="#9f9f9f" stroke-width="1.8"/>
+  <circle cx="49" cy="22" r="2.8" fill="#ffffff" stroke="#9f9f9f" stroke-width="1.8"/>
+  <circle cx="39" cy="7" r="3" fill="#ffffff" stroke="#e6ac40" stroke-width="2"/>
+</svg>
