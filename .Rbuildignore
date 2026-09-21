@@ -82,3 +82,16 @@ CITATION.cff
 ^.*\.tar\.gz$
 ^DESCRIPTION\.backup\..*$
 ^i18n-plans$
+^_build_site\.R$
+
+# LLM / agent tooling and developer notes -- never part of the package tarball
+^\.claude/
+^\.agents$
+^\.agents/
+^\.claude_prompts$
+^CLAUDE.*\.md$
+^AGENTS\.md$
+^GEMINI\.md$
+^TODO.*\.md$
+^sonograph_log\.md$
+^development-LLM
