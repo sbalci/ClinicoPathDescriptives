@@ -3,124 +3,120 @@
 [![R-CMD-check](https://github.com/sbalci/ClinicoPathDescriptives/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/sbalci/ClinicoPathDescriptives/actions/workflows/R-CMD-check.yaml)
 [![CRAN status](https://www.r-pkg.org/badges/version/ClinicoPathDescriptives)](https://CRAN.R-project.org/package=ClinicoPathDescriptives)
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
+[![jamovi](https://img.shields.io/badge/jamovi-module-blue)](https://www.jamovi.org)
 
 ## Overview
 
-**ClinicoPathDescriptives** is a comprehensive R package designed specifically for descriptive analysis in clinicopathological research. This toolkit bridges the gap between statistical analysis and medical research workflows by providing both programmatic R functions and an intuitive graphical interface through the jamovi statistical platform.
+**ClinicoPathDescriptives** is a comprehensive R package and jamovi module designed specifically for descriptive analysis, data profiling, and population visualization in clinicopathological research. As the descriptive analytics engine of the **ClinicoPath** ecosystem, it bridges statistical methodology and clinical research workflows through both programmatic R functions and an intuitive graphical interface in jamovi (under the **Exploration** menu).
 
-The package emphasizes reproducible research workflows, automated reporting capabilities, and natural language interpretation of statistical results, making advanced statistical analysis accessible to medical researchers regardless of their programming background. With over 50 comprehensive vignettes and extensive documentation, ClinicoPathDescriptives serves as both a powerful analytical tool and an educational resource for clinicopathological research.
+The package emphasizes reproducible research workflows, publication-ready baseline tables, interactive data validation, and natural language interpretation of results—making advanced descriptive statistics accessible to clinicians, pathologists, and researchers.
 
-## Key Features
+---
 
-### 📊 Descriptive Analysis Suite
+## 🎯 Key Features & Analysis Suite (14 Analyses)
 
-- **Table One Generation** (`tableone`): Create publication-ready baseline characteristics tables with automatic variable type detection and appropriate statistical tests
-- **Cross-tabulation Analysis** (`crosstable`): Generate comprehensive contingency tables with chi-square, Fisher's exact, and other appropriate statistical tests, including q-value corrections for multiple comparisons
-- **Summary Statistics** (`summarydata`): Automated descriptive statistics with natural language interpretation and multiple output formats
-- **Categorical Data Reporting** (`reportcat`): Specialized reporting tools for categorical variables with clinical context
+ClinicoPathDescriptives provides **14 distinct analyses** organized into four functional groups:
 
-### 📈 Advanced Visualizations
+| Category | Analysis | Function | Key Clinical Features |
+| :--- | :--- | :--- | :--- |
+| **Descriptive Tables** | **Table One** | `tableone` | Publication-ready baseline patient characteristics with automatic variable type detection, parametric/non-parametric tests, SMD (standardized mean differences), and missing value reporting. |
+| **Descriptive Tables** | **Cross-tabulation** | `crosstable` | Multi-way contingency tables with Pearson Chi-Square, Fisher's exact test, Likelihood Ratio, Cramer's V, and multiple comparison corrections. |
+| **Descriptive Tables** | **Continuous Summaries** | `summarydata` | Comprehensive summary statistics for continuous variables with distribution diagnostics and natural language clinical summaries. |
+| **Descriptive Tables** | **Categorical Summaries** | `reportcat` | Frequency and percentage distributions for categorical variables with clinical context and formatted summary text. |
+| **Visualizations** | **Age Pyramid** | `agepyramid` | Demographic and cohort population pyramid plots with flexible age binning, split by gender or disease subgroup. |
+| **Visualizations** | **Alluvial Diagrams** | `alluvial` | Categorical flow diagrams visualizing patient journeys, disease staging transitions, and multi-line therapy trajectories. |
+| **Visualizations** | **Venn & Set Overlaps** | `venn` | High-resolution set intersection diagrams supporting 2 to 7 sets with statistical overlap counts and proportions via ggVennDiagram. |
+| **Visualizations** | **Variable Tree** | `vartree` | Hierarchical data structure trees visualizing patient cohort stratification, inclusion/exclusion paths, and subgroup breakdowns. |
+| **Data Quality** | **Data Quality Assessment** | `dataquality` | Multi-variable data health dashboard summarizing missingness patterns, variable types, distributions, and potential anomalies. |
+| **Data Quality** | **Single Variable Check** | `checkdata` | Interactive data validation tool for screening individual variables for entry errors, boundary violations, and formatting issues. |
+| **Data Quality** | **Outlier Detection** | `outlierdetection` | Multi-method outlier detection leveraging IQR, Z-scores, Mahalanobis distance, MCD (robust covariance), and DBSCAN clustering. |
+| **Data Quality** | **Benford's Law Analysis** | `benford` | Digital data integrity, fraud, and anomaly screening using first- and second-digit Benford distribution conformance. |
+| **Comparisons** | **Chi-Square Post-Hoc** | `chisqposttest` | Pairwise post-hoc proportion comparisons following significant chi-square tests with Bonferroni, Holm, or FDR adjustments. |
+| **Data Preparation** | **Categorize Variables** | `categorize` | Flexible binning and recoding of continuous variables into clinically meaningful ordinal categories, percentiles, or custom intervals. |
 
-- **Age Pyramid Plots** (`agepyramid`): Population structure visualizations for demographic analysis
-- **Alluvial Diagrams** (`alluvial`): Flow visualizations for tracking categorical variable relationships and patient pathways
-- **Venn Diagrams** (`venn`): Set relationship visualizations with statistical overlap analysis using ggVennDiagram (supports 2-7 sets)
-- **Variable Trees** (`vartree`): Hierarchical data structure visualizations for complex datasets
+---
 
-### 🔍 Data Quality & Validation
+## 🚀 Installation
 
-- **Benford's Law Analysis** (`benford`): Statistical data quality assessment and fraud detection using first-digit distribution analysis
-- **Data Quality Assessment** (`dataquality`): Comprehensive data profiling with missing value analysis and distribution assessments
-- **Data Checking** (`checkdata`): Interactive data validation and quality control tools
-- **Outlier Detection** (`outlierdetection`): Multiple methods including DBSCAN, robust statistics, and visualization
-- **Chi-square Post-hoc Tests** (`chisqposttest`): Detailed post-hoc analysis for chi-square tests with pairwise comparisons
+### In jamovi (Recommended)
 
-### 🎯 Clinical Research Focus
+1. Open **jamovi** (>= 2.6).
+2. Click the **Modules** button (**+**) in the top right corner.
+3. Select **jamovi library**.
+4. Search for **ClinicoPathDescriptives** (or browse under **Exploration**).
+5. Click **Install**.
 
-- **Medical Terminology Integration**: Functions and outputs designed with clinical research workflows in mind
-- **Journal-Ready Tables**: Multiple formatting options compatible with major medical journals (NEJM, Lancet, JAMA styles)
-- **Statistical Best Practices**: Appropriate test selection based on data characteristics and clinical research standards
-- **Natural Language Summaries**: Automated interpretation of statistical results in clinically meaningful language
-
-### 🖥️ Dual Interface Design
-
-- **R Programming Interface**: Full programmatic control with pipe-friendly syntax and tidy data principles
-- **jamovi GUI Modules**: Point-and-click interface for researchers without programming experience
-- **Reproducible Workflows**: All analyses generate reproducible code regardless of interface used
-
-### 📚 Comprehensive Documentation
-
-- **50+ Detailed Vignettes**: Step-by-step tutorials covering all package functions with clinical examples
-- **22 Clinical Datasets**: Real-world medical research scenarios for testing and learning
-- **Interactive Examples**: Hands-on tutorials with interpretation guidance
-- **pkgdown Website**: Professional documentation at [serdarbalci.com/ClinicoPathDescriptives](https://www.serdarbalci.com/ClinicoPathDescriptives/)
-
-## Installation
-
-### Development Version
+### As an R Package
 
 ```r
-# Install from GitHub
-devtools::install_github("sbalci/ClinicoPathDescriptives")
+# Install development version from GitHub
+remotes::install_github("sbalci/ClinicoPathDescriptives")
 ```
 
-### jamovi Module
+---
 
-Install the jamovi module from the jamovi library or visit [ClinicoPath jamovi Module](https://www.serdarbalci.com/ClinicoPathJamoviModule/).
-
-## Quick Start
+## 💡 Quick Start (R Interface)
 
 ```r
 library(ClinicoPathDescriptives)
 
-# Load example clinical dataset
-data("histopathology")
+# Load included clinical histopathology dataset
+data("histopathology", package = "ClinicoPathDescriptives")
 
-# Generate Table One for baseline characteristics
-tableone_result <- tableone(
+# 1. Generate publication-ready Table One
+tableone_result <- ClinicoPathDescriptives::tableone(
   data = histopathology,
-  grouping_variable = "Treatment_Group",
-  explanatory_variables = c("Age", "Gender", "Tumor_Size", "Grade")
+  vars = vars(Age, Gender, Grade, Tumor_Size),
+  showSummary = TRUE
 )
 
-# Create cross-tabulation with statistical tests
-crosstable_result <- crosstable(
+# 2. Cross-tabulation with statistical tests
+crosstable_result <- ClinicoPathDescriptives::crosstable(
   data = histopathology,
-  dependent_variable = "Response",
-  explanatory_variables = c("Treatment_Group", "Biomarker_Status"),
-  statistical_test = TRUE
+  vars = vars(Grade),
+  group = "Sex",
+  pcat = TRUE
 )
 
-# Generate alluvial diagram for treatment pathways
-alluvial_plot <- alluvial(
+# 3. Treatment pathway alluvial diagram
+alluvial_plot <- ClinicoPathDescriptives::alluvial(
   data = histopathology,
-  variables = c("Initial_Treatment", "Response", "Second_Line_Treatment")
+  vars = vars(Sex, Grade, Stage)
+)
+
+# 4. Demographic age pyramid
+pyramid_plot <- ClinicoPathDescriptives::agepyramid(
+  data = histopathology,
+  age = "Age",
+  gender = "Sex"
 )
 ```
 
-## Documentation & Support
+---
 
-- **Package Website**: [https://www.serdarbalci.com/ClinicoPathDescriptives/](https://www.serdarbalci.com/ClinicoPathDescriptives/)
+## 📖 Documentation & Resources
+
+- **Module Website & Vignettes**: [https://www.serdarbalci.com/ClinicoPathDescriptives/](https://www.serdarbalci.com/ClinicoPathDescriptives/)
+- **ClinicoPath Umbrella Ecosystem**: [https://www.serdarbalci.com/ClinicoPathJamoviModule/](https://www.serdarbalci.com/ClinicoPathJamoviModule/)
 - **GitHub Repository**: [https://github.com/sbalci/ClinicoPathDescriptives/](https://github.com/sbalci/ClinicoPathDescriptives/)
-- **jamovi Module**: [https://www.serdarbalci.com/ClinicoPathJamoviModule/](https://www.serdarbalci.com/ClinicoPathJamoviModule/)
-- **Issue Tracking**: [GitHub Issues](https://github.com/sbalci/ClinicoPathJamoviModule/issues/)
+- **Issue Tracker & Feature Requests**: [GitHub Issues](https://github.com/sbalci/ClinicoPathJamoviModule/issues)
+
+---
 
 ## Citation
 
-If you use ClinicoPathDescriptives in your research, please cite the main ClinicoPath project:
+If you use ClinicoPathDescriptives in your research or publications, please cite:
 
-```
-Serdar Balci (2025). ClinicoPath jamovi Module. doi:10.5281/zenodo.3997188
-[R package]. Retrieved from https://github.com/sbalci/ClinicoPathJamoviModule
+```bibtex
+@manual{balci2026clinicopath,
+  title  = {ClinicoPath: jamovi Module for Clinicopathological Research},
+  author = {Serdar Balci},
+  year   = {2026},
+  url    = {https://www.serdarbalci.com/ClinicoPathJamoviModule/},
+  doi    = {10.5281/zenodo.3997188}
+}
 ```
 
 ## License
 
-GPL (>= 2) - see [LICENSE](https://github.com/sbalci/ClinicoPathDescriptives/blob/master/LICENSE.md) file for details.
-
-## Related Packages
-
-- **OncoPath**: Oncology-specific visualization tools including swimmer plots and waterfall plots for cancer research workflows. The swimmer plot and waterfall plot modules have been moved to this dedicated oncology package.
-
-## Contributing
-
-Contributions are welcome! Please see our [contributing guidelines](https://github.com/sbalci/ClinicoPathJamoviModule/blob/master/CONTRIBUTING.md) and feel free to submit issues, feature requests, or pull requests.
+GPL (>= 2) — see the [LICENSE](LICENSE) file for details.
