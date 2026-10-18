@@ -1,3 +1,204 @@
+# ClinicoPathDescriptives 1.0.82.03 (development version)
+
+A short development build. Results that rest on random resampling are now reproducible and say
+which random seed they used, two interface and message defects are fixed, and the module installs
+one fewer package.
+
+## Behaviour changes -- saved analyses may produce different results
+
+- **`chisqposttest`: simulated Fisher's exact p-values are now reproducible.** When a table is too
+  large for the exact Fisher calculation, its p-value is estimated by simulation (2,000 random
+  tables). That simulation was not seeded, so the same data could give a slightly different p-value
+  -- occasionally on the other side of 0.05 -- each time the analysis ran. It now uses the
+  analysis's Random seed (default 42), for the overall test and for every pairwise comparison, so a
+  saved analysis gives the same p-values every time it is opened. The first run after upgrading can
+  differ from the last value you saw by simulation noise.
+
+## New options
+
+- **`categorize`: Random seed for natural breaks (Jenks).** Above 20,000 observations natural breaks
+  are computed on a random subsample, using a seed that was fixed inside the analysis. The seed is
+  now an option. Its default (20240101) is the old fixed value, so existing results do not change;
+  a different seed shows how much the break points depend on the subsample. The Break Points table
+  names the seed whenever it was used, and the generated R code uses the same seed.
+
+## Changed -- results name the random seed behind them
+
+- **`chisqposttest`:** the Random seed field is always available (it was greyed out unless
+  bootstrap confidence intervals were ticked), because it now also drives the simulated Fisher
+  p-values. The overall-test, post-hoc and export tables carry a "Random seed: N" note whenever they
+  show a simulated p-value or a bootstrap interval.
+
+- **`outlierdetection`:** the outlier table, the method comparison and the exclusion summary state
+  "Random seed: N" whenever the flags depended on it -- when a large dataset was subsampled, or when
+  the MCD or ICS methods, which use random draws, were run.
+
+## Fixed
+
+- **`outlierdetection`: method and threshold controls grey out when they do not apply.** The
+  univariate and multivariate method lists and the composite, Z-score, IQR and confidence-level
+  fields were linked to the detection category in a form jamovi does not recognise, so they stayed
+  active whatever category was chosen, including where changing them had no effect.
+
+- **`dataquality`: the Little's MCAR test note shows its numbers again.** When non-numeric variables
+  were selected, the sentence explaining that the test covers only the numeric ones printed
+  "{n_num}" and "{n_non}" instead of the counts. This came in with 1.0.81.
+
+- **`venn`: the summary table keeps one row per selected variable.** A variable that cannot be
+  turned into yes/no membership now leaves an empty row, with the explanatory notice, instead of
+  silently dropping out of the table.
+
+## Documentation and packaging
+
+- DescTools is no longer a dependency (nothing in this module used it); withr is added.
+- The References section of each analysis now also cites the R packages it relies on -- for example
+  ggcharts in Age Pyramid, boot and pwr in Chi-Square Post-Hoc Tests, vtree and DiagrammeR in
+  Variable Tree, and UpSetR, ComplexUpset, ggVennDiagram and ggvenn in Venn Diagram.
+- The Turkish translation now ships only this module's own text (about 2,350 messages, labels and
+  titles, four in five of them translated) instead of the whole ClinicoPath catalogue, which makes
+  the download smaller. Coverage is unchanged.
+- The README has a feature table and updated quick-start examples.
+
+# ClinicoPathDescriptives 1.0.81 (2026-09-09)
+
+All fourteen analyses went through a second round of checks and reviews. This release brings a
+Turkish translation and seven new options, and corrects results that were wrong, incomplete or
+different on every run.
+
+**Read the behaviour changes section first.** Several fixes change a number, a label or a default,
+so an analysis saved under 1.0.6.03 can give a different answer after upgrading.
+
+## Behaviour changes -- saved analyses may produce different results
+
+- **`benford`: the Assessment row reports a finding, not a level of concern.** "Low / Moderate /
+  High concern" became "No departure detected / Departure detected / Not assessable / Limited
+  evidence", and the fraud wording and "Recommendation" text gave way to a list of possible causes.
+  Data spanning less than two orders of magnitude, where Benford's Law does not apply, are now "Not
+  assessable" instead of receiving a verdict.
+- **`benford`: the MAD conformity label needs a larger sample** -- about 1,000 observations at 1
+  digit, 5,200 at 2 and 10,200 at 3 (was 250, 1,300 and 2,550). Below that the chi-square test
+  decides. Under the old rule, data that followed Benford's Law perfectly were still rated worse
+  than "Low" in up to 64% of samples.
+- **`checkdata`: imperial units are no longer recognised.** The "Unit system for clinical checks"
+  option is removed. Weight is checked in kg, height in cm (or metres when every value is 10 or
+  less). A weight column in pounds is now flagged "Weight >200 kg", which lowers the quality grade.
+- **`checkdata`: rare categories follow the "Rare category threshold (%)" option** (default 5% of
+  complete cases) instead of a fixed "fewer than 5", so two tables no longer disagree. With 200
+  cases a category is now rare below 10 cases.
+- **`chisqposttest`: "Always Fisher's exact" now applies to the overall test too**, which showed
+  chi-square before. Fractional frequency weights are refused. Tables needing more than 500
+  pairwise comparisons skip them with a warning, and bootstrap intervals are left blank (and
+  counted) for sub-tables above 2,000 observations. When the exact Fisher calculation fails, the
+  simulated p-value uses 2,000 random tables instead of 100,000.
+- **`crosstable`: new analyses start in the gtsummary style** (was NEJM), the only style that honours
+  every option. **Empty levels of the grouping variable are dropped**: an unused group appeared as
+  an all-zero column and made the chi-square test return NaN.
+- **`dataquality`: the "Duplicate rows" option was renamed.** It was called `complete_cases_only` but
+  never restricted anything to complete cases. A saved analysis that had it ticked opens with it
+  unticked; tick it again. R scripts must use `row_level_duplicates`.
+- **`dataquality`: missingness flags follow your threshold.** The "Moderate Missingness" band starts
+  at your threshold, not a fixed 10%. The list of variables over the threshold compares exact
+  counts, so 251 of 2,500 values missing (10.04%) is now listed at a 10% threshold instead of being
+  rounded to 10.0% and missed. A numeric variable with one non-missing value is flagged "Constant".
+- **`outlierdetection`: results are reproducible.** MCD, OPTICS and LOF use random draws that were
+  not seeded, so the same data could flag 21 rows on one run and 22 on the next. They now use the
+  Random seed option (default 123). Infinite values are dropped like missing values.
+- **`outlierdetection`: robust Mahalanobis distance and ICS work.** Their packages now install with
+  the module, so "Robust Mahalanobis" gives a result instead of "Method Not Available", and "All
+  methods" includes both, which can change the composite flags.
+- **`summarydata`: the guidance panels are off by default.** Clinical Interpretation, About This
+  Analysis and Statistical Glossary appear only when the new "Interpretation guidance and glossary"
+  option is ticked, including in saved analyses. Mean, median and SD in the visual summary follow
+  Decimal places; Shapiro-Wilk p-values near 0.05 keep their deciding digits (0.0496, not 0.050);
+  skewness and kurtosis are reported when Shapiro-Wilk is skipped above 5,000 observations.
+- **`tableone`: the janitor style tabulates categorical variables only.** Numeric columns, including
+  1-5 scores, are skipped with a note (set them to Nominal or Ordinal), and no longer drive
+  missing-value exclusion, so N can rise. janitor hides unused levels; gtsummary rows for two-level
+  variables name the counted level ("Sex = Male"); a true NA factor level counts as missing.
+- **`venn`: Set Calculations lists every overlap.** With 4 sets it showed 7 rows instead of 11 (the
+  3-way overlaps were missing). **The UpSet plot shows every selected set**: UpSetR silently kept
+  the 5 largest, so 6- and 7-set plots had wrong bars.
+- **`venn`: other corrections.** An explicit NA factor level counts as missing, not negative. The
+  membership table's Row column gives the row number in your dataset, not 1..n of the analysed rows.
+  With "Fill color mapping" unticked, ggVennDiagram regions are one flat colour.
+- **`agepyramid`:** with a fixed bin width the top band is labelled by its width ("70-74"), not by
+  the oldest patient ("70-73"), and very young cohorts read "0-4", not "0+".
+- **`alluvial`:** in the condensation plot, numeric axis variables are drawn as their recorded values
+  instead of five equal-width bins, and a numeric condensation variable may have up to 20 values.
+- **`vartree`:** in pattern mode the hidden-branch counts count the whole patterns vtree drops, so the
+  summary matches the figure.
+
+## New options
+
+- **`agepyramid`: Percentage base** (within each gender, the default, or of all observations so both
+  columns together sum to 100%) **and Bar values** (counts or percentages on both pyramids).
+- **`alluvial`: Flow table** -- one row per path through the plotted variables with cases and
+  percent, largest first (by weight total under GG Alluvial with a weight). The "Bin labels" and
+  "Custom bin labels" options are removed; they never had a visible effect.
+- **`chisqposttest`: Random seed** for the bootstrap intervals. The default (42) is the value used
+  before, so results do not change.
+- **`crosstable`: Plain-language summary** -- a copy-ready paragraph with the sample size, groups,
+  tests run, rows excluded and the variables that differed at p < 0.05 (q < 0.05 when adjusted). It
+  sits with p-value adjustment and SMD in a new collapsed Advanced box.
+- **`summarydata`: Interpretation guidance and glossary** (see above).
+- **`vartree`: Colour palette** -- Default or Colour-blind safe (blue, orange, purple and brown
+  instead of red/green).
+
+## Changed -- messages
+
+- **`crosstable`:** notes sit below the table, errors and warnings above. Rows removed by
+  missing-value exclusion are counted, and the over-20%-missing warning is judged before exclusion
+  (with exclusion on it could never fire). The low-expected-count warning matches the style, and
+  none appears when Fisher's test is selected. Skewed variables shown as mean (SD) get a note. The
+  Variable Name Warnings and Analysis Information panels are removed.
+- **`chisqposttest`:** a strong warning when any expected count is below 1, a closing summary note
+  ("3 pairwise comparisons with Holm adjustment, 1 significant"), and "fdr" written out as
+  Benjamini-Hochberg (FDR).
+- **`categorize`:** new notices for more than 20% missing values, empty custom labels, a new name
+  equal to the source variable, a decimal comma in manual breaks, and a median split that cannot
+  divide zero-heavy data. Under Quantiles the imbalance warning names the tied value ("60% of the
+  observations equal 0") instead of advising quantiles.
+- **`agepyramid`, `alluvial`, `vartree`, `venn`:** new warnings for unusable ages, too many fill
+  categories, variables with more than 12 levels, prune/follow variables with no level chosen, and
+  a variable positive in over 95% of cases. `alluvial` input problems are error notices instead of a
+  separate panel.
+- **`summarydata`:** "Report sentences" became "Draft report sentences" and asks you to add units,
+  population and time point. **`tableone`:** says "cases", not "patients", warns that repeated
+  records are not merged, and shows missingness as "23.75% (19/80)". **`reportcat`** uses jamovi's
+  own error display.
+
+## Fixed
+
+- **`categorize`: a single manual cut-off works.** One threshold, the usual clinical case, gave
+  "Insufficient break points" while the generated R code gave two categories. Infinite values are
+  treated as missing instead of crashing the run, and empty percentage cells show blank, not "NaN".
+- **`checkdata`, `dataquality`:** infinite values no longer stop the run; duplicated patterns are
+  grouped by their real values; non-numeric variables show "-" instead of "NA" in outlier columns.
+- **`crosstable`:** an all-missing or single-valued variable is named and left out instead of
+  failing the whole table; the chi-square/Fisher choice is no longer greyed out for gtsummary.
+- **`tableone`:** janitor no longer fails on a category named "Total"; the missing row is relabelled
+  when the data hold a real "Unknown" or "NA" category; date and duration columns are left out.
+- **`benford`:** the report sentence for fewer than 100 observations is no longer cut off, NaN values
+  are counted as excluded, and saved files no longer store every observation for the plot.
+- **`agepyramid`:** the Population Data table no longer doubles its rows when the title or colours
+  change, and a gender column named "Age" is no longer overwritten by the ages.
+- **`alluvial`:** GG Alluvial axes show variable names instead of 1.0, 1.5, 2.0, and right-to-left
+  and top-to-bottom directions reverse the axis order.
+- **`reportcat`, `summarydata`:** names containing `<`, `>` or `&` (e.g. "Ki-67 >20%") display
+  correctly; `summarydata` tables are readable in the dark theme.
+- **`vartree`:** a small missing-value node no longer triggers the few-cases warning.
+  **`venn`:** the all-missing check covers variables 3 to 7.
+
+## Documentation and packaging
+
+- **Turkish translation.** Interface and results text can be shown in Turkish; about four in five of
+  the module's messages, labels and titles are translated.
+- Help text no longer overstates what an analysis does: `tableone` covers the whole cohort, with no
+  p-values or confidence intervals; `benford` detects departures, not causes.
+- New references: classInt and Royston, Altman and Sauerbrei (2006) in `categorize`, ggcharts in
+  `agepyramid`, viridis and RColorBrewer in `venn`. R usage examples were added or restored.
+- robustbase and vcd are no longer dependencies; bigutilsr, ICS and ICSOutlier are added.
+
 # ClinicoPathDescriptives 1.0.6.03 (2026-08-22)
 
 Every analysis this module ships was put through three passes: a structural audit, a statistical
@@ -120,20 +321,20 @@ This release is the result of a release review of the fourteen analyses shipped 
 together with a documentation audit of all 62 vignettes. Each backend fix listed below was
 verified against a hand computation or a reference implementation.
 
-**Read the behaviour changes section first.**Several of the defects fixed here produced wrong
+**Read the behaviour changes section first.** Several of the defects fixed here produced wrong
 numbers or wrong verdicts, so an analysis saved under an earlier version can legitimately give a
 different answer after upgrading.
 
 ## Behaviour changes -- saved analyses may produce different results
 
-- **`agepyramid`: age bands are now left-closed.**Bands were right-closed, so every boundary age
+- **`agepyramid`: age bands are now left-closed.** Bands were right-closed, so every boundary age
   fell into the band below it: a 65-year-old was classified into the `1-65` band under a preset
   titled *Geriatric (65+)*. The lowest band also absorbed an extra year, inflating the youngest bar
   by 20% on a uniform population. Bands are now left-closed (`[lower, upper)`), the WHO/UN
   convention. **Bar heights, the pyramid table and every preset's boundary membership change**;
   re-running an existing analysis will move counts near band edges.
 
-- **`categorize`: manual break points are preserved instead of being overwritten.**User-entered
+- **`categorize`: manual break points are preserved instead of being overwritten.** User-entered
   break points were replaced by breaks derived from the data range. Entering the standard CKD eGFR
   cut-points 30/60/90 produced breaks of 12.26/60/109.21 -- two of the three requested thresholds
   were deleted and four CKD stages were merged into two bins. Break points are now kept exactly as
@@ -141,7 +342,7 @@ different answer after upgrading.
   breaks will now produce the categories that were actually requested**, which is not what it
   displayed before.
 
-- **`benford`: the conformity verdict now rests on the chi-square test.**Clean, genuinely
+- **`benford`: the conformity verdict now rests on the chi-square test.** Clean, genuinely
   Benford-distributed data was labelled *Nonconformity* and described as showing "potential
   manipulation" at the very sample sizes the module itself recommends: the MAD conformity cut-offs
   sit below the sampling-noise floor until n > 1301 for the default 2-digit analysis. The verdict
@@ -154,41 +355,41 @@ different answer after upgrading.
   correction is now applied once, so this method will flag substantially more observations than
   before.
 
-- **`tableone`: the default style now discloses missing values.**The default style reported the
+- **`tableone`: the default style now discloses missing values.** The default style reported the
   group size beside a statistic computed on a smaller set (n = 120 printed next to a mean taken
   over 112 observations). Missing values are now disclosed, so denominators shown in the table may
   differ from earlier output.
 
-- **`reportcat`: missing values are no longer presented as a category.**Missing values were
+- **`reportcat`: missing values are no longer presented as a category.** Missing values were
   rendered as if they were a level, with a percentage computed as missing/valid, which could exceed
   100%. In addition, the reported level count now matches the levels actually listed, and the
   sparse-category warning no longer counts declared-but-empty factor levels. Percentages and level
   counts will change for any variable with missing values or unused levels.
 
-- **`summarydata`: normality reporting is now internally consistent.**The diagnostics panel and
+- **`summarydata`: normality reporting is now internally consistent.** The diagnostics panel and
   the copy-ready sentence could return *opposite* normality verdicts for the same variable, because
   one compared the rounded p-value against the threshold and the other the exact p-value. The
   wording "Data showed normal distribution" no longer overstates what a non-significant test
   supports, p-values below 0.001 no longer print as `0`, and the decimal-places setting now applies
   to every panel rather than only the summary table.
 
-- **`crosstable`: the categorical-test selector now takes effect.**The setting was ignored in four
+- **`crosstable`: the categorical-test selector now takes effect.** The setting was ignored in four
   of the six table styles, including the default (NEJM) and gtsummary. gtsummary now honours an
   explicit Fisher request, and styles that cannot apply a given setting now say so rather than
   silently using their own default. Reported p-values may change where Fisher was requested but
   chi-square was actually run.
 
-- **`chisqposttest`: the bootstrap confidence interval for phi is now reproducible.**The bootstrap
+- **`chisqposttest`: the bootstrap confidence interval for phi is now reproducible.** The bootstrap
   was unseeded, so re-running the same analysis on the same data moved the interval. The interval
   is now stable across runs; it may differ from an interval recorded from an earlier run.
 
 ## Fixed
 
-- **`tableone`: crash with the janitor style on a single variable.**Subsetting rows from a
+- **`tableone`: crash with the janitor style on a single variable.** Subsetting rows from a
   one-column frame dropped it to a vector. In addition, the janitor style no longer tabulates
   continuous variables one row per patient.
 
-- **`checkdata`: the per-method flag columns were inverted.**A method that *did* detect an
+- **`checkdata`: the per-method flag columns were inverted.** A method that *did* detect an
   observation rendered a blank cell, and vice versa.
 
 - **`benford`: the "Suspicious Data Points" panel listed the first rows of the dataset** rather
@@ -209,7 +410,7 @@ different answer after upgrading.
 
 - **`alluvial`: variables past the maximum-variables cap were discarded silently.**
 
-- **`dataquality`: Little's MCAR test was unreachable for jamovi users.**It depends on `naniar`,
+- **`dataquality`: Little's MCAR test was unreachable for jamovi users.** It depends on `naniar`,
   which sat in `Suggests`; jamovi installs only a module's `Imports`, so the test could never run
   on a jamovi installation. `naniar` is now an `Imports` dependency. The "near-zero variance" flag
   has also been relabelled to describe what it actually detects: exactly constant variables.
@@ -260,7 +461,7 @@ recurring problem was documentation of an API this module does not have.
   and levels are provisional. `16-coefficient-plots.Rmd` also gained the global
   `knitr::opts_chunk$set(eval = FALSE)` it was missing.
 
-- **Statistical claims were tied to the options they depend on.**The Benford chi-square degrees of
+- **Statistical claims were tied to the options they depend on.** The Benford chi-square degrees of
   freedom were stated flatly as 8, which is true only for `digits = 1`; the default `digits = 2`
   gives 89. The MAD conformity cut-offs (0.006/0.012/0.015) were presented as universal; they are
   Nigrini's first-digit thresholds and are now labelled as such, with the first-two-digit
@@ -269,13 +470,13 @@ recurring problem was documentation of an API this module does not have.
   warning that a bare `benford()` may resolve to `benford.analysis::benford()`, which has a
   different signature.
 
-- **Option reference tables are now complete.**The `alluvial` reference listed 9 of its 24 options
+- **Option reference tables are now complete.** The `alluvial` reference listed 9 of its 24 options
   (and the conclusion claimed "9 customizable parameters"); the function-signature block in
   `09-function-alluvial.Rmd` showed 10 of 24. `outlierdetection` and `checkdata` reference examples
   now list every option with its real default, and `agepyramid`'s colour section now lists the four
   real `color_palette` levels.
 
-- **jamovi menu paths, help pointers and links were corrected.**Benford is under *Exploration >
+- **jamovi menu paths, help pointers and links were corrected.** Benford is under *Exploration >
   ClinicoPath Data Quality*, not *ClinicoPath Descriptives*; `dataquality` is titled
   *Multi-Variable Visual Quality*. `help(package = "ClinicoPath")` became
   `help(package = "ClinicoPathDescriptives")`, `ClinicoPath::` call prefixes became
@@ -305,12 +506,12 @@ previously imposed is now the user's choice. All defaults reproduce the previous
   match an earlier analysis. Note that `right` makes the lowest band one year wider than the
   others.
 
-- **`categorize`: `excludeoutofrange`.**With `manual` breaks the outer range is extended so no
+- **`categorize`: `excludeoutofrange`.** With `manual` breaks the outer range is extended so no
   case is lost (the default, `false`). Set it to `true` to keep the break points exactly as
   entered and drop observations outside them; the number excluded is reported, split by
   direction. Ignored for the computed methods, whose breaks already span the data.
 
-- **`outlierdetection`: `sampleThreshold` and `sampleSize`.**The subsampling threshold and the
+- **`outlierdetection`: `sampleThreshold` and `sampleSize`.** The subsampling threshold and the
   number of rows retained were hard-coded at 10000 and 5000, so a user needing a complete
   outlier list on a large file had no way to get one. Both are now configurable; the defaults
   reproduce the previous behaviour.
@@ -328,7 +529,7 @@ previously imposed is now the user's choice. All defaults reproduce the previous
 
 ## Note
 
-- **Version realignment only; no analysis shipped here was changed.**Between 1.0.2 and 1.0.4 the
+- **Version realignment only; no analysis shipped here was changed.** Between 1.0.2 and 1.0.4 the
   only differences in this module are the version and date strings in `DESCRIPTION`,
   `jamovi/0000.yaml`, the fourteen `jamovi/*.a.yaml` files and their generated `R/*.h.R` headers.
   No `.b.R` backend, `.r.yaml`, `.u.yaml`, shared utility, dataset, manual page or test file was
@@ -336,7 +537,7 @@ previously imposed is now the user's choice. All defaults reproduce the previous
   `meddecide`, `jsurvival` and `OncoPath` analysis families, none of which is distributed to this
   module.
 
-- **Known issue: "Getting Started" panels stay visible after an analysis has run.**A module-wide review found
+- **Known issue: "Getting Started" panels stay visible after an analysis has run.** A module-wide review found
   that a `visible:` expression in a `.r.yaml` file which begins with `!` does not match jamovi's
   routing pattern, so the expression is never evaluated and is treated as a plain non-empty string --
   permanently true. The effect was reproduced here on `benford` (`!var`) and `agepyramid`
@@ -350,7 +551,7 @@ previously imposed is now the user's choice. All defaults reproduce the previous
 
 ## Note
 
-- **Superseded version bump.**1.0.3 was published to keep this module in step with the umbrella
+- **Superseded version bump.** 1.0.3 was published to keep this module in step with the umbrella
   **ClinicoPath** package and was replaced by 1.0.4 a day later. Nothing shipped in this module
   changed between the two.
 
@@ -358,7 +559,7 @@ previously imposed is now the user's choice. All defaults reproduce the previous
 
 ## Fixed
 
-- **Analysis variables were required arguments of the R function.**An option with no default in
+- **Analysis variables were required arguments of the R function.** An option with no default in
   its jamovi definition compiles to a bare parameter, so calling the analysis from R without it
   failed with `argument "X" is missing, with no default` before the analysis's own validation
   could produce a usable message. Now defaulting to `NULL`: `agepyramid` (`age`, `gender`),
@@ -375,7 +576,7 @@ previously imposed is now the user's choice. All defaults reproduce the previous
 
 ## Added
 
-- **Automated GitHub release (`.github/workflows/release.yaml`).**A push to the default branch
+- **Automated GitHub release (`.github/workflows/release.yaml`).** A push to the default branch
   touching `DESCRIPTION` or `jamovi/0000.yaml` cross-checks the two version strings, refuses to
   proceed if they disagree, and -- if the tag does not already exist -- tags `v<version>` and
   publishes a release whose notes are the matching section of this file.
