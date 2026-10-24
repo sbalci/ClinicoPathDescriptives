@@ -70,8 +70,8 @@ msgstr "'%s' ve '%s'"
 
 #: R/venn.b.R
 msgid ""
-"'%s' is not a colour R recognises, so the ggVennDiagram plot below is drawn "
-"with black instead. Use a colour name from the standard R palette (for "
+"'%s' is not a color R recognizes, so the ggVennDiagram plot below is drawn "
+"with black instead. Use a color name from the standard R palette (for "
 "example red, steelblue, grey40) or a hex code such as #2C7FB8."
 msgstr ""
 "'%s', R'ın tanıdığı bir renk değildir, bu nedenle aşağıdaki ggVennDiagram "
@@ -85,7 +85,7 @@ msgid ""
 "preset's own (for the WHO/UN preset: 0-4, 5-9, ... 85+). Applying "
 "right-closure would have moved every boundary by one year and the result "
 "could no longer be described as {preset} age groups. The 'Age band "
-"boundaries' selector is greyed out while a preset is chosen: set 'Age group "
+"boundaries' selector is grayed out while a preset is chosen: set 'Age group "
 "preset' back to 'Custom (use bin width)' to use right-closed bands, or to "
 "set that selector back to left-closed and remove this note."
 msgstr ""
@@ -232,7 +232,7 @@ msgstr "{level}: n = {n}, geçerli vakaların %{percent}'i."
 #: R/outlierdetection.b.R
 msgid ""
 "{method} returned no classification for any of the {n} observations "
-"analysed, so no outlier result can be shown. This happens when the method "
+"analyzed, so no outlier result can be shown. This happens when the method "
 "cannot be estimated at the requested setting rather than because the data "
 "are clean - reporting it as zero outliers would be misleading. Lower the "
 "confidence level, or select Robust Z-score or the Interquartile range "
@@ -654,7 +654,7 @@ msgid ""
 "%d rows. Missing values are never counted as a category of their own: that "
 "would add a row or column and change the degrees of freedom of the test. If "
 "the dropped rows may differ systematically from the rest, say so when "
-"reporting the association, or analyse missingness explicitly."
+"reporting the association, or analyze missingness explicitly."
 msgstr ""
 "%d / %d satırda (%%%.1f) %s üzerinde eksik bir değer vardı ve kontenjans "
 "tablosu oluşturulmadan önce çıkarıldı, bu nedenle aşağıdaki her sonuç kalan "
@@ -675,7 +675,7 @@ msgstr ""
 #: R/venn.b.R
 msgid ""
 "%d of %d selected variables are positive in fewer than 5%% of the %d "
-"analysed cases (%s). The Venn shapes this analysis draws are fixed geometry: "
+"analyzed cases (%s). The Venn shapes this analysis draws are fixed geometry: "
 "a region holding one case is drawn the same size as a region holding a "
 "hundred, so a rare set is easy to over-read. Go by the counts and "
 "percentages printed inside the regions, by the Summary of True Counts table, "
@@ -691,7 +691,7 @@ msgstr ""
 #: R/venn.b.R
 msgid ""
 "%d of %d selected variables are positive in more than 95%% of the %d "
-"analysed cases (%s). A set that contains almost every case fills the "
+"analyzed cases (%s). A set that contains almost every case fills the "
 "diagram, leaving the regions outside it nearly empty, so the picture "
 "separates almost nothing. Check that the level nominated as positive is the "
 "one you meant, and read the Summary of True Counts table rather than the "
@@ -1465,7 +1465,7 @@ msgstr "kullanılabilir sayı olmayan yaşlar (sayısal olmayan, negatif ya da s
 
 #: R/agepyramid.b.R
 msgid ""
-"All {n} analysed observations fall in the female group, so the figure is a "
+"All {n} analyzed observations fall in the female group, so the figure is a "
 "one-sided age distribution rather than a two-sided pyramid, and the male "
 "column of the Population Data table is zero in every band. If the data do "
 "contain both groups, check the 'Female level' and 'Male level' selectors and "
@@ -1479,7 +1479,7 @@ msgstr ""
 
 #: R/agepyramid.b.R
 msgid ""
-"All {n} analysed observations fall in the male group, so the figure is a "
+"All {n} analyzed observations fall in the male group, so the figure is a "
 "one-sided age distribution rather than a two-sided pyramid, and the female "
 "column of the Population Data table is zero in every band. If the data do "
 "contain both groups, check the 'Female level' and 'Male level' selectors and "
@@ -2246,7 +2246,7 @@ msgid "Check the frequency table and the distribution plot"
 msgstr ""
 
 #: R/vartree.b.R
-msgid "Checking data completeness and coding before modelling"
+msgid "Checking data completeness and coding before modeling"
 msgstr "Modellemeden önce veri bütünlüğünü ve kodlamayı kontrol etme"
 
 #: R/chisqposttest.b.R
@@ -2619,12 +2619,17 @@ msgstr "Varyasyon Katsayısı (%)"
 msgid "Cohort type:"
 msgstr "Kohort türü:"
 
+#: R/venn.b.R
+msgid "Color Not Recognized"
+msgstr "Renk Tanınmadı"
+
 #: venn/options/edgeColor.description.jamovi
 msgid "Color of boundary lines."
 msgstr "Sınır çizgilerinin rengi."
 
 #: agepyramid/options/color_palette.title
 #: alluvial/options/colorPalette.title
+#: vartree/options/palette.title
 #: venn/options/colorPalette.title
 msgid "Color palette"
 msgstr "Renk paleti"
@@ -2637,6 +2642,10 @@ msgstr "Cinsiyet görselleştirmesi için renk paleti."
 msgid "Color palette for the diagram flows."
 msgstr "Diyagram akışları için renk paleti."
 
+#: R/alluvial.b.R
+msgid "Color palette stretched"
+msgstr "Renk paleti esnetildi"
+
 #: R/agepyramid.b.R
 msgid "Color palettes:"
 msgstr "Renk paletleri:"
@@ -2644,6 +2653,18 @@ msgstr "Renk paletleri:"
 #: agepyramid/options/ggcharts_colors.description.jamovi
 msgid "Color scheme for the ggcharts pyramid."
 msgstr "ggcharts piramidi için renk şeması."
+
+#: vartree/options/palette/colorblind.title
+msgid "Color-blind safe"
+msgstr "Renk körü için güvenli"
+
+#: R/vartree.b.R
+msgid ""
+"Color-blind-safe palette applied: blue, orange, purple and brown shades in "
+"place of the default red/green rotation"
+msgstr ""
+"Renk körlüğüne uygun palet uygulandı: varsayılan kırmızı/yeşil döngüsü "
+"yerine mavi, turuncu, mor ve kahverengi tonlar"
 
 #: agepyramid/options/color_palette/colorblind.title
 #: agepyramid/options/ggcharts_colors/colorblind.title
@@ -2653,30 +2674,6 @@ msgstr "Renk körlüğüne uygun"
 #: alluvial/ui[2][0][0][0].label
 msgid "Colors & Theme"
 msgstr "Renkler ve Tema"
-
-#: R/venn.b.R
-msgid "Colour Not Recognised"
-msgstr "Renk Tanınmadı"
-
-#: vartree/options/palette.title
-msgid "Colour palette"
-msgstr "Renk paleti"
-
-#: R/alluvial.b.R
-msgid "Colour palette stretched"
-msgstr "Renk paleti esnetildi"
-
-#: vartree/options/palette/colorblind.title
-msgid "Colour-blind safe"
-msgstr "Renk körlüğüne uygun"
-
-#: R/vartree.b.R
-msgid ""
-"Colour-blind-safe palette applied: blue, orange, purple and brown shades in "
-"place of the default red/green rotation"
-msgstr ""
-"Renk körlüğüne uygun palet uygulandı: varsayılan kırmızı/yeşil döngüsü "
-"yerine mavi, turuncu, mor ve kahverengi tonlar"
 
 #: R/chisqposttest.b.R
 msgid "column categories with no observations: %s"
@@ -2826,11 +2823,9 @@ msgstr "Sayısal değişkenler için kapsamlı istatistikler"
 
 #: R/dataquality.b.R
 msgid ""
-"Computed on the {n_num} numeric variable(s) ({names}); missingness in the "
-"{n_non} non-numeric variable(s) was not tested."
+"Computed on the {nNum} numeric variable(s) ({names}); missingness in the "
+"{nNon} non-numeric variable(s) was not tested."
 msgstr ""
-"{n_num} sayısal değişken ({names}) üzerinde hesaplanmıştır; {n_non} sayısal "
-"olmayan değişkendeki eksiklik test edilmemiştir."
 
 #: R/chisqposttest.b.R
 msgid "Computed without Yates' continuity correction."
@@ -3075,7 +3070,7 @@ msgid ""
 "using equal-width intervals, sample quantiles, hand-entered break points, "
 "mean +/- SD bands, a median split, or Fisher-Jenks natural breaks. Reports "
 "the break points and the resulting category frequencies, draws the "
-"distribution with the boundaries marked, and can add the categorised "
+"distribution with the boundaries marked, and can add the categorized "
 "variable straight to the dataset."
 msgstr ""
 "Sürekli bir sayısal değişkeni; eşit genişlikte aralıklar, örneklem "
@@ -3513,8 +3508,8 @@ msgid "Data Summary"
 msgstr "Veri Özeti"
 
 #: R/benford.b.R
-msgid "DATA SUMMARY:"
-msgstr "VERİ ÖZETİ:"
+msgid "Data summary:"
+msgstr "Veri özeti:"
 
 #: R/dataquality.b.R
 msgid "Data Type Analysis:"
@@ -3636,7 +3631,7 @@ msgstr "Demografi:"
 #: agepyramid/options/pct_base.description.jamovi
 msgid ""
 "Denominator of the percentages: within each gender (each column sums to "
-"100%) or of all analysed observations (both columns together sum to 100%)."
+"100%) or of all analyzed observations (both columns together sum to 100%)."
 msgstr ""
 "Yüzdelerin paydası: her cinsiyet içinde (her sütun %100'e tamamlanır) veya "
 "analiz edilen tüm gözlemler içinde (iki sütun birlikte %100'e tamamlanır)."
@@ -4135,19 +4130,15 @@ msgstr "Eşit kuyruklu aralık"
 msgid "equal-tailed interval"
 msgstr "eşit kuyruklu aralık"
 
-#: R/categorize.b.R
-#: R/dataquality.b.R
-#: crosstable/results/errorNotice.title
-msgid "Error"
-msgstr "Hata"
-
 #: R/agepyramid.b.R
 #: R/benford.b.R
+#: R/categorize.b.R
 #: R/dataquality.b.R
 #: R/summarydata.b.R
 #: R/vartree.b.R
-msgid "ERROR"
-msgstr "HATA"
+#: crosstable/results/errorNotice.title
+msgid "Error"
+msgstr "Hata"
 
 #: R/tableone.b.R
 msgid ""
@@ -4199,10 +4190,6 @@ msgstr ""
 msgid "Error:"
 msgstr "Hata:"
 
-#: R/chisqposttest.b.R
-msgid "ERROR:"
-msgstr "HATA:"
-
 #: R/alluvial.b.R
 msgid "ERROR: {title}"
 msgstr ""
@@ -4230,14 +4217,14 @@ msgstr ""
 #: R/reportcat.b.R
 msgid ""
 "Every selected variable was empty or all-missing, so there is nothing to "
-"summarise: {vars}. Select at least one variable that has observed categories."
+"summarize: {vars}. Select at least one variable that has observed categories."
 msgstr ""
 
 #: R/crosstable.b.R
 msgid ""
 "Every selected variable was left out for the reasons above, so there is no "
 "table to build. Select at least one variable that has values in the rows "
-"being analysed."
+"being analyzed."
 msgstr ""
 "Yukarıdaki nedenlerden dolayı seçilen her değişken dışarıda bırakıldı, bu "
 "nedenle oluşturulacak tablo yok. Analiz edilen satırlarda değerleri olan en "
@@ -4256,7 +4243,7 @@ msgstr ""
 
 #: R/tableone.b.R
 msgid ""
-"Every value of this variable is missing, so it cannot be summarised and does "
+"Every value of this variable is missing, so it cannot be summarized and does "
 "not appear in the table below."
 msgstr ""
 "Bu değişkenin tüm değerleri eksik olduğundan özetlenemez ve aşağıdaki "
@@ -4464,7 +4451,7 @@ msgstr ""
 
 #: R/checkdata.b.R
 msgid "Fair"
-msgstr "Orta"
+msgstr "Makul"
 
 #: venn/results/summary.columns.title
 msgid "False Count"
@@ -4545,7 +4532,7 @@ msgstr "'{variable}' dolgu değişkeni veride yok."
 #: R/alluvial.b.R
 msgid ""
 "Fill variable '{variable}' has {n} distinct categories, so the flows are "
-"coloured in that many shades and the legend will be hard to read."
+"colored in that many shades and the legend will be hard to read."
 msgstr ""
 
 #: alluvial/ui[0][3].label
@@ -4819,11 +4806,7 @@ msgid ""
 "- Multiple testing correction (Bonferroni, Holm, Benjamini-Hochberg, "
 "Benjamini-Yekutieli)\n"
 "- Variable name safety (special characters, spaces)\n"
-"- Data quality validation warnings\n"
-"\n"
-"Note: Advanced features (pairwise comparisons, effect sizes, residual "
-"analysis,\n"
-"correspondence analysis) are planned but not yet available."
+"- Data quality validation warnings"
 msgstr ""
 "Birden fazla tablo stiliyle Çapraz Tablolar oluşturma fonksiyonu.\n"
 "\n"
@@ -4835,11 +4818,7 @@ msgstr ""
 "- Çoklu test düzeltmesi (Bonferroni, Holm, Benjamini-Hochberg, "
 "Benjamini-Yekutieli)\n"
 "- Değişken adı güvenliği (özel karakterler, boşluklar)\n"
-"- Veri kalitesi doğrulama uyarıları\n"
-"\n"
-"Not: Gelişmiş özellikler (ikili karşılaştırmalar, etki büyüklükleri, artık "
-"analizi,\n"
-"uygunluk analizi) planlanmaktadır ancak henüz mevcut değildir."
+"- Veri kalitesi doğrulama uyarıları"
 
 #: R/agepyramid.b.R
 #: agepyramid/options/gender.title
@@ -4853,11 +4832,11 @@ msgstr "Cinsiyet düzeyi seçimi"
 
 #: R/agepyramid.b.R
 msgid "Gender levels were assigned by level order, not by name"
-msgstr "Cinsiyet düzeyleri ada göre değil, düzey sırasına göre atandı"
+msgstr ""
 
 #: R/agepyramid.b.R
 msgid "Gender levels were read from the level names"
-msgstr "Cinsiyet düzeyleri düzey adlarından okundu"
+msgstr ""
 
 #: R/agepyramid.b.R
 msgid "gender values matching neither the female nor the male level"
@@ -4997,14 +4976,14 @@ msgstr ""
 msgid "Good completeness"
 msgstr ""
 
+#: alluvial/options/themeStyle/grey.title
+msgid "Gray"
+msgstr "Gri"
+
 #: agepyramid/options/color_palette/grayscale.title
 #: agepyramid/options/ggcharts_colors/grayscale.title
 msgid "Grayscale"
 msgstr "Gri tonlu"
-
-#: alluvial/options/themeStyle/grey.title
-msgid "Grey"
-msgstr "Gri"
 
 #: crosstable/options/group.title
 #: crosstable/ui[0][1].label
@@ -5346,8 +5325,8 @@ msgid ""
 msgstr ""
 
 #: R/vartree.b.R
-msgid "INFO"
-msgstr "BİLGİ"
+msgid "Info"
+msgstr "Bilgi"
 
 #: R/checkdata.b.R
 msgid "INFORMATIVE ONLY (n<10): Single-method flags shown, not statistically robust"
@@ -5646,13 +5625,13 @@ msgstr ""
 "kalitesini doğrudan ele alır ve verilerin birden fazla büyüklük derecesini "
 "kapsamasına bağlı değildir."
 
-#: R/benford.b.R
-msgid "LEADING-DIGIT BIN MEMBERSHIP"
-msgstr "BAŞTAKİ BASAMAK ARALIK ÜYELİĞİ"
-
 #: benford/results/text2.title
 msgid "Leading-Digit Bin Membership"
 msgstr "Baştaki Basamak Aralık Üyeliği"
+
+#: R/benford.b.R
+msgid "Leading-digit bin membership"
+msgstr "Baştaki basamak aralık üyeliği"
 
 #: R/benford.b.R
 msgid ""
@@ -5972,7 +5951,7 @@ msgstr "Kenar grafikleri"
 msgid ""
 "Marginal plots are switched on, so the diagram and its histograms are "
 "assembled into a fixed grid that cannot take further styling. These settings "
-"were left out of this plot: colour palette, theme style, enhanced edge "
+"were left out of this plot: color palette, theme style, enhanced edge "
 "gradients, plot orientation, flow direction, plot subtitle and custom title."
 msgstr ""
 "Kenar grafikleri açık olduğundan diyagram ve histogramları daha fazla "
@@ -6020,7 +5999,7 @@ msgid ""
 "Mean +/- SD boundary outside the data: {band} lies beyond the observed "
 "range, so that band cannot be formed and {ncat} categories were created "
 "instead of the usual 4. This happens on skewed distributions (CRP, ferritin, "
-"tumour burden). Quantile or natural-breaks binning gives bands that always "
+"tumor burden). Quantile or natural-breaks binning gives bands that always "
 "fall inside the data."
 msgstr ""
 
@@ -6170,7 +6149,7 @@ msgstr ""
 #: R/chisqposttest.b.R
 msgid ""
 "Method notice: Pairwise comparisons with expected cell counts below 5 are "
-"automatically analysed with Fisher's exact test; the reported p-values use "
+"automatically analyzed with Fisher's exact test; the reported p-values use "
 "that exact method."
 msgstr ""
 "Yöntem bildirimi: Beklenen hücre sayıları 5'in altında olan ikili "
@@ -6232,7 +6211,7 @@ msgstr ""
 #: R/vartree.b.R
 msgid ""
 "Minimal style applied: one flat tone per level instead of a gradient, no "
-"label colouring, and more space between nodes"
+"label coloring, and more space between nodes"
 msgstr ""
 "Minimal stil uygulandı: gradyan yerine her düzeyde tek düz ton, etiket "
 "renklendirmesi yok ve düğümler arasında daha fazla boşluk"
@@ -6649,7 +6628,7 @@ msgstr ""
 
 #: R/checkdata.b.R
 msgid "N/A"
-msgstr ""
+msgstr "Uygulanamaz"
 
 #: R/checkdata.b.R
 msgid "n={n}"
@@ -6819,7 +6798,7 @@ msgstr ""
 #: R/tableone.b.R
 msgid ""
 "No data quality check was performed because no selected variable could be "
-"summarised; the Instructions panel above explains why."
+"summarized; the Instructions panel above explains why."
 msgstr ""
 
 #: R/tableone.b.R
@@ -7208,7 +7187,7 @@ msgid "Not assessable"
 msgstr "Değerlendirilemez"
 
 #: R/checkdata.b.R
-msgid "NOT ASSESSED - {reason}"
+msgid "Not assessed - {reason}"
 msgstr ""
 
 #: R/checkdata.b.R
@@ -7250,7 +7229,7 @@ msgstr ""
 #: R/agepyramid.b.R
 msgid ""
 "Not every age is a whole number, so read the band labels as completed years "
-"of age (age at last birthday): a band labelled '10-14' holds every age from "
+"of age (age at last birthday): a band labeled '10-14' holds every age from "
 "10 up to just below 15, so 14.6 years is counted in it, and an age of "
 "exactly 15 starts the next band. Counts and percentages are computed from "
 "the ages as recorded, not from rounded ages."
@@ -7298,29 +7277,23 @@ msgstr ""
 "yanlılığı değerlendirmek için dışlanan ve dahil edilen olguları "
 "karşılaştırın."
 
+#: R/agepyramid.b.R
+#: R/benford.b.R
 #: R/categorize.b.R
 #: R/checkdata.b.R
+#: R/summarydata.b.R
 #: checkdata/results/outlierMethodSummary.columns.title
 msgid "Note"
 msgstr "Not"
 
-#: R/agepyramid.b.R
-#: R/benford.b.R
-#: R/summarydata.b.R
-msgid "NOTE"
-msgstr "NOT"
-
 #: R/checkdata.b.R
-msgid "NOTE ON THE CLINICAL PENALTY"
-msgstr "KLİNİK CEZA PUANI ÜZERİNE NOT"
+msgid "Note on the clinical penalty"
+msgstr "Klinik ceza puanı üzerine not"
 
 #: R/benford.b.R
+#: R/chisqposttest.b.R
 msgid "Note:"
 msgstr "Not:"
-
-#: R/chisqposttest.b.R
-msgid "NOTE:"
-msgstr ""
 
 #: R/alluvial.b.R
 msgid "NOTE: {title}"
@@ -7368,7 +7341,7 @@ msgid "Nothing left to tabulate"
 msgstr "Tablolanacak bir şey kalmadı"
 
 #: R/tableone.b.R
-msgid "Nothing to summarise"
+msgid "Nothing to summarize"
 msgstr "Özetlenecek veri yok"
 
 #: R/vartree.b.R
@@ -7453,8 +7426,8 @@ msgstr ""
 "aralıkların Benford Yasasına göre sahip olduğu payla karşılaştırın."
 
 #: R/benford.b.R
-msgid "OBSERVATIONS IN THOSE BINS:"
-msgstr "BU ARALIKLARDAKİ GÖZLEMLER:"
+msgid "Observations in those bins:"
+msgstr "Bu aralıklardaki gözlemler:"
 
 #: R/benford.b.R
 msgid "Observations in those bins: {n} / {total} ({pct}%)"
@@ -7484,7 +7457,7 @@ msgstr ""
 
 #: R/agepyramid.b.R
 msgid "One gender level was filled in automatically"
-msgstr "Bir cinsiyet düzeyi otomatik olarak dolduruldu"
+msgstr ""
 
 #: R/alluvial.b.R
 msgid ""
@@ -7531,7 +7504,7 @@ msgstr ""
 
 #: R/benford.b.R
 msgid ""
-"Only {n} observations were analysed. At this size the digit-frequency tests "
+"Only {n} observations were analyzed. At this size the digit-frequency tests "
 "detect only very large departures, so neither a departure nor its absence is "
 "established here. The statistics above are reported for completeness."
 msgstr ""
@@ -7542,7 +7515,7 @@ msgstr ""
 
 #: R/benford.b.R
 msgid ""
-"Only {n} observations were analysed. The digit-frequency tests below are "
+"Only {n} observations were analyzed. The digit-frequency tests below are "
 "computed, but at this size they resolve only very large departures, and the "
 "MAD conformity label is biased upward by sampling noise. Neither a departure "
 "nor its absence is established at this sample size."
@@ -7607,11 +7580,6 @@ msgid ""
 "wrong patients. Set both the 'Female level' and 'Male level' selectors to "
 "remove the guess."
 msgstr ""
-"İki cinsiyet seçicisinden yalnızca biri ayarlandığı için '{level}' düzeyi "
-"kadın grubu olarak kullanıldı. Bunun kodlamanızla uyuştuğunu kontrol edin; "
-"uyuşmuyorsa piramidin kadın tarafı ve 'Kadın (n)' sütunu yanlış hastaları "
-"anlatır. Tahmini kaldırmak için hem 'Kadın düzeyi' hem 'Erkek düzeyi' "
-"seçicilerini ayarlayın."
 
 #: R/agepyramid.b.R
 msgid ""
@@ -7621,11 +7589,6 @@ msgid ""
 "patients. Set both the 'Female level' and 'Male level' selectors to remove "
 "the guess."
 msgstr ""
-"İki cinsiyet seçicisinden yalnızca biri ayarlandığı için '{level}' düzeyi "
-"erkek grubu olarak kullanıldı. Bunun kodlamanızla uyuştuğunu kontrol edin; "
-"uyuşmuyorsa piramidin erkek tarafı ve 'Erkek (n)' sütunu yanlış hastaları "
-"anlatır. Tahmini kaldırmak için hem 'Kadın düzeyi' hem 'Erkek düzeyi' "
-"seçicilerini ayarlayın."
 
 #: venn/options/minSize.description.jamovi
 msgid ""
@@ -8176,7 +8139,7 @@ msgstr ""
 
 #: R/agepyramid.b.R
 msgid ""
-"Percentages are of all {n} analysed observations (the Female and Male "
+"Percentages are of all {n} analyzed observations (the Female and Male "
 "columns together sum to 100%; the Total row shows each gender's share). "
 "Rounded per-bin percentages may not total exactly 100."
 msgstr ""
@@ -8983,7 +8946,7 @@ msgid "Rows excluded for missing values"
 msgstr "Eksik değerler nedeniyle hariç tutulan satırlar"
 
 #: outlierdetection/options/sampleSize.title
-msgid "Rows to analyse when subsampling"
+msgid "Rows to analyze when subsampling"
 msgstr "Alt örnekleme yapılırken analiz edilecek satırlar"
 
 #: chisqposttest/options/excl.description
@@ -9076,7 +9039,7 @@ msgid ""
 "Screens a single variable for data-quality problems before it is used in "
 "analysis: completeness and the shape of its missingness, consensus outlier "
 "detection (at n = 10 or more a point is flagged only when at least 2 methods "
-"agree; below n = 10 single-method flags are shown, labelled informative-only "
+"agree; below n = 10 single-method flags are shown, labeled informative-only "
 "and excluded from the grade; the MAD-based method is unavailable when there "
 "are 3 or fewer complete values or the MAD is zero, leaving 2 methods), "
 "distribution summaries, duplicate or repeated values, and optional "
@@ -9488,7 +9451,7 @@ msgid ""
 "(|z|>3), IQR (1.5x IQR rule), Modified Z-score (MAD-based |z|>3.5, "
 "unavailable when there are 3 or fewer complete values or the MAD is zero). "
 "Points flagged by only 1 method are not shown, except below n = 10 where "
-"single-method flags are shown, labelled informative-only in the table title "
+"single-method flags are shown, labeled informative-only in the table title "
 "and excluded from the quality grade."
 msgstr ""
 "Çalıştırılan yöntemlerden en az 2'si tarafından tespit edilen aykırı "
@@ -9648,7 +9611,7 @@ msgstr "SMD"
 #: R/crosstable.b.R
 msgid ""
 "SMD between '%s' and '%s'. Continuous: (m1 - m2) / sqrt((s1^2 + s2^2)/2); "
-"numeric columns with 6 or fewer distinct values are labelled 'continuous "
+"numeric columns with 6 or fewer distinct values are labeled 'continuous "
 "(numeric codes)' and treat the codes as an interval scale. Categorical: "
 "multinomial SMD (Yang & Dalton, 2012). |SMD| < 0.1 conventionally indicates "
 "negligible imbalance."
@@ -9892,8 +9855,8 @@ msgid "Statistical tests performed:"
 msgstr "Gerçekleştirilen istatistiksel testler:"
 
 #: R/benford.b.R
-msgid "STATISTICAL TESTS:"
-msgstr "İSTATİSTİKSEL TESTLER:"
+msgid "Statistical tests:"
+msgstr "İstatistiksel testler:"
 
 #: R/chisqposttest.b.R
 msgid "Statistically significant association at \\u{3B1} = %g"
@@ -9905,8 +9868,8 @@ msgstr "\\u{3B1} = %g düzeyinde istatistiksel olarak anlamlı"
 
 #: R/summarydata.b.R
 #: R/vartree.b.R
-msgid "STRONG WARNING"
-msgstr "GÜÇLÜ UYARI"
+msgid "Strong warning"
+msgstr "Güçlü uyarı"
 
 #: alluvial/ui[2].label
 msgid "Styling"
@@ -9950,7 +9913,7 @@ msgstr "Grafik alt başlığı (başlığın altında gösterilir)."
 
 #: tableone/options/nonnormal.description.jamovi
 msgid ""
-"Summarise continuous variables as median (Q1, Q3) rather than mean (SD). Use "
+"Summarize continuous variables as median (Q1, Q3) rather than mean (SD). Use "
 "for skewed measurements. Applies to the 'tableone' style only."
 msgstr ""
 "Sürekli değişkenleri ortalama (SS) yerine medyan (Q1, Q3) olarak özetle. "
@@ -10292,8 +10255,8 @@ msgstr ""
 
 #: R/alluvial.b.R
 msgid ""
-"The {palette} palette publishes {cap} distinguishable colours, and this "
-"diagram has at least {groups} groups to colour."
+"The {palette} palette publishes {cap} distinguishable colors, and this "
+"diagram has at least {groups} groups to color."
 msgstr ""
 "{palette} paleti {cap} ayırt edilebilir renk sunar; bu diyagramda "
 "renklendirilecek en az {groups} grup var."
@@ -10780,7 +10743,7 @@ msgstr ""
 #: R/crosstable.b.R
 msgid ""
 "The grouping variable '%s' has fewer than two groups among the rows being "
-"analysed, so there is nothing to compare across and no significance test can "
+"analyzed, so there is nothing to compare across and no significance test can "
 "be computed. %s Rows dropped by a row filter or by the missing-value setting "
 "are not counted here. Widen or remove the row filter, switch off "
 "missing-value exclusion, or choose a grouping variable that has at least two "
@@ -10883,38 +10846,34 @@ msgid ""
 "levels of '{gender}', or clear one or both selectors to let the analysis "
 "read the levels from their names."
 msgstr ""
-"'{level}' düzeyi HEM kadın HEM erkek tarafı için seçildi; karşılaştırılacak "
-"bir şey olmadığından piramit çizilmedi. '{gender}' değişkeninden iki farklı "
-"düzey seçin ya da seçicilerden birini veya ikisini boş bırakarak düzeylerin "
-"adlarından okunmasına izin verin."
 
 #: venn/options/var1true.description.jamovi
 msgid "The level in `var1` that represents the true condition."
-msgstr "`var1` içinde doğru durumu temsil eden düzey."
+msgstr ""
 
 #: venn/options/var2true.description.jamovi
 msgid "The level in `var2` that represents the true condition."
-msgstr "`var2` içinde doğru durumu temsil eden düzey."
+msgstr ""
 
 #: venn/options/var3true.description.jamovi
 msgid "The level in `var3` that represents the true condition."
-msgstr "`var3` içinde doğru durumu temsil eden düzey."
+msgstr ""
 
 #: venn/options/var4true.description.jamovi
 msgid "The level in `var4` that represents the true condition."
-msgstr "`var4` içinde doğru durumu temsil eden düzey."
+msgstr ""
 
 #: venn/options/var5true.description.jamovi
 msgid "The level in `var5` that represents the true condition."
-msgstr "`var5` içinde doğru durumu temsil eden düzey."
+msgstr ""
 
 #: venn/options/var6true.description.jamovi
 msgid "The level in `var6` that represents the true condition."
-msgstr "`var6` içinde doğru durumu temsil eden düzey."
+msgstr ""
 
 #: venn/options/var7true.description.jamovi
 msgid "The level in `var7` that represents the true condition."
-msgstr "`var7` içinde doğru durumu temsil eden düzey."
+msgstr ""
 
 #: agepyramid/options/female.description.jamovi
 msgid ""
@@ -10922,9 +10881,6 @@ msgid ""
 "level selectors empty to have them read from the level names; the assignment "
 "used is then stated above the results."
 msgstr ""
-"Kadın özneleri tanımlayan cinsiyet değişkeni düzeyi. Düzey adlarından "
-"okunması için her iki düzey seçicisini de boş bırakın; kullanılan atama "
-"sonuçların üzerinde belirtilir."
 
 #: agepyramid/options/male.description.jamovi
 msgid ""
@@ -10932,25 +10888,16 @@ msgid ""
 "level selectors empty to have them read from the level names; the assignment "
 "used is then stated above the results."
 msgstr ""
-"Erkek özneleri tanımlayan cinsiyet değişkeni düzeyi. Düzey adlarından "
-"okunması için her iki düzey seçicisini de boş bırakın; kullanılan atama "
-"sonuçların üzerinde belirtilir."
 
 #: R/agepyramid.b.R
 msgid ""
-"The levels of '{gender}' were not recognised as gender labels, so the first "
+"The levels of '{gender}' were not recognized as gender labels, so the first "
 "level ('{female}') was treated as FEMALE and the second ('{male}') as MALE. "
 "If your data are coded the other way round, the whole analysis is reversed "
 "with them: the left and right sides of the pyramid, the legend, and the "
 "'Female (n)' and 'Male (n)' table columns. Set the 'Female level' and 'Male "
 "level' selectors to state the coding explicitly."
 msgstr ""
-"'{gender}' değişkeninin düzeyleri cinsiyet etiketi olarak tanınmadı; bu "
-"yüzden ilk düzey ('{female}') KADIN, ikinci düzey ('{male}') ERKEK olarak "
-"alındı. Veriniz tersine kodlanmışsa analizin tamamı tersine döner: piramidin "
-"sol ve sağ tarafları, gösterge ve 'Kadın (n)' ile 'Erkek (n)' tablo "
-"sütunları. Kodlamayı açıkça belirtmek için 'Kadın düzeyi' ve 'Erkek düzeyi' "
-"seçicilerini ayarlayın."
 
 #: R/categorize.b.R
 msgid "the lower boundary (mean - {k} SD)"
@@ -11173,7 +11120,7 @@ msgstr ""
 msgid ""
 "The selected variable contains {zeros} zero and {negatives} negative values. "
 "A leading digit is undefined for these, so nothing below was computed. "
-"Filter them out, analyse increases and decreases separately if the variable "
+"Filter them out, analyze increases and decreases separately if the variable "
 "is a change score, or choose a naturally positive measurement."
 msgstr ""
 "Seçilen değişken {zeros} sıfır ve {negatives} negatif değer içeriyor. Bunlar "
@@ -11431,7 +11378,7 @@ msgid ""
 "These variables are stored as numbers but take 6 or fewer distinct values, "
 "so they are most likely encoded categories such as grade 1, 2, 3 rather than "
 "measurements: %s. The table styles do not agree on how to handle them: "
-"gtsummary summarises them as counts and percentages and tests them with a "
+"gtsummary summarizes them as counts and percentages and tests them with a "
 "chi-square or Fisher's exact test, finalfit does the same only when the "
 "column has fewer than 5 distinct values counting missing as one of them, so "
 "a four-value score with any missing data is treated as continuous there, and "
@@ -11500,7 +11447,7 @@ msgstr ""
 
 #: R/crosstable.b.R
 msgid ""
-"These variables have no non-missing values among the rows being analysed, so "
+"These variables have no non-missing values among the rows being analyzed, so "
 "nothing can be tabulated for them and they were left out of the table: %s."
 msgstr ""
 "Bu değişkenlerin analiz edilen satırlar arasında hiç eksik olmayan değeri "
@@ -11517,7 +11464,7 @@ msgstr ""
 
 #: R/crosstable.b.R
 msgid ""
-"These variables take a single value in the rows being analysed, so no "
+"These variables take a single value in the rows being analyzed, so no "
 "comparison between the groups is possible for them and their p-value is "
 "blank: %s."
 msgstr ""
@@ -11527,7 +11474,7 @@ msgstr ""
 
 #: R/crosstable.b.R
 msgid ""
-"These variables take a single value in the rows being analysed, so no "
+"These variables take a single value in the rows being analyzed, so no "
 "comparison between the groups is possible for them: %s. The finalfit style "
 "cannot build a table that contains them, so they were left out; choose "
 "another style to see their row."
@@ -11724,7 +11671,7 @@ msgstr "Eşik Ayarları (Gelişmiş)"
 
 #: R/categorize.b.R
 msgid "Tip"
-msgstr ""
+msgstr "İpucu"
 
 #: R/vartree.b.R
 msgid "Tip:"
@@ -11898,7 +11845,7 @@ msgstr "İki çizgi"
 
 #: R/checkdata.b.R
 msgid ""
-"Two exceptions: below n = 10 single-method flags ARE shown, labelled "
+"Two exceptions: below n = 10 single-method flags ARE shown, labeled "
 "informative-only and excluded from the quality grade; and the Modified "
 "Z-score needs more than 3 complete values and a non-zero MAD, so only the "
 "other two methods run when it is unavailable."
@@ -11993,7 +11940,7 @@ msgstr ""
 
 #: R/checkdata.b.R
 msgid ""
-"Units are inferred from the data range (centimetres against metres, mg/dL "
+"Units are inferred from the data range (centimeters against metres, mg/dL "
 "against {mu}mol/L); a misread unit will flag correct values as implausible."
 msgstr ""
 
@@ -12783,27 +12730,20 @@ msgstr "Derece/evre geçişlerini görselleştirin"
 msgid "Visualize the flow of categorical data across multiple dimensions."
 msgstr "Kategorik verinin birden çok boyut boyunca akışını görselleştirin."
 
-#: R/categorize.b.R
-#: R/checkdata.b.R
-#: R/reportcat.b.R
-msgid "Warning"
-msgstr "Uyarı"
-
 #: R/agepyramid.b.R
 #: R/benford.b.R
+#: R/categorize.b.R
+#: R/checkdata.b.R
 #: R/dataquality.b.R
+#: R/reportcat.b.R
 #: R/summarydata.b.R
 #: R/vartree.b.R
-msgid "WARNING"
-msgstr "UYARI"
+msgid "Warning"
+msgstr "Uyarı"
 
 #: R/chisqposttest.b.R
 msgid "Warning:"
 msgstr "Uyarı:"
-
-#: R/chisqposttest.b.R
-msgid "WARNING:"
-msgstr "UYARI:"
 
 #: R/alluvial.b.R
 msgid "WARNING: {title}"
@@ -12931,8 +12871,8 @@ msgid "What this analysis provides"
 msgstr "Bu analiz ne sağlar"
 
 #: R/benford.b.R
-msgid "WHAT THIS LIST IS:"
-msgstr "BU LİSTE NEDİR:"
+msgid "What this list is:"
+msgstr "Bu liste nedir:"
 
 #: R/alluvial.b.R
 msgid ""
@@ -13038,7 +12978,7 @@ msgstr "Ne zaman kullanılır:"
 
 #: crosstable/options/cont.description.jamovi
 msgid ""
-"Whether continuous variables are summarised as mean (SD) or median (Q1, Q3). "
+"Whether continuous variables are summarized as mean (SD) or median (Q1, Q3). "
 "In the arsenal and finalfit styles this also selects the test (ANOVA vs "
 "Kruskal-Wallis); in gtsummary it changes the displayed statistic only."
 msgstr ""
@@ -13136,8 +13076,8 @@ msgstr ""
 #: R/alluvial.b.R
 msgid ""
 "Why this matters: the extra groups are drawn in shades blended between the "
-"published colours, so neighbouring groups can look alike and are hard to "
-"tell apart in the legend."
+"published colors, so neighbouring groups can look alike and are hard to tell "
+"apart in the legend."
 msgstr ""
 "Neden önemli: fazladan gruplar yayımlanan renkler arasında harmanlanmış "
 "tonlarla çizilir; bu yüzden komşu gruplar birbirine benzeyebilir ve "
@@ -13184,11 +13124,6 @@ msgid ""
 "columns all follow that assignment. Use the 'Female level' and 'Male level' "
 "selectors to set it explicitly."
 msgstr ""
-"Cinsiyet düzeylerini belirlemediğiniz için '{gender}' değişkeninin düzey "
-"adlarıyla eşleştirildi: '{female}' kadın, '{male}' erkek olarak alındı. "
-"Piramidin tarafları, gösterge ve 'Kadın (n)' / 'Erkek (n)' tablo sütunları "
-"bu atamayı izler. Açıkça belirlemek için 'Kadın düzeyi' ve 'Erkek düzeyi' "
-"seçicilerini kullanın."
 
 #: R/venn.b.R
 msgid "You have selected %d variables."
@@ -13226,3 +13161,246 @@ msgstr "Z-puanı"
 #: outlierdetection/options/zscore_threshold.title
 msgid "Z-score threshold"
 msgstr "Z-puanı eşiği"
+
+#~ msgid ""
+#~ "%.0f%% confidence interval via the irr::kappa2 fallback (approximate, built "
+#~ "from the null-hypothesis standard error): vcd::Kappa could not return a "
+#~ "finite SE for this (near-degenerate) table. A null-SE interval is too narrow "
+#~ "when kappa is high, so treat it as optimistic."
+#~ msgstr ""
+#~ "irr::kappa2 yedek yöntemiyle elde edilen %%%.0f güven aralığı (yaklaşık; "
+#~ "sıfır hipotezi standart hatasından oluşturulmuştur): vcd::Kappa bu "
+#~ "(neredeyse dejenere) tablo için sonlu bir SH döndüremedi. Sıfır-SH aralığı "
+#~ "kappa yüksek olduğunda fazla dardır; bu nedenle onu iyimser kabul edin."
+
+#~ msgid ""
+#~ "%.0f%% confidence interval via the irr::kappa2 fallback (approximate, built "
+#~ "from the null-hypothesis standard error). Install the 'vcd' package to "
+#~ "enable the more accurate ASE-based interval. A null-SE interval is too "
+#~ "narrow when kappa is high, so treat it as optimistic."
+#~ msgstr ""
+#~ "irr::kappa2 yedek yöntemiyle elde edilen %%%.0f güven aralığı (yaklaşık; "
+#~ "sıfır hipotezi standart hatasından oluşturulmuştur). Daha doğru olan ASE "
+#~ "tabanlı aralığı etkinleştirmek için 'vcd' paketini kurun. Sıfır-SH aralığı "
+#~ "kappa yüksek olduğunda fazla dardır; bu nedenle onu iyimser kabul edin."
+
+#~ msgid "Alpha for Confidence Intervals"
+#~ msgstr "Güven Aralıkları İçin Alfa"
+
+#~ msgid ""
+#~ "At least one interval in this table was built from the null-hypothesis "
+#~ "standard error (kappa divided by its H0 test statistic) because the non-null "
+#~ "asymptotic standard error from vcd::Kappa was unavailable for that rater, "
+#~ "most often because a rating category is unused at one time point and the "
+#~ "agreement table is near-degenerate. Null-SE intervals are too narrow when "
+#~ "kappa is high, so treat them as optimistic."
+#~ msgstr ""
+#~ "Bu tablodaki en az bir aralık, o değerlendirici için vcd::Kappa'dan "
+#~ "sıfır-dışı asimptotik standart hata elde edilemediğinden sıfır hipotezi "
+#~ "standart hatasından (kappanın H0 test istatistiğine bölümü) oluşturulmuştur; "
+#~ "bunun en sık nedeni, bir değerlendirme kategorisinin bir zaman noktasında "
+#~ "kullanılmamış olması ve uyum tablosunun neredeyse dejenere olmasıdır. "
+#~ "Sıfır-SH aralıkları kappa yüksek olduğunda fazla dardır; bu nedenle bunları "
+#~ "iyimser kabul edin."
+
+#~ msgid ""
+#~ "At least one interval in this table was built from the null-hypothesis "
+#~ "standard error (kappa divided by its H0 test statistic) because the non-null "
+#~ "asymptotic standard error from vcd::Kappa was unavailable for that subgroup. "
+#~ "Null-SE intervals are too narrow when kappa is high, so treat them as "
+#~ "optimistic; three or more raters always use this fallback."
+#~ msgstr ""
+#~ "Bu tablodaki en az bir aralık, o alt grup için vcd::Kappa'dan sıfır-dışı "
+#~ "asimptotik standart hata elde edilemediğinden sıfır hipotezi standart "
+#~ "hatasından (kappanın H0 test istatistiğine bölümü) oluşturulmuştur. Sıfır-SH "
+#~ "aralıkları kappa yüksek olduğunda fazla dardır, bu nedenle bunları iyimser "
+#~ "kabul edin; üç veya daha fazla değerlendirici olduğunda her zaman bu yedek "
+#~ "yöntem kullanılır."
+
+#~ msgid ""
+#~ "At least one interval was built from the null-hypothesis standard error, "
+#~ "because vcd::Kappa returned no finite asymptotic standard error for that "
+#~ "institution (most often a category unused there). Such intervals are too "
+#~ "narrow when kappa is high, so treat them as optimistic."
+#~ msgstr ""
+#~ "En az bir aralık sıfır hipotezi standart hatasından oluşturulmuştur, çünkü "
+#~ "vcd::Kappa o kurum için sonlu bir asimptotik standart hata döndürmemiştir "
+#~ "(en sık nedeni, o kurumda bir kategorinin kullanılmamış olmasıdır). Bu tür "
+#~ "aralıklar kappa yüksek olduğunda fazla dardır; bu nedenle bunları iyimser "
+#~ "kabul edin."
+
+#~ msgid "Average Net Benefit Over the Threshold Range"
+#~ msgstr "Eşik Aralığında Ortalama Net Fayda"
+
+#~ msgid "CI Method for Agreement"
+#~ msgstr "Uyum için GA Yöntemi"
+
+#~ msgid "Class Variable (Gold Standard)"
+#~ msgstr "Sınıf Değişkeni (Altın Standart)"
+
+#~ msgid "Clinical Decision Rule (binary)"
+#~ msgstr "Klinik Karar Kuralı (ikili)"
+
+#~ msgid "Clinical Decision Rule Integration"
+#~ msgstr "Klinik Karar Kuralı Entegrasyonu"
+
+#~ msgid "Clinical Range Highlight"
+#~ msgstr "Klinik Aralık Vurgulama"
+
+#~ msgid "Cost Ratio (FP:FN)"
+#~ msgstr "Maliyet Oranı (YP:YN)"
+
+#~ msgid "Decision Consequences Table"
+#~ msgstr "Karar Sonuçları Tablosu"
+
+#~ msgid "Decision Curve Plot"
+#~ msgstr "Karar Eğrisi Grafiği"
+
+#~ msgid "Decision Rule Label"
+#~ msgstr "Karar Kuralı Etiketi"
+
+#~ msgid "Decision Rule Positive Level"
+#~ msgstr "Karar Kuralı Pozitif Düzeyi"
+
+#~ msgid "Enhanced Multi-Model Comparison"
+#~ msgstr "Gelişmiş Çoklu Model Karşılaştırması"
+
+#~ msgid "Exclude other observed levels"
+#~ msgstr "Gözlenen diğer düzeyleri dışla"
+
+#~ msgid "Fixed Analysis Type"
+#~ msgstr "Sabit Analiz Türü"
+
+#~ msgid "Fixed sensitivity/Specificity analysis"
+#~ msgstr "Sabit duyarlılık/özgüllük analizi"
+
+#~ msgid "Harm-to-Benefit Ratio"
+#~ msgstr "Zarar-Fayda Oranı"
+
+#~ msgid "Highlight Range Maximum"
+#~ msgstr "Aralık Maksimumunu Vurgula"
+
+#~ msgid "Highlight Range Minimum"
+#~ msgstr "Aralık Minimumunu Vurgula"
+
+#~ msgid "IDI/NRI Bootstrap Iterations"
+#~ msgstr "IDI/NRI Bootstrap Yinelemeleri"
+
+#~ msgid "Illustrative Scenario Example"
+#~ msgstr "Açıklayıcı Senaryo Örneği"
+
+#~ msgid "Interval Type"
+#~ msgstr "Aralık Türü"
+
+#~ msgid "Maximum Thresholds to Display"
+#~ msgstr "Görüntülenecek Maksimum Eşikler"
+
+#~ msgid "Monetary Cost per Test/Screening"
+#~ msgstr "Test/Tarama Başına Parasal Maliyet"
+
+#~ msgid "Monetary Cost per Treatment"
+#~ msgstr "Tedavi Başına Parasal Maliyet"
+
+#~ msgid "Monetary Harm Assigned to a False Positive"
+#~ msgstr "Yanlış Pozitife Atanan Parasal Zarar"
+
+#~ msgid "Monetary Value Assigned to a True Positive"
+#~ msgstr "Gerçek Pozitife Atanan Parasal Değer"
+
+#~ msgid "Net Interventions Avoided"
+#~ msgstr "Net Önlenen Girişimler"
+
+#~ msgid ""
+#~ "No confidence interval is shown: across three or more rater × time-point "
+#~ "columns this row reports Fleiss' kappa, for which only the null-hypothesis "
+#~ "test statistic is available here. An interval built from that null standard "
+#~ "error would be too narrow at high kappa. The per-rater rows above carry "
+#~ "non-null intervals."
+#~ msgstr ""
+#~ "Güven aralığı gösterilmemiştir: üç veya daha fazla değerlendirici × zaman "
+#~ "noktası sütunu boyunca bu satır Fleiss kappasını raporlar ve bunun için "
+#~ "burada yalnızca sıfır hipotezi test istatistiği mevcuttur. Bu sıfır hipotezi "
+#~ "standart hatasından oluşturulan bir aralık, yüksek kappa değerlerinde fazla "
+#~ "dar olur. Yukarıdaki değerlendirici başına satırlar sıfır-dışı aralıklar "
+#~ "içerir."
+
+#~ msgid "NRI Risk Categories"
+#~ msgstr "NRI Risk Kategorileri"
+
+#~ msgid "Partial AUC From (Specificity)"
+#~ msgstr "Kısmi EAA Başlangıcı (Özgüllük)"
+
+#~ msgid "Partial AUC To (Specificity)"
+#~ msgstr "Kısmi EAA Bitişi (Özgüllük)"
+
+#~ msgid "Population Size for Projections"
+#~ msgstr "Projeksiyonlar İçin Popülasyon Boyutu"
+
+#~ msgid "Power Analysis Type"
+#~ msgstr "Güç Analizi Türü"
+
+#~ msgid "Prediction Variables/Models"
+#~ msgstr "Tahmin Değişkenleri/Modelleri"
+
+#~ msgid "Prior AUC Belief"
+#~ msgstr "Öncül EAA İnancı"
+
+#~ msgid "Prior Precision"
+#~ msgstr "Öncül Kesinliği"
+
+#~ msgid "Prior Prevalence Value"
+#~ msgstr "Öncül Prevalans Değeri"
+
+#~ msgid "Quantile Positions"
+#~ msgstr "Kantil Konumları"
+
+#~ msgid "Reference Line Labels"
+#~ msgstr "Referans Çizgisi Etiketleri"
+
+#~ msgid "Reference Test for IDI/NRI"
+#~ msgstr "IDI/NRI için Referans Test"
+
+#~ msgid "Resource Utilization Analysis"
+#~ msgstr "Kaynak Kullanımı Analizi"
+
+#~ msgid "Results Table"
+#~ msgstr "Sonuç Tablosu"
+
+#~ msgid "ROC Smoothing Method"
+#~ msgstr "ROC Düzeltme Yöntemi"
+
+#~ msgid "Selected Thresholds for Table"
+#~ msgstr "Tablo İçin Seçilen Eşikler"
+
+#~ msgid "Sensitivity/Specificity vs threshold"
+#~ msgstr "Duyarlılık/Özgüllük - eşik"
+
+#~ msgid "Test 1 Negative Level"
+#~ msgstr "Test 1 Negatif Düzey"
+
+#~ msgid "Test 1 Positive Level"
+#~ msgstr "Test 1 Pozitif Düzey"
+
+#~ msgid "Test 2 (Required for Comparison)"
+#~ msgstr "Test 2 (Karşılaştırma İçin Zorunlu)"
+
+#~ msgid "Test 2 Negative Level"
+#~ msgstr "Test 2 Negatif Düzey"
+
+#~ msgid "Test 2 Positive Level"
+#~ msgstr "Test 2 Pozitif Düzey"
+
+#~ msgid "Test 3 Negative Level"
+#~ msgstr "Test 3 Negatif Düzey"
+
+#~ msgid "Test 3 Positive Level"
+#~ msgstr "Test 3 Pozitif Düzey"
+
+#~ msgid "Test Variables"
+#~ msgstr "Test Değişkenleri"
+
+#~ msgid "Threshold Step Size"
+#~ msgstr "Eşik Adım Boyutu"
+
+#~ msgid "Treatment Threshold Range"
+#~ msgstr "Tedavi Eşik Aralığı"

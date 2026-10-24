@@ -49,10 +49,10 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             # output item renders this literally (no markup, no injection surface).
             blocks <- vapply(private$.noticeList, function(notice) {
                 prefix <- switch(notice$type,
-                    ERROR          = paste0(.("ERROR"), ": "),
-                    STRONG_WARNING = paste0(.("WARNING"), ": "),
-                    WARNING        = paste0(.("WARNING"), ": "),
-                    INFO           = paste0(.("NOTE"), ": "),
+                    ERROR          = paste0(.("Error"), ": "),
+                    STRONG_WARNING = paste0(.("Warning"), ": "),
+                    WARNING        = paste0(.("Warning"), ": "),
+                    INFO           = paste0(.("Note"), ": "),
                     "")
                 paste0(prefix, notice$title, "\n", notice$content)
             }, character(1))
@@ -248,7 +248,7 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                     "STRONG_WARNING",
                     .("Gender levels were assigned by level order, not by name"),
                     .fmt(
-                        .("The levels of '{gender}' were not recognised as gender labels, so the first level ('{female}') was treated as FEMALE and the second ('{male}') as MALE. If your data are coded the other way round, the whole analysis is reversed with them: the left and right sides of the pyramid, the legend, and the 'Female (n)' and 'Male (n)' table columns. Set the 'Female level' and 'Male level' selectors to state the coding explicitly."),
+                        .("The levels of '{gender}' were not recognized as gender labels, so the first level ('{female}') was treated as FEMALE and the second ('{male}') as MALE. If your data are coded the other way round, the whole analysis is reversed with them: the left and right sides of the pyramid, the legend, and the 'Female (n)' and 'Male (n)' table columns. Set the 'Female level' and 'Male level' selectors to state the coding explicitly."),
                         gender = gender, female = female_level, male = male_level)
                 )
             } else if (assign_mode == "partial" && !is.null(auto_level)) {
@@ -460,7 +460,7 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                     "INFO",
                     .("Right-closed bands do not apply to a preset age grouping"),
                     .fmt(
-                        .("'Age band boundaries' is set to right-closed, but the {preset} preset is defined by its source as left-closed bands, so the bands below are the preset's own (for the WHO/UN preset: 0-4, 5-9, ... 85+). Applying right-closure would have moved every boundary by one year and the result could no longer be described as {preset} age groups. The 'Age band boundaries' selector is greyed out while a preset is chosen: set 'Age group preset' back to 'Custom (use bin width)' to use right-closed bands, or to set that selector back to left-closed and remove this note."),
+                        .("'Age band boundaries' is set to right-closed, but the {preset} preset is defined by its source as left-closed bands, so the bands below are the preset's own (for the WHO/UN preset: 0-4, 5-9, ... 85+). Applying right-closure would have moved every boundary by one year and the result could no longer be described as {preset} age groups. The 'Age band boundaries' selector is grayed out while a preset is chosen: set 'Age group preset' back to 'Custom (use bin width)' to use right-closed bands, or to set that selector back to left-closed and remove this note."),
                         preset = preset_label)
                 )
             }
@@ -516,7 +516,7 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 private$.addNotice(
                     "INFO",
                     .("Some ages are not whole years"),
-                    .("Not every age is a whole number, so read the band labels as completed years of age (age at last birthday): a band labelled '10-14' holds every age from 10 up to just below 15, so 14.6 years is counted in it, and an age of exactly 15 starts the next band. Counts and percentages are computed from the ages as recorded, not from rounded ages.")
+                    .("Not every age is a whole number, so read the band labels as completed years of age (age at last birthday): a band labeled '10-14' holds every age from 10 up to just below 15, so 14.6 years is counted in it, and an age of exactly 15 starts the next band. Counts and percentages are computed from the ages as recorded, not from rounded ages.")
                 )
             }
 
@@ -637,9 +637,9 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
             if (total_female == 0 || total_male == 0) {
                 # One complete sentence per case, so each translates on its own.
                 template <- if (total_male == 0) {
-                    .("All {n} analysed observations fall in the female group, so the figure is a one-sided age distribution rather than a two-sided pyramid, and the male column of the Population Data table is zero in every band. If the data do contain both groups, check the 'Female level' and 'Male level' selectors and the 'Missing/unrecognized gender' count in the Data Summary.")
+                    .("All {n} analyzed observations fall in the female group, so the figure is a one-sided age distribution rather than a two-sided pyramid, and the male column of the Population Data table is zero in every band. If the data do contain both groups, check the 'Female level' and 'Male level' selectors and the 'Missing/unrecognized gender' count in the Data Summary.")
                 } else {
-                    .("All {n} analysed observations fall in the male group, so the figure is a one-sided age distribution rather than a two-sided pyramid, and the female column of the Population Data table is zero in every band. If the data do contain both groups, check the 'Female level' and 'Male level' selectors and the 'Missing/unrecognized gender' count in the Data Summary.")
+                    .("All {n} analyzed observations fall in the male group, so the figure is a one-sided age distribution rather than a two-sided pyramid, and the female column of the Population Data table is zero in every band. If the data do contain both groups, check the 'Female level' and 'Male level' selectors and the 'Missing/unrecognized gender' count in the Data Summary.")
                 }
                 private$.addNotice(
                     "STRONG_WARNING",
@@ -738,7 +738,7 @@ agepyramidClass <- if (requireNamespace('jmvcore')) R6::R6Class(
                 "pct",
                 if (pct_base == "total") {
                     .fmt(
-                        .("Percentages are of all {n} analysed observations (the Female and Male columns together sum to 100%; the Total row shows each gender's share). Rounded per-bin percentages may not total exactly 100."),
+                        .("Percentages are of all {n} analyzed observations (the Female and Male columns together sum to 100%; the Total row shows each gender's share). Rounded per-bin percentages may not total exactly 100."),
                         n = n_final)
                 } else {
                     .("Percentages are column percentages within each gender (Female and Male each sum to 100%). Rounded per-bin percentages may not total exactly 100.")

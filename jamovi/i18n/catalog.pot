@@ -61,8 +61,8 @@ msgstr ""
 
 #: R/venn.b.R
 msgid ""
-"'%s' is not a colour R recognises, so the ggVennDiagram plot below is drawn "
-"with black instead. Use a colour name from the standard R palette (for "
+"'%s' is not a color R recognizes, so the ggVennDiagram plot below is drawn "
+"with black instead. Use a color name from the standard R palette (for "
 "example red, steelblue, grey40) or a hex code such as #2C7FB8."
 msgstr ""
 
@@ -73,7 +73,7 @@ msgid ""
 "preset's own (for the WHO/UN preset: 0-4, 5-9, ... 85+). Applying "
 "right-closure would have moved every boundary by one year and the result "
 "could no longer be described as {preset} age groups. The 'Age band "
-"boundaries' selector is greyed out while a preset is chosen: set 'Age group "
+"boundaries' selector is grayed out while a preset is chosen: set 'Age group "
 "preset' back to 'Custom (use bin width)' to use right-closed bands, or to "
 "set that selector back to left-closed and remove this note."
 msgstr ""
@@ -199,7 +199,7 @@ msgstr ""
 #: R/outlierdetection.b.R
 msgid ""
 "{method} returned no classification for any of the {n} observations "
-"analysed, so no outlier result can be shown. This happens when the method "
+"analyzed, so no outlier result can be shown. This happens when the method "
 "cannot be estimated at the requested setting rather than because the data "
 "are clean - reporting it as zero outliers would be misleading. Lower the "
 "confidence level, or select Robust Z-score or the Interquartile range "
@@ -558,7 +558,7 @@ msgid ""
 "%d rows. Missing values are never counted as a category of their own: that "
 "would add a row or column and change the degrees of freedom of the test. If "
 "the dropped rows may differ systematically from the rest, say so when "
-"reporting the association, or analyse missingness explicitly."
+"reporting the association, or analyze missingness explicitly."
 msgstr ""
 
 #: R/crosstable.b.R
@@ -570,7 +570,7 @@ msgstr ""
 #: R/venn.b.R
 msgid ""
 "%d of %d selected variables are positive in fewer than 5%% of the %d "
-"analysed cases (%s). The Venn shapes this analysis draws are fixed geometry: "
+"analyzed cases (%s). The Venn shapes this analysis draws are fixed geometry: "
 "a region holding one case is drawn the same size as a region holding a "
 "hundred, so a rare set is easy to over-read. Go by the counts and "
 "percentages printed inside the regions, by the Summary of True Counts table, "
@@ -580,7 +580,7 @@ msgstr ""
 #: R/venn.b.R
 msgid ""
 "%d of %d selected variables are positive in more than 95%% of the %d "
-"analysed cases (%s). A set that contains almost every case fills the "
+"analyzed cases (%s). A set that contains almost every case fills the "
 "diagram, leaving the regions outside it nearly empty, so the picture "
 "separates almost nothing. Check that the level nominated as positive is the "
 "one you meant, and read the Summary of True Counts table rather than the "
@@ -1250,7 +1250,7 @@ msgstr ""
 
 #: R/agepyramid.b.R
 msgid ""
-"All {n} analysed observations fall in the female group, so the figure is a "
+"All {n} analyzed observations fall in the female group, so the figure is a "
 "one-sided age distribution rather than a two-sided pyramid, and the male "
 "column of the Population Data table is zero in every band. If the data do "
 "contain both groups, check the 'Female level' and 'Male level' selectors and "
@@ -1259,7 +1259,7 @@ msgstr ""
 
 #: R/agepyramid.b.R
 msgid ""
-"All {n} analysed observations fall in the male group, so the figure is a "
+"All {n} analyzed observations fall in the male group, so the figure is a "
 "one-sided age distribution rather than a two-sided pyramid, and the female "
 "column of the Population Data table is zero in every band. If the data do "
 "contain both groups, check the 'Female level' and 'Male level' selectors and "
@@ -1991,7 +1991,7 @@ msgid "Check the frequency table and the distribution plot"
 msgstr ""
 
 #: R/vartree.b.R
-msgid "Checking data completeness and coding before modelling"
+msgid "Checking data completeness and coding before modeling"
 msgstr ""
 
 #: R/chisqposttest.b.R
@@ -2338,12 +2338,17 @@ msgstr ""
 msgid "Cohort type:"
 msgstr ""
 
+#: R/venn.b.R
+msgid "Color Not Recognized"
+msgstr ""
+
 #: venn/options/edgeColor.description.jamovi
 msgid "Color of boundary lines."
 msgstr ""
 
 #: agepyramid/options/color_palette.title
 #: alluvial/options/colorPalette.title
+#: vartree/options/palette.title
 #: venn/options/colorPalette.title
 msgid "Color palette"
 msgstr ""
@@ -2356,12 +2361,26 @@ msgstr ""
 msgid "Color palette for the diagram flows."
 msgstr ""
 
+#: R/alluvial.b.R
+msgid "Color palette stretched"
+msgstr ""
+
 #: R/agepyramid.b.R
 msgid "Color palettes:"
 msgstr ""
 
 #: agepyramid/options/ggcharts_colors.description.jamovi
 msgid "Color scheme for the ggcharts pyramid."
+msgstr ""
+
+#: vartree/options/palette/colorblind.title
+msgid "Color-blind safe"
+msgstr ""
+
+#: R/vartree.b.R
+msgid ""
+"Color-blind-safe palette applied: blue, orange, purple and brown shades in "
+"place of the default red/green rotation"
 msgstr ""
 
 #: agepyramid/options/color_palette/colorblind.title
@@ -2371,28 +2390,6 @@ msgstr ""
 
 #: alluvial/ui[2][0][0][0].label
 msgid "Colors & Theme"
-msgstr ""
-
-#: R/venn.b.R
-msgid "Colour Not Recognised"
-msgstr ""
-
-#: vartree/options/palette.title
-msgid "Colour palette"
-msgstr ""
-
-#: R/alluvial.b.R
-msgid "Colour palette stretched"
-msgstr ""
-
-#: vartree/options/palette/colorblind.title
-msgid "Colour-blind safe"
-msgstr ""
-
-#: R/vartree.b.R
-msgid ""
-"Colour-blind-safe palette applied: blue, orange, purple and brown shades in "
-"place of the default red/green rotation"
 msgstr ""
 
 #: R/chisqposttest.b.R
@@ -2525,8 +2522,8 @@ msgstr ""
 
 #: R/dataquality.b.R
 msgid ""
-"Computed on the {n_num} numeric variable(s) ({names}); missingness in the "
-"{n_non} non-numeric variable(s) was not tested."
+"Computed on the {nNum} numeric variable(s) ({names}); missingness in the "
+"{nNon} non-numeric variable(s) was not tested."
 msgstr ""
 
 #: R/chisqposttest.b.R
@@ -2749,7 +2746,7 @@ msgid ""
 "using equal-width intervals, sample quantiles, hand-entered break points, "
 "mean +/- SD bands, a median split, or Fisher-Jenks natural breaks. Reports "
 "the break points and the resulting category frequencies, draws the "
-"distribution with the boundaries marked, and can add the categorised "
+"distribution with the boundaries marked, and can add the categorized "
 "variable straight to the dataset."
 msgstr ""
 
@@ -3146,7 +3143,7 @@ msgid "Data Summary"
 msgstr ""
 
 #: R/benford.b.R
-msgid "DATA SUMMARY:"
+msgid "Data summary:"
 msgstr ""
 
 #: R/dataquality.b.R
@@ -3259,7 +3256,7 @@ msgstr ""
 #: agepyramid/options/pct_base.description.jamovi
 msgid ""
 "Denominator of the percentages: within each gender (each column sums to "
-"100%) or of all analysed observations (both columns together sum to 100%)."
+"100%) or of all analyzed observations (both columns together sum to 100%)."
 msgstr ""
 
 #: R/categorize.b.R
@@ -3722,18 +3719,14 @@ msgstr ""
 msgid "equal-tailed interval"
 msgstr ""
 
-#: R/categorize.b.R
-#: R/dataquality.b.R
-#: crosstable/results/errorNotice.title
-msgid "Error"
-msgstr ""
-
 #: R/agepyramid.b.R
 #: R/benford.b.R
+#: R/categorize.b.R
 #: R/dataquality.b.R
 #: R/summarydata.b.R
 #: R/vartree.b.R
-msgid "ERROR"
+#: crosstable/results/errorNotice.title
+msgid "Error"
 msgstr ""
 
 #: R/tableone.b.R
@@ -3775,10 +3768,6 @@ msgstr ""
 msgid "Error:"
 msgstr ""
 
-#: R/chisqposttest.b.R
-msgid "ERROR:"
-msgstr ""
-
 #: R/alluvial.b.R
 msgid "ERROR: {title}"
 msgstr ""
@@ -3803,14 +3792,14 @@ msgstr ""
 #: R/reportcat.b.R
 msgid ""
 "Every selected variable was empty or all-missing, so there is nothing to "
-"summarise: {vars}. Select at least one variable that has observed categories."
+"summarize: {vars}. Select at least one variable that has observed categories."
 msgstr ""
 
 #: R/crosstable.b.R
 msgid ""
 "Every selected variable was left out for the reasons above, so there is no "
 "table to build. Select at least one variable that has values in the rows "
-"being analysed."
+"being analyzed."
 msgstr ""
 
 #: R/summarydata.b.R
@@ -3822,7 +3811,7 @@ msgstr ""
 
 #: R/tableone.b.R
 msgid ""
-"Every value of this variable is missing, so it cannot be summarised and does "
+"Every value of this variable is missing, so it cannot be summarized and does "
 "not appear in the table below."
 msgstr ""
 
@@ -4099,7 +4088,7 @@ msgstr ""
 #: R/alluvial.b.R
 msgid ""
 "Fill variable '{variable}' has {n} distinct categories, so the flows are "
-"coloured in that many shades and the legend will be hard to read."
+"colored in that many shades and the legend will be hard to read."
 msgstr ""
 
 #: alluvial/ui[0][3].label
@@ -4347,11 +4336,7 @@ msgid ""
 "- Multiple testing correction (Bonferroni, Holm, Benjamini-Hochberg, "
 "Benjamini-Yekutieli)\n"
 "- Variable name safety (special characters, spaces)\n"
-"- Data quality validation warnings\n"
-"\n"
-"Note: Advanced features (pairwise comparisons, effect sizes, residual "
-"analysis,\n"
-"correspondence analysis) are planned but not yet available."
+"- Data quality validation warnings"
 msgstr ""
 
 #: R/agepyramid.b.R
@@ -4502,13 +4487,13 @@ msgstr ""
 msgid "Good completeness"
 msgstr ""
 
+#: alluvial/options/themeStyle/grey.title
+msgid "Gray"
+msgstr ""
+
 #: agepyramid/options/color_palette/grayscale.title
 #: agepyramid/options/ggcharts_colors/grayscale.title
 msgid "Grayscale"
-msgstr ""
-
-#: alluvial/options/themeStyle/grey.title
-msgid "Grey"
 msgstr ""
 
 #: crosstable/options/group.title
@@ -4822,7 +4807,7 @@ msgid ""
 msgstr ""
 
 #: R/vartree.b.R
-msgid "INFO"
+msgid "Info"
 msgstr ""
 
 #: R/checkdata.b.R
@@ -5091,12 +5076,12 @@ msgid ""
 "directly and do not depend on the data spanning multiple orders of magnitude."
 msgstr ""
 
-#: R/benford.b.R
-msgid "LEADING-DIGIT BIN MEMBERSHIP"
-msgstr ""
-
 #: benford/results/text2.title
 msgid "Leading-Digit Bin Membership"
+msgstr ""
+
+#: R/benford.b.R
+msgid "Leading-digit bin membership"
 msgstr ""
 
 #: R/benford.b.R
@@ -5388,7 +5373,7 @@ msgstr ""
 msgid ""
 "Marginal plots are switched on, so the diagram and its histograms are "
 "assembled into a fixed grid that cannot take further styling. These settings "
-"were left out of this plot: colour palette, theme style, enhanced edge "
+"were left out of this plot: color palette, theme style, enhanced edge "
 "gradients, plot orientation, flow direction, plot subtitle and custom title."
 msgstr ""
 
@@ -5432,7 +5417,7 @@ msgid ""
 "Mean +/- SD boundary outside the data: {band} lies beyond the observed "
 "range, so that band cannot be formed and {ncat} categories were created "
 "instead of the usual 4. This happens on skewed distributions (CRP, ferritin, "
-"tumour burden). Quantile or natural-breaks binning gives bands that always "
+"tumor burden). Quantile or natural-breaks binning gives bands that always "
 "fall inside the data."
 msgstr ""
 
@@ -5570,7 +5555,7 @@ msgstr ""
 #: R/chisqposttest.b.R
 msgid ""
 "Method notice: Pairwise comparisons with expected cell counts below 5 are "
-"automatically analysed with Fisher's exact test; the reported p-values use "
+"automatically analyzed with Fisher's exact test; the reported p-values use "
 "that exact method."
 msgstr ""
 
@@ -5625,7 +5610,7 @@ msgstr ""
 #: R/vartree.b.R
 msgid ""
 "Minimal style applied: one flat tone per level instead of a gradient, no "
-"label colouring, and more space between nodes"
+"label coloring, and more space between nodes"
 msgstr ""
 
 #: R/categorize.b.R
@@ -6156,7 +6141,7 @@ msgstr ""
 #: R/tableone.b.R
 msgid ""
 "No data quality check was performed because no selected variable could be "
-"summarised; the Instructions panel above explains why."
+"summarized; the Instructions panel above explains why."
 msgstr ""
 
 #: R/tableone.b.R
@@ -6487,7 +6472,7 @@ msgid "Not assessable"
 msgstr ""
 
 #: R/checkdata.b.R
-msgid "NOT ASSESSED - {reason}"
+msgid "Not assessed - {reason}"
 msgstr ""
 
 #: R/checkdata.b.R
@@ -6525,7 +6510,7 @@ msgstr ""
 #: R/agepyramid.b.R
 msgid ""
 "Not every age is a whole number, so read the band labels as completed years "
-"of age (age at last birthday): a band labelled '10-14' holds every age from "
+"of age (age at last birthday): a band labeled '10-14' holds every age from "
 "10 up to just below 15, so 14.6 years is counted in it, and an age of "
 "exactly 15 starts the next band. Counts and percentages are computed from "
 "the ages as recorded, not from rounded ages."
@@ -6565,28 +6550,22 @@ msgid ""
 "with included cases to assess potential bias."
 msgstr ""
 
+#: R/agepyramid.b.R
+#: R/benford.b.R
 #: R/categorize.b.R
 #: R/checkdata.b.R
+#: R/summarydata.b.R
 #: checkdata/results/outlierMethodSummary.columns.title
 msgid "Note"
 msgstr ""
 
-#: R/agepyramid.b.R
-#: R/benford.b.R
-#: R/summarydata.b.R
-msgid "NOTE"
-msgstr ""
-
 #: R/checkdata.b.R
-msgid "NOTE ON THE CLINICAL PENALTY"
+msgid "Note on the clinical penalty"
 msgstr ""
 
 #: R/benford.b.R
-msgid "Note:"
-msgstr ""
-
 #: R/chisqposttest.b.R
-msgid "NOTE:"
+msgid "Note:"
 msgstr ""
 
 #: R/alluvial.b.R
@@ -6627,7 +6606,7 @@ msgid "Nothing left to tabulate"
 msgstr ""
 
 #: R/tableone.b.R
-msgid "Nothing to summarise"
+msgid "Nothing to summarize"
 msgstr ""
 
 #: R/vartree.b.R
@@ -6703,7 +6682,7 @@ msgid ""
 msgstr ""
 
 #: R/benford.b.R
-msgid "OBSERVATIONS IN THOSE BINS:"
+msgid "Observations in those bins:"
 msgstr ""
 
 #: R/benford.b.R
@@ -6769,14 +6748,14 @@ msgstr ""
 
 #: R/benford.b.R
 msgid ""
-"Only {n} observations were analysed. At this size the digit-frequency tests "
+"Only {n} observations were analyzed. At this size the digit-frequency tests "
 "detect only very large departures, so neither a departure nor its absence is "
 "established here. The statistics above are reported for completeness."
 msgstr ""
 
 #: R/benford.b.R
 msgid ""
-"Only {n} observations were analysed. The digit-frequency tests below are "
+"Only {n} observations were analyzed. The digit-frequency tests below are "
 "computed, but at this size they resolve only very large departures, and the "
 "MAD conformity label is biased upward by sampling noise. Neither a departure "
 "nor its absence is established at this sample size."
@@ -7336,7 +7315,7 @@ msgstr ""
 
 #: R/agepyramid.b.R
 msgid ""
-"Percentages are of all {n} analysed observations (the Female and Male "
+"Percentages are of all {n} analyzed observations (the Female and Male "
 "columns together sum to 100%; the Total row shows each gender's share). "
 "Rounded per-bin percentages may not total exactly 100."
 msgstr ""
@@ -8092,7 +8071,7 @@ msgid "Rows excluded for missing values"
 msgstr ""
 
 #: outlierdetection/options/sampleSize.title
-msgid "Rows to analyse when subsampling"
+msgid "Rows to analyze when subsampling"
 msgstr ""
 
 #: chisqposttest/options/excl.description
@@ -8170,7 +8149,7 @@ msgid ""
 "Screens a single variable for data-quality problems before it is used in "
 "analysis: completeness and the shape of its missingness, consensus outlier "
 "detection (at n = 10 or more a point is flagged only when at least 2 methods "
-"agree; below n = 10 single-method flags are shown, labelled informative-only "
+"agree; below n = 10 single-method flags are shown, labeled informative-only "
 "and excluded from the grade; the MAD-based method is unavailable when there "
 "are 3 or fewer complete values or the MAD is zero, leaving 2 methods), "
 "distribution summaries, duplicate or repeated values, and optional "
@@ -8525,7 +8504,7 @@ msgid ""
 "(|z|>3), IQR (1.5x IQR rule), Modified Z-score (MAD-based |z|>3.5, "
 "unavailable when there are 3 or fewer complete values or the MAD is zero). "
 "Points flagged by only 1 method are not shown, except below n = 10 where "
-"single-method flags are shown, labelled informative-only in the table title "
+"single-method flags are shown, labeled informative-only in the table title "
 "and excluded from the quality grade."
 msgstr ""
 
@@ -8673,7 +8652,7 @@ msgstr ""
 #: R/crosstable.b.R
 msgid ""
 "SMD between '%s' and '%s'. Continuous: (m1 - m2) / sqrt((s1^2 + s2^2)/2); "
-"numeric columns with 6 or fewer distinct values are labelled 'continuous "
+"numeric columns with 6 or fewer distinct values are labeled 'continuous "
 "(numeric codes)' and treat the codes as an interval scale. Categorical: "
 "multinomial SMD (Yang & Dalton, 2012). |SMD| < 0.1 conventionally indicates "
 "negligible imbalance."
@@ -8892,7 +8871,7 @@ msgid "Statistical tests performed:"
 msgstr ""
 
 #: R/benford.b.R
-msgid "STATISTICAL TESTS:"
+msgid "Statistical tests:"
 msgstr ""
 
 #: R/chisqposttest.b.R
@@ -8905,7 +8884,7 @@ msgstr ""
 
 #: R/summarydata.b.R
 #: R/vartree.b.R
-msgid "STRONG WARNING"
+msgid "Strong warning"
 msgstr ""
 
 #: alluvial/ui[2].label
@@ -8946,7 +8925,7 @@ msgstr ""
 
 #: tableone/options/nonnormal.description.jamovi
 msgid ""
-"Summarise continuous variables as median (Q1, Q3) rather than mean (SD). Use "
+"Summarize continuous variables as median (Q1, Q3) rather than mean (SD). Use "
 "for skewed measurements. Applies to the 'tableone' style only."
 msgstr ""
 
@@ -9223,8 +9202,8 @@ msgstr ""
 
 #: R/alluvial.b.R
 msgid ""
-"The {palette} palette publishes {cap} distinguishable colours, and this "
-"diagram has at least {groups} groups to colour."
+"The {palette} palette publishes {cap} distinguishable colors, and this "
+"diagram has at least {groups} groups to color."
 msgstr ""
 
 #: R/benford.b.R
@@ -9604,7 +9583,7 @@ msgstr ""
 #: R/crosstable.b.R
 msgid ""
 "The grouping variable '%s' has fewer than two groups among the rows being "
-"analysed, so there is nothing to compare across and no significance test can "
+"analyzed, so there is nothing to compare across and no significance test can "
 "be computed. %s Rows dropped by a row filter or by the missing-value setting "
 "are not counted here. Widen or remove the row filter, switch off "
 "missing-value exclusion, or choose a grouping variable that has at least two "
@@ -9722,7 +9701,7 @@ msgstr ""
 
 #: R/agepyramid.b.R
 msgid ""
-"The levels of '{gender}' were not recognised as gender labels, so the first "
+"The levels of '{gender}' were not recognized as gender labels, so the first "
 "level ('{female}') was treated as FEMALE and the second ('{male}') as MALE. "
 "If your data are coded the other way round, the whole analysis is reversed "
 "with them: the left and right sides of the pyramid, the legend, and the "
@@ -9903,7 +9882,7 @@ msgstr ""
 msgid ""
 "The selected variable contains {zeros} zero and {negatives} negative values. "
 "A leading digit is undefined for these, so nothing below was computed. "
-"Filter them out, analyse increases and decreases separately if the variable "
+"Filter them out, analyze increases and decreases separately if the variable "
 "is a change score, or choose a naturally positive measurement."
 msgstr ""
 
@@ -10101,7 +10080,7 @@ msgid ""
 "These variables are stored as numbers but take 6 or fewer distinct values, "
 "so they are most likely encoded categories such as grade 1, 2, 3 rather than "
 "measurements: %s. The table styles do not agree on how to handle them: "
-"gtsummary summarises them as counts and percentages and tests them with a "
+"gtsummary summarizes them as counts and percentages and tests them with a "
 "chi-square or Fisher's exact test, finalfit does the same only when the "
 "column has fewer than 5 distinct values counting missing as one of them, so "
 "a four-value score with any missing data is treated as continuous there, and "
@@ -10141,7 +10120,7 @@ msgstr ""
 
 #: R/crosstable.b.R
 msgid ""
-"These variables have no non-missing values among the rows being analysed, so "
+"These variables have no non-missing values among the rows being analyzed, so "
 "nothing can be tabulated for them and they were left out of the table: %s."
 msgstr ""
 
@@ -10153,14 +10132,14 @@ msgstr ""
 
 #: R/crosstable.b.R
 msgid ""
-"These variables take a single value in the rows being analysed, so no "
+"These variables take a single value in the rows being analyzed, so no "
 "comparison between the groups is possible for them and their p-value is "
 "blank: %s."
 msgstr ""
 
 #: R/crosstable.b.R
 msgid ""
-"These variables take a single value in the rows being analysed, so no "
+"These variables take a single value in the rows being analyzed, so no "
 "comparison between the groups is possible for them: %s. The finalfit style "
 "cannot build a table that contains them, so they were left out; choose "
 "another style to see their row."
@@ -10475,7 +10454,7 @@ msgstr ""
 
 #: R/checkdata.b.R
 msgid ""
-"Two exceptions: below n = 10 single-method flags ARE shown, labelled "
+"Two exceptions: below n = 10 single-method flags ARE shown, labeled "
 "informative-only and excluded from the quality grade; and the Modified "
 "Z-score needs more than 3 complete values and a non-zero MAD, so only the "
 "other two methods run when it is unavailable."
@@ -10558,7 +10537,7 @@ msgstr ""
 
 #: R/checkdata.b.R
 msgid ""
-"Units are inferred from the data range (centimetres against metres, mg/dL "
+"Units are inferred from the data range (centimeters against metres, mg/dL "
 "against {mu}mol/L); a misread unit will flag correct values as implausible."
 msgstr ""
 
@@ -11281,26 +11260,19 @@ msgstr ""
 msgid "Visualize the flow of categorical data across multiple dimensions."
 msgstr ""
 
-#: R/categorize.b.R
-#: R/checkdata.b.R
-#: R/reportcat.b.R
-msgid "Warning"
-msgstr ""
-
 #: R/agepyramid.b.R
 #: R/benford.b.R
+#: R/categorize.b.R
+#: R/checkdata.b.R
 #: R/dataquality.b.R
+#: R/reportcat.b.R
 #: R/summarydata.b.R
 #: R/vartree.b.R
-msgid "WARNING"
+msgid "Warning"
 msgstr ""
 
 #: R/chisqposttest.b.R
 msgid "Warning:"
-msgstr ""
-
-#: R/chisqposttest.b.R
-msgid "WARNING:"
 msgstr ""
 
 #: R/alluvial.b.R
@@ -11425,7 +11397,7 @@ msgid "What this analysis provides"
 msgstr ""
 
 #: R/benford.b.R
-msgid "WHAT THIS LIST IS:"
+msgid "What this list is:"
 msgstr ""
 
 #: R/alluvial.b.R
@@ -11508,7 +11480,7 @@ msgstr ""
 
 #: crosstable/options/cont.description.jamovi
 msgid ""
-"Whether continuous variables are summarised as mean (SD) or median (Q1, Q3). "
+"Whether continuous variables are summarized as mean (SD) or median (Q1, Q3). "
 "In the arsenal and finalfit styles this also selects the test (ANOVA vs "
 "Kruskal-Wallis); in gtsummary it changes the displayed statistic only."
 msgstr ""
@@ -11586,8 +11558,8 @@ msgstr ""
 #: R/alluvial.b.R
 msgid ""
 "Why this matters: the extra groups are drawn in shades blended between the "
-"published colours, so neighbouring groups can look alike and are hard to "
-"tell apart in the legend."
+"published colors, so neighbouring groups can look alike and are hard to tell "
+"apart in the legend."
 msgstr ""
 
 #: R/alluvial.b.R
@@ -11662,3 +11634,214 @@ msgstr ""
 #: outlierdetection/options/zscore_threshold.title
 msgid "Z-score threshold"
 msgstr ""
+
+#~ msgid ""
+#~ "%.0f%% confidence interval via the irr::kappa2 fallback (approximate, built "
+#~ "from the null-hypothesis standard error): vcd::Kappa could not return a "
+#~ "finite SE for this (near-degenerate) table. A null-SE interval is too narrow "
+#~ "when kappa is high, so treat it as optimistic."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "%.0f%% confidence interval via the irr::kappa2 fallback (approximate, built "
+#~ "from the null-hypothesis standard error). Install the 'vcd' package to "
+#~ "enable the more accurate ASE-based interval. A null-SE interval is too "
+#~ "narrow when kappa is high, so treat it as optimistic."
+#~ msgstr ""
+
+#~ msgid "Alpha for Confidence Intervals"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "At least one interval in this table was built from the null-hypothesis "
+#~ "standard error (kappa divided by its H0 test statistic) because the non-null "
+#~ "asymptotic standard error from vcd::Kappa was unavailable for that rater, "
+#~ "most often because a rating category is unused at one time point and the "
+#~ "agreement table is near-degenerate. Null-SE intervals are too narrow when "
+#~ "kappa is high, so treat them as optimistic."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "At least one interval in this table was built from the null-hypothesis "
+#~ "standard error (kappa divided by its H0 test statistic) because the non-null "
+#~ "asymptotic standard error from vcd::Kappa was unavailable for that subgroup. "
+#~ "Null-SE intervals are too narrow when kappa is high, so treat them as "
+#~ "optimistic; three or more raters always use this fallback."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "At least one interval was built from the null-hypothesis standard error, "
+#~ "because vcd::Kappa returned no finite asymptotic standard error for that "
+#~ "institution (most often a category unused there). Such intervals are too "
+#~ "narrow when kappa is high, so treat them as optimistic."
+#~ msgstr ""
+
+#~ msgid "Average Net Benefit Over the Threshold Range"
+#~ msgstr ""
+
+#~ msgid "CI Method for Agreement"
+#~ msgstr ""
+
+#~ msgid "Class Variable (Gold Standard)"
+#~ msgstr ""
+
+#~ msgid "Clinical Decision Rule (binary)"
+#~ msgstr ""
+
+#~ msgid "Clinical Decision Rule Integration"
+#~ msgstr ""
+
+#~ msgid "Clinical Range Highlight"
+#~ msgstr ""
+
+#~ msgid "Cost Ratio (FP:FN)"
+#~ msgstr ""
+
+#~ msgid "Decision Consequences Table"
+#~ msgstr ""
+
+#~ msgid "Decision Curve Plot"
+#~ msgstr ""
+
+#~ msgid "Decision Rule Label"
+#~ msgstr ""
+
+#~ msgid "Decision Rule Positive Level"
+#~ msgstr ""
+
+#~ msgid "Enhanced Multi-Model Comparison"
+#~ msgstr ""
+
+#~ msgid "Exclude other observed levels"
+#~ msgstr ""
+
+#~ msgid "Fixed Analysis Type"
+#~ msgstr ""
+
+#~ msgid "Fixed sensitivity/Specificity analysis"
+#~ msgstr ""
+
+#~ msgid "Harm-to-Benefit Ratio"
+#~ msgstr ""
+
+#~ msgid "Highlight Range Maximum"
+#~ msgstr ""
+
+#~ msgid "Highlight Range Minimum"
+#~ msgstr ""
+
+#~ msgid "IDI/NRI Bootstrap Iterations"
+#~ msgstr ""
+
+#~ msgid "Illustrative Scenario Example"
+#~ msgstr ""
+
+#~ msgid "Interval Type"
+#~ msgstr ""
+
+#~ msgid "Maximum Thresholds to Display"
+#~ msgstr ""
+
+#~ msgid "Monetary Cost per Test/Screening"
+#~ msgstr ""
+
+#~ msgid "Monetary Cost per Treatment"
+#~ msgstr ""
+
+#~ msgid "Monetary Harm Assigned to a False Positive"
+#~ msgstr ""
+
+#~ msgid "Monetary Value Assigned to a True Positive"
+#~ msgstr ""
+
+#~ msgid "Net Interventions Avoided"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "No confidence interval is shown: across three or more rater × time-point "
+#~ "columns this row reports Fleiss' kappa, for which only the null-hypothesis "
+#~ "test statistic is available here. An interval built from that null standard "
+#~ "error would be too narrow at high kappa. The per-rater rows above carry "
+#~ "non-null intervals."
+#~ msgstr ""
+
+#~ msgid "NRI Risk Categories"
+#~ msgstr ""
+
+#~ msgid "Partial AUC From (Specificity)"
+#~ msgstr ""
+
+#~ msgid "Partial AUC To (Specificity)"
+#~ msgstr ""
+
+#~ msgid "Population Size for Projections"
+#~ msgstr ""
+
+#~ msgid "Power Analysis Type"
+#~ msgstr ""
+
+#~ msgid "Prediction Variables/Models"
+#~ msgstr ""
+
+#~ msgid "Prior AUC Belief"
+#~ msgstr ""
+
+#~ msgid "Prior Precision"
+#~ msgstr ""
+
+#~ msgid "Prior Prevalence Value"
+#~ msgstr ""
+
+#~ msgid "Quantile Positions"
+#~ msgstr ""
+
+#~ msgid "Reference Line Labels"
+#~ msgstr ""
+
+#~ msgid "Reference Test for IDI/NRI"
+#~ msgstr ""
+
+#~ msgid "Resource Utilization Analysis"
+#~ msgstr ""
+
+#~ msgid "Results Table"
+#~ msgstr ""
+
+#~ msgid "ROC Smoothing Method"
+#~ msgstr ""
+
+#~ msgid "Selected Thresholds for Table"
+#~ msgstr ""
+
+#~ msgid "Sensitivity/Specificity vs threshold"
+#~ msgstr ""
+
+#~ msgid "Test 1 Negative Level"
+#~ msgstr ""
+
+#~ msgid "Test 1 Positive Level"
+#~ msgstr ""
+
+#~ msgid "Test 2 (Required for Comparison)"
+#~ msgstr ""
+
+#~ msgid "Test 2 Negative Level"
+#~ msgstr ""
+
+#~ msgid "Test 2 Positive Level"
+#~ msgstr ""
+
+#~ msgid "Test 3 Negative Level"
+#~ msgstr ""
+
+#~ msgid "Test 3 Positive Level"
+#~ msgstr ""
+
+#~ msgid "Test Variables"
+#~ msgstr ""
+
+#~ msgid "Threshold Step Size"
+#~ msgstr ""
+
+#~ msgid "Treatment Threshold Range"
+#~ msgstr ""

@@ -1,4 +1,4 @@
-# ClinicoPathDescriptives 1.0.82.03 (development version)
+# ClinicoPathDescriptives (development version)
 
 A short development build. Results that rest on random resampling are now reproducible and say
 which random seed they used, two interface and message defects are fixed, and the module installs
@@ -58,6 +58,17 @@ one fewer package.
   titles, four in five of them translated) instead of the whole ClinicoPath catalogue, which makes
   the download smaller. Coverage is unchanged.
 - The README has a feature table and updated quick-start examples.
+
+## Text and repository
+
+- **Severity labels and section headers in sentence case.** Notices start with "Error:", "Strong
+  warning:", "Warning:" or "Note:" instead of capitals, and the Benford and Data Quality text output
+  uses sentence-case headers ("Data summary:", "Note on the clinical penalty").
+- **American spelling throughout** (analyzed, color, labeled, summarize, behavior). The Turkish
+  translations follow, and 63 strings the module already used but its catalog lacked were added,
+  most of them translated.
+- **Cross Tables description** no longer lists features as "planned but not yet available".
+- **Repository:** a personal settings file is no longer tracked.
 
 # ClinicoPathDescriptives 1.0.81 (2026-09-09)
 
